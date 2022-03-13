@@ -11,7 +11,7 @@
 
 const util = require("../src/util");
 
-exports.command = 'install <name>';
+exports.command = 'install [name]';
 exports.desc = 'Install package';
 exports.builder = {
   name: {
