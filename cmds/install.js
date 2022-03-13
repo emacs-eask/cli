@@ -9,27 +9,24 @@
 
 "use strict";
 
-const { exec } = require("child_process");
+const util = require("../util");
 
-exports.command = "delete-pass [service] [account]";
-exports.desc = "Delete the stored password for the `service` and `account`";
+exports.command = 'install <name>';
+exports.desc = 'Install package';
 exports.builder = {
-  package: {
-    alias: "s",
-    requiresArg: true
+  name: {
+    description: 'Name of the package to install',
+    requiresArg: false,
+    type: 'string',
   },
   global: {
-    alias: "g",
-    requiresArg: false
-  }
+    description: 'Install to default `.emacs.d`, respect to variable `user-emacs-directory`',
+    alias: 'g',
+    requiresArg: false,
+    type: 'boolean',
+  },
 };
 
-exports.handler = async ({ package, global }) => {
-  if (!package || !global) {
-    throw new Error("provide required params (package, global)");
-  }
-
-  await exec("emacs --script install.el " + package, (error, stdout, stderr) => {
-    console.log(stdout);
-  });
+exports.handler = async ({ name, global }) => {
+  await util.call('install', name, (global) ? '-g' : undefined);
 };
