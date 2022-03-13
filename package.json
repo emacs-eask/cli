@@ -1,5 +1,5 @@
 {
-  "name": "@eask/eask",
+  "name": "@emacs-eask/eask",
   "version": "0.0.7",
   "description": "Emacs package command line tool",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jcs090218/eask.git"
+    "url": "https://github.com/emacs-eask/eask.git"
   },
   "keywords": [
     "emacs",
