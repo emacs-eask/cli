@@ -9,6 +9,7 @@
 
 "use strict";
 
+const path = require('path');
 const { exec } = require("child_process");
 
 /*
@@ -37,18 +38,23 @@ function _join_spc(...arr) {
   return _result.join(' ');
 }
 
+/* Return plugin directory */
+function _plugin_dir() { return path.join(__dirname, '..'); }
+
 /**
  * Call emacs process
  * @param { string } script - name of the script from `../lisp`
  * @param { string } args - the rest of the arguments
  */
 async function call(script, ...args) {
-  let _script = '../lisp/' + script + '.el';
-  let cmd = _join_spc('emacs', '--script', _script, args);
-  console.log('-------------------');
-  console.log(args);
-  console.log(cmd);
-  //await exec(cmd, (error, stdout, stderr) => { console.log(stdout); });
+  let _script = 'lisp/' + script + '.el';
+  let _path = path.join(_plugin_dir(), _script);
+  let cmd = _join_spc('emacs', '--script', _path, args);
+  await exec(cmd, (error, stdout, stderr) => {
+    if (stdout) console.log(stdout);
+    if (error) console.log(error);
+    if (stderr) console.log(stderr);
+  });
 }
 
 /*
