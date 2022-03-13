@@ -9,7 +9,7 @@
 
 "use strict";
 
-const util = require("../util");
+const util = require("../src/util");
 
 exports.command = 'install <name>';
 exports.desc = 'Install package';
