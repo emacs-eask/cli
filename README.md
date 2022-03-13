@@ -12,4 +12,3 @@ Emacs package command line tool
 ## Todo
 
 - [ ] setup-eask (GitHub Actions)
-- [ ] eask-mode
