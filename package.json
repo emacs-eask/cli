@@ -1,6 +1,6 @@
 {
   "name": "@eask/eask",
-  "version": "0.0.3",
+  "version": "0.0.7",
   "description": "Emacs package command line tool",
   "main": "index.js",
   "scripts": {
