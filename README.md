@@ -1,2 +1,10 @@
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-green.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Release](https://img.shields.io/github/release/eask/eask.svg?logo=github)](https://github.com/eask/eask/releases/latest)
+[![npm](https://img.shields.io/npm/v/@eask/eask?logo=npm&color=green)](https://www.npmjs.com/package/@eask/eask)
+[![npm-dm](https://img.shields.io/npm/dm/@eask/eask.svg)](https://npmcharts.com/compare/@eask/eask?minimal=true)
+
 # eask
 Emacs package command line tool
+
+[![CI](https://github.com/jcs090218/eask/actions/workflows/test.yml/badge.svg)](https://github.com/jcs090218/eask/actions/workflows/test.yml)
+
