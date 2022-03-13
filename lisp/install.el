@@ -7,14 +7,12 @@
 ;;                   Copyright © 2022 by Shen, Jen-Chieh $
 ;; ========================================================================
 
-(require 'package)
+(load-file "./lisp/prepare.el")
 
-(let ((global (or (member "-g" argv)
-                  (member "--global" argv)))
-      (name (elt argv 0)))
-  (unless global  ; set it locally, else we ignore to respect default settings
-    (setq user-emacs-directory (expand-file-name ".eask/")
-          package-user-dir (expand-file-name "elpa" user-emacs-directory)))
-  (if name (package-install (intern name))  ; install target <name> package
-    (package-install-file (expand-file-name "./")))  ; install locally
-  )
+(eask-start
+  (let ((name (elt argv 0)))
+    (if name
+        ;; If package <name> are specified, we try to install it
+        (package-install (intern name))
+      ;; Else we try to install package from the working directory
+      (package-install-file (expand-file-name "./")))))
