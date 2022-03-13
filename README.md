@@ -7,8 +7,3 @@
 Emacs package command line tool
 
 [![CI](https://github.com/emacs-eask/eask/actions/workflows/test.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test.yml)
-
-
-## Todo
-
-- [ ] setup-eask (GitHub Actions)
