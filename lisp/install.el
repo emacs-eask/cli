@@ -7,7 +7,7 @@
 ;;                   Copyright © 2022 by Shen, Jen-Chieh $
 ;; ========================================================================
 
-(load-file "./lisp/prepare.el")
+(load-file "./lisp/_prepare.el")
 
 (eask-start
   (let ((name (elt argv 0)))
