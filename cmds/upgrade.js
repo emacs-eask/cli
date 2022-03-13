@@ -9,7 +9,7 @@
 
 "use strict";
 
-const util = require("../util");
+const util = require("../src/util");
 
 exports.command = "upgrade";
 exports.desc = "Upgrade all packages";
