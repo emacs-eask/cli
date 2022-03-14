@@ -1,6 +1,6 @@
 /**
- * $File: clean.js $
- * $Date: 2022-03-14 03:04:26 $
+ * $File: list.js $
+ * $Date: 2022-03-14 16:48:43 $
  * $Revision: $
  * $Creator: Jen-Chieh Shen $
  * $Notice: See LICENSE.txt for modification and distribution information
@@ -11,11 +11,11 @@
 
 const util = require("../src/util");
 
-exports.command = "clean";
-exports.desc = "Clean up local .eask directory";
+exports.command = "list";
+exports.desc = "List Emacs packages";
 exports.builder = {
   global: {
-    description: 'Clean workspace globally `~/.emacs.d`, see variable `user-emacs-directory`',
+    description: 'List it globally to `~/.emacs.d/`',
     alias: 'g',
     requiresArg: false,
     type: 'boolean',
@@ -23,5 +23,5 @@ exports.builder = {
 };
 
 exports.handler = async ({ global }) => {
-  await util.e_call('clean', util.def_flag(global, '-g'));
+  await util.e_call('list', util.def_flag(global, '-g'));
 };
