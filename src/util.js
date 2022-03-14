@@ -49,7 +49,7 @@ function _plugin_dir() { return path.join(__dirname, '..'); }
 async function call(script, ...args) {
   let _script = 'lisp/' + script + '.el';
   let _path = path.join(_plugin_dir(), _script);
-  let cmd = _join_spc('emacs', '--script', _path, args);
+  let cmd = _join_spc('emacs', '-q', '--script', _path, args);
   await exec(cmd, (error, stdout, stderr) => {
     if (stdout) console.log(stdout);
     if (error) console.log(error);
