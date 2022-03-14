@@ -4,12 +4,17 @@
 ;;
 ;; Command use to upgrade Emacs packages,
 ;;
-;;   $ eask upgrade [name] [-g]
+;;   $ eask upgrade [name] [-g] [-f]
 ;;
-;; If package [name] is specify; upgrade that specific package. Otherwise, we
-;; upgrade all packages to target workspace.
 ;;
-;; If [-g] is specify; we uprade package to `~/.emacs.d/'.
+;;  Initialization options:
+;;
+;;    [name]     name of the package to upgrade; else we upgrade all packages
+;;
+;;  Action options:
+;;
+;;    [-g]       upgrade packages globally to `~/.emacs.d/'
+;;    [-f]       force to upgrade packages
 ;;
 
 ;;; Code:
@@ -25,9 +30,11 @@ Argument WHERE is the alist of package information."
 
 (defun eask-package-upgrade (pkg-desc)
   "Upgrade package using PKG-DESC."
-  (let ((old-pkg (cadr (assq (package-desc-name pkg-desc) package-alist))))
+  (let ((force (eask-force-p))
+        (old-pkg (cadr (assq (package-desc-name pkg-desc) package-alist))))
+    (when force (package-delete old-pkg))
     (package-install pkg-desc)
-    (package-delete old-pkg)))
+    (unless force (package-delete old-pkg))))
 
 (defun eask-package--upgradable-p (pkg)
   "Return non-nil if PKG can be upgraded."
@@ -52,12 +59,13 @@ Argument WHERE is the alist of package information."
     (message "All packages are up to date")))
 
 (eask-start
+  (package-initialize)
   (package-refresh-contents)
 
   (if-let* ((name (elt argv 0)) (name (intern name)))
       (if (package-installed-p name)
           (if (or (eask-package--upgradable-p name) (eask-force-p))
-              (eask-package-upgrade name)
+              (eask-package-upgrade (cadr (assq name package-archive-contents)))
             (message "Package `%s` is already up to date" name))
         (error "Package does not exists `%s`, you need to install before upgrade" name))
     (eask-package-upgrade-all)))

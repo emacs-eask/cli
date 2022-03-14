@@ -2,13 +2,13 @@
 
 ;;; Commentary:
 ;;
-;; Command use to clean/remove up Emacs packages,
+;; Command use to clean up `.eask' in the working directory,
 ;;
 ;;   $ eask clean [-g]
 ;;
-;; 1. Clean up `.eask' in the working directory.
+;;  Action options:
 ;;
-;; 2. If [-g] is specify; we remove `~/.emacs.d/' instead.
+;;    [-g]       install packages globally to `~/.emacs.d/'
 ;;
 
 ;;; Code:

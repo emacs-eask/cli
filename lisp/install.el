@@ -6,11 +6,15 @@
 ;;
 ;;   $ eask install [name] [-g]
 ;;
-;; If package [name] is specify; install that specific package. Otherwise, we
-;; install the package in current directory using function `package-install-file'
-;; if possible.
 ;;
-;; If [-g] is specify; we install it globally to `~/.emacs.d/'.
+;;  Initialization options:
+;;
+;;    [name]     name of the package to install; else we try to install package
+;;               from current directory by calling function `package-install-file'
+;;
+;;  Action options:
+;;
+;;    [-g]       install packages globally to `~/.emacs.d/'
 ;;
 
 ;;; Code:
