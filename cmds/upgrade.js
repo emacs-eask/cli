@@ -11,9 +11,30 @@
 
 const util = require("../src/util");
 
-exports.command = "upgrade";
-exports.desc = "Upgrade all packages";
+exports.command = 'upgrade [name]';
+exports.desc = 'Upgrade packages';
+exports.builder = {
+  name: {
+    description: 'Name of the package to upgrade',
+    requiresArg: false,
+    type: 'string',
+  },
+  global: {
+    description: 'Upgrade globally `~/.emacs.d`, respect to variable `user-emacs-directory`',
+    alias: 'g',
+    requiresArg: false,
+    type: 'boolean',
+  },
+  force: {
+    description: 'Force upgrade',
+    alias: 'f',
+    requiresArg: false,
+    type: 'boolean',
+  },
+};
 
-exports.handler = async ({}) => {
-  await util.call('upgrade');
+exports.handler = async ({ name, global, force }) => {
+  await util.e_call('upgrade', name
+                    , util.def_flag(global, '-g')
+                    , util.def_flag(force, '-f'));
 };

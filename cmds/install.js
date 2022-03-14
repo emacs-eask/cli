@@ -12,7 +12,7 @@
 const util = require("../src/util");
 
 exports.command = 'install [name]';
-exports.desc = 'Install package';
+exports.desc = 'Install packages';
 exports.builder = {
   name: {
     description: 'Name of the package to install',
@@ -20,7 +20,7 @@ exports.builder = {
     type: 'string',
   },
   global: {
-    description: 'Install to default `.emacs.d`, respect to variable `user-emacs-directory`',
+    description: 'Install globally `.emacs.d`, respect to variable `user-emacs-directory`',
     alias: 'g',
     requiresArg: false,
     type: 'boolean',
@@ -28,5 +28,5 @@ exports.builder = {
 };
 
 exports.handler = async ({ name, global }) => {
-  await util.call('install', name, (global) ? '-g' : undefined);
+  await util.e_call('install', name, util.def_flag(global, '-g'));
 };

@@ -15,5 +15,5 @@ exports.command = "clean";
 exports.desc = "Clean up local .eask directory";
 
 exports.handler = async ({}) => {
-  await util.call('clean');
+  await util.e_call('clean');
 };

@@ -5,10 +5,17 @@
 (require 'package)
 (require 'subr-x)
 
+(defun eask--flag (name)
+  "Return flag NAME exists."
+  (member (concat "--eask" name) argv))
+
 (defun eask-global-p ()
-  "Return non-nil if the workspace is global."
-  (or (member "-g" argv)
-      (member "--global" argv)))
+  "Return non-nil if [global] flag is enabled."
+  (eask--flag "-g"))
+
+(defun eask-force-p ()
+  "Return non-nil if [force] flag is enabled."
+  (eask--flag "-f"))
 
 (defmacro eask-start (&rest body)
   "Execute BODY with workspace setup."

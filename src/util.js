@@ -42,14 +42,21 @@ function _join_spc(...arr) {
 function _plugin_dir() { return path.join(__dirname, '..'); }
 
 /**
+ * Define flag with proper alias flag.
+ * @param { boolean } arg - argument receive from yargs.
+ * @param { string } name - the flag representation in alias.
+ */
+function def_flag(arg, name) { return (arg) ? '--eask' + name : undefined; }
+
+/**
  * Call emacs process
  * @param { string } script - name of the script from `../lisp`
  * @param { string } args - the rest of the arguments
  */
-async function call(script, ...args) {
+async function e_call(script, ...args) {
   let _script = 'lisp/' + script + '.el';
   let _path = path.join(_plugin_dir(), _script);
-  let cmd = _join_spc('emacs', '-q', '--script', _path, args);
+  let cmd = _join_spc('emacs', '-Q', '-nw', '--batch', '--script' , _path, args);
   await exec(cmd, (error, stdout, stderr) => {
     if (stdout) console.log(stdout);
     if (error) console.log(error);
@@ -60,4 +67,5 @@ async function call(script, ...args) {
 /*
  * Module Exports
  */
-module.exports.call = call;
+module.exports.def_flag = def_flag;
+module.exports.e_call = e_call;
