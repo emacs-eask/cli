@@ -1,11 +1,6 @@
-;; ========================================================================
-;; $File: prepare.el $
-;; $Date: 2022-03-13 23:34:21 $
-;; $Revision: $
-;; $Creator: Jen-Chieh Shen $
-;; $Notice: See LICENSE.txt for modification and distribution information
-;;                   Copyright © 2022 by Shen, Jen-Chieh $
-;; ========================================================================
+;;; _prepare.el --- Prepare for command tasks  -*- lexical-binding: t; -*-
+;;; Commentary: Utility module to make Eask work
+;;; Code:
 
 (require 'package)
 (require 'subr-x)
@@ -30,3 +25,5 @@
          (ignore-errors (load-file eask-file))
          ,@body)
      ,@body))
+
+;;; _prepare.el ends here
