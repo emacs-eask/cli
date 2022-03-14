@@ -18,11 +18,11 @@
 
 (eask-start
   (package-initialize)
-  (dolist (pkg package-alist)
+  (dolist (pkg (reverse package-alist))
     (let* ((desc (cadr pkg))
            (name (package-desc-name desc))
            (version (package-desc-version desc))
            (summary (package-desc-summary desc)))
-      (message "%s %s %s" name version summary))))
+      (message "[+] %s %s %s" name version summary))))
 
 ;;; list.el ends here
