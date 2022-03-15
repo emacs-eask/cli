@@ -15,7 +15,7 @@
 
 ;;; Code:
 
-(load-file "./lisp/_prepare.el")
+(load-file (expand-file-name "_prepare.el" (file-name-directory (car (last command-line-args)))))
 
 (defvar eask-list-package-name-width nil
   "Width spaces for the package name.")

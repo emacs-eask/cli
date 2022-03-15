@@ -13,7 +13,7 @@
 
 ;;; Code:
 
-(load-file "./lisp/_prepare.el")
+(load-file (expand-file-name "_prepare.el" (file-name-directory (car (last command-line-args)))))
 
 (eask-start
   (ignore-errors (delete-directory user-emacs-directory t)))

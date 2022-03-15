@@ -19,7 +19,7 @@
 
 ;;; Code:
 
-(load-file "./lisp/_prepare.el")
+(load-file (expand-file-name "_prepare.el" (file-name-directory (car (last command-line-args)))))
 
 (eask-start
   (if-let* ((name (elt argv 0)) (name (intern name)))

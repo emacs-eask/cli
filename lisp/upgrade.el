@@ -19,7 +19,7 @@
 
 ;;; Code:
 
-(load-file "./lisp/_prepare.el")
+(load-file (expand-file-name "_prepare.el" (file-name-directory (car (last command-line-args)))))
 
 (defun eask-package-version (name where)
   "Get version of the package by NAME.
