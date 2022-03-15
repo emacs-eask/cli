@@ -14,7 +14,7 @@
 ;;
 ;;  Action options:
 ;;
-;;    [-g]       install packages globally to `~/.emacs.d/'
+;;    [-g]       install packages to default `~/.emacs.d/'
 ;;
 
 ;;; Code:

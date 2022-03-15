@@ -20,7 +20,7 @@ exports.builder = {
     type: 'string',
   },
   global: {
-    description: 'install globally `.emacs.d`, respect to variable `user-emacs-directory`',
+    description: 'install packages from default `.emacs.d`',
     alias: 'g',
     requiresArg: false,
     type: 'boolean',
