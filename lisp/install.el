@@ -22,6 +22,8 @@
 (load-file (expand-file-name "_prepare.el" (file-name-directory (car (last command-line-args)))))
 
 (eask-start
+  (package-initialize)
+  (package-refresh-contents)
   (if-let* ((name (elt argv 0)) (name (intern name)))
       ;; If package [name] are specified, we try to install it
       (package-install name)
