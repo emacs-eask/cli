@@ -18,7 +18,8 @@
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
 (eask-start
-  (ignore-errors (delete-directory user-emacs-directory t))
-  (message "[INFO] Clean up `%s`" user-emacs-directory))
+  (if (ignore-errors (delete-directory user-emacs-directory t))
+      (message "[INFO] Workspace `%s` cleaned" user-emacs-directory)
+    (message "[INFO] Workspace `%s` is already cleaned" user-emacs-directory)))
 
 ;;; clean.el ends here
