@@ -1,20 +1,10 @@
-;;; info.el --- Install packages  -*- lexical-binding: t; -*-
+;;; info.el --- Print envrionemnt information  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
-;; Command use to install Emacs packages,
+;; Print the Emacs envrionemnt information
 ;;
-;;   $ eask install [name] [-g]
-;;
-;;
-;;  Initialization options:
-;;
-;;    [name]     name of the package to install; else we try to install package
-;;               from current directory by calling function `package-install-file'
-;;
-;;  Action options:
-;;
-;;    [-g]       install packages globally to `~/.emacs.d/'
+;;   $ eask info
 ;;
 
 ;;; Code:
@@ -23,6 +13,7 @@
             "_prepare.el"
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
+;; TODO: Are there any other information we want to print out?
 (message "%s" (emacs-version))
 
 ;;; info.el ends here
