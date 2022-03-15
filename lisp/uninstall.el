@@ -23,7 +23,6 @@
             "_prepare.el"
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
-
 (defun eask-package-desc (name &optional current)
   "Build package description by PKG-NAME."
   (cadr (assq name (if current package-alist package-archive-contents))))
@@ -31,10 +30,9 @@
 (eask-start
   (package-initialize)
   (package-refresh-contents)
-  (if-let* ((name (elt argv 0)) (name (intern name)))
-      ;; If package [name] are specified, we try to install it
-      (package-delete name (eask-force-p))
-    ;; Else we try to install package from the working directory
-    (package-install-file (expand-file-name "./"))))
+  (if-let* ((name (elt argv 0)) (name (intern name))
+            (_ (package-installed-p name)))
+      (package-delete (eask-package-desc name t) (eask-force-p))
+    (message "[INFO] Package `%s` does not exists" name)))
 
 ;;; uninstall.el ends here

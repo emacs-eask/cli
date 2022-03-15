@@ -11,7 +11,7 @@
 
 const util = require("../src/util");
 
-exports.command = 'uninstall';
+exports.command = 'uninstall <name>';
 exports.desc = 'uninstall packages';
 exports.builder = {
   name: {
@@ -25,8 +25,16 @@ exports.builder = {
     requiresArg: false,
     type: 'boolean',
   },
+  force: {
+    description: 'force to uninstall packages',
+    alias: 'f',
+    requiresArg: false,
+    type: 'boolean',
+  },
 };
 
-exports.handler = async ({ name, global }) => {
-  await util.e_call('uninstall', name, util.def_flag(global, '-g'));
+exports.handler = async ({ name, global, force }) => {
+  await util.e_call('uninstall', name
+                    , util.def_flag(global, '-g')
+                    , util.def_flag(force, '-f'));
 };
