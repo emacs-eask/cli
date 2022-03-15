@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8; -*-
+#!/bin/sh
 
 # Copyright (C) 2022 Jen-Chieh Shen
 
@@ -18,4 +17,5 @@
 # Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 # Boston, MA 02110-1301, USA.
 
-node "../eask" "$@"
+BASEDIR=$(dirname "$0")
+node "$BASEDIR/../eask" "$@"
