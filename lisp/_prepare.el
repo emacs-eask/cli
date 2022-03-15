@@ -33,6 +33,10 @@
 ;;
 ;;; Core
 
+(defvar eask--first-init-p nil
+  "Is non-nil if .eask does not exists; meaning users haven't called eask in the
+current workspace.")
+
 (defconst eask--command-list
   '("--eask-g" "--eask-f" "--eask-depth")
   "List of commands to accept, so we can avoid unknown option error.")
@@ -54,6 +58,7 @@
      (if (eask-global-p) (progn ,@body)
        (let* ((user-emacs-directory (expand-file-name ".eask/"))
               (package-user-dir (expand-file-name "elpa" user-emacs-directory))
+              (eask--first-init-p (not (file-directory-p user-emacs-directory)))
               (user-init-file (locate-user-emacs-file "init.el"))
               (custom-file (locate-user-emacs-file "custom.el"))
               (eask-file (expand-file-name "../Eask" user-emacs-directory)))
