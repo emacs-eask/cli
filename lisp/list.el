@@ -10,6 +10,7 @@
 ;;  Action options:
 ;;
 ;;    [-g]       install packages globally to `~/.emacs.d/'
+;;    [--depth]  dependency level to print
 ;;
 
 ;;; Code:
@@ -19,7 +20,7 @@
 (defvar eask-list-package-name-width nil
   "Width spaces for the package name.")
 
-(defun eask--format (depth rest)
+(defun eask--format (depth &optional rest)
   "Format string to align starting from the version number."
   (concat (spaces-string (* depth 2))  ; indent for depth
           " [+] %-" (number-to-string (- eask-list-package-name-width (* depth 2)))
@@ -36,7 +37,7 @@
        (summary (package-desc-summary desc)))
     (if (= depth 0)
         (message (eask--format depth "%-15s %-80s") name version summary)
-      (message (eask--format depth "%-15s") name version))
+      (message (eask--format depth) name))
     (when-let ((reqs (package-desc-reqs desc))
                (_ (< depth max-depth)))
       (dolist (req reqs)
@@ -49,9 +50,9 @@
     result))
 
 (eask-start
-  (package-initialize)
-  (let ((eask-list-package-name-width (+ (eask-seq-max-str package-activated-list) 2)))
-    (dolist (name package-activated-list)
-      (eask-print-pkg name 0 (or (eask-depth) 999)))))
+ (package-initialize)
+ (let ((eask-list-package-name-width (+ (eask-seq-max-str package-activated-list) 2)))
+   (dolist (name package-activated-list)
+     (eask-print-pkg name 0 (or (eask-depth) 999)))))
 
 ;;; list.el ends here
