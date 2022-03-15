@@ -26,7 +26,5 @@ npm install
 
 CMD="node eask"
 
-export PATH=$PATH:$(dirname "$0")
-
 echo "[INFO] 'eask' version: "
 $CMD --version
