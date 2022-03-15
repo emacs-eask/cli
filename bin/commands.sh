@@ -1,4 +1,5 @@
 #!/bin/sh
+# -*- coding: utf-8; -*-
 
 # Copyright (C) 2022 Jen-Chieh Shen
 
