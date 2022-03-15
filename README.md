@@ -8,6 +8,18 @@ Emacs package command-line tool
 
 [![CI](https://github.com/emacs-eask/eask/actions/workflows/test.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test.yml)
 
+## 💾 nstallation
+
+N/A
+
+## About CI/CD
+
+N/A
+
 ## About Eask file
+
+N/A
+
+## Project Development
 
 N/A
