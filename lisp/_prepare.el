@@ -3,8 +3,16 @@
 ;;; Code:
 
 (require 'package)
+
+(require 'cl-lib)
 (require 'rect)
 (require 'subr-x)
+
+(setq package-enable-at-startup nil  ; To avoid initializing twice
+      package-check-signature nil)
+
+(setq package-archives nil
+      package-archive-priorities nil)
 
 ;;
 ;;; Flag
@@ -48,7 +56,14 @@ current workspace.")
           (_ (dolist (cmd eask--command-list)
                (push (cons cmd '(lambda (&rest _))) alist))))
      (setq command-switch-alist (append command-switch-alist alist))
-     ,@body))
+     (cl-flet ((package #'eask-package)
+               (package-file #'eask-package-file)
+               (files #'eask-files)
+               (depends-on #'eask-depends-on)
+               (development #'eask-development)
+               (source #'eask-source)
+               (source-priority #'eask-source-priority))
+       ,@body)))
 
 (defmacro eask-start (&rest body)
   "Execute BODY with workspace setup."
@@ -65,5 +80,50 @@ current workspace.")
          (ignore-errors (make-directory package-user-dir t))
          (ignore-errors (load-file eask-file))
          ,@body))))
+
+;;
+;;; Eask file
+
+(defconst eask-source-mapping
+  `(("gnu"          . ,(concat (if (< emacs-major-version 27) "http" "https")
+                               "://elpa.gnu.org/packages/"))
+    ("celpa"        . "https://celpa.conao3.com/packages/")
+    ("jcs-elpa"     . "https://jcs-emacs.github.io/jcs-elpa/packages/")
+    ("melpa"        . "https://melpa.org/packages/")
+    ("melpa-stable" . "https://stable.melpa.org/packages/")
+    ("marmalade"    . "https://marmalade-repo.org/packages/")
+    ("nongnu"       . "https://elpa.nongnu.org/nongnu/")
+    ("org"          . "https://orgmode.org/elpa/"))
+  "Mapping of source name and url.")
+
+(defvar eask-package-file nil)
+(defvar eask-files nil)
+
+(defun eask-package (name version description)
+  "")
+
+(defun eask-package-file (file)
+  "Set package file."
+  (setq eask-package-file file))
+
+(defun eask-files (&rest files)
+  ""
+  (setq eask-files files))
+
+(defun eask-depends-on (pkg)
+  "")
+
+(defun eask-development (file)
+  "")
+
+(defun eask-source (id &optional location)
+  "Add archive ID with LOCATION."
+  (setq location (or location (assq id eask-source-mapping)))
+  (unless location (error "Unknown package archive: %s" id))
+  (push (cons id location) package-archives))
+
+(defun eask-source-priority (archive-id &optional priority)
+  "Add PRIORITY for to ARCHIVE-ID."
+  (push (cons archive-id priority) package-archive-priorities))
 
 ;;; _prepare.el ends here
