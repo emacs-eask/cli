@@ -50,9 +50,9 @@
     result))
 
 (eask-start
- (package-initialize)
- (let ((eask-list-package-name-width (+ (eask-seq-max-str package-activated-list) 2)))
-   (dolist (name package-activated-list)
-     (eask-print-pkg name 0 (or (eask-depth) 999)))))
+  (package-initialize)
+  (let ((eask-list-package-name-width (+ (eask-seq-max-str package-activated-list) 2)))
+    (dolist (name package-activated-list)
+      (eask-print-pkg name 0 (or (eask-depth) 999)))))
 
 ;;; list.el ends here
