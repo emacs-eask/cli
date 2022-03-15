@@ -54,6 +54,13 @@ function def_flag(arg, name, val = undefined) {
   return '--eask' + name + ' ' + val;
 }
 
+/* Display all terminal output */
+function _exec_out(error, stdout, stderr) {
+  if (stdout) console.log(stdout);
+  if (error) console.log(error);
+  if (stderr) console.log(stderr);
+}
+
 /**
  * Call emacs process
  * @param { string } script - name of the script from `../lisp`
@@ -63,11 +70,7 @@ async function e_call(script, ...args) {
   let _script = 'lisp/' + script + '.el';
   let _path = path.join(_plugin_dir(), _script);
   let cmd = _join_spc('emacs', '-Q', '-nw', '--batch', '--script' , _path, args);
-  await exec(cmd, (error, stdout, stderr) => {
-    if (stdout) console.log(stdout);
-    if (error) console.log(error);
-    if (stderr) console.log(stderr);
-  });
+  await exec(cmd, _exec_out);
 }
 
 /*
