@@ -24,6 +24,6 @@ const util = require("../src/util");
 exports.command = 'info';
 exports.desc = 'Display environment information';
 
-exports.handler = async ({ }) => {
+exports.handler = async ({}) => {
   await util.e_call('info');
 };
