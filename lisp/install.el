@@ -19,7 +19,9 @@
 
 ;;; Code:
 
-(load-file (expand-file-name "_prepare.el" (file-name-directory (car (last command-line-args)))))
+(load-file (expand-file-name
+            "_prepare.el"
+            (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
 (eask-start
   (package-initialize)
