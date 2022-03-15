@@ -38,7 +38,7 @@
        (version (package-version-join version))
        (summary (package-desc-summary desc)))
     (if (= depth 0)
-        (message (eask--format depth "%-15s %-80s") name version summary)
+        (message (eask--format depth "%-14s %-80s") name version summary)
       (message (eask--format depth) name))
     (when-let ((reqs (package-desc-reqs desc))
                (_ (< depth max-depth)))
@@ -53,7 +53,7 @@
 
 (eask-start
   (package-initialize)
-  (let ((eask-list-package-name-width (+ (eask-seq-max-str package-activated-list) 2)))
+  (let ((eask-list-package-name-width (+ (eask-seq-max-str package-activated-list) 1)))
     (dolist (name package-activated-list)
       (eask-print-pkg name 0 (or (eask-depth) 999)))))
 
