@@ -12,21 +12,21 @@
 const util = require("../src/util");
 
 exports.command = 'upgrade [name]';
-exports.desc = 'Upgrade packages';
+exports.desc = 'upgrade packages';
 exports.builder = {
   name: {
-    description: 'Name of the package to upgrade',
+    description: 'name of the package to upgrade',
     requiresArg: false,
     type: 'string',
   },
   global: {
-    description: 'Upgrade globally `~/.emacs.d`, respect to variable `user-emacs-directory`',
+    description: 'upgrade globally `~/.emacs.d`, respect to variable `user-emacs-directory`',
     alias: 'g',
     requiresArg: false,
     type: 'boolean',
   },
   force: {
-    description: 'Force upgrade',
+    description: 'force upgrade',
     alias: 'f',
     requiresArg: false,
     type: 'boolean',

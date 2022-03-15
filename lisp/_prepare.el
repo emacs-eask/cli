@@ -3,34 +3,54 @@
 ;;; Code:
 
 (require 'package)
+(require 'rect)
 (require 'subr-x)
 
-(defun eask--flag (name)
-  "Return flag NAME exists."
-  (member (concat "--eask" name) argv))
+;;
+;;; Flag
 
-(defun eask-global-p ()
-  "Return non-nil if [global] flag is enabled."
-  (eask--flag "-g"))
+(defun eask--str2num (str) (ignore-errors (string-to-number str)))
 
-(defun eask-force-p ()
-  "Return non-nil if [force] flag is enabled."
-  (eask--flag "-f"))
+(defun eask--flag (flag)
+  "Return non-nil if FLAG exists.."
+  (member (concat "--eask" flag) argv))
 
-(defun eask--empty (switch))  ; empty function
+(defun eask--flag-value (flag)
+  "Return value for FLAG."
+  (nth 1 (eask--flag flag)))
 
-(defun eask--setup-args ()
-  "Update `command-switch-alist' to avoid unknown option error."
-  (setq command-switch-alist
-        (append command-switch-alist
-                '(("--eask-g" . eask--empty)
-                  ("--eask-f" . eask--empty)))))
+;;; Boolean
+(defun eask-global-p () (eask--flag "-g"))  ; -g is enabled
+(defun eask-force-p ()  (eask--flag "-f"))  ; -f is enabled
+
+;;; String
+;; TODO: n/a
+
+;;; Number
+(defun eask-depth ()
+  (eask--str2num (eask--flag-value "-depth")))
+
+;;
+;;; Core
+
+(defconst eask--command-list
+  '("--eask-g" "--eask-f" "--eask-depth")
+  "List of commands to accept, so we can avoid unknown option error.")
+
+(defmacro eask--setup-env (&rest body)
+  "Execute BODY with workspace setup."
+  (declare (indent 0) (debug t))
+  `(let* ((alist)
+          (_ (dolist (cmd eask--command-list)
+               (push (cons cmd '(lambda (&rest _))) alist))))
+     (setq command-switch-alist (append command-switch-alist alist))
+     ,@body))
 
 (defmacro eask-start (&rest body)
   "Execute BODY with workspace setup."
   (declare (indent 0) (debug t))
-  ;; set it locally, else we ignore to respect default settings
-  `(let ((command-switch-alist (eask--setup-args)))
+  `(eask--setup-env
+     ;; set it locally, else we ignore to respect default settings
      (if (eask-global-p) (progn ,@body)
        (let* ((user-emacs-directory (expand-file-name ".eask/"))
               (package-user-dir (expand-file-name "elpa" user-emacs-directory))

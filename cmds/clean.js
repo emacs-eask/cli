@@ -12,10 +12,10 @@
 const util = require("../src/util");
 
 exports.command = "clean";
-exports.desc = "Clean up local .eask directory";
+exports.desc = "clean up local .eask directory";
 exports.builder = {
   global: {
-    description: 'Clean workspace globally `~/.emacs.d`, see variable `user-emacs-directory`',
+    description: 'caution, this will kill your entire ~/.emacs.d/ directory',
     alias: 'g',
     requiresArg: false,
     type: 'boolean',

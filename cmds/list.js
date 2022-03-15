@@ -12,16 +12,23 @@
 const util = require("../src/util");
 
 exports.command = "list";
-exports.desc = "List Emacs packages";
+exports.desc = "list Emacs packages";
 exports.builder = {
   global: {
-    description: 'List it globally to `~/.emacs.d/`',
+    description: 'list it globally to `~/.emacs.d/`',
     alias: 'g',
     requiresArg: false,
     type: 'boolean',
   },
+  depth: {
+    description: 'dependency depth level to print',
+    requiresArg: true,
+    type: 'number',
+  },
 };
 
-exports.handler = async ({ global }) => {
-  await util.e_call('list', util.def_flag(global, '-g'));
+exports.handler = async ({ global, depth }) => {
+  await util.e_call('list'
+                    , util.def_flag(global, '-g')
+                    , util.def_flag(depth, '-depth', depth));
 };

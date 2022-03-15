@@ -46,7 +46,13 @@ function _plugin_dir() { return path.join(__dirname, '..'); }
  * @param { boolean } arg - argument receive from yargs.
  * @param { string } name - the flag representation in alias.
  */
-function def_flag(arg, name) { return (arg) ? '--eask' + name : undefined; }
+function def_flag(arg, name, val = undefined) {
+  if (arg === undefined)
+    return undefined;
+  if (val === undefined)
+    return '--eask' + name;
+  return '--eask' + name + ' ' + val;
+}
 
 /**
  * Call emacs process

@@ -12,15 +12,15 @@
 const util = require("../src/util");
 
 exports.command = 'install [name]';
-exports.desc = 'Install packages';
+exports.desc = 'install packages';
 exports.builder = {
   name: {
-    description: 'Name of the package to install',
+    description: 'name of the package to install',
     requiresArg: false,
     type: 'string',
   },
   global: {
-    description: 'Install globally `.emacs.d`, respect to variable `user-emacs-directory`',
+    description: 'install globally `.emacs.d`, respect to variable `user-emacs-directory`',
     alias: 'g',
     requiresArg: false,
     type: 'boolean',

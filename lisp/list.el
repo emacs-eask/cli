@@ -16,13 +16,42 @@
 
 (load-file "./lisp/_prepare.el")
 
+(defvar eask-list-package-name-width nil
+  "Width spaces for the package name.")
+
+(defun eask--format (depth rest)
+  "Format string to align starting from the version number."
+  (concat (spaces-string (* depth 2))  ; indent for depth
+          " [+] %-" (number-to-string (- eask-list-package-name-width (* depth 2)))
+          "s " rest))
+
+(defun eask-print-pkg (name depth max-depth)
+  "Print NAME package information."
+  (when-let*
+      ((pkg (assq name package-alist))
+       (desc (cadr pkg))
+       (name (package-desc-name desc))
+       (version (package-desc-version desc))
+       (version (package-version-join version))
+       (summary (package-desc-summary desc)))
+    (if (= depth 0)
+        (message (eask--format depth "%-15s %-80s") name version summary)
+      (message (eask--format depth "%-15s") name version))
+    (when-let ((reqs (package-desc-reqs desc))
+               (_ (< depth max-depth)))
+      (dolist (req reqs)
+        (eask-print-pkg (car req) (1+ depth) max-depth)))))
+
+(defun eask-seq-max-str (sequence)
+  "Return max length in SEQUENCE."
+  (let ((result 0))
+    (mapc (lambda (elm) (setq result (max result (length (format "%s" elm))))) sequence)
+    result))
+
 (eask-start
   (package-initialize)
-  (dolist (pkg (reverse package-alist))
-    (let* ((desc (cadr pkg))
-           (name (package-desc-name desc))
-           (version (package-desc-version desc))
-           (summary (package-desc-summary desc)))
-      (message "[+] %s %s %s" name version summary))))
+  (let ((eask-list-package-name-width (+ (eask-seq-max-str package-activated-list) 2)))
+    (dolist (name package-activated-list)
+      (eask-print-pkg name 0 (or (eask-depth) 999)))))
 
 ;;; list.el ends here
