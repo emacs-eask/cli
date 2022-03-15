@@ -55,6 +55,8 @@
   (package-initialize)
   (let ((eask-list-package-name-width (+ (eask-seq-max-str package-activated-list) 1)))
     (dolist (name package-activated-list)
-      (eask-print-pkg name 0 (or (eask-depth) 999)))))
+      (eask-print-pkg name 0 (or (eask-depth) 999))))
+  (message "")
+  (message " Total of %s packages installed" (length package-activated-list)))
 
 ;;; list.el ends here

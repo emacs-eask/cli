@@ -106,21 +106,21 @@ current workspace.")
   "Set package file."
   (setq eask-package-file file))
 
-(defun eask-files (&rest files)
+(defun eask-files (&rest patterns)
   ""
-  (setq eask-files files))
+  (setq eask-files patterns))
 
-(defun eask-depends-on (pkg)
-  "")
+(defun eask-depends-on (pkg &optional minimum-version)
+  "Specify a dependency of this package.")
 
 (defun eask-development (file)
   "")
 
-(defun eask-source (id &optional location)
-  "Add archive ID with LOCATION."
-  (setq location (or location (assq id eask-source-mapping)))
-  (unless location (error "Unknown package archive: %s" id))
-  (push (cons id location) package-archives))
+(defun eask-source (name &optional location)
+  "Add archive NAME with LOCATION."
+  (setq location (or location (assq name eask-source-mapping)))
+  (unless location (error "Unknown package archive: %s" name))
+  (push (cons name location) package-archives))
 
 (defun eask-source-priority (archive-id &optional priority)
   "Add PRIORITY for to ARCHIVE-ID."

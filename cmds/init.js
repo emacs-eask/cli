@@ -22,7 +22,7 @@
 const util = require("../src/util");
 
 exports.command = 'init';
-exports.desc = 'init';
+exports.desc = 'Create new `Eask` file in the current directory.';
 
 exports.handler = async ({}) => {
   await util.e_call('init');
