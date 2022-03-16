@@ -3,6 +3,7 @@
 ;;; Code:
 
 (require 'package)
+(require 'project)
 
 (require 'cl-lib)
 (require 'rect)
@@ -13,6 +14,12 @@
 
 (setq package-archives nil
       package-archive-priorities nil)
+
+(defcustom eask-path-ignores
+  (append project-vc-ignores '(".eask"))
+  "List of default path to ignore for search result."
+  :type 'list
+  :group 'eask)
 
 ;;
 ;;; Flag

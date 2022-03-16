@@ -13,27 +13,35 @@
             "_prepare.el"
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
+(defvar eask--compiled-files nil
+  "Cache for compiled files.")
+
+(defun eask--filter-exclude-dirs (item)
+  "Filter out ITEM from default ignore paths."
+  (not (cl-some (lambda (elm) (string-match-p elm item)) eask-path-ignores)))
+
 (defun eask--f-entries (path pattern)
   "Return entries from PATH with PATTERN."
   (when (file-directory-p path)
     (cl-remove-if-not
      (lambda (file) (string-match-p pattern file))
-     (directory-files-recursively path "^\\([^.]\\|\\.[^.]\\|\\.\\..\\)"))))
+     (directory-files-recursively path "^\\([^.]\\|\\.[^.]\\|\\.\\..\\)" nil
+                                  #'eask--filter-exclude-dirs))))
 
 (defun eask--byte-compile-file (filename)
   "Byte compile FILENAME with display messages."
-  (message "Compiling file... %s" filename)
-  (byte-compile-file filename))
+  (unless (member filename eask--compiled-files)
+    (message "Compiling file... %s" filename)
+    (byte-compile-file filename)
+    (push filename eask--compiled-files)))
 
 (eask-start
   (package-initialize)
   (package-refresh-contents)
   (dolist (pattern eask-files)
     (dolist (filename (eask--f-entries default-directory pattern))
-      ;; XXX Optionally, we can just ignore package-file?
-      (unless (equal filename eask-package-file)
-        (add-to-list 'load-path (file-name-directory filename))
-        (eask--byte-compile-file filename))))
+      (add-to-list 'load-path (file-name-directory filename))
+      (eask--byte-compile-file filename)))
   (eask--byte-compile-file eask-package-file))
 
 ;;; compile.el ends here
