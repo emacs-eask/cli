@@ -13,8 +13,12 @@
             "_prepare.el"
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
+(defun eask--print-filename (filename)
+  "Print out the FILENAME."
+  (message "%s" filename))
+
 (eask-start
-  ;; TODO: ..
+  (mapc #'eask--print-filename (eask-package-files))
   )
 
 ;;; files.el ends here
