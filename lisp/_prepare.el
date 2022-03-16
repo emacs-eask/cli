@@ -159,7 +159,7 @@ current workspace.")
 
 (defun eask-load-path (dir)
   "Add DIR to load-path."
-  (add-to-list 'load-path dir))
+  (add-to-list 'load-path (expand-file-name dir default-directory)))
 
 (defun eask-source (name &optional location)
   "Add archive NAME with LOCATION."

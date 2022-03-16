@@ -14,11 +14,10 @@
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
 (eask-start
-  (let ((elcs (eask--f-entries default-directory "\\.elc$")))
-    (when (zerop (length elcs))
-      (message "Workspace is already cleaned"))
-    (dolist (elc elcs)
-      (ignore-errors (delete-file elc))
-      (message "Deleting %s..." elc))))
+  (if-let ((elcs (eask--f-entries default-directory "\\.elc$")))
+      (dolist (elc elcs)
+        (ignore-errors (delete-file elc))
+        (message "Deleting %s..." elc))
+    (message "Workspace is already cleaned")))
 
 ;;; clean-elc.el ends here

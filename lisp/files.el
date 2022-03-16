@@ -18,7 +18,6 @@
   (message "%s" filename))
 
 (eask-start
-  (mapc #'eask--print-filename (eask-package-files))
-  )
+  (mapc #'eask--print-filename (eask-package-files)))
 
 ;;; files.el ends here
