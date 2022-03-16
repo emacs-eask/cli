@@ -66,12 +66,9 @@ function def_flag(arg, name, val = undefined) {
 
 /* Display all terminal output */
 function _exec_out(error, stdout, stderr) {
-  if (stdout) console.log(stdout);
-  if (stderr) console.log(stderr);
-  if (error) {
-    console.log(error);
-    process.exit(1);
-  }
+  if (stdout) console.log('----------> STD OUT:' + stdout);
+  if (error) console.log('----------> ERROR:' + error);  // ignore node error
+  if (stderr) console.log('----------> STD ERROR:' + stderr);
 }
 
 /**
