@@ -23,16 +23,17 @@
 (defun eask--byte-compile-file (filename)
   "Byte compile FILENAME with display messages."
   (message "Compiling file... %s" filename)
-  (byte-compile-file filename)
-  (message "Done compile, %s" filename))
+  (byte-compile-file filename))
 
 (eask-start
   (package-initialize)
   (package-refresh-contents)
   (dolist (pattern eask-files)
     (dolist (filename (eask--f-entries default-directory pattern))
-      (add-to-list 'load-path (file-name-directory filename))
-      (eask--byte-compile-file filename)))
+      ;; XXX Optionally, we can just ignore package-file?
+      (unless (equal filename eask-package-file)
+        (add-to-list 'load-path (file-name-directory filename))
+        (eask--byte-compile-file filename))))
   (eask--byte-compile-file eask-package-file))
 
 ;;; compile.el ends here
