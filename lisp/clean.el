@@ -18,9 +18,12 @@
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
 (eask-start
-  (ignore-errors (delete-directory user-emacs-directory t))
-  (if eask--first-init-p
-      (message "[INFO] Workspace `%s` is already cleaned" user-emacs-directory)
-    (message "[INFO] Workspace `%s` cleaned" user-emacs-directory)))
+  (let ((target-dir
+         (if (eask-global-p) user-emacs-directory
+           (file-name-directory (directory-file-name user-emacs-directory)))))
+    (ignore-errors (delete-directory target-dir t))
+    (if eask--first-init-p
+        (message "[INFO] Workspace `%s` is already cleaned" target-dir)
+      (message "[INFO] Workspace `%s` cleaned" target-dir))))
 
 ;;; clean.el ends here

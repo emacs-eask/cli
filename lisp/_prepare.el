@@ -79,7 +79,7 @@ current workspace.")
 
 (defun eask-file-load ()
   "Load Eask file in workspace."
-  (let ((eask-file (expand-file-name "../Eask" user-emacs-directory))
+  (let ((eask-file (expand-file-name "../../Eask" user-emacs-directory))
         (f-package         (eask-fbound 'package))
         (f-package-file    (eask-fbound 'package-file))
         (f-files           (eask-fbound 'files))
@@ -101,7 +101,7 @@ current workspace.")
   `(eask--setup-env
      ;; set it locally, else we ignore to respect default settings
      (if (eask-global-p) (progn ,@body)
-       (let* ((user-emacs-directory (expand-file-name ".eask/"))
+       (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
               (package-user-dir (expand-file-name "elpa" user-emacs-directory))
               (eask--first-init-p (not (file-directory-p user-emacs-directory)))
               (user-init-file (locate-user-emacs-file "init.el"))
@@ -129,21 +129,25 @@ current workspace.")
 (defvar eask-files nil)
 
 (defun eask-package (name version description)
-  "")
+  ""
+  ;; TODO: ..
+  )
 
 (defun eask-package-file (file)
   "Set package file."
   (setq eask-package-file (expand-file-name file)))
 
 (defun eask-files (&rest patterns)
-  ""
+  "Set files patterns."
   (setq eask-files patterns))
 
 (defun eask-depends-on (pkg &optional minimum-version)
   "Specify a dependency of this package.")
 
 (defun eask-development (file)
-  "")
+  ""
+  ;; TODO: ..
+  )
 
 (defun eask-source (name &optional location)
   "Add archive NAME with LOCATION."
@@ -160,6 +164,6 @@ current workspace.")
 
 (defun eask--exit (&rest _) "Send exit code." (kill-emacs 1))
 
-(advice-add 'error :before #'eask--exit)
+(advice-add 'error :after #'eask--exit)
 
 ;;; _prepare.el ends here
