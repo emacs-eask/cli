@@ -58,21 +58,35 @@ current workspace.")
      (setq command-switch-alist (append command-switch-alist alist))
      ,@body))
 
+(defun eask-fbound (symbol) (and (fboundp symbol) symbol))
+
+(defun eask--keywords-update (package package-file files depends-on development source source-priority)
+  "Update set of Eask file functions."
+  (defalias 'package         (symbol-function package))
+  (defalias 'package-file    (symbol-function package-file))
+  (defalias 'files           (symbol-function files))
+  (defalias 'depends-on      (symbol-function depends-on))
+  (defalias 'development     (symbol-function development))
+  (defalias 'source          (symbol-function source))
+  (defalias 'source-priority (symbol-function source-priority)))
+
 (defun eask-file-load ()
   "Load Eask file in workspace."
-  (let ((eask-file (expand-file-name "../Eask" user-emacs-directory)))
-    (cl-flet ((package #'eask-package)
-              (package-file #'eask-package-file)
-              (files #'eask-files)
-              (depends-on #'eask-depends-on)
-              (development #'eask-development)
-              (source #'eask-source)
-              (source-priority #'eask-source-priority))
-      (defalias 'source #'eask-source)
-      (defalias 'package-file #'eask-package-file)
-      (load-file eask-file)
-      ;;(ignore-errors (load-file eask-file))
-      )))
+  (let ((eask-file (expand-file-name "../Eask" user-emacs-directory))
+        (f-package         (eask-fbound 'package))
+        (f-package-file    (eask-fbound 'package-file))
+        (f-files           (eask-fbound 'files))
+        (f-depends-on      (eask-fbound 'depends-on))
+        (f-development     (eask-fbound 'development))
+        (f-source          (eask-fbound 'source))
+        (f-source-priority (eask-fbound 'source-priority)))
+    (eask--keywords-update #'eask-package #'eask-package-file #'eask-files
+                           #'eask-depends-on #'eask-development
+                           #'eask-source #'eask-source-priority)
+    (load-file eask-file)
+    (eask--keywords-update f-package f-package-file f-files
+                           f-depends-on f-development
+                           f-source f-source-priority)))
 
 (defmacro eask-start (&rest body)
   "Execute BODY with workspace setup."
@@ -112,7 +126,7 @@ current workspace.")
 
 (defun eask-package-file (file)
   "Set package file."
-  (setq eask-package-file file))
+  (setq eask-package-file (expand-file-name file)))
 
 (defun eask-files (&rest patterns)
   ""
