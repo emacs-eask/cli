@@ -155,4 +155,11 @@ current workspace.")
   "Add PRIORITY for to ARCHIVE-ID."
   (push (cons archive-id priority) package-archive-priorities))
 
+;;
+;;; Error Handling
+
+(defun eask--exit (&rest _) "Send exit code." (kill-emacs 1))
+
+(advice-add 'error :before #'eask--exit)
+
 ;;; _prepare.el ends here

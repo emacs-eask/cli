@@ -31,8 +31,7 @@
 (defun eask--byte-compile-file (filename)
   "Byte compile FILENAME with display messages."
   (unless (member filename eask--compiled-files)
-    (message "Compiling file... %s" filename)
-    (byte-compile-file filename)
+    (let ((byte-compile-verbose t)) (byte-compile-file filename))
     (push filename eask--compiled-files)))
 
 (eask-start
