@@ -125,13 +125,13 @@ current workspace.")
     (org          . "https://orgmode.org/elpa/"))
   "Mapping of source name and url.")
 
+(defvar eask-package nil)
 (defvar eask-package-file nil)
 (defvar eask-files nil)
 
 (defun eask-package (name version description)
-  ""
-  ;; TODO: ..
-  )
+  "Set the package information."
+  (setq eask-package `(:name ,name :version ,version :description ,description)))
 
 (defun eask-package-file (file)
   "Set package file."
@@ -163,7 +163,28 @@ current workspace.")
 ;;; Error Handling
 
 (defun eask--exit (&rest _) "Send exit code." (kill-emacs 1))
-
 (advice-add 'error :after #'eask--exit)
+
+;;
+;;; File
+
+(defun eask--filter-exclude-dirs (item)
+  "Filter out ITEM from default ignore paths."
+  (not (cl-some (lambda (elm) (string-match-p elm item)) eask-path-ignores)))
+
+(defun eask--f-entries (path pattern)
+  "Return entries from PATH with PATTERN."
+  (when (file-directory-p path)
+    (cl-remove-if-not
+     (lambda (file) (string-match-p pattern file))
+     (directory-files-recursively path "^\\([^.]\\|\\.[^.]\\|\\.\\..\\)" nil
+                                  #'eask--filter-exclude-dirs))))
+
+(defun eask-package-files ()
+  "Return package files in workspace."
+  (let (files)
+    (dolist (pattern eask-files)
+      (setq files (append files (eask--f-entries default-directory pattern))))
+    (delete-dups files)))
 
 ;;; _prepare.el ends here
