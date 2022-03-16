@@ -59,7 +59,7 @@ current workspace.")
      ,@body))
 
 (defun eask-file-load ()
-  ""
+  "Load Eask file in workspace."
   (let ((eask-file (expand-file-name "../Eask" user-emacs-directory)))
     (cl-flet ((package #'eask-package)
               (package-file #'eask-package-file)
