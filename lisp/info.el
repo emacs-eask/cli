@@ -16,4 +16,9 @@
 ;; TODO: Are there any other information we want to print out?
 (message "%s" (emacs-version))
 
+(eask-start
+  (message "%s" (plist-get eask-package :name))
+  (message "%s" (plist-get eask-package :version))
+  (message "%s" (plist-get eask-package :description)))
+
 ;;; info.el ends here
