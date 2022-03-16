@@ -71,7 +71,7 @@ current workspace.")
                               package-file files
                               depends-on development
                               source source-priority
-                              load-path)
+                              load-path load-paths)
   "Update set of Eask file functions."
   (defalias 'package         (symbol-function package))
   (defalias 'package-file    (symbol-function package-file))
@@ -80,7 +80,8 @@ current workspace.")
   (defalias 'development     (symbol-function development))
   (defalias 'source          (symbol-function source))
   (defalias 'source-priority (symbol-function source-priority))
-  (defalias 'load-path       (symbol-function load-path)))
+  (defalias 'load-path       (symbol-function load-path))
+  (defalias 'load-paths      (symbol-function load-paths)))
 
 (defun eask-file-load ()
   "Load Eask file in workspace."
@@ -92,16 +93,17 @@ current workspace.")
         (f-development     (eask-fbound 'development))
         (f-source          (eask-fbound 'source))
         (f-source-priority (eask-fbound 'source-priority))
-        (f-load-path       (eask-fbound 'load-path)))
+        (f-load-path       (eask-fbound 'load-path))
+        (f-load-paths       (eask-fbound 'load-paths)))
     (eask--keywords-update #'eask-package #'eask-package-file #'eask-files
                            #'eask-depends-on #'eask-development
                            #'eask-source #'eask-source-priority
-                           #'eask-load-path)
+                           #'eask-load-path #'eask-load-paths)
     (load-file eask-file)
     (eask--keywords-update f-package f-package-file f-files
                            f-depends-on f-development
                            f-source f-source-priority
-                           f-load-path)))
+                           f-load-path f-load-paths)))
 
 (defmacro eask-start (&rest body)
   "Execute BODY with workspace setup."
@@ -160,6 +162,10 @@ current workspace.")
 (defun eask-load-path (dir)
   "Add DIR to load-path."
   (add-to-list 'load-path (expand-file-name dir default-directory)))
+
+(defun eask-load-paths (&rest dirs)
+  "Add all DIRS to load-path."
+  (dolist (dir dirs) (eask-load-path dir)))
 
 (defun eask-source (name &optional location)
   "Add archive NAME with LOCATION."
