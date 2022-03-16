@@ -67,7 +67,11 @@ current workspace.")
 
 (defun eask-fbound (symbol) (and (fboundp symbol) symbol))
 
-(defun eask--keywords-update (package package-file files depends-on development source source-priority)
+(defun eask--keywords-update (package
+                              package-file files
+                              depends-on development
+                              source source-priority
+                              load-path)
   "Update set of Eask file functions."
   (defalias 'package         (symbol-function package))
   (defalias 'package-file    (symbol-function package-file))
@@ -75,7 +79,8 @@ current workspace.")
   (defalias 'depends-on      (symbol-function depends-on))
   (defalias 'development     (symbol-function development))
   (defalias 'source          (symbol-function source))
-  (defalias 'source-priority (symbol-function source-priority)))
+  (defalias 'source-priority (symbol-function source-priority))
+  (defalias 'load-path       (symbol-function load-path)))
 
 (defun eask-file-load ()
   "Load Eask file in workspace."
@@ -86,14 +91,17 @@ current workspace.")
         (f-depends-on      (eask-fbound 'depends-on))
         (f-development     (eask-fbound 'development))
         (f-source          (eask-fbound 'source))
-        (f-source-priority (eask-fbound 'source-priority)))
+        (f-source-priority (eask-fbound 'source-priority))
+        (f-load-path       (eask-fbound 'load-path)))
     (eask--keywords-update #'eask-package #'eask-package-file #'eask-files
                            #'eask-depends-on #'eask-development
-                           #'eask-source #'eask-source-priority)
+                           #'eask-source #'eask-source-priority
+                           #'eask-load-path)
     (load-file eask-file)
     (eask--keywords-update f-package f-package-file f-files
                            f-depends-on f-development
-                           f-source f-source-priority)))
+                           f-source f-source-priority
+                           f-load-path)))
 
 (defmacro eask-start (&rest body)
   "Execute BODY with workspace setup."
@@ -148,6 +156,10 @@ current workspace.")
   ""
   ;; TODO: ..
   )
+
+(defun eask-load-path (dir)
+  "Add DIR to load-path."
+  (add-to-list 'load-path dir))
 
 (defun eask-source (name &optional location)
   "Add archive NAME with LOCATION."
