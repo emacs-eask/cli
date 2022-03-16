@@ -28,3 +28,4 @@ CMD="node eask"
 
 echo "[INFO] 'eask' version: "
 $CMD --version
+$CMD info

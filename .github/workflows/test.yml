@@ -23,13 +23,13 @@ jobs:
           - snapshot
 
     steps:
-    - if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
-      uses: purcell/setup-emacs@master
+    - uses: purcell/setup-emacs@master
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       with:
         version: ${{ matrix.emacs-version }}
 
-    - if: matrix.os == 'windows-latest'
-      uses: jcs090218/setup-emacs-windows@master
+    - uses: jcs090218/setup-emacs-windows@master
+      if: matrix.os == 'windows-latest'
       with:
         version: ${{ matrix.emacs-version }}
 
