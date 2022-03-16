@@ -20,7 +20,7 @@
 "use strict";
 
 const path = require('path');
-const { exec } = require("child_process");
+const child_process = require("child_process");
 
 /*
  * Remove `undefined` item from the array
@@ -64,11 +64,21 @@ function def_flag(arg, name, val = undefined) {
   return '--eask' + name + ' ' + val;
 }
 
+function _exit(code) {
+  process.exitCode = code;
+  throw 'Uncaught exception error: ' + code;
+}
+
 /* Display all terminal output */
 function _exec_out(error, stdout, stderr) {
-  if (stdout) console.log('----------> STD OUT:' + stdout);
-  if (error) console.log('----------> ERROR:' + error);  // ignore node error
-  if (stderr) console.log('----------> STD ERROR:' + stderr);
+  if (stdout) { console.log(stdout); }
+  //if (error) { console.log(error); }  /* ignore node error */
+  if (stderr) {
+    console.log(stderr);
+    if (stderr.includes ('Error: ')) {
+      _exit(1);
+    }
+  }
 }
 
 /**
@@ -81,10 +91,10 @@ async function e_call(script, ...args) {
   let _path = path.join(_plugin_dir(), _script);
   let cmd = _join_spc('emacs', '-Q', '-nw', '--batch', '--script' , _path, args);
   console.log('Starting Eask...');
-  console.log('>');
-  console.log('>  $ ' + cmd);
-  console.log('>');
-  await exec(cmd, _exec_out);
+  console.log('~');
+  console.log('~  $ ' + cmd);
+  console.log('~');
+  await child_process.exec(cmd, _exec_out);
 }
 
 /*
