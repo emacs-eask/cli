@@ -22,7 +22,7 @@
 const util = require("../src/util");
 
 exports.command = 'compile';
-exports.desc = 'Byte compile all Emacs Lisp files in the package';
+exports.desc = 'byte compile all Emacs Lisp files in the package';
 
 exports.handler = async ({}) => {
   await util.e_call('compile');
