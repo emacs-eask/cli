@@ -22,6 +22,19 @@
   :group 'eask)
 
 ;;
+;;; Package
+
+(defun eask-pkg-init ()
+  "Package initialization."
+  (package-initialize)
+  (package-refresh-contents))
+
+(defun eask-package-install (pkg)
+  "Install the package PKG."
+  (eask-pkg-init)
+  (package-install (if (stringp pkg) (intern pkg) pkg)))
+
+;;
 ;;; Flag
 
 (defun eask--str2num (str) (ignore-errors (string-to-number str)))
@@ -35,8 +48,9 @@
   (nth 1 (eask--flag flag)))
 
 ;;; Boolean
-(defun eask-global-p () (eask--flag "-g"))  ; -g is enabled
-(defun eask-force-p ()  (eask--flag "-f"))  ; -f is enabled
+(defun eask-global-p () (eask--flag "-g"))    ; -g   is enabled
+(defun eask-force-p ()  (eask--flag "-f"))    ; -f   is enabled
+(defun eask-dev-p ()    (eask--flag "-dev"))  ; -dev is enabled
 
 ;;; String
 ;; TODO: n/a
@@ -53,7 +67,7 @@
 current workspace.")
 
 (defconst eask--command-list
-  '("--eask-g" "--eask-f" "--eask-depth")
+  '("--eask-g" "--eask-f" "--eask-depth" "--eask-dev")
   "List of commands to accept, so we can avoid unknown option error.")
 
 (defmacro eask--setup-env (&rest body)
@@ -155,12 +169,13 @@ current workspace.")
 
 (defun eask-depends-on (pkg &optional minimum-version)
   "Specify a dependency of this package."
-  (push pkg eask-depends-on))
+  (eask-package-install pkg))
 
 (defun eask-development (&rest dep)
-  ""
-  ;; TODO: ..
-  )
+  "Development scope."
+  (when (eask-dev-p)
+    ;; TODO: ..
+    ))
 
 (defun eask-load-path (dir)
   "Add DIR to load-path."

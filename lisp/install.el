@@ -24,12 +24,11 @@
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
 (eask-start
-  (package-initialize)
-  (package-refresh-contents)
-  (if-let* ((name (elt argv 0)) (name (intern name)))
+  (if-let* ((name (elt argv 0)))
       ;; If package [name] are specified, we try to install it
-      (package-install name)
+      (eask-package-install name)
     ;; Else we try to install package from the working directory
+    (eask-pkg-init)
     (package-install-file (expand-file-name "./"))))
 
 ;;; install.el ends here

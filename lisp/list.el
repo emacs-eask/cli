@@ -52,7 +52,7 @@
     result))
 
 (eask-start
-  (package-initialize)
+  (eask-pkg-init)
   (let ((eask-list-package-name-width (+ (eask-seq-max-str package-activated-list) 1)))
     (dolist (name package-activated-list)
       (eask-print-pkg name 0 (or (eask-depth) 999))))

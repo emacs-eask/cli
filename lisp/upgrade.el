@@ -61,9 +61,7 @@ Argument WHERE is the alist of package information."
     (message "All packages are up to date")))
 
 (eask-start
-  (package-initialize)
-  (package-refresh-contents)
-
+  (eask-pkg-init)
   (if-let* ((name (elt argv 0)) (name (intern name)))
       (if (package-installed-p name)
           (if (or (eask-package--upgradable-p name) (eask-force-p))

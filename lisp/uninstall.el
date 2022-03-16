@@ -28,8 +28,7 @@
   (cadr (assq name (if current package-alist package-archive-contents))))
 
 (eask-start
-  (package-initialize)
-  (package-refresh-contents)
+  (eask-pkg-init)
   (if-let* ((name (elt argv 0)) (name (intern name))
             (_ (package-installed-p name)))
       (package-delete (eask-package-desc name t) (eask-force-p))

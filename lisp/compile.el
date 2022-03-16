@@ -18,8 +18,7 @@
   (let ((byte-compile-verbose t)) (byte-compile-file filename)))
 
 (eask-start
-  (package-initialize)
-  (package-refresh-contents)
+  (eask-pkg-init)
   (dolist (filename (eask-package-files))
     (add-to-list 'load-path (file-name-directory filename))
     (eask--byte-compile-file filename))
