@@ -138,6 +138,8 @@ current workspace.")
 (defvar eask-package nil)
 (defvar eask-package-file nil)
 (defvar eask-files nil)
+(defvar eask-depends-on nil)
+(defvar eask-depends-on-dev nil)
 
 (defun eask-package (name version description)
   "Set the package information."
@@ -152,9 +154,10 @@ current workspace.")
   (setq eask-files patterns))
 
 (defun eask-depends-on (pkg &optional minimum-version)
-  "Specify a dependency of this package.")
+  "Specify a dependency of this package."
+  (push pkg eask-depends-on))
 
-(defun eask-development (file)
+(defun eask-development (&rest dep)
   ""
   ;; TODO: ..
   )
