@@ -15,9 +15,29 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        emacs-version:
+          - 25.1
+          - 25.2
+          - 25.3
+          - 26.1
+          - 26.2
+          - 26.3
+          - 27.1
+          - 27.2
+          - snapshot
 
     steps:
+    - if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
+      uses: purcell/setup-emacs@master
+      with:
+        version: ${{ matrix.emacs-version }}
+
+    - if: matrix.os == 'windows-latest'
+      uses: jcs090218/setup-emacs-windows@master
+      with:
+        version: ${{ matrix.emacs-version }}
+
     - uses: actions/setup-node@v2
       with:
         node-version: '14'
