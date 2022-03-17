@@ -3,7 +3,7 @@
 const yargs = require("yargs");
 
 yargs
-  .usage("eask <command> [args]")
+  .usage("Usage: $0 <command> [options]")
   .commandDir("cmds")
   .showHelpOnFail(true)
   .help(
