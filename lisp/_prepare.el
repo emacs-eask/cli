@@ -108,7 +108,7 @@ current workspace.")
         (f-source          (eask-fbound 'source))
         (f-source-priority (eask-fbound 'source-priority))
         (f-load-path       (eask-fbound 'load-path))
-        (f-load-paths       (eask-fbound 'load-paths)))
+        (f-load-paths      (eask-fbound 'load-paths)))
     (eask--keywords-update #'eask-package #'eask-package-file #'eask-files
                            #'eask-depends-on #'eask-development
                            #'eask-source #'eask-source-priority
