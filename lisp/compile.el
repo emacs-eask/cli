@@ -15,7 +15,8 @@
 
 (defun eask--byte-compile-file (filename)
   "Byte compile FILENAME with display messages."
-  (let ((byte-compile-verbose t)) (byte-compile-file filename)))
+  (when (member (file-name-extension filename) '("el"))
+    (let ((byte-compile-verbose t)) (byte-compile-file filename))))
 
 (eask-start
   (eask-pkg-init)
