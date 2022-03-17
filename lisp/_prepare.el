@@ -53,7 +53,7 @@
 (defun eask-dev-p ()    (eask--flag "-dev"))  ; -dev is enabled
 
 ;;; String
-;; TODO: n/a
+;; XXX Add string argument here if any!
 
 ;;; Number
 (defun eask-depth ()
