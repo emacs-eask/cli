@@ -15,13 +15,12 @@
 
 (defun eask--byte-compile-file (filename)
   "Byte compile FILENAME with display messages."
-  (when (member (file-name-extension filename) '("el"))
-    (byte-compile-file filename)
-    (unless byte-compile-verbose (message "Compiling %s..." filename))))
+  (byte-compile-file filename)
+  (unless byte-compile-verbose (message "Compiling %s..." filename)))
 
 (eask-start
   (eask-pkg-init)
-  (dolist (filename (eask-package-files))
+  (dolist (filename (eask-package-el-files))
     (add-to-list 'load-path (file-name-directory filename))
     (eask--byte-compile-file filename)))
 

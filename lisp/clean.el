@@ -1,4 +1,4 @@
-;;; clean.el --- Clean up Eask  -*- lexical-binding: t; -*-
+;;; clean.el --- Clean up .eask directory  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -8,7 +8,7 @@
 ;;
 ;;  Action options:
 ;;
-;;    [-g]       install packages globally to `~/.emacs.d/'
+;;    [-g]       clean packages to default `~/.emacs.d/'
 ;;
 
 ;;; Code:
@@ -24,6 +24,6 @@
     (ignore-errors (delete-directory target-dir t))
     (if eask--first-init-p
         (message "Workspace `%s` is already cleaned" target-dir)
-      (message "Workspace `%s` cleaned" target-dir))))
+      (message "Cleaning workspace `%s`... done" target-dir))))
 
 ;;; clean.el ends here

@@ -66,6 +66,15 @@
 (defun eask-depth () (eask--str2num (eask--flag-value "--depth")))  ; -depth is enabled
 
 ;;
+;;; Execution
+
+(defun eask-call (script)
+  "Call another eask script."
+  (let ((script-el (concat script ".el"))
+        (lisp-dir (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
+    (load-file (expand-file-name script-el lisp-dir))))
+
+;;
 ;;; Core
 
 (defvar eask--first-init-p nil
@@ -239,5 +248,9 @@ Eask file in the workspace."
     ;; Package file is part of package-files
     (when eask-package-file (push eask-package-file files))
     (delete-dups files)))
+
+(defun eask-package-el-files ()
+  "Return package files in workspace."
+  (cl-remove-if-not (lambda (filename) (string= (file-name-extension filename) "el")) (eask-package-files)))
 
 ;;; _prepare.el ends here

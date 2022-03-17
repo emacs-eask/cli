@@ -18,6 +18,6 @@
       (dolist (elc elcs)
         (ignore-errors (delete-file elc))
         (message "Deleting %s..." elc))
-    (message "Workspace is already cleaned")))
+    (message "Workspace has no .elc files")))
 
 ;;; clean-elc.el ends here
