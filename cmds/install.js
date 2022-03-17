@@ -21,7 +21,7 @@
 
 const util = require("../src/util");
 
-exports.command = 'install [name]';
+exports.command = 'install [name] [-g] [--dev]';
 exports.desc = 'install packages';
 exports.builder = {
   name: {
@@ -35,8 +35,16 @@ exports.builder = {
     requiresArg: false,
     type: 'boolean',
   },
+  development: {
+    description: 'install development packages as well',
+    alias: 'dev',
+    requiresArg: false,
+    type: 'boolean',
+  },
 };
 
-exports.handler = async ({ name, global }) => {
-  await util.e_call('install', name, util.def_flag(global, '-g'));
+exports.handler = async ({ name, global, development }) => {
+  await util.e_call('install', name
+                    , util.def_flag(global, '-g')
+                    , util.def_flag(development, '--dev'));
 };

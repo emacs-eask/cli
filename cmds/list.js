@@ -40,5 +40,5 @@ exports.builder = {
 exports.handler = async ({ global, depth }) => {
   await util.e_call('list'
                     , util.def_flag(global, '-g')
-                    , util.def_flag(depth, '-depth', depth));
+                    , util.def_flag(depth, '--depth', depth));
 };
