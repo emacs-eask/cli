@@ -19,6 +19,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add command `eask files`
 * Add command `eask clean-elc`
 * Add command `eask load-path`
+* Show help on command fails (cf17c081bfd339a09be8b9e43723a739e4bb3f58)
 
 ## 0.1.x
 > Released Mar 15, 2022
