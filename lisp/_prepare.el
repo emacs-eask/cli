@@ -110,7 +110,9 @@ Eask file in the workspace."
      (progn ,@body)
      (eask--loop-file-keywords
       (lambda (keyword api old)
-        (eval `(defalias (quote ,keyword) (quote ,old)))))))
+        ;; TODO: Revert the original function's definition; just in case,
+        ;; anything else don't go wrong
+        (eval `(defalias (quote ,keyword) (symbol-function ,old)))))))
 
 (defun eask-file-load ()
   "Load Eask file in workspace."
