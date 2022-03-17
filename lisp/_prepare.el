@@ -81,43 +81,40 @@ current workspace.")
 
 (defun eask-fbound (symbol) (and (fboundp symbol) symbol))
 
-(defun eask--keywords-update (package
-                              package-file files
-                              depends-on development
-                              source source-priority
-                              load-path load-paths)
-  "Update set of Eask file functions."
-  (defalias 'package         (symbol-function package))
-  (defalias 'package-file    (symbol-function package-file))
-  (defalias 'files           (symbol-function files))
-  (defalias 'depends-on      (symbol-function depends-on))
-  (defalias 'development     (symbol-function development))
-  (defalias 'source          (symbol-function source))
-  (defalias 'source-priority (symbol-function source-priority))
-  (defalias 'load-path       (symbol-function load-path))
-  (defalias 'load-paths      (symbol-function load-paths)))
+(defconst eask-file-keywords
+  '("package" "package-file" "files"
+    "depends-on" "development"
+    "source" "source-priority"
+    "load-path" "load-paths")
+  "List of Eask file keywords.")
+
+(defun eask--loop-file-keywords (func)
+  "Loop through Eask file keywords for environment replacement.  Internal used
+for function `eask--alias-env'."
+  (dolist (keyword eask-file-keywords)
+    (let ((keyword-sym (intern keyword))
+          (api (intern (concat "eask-" keyword)))      ; existing function
+          (old (intern (concat "eask--f-" keyword))))  ; variable that holds function pointer
+      (funcall func keyword-sym api old))))
+
+(defmacro eask--alias-env (&rest body)
+  "Replace all Eask file functions temporary; this is only used when loading
+Eask file in the workspace."
+  (declare (indent 0) (debug t))
+  (eask--loop-file-keywords
+   (lambda (keyword api old)
+     (eval `(defvar ,old nil))
+     (eval `(setq ,old (eask-fbound keyword)))
+     (eval `(defalias keyword ,(symbol-function api)))))
+  (eval `(progn ,@body))
+  (eask--loop-file-keywords
+   (lambda (keyword api old)
+     (eval `(defalias keyword ,(symbol-function (symbol-value old)))))))
 
 (defun eask-file-load ()
   "Load Eask file in workspace."
-  (let ((eask-file (expand-file-name "../../Eask" user-emacs-directory))
-        (f-package         (eask-fbound 'package))
-        (f-package-file    (eask-fbound 'package-file))
-        (f-files           (eask-fbound 'files))
-        (f-depends-on      (eask-fbound 'depends-on))
-        (f-development     (eask-fbound 'development))
-        (f-source          (eask-fbound 'source))
-        (f-source-priority (eask-fbound 'source-priority))
-        (f-load-path       (eask-fbound 'load-path))
-        (f-load-paths      (eask-fbound 'load-paths)))
-    (eask--keywords-update #'eask-package #'eask-package-file #'eask-files
-                           #'eask-depends-on #'eask-development
-                           #'eask-source #'eask-source-priority
-                           #'eask-load-path #'eask-load-paths)
-    (load-file eask-file)
-    (eask--keywords-update f-package f-package-file f-files
-                           f-depends-on f-development
-                           f-source f-source-priority
-                           f-load-path f-load-paths)))
+  (let ((eask-file (expand-file-name "../../Eask" user-emacs-directory)))
+    (eask--alias-env (load-file eask-file))))
 
 (defmacro eask-start (&rest body)
   "Execute BODY with workspace setup."
