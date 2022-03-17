@@ -31,8 +31,11 @@
 
 (defun eask-package-install (pkg)
   "Install the package PKG."
-  (eask-pkg-init)
-  (package-install (if (stringp pkg) (intern pkg) pkg)))
+  (package-initialize)
+  (let ((pkg (if (stringp pkg) (intern pkg) pkg)))
+    (unless (package-installed-p pkg)
+      (package-refresh-contents)
+      (package-install pkg))))
 
 ;;
 ;;; Flag
@@ -47,17 +50,20 @@
   "Return value for FLAG."
   (nth 1 (eask--flag flag)))
 
-;;; Boolean
-(defun eask-global-p () (eask--flag "-g"))    ; -g   is enabled
-(defun eask-force-p ()  (eask--flag "-f"))    ; -f   is enabled
-(defun eask-dev-p ()    (eask--flag "-dev"))  ; -dev is enabled
+(defun eask-command ()
+  "What's the current command?"
+  (file-name-sans-extension (file-name-nondirectory (nth 0 argv))))
 
-;;; String
+;;; Boolean
+(defun eask-global-p () (eask--flag "-g"))     ; -g   is enabled
+(defun eask-force-p ()  (eask--flag "-f"))     ; -f   is enabled
+(defun eask-dev-p ()    (eask--flag "--dev"))  ; -dev is enabled
+
+;;; String (with arguments)
 ;; XXX Add string argument here if any!
 
-;;; Number
-(defun eask-depth ()
-  (eask--str2num (eask--flag-value "-depth")))
+;;; Number (with arguments)
+(defun eask-depth () (eask--str2num (eask--flag-value "--depth")))  ; -depth is enabled
 
 ;;
 ;;; Core
@@ -67,8 +73,12 @@
 current workspace.")
 
 (defconst eask--command-list
-  '("--eask-g" "--eask-f" "--eask-depth" "--eask-dev")
+  '("--eask-g" "--eask-f" "--eask--depth" "--eask--dev")
   "List of commands to accept, so we can avoid unknown option error.")
+
+(defun eask-self-command-p (arg)
+  "Return non-nil if ARG is known internal command."
+  (member arg eask--command-list))
 
 (defmacro eask--setup-env (&rest body)
   "Execute BODY with workspace setup."
@@ -155,6 +165,8 @@ Eask file in the workspace."
 (defvar eask-depends-on nil)
 (defvar eask-depends-on-dev nil)
 
+(defvar eask--development-scope nil)
+
 (defun eask-package (name version description)
   "Set the package information."
   (setq eask-package `(:name ,name :version ,version :description ,description)))
@@ -169,13 +181,16 @@ Eask file in the workspace."
 
 (defun eask-depends-on (pkg &optional minimum-version)
   "Specify a dependency of this package."
-  (eask-package-install pkg))
+  (push pkg eask-depends-on)
+  (delete-dups eask-depends-on)
+  pkg)
 
 (defun eask-development (&rest dep)
   "Development scope."
-  (when (eask-dev-p)
-    ;; TODO: ..
-    ))
+  (dolist (pkg dep)
+    (push pkg eask-depends-on-dev)
+    (delete-dups eask-depends-on-dev)
+    (setq eask-depends-on (remove pkg eask-depends-on))))  ; remove it from production
 
 (defun eask-load-path (dir)
   "Add DIR to load-path."
