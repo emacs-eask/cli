@@ -101,15 +101,16 @@ for function `eask--alias-env'."
   "Replace all Eask file functions temporary; this is only used when loading
 Eask file in the workspace."
   (declare (indent 0) (debug t))
-  (eask--loop-file-keywords
-   (lambda (keyword api old)
-     (eval `(defvar ,old nil))
-     (eval `(setq ,old (eask-fbound keyword)))
-     (eval `(defalias keyword ,(symbol-function api)))))
-  (eval `(progn ,@body))
-  (eask--loop-file-keywords
-   (lambda (keyword api old)
-     (eval `(defalias keyword ,(symbol-function (symbol-value old)))))))
+  `(progn
+     (eask--loop-file-keywords
+      (lambda (keyword api old)
+        (eval `(defvar ,old nil))
+        (eval `(setq ,old (eask-fbound (quote ,keyword))))
+        (eval `(defalias (quote ,keyword) (quote ,api)))))
+     (progn ,@body)
+     (eask--loop-file-keywords
+      (lambda (keyword api old)
+        (eval `(defalias (quote ,keyword) (quote ,old)))))))
 
 (defun eask-file-load ()
   "Load Eask file in workspace."
@@ -218,6 +219,8 @@ Eask file in the workspace."
   (let (files)
     (dolist (pattern eask-files)
       (setq files (append files (eask--f-entries default-directory pattern))))
+    ;; Package file is part of package-files
+    (when eask-package-file (push eask-package-file files))
     (delete-dups files)))
 
 ;;; _prepare.el ends here
