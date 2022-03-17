@@ -31,7 +31,7 @@ function _remove_undefined(arr) {
 }
 
 /**
- *
+ * Remove undefined item and insert space between arguments.
  * @param { ellipsis } ...arr - an array to insert space between each item.
  */
 function _join_spc(...arr) {
@@ -64,6 +64,7 @@ function def_flag(arg, name, val = undefined) {
   return '--eask' + name + ' ' + val;
 }
 
+/* Send error code, and exit the program. */
 function _exit(code) {
   process.exitCode = code;
   throw 'Uncaught exception error: ' + code;
@@ -75,6 +76,9 @@ function _exec_out(error, stdout, stderr) {
   //if (error) { console.log(error); }  /* ignore node error */
   if (stderr) {
     console.log(stderr);
+    // XXX The method here to detect error, and send exit code is fragile.
+    // The better way should just grab it from Emacs program itself; but Emacs
+    // return exit code immediately with `child_process.exec` call
     if (stderr.includes ('Error: ')) {
       _exit(1);
     }
