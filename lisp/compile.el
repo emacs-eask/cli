@@ -21,7 +21,6 @@
   (eask-pkg-init)
   (dolist (filename (eask-package-files))
     (add-to-list 'load-path (file-name-directory filename))
-    (eask--byte-compile-file filename))
-  (eask--byte-compile-file eask-package-file))
+    (eask--byte-compile-file filename)))
 
 ;;; compile.el ends here
