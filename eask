@@ -5,5 +5,14 @@ const yargs = require("yargs");
 yargs
   .usage("eask <command> [args]")
   .commandDir("cmds")
+  .showHelpOnFail(true)
+  .help(
+    'help',
+    'Show usage instructions.'
+  )
+  .command({
+    command: '*',
+    handler() { yargs.showHelp(); console.log('\n'); }
+  })
   .demandCommand()
   .help().argv;
