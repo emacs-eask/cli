@@ -20,7 +20,7 @@
 
 (eask-start
   (eask-package-install 'package-lint)
-  (dolist (el (or (eask-argv) (eask-package-el-files)))
+  (dolist (el (or (eask-args) (eask-package-el-files)))
     (message "")
     (message "`%s` with package-lint" el)
     (with-temp-buffer

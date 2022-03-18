@@ -61,7 +61,7 @@ Argument WHERE is the alist of package information."
 
 (eask-start
   (eask-pkg-init)
-  (if-let ((names (eask-argv)))
+  (if-let ((names (eask-args)))
       (dolist (name names)
         (setq name (intern name))
         (if (package-installed-p name)

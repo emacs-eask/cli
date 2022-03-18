@@ -25,7 +25,7 @@
 
 (eask-start
   (eask-pkg-init)
-  (dolist (filename (or (eask-argv) (eask-package-el-files)))
+  (dolist (filename (or (eask-args) (eask-package-el-files)))
     (add-to-list 'load-path (file-name-directory filename))
     (eask--byte-compile-file filename)))
 
