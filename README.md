@@ -48,7 +48,24 @@ N/A
 
 ## About Eask file
 
-N/A
+`Eask` is the magic file that `eask` will read it as init file in Emacs. The
+syntax are very similar to `Cask` file, but different.
+
+```el
+(source "gnu")
+
+(package "your-package" "1.0.0" "Your package description")
+
+(package-file "your-package-name.el")
+```
+
+Remember, `Eask` are just regular elisp file, and can be read it from Emacs itself!
+
+```el
+; Regular Eask file content...
+
+(setq byte-compile-error-on-warn t)  ; Singal error if warning occurred
+```
 
 ## Project Development
 
