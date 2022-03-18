@@ -19,11 +19,56 @@
 
 "use strict";
 
-const util = require("../src/util");
+const fs = require('fs');
+const readline = require('readline').createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+const EASK_FILE = './Eask';
 
 exports.command = 'init';
-exports.desc = 'Create new `Eask` file in the current directory.';
+exports.desc = 'create new `Eask` file in the current directory.';
 
 exports.handler = async ({}) => {
-  await util.e_call('init');
+  if (fs.existsSync(EASK_FILE)) {
+    console.log('Eask file is already exists');
+    process.exit(0);
+  }
+
+  let name, version, description, entry_point;
+  await ask('package name: () ', (answer) => { name = answer; });
+  await ask('version: (1.0.0) ', (answer) => { version = answer; });
+  await ask('description: ', (answer) => { description = answer; });
+  await ask('entry-point: (MAIN.el) ', (answer) => { entry_point = answer; });
+
+  let content = `(source "gnu")
+
+(package ${name} ${version} ${description})
+
+(package-file ${entry_point})
+`;
+
+  await ask(`About to write to ${EASK_FILE}:
+
+${content}
+
+Is this OK? (yes) `,
+            (answer) => {
+              if (answer == '' || answer == 'yes') {
+                fs.writeFile(EASK_FILE, content, (err) => { if (err) console.log(err); });
+              }
+            });
+  readline.close();
 };
+
+/*
+ * Ask question with callback
+ * @param { string } question - question to ask for user input
+ * @param { callback } callback - callback with user's answer
+ */
+function ask(question, callback) {
+  return new Promise((resolve, reject) => {
+    readline.question(question, (answer) => { callback(answer); resolve(); });
+  });
+}
