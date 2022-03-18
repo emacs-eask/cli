@@ -29,3 +29,6 @@ CMD="node eask"
 echo "[INFO] 'eask' version: "
 $CMD --version
 $CMD info
+
+# TODO: provide a better test case?
+$CMD list -g
