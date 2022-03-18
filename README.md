@@ -59,7 +59,8 @@ syntax are very similar to `Cask` file, but different.
 (package-file "your-package-name.el")
 ```
 
-Remember, `Eask` are just regular elisp file, and can be read it from Emacs itself!
+Remember, `Eask` is just the regular elisp file, and should be read it from
+Emacs itself!
 
 ```el
 ; Regular Eask file content...
@@ -68,6 +69,10 @@ Remember, `Eask` are just regular elisp file, and can be read it from Emacs itse
 ```
 
 ## Project Development
+
+N/A
+
+## Focus
 
 N/A
 
