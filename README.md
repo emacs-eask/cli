@@ -8,6 +8,12 @@ Emacs package command-line tool
 
 [![CI](https://github.com/emacs-eask/eask/actions/workflows/test.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test.yml)
 
+## Dependencies
+
+* [Node.js](https://nodejs.org/en/)
+* [yargs](https://github.com/yargs/yargs)
+* [Emacs](https://www.gnu.org/software/emacs/) of course!
+
 ## 💾 Installation
 
 N/A
