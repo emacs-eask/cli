@@ -24,6 +24,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add hooks for all commands, including the master one.
 * Command `compile`, and `lint` accept multiple arguments, `files` (b06f1139fbcc404f4148948e3f3429d23773a6c0)
 * Add command `eask init` (846f8972c597cc1427bc9990fa7e452a9a963bb9)
+* Add command `eask exec` (83cc11d5b9aa4f818a11f53cb29a6a076f05739b)
 
 ## 0.1.x
 > Released Mar 15, 2022
