@@ -4,7 +4,7 @@
 ;;
 ;; Command use to list out Emacs packages,
 ;;
-;;   $ eask list [-g]
+;;   $ eask list
 ;;
 ;;
 ;;  Action options:

@@ -21,13 +21,13 @@
 
 const util = require("../src/util");
 
-exports.command = 'install [name] [-g] [--dev]';
+exports.command = 'install [names..]';
 exports.desc = 'install packages';
 exports.builder = {
-  name: {
-    description: 'name of the package to install',
+  names: {
+    description: 'packages to install',
     requiresArg: false,
-    type: 'string',
+    type: 'array',
   },
   global: {
     description: 'install packages from default `.emacs.d`',
@@ -43,8 +43,8 @@ exports.builder = {
   },
 };
 
-exports.handler = async ({ name, global, development }) => {
-  await util.e_call('install', name
+exports.handler = async ({ names, global, development }) => {
+  await util.e_call('install', names
                     , util.def_flag(global, '-g')
                     , util.def_flag(development, '--dev'));
 };

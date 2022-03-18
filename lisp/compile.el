@@ -4,7 +4,7 @@
 ;;
 ;; Byte compile all Emacs Lisp files in the package
 ;;
-;;   $ eask compile
+;;   $ eask compile [names..]
 ;;
 
 ;;; Code:

@@ -9,10 +9,10 @@
 (require 'rect)
 (require 'subr-x)
 
-(setq package-enable-at-startup nil  ; To avoid initializing twice
+(setq package-enable-at-startup nil    ; To avoid initializing twice
       package-check-signature nil)
 
-(setq package-archives nil
+(setq package-archives nil             ; Leave it to custom use
       package-archive-priorities nil)
 
 (defcustom eask-path-ignores
@@ -88,6 +88,10 @@ current workspace.")
 (defun eask-self-command-p (arg)
   "Return non-nil if ARG is known internal command."
   (member arg eask--command-list))
+
+(defun eask-argv ()
+  "Get all arguments except options."
+  (cl-remove-if #'eask-self-command-p argv))
 
 (defmacro eask--setup-env (&rest body)
   "Execute BODY with workspace setup."

@@ -4,17 +4,17 @@
 ;;
 ;; Command use to upgrade Emacs packages,
 ;;
-;;   $ eask upgrade [name] [-g] [-f]
+;;   $ eask upgrade [names..]
 ;;
 ;;
 ;;  Initialization options:
 ;;
-;;    [name]     name of the package to upgrade; else we upgrade all packages
+;;    [names..]     package to upgrade; else we upgrade all packages
 ;;
 ;;  Action options:
 ;;
-;;    [-g]       upgrade packages globally to `~/.emacs.d/'
-;;    [-f]       force to upgrade packages
+;;    [-g]          upgrade packages globally to `~/.emacs.d/'
+;;    [-f]          force to upgrade packages
 ;;
 
 ;;; Code:
@@ -62,12 +62,14 @@ Argument WHERE is the alist of package information."
 
 (eask-start
   (eask-pkg-init)
-  (if-let* ((name (elt argv 0)) (name (intern name)))
-      (if (package-installed-p name)
-          (if (or (eask-package--upgradable-p name) (eask-force-p))
-              (eask-package-upgrade (cadr (assq name package-archive-contents)))
-            (message "Package `%s` is already up to date" name))
-        (error "Package does not exists `%s`, you need to install before upgrade" name))
+  (if-let ((names (eask-argv)))
+      (dolist (name names)
+        (setq name (intern name))
+        (if (package-installed-p name)
+            (if (or (eask-package--upgradable-p name) (eask-force-p))
+                (eask-package-upgrade (cadr (assq name package-archive-contents)))
+              (message "Package `%s` is already up to date" name))
+          (error "Package does not exists `%s`, you need to install before upgrade" name)))
     (eask-package-upgrade-all)))
 
 ;;; upgrade.el ends here

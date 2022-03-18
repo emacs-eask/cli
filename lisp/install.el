@@ -4,18 +4,19 @@
 ;;
 ;; Command use to install Emacs packages,
 ;;
-;;   $ eask install [name] [-g] [--dev]
+;;   $ eask install [names..]
 ;;
 ;;
 ;;  Initialization options:
 ;;
-;;    [name]     name of the package to install; else we try to install package
-;;               from current directory by calling function `package-install-file'
+;;    [names..]     name of the package to install; else we try to install
+;;                  package from current directory by calling function
+;;                  `package-install-file'
 ;;
 ;;  Action options:
 ;;
-;;    [-g]       install packages to default `~/.emacs.d/'
-;;    [--dev]    install development packages as well
+;;    [-g]          install packages to default `~/.emacs.d/'
+;;    [--dev]       install development packages as well
 ;;
 
 ;;; Code:
@@ -25,9 +26,9 @@
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
 (eask-start
-  (if-let* ((name (elt argv 0)) (_ (not (eask-self-command-p name))))
-      ;; If package [name] are specified, we try to install it
-      (eask-package-install name)
+  (if-let ((names (eask-argv)))
+      ;; If package [name..] are specified, we try to install it
+      (dolist (name names) (eask-package-install name))
     ;; Else we try to install package from the working directory
     (eask-pkg-init)
     (mapc #'eask-package-install eask-depends-on)
