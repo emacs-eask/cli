@@ -54,12 +54,6 @@ N/A
 
 N/A
 
-## Todo
-
-Very rough todo list
-
-- [ ] Add `[file..]` arguments for `lint` and `compile`
-
 ## Contribute
 
 N/A
