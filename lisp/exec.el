@@ -28,8 +28,8 @@
 (eask-start
   (eask-pkg-init)
   (eask--add-bin-exec-path)
-  (setq commander-args (cdr argv))
-  (if-let* ((command (eask-argv 0))
+  (setq commander-args (cddr argv))  ; by pass `--' as well
+  (if-let* ((command (eask-argv 1))
             (exe (executable-find command)))
       (load-file exe)
     (message "Executable `%s`.. not found" command)))
