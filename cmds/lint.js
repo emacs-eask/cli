@@ -21,9 +21,16 @@
 
 const util = require("../src/util");
 
-exports.command = "lint";
+exports.command = "lint [names..]";
 exports.desc = "lint the package using `package-lint'";
+exports.builder = {
+  names: {
+    description: 'specify files to lint',
+    requiresArg: false,
+    type: 'array',
+  },
+};
 
-exports.handler = async ({ }) => {
-  await util.e_call('lint');
+exports.handler = async ({ names }) => {
+  await util.e_call('lint', names);
 };

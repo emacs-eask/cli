@@ -21,9 +21,16 @@
 
 const util = require("../src/util");
 
-exports.command = 'compile';
+exports.command = 'compile [names..]';
 exports.desc = 'byte compile all Emacs Lisp files in the package';
+exports.builder = {
+  names: {
+    description: 'specify files to byte-compile',
+    requiresArg: false,
+    type: 'array',
+  },
+};
 
-exports.handler = async ({}) => {
-  await util.e_call('compile');
+exports.handler = async ({ names }) => {
+  await util.e_call('compile', names);
 };

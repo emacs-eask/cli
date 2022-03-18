@@ -6,6 +6,11 @@
 ;;
 ;;   $ eask compile [names..]
 ;;
+;;
+;;  Initialization options:
+;;
+;;    [names..]     specify files to byte-compile
+;;
 
 ;;; Code:
 
@@ -20,7 +25,7 @@
 
 (eask-start
   (eask-pkg-init)
-  (dolist (filename (eask-package-el-files))
+  (dolist (filename (or (eask-argv) (eask-package-el-files)))
     (add-to-list 'load-path (file-name-directory filename))
     (eask--byte-compile-file filename)))
 

@@ -4,7 +4,12 @@
 ;;
 ;; Command use to lint current Emacs package,
 ;;
-;;   $ eask lint
+;;   $ eask lint [names..]
+;;
+;;
+;;  Initialization options:
+;;
+;;    [names..]     specify files to byte-compile
 ;;
 
 ;;; Code:
@@ -15,7 +20,8 @@
 
 (eask-start
   (eask-package-install 'package-lint)
-  (dolist (el (eask-package-el-files))
+  (dolist (el (or (eask-argv) (eask-package-el-files)))
+    (message "")
     (message "`%s` with package-lint" el)
     (with-temp-buffer
       (emacs-lisp-mode)
