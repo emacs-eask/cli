@@ -21,6 +21,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add command `eask load-path`
 * Show help on command fails (cf17c081bfd339a09be8b9e43723a739e4bb3f58)
 * Add command `eask lint` (4157f4310d639612fe5cab1d5b2d75747dde2311)
+* Add hooks for all commands, including the master one.
 
 ## 0.1.x
 > Released Mar 15, 2022

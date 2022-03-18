@@ -146,16 +146,6 @@ Eask file in the workspace."
 
 (defvar eask-file nil "The Eask file path.")
 
-(defcustom eask-before-command-hook nil
-  "Hooks run before any command is executed."
-  :type 'hook
-  :group 'eask)
-
-(defcustom eask-after-command-hook nil
-  "Hooks run after any command is executed."
-  :type 'hook
-  :group 'eask)
-
 (defmacro eask-start (&rest body)
   "Execute BODY with workspace setup."
   (declare (indent 0) (debug t))
