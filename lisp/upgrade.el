@@ -27,8 +27,7 @@
   "Get version of the package by NAME.
 
 Argument WHERE is the alist of package information."
-  (when-let ((pkg (cadr (assq name where))))
-    (package-desc-version pkg)))
+  (when-let ((pkg (cadr (assq name where)))) (package-desc-version pkg)))
 
 (defun eask-package-upgrade (pkg-desc)
   "Upgrade package using PKG-DESC."

@@ -50,10 +50,6 @@
   "Return value for FLAG."
   (nth 1 (eask--flag flag)))
 
-(defun eask-command ()
-  "What's the current command?"
-  (file-name-sans-extension (file-name-nondirectory (nth 0 argv))))
-
 ;;; Boolean
 (defun eask-global-p () (eask--flag "-g"))     ; -g   is enabled
 (defun eask-force-p ()  (eask--flag "-f"))     ; -f   is enabled
@@ -68,10 +64,17 @@
 ;;
 ;;; Execution
 
+(defconst eask--script (nth 1 (member "-scriptload" command-line-args))
+  "Script currently executing.")
+
+(defun eask-command ()
+  "What's the current command?"
+  (file-name-sans-extension (file-name-nondirectory eask--script)))
+
 (defun eask-call (script)
   "Call another eask script."
   (let ((script-el (concat script ".el"))
-        (lisp-dir (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
+        (lisp-dir (file-name-directory eask--script)))
     (load-file (expand-file-name script-el lisp-dir))))
 
 ;;
@@ -137,15 +140,24 @@ Eask file in the workspace."
         ;; anything else don't go wrong
         (eval `(defalias (quote ,keyword) (symbol-function ,old)))))))
 
-(defun eask-file-load ()
-  "Load Eask file in workspace."
-  (let ((eask-file (expand-file-name "../../Eask" user-emacs-directory)))
-    (eask--alias-env (load-file eask-file))))
+(defvar eask-file nil "The Eask file path.")
+
+(defcustom eask-before-command-hook nil
+  "Hooks run before any command is executed."
+  :type 'hook
+  :group 'eask)
+
+(defcustom eask-after-command-hook nil
+  "Hooks run after any command is executed."
+  :type 'hook
+  :group 'eask)
 
 (defmacro eask-start (&rest body)
   "Execute BODY with workspace setup."
   (declare (indent 0) (debug t))
   `(eask--setup-env
+     (run-hooks 'eask-before-command-hook)
+     (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
      ;; set it locally, else we ignore to respect default settings
      (if (eask-global-p) (progn ,@body)
        (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
@@ -153,9 +165,12 @@ Eask file in the workspace."
               (eask--first-init-p (not (file-directory-p user-emacs-directory)))
               (user-init-file (locate-user-emacs-file "init.el"))
               (custom-file (locate-user-emacs-file "custom.el")))
+         (setq eask-file (expand-file-name "../../Eask" user-emacs-directory))
          (ignore-errors (make-directory package-user-dir t))
-         (eask-file-load)
-         ,@body))))
+         (eask--alias-env (load-file eask-file))
+         ,@body))
+     (run-hooks (intern (concat "eask-after-command-" (eask-command) "-hook")))
+     (run-hooks 'eask-after-command-hook)))
 
 ;;
 ;;; Eask file
