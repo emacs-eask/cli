@@ -42,7 +42,7 @@ exports.handler = async ({}) => {
   let name, version, description, entry_point;
   await ask(`package name: (${basename}) `, (answer) => { name = answer || basename; });
   await ask(`version: (1.0.0) `, (answer) => { version = answer || '1.0.0'; });
-  await ask(`description:  `, (answer) => { description = answer; });
+  await ask(`description: `, (answer) => { description = answer; });
   await ask(`entry-point: (${basename}.el) `, (answer) => { entry_point = answer || `${basename}.el`; });
 
   let content = `(source "gnu")
