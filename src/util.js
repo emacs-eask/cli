@@ -65,7 +65,7 @@ function def_flag(arg, name, val = undefined) {
 }
 
 /* Send error code, and exit the program. */
-function _exit(code) {
+function _exit_error(code) {
   process.exitCode = code;
   throw 'Uncaught exception error: ' + code;
 }
@@ -80,7 +80,7 @@ function _exec_out(error, stdout, stderr) {
     // The better way should just grab it from Emacs program itself; but Emacs
     // return exit code immediately with `child_process.exec` call
     if (stderr.includes ('Error: ')) {
-      _exit(1);
+      _exit_error(1);
     }
   }
 }

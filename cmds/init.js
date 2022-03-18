@@ -19,34 +19,37 @@
 
 "use strict";
 
+const path = require('path');
 const fs = require('fs');
 const readline = require('readline').createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-const EASK_FILE = './Eask';
+const EASK_FILE = path.join(process.cwd(), '/Eask');
 
 exports.command = 'init';
 exports.desc = 'create new `Eask` file in the current directory.';
 
 exports.handler = async ({}) => {
+  let basename = path.basename(process.cwd());
+
   if (fs.existsSync(EASK_FILE)) {
     console.log('Eask file is already exists');
     process.exit(0);
   }
 
   let name, version, description, entry_point;
-  await ask('package name: () ', (answer) => { name = answer; });
-  await ask('version: (1.0.0) ', (answer) => { version = answer; });
-  await ask('description: ', (answer) => { description = answer; });
-  await ask('entry-point: (MAIN.el) ', (answer) => { entry_point = answer; });
+  await ask(`package name: (${basename}) `, (answer) => { name = answer || basename; });
+  await ask(`version: (1.0.0) `, (answer) => { version = answer || '1.0.0'; });
+  await ask(`description:  `, (answer) => { description = answer; });
+  await ask(`entry-point: (${basename}.el) `, (answer) => { entry_point = answer || `${basename}.el`; });
 
   let content = `(source "gnu")
 
-(package ${name} ${version} ${description})
+(package "${name}" "${version}" "${description}")
 
-(package-file ${entry_point})
+(package-file "${entry_point}")
 `;
 
   await ask(`About to write to ${EASK_FILE}:
