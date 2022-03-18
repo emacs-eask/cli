@@ -21,18 +21,21 @@
 
 const path = require('path');
 const fs = require('fs');
-const readline = require('readline').createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+const readline = require('readline');
 
 const EASK_FILE = path.join(process.cwd(), '/Eask');
+
+var instance;  /* `readline` instance */
 
 exports.command = 'init';
 exports.desc = 'create new `Eask` file in the current directory.';
 
 exports.handler = async ({}) => {
   let basename = path.basename(process.cwd());
+  instance = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
 
   if (fs.existsSync(EASK_FILE)) {
     console.log('Eask file is already exists');
@@ -62,7 +65,7 @@ Is this OK? (yes) `,
                 fs.writeFile(EASK_FILE, content, (err) => { if (err) console.log(err); });
               }
             });
-  readline.close();
+  instance.close();
 };
 
 /*
@@ -72,6 +75,6 @@ Is this OK? (yes) `,
  */
 function ask(question, callback) {
   return new Promise((resolve, reject) => {
-    readline.question(question, (answer) => { callback(answer); resolve(); });
+    instance.question(question, (answer) => { callback(answer); resolve(); });
   });
 }
