@@ -13,7 +13,8 @@
             "_prepare.el"
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
-(eask-call "clean-elc")
-(eask-call "clean")
+(eask-start
+  (eask-call "clean-elc")
+  (eask-call "clean"))
 
 ;;; clean-all.el ends here

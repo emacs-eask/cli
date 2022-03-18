@@ -84,6 +84,10 @@
   "Is non-nil if .eask does not exists; meaning users haven't called eask in the
 current workspace.")
 
+(defvar eask--setup-done-p nil
+  "Set to t once the environment setup has done; this is used when calling
+other scripts internally.  See function `eask-call'.")
+
 (defconst eask--command-list
   '("--eask-g" "--eask-f" "--eask--depth" "--eask--dev")
   "List of commands to accept, so we can avoid unknown option error.")
@@ -159,8 +163,9 @@ Eask file in the workspace."
      (run-hooks 'eask-before-command-hook)
      (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
      ;; set it locally, else we ignore to respect default settings
-     (if (eask-global-p) (progn ,@body)
-       (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
+     (if (or (eask-global-p) eask--setup-done-p) (progn ,@body)
+       (let* ((eask--setup-done-p t)
+              (user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
               (package-user-dir (expand-file-name "elpa" user-emacs-directory))
               (eask--first-init-p (not (file-directory-p user-emacs-directory)))
               (user-init-file (locate-user-emacs-file "init.el"))
