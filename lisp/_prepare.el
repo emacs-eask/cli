@@ -96,7 +96,7 @@ other scripts internally.  See function `eask-call'.")
   "Return non-nil if ARG is known internal command."
   (member arg eask--command-list))
 
-(defun eask-argv (index) "Return argument value by INDEX." (elt index argv))
+(defun eask-argv (index) "Return argument value by INDEX." (elt argv index))
 
 (defun eask-args ()
   "Get all arguments except options."
