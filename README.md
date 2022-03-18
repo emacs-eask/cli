@@ -16,7 +16,31 @@ Emacs package command-line tool
 
 ## 💾 Installation
 
-N/A
+Easiest way to install, is through tool [npm](https://www.npmjs.com/),
+
+```sh
+$ npm install -g @emacs-eask/eask
+```
+
+Alternatively, you can clone it directly from this repo
+
+```sh
+$ git clone https://github.com/emacs-eask/eask
+```
+
+Make sure you set up the environment path variable according to your system,
+
+On Linux/macOS,
+
+```sh
+PATH=$PATH:/path/to/eask/bin
+```
+
+On Windows,
+
+```batch
+set PATH=%PATH%;c:/path/to/eask/bin
+```
 
 ## About CI/CD
 
