@@ -26,7 +26,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add command `eask init` (846f8972c597cc1427bc9990fa7e452a9a963bb9)
 * Add command `eask exec` (83cc11d5b9aa4f818a11f53cb29a6a076f05739b)
 * Add command `eask package-directory` (e3098c8b0816a9f1a1fa953fa46f140e60c29bb2)
-* Add command `eask exec-path` (3b37957c53d5e662258014da82e81a3550bcb085)
+* Add command `eask path` (3b37957c53d5e662258014da82e81a3550bcb085)
 
 ## 0.1.x
 > Released Mar 15, 2022

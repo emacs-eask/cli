@@ -1,10 +1,10 @@
-;;; exec-path.el --- Print the exec-path from workspace  -*- lexical-binding: t; -*-
+;;; path.el --- Print the PATH (exec-path) from workspace  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
-;; Print the exec-path from workspace
+;; Print the PATH (exec-path) from workspace
 ;;
-;;   $ eask exec-path
+;;   $ eask path
 ;;
 
 ;;; Code:
@@ -22,4 +22,4 @@
   (eask--add-bin-exec-path)
   (mapc #'eask--print-exec-path exec-path))
 
-;;; exec-path.el ends here
+;;; path.el ends here
