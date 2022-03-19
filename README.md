@@ -46,6 +46,41 @@ set PATH=%PATH%;c:/path/to/eask/bin
 
 N/A
 
+```yml
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        emacs-version: [27.2, snapshot]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: purcell/setup-emacs@master
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
+      with:
+        version: ${{ matrix.emacs-version }}
+
+    - uses: jcs090218/setup-emacs-windows@master
+      if: matrix.os == 'windows-latest'
+      with:
+        version: ${{ matrix.emacs-version }}
+
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - uses: emacs-eask/setup-eask@master
+      with:
+        version: 'snapshot'
+
+    - name: Run tests
+      run:
+        make ci
+```
+
 ## About Eask file
 
 `Eask` is the magic file that `eask` will read it as init file in Emacs. The
