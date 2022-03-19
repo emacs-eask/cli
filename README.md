@@ -56,7 +56,7 @@ syntax are very similar to `Cask` file, but different.
 
 (package "your-package" "1.0.0" "Your package description")
 
-(package-file "your-package-name.el")
+(package-file "your-package-file.el")
 ```
 
 Remember, `Eask` is just the regular elisp file, and should be read it from
