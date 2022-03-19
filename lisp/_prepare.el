@@ -24,10 +24,18 @@
 ;;
 ;;; Package
 
+(defun eask--update-exec-path ()
+  "Add all bin directory to `exec-path'."
+  (dolist (filename (directory-files-recursively package-user-dir "^\\([^.]\\|\\.[^.]\\|\\.\\..\\)"))
+    (when (string-suffix-p "bin/" (file-name-directory filename))
+      (add-to-list 'exec-path (file-name-directory filename))))
+  (delete-dups exec-path))
+
 (defun eask-pkg-init ()
   "Package initialization."
   (package-initialize)
-  (package-refresh-contents))
+  (package-refresh-contents)
+  (eask--update-exec-path))
 
 (defun eask-package-install (pkg)
   "Install the package PKG."
@@ -154,22 +162,22 @@ Eask file in the workspace."
   "Execute BODY with workspace setup."
   (declare (indent 0) (debug t))
   `(eask--setup-env
-    (run-hooks 'eask-before-command-hook)
-    (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
-    ;; set it locally, else we ignore to respect default settings
-    (if (or (eask-global-p) eask--setup-done-p) (progn ,@body)
-      (let* ((eask--setup-done-p t)
-             (user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
-             (package-user-dir (expand-file-name "elpa" user-emacs-directory))
-             (eask--first-init-p (not (file-directory-p user-emacs-directory)))
-             (user-init-file (locate-user-emacs-file "init.el"))
-             (custom-file (locate-user-emacs-file "custom.el")))
-        (setq eask-file (expand-file-name "../../Eask" user-emacs-directory))
-        (ignore-errors (make-directory package-user-dir t))
-        (eask--alias-env (load-file eask-file))
-        ,@body))
-    (run-hooks (intern (concat "eask-after-command-" (eask-command) "-hook")))
-    (run-hooks 'eask-after-command-hook)))
+     (run-hooks 'eask-before-command-hook)
+     (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
+     ;; set it locally, else we ignore to respect default settings
+     (if (or (eask-global-p) eask--setup-done-p) (progn ,@body)
+       (let* ((eask--setup-done-p t)
+              (user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
+              (package-user-dir (expand-file-name "elpa" user-emacs-directory))
+              (eask--first-init-p (not (file-directory-p user-emacs-directory)))
+              (user-init-file (locate-user-emacs-file "init.el"))
+              (custom-file (locate-user-emacs-file "custom.el")))
+         (setq eask-file (expand-file-name "../../Eask" user-emacs-directory))
+         (ignore-errors (make-directory package-user-dir t))
+         (eask--alias-env (load-file eask-file))
+         ,@body))
+     (run-hooks (intern (concat "eask-after-command-" (eask-command) "-hook")))
+     (run-hooks 'eask-after-command-hook)))
 
 ;;
 ;;; Eask file

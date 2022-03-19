@@ -19,7 +19,6 @@
 
 (eask-start
   (eask-pkg-init)
-  (eask--add-bin-exec-path)
   (mapc #'eask--print-exec-path exec-path))
 
 ;;; path.el ends here
