@@ -1,10 +1,10 @@
-;;; eval.el --- Print path to package directory  -*- lexical-binding: t; -*-
+;;; eval.el --- Evaluate lisp form with a proper PATH  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
-;; Print path to package directory,
+;; Evaluate lisp form with a proper PATH,
 ;;
-;;   $ eask eval
+;;   $ eask eval [form]
 ;;
 
 ;;; Code:
@@ -14,6 +14,8 @@
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
 (eask-start
-  )
+  (eask-pkg-init)
+  (let ((form (eask-argv 0)))
+    (with-temp-buffer (insert form) (eval-buffer))))
 
 ;;; eval.el ends here
