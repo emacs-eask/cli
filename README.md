@@ -25,7 +25,7 @@ $ npm install -g @emacs-eask/eask
 Alternatively, you can clone it directly from this repo
 
 ```sh
-$ git clone https://github.com/emacs-eask/eask
+$ git clone https://github.com/emacsc-eask/eask
 ```
 
 Make sure you set up the environment path variable according to your system,
