@@ -9,11 +9,11 @@
 (require 'rect)
 (require 'subr-x)
 
-(setq package-enable-at-startup nil    ; To avoid initializing twice
-      package-check-signature nil)
-
-(setq package-archives nil             ; Leave it to custom use
-      package-archive-priorities nil)
+(unless (bound-and-true-p eask--initialized-p)
+  (setq package-enable-at-startup nil    ; To avoid initializing twice
+        package-check-signature nil
+        package-archives nil             ; Leave it to custom use
+        package-archive-priorities nil))
 
 (defcustom eask-path-ignores
   (append project-vc-ignores '(".eask"))
@@ -102,7 +102,7 @@ the `eask-start' execution.")
   "Is non-nil if .eask does not exists; meaning users haven't called eask in the
 current workspace.")
 
-(defvar eask--setup-done-p nil
+(defvar eask--initialized-p nil
   "Set to t once the environment setup has done; this is used when calling
 other scripts internally.  See function `eask-call'.")
 
@@ -174,8 +174,8 @@ Eask file in the workspace."
        (run-hooks 'eask-before-command-hook)
        (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
        ;; set it locally, else we ignore to respect default settings
-       (if (or (eask-global-p) eask--setup-done-p) (progn ,@body)
-         (let* ((eask--setup-done-p t)
+       (if (or (eask-global-p) eask--initialized-p) (progn ,@body)
+         (let* ((eask--initialized-p t)
                 (user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
                 (package-user-dir (expand-file-name "elpa" user-emacs-directory))
                 (eask--first-init-p (not (file-directory-p user-emacs-directory)))

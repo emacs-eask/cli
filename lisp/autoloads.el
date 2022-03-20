@@ -15,7 +15,8 @@
 
 (eask-start
   (package-generate-autoloads
-   (or (eask-package-get :name) (file-name-sans-extension eask-package-file))
+   (or (eask-package-get :name)
+       (file-name-nondirectory (file-name-sans-extension eask-package-file)))
    default-directory))
 
 ;;; autoloads.el ends here
