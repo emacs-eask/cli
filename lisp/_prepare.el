@@ -203,13 +203,15 @@ Eask file in the workspace."
     (org          . "https://orgmode.org/elpa/"))
   "Mapping of source name and url.")
 
-(defvar eask-package nil)
-(defvar eask-package-file nil)
-(defvar eask-files nil)
-(defvar eask-depends-on nil)
+(defvar eask-package        nil)
+(defvar eask-package-file   nil)
+(defvar eask-files          nil)
+(defvar eask-depends-on     nil)
 (defvar eask-depends-on-dev nil)
 
-(defvar eask--development-scope nil)
+(defun eask-package-get (key)
+  "Return package info by KEY."
+  (plist-get eask-package key))
 
 (defun eask-package (name version description)
   "Set the package information."

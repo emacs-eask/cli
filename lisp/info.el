@@ -15,7 +15,7 @@
 
 (defun eask--print-info (key)
   "Print package information."
-  (when-let ((info (plist-get eask-package key)))
+  (when-let ((info (eask-package-get key)))
     (message "%s" info)))
 
 (eask-start
