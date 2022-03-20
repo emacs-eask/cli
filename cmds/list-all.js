@@ -21,8 +21,8 @@
 
 const util = require("../src/util");
 
-exports.command = "list";
-exports.desc = "list all installed packages";
+exports.command = "list-all";
+exports.desc = "list all available packages";
 exports.builder = {
   global: {
     description: 'list it globally to `~/.emacs.d/`',
@@ -38,7 +38,7 @@ exports.builder = {
 };
 
 exports.handler = async ({ global, depth }) => {
-  await util.e_call('list'
+  await util.e_call('list-all'
                     , util.def_flag(global, '-g')
                     , util.def_flag(depth, '--depth', depth));
 };

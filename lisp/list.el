@@ -1,15 +1,15 @@
-;;; list.el --- Install packages  -*- lexical-binding: t; -*-
+;;; list.el --- List all installed packages  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
-;; Command use to list out Emacs packages,
+;; Command use to list out installed Emacs packages,
 ;;
 ;;   $ eask list
 ;;
 ;;
 ;;  Action options:
 ;;
-;;    [-g]       install packages globally to `~/.emacs.d/'
+;;    [-g]       list all packages default to `~/.emacs.d/'
 ;;    [--depth]  dependency level to print
 ;;
 
@@ -28,10 +28,10 @@
           " [+] %-" (number-to-string (- eask-list-package-name-width (* depth 2)))
           "s " rest))
 
-(defun eask-print-pkg (name depth max-depth)
+(defun eask-print-pkg (name depth max-depth pkg-alist)
   "Print NAME package information."
   (when-let*
-      ((pkg (assq name package-alist))
+      ((pkg (assq name pkg-alist))
        (desc (cadr pkg))
        (name (package-desc-name desc))
        (version (package-desc-version desc))
@@ -43,7 +43,7 @@
     (when-let ((reqs (package-desc-reqs desc))
                (_ (< depth max-depth)))
       (dolist (req reqs)
-        (eask-print-pkg (car req) (1+ depth) max-depth)))))
+        (eask-print-pkg (car req) (1+ depth) max-depth pkg-alist)))))
 
 (defun eask-seq-max-str (sequence)
   "Return max length in SEQUENCE."
@@ -55,7 +55,7 @@
   (eask-pkg-init)
   (let ((eask-list-package-name-width (+ (eask-seq-max-str package-activated-list) 1)))
     (dolist (name package-activated-list)
-      (eask-print-pkg name 0 (or (eask-depth) 999))))
+      (eask-print-pkg name 0 (or (eask-depth) 999) package-alist)))
   (message "")
   (message " Total of %s packages installed" (length package-activated-list)))
 
