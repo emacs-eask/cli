@@ -44,8 +44,6 @@ set PATH=%PATH%;c:/path/to/eask/bin
 
 ## About CI/CD
 
-N/A
-
 ```yml
 jobs:
   test:
