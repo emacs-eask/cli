@@ -28,6 +28,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add command `eask package-directory` (e3098c8b0816a9f1a1fa953fa46f140e60c29bb2)
 * Add command `eask path` (3b37957c53d5e662258014da82e81a3550bcb085)
 * Add command `eask eval` (a3d8cd5a3d28aabee2aec3950f8e74fc299b75dd)
+* Add command `eask list-all` (5817606f85dbb88253b6eb30cf072e2a8cd4f5c2)
 
 ## 0.1.x
 > Released Mar 15, 2022
