@@ -19,9 +19,11 @@
 
 "use strict";
 
+// This command is the same as `eask exec-path`
+
 const util = require("../src/util");
 
-exports.command = 'path';
+exports.command = ['path', 'exec-path'];
 exports.desc = 'print the PATH (exec-path) from workspace';
 
 exports.handler = async ({}) => {
