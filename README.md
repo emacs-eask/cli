@@ -8,6 +8,20 @@ Emacs package command-line tool
 
 [![CI](https://github.com/emacs-eask/eask/actions/workflows/test.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test.yml)
 
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [eask](#eask)
+    - [Dependencies](#dependencies)
+    - [💾 Installation](#💾-installation)
+    - [About CI/CD](#about-cicd)
+    - [About Eask file](#about-eask-file)
+    - [Project Development](#project-development)
+    - [Focus](#focus)
+    - [Contribute](#contribute)
+
+<!-- markdown-toc end -->
+
 ## Dependencies
 
 * [Node.js](https://nodejs.org/en/)
