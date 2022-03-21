@@ -1,8 +1,8 @@
-;;; info.el --- Print envrionemnt information  -*- lexical-binding: t; -*-
+;;; info.el --- Display information about the current package  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
-;; Print the Emacs envrionemnt information
+;; Display information about the current package
 ;;
 ;;   $ eask info
 ;;
