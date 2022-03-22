@@ -14,7 +14,6 @@
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
 (eask-start
-  (eask-package-install 'package-build)
   (if-let ((elcs (eask-package-elc-files)))
       (progn
         (dolist (elc elcs)

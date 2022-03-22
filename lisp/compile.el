@@ -27,7 +27,6 @@
     compiled))
 
 (eask-start
-  (eask-package-install 'package-build)
   (eask-pkg-init)
   (let ((files (or (eask-args) (eask-package-el-files))) compiled)
     (dolist (filename files)
