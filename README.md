@@ -26,7 +26,7 @@ Emacs package command-line tool
 
 * [Node.js](https://nodejs.org/en/)
 * [yargs](https://github.com/yargs/yargs)
-* [Emacs](https://www.gnu.org/software/emacs/) of course!
+* [Emacs](https://www.gnu.org/software/emacs/) of course; make sure this is inside your environment PATH!
 
 ## 💾 Installation
 

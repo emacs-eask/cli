@@ -27,5 +27,5 @@ exports.command = ['path', 'exec-path'];
 exports.desc = 'print the PATH (exec-path) from workspace';
 
 exports.handler = async ({}) => {
-  await util.e_call('path');
+  await util.e_call('exec-path');
 };

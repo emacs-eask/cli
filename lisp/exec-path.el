@@ -1,4 +1,4 @@
-;;; path.el --- Print the PATH (exec-path) from workspace  -*- lexical-binding: t; -*-
+;;; exec-path.el --- Print the PATH (exec-path) from workspace  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -21,4 +21,4 @@
   (eask-pkg-init)
   (mapc #'eask--print-exec-path exec-path))
 
-;;; path.el ends here
+;;; exec-path.el ends here
