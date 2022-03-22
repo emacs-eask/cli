@@ -24,6 +24,7 @@
   (unless byte-compile-verbose (message "Compiling %s..." filename)))
 
 (eask-start
+  (eask-package-install 'package-build)
   (eask-pkg-init)
   (dolist (filename (or (eask-args) (eask-package-el-files)))
     (add-to-list 'load-path (file-name-directory filename))

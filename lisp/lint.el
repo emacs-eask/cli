@@ -19,6 +19,7 @@
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
 (eask-start
+  (eask-package-install 'package-build)
   (eask-package-install 'package-lint)
   (dolist (el (or (eask-args) (eask-package-el-files)))
     (message "")
