@@ -43,7 +43,8 @@
   (let ((pkg (if (stringp pkg) (intern pkg) pkg)))
     (unless (package-installed-p pkg)
       (package-refresh-contents)
-      (package-install pkg))))
+      (package-install pkg))
+    (require pkg nil t)))
 
 ;;
 ;;; Flag
@@ -265,23 +266,10 @@ Eask file in the workspace."
 ;;
 ;;; File
 
-(defun eask--filter-exclude-dirs (item)
-  "Filter out ITEM from default ignore paths."
-  (not (cl-some (lambda (elm) (string-match-p elm item)) eask-path-ignores)))
-
-(defun eask--f-entries (path pattern)
-  "Return entries from PATH with PATTERN."
-  (when (file-directory-p path)
-    (cl-remove-if-not
-     (lambda (file) (string-match-p pattern file))
-     (directory-files-recursively path "^\\([^.]\\|\\.[^.]\\|\\.\\..\\)" nil
-                                  #'eask--filter-exclude-dirs))))
-
 (defun eask-package-files ()
   "Return package files in workspace."
-  (let (files)
-    (dolist (pattern eask-files)
-      (setq files (append files (eask--f-entries default-directory pattern))))
+  (let ((files (mapcar (lambda (elm) (expand-file-name (car elm) default-directory))
+                       (package-build-expand-file-specs default-directory eask-files))))
     ;; Package file is part of package-files
     (when eask-package-file (push eask-package-file files))
     (delete-dups files)))

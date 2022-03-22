@@ -18,6 +18,7 @@
   (message "%s" filename))
 
 (eask-start
+  (eask-package-install 'package-build)
   (mapc #'eask--print-filename (eask-package-files)))
 
 ;;; files.el ends here
