@@ -269,7 +269,7 @@ Eask file in the workspace."
 (defun eask-package-files ()
   "Return package files in workspace."
   (if-let ((files (mapcar (lambda (elm) (expand-file-name (car elm) default-directory))
-                          (ignore-errors (package-build-expand-file-specs default-directory eask-files)))))
+                          (package-build-expand-file-specs default-directory eask-files nil t))))
       (progn
         ;; Package file is part of package-files
         (when eask-package-file (push eask-package-file files))
