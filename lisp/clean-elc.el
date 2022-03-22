@@ -14,10 +14,11 @@
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
 (eask-start
-  (if-let ((elcs (eask--f-entries default-directory "\\.elc$")))
+  (eask-package-install 'package-build)
+  (if-let ((elcs (eask-package-elc-files)))
       (dolist (elc elcs)
         (ignore-errors (delete-file elc))
         (message "Deleting %s..." elc))
-    (message "Workspace has no .elc files")))
+    (message "No elc file(s) found in workspace")))
 
 ;;; clean-elc.el ends here

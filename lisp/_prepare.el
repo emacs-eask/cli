@@ -15,12 +15,6 @@
         package-archives nil             ; Leave it to custom use
         package-archive-priorities nil))
 
-(defcustom eask-path-ignores
-  (append project-vc-ignores '(".eask"))
-  "List of default path to ignore for search result."
-  :type 'list
-  :group 'eask)
-
 ;;
 ;;; Package
 
@@ -280,5 +274,11 @@ Eask file in the workspace."
 (defun eask-package-el-files ()
   "Return package files in workspace."
   (cl-remove-if-not (lambda (filename) (string= (file-name-extension filename) "el")) (eask-package-files)))
+
+(defun eask-package-elc-files ()
+  "Return package files' elc in workspace."
+  (when-let ((elcs (mapcar (lambda (elm) (concat elm "c")) (eask-package-el-files))))
+    (setq elcs (cl-remove-if-not (lambda (elm) (file-exists-p elm)) elcs))
+    elcs))
 
 ;;; _prepare.el ends here
