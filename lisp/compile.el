@@ -20,14 +20,21 @@
 
 (defun eask--byte-compile-file (filename)
   "Byte compile FILENAME with display messages."
-  (byte-compile-file filename)
-  (unless byte-compile-verbose (message "Compiling %s..." filename)))
+  (let* ((result (byte-compile-file filename)) (compiled (eq result t)))
+    (unless byte-compile-verbose
+      (if compiled (message "Compiling %s..." filename)
+        (message "No need to compile %s..." filename)))
+    compiled))
 
 (eask-start
   (eask-package-install 'package-build)
   (eask-pkg-init)
-  (dolist (filename (or (eask-args) (eask-package-el-files)))
-    (add-to-list 'load-path (file-name-directory filename))
-    (eask--byte-compile-file filename)))
+  (let ((files (or (eask-args) (eask-package-el-files))) compiled)
+    (dolist (filename files)
+      (add-to-list 'load-path (file-name-directory filename))
+      (when (eask--byte-compile-file filename)
+        (push filename compiled)))
+    (message "")
+    (message " Total of %s files compiled" (length compiled))))
 
 ;;; compile.el ends here

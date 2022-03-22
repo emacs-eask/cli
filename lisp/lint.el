@@ -21,13 +21,18 @@
 (eask-start
   (eask-package-install 'package-build)
   (eask-package-install 'package-lint)
-  (dolist (el (or (eask-args) (eask-package-el-files)))
-    (message "")
-    (message "`%s` with package-lint" el)
-    (with-temp-buffer
-      (emacs-lisp-mode)
-      (insert-file-contents el)
-      (package-lint-current-buffer))
-    (with-current-buffer "*Package-Lint*" (message "%s" (buffer-string)))))
+  (if-let ((files (or (eask-args) (eask-package-el-files))))
+      (progn
+        (dolist (el files)
+          (message "")
+          (message "`%s` with package-lint" el)
+          (with-temp-buffer
+            (emacs-lisp-mode)
+            (insert-file-contents el)
+            (package-lint-current-buffer))
+          (with-current-buffer "*Package-Lint*" (message "%s" (buffer-string))))
+        (message "")
+        (message "Total of %s files linted" (length files)))
+    (message "No files have
 
 ;;; lint.el ends here

@@ -16,9 +16,12 @@
 (eask-start
   (eask-package-install 'package-build)
   (if-let ((elcs (eask-package-elc-files)))
-      (dolist (elc elcs)
-        (ignore-errors (delete-file elc))
-        (message "Deleting %s..." elc))
-    (message "No elc file(s) found in workspace")))
+      (progn
+        (dolist (elc elcs)
+          (ignore-errors (delete-file elc))
+          (message "Deleting %s..." elc))
+        (message "")
+        (message " Total of %s .elc files deleted" (length elcs)))
+    (message "No .elc file(s) found in workspace")))
 
 ;;; clean-elc.el ends here
