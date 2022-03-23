@@ -31,6 +31,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add command `eask list-all` (5817606f85dbb88253b6eb30cf072e2a8cd4f5c2)
 * Add command `eask autoloads` (3f7c98954aa7ffb5dce4c424d380d7ef4af66a7c)
 * Add command `eask pkg-file` (e267b5a26987f1e1361864280cf8781ee58200c2)
+* Add command `eask outdated` (eb03a2b1cecd20620746edc4fe6719ed7a4c0b59)
 
 ## 0.1.x
 > Released Mar 15, 2022
