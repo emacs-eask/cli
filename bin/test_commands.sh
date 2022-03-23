@@ -28,6 +28,7 @@ cd '../parse-it'
 
 CMD="node ../eask/eask"
 
+# Test for local commands
 $CMD info
 $CMD install
 $CMD compile
@@ -37,3 +38,7 @@ $CMD list --depth=0
 $CMD clean
 $CMD clean-elc
 $CMD clean-all
+
+# Test for global commands
+$CMD install -g package-build s f dash
+$CMD list --depth=0 -g
