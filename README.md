@@ -130,6 +130,17 @@ Emacs itself!
 (setq byte-compile-error-on-warn t)  ; Singal error if warning occurred
 ```
 
+`eask` provide some hooks so you can define your own action before/after 
+each commands. The name of the hook follow the rule of 
+`eask-{before/after}-command-{%name%}-hook`.
+
+For example,
+
+```el
+(add-hook 'eask-before-command-compile-hook 
+          (lambda () (setq byte-compile-error-on-warn t)))
+```
+
 ## Project Development
 
 N/A
