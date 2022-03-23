@@ -6,6 +6,11 @@
 ;;
 ;;   $ eask path
 ;;
+;;
+;;  Action options:
+;;
+;;    [-g]          install packages to default `~/.emacs.d/'
+;;
 
 ;;; Code:
 

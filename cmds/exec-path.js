@@ -25,7 +25,15 @@ const util = require("../src/util");
 
 exports.command = ['path', 'exec-path'];
 exports.desc = 'print the PATH (exec-path) from workspace';
+exports.builder = {
+  global: {
+    description: 'install packages from default `.emacs.d`',
+    alias: 'g',
+    requiresArg: false,
+    type: 'boolean',
+  },
+};
 
-exports.handler = async ({}) => {
-  await util.e_call('exec-path');
+exports.handler = async ({ global }) => {
+  await util.e_call('exec-path', util.def_flag(global, '-g'));
 };

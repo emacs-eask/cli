@@ -6,6 +6,11 @@
 ;;
 ;;   $ eask load-path
 ;;
+;;
+;;  Action options:
+;;
+;;    [-g]          install packages to default `~/.emacs.d/'
+;;
 
 ;;; Code:
 
@@ -18,6 +23,7 @@
   (message "%s" path))
 
 (eask-start
+  (eask-pkg-init)
   (mapc #'eask--print-load-path load-path))
 
 ;;; load-path.el ends here
