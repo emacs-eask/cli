@@ -32,6 +32,6 @@ exports.builder = {
   },
 };
 
-exports.handler = async ({ global, depth }) => {
+exports.handler = async ({ global }) => {
   await util.e_call('outdated' , util.def_flag(global, '-g'));
 };
