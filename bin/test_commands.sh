@@ -25,12 +25,9 @@ CMD="node eask"
 echo "[INFO] 'eask' version: "
 $CMD --version
 
-tree .
-
-$CMD info
-
 git clone $TEST_PROJECT
 cd 'parse-it'
+$CMD info
 $CMD install
 $CMD compile
 $CMD lint
