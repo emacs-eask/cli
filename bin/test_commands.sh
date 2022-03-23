@@ -24,11 +24,20 @@
 
 npm install
 
+TEST_PROJECT="https://github.com/jcs-elpa/parse-it"  # project use to test
 CMD="node eask"
 
 echo "[INFO] 'eask' version: "
 $CMD --version
 $CMD info
 
-# TODO: provide a better test case?
-$CMD list -g
+git clone $TEST_PROJECT
+cd 'parse-it'
+$CMD install
+$CMD compile
+$CMD lint
+$CMD list --depth=0
+
+$CMD clean
+$CMD clean-elc
+$CMD clean-all
