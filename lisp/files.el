@@ -19,7 +19,6 @@
 
 (eask-start
   (mapc #'eask--print-filename (eask-package-files))
-  (message "")
-  (message " Total of %s files listed" (length (eask-package-files))))
+  (message "\n Total of %s files listed" (length (eask-package-files))))
 
 ;;; files.el ends here

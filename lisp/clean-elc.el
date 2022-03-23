@@ -19,9 +19,7 @@
         (dolist (elc elcs)
           (ignore-errors (delete-file elc))
           (message "Deleting %s..." elc))
-        (message "")
-        (message " Total of %s .elc files deleted" (length elcs)))
-    (message "")
-    (message " No .elc file(s) found in workspace")))
+        (message "\n Total of %s .elc files deleted" (length elcs)))
+    (message "\n No .elc file(s) found in workspace")))
 
 ;;; clean-elc.el ends here

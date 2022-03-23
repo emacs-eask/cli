@@ -33,7 +33,6 @@
       (add-to-list 'load-path (file-name-directory filename))
       (when (eask--byte-compile-file filename)
         (push filename compiled)))
-    (message "")
-    (message " Total of %s files compiled" (length compiled))))
+    (message "\n Total of %s files compiled" (length compiled))))
 
 ;;; compile.el ends here

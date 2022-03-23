@@ -56,8 +56,8 @@ Argument WHERE is the alist of package information."
   (if-let ((upgrades (eask-package--upgrades)))
       (progn
         (dolist (pkg-desc upgrades) (eask-package-upgrade pkg-desc))
-        (message "Done upgrading all packages"))
-    (message "All packages are up to date")))
+        (message "\n Done upgrading all packages"))
+    (message "\n All packages are up to date")))
 
 (eask-start
   (eask-pkg-init)

@@ -240,8 +240,11 @@ Eask file in the workspace."
 
 (defun eask-depends-on (pkg &optional minimum-version)
   "Specify a dependency of this package."
-  (push pkg eask-depends-on)
-  (delete-dups eask-depends-on)
+  (if (string= pkg "emacs")
+      (when (and minimum-version (version< emacs-version minimum-version))
+        (error "\n This requires Emacs %s and above!" minimum-version))
+    (push pkg eask-depends-on)
+    (delete-dups eask-depends-on))
   pkg)
 
 (defun eask-development (&rest dep)

@@ -14,7 +14,6 @@
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
 (eask-start
-  (message "")
-  (message "%s" package-user-dir))
+  (message "\n%s" package-user-dir))
 
 ;;; package-directory.el ends here

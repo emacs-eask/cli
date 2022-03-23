@@ -24,7 +24,6 @@
                     (insert-file-contents gen-filename)
                     (buffer-string))
                   nil pkg-file)
-    (message "")
-    (message "Write file %s..." gen-filename)))
+    (message "\nWrite file %s..." gen-filename)))
 
 ;;; pkg-file.el ends here
