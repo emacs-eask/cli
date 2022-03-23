@@ -290,14 +290,14 @@ Eask file in the workspace."
 
 (defun eask-package-files ()
   "Return package files in workspace."
-  (if-let ((files (mapcar (lambda (elm) (expand-file-name (car elm) default-directory))
-                          (package-build-expand-file-specs default-directory eask-files nil t))))
-      (progn
-        ;; Package file is part of package-files
-        (when eask-package-file (push eask-package-file files))
-        (delete-dups files))
-    (message "No matching file(s) found in %s: %s" default-directory eask-files)
-    nil))
+  (let ((files (mapcar (lambda (elm) (expand-file-name (car elm) default-directory))
+                       (package-build-expand-file-specs default-directory eask-files nil t))))
+    ;; Package file is part of package-files
+    (when eask-package-file (push eask-package-file files))
+    (delete-dups files)
+    (unless files
+      (message "No matching file(s) found in %s: %s" default-directory eask-files))
+    files))
 
 (defun eask-package-el-files ()
   "Return package files in workspace."
