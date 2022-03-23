@@ -67,22 +67,36 @@ function def_flag(arg, name, val = undefined) {
 /* Send error code, and exit the program. */
 function _exit_error(code) {
   process.exitCode = code;
-  throw 'Uncaught exception error: ' + code;
+  throw 'Error occurs from Emacs: ' + code;
+}
+
+/* Return ture if error occurs. */
+function _trigger_error(str) {
+  // XXX The method here to detect error, and send exit code is fragile.
+  // The better way should just grab it from Emacs program itself; but Emacs
+  // return exit code immediately with `child_process.exec` call
+  return str.includes ('Error: ') || str.includes ('top-level()');
+}
+
+/* Return true if falg is already true; else we test str for error flag. */
+function _test_error(str, flag) {
+  if (flag) return true;
+  return _trigger_error(str);
 }
 
 /* Display all terminal output */
 function _exec_out(error, stdout, stderr) {
-  if (stdout) { console.log(stdout); }
+  let trigger_error = false;
   //if (error) { console.log(error); }  /* ignore node error */
+  if (stdout) {
+    console.log(stdout);
+    trigger_error = _test_error(stdout, trigger_error);
+  }
   if (stderr) {
     console.log(stderr);
-    // XXX The method here to detect error, and send exit code is fragile.
-    // The better way should just grab it from Emacs program itself; but Emacs
-    // return exit code immediately with `child_process.exec` call
-    if (stderr.includes ('Error: ')) {
-      _exit_error(1);
-    }
+    trigger_error = _test_error(stderr, trigger_error);
   }
+  if (trigger_error) _exit_error(1);  // Trigger error!
 }
 
 /**
