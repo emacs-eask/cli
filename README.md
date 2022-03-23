@@ -13,17 +13,17 @@ Emacs package command-line tool
 **Table of Contents**
 
 - [eask](#eask)
-    - [Dependencies](#dependencies)
+    - [📌 Dependencies](#📌-dependencies)
     - [💾 Installation](#💾-installation)
     - [About CI/CD](#about-cicd)
-    - [About Eask file](#about-eask-file)
+    - [📝 About Eask file](#📝-about-eask-file)
     - [Project Development](#project-development)
     - [Focus](#focus)
     - [Contribute](#contribute)
 
 <!-- markdown-toc end -->
 
-## Dependencies
+## 📌 Dependencies
 
 * [Node.js](https://nodejs.org/en/)
 * [yargs](https://github.com/yargs/yargs)
@@ -108,7 +108,7 @@ jobs:
         eask lint
 ```
 
-## About Eask file
+## 📝 About Eask file
 
 `Eask` is the magic file that `eask` will read it as init file in Emacs. The
 syntax are very similar to `Cask` file, but different.
