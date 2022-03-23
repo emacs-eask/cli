@@ -75,7 +75,7 @@ function _trigger_error(str) {
   // XXX The method here to detect error, and send exit code is fragile.
   // The better way should just grab it from Emacs program itself; but Emacs
   // return exit code immediately with `child_process.exec` call
-  return str.includes ('Error: ') || str.includes ('top-level()');
+  return str.includes ('toplevel form:') || str.includes ('top-level()');
 }
 
 /* Return true if falg is already true; else we test str for error flag. */
