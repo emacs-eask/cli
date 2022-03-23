@@ -51,11 +51,15 @@
     (mapc (lambda (elm) (setq result (max result (length (format "%s" elm))))) sequence)
     result))
 
+(defun eask--list (list pkg-alist &optional depth)
+  "List packages."
+  (let ((eask-list-package-name-width (+ (eask-seq-max-str list) 1)))
+    (dolist (name list)
+      (eask-print-pkg name 0 (or depth (eask-depth) 999) pkg-alist))))
+
 (eask-start
   (eask-pkg-init)
-  (let ((eask-list-package-name-width (+ (eask-seq-max-str package-activated-list) 1)))
-    (dolist (name package-activated-list)
-      (eask-print-pkg name 0 (or (eask-depth) 999) package-alist)))
+  (eask--list package-activated-list package-alist)
   (message "")
   (message " Total of %s packages installed" (length package-activated-list)))
 

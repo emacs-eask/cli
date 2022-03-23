@@ -15,6 +15,11 @@
         package-archives nil             ; Leave it to custom use
         package-archive-priorities nil))
 
+(defmacro eask-mute (&rest body)
+  "Execute BODY without message."
+  (declare (indent 0) (debug t))
+  `(let ((inhibit-message t) message-log-max) ,@body))
+
 ;;
 ;;; Package
 
@@ -87,7 +92,7 @@ the `eask-start' execution.")
   (let* ((script-el (concat script ".el"))
          (lisp-dir (file-name-directory eask--script))
          (script-file (expand-file-name script-el lisp-dir)))
-    (if (file-exists-p script-file) (load-file script-file)
+    (if (file-exists-p script-file) (eask-mute (load-file script-file))
       (error "Scripting missing %s..." script-file))))
 
 ;;
@@ -261,6 +266,11 @@ Eask file in the workspace."
 ;;; File
 
 (eask-load "./extern/package-build")
+
+(defun eask-guess-package-name ()
+  "Return the possible package name."
+  (or (eask-package-get :name)
+      (file-name-nondirectory (file-name-sans-extension eask-package-file))))
 
 (defun eask-package-files ()
   "Return package files in workspace."

@@ -23,10 +23,8 @@
 
 (eask-start
   (eask-pkg-init)
-  (let* ((pkg-list (reverse (mapcar #'car package-archive-contents)))
-         (eask-list-package-name-width (+ (eask-seq-max-str pkg-list) 1)))
-    (dolist (name pkg-list)
-      (eask-print-pkg name 0 (or (eask-depth) 999) package-archive-contents)))
+  (let ((pkg-list (reverse (mapcar #'car package-archive-contents))))
+    (eask--list pkg-list package-archive-contents))
   (message "")
   (message " Total of %s packages available" (length package-archive-contents)))
 

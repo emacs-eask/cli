@@ -14,9 +14,6 @@
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
 (eask-start
-  (package-generate-autoloads
-   (or (eask-package-get :name)
-       (file-name-nondirectory (file-name-sans-extension eask-package-file)))
-   default-directory))
+  (package-generate-autoloads (eask-guess-package-name) default-directory))
 
 ;;; autoloads.el ends here
