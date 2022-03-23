@@ -177,8 +177,6 @@ Eask file in the workspace."
   (declare (indent 0) (debug t))
   `(unless eask-loading-file-p
      (eask--setup-env
-       (run-hooks 'eask-before-command-hook)
-       (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
        (cond
         (eask--initialized-p ,@body)
         ((eask-global-p)
@@ -197,9 +195,11 @@ Eask file in the workspace."
            (setq eask-file (expand-file-name "../../Eask" user-emacs-directory))
            (ignore-errors (make-directory package-user-dir t))
            (eask--alias-env (load-file eask-file))
-           ,@body)))
-       (run-hooks (intern (concat "eask-after-command-" (eask-command) "-hook")))
-       (run-hooks 'eask-after-command-hook))))
+           (run-hooks 'eask-before-command-hook)
+           (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
+           ,@body
+           (run-hooks (intern (concat "eask-after-command-" (eask-command) "-hook")))
+           (run-hooks 'eask-after-command-hook)))))))
 
 ;;
 ;;; Eask file
