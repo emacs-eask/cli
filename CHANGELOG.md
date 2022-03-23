@@ -32,6 +32,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add command `eask autoloads` (3f7c98954aa7ffb5dce4c424d380d7ef4af66a7c)
 * Add command `eask pkg-file` (e267b5a26987f1e1361864280cf8781ee58200c2)
 * Add command `eask outdated` (eb03a2b1cecd20620746edc4fe6719ed7a4c0b59)
+* Command `load-path` and `exec-path` can now accept `-g` option. (e73bff70b21290c2b79a7c13091701f712ce6d0b)
 
 ## 0.1.x
 > Released Mar 15, 2022
