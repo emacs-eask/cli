@@ -24,7 +24,7 @@
     (ignore-errors (delete-directory target-dir t))
     (message "")
     (if eask--first-init-p
-        (message " Workspace is already cleaned")
+        (message " Workspace already cleaned")
       (message " Done, workspace `%s` is cleaned" target-dir))))
 
 ;;; clean.el ends here

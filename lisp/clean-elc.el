@@ -21,6 +21,7 @@
           (message "Deleting %s..." elc))
         (message "")
         (message " Total of %s .elc files deleted" (length elcs)))
-    (message "No .elc file(s) found in workspace")))
+    (message "")
+    (message " No .elc file(s) found in workspace")))
 
 ;;; clean-elc.el ends here

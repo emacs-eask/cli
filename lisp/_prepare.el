@@ -15,10 +15,10 @@
         package-archives           nil            ; Leave it to custom use
         package-archive-priorities nil))
 
-(defmacro eask-mute (&rest body)
-  "Execute BODY without message."
-  (declare (indent 0) (debug t))
-  `(let ((inhibit-message t) message-log-max) ,@body))
+(defun eask--load-file--adv (fnc &rest args)
+  "Prevent `_prepare.el' loading twice."
+  (unless (string= (nth 0 args) (eask-script "_prepare")) (apply fnc args)))
+(advice-add 'load-file :around #'eask--load-file--adv)
 
 ;;
 ;;; Package
@@ -79,6 +79,13 @@
   "What's the current command?"
   (file-name-sans-extension (file-name-nondirectory eask--script)))
 
+(defun eask-script (script)
+  "Return full script filename."
+  (let* ((script-el (concat script ".el"))
+         (lisp-dir (file-name-directory eask--script))
+         (script-file (expand-file-name script-el lisp-dir)))
+    script-file))
+
 (defvar eask-loading-file-p nil
   "This became t; if we are loading script from another file and not expecting
 the `eask-start' execution.")
@@ -89,11 +96,10 @@ the `eask-start' execution.")
 
 (defun eask-call (script)
   "Call another eask script."
-  (let* ((script-el (concat script ".el"))
-         (lisp-dir (file-name-directory eask--script))
-         (script-file (expand-file-name script-el lisp-dir)))
-    (if (file-exists-p script-file) (eask-mute (load-file script-file))
-      (error "Scripting missing %s..." script-file))))
+  (if-let* ((script-file (eask-script script))
+            (_ (file-exists-p script-file)))
+      (load script-file nil t)
+    (error "Scripting missing %s..." script-file)))
 
 ;;
 ;;; Core
