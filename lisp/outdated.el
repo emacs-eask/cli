@@ -27,7 +27,10 @@
             (pkg-list (reverse (mapcar #'package-desc-name upgrades)))
             ;; Remove current developing packages
             (pkg-list (remove (intern (eask-guess-package-name)) pkg-list)))
-      (eask--list pkg-list package-alist 0)
+      (progn
+        (eask--list pkg-list package-alist 0)
+        (message "")
+        (message " Total of %s dependencies are outdated" (length pkg-list)))
     (message "")
     (message " No outdated dependencies")))
 
