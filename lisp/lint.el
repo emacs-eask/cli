@@ -31,7 +31,8 @@
             (package-lint-current-buffer))
           (with-current-buffer "*Package-Lint*" (message "%s" (buffer-string))))
         (message "")
-        (message "Total of %s files linted" (length files)))
-    (message "No files have
+        (message " Total of %s files linted" (length files)))
+    (message "")
+    (message " No files have been linted")))
 
 ;;; lint.el ends here
