@@ -17,11 +17,6 @@
 # Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 # Boston, MA 02110-1301, USA.
 
-
-# Following command is commented due to CI
-#
-#cd ..
-
 npm install
 
 TEST_PROJECT="https://github.com/jcs-elpa/parse-it"  # project use to test
@@ -29,6 +24,9 @@ CMD="node eask"
 
 echo "[INFO] 'eask' version: "
 $CMD --version
+
+tree .
+
 $CMD info
 
 git clone $TEST_PROJECT
