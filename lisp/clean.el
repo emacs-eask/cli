@@ -22,8 +22,9 @@
          (if (eask-global-p) user-emacs-directory
            (file-name-directory (directory-file-name user-emacs-directory)))))
     (ignore-errors (delete-directory target-dir t))
+    (message "")
     (if eask--first-init-p
-        (message "Workspace `%s` is already cleaned" target-dir)
-      (message "Cleaning workspace `%s`... done" target-dir))))
+        (message " Workspace `%s` is already cleaned" target-dir)
+      (message " Cleaning workspace `%s`... done" target-dir))))
 
 ;;; clean.el ends here
