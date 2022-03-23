@@ -134,7 +134,7 @@ Emacs itself!
 each commands. The name of the hook follow the rule of 
 `eask-{before/after}-command-{%name%}-hook`.
 
-For example,
+For example, to enable compile on warn on `byte-compile` command
 
 ```el
 (add-hook 'eask-before-command-compile-hook 
