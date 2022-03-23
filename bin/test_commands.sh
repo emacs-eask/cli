@@ -18,15 +18,16 @@
 # Boston, MA 02110-1301, USA.
 
 npm install
-
-TEST_PROJECT="https://github.com/jcs-elpa/parse-it"  # project use to test
 CMD="node eask"
 
 echo "[INFO] 'eask' version: "
 $CMD --version
 
-git clone $TEST_PROJECT
-cd 'parse-it'
+git clone "https://github.com/jcs-elpa/parse-it" "../parse-it"  # project use to test
+cd '../parse-it'
+
+CMD="node ../eask/eask"
+
 $CMD info
 $CMD install
 $CMD compile
