@@ -146,6 +146,11 @@ For example, to enable compile on warn on `byte-compile` command
           (lambda () (setq byte-compile-error-on-warn t)))
 ```
 
+## 📂 Related Projects
+
+* [cask](https://github.com/cask/cask) - Project management tool for Emacs
+* [makem.sh](https://github.com/alphapapa/makem.sh) - Makefile-like script for building and testing Emacs Lisp packages
+
 ## Project Development
 
 N/A
