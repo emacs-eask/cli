@@ -5,9 +5,12 @@
 [![npm-dm](https://img.shields.io/npm/dm/@emacs-eask/eask.svg)](https://npmcharts.com/compare/@emacs-eask/eask?minimal=true)
 
 # eask
-A set of command-line tools to build Emacs packages
+> A set of command-line tools to build Emacs packages
 
 [![CI](https://github.com/emacs-eask/eask/actions/workflows/test.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test.yml)
+
+Eask is heavily inspired by Cask, so they are somewhat related! This tool focuses
+on Emacs built-in feature.
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
