@@ -9,7 +9,7 @@
 ;;
 ;;  Action options:
 ;;
-;;    [-g]          install packages to default `~/.emacs.d/'
+;;    [-g]          change default workspace to `~/.emacs.d/'
 ;;
 
 ;;; Code:
