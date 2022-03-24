@@ -20,6 +20,7 @@ on Emacs built-in feature.
     - [💾 Installation](#💾-installation)
     - [About CI/CD](#about-cicd)
     - [📝 About Eask file](#📝-about-eask-file)
+    - [📂 Related Projects](#📂-related-projects)
     - [Project Development](#project-development)
     - [Focus](#focus)
     - [Contribute](#contribute)
@@ -115,8 +116,8 @@ jobs:
 
 ## 📝 About Eask file
 
-`Eask` is the magic file that `eask` will read it as init file in Emacs. The
-syntax are very similar to `Cask` file, but different.
+`Eask` is the magic file that `eask` will read it as the init file in Emacs.
+The syntaxs are very similar to `Cask` file, but different.
 
 ```el
 (source "gnu")
@@ -127,7 +128,7 @@ syntax are very similar to `Cask` file, but different.
 ```
 
 Remember, `Eask` is just the regular elisp file, and should be read it from
-Emacs itself!
+the Emacs itself!
 
 ```el
 ; Regular Eask file content...
@@ -135,8 +136,8 @@ Emacs itself!
 (setq byte-compile-error-on-warn t)  ; Singal error if warning occurred
 ```
 
-`eask` provide some hooks so you can define your own action before/after 
-each commands. The name of the hook follow the rule of 
+`eask` provides some hooks so you can define your own action before/after
+each command. The name of the hook follows the rule of
 `eask-{before/after}-command-{%name%}-hook`.
 
 For example, to enable compile on warn on `byte-compile` command
