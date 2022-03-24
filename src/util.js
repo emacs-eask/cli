@@ -107,7 +107,7 @@ function _exec_out(error, stdout, stderr) {
 async function e_call(script, ...args) {
   let _script = 'lisp/' + script + '.el';
   let _path = path.join(_plugin_dir(), _script);
-  let cmd = _join_spc('emacs', '-Q', '-nw', '--batch', '--script' , _path, args);
+  let cmd = _join_spc('emacs', '-Q', '--batch', '--script' , _path, args);
   console.log('Starting Eask...');
   console.log('~');
   console.log('~  $ ' + cmd);
