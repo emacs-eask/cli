@@ -29,12 +29,6 @@ exports.builder = {
     requiresArg: false,
     type: 'array',
   },
-  force: {
-    description: 'force upgrade',
-    alias: 'f',
-    requiresArg: false,
-    type: 'boolean',
-  },
 };
 
 exports.handler = async ({ names, global, force }) => {

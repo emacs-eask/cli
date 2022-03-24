@@ -29,12 +29,6 @@ exports.builder = {
     requiresArg: false,
     type: 'string',
   },
-  force: {
-    description: 'force to uninstall packages',
-    alias: 'f',
-    requiresArg: false,
-    type: 'boolean',
-  },
 };
 
 exports.handler = async ({ name, global, force }) => {

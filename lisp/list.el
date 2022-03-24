@@ -11,6 +11,10 @@
 ;;
 ;;    [--depth]  dependency level to print
 ;;
+;;  Effective flags:
+;;
+;;    [-g, --global]
+;;
 
 ;;; Code:
 

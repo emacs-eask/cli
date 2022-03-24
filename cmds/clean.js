@@ -24,6 +24,6 @@ const util = require("../src/util");
 exports.command = "clean";
 exports.desc = "clean up local .eask directory";
 
-exports.handler = async ({ global }) => {
-  await util.e_call('clean', util.def_flag(global, '-g'));
+exports.handler = async ({ }) => {
+  await util.e_call('clean');
 };

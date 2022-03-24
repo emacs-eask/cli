@@ -4,16 +4,16 @@
 ;;
 ;; Command use to uninstall Emacs packages,
 ;;
-;;   $ eask uninstall <name> [-g] [-f]
+;;   $ eask uninstall <name>
 ;;
 ;;
 ;;  Initialization options:
 ;;
 ;;    <name>     name of the package to uninstall
 ;;
-;;  Action options:
+;;  Effective flag:
 ;;
-;;    [-f]       force to uninstall packages
+;;    [-g, --global], [-f, --force]
 ;;
 
 ;;; Code:

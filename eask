@@ -17,6 +17,17 @@ yargs
   .option('global', {
     description: 'change default workspace to ~/.emacs.d/',
     alias: 'g',
+    type: 'boolean',
+  })
+  .option('force', {
+    description: 'enable force flag',
+    alias: 'f',
+    type: 'boolean',
+  })
+  .option('development', {
+    description: 'turn on development mode',
+    alias: 'dev',
+    type: 'boolean',
   })
   .demandCommand()
   .wrap(yargs.terminalWidth())

@@ -23,14 +23,6 @@ const util = require("../src/util");
 
 exports.command = "outdated";
 exports.desc = "show all outdated dependencies";
-exports.builder = {
-  global: {
-    description: 'list all outdated dependencies default to `~/.emacs.d/`',
-    alias: 'g',
-    requiresArg: false,
-    type: 'boolean',
-  },
-};
 
 exports.handler = async ({ global }) => {
   await util.e_call('outdated' , util.def_flag(global, '-g'));

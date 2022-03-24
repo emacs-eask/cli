@@ -11,9 +11,9 @@
 ;;
 ;;    [names..]     package to upgrade; else we upgrade all packages
 ;;
-;;  Action options:
+;;  Effective flag:
 ;;
-;;    [-f]          force to upgrade packages
+;;    [-g, --global], [-f, --force]
 ;;
 
 ;;; Code:

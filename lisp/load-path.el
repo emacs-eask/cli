@@ -6,6 +6,11 @@
 ;;
 ;;   $ eask load-path
 ;;
+;;
+;;  Effective flag:
+;;
+;;    [-g, --global]
+;;
 
 ;;; Code:
 

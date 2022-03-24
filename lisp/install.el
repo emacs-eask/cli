@@ -17,6 +17,10 @@
 ;;
 ;;    [--dev]       install development packages as well
 ;;
+;;  Effective flags:
+;;
+;;    [-g, --global]
+;;
 
 ;;; Code:
 
