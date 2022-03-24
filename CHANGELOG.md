@@ -33,6 +33,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add command `eask pkg-file` (e267b5a26987f1e1361864280cf8781ee58200c2)
 * Add command `eask outdated` (eb03a2b1cecd20620746edc4fe6719ed7a4c0b59)
 * Command `load-path` and `exec-path` can now accept `-g` option. (e73bff70b21290c2b79a7c13091701f712ce6d0b)
+* Add proxy global options (8e3a9130805341bd4c1ce9ccb8e4bf0a42e16ee8)
 
 ## 0.1.x
 > Released Mar 15, 2022
