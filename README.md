@@ -100,7 +100,6 @@ jobs:
       with:
         version: 'snapshot'
 
-
     - name: Run tests
       run: |
         eask install
