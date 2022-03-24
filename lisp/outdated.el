@@ -6,11 +6,6 @@
 ;;
 ;;   $ eask outdated
 ;;
-;;
-;;  Action options:
-;;
-;;    [-g]     change default workspace to `~/.emacs.d'
-;;
 
 ;;; Code:
 
@@ -24,10 +19,11 @@
 (eask-start
   (eask-pkg-init)
   (if-let* ((upgrades (eask-package--upgrades))
-            (pkg-list (reverse (mapcar #'package-desc-name upgrades)))
-            ;; Remove current developing packages
-            (pkg-list (remove (intern (eask-guess-package-name)) pkg-list)))
+            (pkg-list (reverse (mapcar #'package-desc-name upgrades))))
       (progn
+        (unless (eask-global-p)
+          ;; Remove current developing packages
+          (setq pkg-list (remove (intern (eask-guess-package-name)) pkg-list)))
         (eask--list pkg-list package-alist 0)
         (message "\n Total of %s dependencies are outdated" (length pkg-list)))
     (message "\n No outdated dependencies")))

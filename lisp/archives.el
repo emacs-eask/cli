@@ -6,11 +6,6 @@
 ;;
 ;;   $ eask archives
 ;;
-;;
-;;  Action options:
-;;
-;;    [-g]          install packages to default `~/.emacs.d/'
-;;
 
 ;;; Code:
 

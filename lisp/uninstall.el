@@ -13,7 +13,6 @@
 ;;
 ;;  Action options:
 ;;
-;;    [-g]       uninstall packages to default `~/.emacs.d/'
 ;;    [-f]       force to uninstall packages
 ;;
 

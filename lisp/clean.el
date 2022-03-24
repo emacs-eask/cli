@@ -6,10 +6,6 @@
 ;;
 ;;   $ eask clean [-g]
 ;;
-;;  Action options:
-;;
-;;    [-g]       clean packages to default `~/.emacs.d/'
-;;
 
 ;;; Code:
 

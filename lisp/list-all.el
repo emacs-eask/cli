@@ -9,7 +9,6 @@
 ;;
 ;;  Action options:
 ;;
-;;    [-g]       list all packages default to `~/.emacs.d/'
 ;;    [--depth]  dependency level to print
 ;;
 

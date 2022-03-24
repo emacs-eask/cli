@@ -29,12 +29,6 @@ exports.builder = {
     requiresArg: false,
     type: 'array',
   },
-  global: {
-    description: 'upgrade globally `~/.emacs.d`, respect to variable `user-emacs-directory`',
-    alias: 'g',
-    requiresArg: false,
-    type: 'boolean',
-  },
   force: {
     description: 'force upgrade',
     alias: 'f',

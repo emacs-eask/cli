@@ -23,14 +23,6 @@ const util = require("../src/util");
 
 exports.command = ['archives', 'sources'];
 exports.desc = 'list out all package archives';
-exports.builder = {
-  global: {
-    description: 'change default workspace to ~/.emacs.d/',
-    alias: 'g',
-    requiresArg: false,
-    type: 'boolean',
-  },
-};
 
 exports.handler = async ({ global }) => {
   await util.e_call('archives', util.def_flag(global, '-g'));

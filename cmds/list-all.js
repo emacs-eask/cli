@@ -24,12 +24,6 @@ const util = require("../src/util");
 exports.command = "list-all";
 exports.desc = "list all available packages";
 exports.builder = {
-  global: {
-    description: 'list it globally to `~/.emacs.d/`',
-    alias: 'g',
-    requiresArg: false,
-    type: 'boolean',
-  },
   depth: {
     description: 'dependency depth level to print',
     requiresArg: true,

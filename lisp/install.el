@@ -15,7 +15,6 @@
 ;;
 ;;  Action options:
 ;;
-;;    [-g]          change default workspace to `~/.emacs.d/'
 ;;    [--dev]       install development packages as well
 ;;
 

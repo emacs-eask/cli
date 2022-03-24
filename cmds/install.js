@@ -29,12 +29,6 @@ exports.builder = {
     requiresArg: false,
     type: 'array',
   },
-  global: {
-    description: 'install packages from default `.emacs.d`',
-    alias: 'g',
-    requiresArg: false,
-    type: 'boolean',
-  },
   development: {
     description: 'install development packages as well',
     alias: 'dev',

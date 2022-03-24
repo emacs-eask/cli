@@ -6,11 +6,6 @@
 ;;
 ;;   $ eask path
 ;;
-;;
-;;  Action options:
-;;
-;;    [-g]          change default workspace to `~/.emacs.d/'
-;;
 
 ;;; Code:
 

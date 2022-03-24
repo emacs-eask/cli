@@ -13,7 +13,6 @@
 ;;
 ;;  Action options:
 ;;
-;;    [-g]          upgrade packages globally to `~/.emacs.d/'
 ;;    [-f]          force to upgrade packages
 ;;
 

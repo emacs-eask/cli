@@ -14,6 +14,10 @@ yargs
     command: '*',
     handler() { yargs.showHelp(); console.log('\n'); }
   })
+  .option('global', {
+    description: 'change default workspace to ~/.emacs.d/',
+    alias: 'g',
+  })
   .demandCommand()
   .wrap(yargs.terminalWidth())
   .help().argv;

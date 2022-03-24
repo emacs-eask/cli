@@ -29,12 +29,6 @@ exports.builder = {
     requiresArg: false,
     type: 'string',
   },
-  global: {
-    description: 'uninstall packages from default `.emacs.d`',
-    alias: 'g',
-    requiresArg: false,
-    type: 'boolean',
-  },
   force: {
     description: 'force to uninstall packages',
     alias: 'f',
