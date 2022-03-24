@@ -26,11 +26,11 @@
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
 (eask-start
+  (eask-pkg-init)
   (if-let ((names (eask-args)))
       ;; If package [name..] are specified, we try to install it
       (dolist (name names) (eask-package-install name))
     ;; Else we try to install package from the working directory
-    (eask-pkg-init)
     (mapc #'eask-package-install eask-depends-on)
     (when (eask-dev-p) (mapc #'eask-package-install eask-depends-on-dev))
     (package-install-file (expand-file-name "./"))))
