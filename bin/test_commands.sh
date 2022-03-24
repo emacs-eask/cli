@@ -30,6 +30,7 @@ CMD="node ../eask/eask"
 
 # Test for local commands
 $CMD info
+$CMD archives
 $CMD install
 $CMD compile
 $CMD lint
@@ -40,5 +41,6 @@ $CMD clean-elc
 $CMD clean-all
 
 # Test for global commands
+$CMD archives
 $CMD install -g spinner ivy beacon
 $CMD list --depth=0 -g
