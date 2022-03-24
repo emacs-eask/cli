@@ -68,7 +68,7 @@ set PATH=%PATH%;c:/path/to/eask/bin
 ```
 
 Once you have set it up correctly, try `eask --version` then you should see 
-the current eask's version number!
+the current eask's version number! 🎉 🎊
 
 ## About CI/CD
 
