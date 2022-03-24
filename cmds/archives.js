@@ -21,8 +21,8 @@
 
 const util = require("../src/util");
 
-exports.command = "archives";
-exports.desc = "list out all package archives";
+exports.command = ['archives', 'sources'];
+exports.desc = 'list out all package archives';
 exports.builder = {
   global: {
     description: 'change default workspace to ~/.emacs.d/',
