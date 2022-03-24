@@ -15,4 +15,5 @@ yargs
     handler() { yargs.showHelp(); console.log('\n'); }
   })
   .demandCommand()
+  .wrap(yargs.terminalWidth())
   .help().argv;
