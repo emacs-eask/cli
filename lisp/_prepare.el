@@ -4,6 +4,7 @@
 
 (require 'package)
 (require 'project)
+(require 'url-vars)
 
 (require 'cl-lib)
 (require 'rect)
@@ -59,15 +60,35 @@
   (nth 1 (eask--flag flag)))
 
 ;;; Boolean
-(defun eask-global-p () (eask--flag "-g"))     ; -g   is enabled
-(defun eask-force-p ()  (eask--flag "-f"))     ; -f   is enabled
-(defun eask-dev-p ()    (eask--flag "--dev"))  ; --dev is enabled
+(defun eask-global-p () (eask--flag "-g"))       ; -g, --global
+(defun eask-force-p ()  (eask--flag "-f"))       ; -f, --force
+(defun eask-dev-p ()    (eask--flag "--dev"))    ; --dev, --development
+(defun eask-debug-p ()  (eask--flag "--debug"))  ; --debug
 
 ;;; String (with arguments)
-;; XXX Add string argument here if any!
+(defun eask-proxy ()       (eask--flag-value "--proxy"))
+(defun eask-http-proxy ()  (eask--flag-value "--http-proxy"))
+(defun eask-https-proxy () (eask--flag-value "--https-proxy"))
+(defun eask-no-proxy ()    (eask--flag-value "--no-proxy"))
 
 ;;; Number (with arguments)
 (defun eask-depth () (eask--str2num (eask--flag-value "--depth")))  ; --depth is enabled
+
+(defun eask--handle-global-options ()
+  "Handle global options."
+  (when (eask-debug-p) (setq debug-on-error t))
+  (eask--add-proxy "http"     (eask-proxy))
+  (eask--add-proxy "https"    (eask-proxy))
+  (eask--add-proxy "http"     (eask-http-proxy))
+  (eask--add-proxy "https"    (eask-https-proxy))
+  (eask--add-proxy "no_proxy" (eask-no-proxy)))
+
+;;
+;;; Proxy
+
+(defun eask--add-proxy (protocal host)
+  "Add proxy."
+  (when host (push (cons protocal (eask-proxy)) url-proxy-services)))
 
 ;;
 ;;; Execution
@@ -113,7 +134,10 @@ current workspace.")
 other scripts internally.  See function `eask-call'.")
 
 (defconst eask--command-list
-  '("--eask-g" "--eask-f" "--eask--depth" "--eask--dev")
+  (mapcar (lambda (elm) (concat "--eask" elm))
+          '("-g" "-f" "--depth" "--dev"
+            "--proxy" "--http-proxy" "--https-proxy" "--no-proxy"
+            "--debug" "--verbose" "--silent"))
   "List of commands to accept, so we can avoid unknown option error.")
 
 (defun eask-self-command-p (arg)
@@ -193,6 +217,7 @@ Eask file in the workspace."
                 (user-init-file (locate-user-emacs-file "init.el"))
                 (custom-file (locate-user-emacs-file "custom.el")))
            (setq eask-file (expand-file-name "../../Eask" user-emacs-directory))
+           (eask--handle-global-options)
            (ignore-errors (make-directory package-user-dir t))
            (eask--alias-env (load-file eask-file))
            (run-hooks 'eask-before-command-hook)

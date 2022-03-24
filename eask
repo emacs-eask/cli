@@ -29,6 +29,22 @@ yargs
     alias: 'dev',
     type: 'boolean',
   })
+  .option('proxy', {
+    description: 'update proxy for HTTP and HTTPS to host',
+    type: 'string',
+  })
+  .option('http-proxy', {
+    description: 'update proxy for HTTP to host',
+    type: 'string',
+  })
+  .option('https-proxy', {
+    description: 'update proxy for HTTPS to host',
+    type: 'string',
+  })
+  .option('no-proxy', {
+    description: 'set no-proxy to host',
+    type: 'string',
+  })
   .option('debug', {
     description: 'turn on debug mode',
     type: 'boolean',
