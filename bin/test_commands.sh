@@ -40,5 +40,5 @@ $CMD clean-elc
 $CMD clean-all
 
 # Test for global commands
-$CMD install -g package-build s f dash
+$CMD install -g spinner ivy beacon
 $CMD list --depth=0 -g
