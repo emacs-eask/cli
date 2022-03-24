@@ -5,7 +5,7 @@
 [![npm-dm](https://img.shields.io/npm/dm/@emacs-eask/eask.svg)](https://npmcharts.com/compare/@emacs-eask/eask?minimal=true)
 
 # eask
-Emacs package command-line tool
+A set of command-line tools to build Emacs packages
 
 [![CI](https://github.com/emacs-eask/eask/actions/workflows/test.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test.yml)
 
