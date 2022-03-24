@@ -31,6 +31,6 @@ exports.builder = {
   },
 };
 
-exports.handler = async ({ names }) => {
-  await util.e_call('lint', names);
+exports.handler = async (argv) => {
+  await util.e_call(argv, 'lint', argv.names);
 };

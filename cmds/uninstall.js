@@ -21,18 +21,16 @@
 
 const util = require("../src/util");
 
-exports.command = 'uninstall <name>';
+exports.command = 'uninstall [names..]';
 exports.desc = 'uninstall packages';
 exports.builder = {
-  name: {
-    description: 'name of the package to uninstall',
+  names: {
+    description: 'packages to uninstall',
     requiresArg: false,
-    type: 'string',
+    type: 'array',
   },
 };
 
-exports.handler = async ({ name, global, force }) => {
-  await util.e_call('uninstall', name
-                    , util.def_flag(global, '-g')
-                    , util.def_flag(force, '-f'));
+exports.handler = async (argv) => {
+  await util.e_call(argv, 'uninstall', argv.names);
 };

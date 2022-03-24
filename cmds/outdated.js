@@ -24,6 +24,6 @@ const util = require("../src/util");
 exports.command = "outdated";
 exports.desc = "show all outdated dependencies";
 
-exports.handler = async ({ global }) => {
-  await util.e_call('outdated' , util.def_flag(global, '-g'));
+exports.handler = async (argv) => {
+  await util.e_call(argv, 'outdated');
 };

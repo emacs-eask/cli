@@ -31,6 +31,6 @@ exports.builder = {
   },
 };
 
-exports.handler = async ({ args }) => {
+exports.handler = async (argv) => {
   await util.e_call('exec', '--', process.argv.slice(3));
 };

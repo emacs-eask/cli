@@ -24,6 +24,6 @@ const util = require("../src/util");
 exports.command = 'files';
 exports.desc = 'print the list of all package files';
 
-exports.handler = async ({}) => {
-  await util.e_call('files');
+exports.handler = async (argv) => {
+  await util.e_call(argv, 'files');
 };

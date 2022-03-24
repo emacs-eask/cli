@@ -31,8 +31,6 @@ exports.builder = {
   },
 };
 
-exports.handler = async ({ names, global, force }) => {
-  await util.e_call('upgrade', names
-                    , util.def_flag(global, '-g')
-                    , util.def_flag(force, '-f'));
+exports.handler = async (argv) => {
+  await util.e_call(argv, 'upgrade', argv.names);
 };

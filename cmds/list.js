@@ -31,8 +31,7 @@ exports.builder = {
   },
 };
 
-exports.handler = async ({ global, depth }) => {
-  await util.e_call('list'
-                    , util.def_flag(global, '-g')
-                    , util.def_flag(depth, '--depth', depth));
+exports.handler = async (argv) => {
+  await util.e_call(argv, 'list'
+                    , util.def_flag(argv.depth, '--depth', argv.depth));
 };

@@ -24,6 +24,6 @@ const util = require("../src/util");
 exports.command = "pkg-file";
 exports.desc = "generate -pkg file";
 
-exports.handler = async ({ }) => {
-  await util.e_call('pkg-file');
+exports.handler = async (argv) => {
+  await util.e_call(argv, 'pkg-file');
 };

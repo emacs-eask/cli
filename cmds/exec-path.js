@@ -26,6 +26,6 @@ const util = require("../src/util");
 exports.command = ['path', 'exec-path'];
 exports.desc = 'print the PATH (exec-path) from workspace';
 
-exports.handler = async ({ global }) => {
-  await util.e_call('exec-path', util.def_flag(global, '-g'));
+exports.handler = async (argv) => {
+  await util.e_call(argv, 'exec-path');
 };

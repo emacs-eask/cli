@@ -31,7 +31,6 @@ exports.builder = {
   },
 };
 
-exports.handler = async ({ files, global }) => {
-  await util.e_call('load', files
-                    , util.def_flag(global, '-g'));
+exports.handler = async (argv) => {
+  await util.e_call(argv, 'load', argv.files);
 };

@@ -24,6 +24,6 @@ const util = require("../src/util");
 exports.command = 'info';
 exports.desc = 'display information about the current package';
 
-exports.handler = async ({}) => {
-  await util.e_call('info');
+exports.handler = async (argv) => {
+  await util.e_call(argv, 'info');
 };

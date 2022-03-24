@@ -24,6 +24,6 @@ const util = require("../src/util");
 exports.command = "autoloads";
 exports.desc = "generate autoloads file";
 
-exports.handler = async ({ }) => {
-  await util.e_call('autoloads');
+exports.handler = async (argv) => {
+  await util.e_call(argv, 'autoloads');
 };

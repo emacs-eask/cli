@@ -31,8 +31,6 @@ exports.builder = {
   },
 };
 
-exports.handler = async ({ names, global, development }) => {
-  await util.e_call('install', names
-                    , util.def_flag(global, '-g')
-                    , util.def_flag(development, '--dev'));
+exports.handler = async (argv) => {
+  await util.e_call(argv, 'install', argv.names);
 };

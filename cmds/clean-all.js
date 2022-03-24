@@ -24,6 +24,6 @@ const util = require("../src/util");
 exports.command = "clean-all";
 exports.desc = "do all cleaning tasks";
 
-exports.handler = async ({ }) => {
-  await util.e_call('clean-all');
+exports.handler = async (argv) => {
+  await util.e_call(argv, 'clean-all');
 };

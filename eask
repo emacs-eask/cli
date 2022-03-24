@@ -29,6 +29,10 @@ yargs
     alias: 'dev',
     type: 'boolean',
   })
+  .option('debug', {
+    description: 'turn on debug mode',
+    type: 'boolean',
+  })
   .demandCommand()
   .wrap(yargs.terminalWidth())
   .help().argv;

@@ -24,6 +24,6 @@ const util = require("../src/util");
 exports.command = 'load-path';
 exports.desc = 'print the load-path from workspace';
 
-exports.handler = async ({ global }) => {
-  await util.e_call('load-path', util.def_flag(global, '-g'));
+exports.handler = async (argv) => {
+  await util.e_call(argv, 'load-path');
 };

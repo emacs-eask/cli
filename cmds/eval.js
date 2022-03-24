@@ -31,6 +31,6 @@ exports.builder = {
   },
 };
 
-exports.handler = async ({ form }) => {
-  await util.e_call('eval', '\"' + form.replace(/[\\$'"]/g, "\\$&") + '\"');
+exports.handler = async (argv) => {
+  await util.e_call(argv, 'eval', '\"' + argv.form.replace(/[\\$'"]/g, "\\$&") + '\"');
 };

@@ -64,6 +64,19 @@ function def_flag(arg, name, val = undefined) {
   return '--eask' + name + ' ' + val;
 }
 
+/**
+ * Handle global options
+ *
+ * @param { Object } argv - is a parsed object from yargs.
+ */
+function _global_options(argv) {
+  let flags = [];
+  flags.push(def_flag(argv.global, '-g'));
+  flags.push(def_flag(argv.force, '-f'));
+  flags.push(def_flag(argv.development, '--dev'));
+  return flags;
+}
+
 /* Send error code, and exit the program. */
 function _exit_error(code) {
   process.exitCode = code;
@@ -104,10 +117,10 @@ function _exec_out(error, stdout, stderr) {
  * @param { string } script - name of the script from `../lisp`
  * @param { string } args - the rest of the arguments
  */
-async function e_call(script, ...args) {
+async function e_call(argv, script, ...args) {
   let _script = 'lisp/' + script + '.el';
   let _path = path.join(_plugin_dir(), _script);
-  let cmd = _join_spc('emacs', '-Q', '--batch', '--script' , _path, args);
+  let cmd = _join_spc('emacs', '-Q', '--batch', '--script' , _path, args, _global_options(argv));
   console.log('Starting Eask...');
   console.log('~');
   console.log('~  $ ' + cmd);

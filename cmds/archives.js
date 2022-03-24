@@ -24,6 +24,6 @@ const util = require("../src/util");
 exports.command = ['archives', 'sources'];
 exports.desc = 'list out all package archives';
 
-exports.handler = async ({ global }) => {
-  await util.e_call('archives', util.def_flag(global, '-g'));
+exports.handler = async (argv) => {
+  await util.e_call(argv, 'archives');
 };
