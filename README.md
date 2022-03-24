@@ -31,7 +31,7 @@ Emacs package command-line tool
 
 ## 💾 Installation
 
-Easiest way to install, is through tool [npm](https://www.npmjs.com/),
+The easiest way to install is through tool [npm](https://www.npmjs.com/),
 
 ```sh
 $ npm install -g @emacs-eask/eask
@@ -63,6 +63,9 @@ On Windows,
 ```batch
 set PATH=%PATH%;c:/path/to/eask/bin
 ```
+
+Once you have set it up correctly, try `eask --version` then you should see 
+the current eask's version number!
 
 ## About CI/CD
 
