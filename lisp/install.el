@@ -13,13 +13,9 @@
 ;;                  package from current directory by calling function
 ;;                  `package-install-file'
 ;;
-;;  Action options:
-;;
-;;    [--dev]       install development packages as well
-;;
 ;;  Effective flags:
 ;;
-;;    [-g, --global]
+;;    [-g, --global] [--development, --dev]
 ;;
 
 ;;; Code:

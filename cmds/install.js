@@ -29,12 +29,6 @@ exports.builder = {
     requiresArg: false,
     type: 'array',
   },
-  development: {
-    description: 'install development packages as well',
-    alias: 'dev',
-    requiresArg: false,
-    type: 'boolean',
-  },
 };
 
 exports.handler = async ({ names, global, development }) => {
