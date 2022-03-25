@@ -90,7 +90,10 @@ async function e_call(argv, script, ...args) {
   process.stdout.on('data', function (data) { _print_data(data); });
   process.stderr.on('data', function (data) { _print_data(data); });
 
-  process.on('exit', function (code) { _print_data(code, '\nExit with code '); });
+  process.on('exit', function (code) {
+    if (code == 0) return;
+    _print_data(code, '\nExit with code ');
+  });
 }
 
 /*
