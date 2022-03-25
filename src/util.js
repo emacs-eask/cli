@@ -61,6 +61,9 @@ function _global_options(argv) {
 
 /* Print data from process. */
 function _log(data) {
+  // After using `spawn` method, it will print two newline at the end of
+  // message (Emacs + console.log). We simply remove 1 newline at the end
+  // to prevent printing 2 newlines from one data.
   console.log(data.toString().replace(/\n$/, ''));
 }
 
