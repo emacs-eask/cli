@@ -21,8 +21,8 @@ on Emacs built-in feature.
     - [About CI/CD](#about-cicd)
     - [📝 About Eask file](#📝-about-eask-file)
     - [📂 Related Projects](#📂-related-projects)
-    - [Project Development](#project-development)
-    - [Focus](#focus)
+    - [🏆 Goals for the project](#🏆-goals-for-the-project)
+    - [Project Structure](#project-structure)
     - [Contribute](#contribute)
 
 <!-- markdown-toc end -->
@@ -152,7 +152,7 @@ For example, to enable compile on warn on `byte-compile` command
 * [cask](https://github.com/cask/cask) - Project management tool for Emacs
 * [makem.sh](https://github.com/alphapapa/makem.sh) - Makefile-like script for building and testing Emacs Lisp packages
 
-## Goals for the project
+## 🏆 Goals for the project
 
 1. Consistent sandbox testing across all systems
 2. Has most commands that Emacsers often used (byte-compile, checkdoc, etc)
@@ -161,11 +161,16 @@ For example, to enable compile on warn on `byte-compile` command
 
 ## Project Structure
 
-N/A
+The project structure are very simple, all we need is to look into 3 places.
 
-## Focus
+1. `eask` file at the root of the project
+2. `cmds` folder with all available commands
+3. `lisp` folder with all elisp code
 
-N/A
+`eask` is the node entry, and the main yargs definition! `cmds` and `lisp`
+folders are command files that correspond to each other.
+
+The sandbox logic is stored inside file `./lisp/_prepare.el`.
 
 ## Contribute
 
