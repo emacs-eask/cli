@@ -196,6 +196,11 @@ Eask file in the workspace."
 
 (defvar eask-file nil "The Eask file path.")
 
+(defun eask-file-load (location &optional noerror)
+  "Load Eask file in the LOCATION."
+  (setq eask-file (expand-file-name location user-emacs-directory))
+  (eask--alias-env (load eask-file noerror)))
+
 (defmacro eask-start (&rest body)
   "Execute BODY with workspace setup."
   (declare (indent 0) (debug t))
@@ -204,11 +209,15 @@ Eask file in the workspace."
        (cond
         (eask--initialized-p ,@body)
         ((eask-global-p)
-         (eask-pkg-init)
-         (load (locate-user-emacs-file "early-init.el") t)
-         (load (locate-user-emacs-file "../.emacs") t)
-         (load (locate-user-emacs-file "init.el") t)
-         ,@body)
+         (let ((eask--initialized-p t))
+           (eask-pkg-init)
+           (load (locate-user-emacs-file "early-init.el") t)
+           (load (locate-user-emacs-file "../.emacs") t)
+           (load (locate-user-emacs-file "init.el") t)
+           ;; We accept Eask file in global scope, but it shouldn't be used
+           ;; as a sandbox.
+           (eask-file-load "./Eask" t)
+           ,@body))
         (t
          (let* ((eask--initialized-p t)
                 (user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
@@ -216,10 +225,9 @@ Eask file in the workspace."
                 (eask--first-init-p (not (file-directory-p user-emacs-directory)))
                 (user-init-file (locate-user-emacs-file "init.el"))
                 (custom-file (locate-user-emacs-file "custom.el")))
-           (setq eask-file (expand-file-name "../../Eask" user-emacs-directory))
            (eask--handle-global-options)
+           (eask-file-load "../../Eask")
            (ignore-errors (make-directory package-user-dir t))
-           (eask--alias-env (load-file eask-file))
            (run-hooks 'eask-before-command-hook)
            (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
            ,@body
