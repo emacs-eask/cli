@@ -185,7 +185,7 @@ The sandbox logic is stored inside file `./lisp/_prepare.el`.
 ### 📌 Dependencies
 
 * [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/)
-* [yargs](https://github.com/yargs/yargs)
+* [yargs](https://github.com/yargs/yargs) to parse commands and options.
 * [Emacs](https://www.gnu.org/software/emacs/) of course; make sure this is inside your environment PATH!
 
 ## Contribute
