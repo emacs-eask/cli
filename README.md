@@ -152,6 +152,15 @@ For example, to enable compile on warn on `byte-compile` command
 * [cask](https://github.com/cask/cask) - Project management tool for Emacs
 * [makem.sh](https://github.com/alphapapa/makem.sh) - Makefile-like script for building and testing Emacs Lisp packages
 
+## State of the project
+
+The project barebones are pretty much done, we are currently looking for
+contirbutors to give us feedback and improve our TUI/UX for this tool!
+
+We are also looking for advices to add more Emacser often use commands and
+options, so these features are prepared by default! Like command `lint` 
+(package-lint) or option `--debug` refers to `debug-on-error` to `t`!
+
 ## 🏆 Goals for the project
 
 1. Consistent sandbox testing across all systems
