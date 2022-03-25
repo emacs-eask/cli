@@ -21,6 +21,7 @@ on Emacs built-in feature.
     - [About CI/CD](#about-cicd)
     - [📝 About Eask file](#📝-about-eask-file)
     - [📂 Related Projects](#📂-related-projects)
+    - [State of the project](#state-of-the-project)
     - [🏆 Goals for the project](#🏆-goals-for-the-project)
     - [Project Structure](#project-structure)
     - [Contribute](#contribute)
