@@ -26,6 +26,7 @@ exports.desc = 'load files';
 exports.builder = {
   files: {
     description: 'files to load',
+    alias: 'l',
     requiresArg: false,
     type: 'array',
   },
