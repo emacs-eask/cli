@@ -16,7 +16,7 @@ on Emacs built-in feature.
 **Table of Contents**
 
 - [eask](#eask)
-    - [📌 Dependencies](#📌-dependencies)
+    - [📰 News](#📰-news)
     - [💾 Installation](#💾-installation)
     - [About CI/CD](#about-cicd)
     - [📝 About Eask file](#📝-about-eask-file)
@@ -24,6 +24,7 @@ on Emacs built-in feature.
     - [State of the project](#state-of-the-project)
     - [🏆 Goals for the project](#🏆-goals-for-the-project)
     - [Project Structure](#project-structure)
+        - [📌 Dependencies](#📌-dependencies)
     - [Contribute](#contribute)
 
 <!-- markdown-toc end -->
