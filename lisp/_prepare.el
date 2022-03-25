@@ -240,12 +240,12 @@ Eask file in the workspace."
 (defconst eask-source-mapping
   `((gnu          . ,(concat (if (< emacs-major-version 27) "http" "https")
                              "://elpa.gnu.org/packages/"))
+    (nongnu       . "https://elpa.nongnu.org/nongnu/")
     (celpa        . "https://celpa.conao3.com/packages/")
     (jcs-elpa     . "https://jcs-emacs.github.io/jcs-elpa/packages/")
     (melpa        . "https://melpa.org/packages/")
     (melpa-stable . "https://stable.melpa.org/packages/")
     (marmalade    . "https://marmalade-repo.org/packages/")
-    (nongnu       . "https://elpa.nongnu.org/nongnu/")
     (org          . "https://orgmode.org/elpa/"))
   "Mapping of source name and url.")
 
@@ -308,8 +308,10 @@ Eask file in the workspace."
 ;;
 ;;; Error Handling
 
+(defvar eask--error-p nil)
+
 (defun eask--exit (&rest _) "Send exit code." (kill-emacs 1))
-(advice-add 'error :after #'eask--exit)
+(advice-add 'error :before #'eask--exit)
 
 ;;
 ;;; File
@@ -328,6 +330,7 @@ Eask file in the workspace."
     ;; Package file is part of package-files
     (when eask-package-file (push eask-package-file files))
     (delete-dups files)
+    (setq files (cl-remove-if-not #'file-exists-p files))
     (unless files
       (message "No matching file(s) found in %s: %s" default-directory eask-files))
     files))
