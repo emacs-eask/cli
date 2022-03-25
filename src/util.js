@@ -60,11 +60,11 @@ function _global_options(argv) {
 }
 
 /* Print data from process. */
-function _log(data) {
+function _print_data(data, prefix = '') {
   // After using `spawn` method, it will print two newline at the end of
   // message (Emacs + console.log). We simply remove 1 newline at the end
   // to prevent printing 2 newlines from one data.
-  console.log(data.toString().replace(/\n$/, ''));
+  console.log(prefix + data.toString().replace(/\n$/, ''));
 }
 
 /**
@@ -87,12 +87,10 @@ async function e_call(argv, script, ...args) {
   console.log('~');
   let process = child_process.spawn('emacs', cmd);
 
-  process.stdout.on('data', function (data) { _log(data); });
-  process.stderr.on('data', function (data) { _log(data); });
+  process.stdout.on('data', function (data) { _print_data(data); });
+  process.stderr.on('data', function (data) { _print_data(data); });
 
-  process.on('exit', function (code) {
-    console.log('\nExit with code ' + code.toString());
-  });
+  process.on('exit', function (code) { _print_data(code, '\nExit with code '); });
 }
 
 /*
