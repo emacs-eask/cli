@@ -35,6 +35,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Command `load-path` and `exec-path` can now accept `-g` option. (e73bff70b21290c2b79a7c13091701f712ce6d0b)
 * Add proxy global options (8e3a9130805341bd4c1ce9ccb8e4bf0a42e16ee8)
 * Accept `Eask` file from default `~/.emacs.d/` directory (044ce9327a60cad8adb4bc34141b2f8e8ecd2b45)
+* Use `spawn` instead of `exec`, so new the terminal will be updated immediately (e1790a833ba2422d3d171523a2670f66f0485173)
 
 ## 0.1.x
 > Released Mar 15, 2022
