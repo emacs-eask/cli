@@ -28,11 +28,10 @@ on Emacs built-in feature.
 
 <!-- markdown-toc end -->
 
-## 📌 Dependencies
+## 📰 News
 
-* [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/)
-* [yargs](https://github.com/yargs/yargs)
-* [Emacs](https://www.gnu.org/software/emacs/) of course; make sure this is inside your environment PATH!
+* `0.1.40` - Use `spawn` instead `exec`; now messages will be print immediately
+* `0.1.0` - Project barebones are pretty much complete!
 
 ## 💾 Installation
 
@@ -181,6 +180,12 @@ The project structure are very simple, all we need is to look into 3 places.
 folders are command files that correspond to each other.
 
 The sandbox logic is stored inside file `./lisp/_prepare.el`.
+
+### 📌 Dependencies
+
+* [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/)
+* [yargs](https://github.com/yargs/yargs)
+* [Emacs](https://www.gnu.org/software/emacs/) of course; make sure this is inside your environment PATH!
 
 ## Contribute
 
