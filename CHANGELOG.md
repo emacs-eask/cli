@@ -36,6 +36,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add proxy global options (8e3a9130805341bd4c1ce9ccb8e4bf0a42e16ee8)
 * Accept `Eask` file from default `~/.emacs.d/` directory (044ce9327a60cad8adb4bc34141b2f8e8ecd2b45)
 * Use `spawn` instead of `exec`, so new the terminal will be updated immediately (e1790a833ba2422d3d171523a2670f66f0485173)
+* Done basic error handling with exit code at the end of executions (e5afb70f6bbdf0424681949dd10ebd02b9fc7a25)
 
 ## 0.1.x
 > Released Mar 15, 2022
