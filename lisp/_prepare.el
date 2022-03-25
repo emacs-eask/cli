@@ -1,5 +1,5 @@
 ;;; _prepare.el --- Prepare for command tasks  -*- lexical-binding: t; -*-
-;;; Commentary: Utility module to make Eask work
+;;; Commentary: Prepare to setup Eask environment for sandboxing
 ;;; Code:
 
 (require 'package)
