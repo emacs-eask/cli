@@ -29,11 +29,15 @@ on Emacs built-in feature.
 
 ## 📌 Dependencies
 
-* [Node.js](https://nodejs.org/en/)
+* [Node.js](https://nodejs.org/en/) and [npm]()
 * [yargs](https://github.com/yargs/yargs)
 * [Emacs](https://www.gnu.org/software/emacs/) of course; make sure this is inside your environment PATH!
 
 ## 💾 Installation
+
+You would need Node and npm to run this tool, see their official manual to 
+https://nodejs.dev/learn/how-to-install-nodejs install it according to your 
+system.
 
 The easiest way to install is through tool [npm](https://www.npmjs.com/),
 
@@ -117,7 +121,7 @@ jobs:
 ## 📝 About Eask file
 
 `Eask` is the magic file that `eask` will read it as the init file in Emacs.
-The syntaxs are very similar to `Cask` file, but different.
+The syntaxes are very similar to the `Cask` file, but different.
 
 ```el
 (source "gnu")
@@ -152,7 +156,14 @@ For example, to enable compile on warn on `byte-compile` command
 * [cask](https://github.com/cask/cask) - Project management tool for Emacs
 * [makem.sh](https://github.com/alphapapa/makem.sh) - Makefile-like script for building and testing Emacs Lisp packages
 
-## Project Development
+## Goals for the project
+
+1. Consistent sandbox testing across all systems
+2. Has most commands that Emacsers often used (byte-compile, checkdoc, etc)
+3. No dependencies installed by default; only install packages when it's needed!
+4. Extra: Package Management Tool for your personal configuration/package
+
+## Project Structure
 
 N/A
 
