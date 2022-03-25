@@ -30,24 +30,6 @@ function _remove_undefined(arr) {
   return arr.filter(elm => { return elm !== undefined; });
 }
 
-/**
- * Remove undefined item and insert space between arguments.
- * @param { ellipsis } ...arr - an array to insert space between each item.
- */
-function _join_spc(...arr) {
-  arr = _remove_undefined(arr);
-  let _result = [];
-  for (let index = 0; index < arr.length; ++index) {
-    let _item = arr[index];
-    if (Array.isArray(_item)) {
-      _result.push(_join_spc(..._item));
-    } else {
-      _result.push(_item);
-    }
-  }
-  return _result.join(' ');
-}
-
 /* Return plugin directory */
 function _plugin_dir() { return path.join(__dirname, '..'); }
 
@@ -77,39 +59,9 @@ function _global_options(argv) {
   return flags;
 }
 
-/* Send error code, and exit the program. */
-function _exit_error(code) {
-  process.exitCode = code;
-  throw 'Error occurs from Emacs: ' + code;
-}
-
-/* Return ture if error occurs. */
-function _trigger_error(str) {
-  // XXX The method here to detect error, and send exit code is fragile.
-  // The better way should just grab it from Emacs program itself; but Emacs
-  // return exit code immediately with `child_process.exec` call
-  return str.includes ('toplevel form:') || str.includes ('top-level()');
-}
-
-/* Return true if falg is already true; else we test str for error flag. */
-function _test_error(str, flag) {
-  if (flag) return true;
-  return _trigger_error(str);
-}
-
-/* Display all terminal output */
-function _exec_out(error, stdout, stderr) {
-  let trigger_error = false;
-  //if (error) { console.log(error); }  /* ignore node error */
-  if (stdout) {
-    console.log(stdout);
-    trigger_error = _test_error(stdout, trigger_error);
-  }
-  if (stderr) {
-    console.log(stderr);
-    trigger_error = _test_error(stderr, trigger_error);
-  }
-  if (trigger_error) _exit_error(1);  // Trigger error!
+/* Print data from process. */
+function _log(data) {
+  console.log(data.toString().replace(/\n$/, ''));
 }
 
 /**
@@ -120,12 +72,24 @@ function _exec_out(error, stdout, stderr) {
 async function e_call(argv, script, ...args) {
   let _script = 'lisp/' + script + '.el';
   let _path = path.join(_plugin_dir(), _script);
-  let cmd = _join_spc('emacs', '-Q', '--batch', '--script' , _path, args, _global_options(argv));
+
+  let cmd_base = ['-Q', '--batch', '--script', _path].concat(args);
+  let cmd_args = args;
+  let cmd_global = _global_options(argv);
+  let cmd = cmd_base.concat(cmd_args).concat(cmd_global);
+  cmd = _remove_undefined(cmd);
   console.log('Starting Eask...');
   console.log('~');
-  console.log('~  $ ' + cmd);
+  console.log('~  $ ' + cmd.join(' '));
   console.log('~');
-  await child_process.exec(cmd, _exec_out);
+  let process = child_process.spawn('emacs', cmd);
+
+  process.stdout.on('data', function (data) { _log(data); });
+  process.stderr.on('data', function (data) { _log(data); });
+
+  process.on('exit', function (code) {
+    console.log('\nExit with code ' + code.toString());
+  });
 }
 
 /*
