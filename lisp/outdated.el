@@ -24,7 +24,7 @@
 (eask-start
   (eask-pkg-init)
   (if-let* ((upgrades (eask-package--upgrades))
-            (pkg-list (reverse (mapcar #'package-desc-name upgrades))))
+            (pkg-list (mapcar #'package-desc-name upgrades)))
       (progn
         (unless (eask-global-p)
           ;; Remove current developing packages
