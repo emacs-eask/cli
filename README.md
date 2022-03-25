@@ -30,7 +30,7 @@ on Emacs built-in feature.
 
 ## 📰 News
 
-* `0.1.40` - Use `spawn` instead `exec`; now messages will be print immediately
+* `0.1.40` - Use `spawn` instead `exec`; now messages will be printed immediately
 * `0.1.0` - Project barebones are pretty much complete!
 
 ## 💾 Installation
