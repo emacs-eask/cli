@@ -308,10 +308,13 @@ Eask file in the workspace."
 ;;
 ;;; Error Handling
 
-(defvar eask--error-p nil)
-
 (defun eask--exit (&rest _) "Send exit code." (kill-emacs 1))
-(advice-add 'error :before #'eask--exit)
+
+(defun eask--trigger-error (&rest _)
+  "Trigger error."
+  (add-hook 'eask-after-command-hook #'eask--exit))
+
+(advice-add 'error :before #'eask--trigger-error)
 
 ;;
 ;;; File
