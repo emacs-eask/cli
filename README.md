@@ -29,15 +29,11 @@ on Emacs built-in feature.
 
 ## 📌 Dependencies
 
-* [Node.js](https://nodejs.org/en/) and [npm]()
+* [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/)
 * [yargs](https://github.com/yargs/yargs)
 * [Emacs](https://www.gnu.org/software/emacs/) of course; make sure this is inside your environment PATH!
 
 ## 💾 Installation
-
-You would need Node and npm to run this tool, see their official manual to 
-https://nodejs.dev/learn/how-to-install-nodejs install it according to your 
-system.
 
 The easiest way to install is through tool [npm](https://www.npmjs.com/),
 
