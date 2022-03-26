@@ -14,16 +14,13 @@
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
 (eask-start
-  (eask-call "install")  ; XXX maybe try to avoid this?
-
   (let* ((name (eask-guess-package-name))
-         (dir (file-name-directory (locate-library name)))
-         (pkg-file (concat name "-pkg.el"))
-         (gen-filename (concat dir pkg-file)))
-    (write-region (with-temp-buffer
-                    (insert-file-contents gen-filename)
-                    (buffer-string))
-                  nil pkg-file)
-    (message "\nWrite file %s..." gen-filename)))
+         (version (eask-package-get :version))
+         (description (eask-package-get :description))
+         (pkg-file (expand-file-name (concat name "-pkg.el"))))
+    (write-region
+     (pp-to-string `(define-package ,name ,version ,description))
+     nil pkg-file)
+    (message "\nWrite file %s..." pkg-file)))
 
 ;;; pkg-file.el ends here

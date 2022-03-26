@@ -43,9 +43,9 @@
     (mapc #'eask-package-install eask-depends-on)
     (when (eask-dev-p) (mapc #'eask-package-install eask-depends-on-dev))
     ;; Start the normal package installation procedure
-    (message "Installing %s..." eask-package-file)
-    (package-install-file eask-package-file)
-    (let ((target (or (eask--package-tar) (expand-file-name "./"))))
+    (let ((target (or (eask--package-tar)
+                      eask-package-file
+                      (expand-file-name "./"))))
       (message "Installing %s..." target)
       (package-install-file target))))
 

@@ -23,21 +23,24 @@
   :type 'string
   :group 'eask)
 
+(defun eask-package-dir-recipe ()
+  "Form a directory recipe."
+  (eask-load "./extern/package-recipe")
+  (let ((name (eask-guess-package-name))
+        (patterns (or eask-files package-build-default-files-spec))
+        (path default-directory))
+    (package-directory-recipe name :name name :files patterns :dir path)))
+
 (eask-start
   (let ((dest (or (eask-argv 0) eask-dist-path)))
     (ignore-errors (make-directory (expand-file-name dest) t))
 
     (eask-package-install 'package-build)
-    (require 'package-recipe)
     (eask-load "./extern/package-build")  ; override
-    (eask-load "./extern/package-recipe")
 
-    (let* ((name (eask-guess-package-name))
-           (patterns (or eask-files package-build-default-files-spec))
-           (path default-directory)
-           (version (eask-package-get :version))
-           (rcp (package-directory-recipe name :name name :files patterns :dir path))
-           (package-build-working-dir path)
+    (let* ((version (eask-package-get :version))
+           (rcp (eask-package-dir-recipe))
+           (package-build-working-dir default-directory)
            (package-build-archive-dir (expand-file-name dest)))
       (package-build--package rcp version))
     (message "\n Done.")))
