@@ -31,11 +31,18 @@
       (add-to-list 'exec-path (file-name-directory filename))))
   (delete-dups exec-path))
 
+(defun eask--update-load-path ()
+  "Add all load-path for all .el files."
+  (dolist (filename (eask-package-el-files))
+    (add-to-list 'load-path (file-name-directory filename)))
+  (delete-dups load-path))
+
 (defun eask-pkg-init ()
   "Package initialization."
   (package-initialize)
   (package-refresh-contents)
-  (eask--update-exec-path))
+  (eask--update-exec-path)
+  (eask--update-load-path))
 
 (defun eask-package-install (pkg)
   "Install the package PKG."
