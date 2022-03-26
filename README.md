@@ -16,16 +16,16 @@ on Emacs built-in feature.
 **Table of Contents**
 
 - [eask](#eask)
-    - [📰 News](#📰-news)
-    - [💾 Installation](#💾-installation)
-    - [About CI/CD](#about-cicd)
-    - [📝 About Eask file](#📝-about-eask-file)
-    - [📂 Related Projects](#📂-related-projects)
-    - [State of the project](#state-of-the-project)
-    - [🏆 Goals for the project](#🏆-goals-for-the-project)
-    - [Project Structure](#project-structure)
-        - [📌 Dependencies](#📌-dependencies)
-    - [Contribute](#contribute)
+- [📰 News](#📰-news)
+- [💾 Installation](#💾-installation)
+- [About CI/CD](#about-cicd)
+- [📝 About Eask file](#📝-about-eask-file)
+- [📂 Related Projects](#📂-related-projects)
+- [State of the project](#state-of-the-project)
+- [🏆 Goals for the project](#🏆-goals-for-the-project)
+- [Project Structure](#project-structure)
+- [📌 Dependencies](#📌-dependencies)
+- [Contribute](#contribute)
 
 <!-- markdown-toc end -->
 
@@ -190,6 +190,8 @@ The sandbox logic is stored inside file `./lisp/_prepare.el`.
 * [Emacs](https://www.gnu.org/software/emacs/) of course; make sure this is inside your environment PATH!
 
 ## 📝 Todo list
+
+- [ ] `checkdoc` command
 
 ## Contribute
 
