@@ -79,7 +79,7 @@ async function e_call(argv, script, ...args) {
   console.log('~');
   let process = child_process.spawn('emacs', cmd, { stdio: 'inherit' });
 
-  process.on('exit', function (code) {
+  process.on('close', function (code) {
     if (code == 0) return;
     throw 'Exit with code: ' + code;
   });
