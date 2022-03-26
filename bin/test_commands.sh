@@ -40,6 +40,8 @@ $CMD clean
 $CMD clean-elc
 $CMD clean-all
 
+# TODO: Revert these global tests ASAP..
+
 # Test for global commands
 # $CMD archives
 # $CMD install -g spinner ivy beacon
