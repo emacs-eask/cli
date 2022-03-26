@@ -9,6 +9,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 > Released N/A
 
 * Ensure use `throw` operation to trigger CI (0253edff816a85868daf708289872542d49af729)
+* Fix extra concatenation args (458d551d2e1981407929ada1ad8b4b4b430cf526)
 
 ## 0.2.x
 > Released Mar 26, 2022
