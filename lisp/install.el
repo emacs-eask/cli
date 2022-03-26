@@ -24,6 +24,12 @@
             "_prepare.el"
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
+(defun eask--package-tar ()
+  "Find a possible package tar file."
+  (let* ((name (eask-guess-package-name))
+         (tar (expand-file-name (concat name ".tar") default-directory)))
+    (and (file-exists-p tar) tar)))
+
 (eask-start
   (eask-pkg-init)
   (if-let ((names (eask-args)))
@@ -32,6 +38,9 @@
     ;; Else we try to install package from the working directory
     (mapc #'eask-package-install eask-depends-on)
     (when (eask-dev-p) (mapc #'eask-package-install eask-depends-on-dev))
-    (package-install-file (or eask-package-file (expand-file-name "./")))))
+    ;; Start the normal package installation procedure
+    (package-install-file (or eask-package-file
+                              (eask--package-tar)
+                              (expand-file-name "./")))))
 
 ;;; install.el ends here

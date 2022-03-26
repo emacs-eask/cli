@@ -23,7 +23,7 @@
   (let* ((result (byte-compile-file filename)) (compiled (eq result t)))
     (unless byte-compile-verbose
       (if compiled (message "Compiling %s..." filename)
-        (message "Failed to compile %s..." filename)))
+        (message "Skipping %s..." filename)))
     compiled))
 
 (eask-start
