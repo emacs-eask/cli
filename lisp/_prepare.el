@@ -23,6 +23,14 @@
 (advice-add 'load-file :around #'eask--load-file--adv)
 
 ;;
+;;; Util
+
+(defmacro eask--silent (&rest body)
+  "Execute BODY without message."
+  (declare (indent 0) (debug t))
+  `(let ((inhibit-message t) message-log-max) ,@body))
+
+;;
 ;;; Package
 
 (defun eask--update-exec-path ()
@@ -42,8 +50,9 @@
   "Package initialization."
   (package-initialize)
   (package-refresh-contents)
-  (eask--update-exec-path)
-  (eask--update-load-path))
+  (eask--silent
+    (eask--update-exec-path)
+    (eask--update-load-path)))
 
 (defun eask-package-install (pkg)
   "Install the package PKG."
