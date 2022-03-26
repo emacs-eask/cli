@@ -92,7 +92,7 @@ async function e_call(argv, script, ...args) {
 
   process.on('exit', function (code) {
     if (code == 0) return;
-    _print_data(code, '\nExit with code ');
+    throw 'Exit with code: ' + code;
   });
 }
 
