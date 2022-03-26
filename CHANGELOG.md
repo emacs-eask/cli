@@ -12,6 +12,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Fix extra concatenation args (458d551d2e1981407929ada1ad8b4b4b430cf526)
 * Use inherit options for `spawn` process (aaf4ace0603905574ccbe1c900c057e31988bdee)
 * Add command `eask package [dest]` (a304cc2342c4cd85a59d38fb61709543d3d39fca)
+* Add `shmelpa` source (578ea2cc0b11c145c33833b87a01e938aca48e0e)
 
 ## 0.2.x
 > Released Mar 26, 2022
