@@ -18,8 +18,10 @@
             "_prepare.el"
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
-(defconst eask-dist-path "dist"
-  "Name of default target directory for building packages.")
+(defcustom eask-dist-path "dist"
+  "Name of default target directory for building packages."
+  :type 'string
+  :group 'eask)
 
 (eask-start
   (let ((dest (or (eask-argv 0) eask-dist-path)))
