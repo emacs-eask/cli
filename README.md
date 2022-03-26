@@ -189,6 +189,8 @@ The sandbox logic is stored inside file `./lisp/_prepare.el`.
 * [yargs](https://github.com/yargs/yargs) to parse commands and options.
 * [Emacs](https://www.gnu.org/software/emacs/) of course; make sure this is inside your environment PATH!
 
+## 📝 Todo list
+
 ## Contribute
 
 N/A
