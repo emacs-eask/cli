@@ -2,6 +2,28 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun package-build--create-tar (name version directory)
+  "Create a tar file containing the contents of VERSION of package NAME."
+  (let ((tar (expand-file-name (concat name "-" version ".tar")
+                               package-build-archive-dir))
+        (dir (concat name "-" version)))
+    ;; XXX https://github.com/melpa/package-build/pull/34
+    ;; (when (eq system-type 'windows-nt)
+    ;;   (setq tar (replace-regexp-in-string "^\\([a-z]\\):" "/\\1" tar)))
+    (let ((default-directory directory))
+      (process-file package-build-tar-executable nil
+                    (get-buffer-create "*package-build-checkout*") nil
+                    "-cvf" tar
+                    "--exclude=.git"
+                    "--exclude=.hg"
+                    dir))
+    (when (and package-build-verbose noninteractive)
+      (message "Created %s containing:" (file-name-nondirectory tar))
+      (dolist (line (sort (process-lines package-build-tar-executable
+                                         "--list" "--file" tar)
+                          #'string<))
+        (message "  %s" line)))))
+
 (defun package-build-expand-file-specs (dir specs &optional subdir allow-empty)
   "In DIR, expand SPECS, optionally under SUBDIR.
 The result is a list of (SOURCE . DEST), where SOURCE is a source

@@ -21,9 +21,16 @@
 
 const util = require("../src/util");
 
-exports.command = ['build'];
-exports.desc = '';
+exports.command = ['package [dest]'];
+exports.desc = 'Build a package artefact, and put it into the given destination';
+exports.builder = {
+  dest: {
+    description: 'destination path/folder',
+    requiresArg: false,
+    type: 'string',
+  },
+};
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'build');
+  await util.e_call(argv, 'package', argv.dest);
 };
