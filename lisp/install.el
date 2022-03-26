@@ -32,6 +32,6 @@
     ;; Else we try to install package from the working directory
     (mapc #'eask-package-install eask-depends-on)
     (when (eask-dev-p) (mapc #'eask-package-install eask-depends-on-dev))
-    (package-install-file (expand-file-name "./"))))
+    (package-install-file (or eask-package-file (expand-file-name "./")))))
 
 ;;; install.el ends here
