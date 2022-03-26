@@ -59,14 +59,6 @@ function _global_options(argv) {
   return flags;
 }
 
-/* Print data from process. */
-function _print_data(data, prefix = '') {
-  // After using `spawn` method, it will print two newline at the end of
-  // message (Emacs + console.log). We simply remove 1 newline at the end
-  // to prevent printing 2 newlines from one data.
-  console.log(prefix + data.toString().replace(/\n$/, ''));
-}
-
 /**
  * Call emacs process
  * @param { string } script - name of the script from `../lisp`
@@ -85,10 +77,7 @@ async function e_call(argv, script, ...args) {
   console.log('~');
   console.log('~  $ ' + cmd.join(' '));
   console.log('~');
-  let process = child_process.spawn('emacs', cmd);
-
-  process.stdout.on('data', function (data) { _print_data(data); });
-  process.stderr.on('data', function (data) { _print_data(data); });
+  let process = child_process.spawn('emacs', cmd, { stdio: 'inherit' });
 
   process.on('exit', function (code) {
     if (code == 0) return;
