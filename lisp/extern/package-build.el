@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'package-build nil t)
+
 (defun package-build--create-tar (name version directory)
   "Create a tar file containing the contents of VERSION of package NAME."
   (let ((tar (expand-file-name (concat name "-" version ".tar")
