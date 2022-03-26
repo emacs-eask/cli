@@ -21,7 +21,7 @@
 
 const util = require("../src/util");
 
-exports.command = ['build [names..]', 'compile [names..]'];
+exports.command = ['compile [names..]'];
 exports.desc = 'byte compile all Emacs Lisp files in the package';
 exports.builder = {
   names: {
