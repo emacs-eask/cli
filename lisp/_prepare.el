@@ -312,6 +312,9 @@ Eask file in the workspace."
 
 (defun eask--trigger-error (&rest args)
   "Trigger error."
+  ;; XXX Log out the error explicitly, so the user will know what causes Emacs
+  ;; to crash.
+  (message "Error: %s" (apply #'format-message args))
   (add-hook 'eask-after-command-hook #'eask--exit))
 
 (advice-add 'error :before #'eask--trigger-error)
@@ -347,5 +350,9 @@ Eask file in the workspace."
   (when-let ((elcs (mapcar (lambda (elm) (concat elm "c")) (eask-package-el-files))))
     (setq elcs (cl-remove-if-not (lambda (elm) (file-exists-p elm)) elcs))
     elcs))
+
+(defun eask-package-multi-p ()
+  "Return t if the package is multi-files."
+  (< 1 (length (eask-package-files))))
 
 ;;; _prepare.el ends here
