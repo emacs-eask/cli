@@ -8,7 +8,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 0.3.x (Unreleased)
 > Released N/A
 
-* N/A
+* Ensure use `throw` operation to trigger CI (0253edff816a85868daf708289872542d49af729)
 
 ## 0.2.x
 > Released Mar 26, 2022
