@@ -14,6 +14,9 @@
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
 (eask-start
-  (package-generate-autoloads (eask-guess-package-name) default-directory))
+  (let* ((name (eask-guess-package-name))
+         (autoloads-file (expand-file-name (concat name "-autoloads.el"))))
+    (package-generate-autoloads name default-directory)
+    (message "\nWrite file %s..." autoloads-file)))
 
 ;;; autoloads.el ends here
