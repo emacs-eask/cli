@@ -30,7 +30,6 @@
   (eask-pkg-init)
   (let ((files (or (eask-args) (eask-package-el-files))) compiled)
     (dolist (filename files)
-      (add-to-list 'load-path (file-name-directory filename))
       (when (eask--byte-compile-file filename)
         (push filename compiled)))
     (message "\n Total of %s files compiled" (length compiled))))
