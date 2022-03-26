@@ -238,16 +238,16 @@ Eask file in the workspace."
 ;;; Eask file
 
 (defconst eask-source-mapping
-  `((gnu          . ,(concat (if (< emacs-major-version 27) "http" "https")
-                             "://elpa.gnu.org/packages/"))
-    (nongnu       . "https://elpa.nongnu.org/nongnu/")
-    (celpa        . "https://celpa.conao3.com/packages/")
-    (jcs-elpa     . "https://jcs-emacs.github.io/jcs-elpa/packages/")
-    (marmalade    . "https://marmalade-repo.org/packages/")
-    (melpa        . "https://melpa.org/packages/")
-    (melpa-stable . "https://stable.melpa.org/packages/")
-    (org          . "https://orgmode.org/elpa/")
-    (shmelpa      . "https://shmelpa.commandlinesystems.com/packages/"))
+  (let ((secure (if (gnutls-available-p) "s" "")))
+    `((gnu          . ,(format "http%s://elpa.gnu.org/packages/"                   secure))
+      (nongnu       . ,(format "http%s://elpa.nongnu.org/nongnu/"                  secure))
+      (celpa        . ,(format "http%s://celpa.conao3.com/packages/"               secure))
+      (jcs-elpa     . ,(format "http%s://jcs-emacs.github.io/jcs-elpa/packages/"   secure))
+      (marmalade    . ,(format "http%s://marmalade-repo.org/packages/"             secure))
+      (melpa        . ,(format "http%s://melpa.org/packages/"                      secure))
+      (melpa-stable . ,(format "http%s://stable.melpa.org/packages/"               secure))
+      (org          . ,(format "http%s://orgmode.org/elpa/"                        secure))
+      (shmelpa      . ,(format "http%s://shmelpa.commandlinesystems.com/packages/" secure))))
   "Mapping of source name and url.")
 
 (defvar eask-package        nil)
