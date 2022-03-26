@@ -243,10 +243,11 @@ Eask file in the workspace."
     (nongnu       . "https://elpa.nongnu.org/nongnu/")
     (celpa        . "https://celpa.conao3.com/packages/")
     (jcs-elpa     . "https://jcs-emacs.github.io/jcs-elpa/packages/")
+    (marmalade    . "https://marmalade-repo.org/packages/")
     (melpa        . "https://melpa.org/packages/")
     (melpa-stable . "https://stable.melpa.org/packages/")
-    (marmalade    . "https://marmalade-repo.org/packages/")
-    (org          . "https://orgmode.org/elpa/"))
+    (org          . "https://orgmode.org/elpa/")
+    (shmelpa      . "https://shmelpa.commandlinesystems.com/packages/"))
   "Mapping of source name and url.")
 
 (defvar eask-package        nil)
