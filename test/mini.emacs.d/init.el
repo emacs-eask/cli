@@ -18,6 +18,8 @@
 (setq package-enable-at-startup nil  ; To avoid initializing twice
       package-check-signature nil)
 
+(setq network-security-level 'low)  ; see https://github.com/jcs090218/setup-emacs-windows/issues/156#issuecomment-932956432
+
 (require 'package)
 
 ;; Local Variables:
