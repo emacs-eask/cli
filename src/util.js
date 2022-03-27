@@ -42,8 +42,8 @@ function def_flag(arg, name, val = undefined) {
   if (arg === undefined)
     return undefined;
   if (val === undefined)
-    return '--eask' + name;
-  return '--eask' + name + ' ' + val;
+    return ['--eask' + name];
+  return ['--eask' + name, val];
 }
 
 /**
@@ -53,9 +53,17 @@ function def_flag(arg, name, val = undefined) {
  */
 function _global_options(argv) {
   let flags = [];
+  /* General */
   flags.push(def_flag(argv.global, '-g'));
   flags.push(def_flag(argv.force, '-f'));
   flags.push(def_flag(argv.development, '--dev'));
+  /* Proxy */
+  flags.push(def_flag(argv.proxy, '--proxy', argv.proxy));
+  flags.push(def_flag(argv['http-proxy'], '--http-proxy', argv['http-proxy']));
+  flags.push(def_flag(argv['https-proxy'], '--https-proxy', argv['https-proxy']));
+  flags.push(def_flag(argv['no-proxy'], '--no-proxy', argv['no-proxy']));
+  /* Others */
+  flags.push(def_flag(argv.debug, '--debug'));
   return flags;
 }
 
@@ -69,8 +77,8 @@ async function e_call(argv, script, ...args) {
   let _path = path.join(_plugin_dir(), _script);
 
   let cmd_base = ['-Q', '--batch', '--script', _path];
-  let cmd_args = args;
-  let cmd_global = _global_options(argv);
+  let cmd_args = args.flat();
+  let cmd_global = _global_options(argv).flat();
   let cmd = cmd_base.concat(cmd_args).concat(cmd_global);
   cmd = _remove_undefined(cmd);
   console.log('Starting Eask...');
