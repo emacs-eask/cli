@@ -13,6 +13,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Use inherit options for `spawn` process (aaf4ace0603905574ccbe1c900c057e31988bdee)
 * Add command `eask package [dest]` (a304cc2342c4cd85a59d38fb61709543d3d39fca)
 * Add `shmelpa` source (578ea2cc0b11c145c33833b87a01e938aca48e0e)
+* Improve output message (9aa9ba5977779fe837f084ff54666c6104361e07)
+* Disable backup file by default (3be0010d3fe19ea7cd1d5fd64931532c98f6267f)
+* Fix line endings on Windows system (b7b25da75f794e1bd1c1f6b74a9d4cd6a83e3435)
 
 ## 0.2.x
 > Released Mar 26, 2022
