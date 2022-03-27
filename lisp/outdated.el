@@ -30,7 +30,7 @@
           ;; Remove current developing packages
           (setq pkg-list (remove (intern (eask-guess-package-name)) pkg-list)))
         (eask--list pkg-list package-alist 0)
-        (message "\n Total of %s dependencies are outdated" (length pkg-list)))
-    (message "\n No outdated dependencies")))
+        (message "(Total of %s dependencies are outdated)" (length pkg-list)))
+    (message "(No outdated dependencies)")))
 
 ;;; outdated.el ends here

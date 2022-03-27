@@ -63,6 +63,6 @@
 (eask-start
   (eask-pkg-init)
   (eask--list package-activated-list package-alist)
-  (message "\n Total of %s packages installed" (length package-activated-list)))
+  (message "(Total of %s packages installed)" (length package-activated-list)))
 
 ;;; list.el ends here

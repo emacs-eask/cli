@@ -30,7 +30,7 @@
             (insert-file-contents el)
             (package-lint-current-buffer))
           (with-current-buffer "*Package-Lint*" (message "%s" (buffer-string))))
-        (message "\n Total of %s files linted" (length files)))
-    (message "\n No files have been linted")))
+        (message "(Total of %s files linted)" (length files)))
+    (message "(No files have been linted)")))
 
 ;;; lint.el ends here
