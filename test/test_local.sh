@@ -17,6 +17,15 @@
 # Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 # Boston, MA 02110-1301, USA.
 
+## Commentary:
+#
+# Here we test all local (workspace) commands by simulating a Emacs
+# pacakge development environment!
+#
+# Notice, below we clone a random packae (repo) that uses Eask as the
+# dependencies management tool.
+#
+
 # Clone a project simulate Emacs package development
 git clone "https://github.com/jcs-elpa/parse-it" "../parse-it"
 cd '../parse-it'

@@ -17,6 +17,13 @@
 # Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 # Boston, MA 02110-1301, USA.
 
+## Commentary:
+#
+# Here we test all global (~/.emacs.d/) that the Emacser can be use daily!
+#
+# Notice, to make global commands work; we need a minimum configuration
+# (mini.emacs.d), and place it under to the default Emacs directory!
+#
 
 CMD="node eask"
 
