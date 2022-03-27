@@ -16,6 +16,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Improve output message (9aa9ba5977779fe837f084ff54666c6104361e07)
 * Disable backup file by default (3be0010d3fe19ea7cd1d5fd64931532c98f6267f)
 * Fix line endings on Windows system (b7b25da75f794e1bd1c1f6b74a9d4cd6a83e3435)
+* Fix option that accept arguments (979d87ef6953f0f4a9403db4bb244c87987ea478)
 
 ## 0.2.x
 > Released Mar 26, 2022
