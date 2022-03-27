@@ -23,7 +23,16 @@ CMD="node eask"
 echo "[INFO] 'eask' version: "
 $CMD --version
 
-git clone "https://github.com/jcs-elpa/parse-it" "../parse-it"  # project use to test
+# Copy test configuration
+cp -R ./test/mini.emacs.d/ ~/.emacs.d
+
+# Test for global commands
+$CMD archives -g
+$CMD install -g spinner ivy beacon
+$CMD list --depth=0 -g
+
+# Clone a project simulate Emacs package development
+git clone "https://github.com/jcs-elpa/parse-it" "../parse-it"
 cd '../parse-it'
 
 CMD="node ../eask/eask"
@@ -39,10 +48,3 @@ $CMD list --depth=0
 $CMD clean
 $CMD clean-elc
 $CMD clean-all
-
-# TODO: Revert these global tests ASAP..
-
-# Test for global commands
-# $CMD archives
-# $CMD install -g spinner ivy beacon
-# $CMD list --depth=0 -g
