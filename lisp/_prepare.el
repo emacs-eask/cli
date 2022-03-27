@@ -24,6 +24,7 @@
         (t               'unknown))
   "Return current OS type.")
 
+(setq make-backup-files nil)
 
 (unless (bound-and-true-p eask--initialized-p)
   (setq package-enable-at-startup  nil            ; To avoid initializing twice
