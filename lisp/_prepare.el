@@ -394,7 +394,11 @@ Eask file in the workspace."
     elcs))
 
 (defun eask-package-multi-p ()
-  "Return t if the package is multi-files."
+  "Return t if multi-files package."
   (< 1 (length (eask-package-files))))
+
+(defun eask-package-single-p ()
+  "Return t if single file package."
+  (not (eask-package-multi-p)))
 
 ;;; _prepare.el ends here
