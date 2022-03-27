@@ -17,7 +17,7 @@
 # Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 # Boston, MA 02110-1301, USA.
 
-npm install
+
 CMD="node eask"
 
 # Copy test configuration

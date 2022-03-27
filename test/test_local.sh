@@ -17,9 +17,6 @@
 # Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 # Boston, MA 02110-1301, USA.
 
-npm install
-CMD="node eask"
-
 # Clone a project simulate Emacs package development
 git clone "https://github.com/jcs-elpa/parse-it" "../parse-it"
 cd '../parse-it'
