@@ -66,8 +66,8 @@
   (package-initialize)
   (package-refresh-contents)
   (eask--silent
-   (eask--update-exec-path)
-   (eask--update-load-path)))
+    (eask--update-exec-path)
+    (eask--update-load-path)))
 
 (defun eask-package-install (pkg)
   "Install the package PKG."
@@ -238,33 +238,33 @@ Eask file in the workspace."
   (declare (indent 0) (debug t))
   `(unless eask-loading-file-p
      (eask--setup-env
-      (cond
-       (eask--initialized-p ,@body)
-       ((eask-global-p)
-        (let ((eask--initialized-p t))
-          (eask-pkg-init)
-          (load (locate-user-emacs-file "early-init.el") t)
-          (load (locate-user-emacs-file "../.emacs") t)
-          (load (locate-user-emacs-file "init.el") t)
-          ;; We accept Eask file in global scope, but it shouldn't be used
-          ;; as a sandbox.
-          (eask-file-load "./Eask" t)
-          ,@body))
-       (t
-        (let* ((eask--initialized-p t)
-               (user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
-               (package-user-dir (expand-file-name "elpa" user-emacs-directory))
-               (eask--first-init-p (not (file-directory-p user-emacs-directory)))
-               (user-init-file (locate-user-emacs-file "init.el"))
-               (custom-file (locate-user-emacs-file "custom.el")))
-          (eask--handle-global-options)
-          (eask-file-load "../../Eask")
-          (ignore-errors (make-directory package-user-dir t))
-          (run-hooks 'eask-before-command-hook)
-          (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
-          ,@body
-          (run-hooks (intern (concat "eask-after-command-" (eask-command) "-hook")))
-          (run-hooks 'eask-after-command-hook)))))))
+       (cond
+        (eask--initialized-p ,@body)
+        ((eask-global-p)
+         (let ((eask--initialized-p t))
+           (eask-pkg-init)
+           (load (locate-user-emacs-file "early-init.el") t)
+           (load (locate-user-emacs-file "../.emacs") t)
+           (load (locate-user-emacs-file "init.el") t)
+           ;; We accept Eask file in global scope, but it shouldn't be used
+           ;; as a sandbox.
+           (eask-file-load "./Eask" t)
+           ,@body))
+        (t
+         (let* ((eask--initialized-p t)
+                (user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
+                (package-user-dir (expand-file-name "elpa" user-emacs-directory))
+                (eask--first-init-p (not (file-directory-p user-emacs-directory)))
+                (user-init-file (locate-user-emacs-file "init.el"))
+                (custom-file (locate-user-emacs-file "custom.el")))
+           (eask--handle-global-options)
+           (eask-file-load "../../Eask")
+           (ignore-errors (make-directory package-user-dir t))
+           (run-hooks 'eask-before-command-hook)
+           (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
+           ,@body
+           (run-hooks (intern (concat "eask-after-command-" (eask-command) "-hook")))
+           (run-hooks 'eask-after-command-hook)))))))
 
 ;;
 ;;; Eask file
