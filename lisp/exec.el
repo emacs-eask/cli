@@ -24,6 +24,6 @@
   (if-let* ((command (eask-argv 1))
             (exe (executable-find command)))
       (load-file exe)
-    (message "Executable `%s`.. not found" command)))
+    (error "Executable `%s`.. not found" command)))
 
 ;;; exec.el ends here
