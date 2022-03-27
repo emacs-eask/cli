@@ -26,27 +26,41 @@
 
 (eask-load "package")  ; load dist path
 
-(defun eask--package-tar ()
-  "Find a possible package tar file."
-  (let* ((name (eask-guess-package-name))
-         (version (eask-package-get :version))
-         (dist (expand-file-name eask-dist-path))
-         (tar (expand-file-name (concat name "-" version ".tar") dist)))
-    (and (file-exists-p tar) tar)))
+(defun eask--install-dep ()
+  "Install all dependencies."
+  (mapc #'eask-package-install eask-depends-on))
+
+(defun eask--install-dep-dev ()
+  "Install all development dependencies."
+  (when (eask-dev-p) (mapc #'eask-package-install eask-depends-on-dev)))
 
 (eask-start
   (eask-pkg-init)
   (if-let ((names (eask-args)))
       ;; If package [name..] are specified, we try to install it
-      (dolist (name names) (eask-package-install name))
+      (mapc #'eask-package-install names)
+
     ;; Else we try to install package from the working directory
-    (mapc #'eask-package-install eask-depends-on)
-    (when (eask-dev-p) (mapc #'eask-package-install eask-depends-on-dev))
+    ;;
+    ;; XXX Without ignore-errors guard, it will trigger error
+    ;;
+    ;;   Can't find library xxxxxxx.el
+    ;;
+    ;; But we can remove this after Emacs 28, since function `find-library-name'
+    ;; has replaced the function `signal' instead of the `error'.
+    (eask-ignore-errors
+      (eask--install-dep)
+      (eask--install-dep-dev))
+
     ;; Start the normal package installation procedure
-    (let ((target (or (eask--package-tar)
-                      eask-package-file
-                      (expand-file-name "./"))))
+    (let* ((packaged (eask-packaged-file))
+           (target (or packaged
+                       eask-package-file
+                       (expand-file-name "./"))))
+      (when packaged
+        (message "Found packaged artefact, use %s instead" packaged))
       (message "Installing %s..." target)
+      (add-to-list 'load-path (expand-file-name (eask-packaged-name) package-user-dir))
       (package-install-file target))))
 
 ;;; install.el ends here

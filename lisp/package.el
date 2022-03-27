@@ -31,18 +31,44 @@
         (path default-directory))
     (package-directory-recipe name :name name :files patterns :dir path)))
 
-(eask-start
-  (let ((dest (or (eask-argv 0) eask-dist-path)))
-    (ignore-errors (make-directory (expand-file-name dest) t))
+(defun eask-packaged-name ()
+  "Find a possible packaged name."
+  (let ((name (eask-guess-package-name))
+        (version (eask-package-get :version)))
+    (concat name "-" version)))
 
+(defun eask--packaged-file (ext)
+  "Find a possible packaged file."
+  (let* ((dist (expand-file-name eask-dist-path))
+         (file (expand-file-name (concat (eask-packaged-name) "." ext) dist)))
+    (and (file-exists-p file) file)))
+
+(defun eask-packaged-file ()
+  "Return generated pacakge artefact."
+  (or (eask--packaged-file "tar") (eask--packaged-file "el")))
+
+(eask-start
+  (let ((eask-dist-path (or (eask-argv 0) eask-dist-path))
+        (packaged))
+    (ignore-errors (make-directory (expand-file-name eask-dist-path) t))
+
+    (eask-pkg-init)
     (eask-package-install 'package-build)
     (eask-load "./extern/package-build")  ; override
 
     (let* ((version (eask-package-get :version))
            (rcp (eask-package-dir-recipe))
            (package-build-working-dir default-directory)
-           (package-build-archive-dir (expand-file-name dest)))
+           (package-build-archive-dir (expand-file-name eask-dist-path)))
       (package-build--package rcp version))
-    (message "\n Done.")))
+
+    (setq packaged (eask-packaged-file))
+
+    (when eask-is-windows
+      (with-current-buffer (find-file packaged)
+        (set-buffer-file-coding-system 'utf-8-unix)
+        (save-buffer)))
+
+    (message "\n Done packaging %s..." packaged)))
 
 ;;; package.el ends here
