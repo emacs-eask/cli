@@ -11,6 +11,20 @@
 (require 'rect)
 (require 'subr-x)
 
+;; Determine the underlying operating system
+(defconst eask-is-windows (memq system-type '(cygwin windows-nt ms-dos))   "Windows")
+(defconst eask-is-mac     (eq system-type 'darwin)                         "macOS")
+(defconst eask-is-linux   (eq system-type 'gnu/linux)                      "Linux")
+(defconst eask-is-bsd     (or eask-is-mac (eq system-type 'berkeley-unix)) "BSD")
+
+(defconst eask-system-type
+  (cond (eask-is-windows 'dos)
+        (eask-is-bsd     'mac)
+        (eask-is-linux   'unix)
+        (t               'unknown))
+  "Return current OS type.")
+
+
 (unless (bound-and-true-p eask--initialized-p)
   (setq package-enable-at-startup  nil            ; To avoid initializing twice
         package-check-signature    nil
@@ -307,7 +321,7 @@ Eask file in the workspace."
 
 (defun eask-load-path (dir)
   "Add DIR to load-path."
-  (add-to-list 'load-path (expand-file-name dir default-directory)))
+  (add-to-list 'load-path (expand-file-name dir)))
 
 (defun eask-load-paths (&rest dirs)
   "Add all DIRS to load-path."
@@ -326,14 +340,23 @@ Eask file in the workspace."
 ;;
 ;;; Error Handling
 
+(defvar eask--ignore-error-p nil
+  "Don't trigger error when this is non-nil.")
+
+(defmacro eask-ignore-errors (&rest body)
+  "Execute BODY but ignore all errors."
+  (declare (indent 0) (debug t))
+  `(let ((eask--ignore-error-p t)) ,@body))
+
 (defun eask--exit (&rest _) "Send exit code." (kill-emacs 1))
 
 (defun eask--trigger-error (&rest args)
   "Trigger error."
-  ;; XXX Log out the error explicitly, so the user will know what causes Emacs
-  ;; to crash.
-  (message "Error: %s" (apply #'format-message args))
-  (add-hook 'eask-after-command-hook #'eask--exit))
+  (unless eask--ignore-error-p
+    ;; XXX Log out the error explicitly, so the user will know what causes Emacs
+    ;; to crash.
+    (message "[ERROR] %s" (apply #'format-message args))
+    (add-hook 'eask-after-command-hook #'eask--exit)))
 
 (advice-add 'error :before #'eask--trigger-error)
 
