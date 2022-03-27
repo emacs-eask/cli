@@ -64,7 +64,7 @@
 
     (setq packaged (eask-packaged-file))
 
-    (when eask-is-windows
+    (when (and eask-is-windows (string= (file-name-extension packaged) "el"))
       (with-current-buffer (find-file packaged)
         (set-buffer-file-coding-system 'utf-8-unix)
         (save-buffer)))
