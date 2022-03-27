@@ -20,10 +20,15 @@
 
 (eask-start
   (eask-pkg-init)
+
   (setq commander-args (cddr argv))  ; by pass `--' as well
-  (if-let* ((command (eask-argv 1))
-            (exe (executable-find command)))
-      (load-file exe)
-    (error "Executable `%s`.. not found" command)))
+  (let* ((program (eask-argv 1))
+         (exe (executable-find program))
+         (command (mapconcat #'identity (append (list program) commander-args) " ")))
+    (unless (or (ignore-errors (load exe t t))
+                (progn
+                  (message "Execute command %s..." command)
+                  (zerop (shell-command command))))
+      (error "Error from execution."))))
 
 ;;; exec.el ends here

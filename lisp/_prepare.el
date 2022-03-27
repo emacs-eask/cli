@@ -304,7 +304,7 @@ Eask file in the workspace."
   "Set files patterns."
   (setq eask-files patterns))
 
-(defun eask-depends-on (pkg &optional minimum-version)
+(defun eask-depends-on (pkg &optional minimum-version &rest rcp)
   "Specify a dependency of this package."
   (if (string= pkg "emacs")
       (when (and minimum-version (version< emacs-version minimum-version))
