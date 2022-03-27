@@ -75,7 +75,7 @@ async function e_call(argv, script, ...args) {
   cmd = _remove_undefined(cmd);
   console.log('Starting Eask...');
   console.log('~');
-  console.log('~  $ ' + cmd.join(' '));
+  console.log('~  $ emacs ' + cmd.join(' '));
   console.log('~');
   let process = child_process.spawn('emacs', cmd, { stdio: 'inherit' });
 
