@@ -38,4 +38,4 @@ jobs:
 
     - uses: actions/checkout@v2
     - name: Test commands
-      run: sh ./bin/test_commands.sh
+      run: sh ./test/test_commands.sh
