@@ -20,7 +20,7 @@
     "cli"
   ],
   "author": "Jen-Chieh Shen",
-  "license": "GPLv3",
+  "license": "GPL-3.0",
   "dependencies": {
     "yargs": "^17.0.0"
   },
