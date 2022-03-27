@@ -20,9 +20,6 @@
 npm install
 CMD="node eask"
 
-echo "[INFO] 'eask' version: "
-$CMD --version
-
 # Copy test configuration
 cp -R ./test/mini.emacs.d/ ~/.emacs.d
 
@@ -30,21 +27,3 @@ cp -R ./test/mini.emacs.d/ ~/.emacs.d
 $CMD archives -g
 $CMD install -g spinner ivy beacon
 $CMD list --depth=0 -g
-
-# Clone a project simulate Emacs package development
-git clone "https://github.com/jcs-elpa/parse-it" "../parse-it"
-cd '../parse-it'
-
-CMD="node ../eask/eask"
-
-# Test for local commands
-$CMD info
-$CMD archives
-$CMD install
-$CMD compile
-$CMD lint
-$CMD list --depth=0
-
-$CMD clean
-$CMD clean-elc
-$CMD clean-all
