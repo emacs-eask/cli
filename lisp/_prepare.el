@@ -63,8 +63,9 @@
 
 (defun eask-pkg-init ()
   "Package initialization."
-  (package-initialize)
-  (package-refresh-contents)
+  (eask-with-verbosity 1
+    (package-initialize)
+    (package-refresh-contents))
   (eask--silent
     (eask--update-exec-path)
     (eask--update-load-path)))
@@ -379,7 +380,7 @@ Eask file in the workspace."
 (defmacro eask-with-verbosity (level &rest body)
   "If LEVEL is above `eask-verbosity'; hide all messages in BODY."
   (declare (indent 1) (debug t))
-  `(if (>= eask-verbosity ,level) ,@body (eask--silent ,@body)))
+  `(if (>= eask-verbosity ,level) (progn ,@body) (eask--silent ,@body)))
 
 (defun eask-info (level msg &rest args) (apply #'eask--log level "[INFO]" msg args))
 (defun eask-warn (level msg &rest args) (apply #'eask--log level "[WARNING]" msg args))
