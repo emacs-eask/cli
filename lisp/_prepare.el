@@ -275,7 +275,9 @@ Eask file in the workspace."
              (load (locate-user-emacs-file "init.el") t))
            ;; We accept Eask file in global scope, but it shouldn't be used
            ;; as a sandbox.
-           (eask-file-load "./Eask" t)
+           (unless (or (eask-file-load "./Easkfile" t)
+                       (eask-file-load "./Eask" t))
+             (eask-warn "Default Eask file not found"))
            ,@body))
         (t
          (let* ((eask--initialized-p t)
@@ -285,7 +287,9 @@ Eask file in the workspace."
                 (user-init-file (locate-user-emacs-file "init.el"))
                 (custom-file (locate-user-emacs-file "custom.el")))
            (eask--handle-global-options)
-           (eask-file-load "../../Eask")
+           (unless (or (eask-file-load "../../Easkfile" t)
+                       (eask-file-load "../../Eask" t))
+             (eask-error "Eask file not found"))
            (ignore-errors (make-directory package-user-dir t))
            (run-hooks 'eask-before-command-hook)
            (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
