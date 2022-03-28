@@ -7,7 +7,8 @@
 # eask
 > A set of command-line tools to build Emacs packages
 
-[![CI](https://github.com/emacs-eask/eask/actions/workflows/test.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test.yml)
+[![Commands](https://github.com/emacs-eask/eask/actions/workflows/test-commands.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-commands.yml)
+[![Compile](https://github.com/emacs-eask/eask/actions/workflows/test-redefine.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-redefine.yml)
 
 Eask is heavily inspired by Cask, so they are somewhat related! This tool focuses
 on Emacs built-in feature.
