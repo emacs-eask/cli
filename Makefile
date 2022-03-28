@@ -23,3 +23,4 @@ test-redefine:
 	@echo "[Development] Test redefine..."
 	$(EASK) concat
 	$(EASK) load ./test/development/test-redefine.el
+	$(EASK) compile ./dist/eask.built.el

@@ -7,18 +7,13 @@
 
 ;;; Code:
 
-(setq byte-compile-error-on-warn t)
-
-(let ((concated-file "./dist/eask.built.el"))
+(let* ((concated-file "./dist/eask.built.el")
+       (concated-file (expand-file-name concated-file)))
   (write-region
    "
 ;; Local Variables:
 ;; byte-compile-warnings: (redefine)
 ;; End:
-" nil concated-file t)
-
-  (message "")
-  (message "Compile file %s..." concated-file)
-  (byte-compile-file concated-file))
+" nil concated-file t))
 
 ;;; test-redefine.el ends here
