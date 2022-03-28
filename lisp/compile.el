@@ -18,7 +18,9 @@
             "_prepare.el"
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
+;; Handle options
 (when (eask-strict-p) (setq byte-compile-error-on-warn t))
+(when (= eask-verbosity 4) (setq byte-compile-verbose t))
 
 (defun eask--byte-compile-file (filename)
   "Byte compile FILENAME with display messages."
