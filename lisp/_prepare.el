@@ -97,6 +97,7 @@
 (defun eask-force-p ()         (eask--flag "-f"))               ; -f, --force
 (defun eask-dev-p ()           (eask--flag "--dev"))            ; --dev, --development
 (defun eask-debug-p ()         (eask--flag "--debug"))          ; --debug
+(defun eask-strict-p ()        (eask--flag "--strict"))         ; --strict
 (defun eask-timestamps-p ()    (eask--flag "--timestamps"))     ; --timestamps
 (defun eask-no-timestamps-p () (eask--flag "--no-timestamps"))  ; --no-timestamps
 
@@ -181,7 +182,7 @@ other scripts internally.  See function `eask-call'.")
 (defconst eask--option-switches
   (eask--form-options
    '("-g" "-f" "--depth" "--dev"
-     "--debug"
+     "--debug" "--strict"
      "--timestamps" "--no-timestamps"))
   "List of boolean type options")
 
@@ -482,10 +483,6 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (defun eask-package-multi-p ()
   "Return t if multi-files package."
   (< 1 (length (eask-package-files))))
-
-(defun eask-package-single-p ()
-  "Return t if single file package."
-  (not (eask-package-multi-p)))
 
 (defun eask-package-single-p ()
   "Return t if single file package."

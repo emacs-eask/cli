@@ -18,6 +18,8 @@
             "_prepare.el"
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
+(when (eask-strict-p) (setq byte-compile-error-on-warn t))
+
 (defun eask--byte-compile-file (filename)
   "Byte compile FILENAME with display messages."
   (let* ((filename (expand-file-name filename))

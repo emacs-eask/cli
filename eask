@@ -33,6 +33,10 @@ yargs
     description: 'turn on debug mode',
     type: 'boolean',
   })
+  .option('strict', {
+    description: 'N/A',
+    type: 'boolean',
+  })
   .option('timestamps', {
     description: 'log with timestamps',
     type: 'boolean',

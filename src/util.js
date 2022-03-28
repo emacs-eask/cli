@@ -58,6 +58,7 @@ function _global_options(argv) {
   flags.push(def_flag(argv.force, '-f'));
   flags.push(def_flag(argv.development, '--dev'));
   flags.push(def_flag(argv.debug, '--debug'));
+  flags.push(def_flag(argv.strict, '--strict'));
   flags.push(def_flag(argv.timestamps, (argv.timestamps) ? '--timestamps' : '--no-timestamps'));
   /* With arguments */
   flags.push(def_flag(argv.proxy, '--proxy', argv.proxy));
