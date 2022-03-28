@@ -39,8 +39,8 @@
       (with-temp-buffer
         (dolist (filename files)
           (message "Visit file %s... append!" filename)
-          (insert-file-contents filename))
-        (eask-info "Done. (Wrote file in %s)" target-filename)
-        (write-region (buffer-string) nil target-filename)))))
+          (insert-file-contents filename)))
+      (eask-info "Done. (Wrote file in %s)" target-filename)
+      (write-region (buffer-string) nil target-filename))))
 
 ;;; concat.el ends here

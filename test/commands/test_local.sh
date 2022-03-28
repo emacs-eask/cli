@@ -38,6 +38,7 @@ $CMD install
 $CMD compile
 $CMD lint
 $CMD list --depth=0
+$CMD concat
 
 $CMD clean
 $CMD clean-elc
