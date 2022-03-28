@@ -93,10 +93,11 @@
   (nth 1 (eask--flag flag)))
 
 ;;; Boolean
-(defun eask-global-p () (eask--flag "-g"))       ; -g, --global
-(defun eask-force-p ()  (eask--flag "-f"))       ; -f, --force
-(defun eask-dev-p ()    (eask--flag "--dev"))    ; --dev, --development
-(defun eask-debug-p ()  (eask--flag "--debug"))  ; --debug
+(defun eask-global-p ()      (eask--flag "-g"))            ; -g, --global
+(defun eask-force-p ()       (eask--flag "-f"))            ; -f, --force
+(defun eask-dev-p ()         (eask--flag "--dev"))         ; --dev, --development
+(defun eask-debug-p ()       (eask--flag "--debug"))       ; --debug
+(defun eask-timestamps-p ()  (eask--flag "--timestamps"))  ; --timestamps
 
 ;;; String (with arguments)
 (defun eask-proxy ()       (eask--flag-value "--proxy"))        ; --proxy
@@ -239,18 +240,19 @@ for function `eask--alias-env'."
   "Replace all Eask file functions temporary; this is only used when loading
 Eask file in the workspace."
   (declare (indent 0) (debug t))
-  `(progn
+  `(let (result)
      (eask--loop-file-keywords
       (lambda (keyword api old)
         (eval `(defvar ,old nil))
         (eval `(setq ,old (eask-fbound (quote ,keyword))))
         (eval `(defalias (quote ,keyword) (quote ,api)))))
-     (progn ,@body)
+     (setq result (progn ,@body))
      (eask--loop-file-keywords
       (lambda (keyword api old)
         ;; TODO: Revert the original function's definition; just in case,
         ;; anything else don't go wrong
-        (eval `(defalias (quote ,keyword) (symbol-function ,old)))))))
+        (eval `(defalias (quote ,keyword) (symbol-function ,old)))))
+     result))
 
 (defvar eask-file nil "The Eask file path.")
 
@@ -402,7 +404,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   :type 'integer
   :group 'eask)
 
-(defcustom eask-timestamps t
+(defcustom eask-timestamps nil
   "Log messages with timestamps."
   :type 'boolean
   :group 'eask)

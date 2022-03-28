@@ -1,3 +1,5 @@
-(package "eask")
+(package "eask"
+         "0.2.26"
+         "A set of command-line tools to build Emacs packages")
 
 (files "lisp/*.el")
