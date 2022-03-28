@@ -394,7 +394,7 @@ Eask file in the workspace."
   (unless eask--ignore-error-p
     ;; XXX Log out the error explicitly, so the user will know what causes Emacs
     ;; to crash.
-    (eask-error 0 "%s" (apply #'format-message args))
+    (eask-error "[ERROR] %s" (apply #'format-message args))
     (add-hook 'eask-after-command-hook #'eask--exit)))
 
 (advice-add 'error :before #'eask--trigger-error)
