@@ -1,0 +1,9 @@
+(source "melpa")
+
+(package "mini.emacs.pkg"
+         "0.0.1"
+         "Minimal Emacs package to simulate development environment; only for testing purposes!")
+
+(package-file "mini.emacs.pkg.el")
+
+(depends-on "emacs" "26.1")
