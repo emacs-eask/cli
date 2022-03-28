@@ -21,4 +21,5 @@ test-local:
 
 test-redefine:
 	@echo "[Development] Test redefine..."
-	echo "N/A"
+	$(EASK) concat
+	echo ./test/development/test-redefine.el

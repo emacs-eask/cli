@@ -1,4 +1,4 @@
-name: CI
+name: Commands
 
 on:
   push:
@@ -38,5 +38,6 @@ jobs:
         node-version: '14'
 
     - uses: actions/checkout@v2
+
     - name: Test commands
       run: make test-commands
