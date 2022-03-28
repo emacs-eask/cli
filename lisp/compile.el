@@ -20,7 +20,8 @@
 
 (defun eask--byte-compile-file (filename)
   "Byte compile FILENAME with display messages."
-  (let* ((result (byte-compile-file filename)) (compiled (eq result t)))
+  (let* ((filename (expand-file-name filename))
+         (result (byte-compile-file filename)) (compiled (eq result t)))
     (unless byte-compile-verbose
       (if compiled (message "Compiling %s..." filename)
         (message "Skipping %s..." filename)))
