@@ -19,6 +19,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Fix option that accept arguments (979d87ef6953f0f4a9403db4bb244c87987ea478)
 * Add verbosity level and timestamps (9de0bb4155911c5399d9d2ddb0cbff9dfc25f88f)
 * Add new command `eask concat` (2c85287e4a24d667d99185c05de6f714bcc669a0)
+* Add new options `--timestamps` and `--no-timestamps` (3f167d64e3115eea2580708f7eff2becce246537)
 
 ## 0.2.x
 > Released Mar 26, 2022
