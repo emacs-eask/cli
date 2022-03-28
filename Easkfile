@@ -3,3 +3,5 @@
          "A set of command-line tools to build Emacs packages")
 
 (files "lisp/*.el")
+
+(depends-on "emacs" "26.1")
