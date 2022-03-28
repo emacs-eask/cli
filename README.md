@@ -199,6 +199,7 @@ The sandbox logic is stored inside file `./lisp/_prepare.el`.
 
 ## 📝 Todo list
 
+- [ ] logging with color
 - [ ] `checkdoc` command
 
 ## Contribute
