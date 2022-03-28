@@ -13,12 +13,15 @@
             "_prepare.el"
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
 
+(defun eask--delete-file (filename)
+  "Delete FILENAME from disk."
+  (ignore-errors (delete-file filename))
+  (message "Deleting %s..." filename))
+
 (eask-start
   (if-let ((elcs (eask-package-elc-files)))
       (progn
-        (dolist (elc elcs)
-          (ignore-errors (delete-file elc))
-          (eask-log "Deleting %s..." elc))
+        (eask-with-verbosity 'log (mapc #'eask--delete-file elcs))
         (eask-info "(Total of %s .elc files deleted)" (length elcs)))
     (eask-info "(No .elc file found in workspace)")))
 

@@ -24,6 +24,7 @@
 
 (eask-start
   (eask-pkg-init)
-  (mapc #'eask--print-exec-path exec-path))
+  (mapc #'eask--print-exec-path exec-path)
+  (eask-info "(Total of %s exec-path)" (length exec-path)))
 
 ;;; exec-path.el ends here

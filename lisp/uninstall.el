@@ -31,6 +31,6 @@
   (if-let* ((name (elt argv 0)) (name (intern name))
             (_ (package-installed-p name)))
       (package-delete (eask-package-desc name t) (eask-force-p))
-    (message "Package `%s` does not exists" name)))
+    (eask-info "Package `%s` does not exists" name)))
 
 ;;; uninstall.el ends here

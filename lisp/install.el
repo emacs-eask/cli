@@ -58,8 +58,8 @@
                        eask-package-file
                        (expand-file-name "./"))))
       (when packaged
-        (message "Found packaged artefact, use %s instead" packaged))
-      (message "Installing %s..." target)
+        (eask-info "Found packaged artefact, use %s instead" packaged))
+      (eask-info "Installing %s..." target)
       (add-to-list 'load-path (expand-file-name (eask-packaged-name) package-user-dir))
       (package-install-file target))))
 

@@ -69,6 +69,6 @@
         (set-buffer-file-coding-system 'utf-8-unix)
         (save-buffer)))
 
-    (message "Done packaging %s..." packaged)))
+    (eask-info "Done packaging %s..." packaged)))
 
 ;;; package.el ends here

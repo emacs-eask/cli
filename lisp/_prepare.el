@@ -266,9 +266,10 @@ Eask file in the workspace."
         ((eask-global-p)
          (let ((eask--initialized-p t))
            (eask-pkg-init)
-           (load (locate-user-emacs-file "early-init.el") t)
-           (load (locate-user-emacs-file "../.emacs") t)
-           (load (locate-user-emacs-file "init.el") t)
+           (eask-with-verbosity 'debug
+             (load (locate-user-emacs-file "early-init.el") t)
+             (load (locate-user-emacs-file "../.emacs") t)
+             (load (locate-user-emacs-file "init.el") t))
            ;; We accept Eask file in global scope, but it shouldn't be used
            ;; as a sandbox.
            (eask-file-load "./Eask" t)
@@ -414,11 +415,11 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   (declare (indent 1) (debug t))
   `(if (>= eask-verbosity (eask--verb2lvl ,symbol)) (progn ,@body) (eask--silent ,@body)))
 
-(defun eask-debug (msg &rest args) (apply #'eask--msg 'debug "[DEBUG]" msg args))
-(defun eask-log (msg &rest args)   (apply #'eask--msg 'log   "[LOG]" msg args))
-(defun eask-info (msg &rest args)  (apply #'eask--msg 'info  "[INFO]" msg args))
-(defun eask-warn (msg &rest args)  (apply #'eask--msg 'warn  "[WARNING]" msg args))
-(defun eask-error (msg &rest args) (apply #'eask--msg 'error "[ERROR]" msg args))
+(defun eask-debug (msg &rest args) (apply #'eask--msg 'debug "[DEBUG]"   msg args))
+(defun eask-log   (msg &rest args) (apply #'eask--msg 'log   "[LOG]"     msg args))
+(defun eask-info  (msg &rest args) (apply #'eask--msg 'info  "[INFO]"    msg args))
+(defun eask-warn  (msg &rest args) (apply #'eask--msg 'warn  "[WARNING]" msg args))
+(defun eask-error (msg &rest args) (apply #'eask--msg 'error "[ERROR]"   msg args))
 
 (defun eask--msg (level prefix msg &rest args)
   "If LEVEL is at or below `eask-verbosity', log message."

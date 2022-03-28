@@ -21,6 +21,6 @@
     (write-region
      (pp-to-string `(define-package ,name ,version ,description))
      nil pkg-file)
-    (message "Write file %s..." pkg-file)))
+    (eask-info "Write file %s..." pkg-file)))
 
 ;;; pkg-file.el ends here

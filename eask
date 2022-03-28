@@ -50,7 +50,7 @@ yargs
     type: 'boolean',
   })
   .option('verbose', {
-    description: 'log level for all messages; 4 means trace most anything, 0 means nothing.',
+    description: 'set verbosity from 0 to 4',
     alias: 'v',
     requiresArg: true,
     type: 'number',

@@ -55,8 +55,8 @@ Argument WHERE is the alist of package information."
   (if-let ((upgrades (eask-package--upgrades)))
       (progn
         (dolist (pkg-desc upgrades) (eask-package-upgrade pkg-desc))
-        (message "(Done upgrading all packages)"))
-    (message "(All packages are up to date)")))
+        (eask-info "(Done upgrading all packages)"))
+    (eask-info "(All packages are up to date)")))
 
 (eask-start
   (eask-pkg-init)
@@ -66,8 +66,8 @@ Argument WHERE is the alist of package information."
         (if (package-installed-p name)
             (if (or (eask-package--upgradable-p name) (eask-force-p))
                 (eask-package-upgrade (cadr (assq name package-archive-contents)))
-              (message "Package `%s` is already up to date" name))
-          (error "Package does not exists `%s`, you need to install before upgrade" name)))
+              (eask-warn "Package `%s` is already up to date" name))
+          (eask-error "Package does not exists `%s`, you need to install before upgrade" name)))
     (eask-package-upgrade-all)))
 
 ;;; upgrade.el ends here

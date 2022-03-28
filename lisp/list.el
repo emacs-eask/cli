@@ -25,7 +25,7 @@
 (defvar eask-list-package-name-width nil
   "Width spaces for the package name.")
 
-(defun eask--format (depth &optional rest)
+(defun eask--align (depth &optional rest)
   "Format string to align starting from the version number."
   (concat (spaces-string (* depth 2))  ; indent for depth
           " [+] %-" (number-to-string (- eask-list-package-name-width (* depth 2)))
@@ -41,8 +41,8 @@
        (version (package-version-join version))
        (summary (package-desc-summary desc)))
     (if (= depth 0)
-        (message (eask--format depth "%-14s %-80s") name version summary)
-      (message (eask--format depth) name))
+        (message (eask--align depth "%-14s %-80s") name version summary)
+      (message (eask--align depth) name))
     (when-let ((reqs (package-desc-reqs desc))
                (_ (< depth max-depth)))
       (dolist (req reqs)
@@ -63,6 +63,6 @@
 (eask-start
   (eask-pkg-init)
   (eask--list package-activated-list package-alist)
-  (message "(Total of %s packages installed)" (length package-activated-list)))
+  (eask-info "(Total of %s packages installed)" (length package-activated-list)))
 
 ;;; list.el ends here

@@ -28,6 +28,6 @@
   (eask-pkg-init)
   (let ((pkg-list (reverse (mapcar #'car package-archive-contents))))
     (eask--list pkg-list package-archive-contents))
-  (message "(Total of %s packages available)" (length package-archive-contents)))
+  (eask-info "(Total of %s packages available)" (length package-archive-contents)))
 
 ;;; list-all.el ends here
