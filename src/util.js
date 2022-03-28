@@ -52,13 +52,14 @@ function def_flag(arg, name, val = undefined) {
  * @param { Object } argv - is a parsed object from yargs.
  */
 function _global_options(argv) {
+  console.log(argv);
   let flags = [];
   /* Boolean type */
   flags.push(def_flag(argv.global, '-g'));
   flags.push(def_flag(argv.force, '-f'));
   flags.push(def_flag(argv.development, '--dev'));
   flags.push(def_flag(argv.debug, '--debug'));
-  flags.push(def_flag(argv.timestamps, '--timestamps'));
+  flags.push(def_flag(argv.timestamps, (argv.timestamps) ? '--timestamps' : '--no-timestamps'));
   /* With arguments */
   flags.push(def_flag(argv.proxy, '--proxy', argv.proxy));
   flags.push(def_flag(argv['http-proxy'], '--http-proxy', argv['http-proxy']));

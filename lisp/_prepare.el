@@ -93,11 +93,12 @@
   (nth 1 (eask--flag flag)))
 
 ;;; Boolean
-(defun eask-global-p ()      (eask--flag "-g"))            ; -g, --global
-(defun eask-force-p ()       (eask--flag "-f"))            ; -f, --force
-(defun eask-dev-p ()         (eask--flag "--dev"))         ; --dev, --development
-(defun eask-debug-p ()       (eask--flag "--debug"))       ; --debug
-(defun eask-timestamps-p ()  (eask--flag "--timestamps"))  ; --timestamps
+(defun eask-global-p ()        (eask--flag "-g"))               ; -g, --global
+(defun eask-force-p ()         (eask--flag "-f"))               ; -f, --force
+(defun eask-dev-p ()           (eask--flag "--dev"))            ; --dev, --development
+(defun eask-debug-p ()         (eask--flag "--debug"))          ; --debug
+(defun eask-timestamps-p ()    (eask--flag "--timestamps"))     ; --timestamps
+(defun eask-no-timestamps-p () (eask--flag "--no-timestamps"))  ; --no-timestamps
 
 ;;; String (with arguments)
 (defun eask-proxy ()       (eask--flag-value "--proxy"))        ; --proxy
@@ -116,6 +117,7 @@
   (when (eask-debug-p) (setq debug-on-error t))
   (when (eask-verbose) (setq eask-verbosity (eask-verbose)))
   (when (eask-timestamps-p) (setq eask-timestamps t))
+  (when (eask-no-timestamps-p) (setq eask-timestamps nil))
   (eask--add-proxy "http"     (eask-proxy))
   (eask--add-proxy "https"    (eask-proxy))
   (eask--add-proxy "http"     (eask-http-proxy))
@@ -179,7 +181,8 @@ other scripts internally.  See function `eask-call'.")
 (defconst eask--option-switches
   (eask--form-options
    '("-g" "-f" "--depth" "--dev"
-     "--debug"))
+     "--debug"
+     "--timestamps" "--no-timestamps"))
   "List of boolean type options")
 
 (defconst eask--option-args

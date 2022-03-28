@@ -3,7 +3,7 @@
 const yargs = require("yargs");
 
 yargs
-  .usage("Usage: $0 <command> [options]")
+  .usage("Usage: $0 <command> [options..]")
   .commandDir("cmds")
   .showHelpOnFail(true)
   .help(
@@ -35,6 +35,10 @@ yargs
   })
   .option('timestamps', {
     description: 'log with timestamps',
+    type: 'boolean',
+  })
+  .option('no-timestamps', {
+    description: 'log without timestamps',
     type: 'boolean',
   })
   .option('proxy', {
