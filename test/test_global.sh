@@ -27,7 +27,7 @@
 
 CMD="node eask"
 
-# Copy test configuration
+echo 'Copy test configuration'
 cp -R ./test/mini.emacs.d/ ~/.emacs.d
 
 # Test for global commands
