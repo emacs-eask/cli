@@ -63,9 +63,8 @@
 
 (defun eask-pkg-init ()
   "Package initialization."
-  (eask-with-verbosity 1
-    (package-initialize)
-    (package-refresh-contents))
+  (package-initialize)
+  (package-refresh-contents)
   (eask--silent
     (eask--update-exec-path)
     (eask--update-load-path)))
