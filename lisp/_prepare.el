@@ -487,6 +487,10 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   "Return t if single file package."
   (not (eask-package-multi-p)))
 
+(defun eask-package-single-p ()
+  "Return t if single file package."
+  (not (eask-package-multi-p)))
+
 ;;
 ;;; Progress
 

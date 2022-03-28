@@ -22,4 +22,4 @@ test-local:
 test-redefine:
 	@echo "[Development] Test redefine..."
 	$(EASK) concat
-	echo ./test/development/test-redefine.el
+	$(EASK) load ./test/development/test-redefine.el
