@@ -18,8 +18,8 @@
       (progn
         (dolist (elc elcs)
           (ignore-errors (delete-file elc))
-          (message "Deleting %s..." elc))
-        (message "(Total of %s .elc files deleted)" (length elcs)))
-    (message "(No .elc file found in workspace)")))
+          (eask-info 3 "Deleting %s..." elc))
+        (eask-info 3 "(Total of %s .elc files deleted)" (length elcs)))
+    (eask-info 3 "(No .elc file found in workspace)")))
 
 ;;; clean-elc.el ends here

@@ -20,8 +20,8 @@
 (eask-start
   (if package-archives
       (progn
-        (message "")
-        (mapc #'eask--print-archive package-archives))
-    (message "\n No archive has been selected")))
+        (mapc #'eask--print-archive package-archives)
+        (eask-info 3 "(Total of %s archives)" (length package-archives)))
+    (eask-info 3 "(No archive has been selected)")))
 
 ;;; archives.el ends here

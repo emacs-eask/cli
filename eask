@@ -49,6 +49,12 @@ yargs
     description: 'turn on debug mode',
     type: 'boolean',
   })
+  .option('verbose', {
+    description: 'log level for all messages; 4 means trace most anything, 0 means nothing.',
+    alias: 'v',
+    requiresArg: true,
+    type: 'number',
+  })
   .demandCommand()
   .wrap(yargs.terminalWidth())
   .help().argv;

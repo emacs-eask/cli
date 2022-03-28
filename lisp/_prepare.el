@@ -63,8 +63,9 @@
 
 (defun eask-pkg-init ()
   "Package initialization."
-  (package-initialize)
-  (package-refresh-contents)
+  (eask-with-verbosity 1
+    (package-initialize)
+    (package-refresh-contents))
   (eask--silent
     (eask--update-exec-path)
     (eask--update-load-path)))
@@ -105,10 +106,12 @@
 
 ;;; Number (with arguments)
 (defun eask-depth () (eask--str2num (eask--flag-value "--depth")))  ; --depth is enabled
+(defun eask-verbose () (eask--str2num (eask--flag-value "--verbose")))
 
 (defun eask--handle-global-options ()
   "Handle global options."
   (when (eask-debug-p) (setq debug-on-error t))
+  (when (eask-verbose) (setq eask-verbosity (eask-verbose)))
   (eask--add-proxy "http"     (eask-proxy))
   (eask--add-proxy "https"    (eask-proxy))
   (eask--add-proxy "http"     (eask-http-proxy))
@@ -356,10 +359,45 @@ Eask file in the workspace."
   (unless eask--ignore-error-p
     ;; XXX Log out the error explicitly, so the user will know what causes Emacs
     ;; to crash.
-    (message "[ERROR] %s" (apply #'format-message args))
+    (eask-error 0 "%s" (apply #'format-message args))
     (add-hook 'eask-after-command-hook #'eask--exit)))
 
 (advice-add 'error :before #'eask--trigger-error)
+
+;;
+;;; Verbosity
+
+(defcustom eask-verbosity 3
+  "Log level for all messages; 4 means trace most anything, 0 means nothing."
+  :type 'integer
+  :group 'eask)
+
+(defcustom eask-timestamps t
+  "Log messages with timestamps."
+  :type 'boolean
+  :group 'eask)
+
+(defmacro eask-with-verbosity (level &rest body)
+  "If LEVEL is above `eask-verbosity'; hide all messages in BODY."
+  (declare (indent 1) (debug t))
+  `(if (>= eask-verbosity ,level) ,@body (eask--silent ,@body)))
+
+(defun eask-info (level msg &rest args) (apply #'eask--log level "[INFO]" msg args))
+(defun eask-warn (level msg &rest args) (apply #'eask--log level "[WARNING]" msg args))
+(defun eask-error (level msg &rest args) (apply #'eask--log level "[ERROR]" msg args))
+
+(defun eask--log (level prefix msg &rest args)
+  "If LEVEL is at or below `eask-verbosity', log message."
+  (eask-with-verbosity level
+    (message "%s" (apply #'eask--format prefix msg args))))
+
+(defun eask--format (prefix format-control &rest format-args)
+  "Format Eask messages."
+  (apply #'format
+         (concat (when eask-timestamps
+                   (concat (format-time-string "%Y-%m-%d %H:%M:%S ") prefix " "))
+                 format-control)
+         format-args))
 
 ;;
 ;;; File
