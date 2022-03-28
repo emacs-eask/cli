@@ -21,7 +21,7 @@
 
 const util = require("../src/util");
 
-exports.command = 'info';
+exports.command = ['info'];
 exports.desc = 'display information about the current package';
 
 exports.handler = async (argv) => {

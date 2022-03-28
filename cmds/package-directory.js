@@ -21,8 +21,8 @@
 
 const util = require("../src/util");
 
-exports.command = "package-directory";
-exports.desc = "print path to package directory";
+exports.command = ['package-directory'];
+exports.desc = 'print path to package directory';
 
 exports.handler = async (argv) => {
   await util.e_call(argv, 'package-directory');

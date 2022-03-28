@@ -21,7 +21,7 @@
 
 const util = require("../src/util");
 
-exports.command = 'eval [form]';
+exports.command = ['eval [form]'];
 exports.desc = 'evaluate lisp form with a proper PATH';
 exports.builder = {
   form: {

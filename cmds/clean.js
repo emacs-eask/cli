@@ -21,8 +21,8 @@
 
 const util = require("../src/util");
 
-exports.command = "clean";
-exports.desc = "clean up local .eask directory";
+exports.command = ['clean'];
+exports.desc = 'clean up local .eask directory';
 
 exports.handler = async (argv) => {
   await util.e_call(argv, 'clean');

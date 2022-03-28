@@ -21,7 +21,7 @@
 
 const util = require("../src/util");
 
-exports.command = 'load [files..]';
+exports.command = ['load [files..]'];
 exports.desc = 'load files';
 exports.builder = {
   files: {

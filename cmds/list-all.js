@@ -21,8 +21,8 @@
 
 const util = require("../src/util");
 
-exports.command = "list-all";
-exports.desc = "list all available packages";
+exports.command = ['list-all'];
+exports.desc = 'list all available packages';
 exports.builder = {
   depth: {
     description: 'dependency depth level to print',

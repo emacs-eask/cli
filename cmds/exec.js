@@ -21,7 +21,7 @@
 
 const util = require("../src/util");
 
-exports.command = 'exec [args..]';
+exports.command = ['exec [args..]'];
 exports.desc = 'execute command with correct load-path set up';
 exports.builder = {
   args: {

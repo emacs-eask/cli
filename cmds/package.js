@@ -21,12 +21,13 @@
 
 const util = require("../src/util");
 
-exports.command = ['package [dest]'];
+exports.command = ['package [destintation]'];
 exports.desc = 'Build a package artefact, and put it into the given destination';
 exports.builder = {
-  dest: {
+  destintation: {
     description: 'destination path/folder',
     requiresArg: false,
+    alias: 'dest',
     type: 'string',
   },
 };

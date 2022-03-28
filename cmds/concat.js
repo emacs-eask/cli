@@ -21,16 +21,24 @@
 
 const util = require("../src/util");
 
-exports.command = ['install [names..]'];
-exports.desc = 'install packages';
+exports.command = ['concat [names..]', 'concatenate [names..]'];
+exports.desc = 'concatenate all elisp files';
 exports.builder = {
   names: {
-    description: 'packages to install',
+    description: 'specify files to concatenate',
     requiresArg: false,
     type: 'array',
   },
+  destintation: {
+    description: 'optional output destintation',
+    requiresArg: true,
+    alias: 'dest',
+    type: 'string',
+  }
 };
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'install', argv.names);
+  await util.e_call(argv, 'concat'
+                    , argv.names
+                    , util.def_flag(argv.dest, '--dest', argv.dest));
 };

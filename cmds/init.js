@@ -27,7 +27,7 @@ const EASK_FILE = path.join(process.cwd(), '/Eask');
 
 var instance;  /* `readline` instance */
 
-exports.command = 'init';
+exports.command = ['init'];
 exports.desc = 'create new `Eask` file in current directory';
 
 exports.handler = async ({}) => {
