@@ -30,6 +30,10 @@ jobs:
       with:
         node-version: '14'
 
+    - uses: emacs-eask/setup-eask@master
+      with:
+        version: 'snapshot'
+
     - uses: actions/checkout@v2
 
     - name: Test commands

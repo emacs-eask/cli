@@ -20,7 +20,6 @@ test-local:
 	sh ./test/commands/test_local.sh
 
 test-redefine:
-	make install
 	@echo "[Development] Test redefine..."
 	$(EASK) concat
 	echo ./test/development/test-redefine.el
