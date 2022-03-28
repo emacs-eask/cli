@@ -491,7 +491,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 ;;; Progress
 
 (defun eask-progress (prefix sequence suffix func)
-  ""
+  "Progress SEQUENCE with messages."
   (let ((total (length sequence)) (count 0))
     (mapc
      (lambda (item)
