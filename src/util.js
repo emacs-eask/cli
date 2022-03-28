@@ -52,7 +52,6 @@ function def_flag(arg, name, val = undefined) {
  * @param { Object } argv - is a parsed object from yargs.
  */
 function _global_options(argv) {
-  console.log(argv);
   let flags = [];
   /* Boolean type */
   flags.push(def_flag(argv.global, '-g'));
@@ -83,7 +82,6 @@ async function e_call(argv, script, ...args) {
   let cmd_global = _global_options(argv).flat();
   let cmd = cmd_base.concat(cmd_args).concat(cmd_global);
   cmd = _remove_undefined(cmd);
-  console.log('Starting Eask...');
   console.log('~');
   console.log('~  $ emacs ' + cmd.join(' '));
   console.log('~');
