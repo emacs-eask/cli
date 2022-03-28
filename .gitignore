@@ -145,3 +145,14 @@ dist
 _test/
 
 # End of https://www.toptal.com/developers/gitignore/api/node
+
+# ignore generated files
+*.elc
+
+# eask packages
+.eask/
+dist/
+
+# packaging
+*-autoloads.el
+*-pkg.el
