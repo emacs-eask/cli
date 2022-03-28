@@ -1,0 +1,3 @@
+(package "eask")
+
+(files "lisp/*.el")
