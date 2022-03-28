@@ -21,7 +21,7 @@
   (if package-archives
       (progn
         (mapc #'eask--print-archive package-archives)
-        (eask-info 3 "(Total of %s archives)" (length package-archives)))
-    (eask-info 3 "(No archive has been selected)")))
+        (eask-info "(Total of %s archives)" (length package-archives)))
+    (eask-info "(No archive has been selected)")))
 
 ;;; archives.el ends here

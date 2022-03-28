@@ -17,6 +17,6 @@
   (let* ((name (eask-guess-package-name))
          (autoloads-file (expand-file-name (concat name "-autoloads.el"))))
     (package-generate-autoloads name default-directory)
-    (eask-info 3 "Write file %s..." autoloads-file)))
+    (eask-info "Write file %s..." autoloads-file)))
 
 ;;; autoloads.el ends here

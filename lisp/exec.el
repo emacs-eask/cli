@@ -27,7 +27,7 @@
          (command (mapconcat #'identity (append (list program) commander-args) " ")))
     (unless (or (ignore-errors (load exe t t))
                 (progn
-                  (message "Execute command %s..." command)
+                  (eask-info "Execute command %s..." command)
                   (zerop (shell-command command))))
       (error "Error from execution."))))
 

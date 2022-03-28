@@ -16,7 +16,7 @@
 (defun eask--print-info (key)
   "Print package information."
   (when-let ((info (eask-package-get key)))
-    (message "%s" info)))
+    (message "  %s" info)))
 
 (eask-start
   (eask--print-info :name)

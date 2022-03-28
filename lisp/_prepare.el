@@ -63,7 +63,7 @@
 
 (defun eask-pkg-init ()
   "Package initialization."
-  (eask-with-verbosity 1
+  (eask-with-verbosity 'log
     (package-initialize)
     (package-refresh-contents))
   (eask--silent
@@ -168,11 +168,24 @@ current workspace.")
   "Set to t once the environment setup has done; this is used when calling
 other scripts internally.  See function `eask-call'.")
 
+(defun eask--form-options (options)
+  "Add --eask to all OPTIONS."
+  (mapcar (lambda (elm) (concat "--eask" elm)) options))
+
+(defconst eask--option-switches
+  (eask--form-options
+   '("-g" "-f" "--depth" "--dev"
+     "--debug"))
+  "List of boolean type options")
+
+(defconst eask--option-args
+  (eask--form-options
+   '("--proxy" "--http-proxy" "--https-proxy" "--no-proxy"
+     "--verbose" "--silent"))
+  "List of arguments (number/string) type options.")
+
 (defconst eask--command-list
-  (mapcar (lambda (elm) (concat "--eask" elm))
-          '("-g" "-f" "--depth" "--dev"
-            "--proxy" "--http-proxy" "--https-proxy" "--no-proxy"
-            "--debug" "--verbose" "--silent"))
+  (append eask--option-switches eask--option-args)
   "List of commands to accept, so we can avoid unknown option error.")
 
 (defun eask-self-command-p (arg)
@@ -183,7 +196,14 @@ other scripts internally.  See function `eask-call'.")
 
 (defun eask-args ()
   "Get all arguments except options."
-  (cl-remove-if #'eask-self-command-p argv))
+  (let ((argv (cl-remove-if (lambda (arg) (member arg eask--option-switches)) argv))
+        (args) (skip-next))
+    (dolist (arg argv)
+      (if skip-next (setq skip-next nil)
+        (if (member arg eask--option-args)
+            (setq skip-next t)
+          (push arg args))))
+    args))
 
 (defmacro eask--setup-env (&rest body)
   "Execute BODY with workspace setup."
@@ -368,7 +388,9 @@ Eask file in the workspace."
 ;;; Verbosity
 
 (defcustom eask-verbosity 3
-  "Log level for all messages; 4 means trace most anything, 0 means nothing."
+  "Log level for all messages; 4 means trace most anything, 0 means nothing.
+
+Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   :type 'integer
   :group 'eask)
 
@@ -377,16 +399,28 @@ Eask file in the workspace."
   :type 'boolean
   :group 'eask)
 
-(defmacro eask-with-verbosity (level &rest body)
+(defun eask--verb2lvl (symbol)
+  "Convert verbosity SYMBOL to level."
+  (cl-case symbol
+    (`debug 4)
+    (`log   3)
+    (`info  2)
+    (`warn  1)
+    (`error 0)
+    (t symbol)))
+
+(defmacro eask-with-verbosity (symbol &rest body)
   "If LEVEL is above `eask-verbosity'; hide all messages in BODY."
   (declare (indent 1) (debug t))
-  `(if (>= eask-verbosity ,level) (progn ,@body) (eask--silent ,@body)))
+  `(if (>= eask-verbosity (eask--verb2lvl ,symbol)) (progn ,@body) (eask--silent ,@body)))
 
-(defun eask-info (level msg &rest args) (apply #'eask--log level "[INFO]" msg args))
-(defun eask-warn (level msg &rest args) (apply #'eask--log level "[WARNING]" msg args))
-(defun eask-error (level msg &rest args) (apply #'eask--log level "[ERROR]" msg args))
+(defun eask-debug (msg &rest args) (apply #'eask--msg 'debug "[DEBUG]" msg args))
+(defun eask-log (msg &rest args)   (apply #'eask--msg 'log   "[LOG]" msg args))
+(defun eask-info (msg &rest args)  (apply #'eask--msg 'info  "[INFO]" msg args))
+(defun eask-warn (msg &rest args)  (apply #'eask--msg 'warn  "[WARNING]" msg args))
+(defun eask-error (msg &rest args) (apply #'eask--msg 'error "[ERROR]" msg args))
 
-(defun eask--log (level prefix msg &rest args)
+(defun eask--msg (level prefix msg &rest args)
   "If LEVEL is at or below `eask-verbosity', log message."
   (eask-with-verbosity level
     (message "%s" (apply #'eask--format prefix msg args))))

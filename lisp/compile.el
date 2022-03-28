@@ -29,9 +29,9 @@
 (eask-start
   (eask-pkg-init)
   (let ((files (or (eask-args) (eask-package-el-files))) compiled)
-    (eask-with-verbosity 3
+    (eask-with-verbosity 'log
       (dolist (filename files)
         (when (eask--byte-compile-file filename) (push filename compiled))))
-    (eask-info 3 "(Total of %s files compiled)" (length compiled))))
+    (eask-info "(Total of %s files compiled)" (length compiled))))
 
 ;;; compile.el ends here
