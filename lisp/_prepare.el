@@ -115,6 +115,7 @@
   "Handle global options."
   (when (eask-debug-p) (setq debug-on-error t))
   (when (eask-verbose) (setq eask-verbosity (eask-verbose)))
+  (when (eask-timestamps-p) (setq eask-timestamps t))
   (eask--add-proxy "http"     (eask-proxy))
   (eask--add-proxy "https"    (eask-proxy))
   (eask--add-proxy "http"     (eask-http-proxy))
