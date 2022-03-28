@@ -17,6 +17,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Disable backup file by default (3be0010d3fe19ea7cd1d5fd64931532c98f6267f)
 * Fix line endings on Windows system (b7b25da75f794e1bd1c1f6b74a9d4cd6a83e3435)
 * Fix option that accept arguments (979d87ef6953f0f4a9403db4bb244c87987ea478)
+* Add verbosity level and timestamps (9de0bb4155911c5399d9d2ddb0cbff9dfc25f88f)
 
 ## 0.2.x
 > Released Mar 26, 2022
