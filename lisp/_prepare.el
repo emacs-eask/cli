@@ -488,6 +488,19 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   (not (eask-package-multi-p)))
 
 ;;
+;;; Progress
+
+(defun eask-progress (prefix sequence suffix func)
+  ""
+  (let ((total (length sequence)) (count 0))
+    (mapc
+     (lambda (item)
+       (cl-incf count)
+       (funcall func item)
+       (message "  - %s [%2d/%d] %s%s" prefix count total item suffix))
+     sequence)))
+
+;;
 ;;; User customization
 
 (defcustom eask-dist-path "dist"
