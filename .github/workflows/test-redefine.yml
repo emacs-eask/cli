@@ -16,11 +16,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest]
+        os: [ubuntu-latest]
         emacs-version:
-          - 26.3
           - 27.2
-          - snapshot
 
     steps:
     - uses: purcell/setup-emacs@master
