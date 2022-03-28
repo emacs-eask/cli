@@ -20,8 +20,6 @@
     (unless (string-suffix-p test-conditions (buffer-string))
       (goto-char (point-max))
       (insert test-conditions))
-    (set-buffer-file-coding-system 'utf-8-unix)
-    (save-buffer)
     (byte-compile-file buffer-file-name)))
 
 ;;; test-redefine.el ends here
