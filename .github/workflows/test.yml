@@ -39,4 +39,4 @@ jobs:
 
     - uses: actions/checkout@v2
     - name: Test commands
-      run: make test
+      run: make test-commands
