@@ -17,8 +17,8 @@
 ;; End:
 "))
   (with-current-buffer (find-file concated-file)
-    (insert-file-contents concated-file)
     (unless (string-suffix-p test-conditions (buffer-string))
+      (goto-char (point-max))
       (insert test-conditions))
     (set-buffer-file-coding-system 'utf-8-unix)
     (save-buffer)
