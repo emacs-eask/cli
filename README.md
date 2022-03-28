@@ -11,22 +11,29 @@
 [![Compile](https://github.com/emacs-eask/eask/actions/workflows/test-redefine.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-redefine.yml)
 
 Eask is heavily inspired by Cask, so they are somewhat related! This tool focuses
-on Emacs built-in feature.
+on consistency! [Cask]() and [makem.sh]() both rely on bash which Windows doesn't
+run on by default. If you use WSL or other environment system file Cygwin/MSYS
+; then this may not be the tool you are looking for! 👀
+
+##### Why Node.JS?
+
+Node has a better support on all kind of terminal applications!
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
 - [eask](#eask)
-- [📰 News](#📰-news)
-- [💾 Installation](#💾-installation)
-- [About CI/CD](#about-cicd)
-- [📝 About Eask file](#📝-about-eask-file)
-- [📂 Related Projects](#📂-related-projects)
-- [State of the project](#state-of-the-project)
-- [🏆 Goals for the project](#🏆-goals-for-the-project)
-- [Project Structure](#project-structure)
-- [📌 Dependencies](#📌-dependencies)
-- [Contribute](#contribute)
+    - [📰 News](#📰-news)
+    - [💾 Installation](#💾-installation)
+    - [About CI/CD](#about-cicd)
+    - [📝 About Eask file](#📝-about-eask-file)
+    - [📂 Related Projects](#📂-related-projects)
+    - [State of the project](#state-of-the-project)
+    - [🏆 Goals for the project](#🏆-goals-for-the-project)
+    - [Project Structure](#project-structure)
+        - [📌 Dependencies](#📌-dependencies)
+    - [📝 Todo list](#📝-todo-list)
+    - [Contribute](#contribute)
 
 <!-- markdown-toc end -->
 
