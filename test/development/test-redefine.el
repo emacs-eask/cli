@@ -13,6 +13,7 @@
        (concated-file (expand-file-name concated-file))
        (test-conditions "
 ;; Local Variables:
+;; coding: utf-8
 ;; byte-compile-warnings: (redefine)
 ;; End:
 "))
