@@ -11,10 +11,6 @@
 ;;
 ;;    [names..]     package to upgrade; else we upgrade all packages
 ;;
-;;  Effective flag:
-;;
-;;    [-g, --global], [-f, --force]
-;;
 
 ;;; Code:
 

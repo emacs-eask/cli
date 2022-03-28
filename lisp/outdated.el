@@ -6,11 +6,6 @@
 ;;
 ;;   $ eask outdated
 ;;
-;;
-;;  Effective flag:
-;;
-;;    [-g, --global]
-;;
 
 ;;; Code:
 

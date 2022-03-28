@@ -11,10 +11,6 @@
 ;;
 ;;    <name>     name of the package to uninstall
 ;;
-;;  Effective flag:
-;;
-;;    [-g, --global], [-f, --force]
-;;
 
 ;;; Code:
 

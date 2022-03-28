@@ -4,12 +4,12 @@
 ;;
 ;; Build a package artefact, and put it into the given destination
 ;;
-;;   $ eask package [dest]
+;;   $ eask package [destintation]
 ;;
 ;;
 ;;  Positional options:
 ;;
-;;    [dest]     destination path/folder
+;;    [destintation]     destination path/folder
 ;;
 
 ;;; Code:
@@ -17,11 +17,6 @@
 (load-file (expand-file-name
             "_prepare.el"
             (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
-
-(defcustom eask-dist-path "dist"
-  "Name of default target directory for building packages."
-  :type 'string
-  :group 'eask)
 
 (defun eask-package-dir-recipe ()
   "Form a directory recipe."
@@ -39,7 +34,7 @@
 
 (defun eask--packaged-file (ext)
   "Find a possible packaged file."
-  (let* ((dist (expand-file-name eask-dist-path))
+  (let* ((dist eask-dist-path)
          (file (expand-file-name (concat (eask-packaged-name) "." ext) dist)))
     (and (file-exists-p file) file)))
 
@@ -49,8 +44,9 @@
 
 (eask-start
   (let ((eask-dist-path (or (eask-argv 0) eask-dist-path))
+        (eask-dist-path (expand-file-name eask-dist-path))
         (packaged))
-    (ignore-errors (make-directory (expand-file-name eask-dist-path) t))
+    (ignore-errors (make-directory eask-dist-path t))
 
     (eask-pkg-init)
     (eask-package-install 'package-build)
@@ -59,7 +55,7 @@
     (let* ((version (eask-package-get :version))
            (rcp (eask-package-dir-recipe))
            (package-build-working-dir default-directory)
-           (package-build-archive-dir (expand-file-name eask-dist-path)))
+           (package-build-archive-dir eask-dist-path))
       (package-build--package rcp version))
 
     (setq packaged (eask-packaged-file))

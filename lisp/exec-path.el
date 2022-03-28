@@ -6,11 +6,6 @@
 ;;
 ;;   $ eask path
 ;;
-;;
-;;  Effective flags:
-;;
-;;    [-g, --global]
-;;
 
 ;;; Code:
 

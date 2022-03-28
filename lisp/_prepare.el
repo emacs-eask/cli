@@ -99,14 +99,16 @@
 (defun eask-debug-p ()  (eask--flag "--debug"))  ; --debug
 
 ;;; String (with arguments)
-(defun eask-proxy ()       (eask--flag-value "--proxy"))
-(defun eask-http-proxy ()  (eask--flag-value "--http-proxy"))
-(defun eask-https-proxy () (eask--flag-value "--https-proxy"))
-(defun eask-no-proxy ()    (eask--flag-value "--no-proxy"))
+(defun eask-proxy ()       (eask--flag-value "--proxy"))        ; --proxy
+(defun eask-http-proxy ()  (eask--flag-value "--http-proxy"))   ; --http-proxy
+(defun eask-https-proxy () (eask--flag-value "--https-proxy"))  ; --https-proxy
+(defun eask-no-proxy ()    (eask--flag-value "--no-proxy"))     ; --no-proxy
+(defun eask-destination () (eask--flag-value "--dest"))         ; --dest, --destintation
+(defalias 'eask-dest #'eask-destination)
 
 ;;; Number (with arguments)
-(defun eask-depth () (eask--str2num (eask--flag-value "--depth")))  ; --depth is enabled
-(defun eask-verbose () (eask--str2num (eask--flag-value "--verbose")))
+(defun eask-depth () (eask--str2num (eask--flag-value "--depth")))       ; --depth
+(defun eask-verbose () (eask--str2num (eask--flag-value "--verbose")))   ; -v, --verbose
 
 (defun eask--handle-global-options ()
   "Handle global options."
@@ -181,7 +183,8 @@ other scripts internally.  See function `eask-call'.")
 (defconst eask--option-args
   (eask--form-options
    '("--proxy" "--http-proxy" "--https-proxy" "--no-proxy"
-     "--verbose" "--silent"))
+     "--verbose" "--silent"
+     "--dest"))
   "List of arguments (number/string) type options.")
 
 (defconst eask--command-list
@@ -473,5 +476,13 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (defun eask-package-single-p ()
   "Return t if single file package."
   (not (eask-package-multi-p)))
+
+;;
+;;; User customization
+
+(defcustom eask-dist-path "dist"
+  "Name of default target directory for building packages."
+  :type 'string
+  :group 'eask)
 
 ;;; _prepare.el ends here

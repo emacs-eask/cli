@@ -18,6 +18,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Fix line endings on Windows system (b7b25da75f794e1bd1c1f6b74a9d4cd6a83e3435)
 * Fix option that accept arguments (979d87ef6953f0f4a9403db4bb244c87987ea478)
 * Add verbosity level and timestamps (9de0bb4155911c5399d9d2ddb0cbff9dfc25f88f)
+* Add new command `eask concat` ()
 
 ## 0.2.x
 > Released Mar 26, 2022

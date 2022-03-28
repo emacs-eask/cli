@@ -6,11 +6,6 @@
 ;;
 ;;   $ eask load
 ;;
-;;
-;;  Effective flag:
-;;
-;;    [-g, --global]
-;;
 
 ;;; Code:
 

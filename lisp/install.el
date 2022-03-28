@@ -13,10 +13,6 @@
 ;;                  package from current directory by calling function
 ;;                  `package-install-file'
 ;;
-;;  Effective flags:
-;;
-;;    [-g, --global] [--development, --dev]
-;;
 
 ;;; Code:
 
