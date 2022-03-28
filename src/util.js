@@ -64,7 +64,7 @@ function _global_options(argv) {
   flags.push(def_flag(argv['no-proxy'], '--no-proxy', argv['no-proxy']));
   /* Others */
   flags.push(def_flag(argv.debug, '--debug'));
-  flags.push(def_flag(argv.verbose, '--verbose'));
+  flags.push(def_flag(argv.verbose, '--verbose', argv.verbose));
   return flags;
 }
 
