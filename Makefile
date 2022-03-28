@@ -3,18 +3,22 @@ SHELL := /usr/bin/env bash
 EMACS ?= emacs
 EASK ?= eask
 
-.PHONY: install test-global test-local
+.PHONY: install test-global test-local test-redefine
 
-test: install test-global test-local
+test-commands: install test-global test-local
 
 install:
 	@echo "Preparing Eask..."
 	npm install
 
 test-global:
-	@echo "Test global commands..."
-	sh ./test/test_global.sh
+	@echo "[Commands] Test global commands..."
+	sh ./test/commands/test_global.sh
 
 test-local:
-	@echo "Test local commands..."
-	sh ./test/test_local.sh
+	@echo "[Commands] Test local commands..."
+	sh ./test/commands/test_local.sh
+
+test-redefine:
+	@echo "[Development] Test redefine..."
+	echo "N/A"
