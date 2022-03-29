@@ -55,4 +55,5 @@ jobs:
 
     - name: Test commands
       shell: cmd
-      run: make test-commands
+      #run: make test-commands
+      run: eask --version
