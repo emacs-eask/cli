@@ -2,6 +2,6 @@
          "0.2.26"
          "A set of command-line tools to build Emacs packages")
 
-(files "lisp/*.el")
+(files "lisp/*.el" "lisp/extern/*.el")
 
 (depends-on "emacs" "26.1")
