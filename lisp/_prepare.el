@@ -422,6 +422,11 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   :type 'boolean
   :group 'eask)
 
+(defcustom eask-log-header nil
+  "Log messages with header."
+  :type 'boolean
+  :group 'eask)
+
 (defun eask--verb2lvl (symbol)
   "Convert verbosity SYMBOL to level."
   (cl-case symbol
@@ -451,8 +456,8 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (defun eask--format (prefix format-control &rest format-args)
   "Format Eask messages."
   (apply #'format
-         (concat (when eask-timestamps
-                   (concat (format-time-string "%Y-%m-%d %H:%M:%S ") prefix " "))
+         (concat (when eask-timestamps (format-time-string "%Y-%m-%d %H:%M:%S "))
+                 (when eask-log-header (concat prefix " "))
                  format-control)
          format-args))
 
@@ -475,7 +480,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
     (delete-dups files)
     (setq files (cl-remove-if-not #'file-exists-p files))
     (unless files
-      (message "No matching file(s) found in %s: %s" default-directory eask-files))
+      (eask-info "No matching file(s) found in %s: %s" default-directory eask-files))
     files))
 
 (defun eask-package-el-files ()
