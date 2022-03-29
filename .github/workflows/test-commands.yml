@@ -42,9 +42,11 @@ jobs:
     - name: Prepare Eask (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       run: |
+        echo $HOME
+        echo ${HOME}
         npm install
         chmod -R 777 ./
-        echo "$HOME/bin" >> $GITHUB_PATH
+        echo "${HOME}/bin" >> $GITHUB_PATH
 
     - name: Prepare Eask (Windows)
       if: matrix.os == 'windows-latest'
