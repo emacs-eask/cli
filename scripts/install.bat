@@ -19,8 +19,7 @@
 
 SET EASK_BIN=%CD%\bin\
 
-::setx PATH %PATH%;%EASK_BIN%;
-$env:Path += '%EASK_BIN%'
+echo "%EASK_BIN%" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
 :: See new PATH variable
 echo %PATH%

@@ -20,7 +20,7 @@
 EASK_BIN=$PWD/bin
 echo $EASK_BIN
 
-export PATH=$PATH:$EASK_BIN
+echo $EASK_BIN >> $GITHUB_PATH
 
 # See new PATH variable
 echo $PATH
