@@ -51,6 +51,7 @@ jobs:
       run: |
         npm install
         .github/scripts/install.ps1
+        eask --version
 
     - name: Test commands
       run: make test-commands
