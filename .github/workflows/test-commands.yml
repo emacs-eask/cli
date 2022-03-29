@@ -43,16 +43,16 @@ jobs:
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       run: |
         echo $HOME
-        echo ${HOME}
         npm install
         chmod -R 777 ./
-        echo "${HOME}/bin" >> $GITHUB_PATH
+        echo "$HOME/work/eask/eask/bin" >> $GITHUB_PATH
 
     - name: Prepare Eask (Windows)
       if: matrix.os == 'windows-latest'
       run: |
+        echo $HOME
         npm install
-        echo "$HOME/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+        echo "$HOME/work/eask/eask/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
     - name: Test commands (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
