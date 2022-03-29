@@ -300,7 +300,7 @@ Eask file in the workspace."
            ;; We accept Eask file in global scope, but it shouldn't be used
            ;; as a sandbox.
            (unless (eask-file-try-load "./")
-             (eask-warn "Default Eask file not found"))
+             (eask-warn "~ Default Eask file not found"))
            ,@body)
           (t
            (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
@@ -309,7 +309,7 @@ Eask file in the workspace."
                   (user-init-file (locate-user-emacs-file "init.el"))
                   (custom-file (locate-user-emacs-file "custom.el")))
              (unless (eask-file-try-load "../../")
-               (eask-error "Eask file not found"))
+               (eask-error "~ Eask file not found"))
              (ignore-errors (make-directory package-user-dir t))
              (run-hooks 'eask-before-command-hook)
              (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
@@ -359,7 +359,7 @@ Eask file in the workspace."
   "Specify a dependency of this package."
   (if (string= pkg "emacs")
       (when (and minimum-version (version< emacs-version minimum-version))
-        (error "\n This requires Emacs %s and above!" minimum-version))
+        (error "This requires Emacs %s and above!" minimum-version))
     (push pkg eask-depends-on)
     (delete-dups eask-depends-on))
   pkg)
