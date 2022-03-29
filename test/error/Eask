@@ -5,4 +5,4 @@
          "0.0.1"
          "Test (trigger) error on GitHub Actions")
 
-(depends-on "emacs" "999.99")
+(depends-on "emacs" "999.99")  ; This is the error we are going to see!
