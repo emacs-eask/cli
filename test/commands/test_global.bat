@@ -26,9 +26,10 @@
 ::
 
 echo "Copy test configuration"
+mkdir "%UserProfile%/.emacs.d"
 robocopy /e "./test/mini.emacs.d/" "%UserProfile%/.emacs.d"
 
-:: Test for global commands
+echo "Testing global commands..."
 eask archives -g
 eask install -g spinner ivy beacon
 eask list --depth=0 -g

@@ -25,10 +25,10 @@
 # (mini.emacs.d), and place it under to the default Emacs directory!
 #
 
-echo 'Copy test configuration'
+echo "Copy test configuration"
 cp -R ./test/mini.emacs.d/ ~/.emacs.d
 
-# Test for global commands
+echo "Testing global commands..."
 eask archives -g
 eask install -g spinner ivy beacon
 eask list --depth=0 -g
