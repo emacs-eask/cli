@@ -21,6 +21,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add new command `eask concat` (2c85287e4a24d667d99185c05de6f714bcc669a0)
 * Add new options `--timestamps` and `--no-timestamps` (3f167d64e3115eea2580708f7eff2becce246537)
 * Add new option `--strict` (6d59d98999f2bd46e66e2a6d03064ee56678a591)
+* Add new options `--log-level` and `--no-log-level` (e5e03679db496ce77d1ba4adde1fc6b42d931ba9)
 
 ## 0.2.x
 > Released Mar 26, 2022
