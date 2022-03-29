@@ -1,0 +1,9 @@
+(source "gnu")
+
+(package "exec"
+         "0.0.1"
+         "Test project for command exec")
+
+(package-file "exec.el")
+
+(depends-on "emacs" "26.1")
