@@ -21,7 +21,7 @@ EASK_BIN=$PWD/bin
 set PATH=$PATH:EASK_BIN
 
 # See new PATH variable
-echo PATH
+echo $PATH
 
 # See if `eask` install successfully!
 eask --version
