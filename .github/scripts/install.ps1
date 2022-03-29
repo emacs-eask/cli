@@ -17,4 +17,8 @@
 
 $EASK_BIN = ($pwd).path + "\bin"
 
+echo $EASK_BIN
+
+ls $EASK_BIN
+
 echo "$EASK_BIN" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
