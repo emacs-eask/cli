@@ -18,7 +18,7 @@
 # Boston, MA 02110-1301, USA.
 
 EASK_BIN=$PWD/bin
-set PATH=$PATH:EASK_BIN
+export PATH=$PATH:EASK_BIN
 
 # See new PATH variable
 echo $PATH
