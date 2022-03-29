@@ -20,6 +20,8 @@
 EASK_BIN=$PWD/bin
 echo $EASK_BIN
 
+ls $EASK_BIN
+
 export PATH=$PATH:$EASK_BIN
 
 # See new PATH variable
