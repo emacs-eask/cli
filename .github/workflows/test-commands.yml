@@ -48,10 +48,10 @@ jobs:
 
     - name: Prepare Eask (Windows)
       if: matrix.os == 'windows-latest'
-      shell: cmd
       run: |
         npm install
         echo "./bin" >> $GITHUB_PATH
+        echo $GITHUB_PATH
 
     - name: Test commands
       shell: cmd
