@@ -22,4 +22,5 @@
 # Test command `exec`
 #
 
+eask install
 eask exec github-elpa -h
