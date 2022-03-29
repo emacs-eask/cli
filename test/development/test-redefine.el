@@ -26,4 +26,8 @@
       (insert conditions))
     (byte-compile-file buffer-file-name)))
 
+;; Local Variables:
+;; coding: utf-8
+;; no-byte-compile: t
+;; End:
 ;;; test-redefine.el ends here
