@@ -44,14 +44,13 @@ jobs:
       run: |
         npm install
         chmod -R 777 ./
-        echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
+        echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
 
     - name: Prepare Eask (Windows)
       if: matrix.os == 'windows-latest'
       run: |
-        echo $GITHUB_WORKSPACE/bin
         npm install
-        echo "$GITHUB_WORKSPACE/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+        echo "${{ github.workspace }}/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
     - name: Test commands (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
