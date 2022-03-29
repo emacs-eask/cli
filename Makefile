@@ -9,9 +9,9 @@ install:
 	@echo "Preparing Eask..."
 	npm install
 ifeq ($(OS),Windows_NT)
-	start './scripts/install.bat'
+	cmd /C ./scripts/install.bat
 else
-	bash ./scripts/install.sh
+	$(SHELL) ./scripts/install.sh
 endif
 
 #
@@ -20,15 +20,15 @@ test-commands: install test-global test-local
 
 test-global:
 	@echo "Test global commands..."
-	bash ./test/commands/test_global.sh
+	$(SHELL) ./test/commands/test_global.sh
 
 test-local:
 	@echo "Test local commands..."
-	bash ./test/commands/test_local.sh
+	$(SHELL) ./test/commands/test_local.sh
 
 test-exec:
 	@echo "Test command exec..."
-	bash ./test/commands/exec/make.sh
+	$(SHELL) ./test/commands/exec/make.sh
 
 #
 ## Development
