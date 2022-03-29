@@ -48,9 +48,10 @@ jobs:
 
     - name: Prepare Eask (Windows)
       if: matrix.os == 'windows-latest'
+      shell: cmd
       run: |
         npm install
-        .github/scripts/install.ps1
+        .github/scripts/install.bat
         eask --version
 
     - name: Test commands
