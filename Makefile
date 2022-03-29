@@ -25,7 +25,7 @@ test-commands-dos: test-global-dos test-local-dos
 
 test-global-dos:
 	@echo "Test global commands..."
-	cmd /C ./test/commands/test_global.bat
+	cmd /C "./test/commands/test_global.bat"
 
 test-local-dos:
 	@echo "Test local commands..."
