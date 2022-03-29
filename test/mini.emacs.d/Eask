@@ -1,0 +1,7 @@
+(package "mini.emacs.d"
+         "0.0.1"
+         "Minimal Emacs configuration to run `eask`; only for testing purposes!")
+
+(depends-on "emacs" "26.1")
+
+(depends-on "company-fuzzy")

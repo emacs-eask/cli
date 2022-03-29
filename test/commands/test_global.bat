@@ -32,4 +32,4 @@ robocopy /e "./test/mini.emacs.d/" "%UserProfile%/.emacs.d"
 echo "Testing global commands..."
 eask archives -g
 eask install -g spinner ivy beacon
-eask list --depth=0 -g
+eask list -g --depth=0
