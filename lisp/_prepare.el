@@ -64,11 +64,11 @@
 (defun eask-pkg-init ()
   "Package initialization."
   (eask-with-verbosity 'log
-    (package-initialize)
-    (package-refresh-contents))
+                       (package-initialize)
+                       (package-refresh-contents))
   (eask--silent
-    (eask--update-exec-path)
-    (eask--update-load-path)))
+   (eask--update-exec-path)
+   (eask--update-load-path)))
 
 (defun eask-package-install (pkg)
   "Install the package PKG."
@@ -271,38 +271,38 @@ Eask file in the workspace."
   (declare (indent 0) (debug t))
   `(unless eask-loading-file-p
      (eask--setup-env
-       (cond
-        (eask--initialized-p ,@body)
-        ((eask-global-p)
-         (let ((eask--initialized-p t))
-           (eask-pkg-init)
-           (eask-with-verbosity 'debug
-             (load (locate-user-emacs-file "early-init.el") t)
-             (load (locate-user-emacs-file "../.emacs") t)
-             (load (locate-user-emacs-file "init.el") t))
-           ;; We accept Eask file in global scope, but it shouldn't be used
-           ;; as a sandbox.
-           (unless (or (eask-file-load "./Easkfile" t)
-                       (eask-file-load "./Eask" t))
-             (eask-warn "Default Eask file not found"))
-           ,@body))
-        (t
-         (let* ((eask--initialized-p t)
-                (user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
-                (package-user-dir (expand-file-name "elpa" user-emacs-directory))
-                (eask--first-init-p (not (file-directory-p user-emacs-directory)))
-                (user-init-file (locate-user-emacs-file "init.el"))
-                (custom-file (locate-user-emacs-file "custom.el")))
-           (eask--handle-global-options)
-           (unless (or (eask-file-load "../../Easkfile" t)
-                       (eask-file-load "../../Eask" t))
-             (eask-error "Eask file not found"))
-           (ignore-errors (make-directory package-user-dir t))
-           (run-hooks 'eask-before-command-hook)
-           (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
-           ,@body
-           (run-hooks (intern (concat "eask-after-command-" (eask-command) "-hook")))
-           (run-hooks 'eask-after-command-hook)))))))
+      (cond
+       (eask--initialized-p ,@body)
+       ((eask-global-p)
+        (let ((eask--initialized-p t))
+          (eask-pkg-init)
+          (eask-with-verbosity 'debug
+                               (load (locate-user-emacs-file "early-init.el") t)
+                               (load (locate-user-emacs-file "../.emacs") t)
+                               (load (locate-user-emacs-file "init.el") t))
+          ;; We accept Eask file in global scope, but it shouldn't be used
+          ;; as a sandbox.
+          (unless (or (eask-file-load "./Easkfile" t)
+                      (eask-file-load "./Eask" t))
+            (eask-warn "Default Eask file not found"))
+          ,@body))
+       (t
+        (let* ((eask--initialized-p t)
+               (user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
+               (package-user-dir (expand-file-name "elpa" user-emacs-directory))
+               (eask--first-init-p (not (file-directory-p user-emacs-directory)))
+               (user-init-file (locate-user-emacs-file "init.el"))
+               (custom-file (locate-user-emacs-file "custom.el")))
+          (eask--handle-global-options)
+          (unless (or (eask-file-load "../../Easkfile" t)
+                      (eask-file-load "../../Eask" t))
+            (eask-error "Eask file not found"))
+          (ignore-errors (make-directory package-user-dir t))
+          (run-hooks 'eask-before-command-hook)
+          (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
+          ,@body
+          (run-hooks (intern (concat "eask-after-command-" (eask-command) "-hook")))
+          (run-hooks 'eask-after-command-hook)))))))
 
 ;;
 ;;; Eask file
@@ -438,7 +438,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (defun eask--msg (level prefix msg &rest args)
   "If LEVEL is at or below `eask-verbosity', log message."
   (eask-with-verbosity level
-    (message "%s" (apply #'eask--format prefix msg args))))
+                       (message "%s" (apply #'eask--format prefix msg args))))
 
 (defun eask--format (prefix format-control &rest format-args)
   "Format Eask messages."
@@ -493,12 +493,13 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 
 (defun eask-progress (prefix sequence suffix func)
   "Progress SEQUENCE with messages."
-  (let ((total (length sequence)) (count 0))
+  (let* ((total (length sequence)) (count 0)
+         (offset (format "%s" (length (format "%s" total)))))
     (mapc
      (lambda (item)
        (cl-incf count)
        (funcall func item)
-       (message "  - %s [%2d/%d] %s%s" prefix count total item suffix))
+       (message (concat "  - %s [%" offset "d/%d] %s%s") prefix count total item suffix))
      sequence)))
 
 ;;
