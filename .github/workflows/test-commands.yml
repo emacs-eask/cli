@@ -43,13 +43,13 @@ jobs:
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       run: |
         npm install
-        bash ./scripts/install.sh
+        .github/scripts/install.sh
 
     - name: Prepare Eask (Windows)
       if: matrix.os == 'windows-latest'
       run: |
         npm install
-        ./scripts/install.bat
+        .github/scripts/install.ps1
 
     - name: Test commands
       run: make test-commands
