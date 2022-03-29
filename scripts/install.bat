@@ -17,7 +17,8 @@
 :: Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 :: Boston, MA 02110-1301, USA.
 
-setx path "%PATH%;%CD%/bin/"
+SET EASK_BIN=%CD%\bin\
+setx PATH %PATH%;%EASK_BIN%;
 
 :: See new PATH variable
 echo %PATH%
