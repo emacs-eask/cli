@@ -51,7 +51,7 @@ jobs:
       shell: cmd
       run: |
         npm install
-        .github/scripts/install.bat
+        echo "./bin" >> $GITHUB_PATH
 
     - name: Test commands
       shell: cmd
