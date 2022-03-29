@@ -9,7 +9,7 @@ install:
 	@echo "Preparing Eask..."
 	npm install
 ifeq ($(OS),Windows_NT)
-	cmd /C ./scripts/install.bat
+	cmd /C "./scripts/install.bat"
 else
 	$(SHELL) ./scripts/install.sh
 endif
