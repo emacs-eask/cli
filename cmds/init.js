@@ -50,7 +50,9 @@ exports.handler = async ({}) => {
 
   let content = `(source "gnu")
 
-(package "${name}" "${version}" "${description}")
+(package "${name}"
+         "${version}"
+         "${description}")
 
 (package-file "${entry_point}")
 `;
