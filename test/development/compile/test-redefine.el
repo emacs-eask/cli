@@ -21,6 +21,7 @@
 ;; End:
 "))
   (with-current-buffer (find-file concated-file)
+    (insert-file-contents "../test/development/compile/predefined.el")
     (unless (string-suffix-p conditions (buffer-string))
       (goto-char (point-max))
       (insert conditions))

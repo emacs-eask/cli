@@ -212,7 +212,7 @@ other scripts internally.  See function `eask-call'.")
         (if (member arg eask--option-args)
             (setq skip-next t)
           (push arg args))))
-    args))
+    (reverse args)))
 
 (defmacro eask--setup-env (&rest body)
   "Execute BODY with workspace setup."
