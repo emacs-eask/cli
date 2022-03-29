@@ -43,6 +43,7 @@ jobs:
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       run: |
         npm install
+        git update-index --chmod=+x ./.github/scripts/install.sh
         .github/scripts/install.sh
 
     - name: Prepare Eask (Windows)
