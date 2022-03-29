@@ -43,10 +43,7 @@ jobs:
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       run: |
         npm install
-        #chmod 777 .github/scripts/install.sh
-        #.github/scripts/install.sh
         echo "./bin" >> $GITHUB_PATH
-        echo $GITHUB_PATH
 
     - name: Prepare Eask (Windows)
       if: matrix.os == 'windows-latest'
