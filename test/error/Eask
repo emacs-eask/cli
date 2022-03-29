@@ -1,0 +1,8 @@
+(source "gnu")
+(source "melpa")
+
+(package "error"
+         "0.0.1"
+         "Test (trigger) error on GitHub Actions")
+
+(depends-on "emacs" "999.99")
