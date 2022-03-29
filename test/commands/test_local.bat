@@ -27,11 +27,10 @@
 ::
 
 :: Clone a project simulate Emacs package development
-cd ..
-git clone "https://github.com/jcs-elpa/parse-it" ./parse-it
-cd ./parse-it
+git clone "https://github.com/jcs-elpa/parse-it" "../parse-it"
+cd "../parse-it"
 
-::Test for local commands
+echo "Testing local commands..."
 eask info
 eask archives
 eask install

@@ -31,7 +31,7 @@ git clone "https://github.com/jcs-elpa/parse-it" "../parse-it"
 cd '../parse-it'
 CMD="node ../eask/eask"
 
-# Test for local commands
+echo "Testing local commands..."
 $CMD info
 $CMD archives
 $CMD install
