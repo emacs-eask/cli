@@ -5,21 +5,34 @@ EASK ?= eask
 
 .PHONY: install test-global test-local test-redefine
 
-test-commands: install test-global test-local
-
 install:
 	@echo "Preparing Eask..."
 	npm install
+ifeq ($(OS),Windows_NT)
+	./scripts/install.bat
+else
+	sh ./scripts/install.sh
+endif
+
+#
+## Commands
+test-commands: install test-global test-local
 
 test-global:
-	@echo "[Commands] Test global commands..."
+	@echo "Test global commands..."
 	sh ./test/commands/test_global.sh
 
 test-local:
-	@echo "[Commands] Test local commands..."
+	@echo "Test local commands..."
 	sh ./test/commands/test_local.sh
 
+test-exec:
+	@echo "Test command exec..."
+	sh ./test/commands/exec/make.sh
+
+#
+## Development
 test-redefine:
-	@echo "[Development] Test redefine..."
+	@echo "Test redefine..."
 	$(EASK) concat
 	$(EASK) load ./test/development/test-redefine.el
