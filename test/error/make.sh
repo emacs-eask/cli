@@ -23,7 +23,7 @@
 #
 
 echo "Test (trigger) error on GitHub Actions"
-
 cd $(dirname "$0")
 
+# This should trigger an error!
 eask info
