@@ -43,7 +43,7 @@ jobs:
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       run: |
         npm install
-        sh ./scripts/install.sh
+        bash ./scripts/install.sh
 
     - name: Prepare Eask (Windows)
       if: matrix.os == 'windows-latest'
