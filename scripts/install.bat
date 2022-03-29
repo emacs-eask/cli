@@ -18,7 +18,9 @@
 :: Boston, MA 02110-1301, USA.
 
 SET EASK_BIN=%CD%\bin\
-setx PATH %PATH%;%EASK_BIN%;
+
+::setx PATH %PATH%;%EASK_BIN%;
+$env:Path += '%EASK_BIN%'
 
 :: See new PATH variable
 echo %PATH%
