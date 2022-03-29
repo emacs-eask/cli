@@ -1,4 +1,8 @@
+ifeq ($(OS),Windows_NT)
+SHELL :=
+else
 SHELL := /usr/bin/env bash
+endif
 
 EMACS ?= emacs
 EASK ?= eask
