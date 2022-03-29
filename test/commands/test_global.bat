@@ -25,7 +25,7 @@
 :: (mini.emacs.d), and place it under to the default Emacs directory!
 ::
 
-echo 'Copy test configuration'
+echo "Copy test configuration"
 robocopy /e "./test/mini.emacs.d/" "%UserProfile%/.emacs.d"
 
 :: Test for global commands
