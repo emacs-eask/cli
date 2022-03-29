@@ -17,10 +17,7 @@
 # Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 # Boston, MA 02110-1301, USA.
 
-EASK_BIN=$PWD/bin
-echo $EASK_BIN
-
-echo $EASK_BIN >> $GITHUB_PATH
+echo "$PWD/bin" >> "$GITHUB_PATH"
 
 # See new PATH variable
 echo $PATH
