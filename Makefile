@@ -26,4 +26,4 @@ test-exec:
 test-redefine:
 	@echo "Test redefine..."
 	$(EASK) concat
-	$(EASK) load ./test/development/test-redefine.el
+	$(EASK) load ./test/development/compile/test-redefine.el

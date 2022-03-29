@@ -24,6 +24,7 @@
     (unless (string-suffix-p conditions (buffer-string))
       (goto-char (point-max))
       (insert conditions))
+    (save-buffer)
     (byte-compile-file buffer-file-name)))
 
 ;; Local Variables:

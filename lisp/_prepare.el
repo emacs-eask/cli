@@ -266,15 +266,27 @@ Eask file in the workspace."
   (setq eask-file (expand-file-name location user-emacs-directory))
   (eask--alias-env (load eask-file noerror)))
 
+(defun eask--print-env-info ()
+  "Display environment information at the very top of the execution."
+  (message "~ Emacs:  %s" emacs-version)
+  (message "~ System: %s" system-type))
+
+(defun eask-file-try-load (relative-path)
+  "Try load eask file in RELATIVE-PATH."
+  (or (eask-file-load (concat relative-path "Easkfile") t)
+      (eask-file-load (concat relative-path "Eask") t)))
+
 (defmacro eask-start (&rest body)
   "Execute BODY with workspace setup."
   (declare (indent 0) (debug t))
   `(unless eask-loading-file-p
      (eask--setup-env
-       (cond
-        (eask--initialized-p ,@body)
-        ((eask-global-p)
-         (let ((eask--initialized-p t))
+       (if eask--initialized-p (progn ,@body)
+         (eask--handle-global-options)
+         (eask--print-env-info)
+         (setq eask--initialized-p t)
+         (cond
+          ((eask-global-p)
            (eask-pkg-init)
            (eask-with-verbosity 'debug
              (load (locate-user-emacs-file "early-init.el") t)
@@ -282,27 +294,23 @@ Eask file in the workspace."
              (load (locate-user-emacs-file "init.el") t))
            ;; We accept Eask file in global scope, but it shouldn't be used
            ;; as a sandbox.
-           (unless (or (eask-file-load "./Easkfile" t)
-                       (eask-file-load "./Eask" t))
+           (unless (eask-file-try-load "./")
              (eask-warn "Default Eask file not found"))
-           ,@body))
-        (t
-         (let* ((eask--initialized-p t)
-                (user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
-                (package-user-dir (expand-file-name "elpa" user-emacs-directory))
-                (eask--first-init-p (not (file-directory-p user-emacs-directory)))
-                (user-init-file (locate-user-emacs-file "init.el"))
-                (custom-file (locate-user-emacs-file "custom.el")))
-           (eask--handle-global-options)
-           (unless (or (eask-file-load "../../Easkfile" t)
-                       (eask-file-load "../../Eask" t))
-             (eask-error "Eask file not found"))
-           (ignore-errors (make-directory package-user-dir t))
-           (run-hooks 'eask-before-command-hook)
-           (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
-           ,@body
-           (run-hooks (intern (concat "eask-after-command-" (eask-command) "-hook")))
-           (run-hooks 'eask-after-command-hook)))))))
+           ,@body)
+          (t
+           (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
+                  (package-user-dir (expand-file-name "elpa" user-emacs-directory))
+                  (eask--first-init-p (not (file-directory-p user-emacs-directory)))
+                  (user-init-file (locate-user-emacs-file "init.el"))
+                  (custom-file (locate-user-emacs-file "custom.el")))
+             (unless (eask-file-try-load "../../")
+               (eask-error "Eask file not found"))
+             (ignore-errors (make-directory package-user-dir t))
+             (run-hooks 'eask-before-command-hook)
+             (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
+             ,@body
+             (run-hooks (intern (concat "eask-after-command-" (eask-command) "-hook")))
+             (run-hooks 'eask-after-command-hook))))))))
 
 ;;
 ;;; Eask file
