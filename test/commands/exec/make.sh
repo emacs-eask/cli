@@ -19,13 +19,7 @@
 
 ## Commentary:
 #
-# N/A
+# Test command `exec`
 #
 
-# Clone a project simulate Emacs package development
-git clone "https://github.com/jcs-elpa/parse-it" "../parse-it"
-cd './test/commands/exec/'
-CMD="node ../eask/eask"
-
-# Test for local commands
-$CMD info
+eask exec github-elpa -h
