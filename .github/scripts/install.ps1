@@ -18,9 +18,3 @@
 $EASK_BIN = ($pwd).path + "\bin"
 
 echo "$EASK_BIN" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-
-# See new PATH variable
-echo $PATH
-
-# See if `eask` install successfully!
-eask --version
