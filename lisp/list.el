@@ -40,7 +40,7 @@
         (message (eask--align depth "%-14s %-80s") name version summary)
       (message (eask--align depth) name))
     (when-let ((reqs (package-desc-reqs desc))
-               (_ (< depth max-depth)))
+               ((< depth max-depth)))
       (dolist (req reqs)
         (eask-print-pkg (car req) (1+ depth) max-depth pkg-alist)))))
 

@@ -160,7 +160,7 @@ the `eask-start' execution.")
 (defun eask-call (script)
   "Call another eask script."
   (if-let* ((script-file (eask-script script))
-            (_ (file-exists-p script-file)))
+            ((file-exists-p script-file)))
       (load script-file nil t)
     (error "Scripting missing %s..." script-file)))
 
@@ -217,9 +217,9 @@ other scripts internally.  See function `eask-call'.")
 (defmacro eask--setup-env (&rest body)
   "Execute BODY with workspace setup."
   (declare (indent 0) (debug t))
-  `(let* ((alist)
-          (_ (dolist (cmd eask--command-list)
-               (push (cons cmd '(lambda (&rest _))) alist))))
+  `(let (alist)
+     (dolist (cmd eask--command-list)
+       (push (cons cmd '(lambda (&rest _))) alist))
      (setq command-switch-alist (append command-switch-alist alist))
      ,@body))
 
