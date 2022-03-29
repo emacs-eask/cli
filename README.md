@@ -9,6 +9,7 @@
 
 [![Commands](https://github.com/emacs-eask/eask/actions/workflows/test-commands.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-commands.yml)
 [![Compile](https://github.com/emacs-eask/eask/actions/workflows/test-redefine.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-redefine.yml)
+[![Error](https://github.com/emacs-eask/eask/actions/workflows/test-error.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-error.yml)
 
 Eask is heavily inspired by Cask, so they are somewhat related! This tool focuses
 on consistency! [Cask]() and [makem.sh]() both rely on bash which Windows doesn't
@@ -200,7 +201,6 @@ The sandbox logic is stored inside file `./lisp/_prepare.el`.
 ## 📝 Todo list
 
 - [ ] logging with color
-- [ ] [CI] add error test
 - [ ] `checkdoc` command
 
 ## Contribute
