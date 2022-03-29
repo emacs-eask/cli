@@ -3,20 +3,11 @@ SHELL := /usr/bin/env bash
 EMACS ?= emacs
 EASK ?= eask
 
-.PHONY: install test-global test-local test-redefine
-
-install:
-	@echo "Preparing Eask..."
-	npm install
-ifeq ($(OS),Windows_NT)
-	cmd /C "./scripts/install.bat"
-else
-	$(SHELL) ./scripts/install.sh
-endif
+.PHONY: test-global test-local test-redefine
 
 #
 ## Commands
-test-commands: install test-global test-local
+test-commands: test-global test-local
 
 test-global:
 	@echo "Test global commands..."

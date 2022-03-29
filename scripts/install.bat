@@ -20,7 +20,7 @@
 setx path "%PATH%;%CD%/bin/"
 
 :: See new PATH variable
-echo %path%
+echo %PATH%
 
 :: See if `eask` install successfully!
 eask --version
