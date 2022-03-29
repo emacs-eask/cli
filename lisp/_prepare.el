@@ -422,8 +422,8 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   :type 'boolean
   :group 'eask)
 
-(defcustom eask-log-header nil
-  "Log messages with header."
+(defcustom eask-log-level nil
+  "Log messages with level."
   :type 'boolean
   :group 'eask)
 
@@ -457,7 +457,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   "Format Eask messages."
   (apply #'format
          (concat (when eask-timestamps (format-time-string "%Y-%m-%d %H:%M:%S "))
-                 (when eask-log-header (concat prefix " "))
+                 (when eask-log-level (concat prefix " "))
                  format-control)
          format-args))
 
