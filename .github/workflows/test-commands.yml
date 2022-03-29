@@ -43,7 +43,7 @@ jobs:
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       run: |
         npm install
-        chmod 777 ./bin/eask
+        chmod -R 777 ./
         echo "./bin" >> $GITHUB_PATH
 
     - name: Prepare Eask (Windows)
