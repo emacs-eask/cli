@@ -45,6 +45,14 @@ yargs
     description: 'log without timestamps',
     type: 'boolean',
   })
+  .option('log-level', {
+    description: 'log with level',
+    type: 'boolean',
+  })
+  .option('no-log-level', {
+    description: 'log without level',
+    type: 'boolean',
+  })
   .option('proxy', {
     description: 'update proxy for HTTP and HTTPS to host',
     type: 'string',

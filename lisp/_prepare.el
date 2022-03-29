@@ -100,6 +100,8 @@
 (defun eask-strict-p ()        (eask--flag "--strict"))         ; --strict
 (defun eask-timestamps-p ()    (eask--flag "--timestamps"))     ; --timestamps
 (defun eask-no-timestamps-p () (eask--flag "--no-timestamps"))  ; --no-timestamps
+(defun eask-log-level-p ()     (eask--flag "--log-level"))      ; --log-level
+(defun eask-no-log-level-p ()  (eask--flag "--no-log-level"))   ; --no-log-level
 
 ;;; String (with arguments)
 (defun eask-proxy ()       (eask--flag-value "--proxy"))        ; --proxy
@@ -119,6 +121,8 @@
   (when (eask-verbose) (setq eask-verbosity (eask-verbose)))
   (when (eask-timestamps-p) (setq eask-timestamps t))
   (when (eask-no-timestamps-p) (setq eask-timestamps nil))
+  (when (eask-log-level-p) (setq eask-log-level t))
+  (when (eask-no-log-level-p) (setq eask-log-level nil))
   (eask--add-proxy "http"     (eask-proxy))
   (eask--add-proxy "https"    (eask-proxy))
   (eask--add-proxy "http"     (eask-http-proxy))
@@ -183,7 +187,8 @@ other scripts internally.  See function `eask-call'.")
   (eask--form-options
    '("-g" "-f" "--depth" "--dev"
      "--debug" "--strict"
-     "--timestamps" "--no-timestamps"))
+     "--timestamps" "--no-timestamps"
+     "--log-level" "--no-log-level"))
   "List of boolean type options")
 
 (defconst eask--option-args
