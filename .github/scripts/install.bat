@@ -17,6 +17,6 @@
 :: Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 :: Boston, MA 02110-1301, USA.
 
-set PATH=%PATH%;%CD%\bin
+setx PATH=%PATH%;%CD%\bin
 
 echo %PATH%
