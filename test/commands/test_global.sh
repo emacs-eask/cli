@@ -25,12 +25,10 @@
 # (mini.emacs.d), and place it under to the default Emacs directory!
 #
 
-CMD="node eask"
-
 echo 'Copy test configuration'
 cp -R ./test/mini.emacs.d/ ~/.emacs.d
 
 # Test for global commands
-$CMD archives -g
-$CMD install -g spinner ivy beacon
-$CMD list --depth=0 -g
+eask archives -g
+eask install -g spinner ivy beacon
+eask list --depth=0 -g
