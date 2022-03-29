@@ -24,14 +24,15 @@ Node has a better support on all kind of terminal applications!
 **Table of Contents**
 
 - [eask](#eask)
+    - [-](#-)
     - [📰 News](#📰-news)
     - [💾 Installation](#💾-installation)
     - [About CI/CD](#about-cicd)
     - [📝 About Eask file](#📝-about-eask-file)
     - [📂 Related Projects](#📂-related-projects)
-    - [State of the project](#state-of-the-project)
+    - [📂 State of the project](#📂-state-of-the-project)
     - [🏆 Goals for the project](#🏆-goals-for-the-project)
-    - [Project Structure](#project-structure)
+    - [📂 Project Structure](#📂-project-structure)
         - [📌 Dependencies](#📌-dependencies)
     - [📝 Todo list](#📝-todo-list)
     - [Contribute](#contribute)
@@ -163,7 +164,7 @@ For example, to enable compile on warn on `byte-compile` command
 * [cask](https://github.com/cask/cask) - Project management tool for Emacs
 * [makem.sh](https://github.com/alphapapa/makem.sh) - Makefile-like script for building and testing Emacs Lisp packages
 
-## State of the project
+## 📂 State of the project
 
 The project barebones are pretty much done, we are currently looking for
 contirbutors to give us feedback and improve our TUI/UX for this tool!
@@ -179,7 +180,7 @@ options, so these features are prepared by default! Like command `lint`
 3. No dependencies installed by default; only install packages when it's needed!
 4. Extra: Package Management Tool for your personal configuration/package
 
-## Project Structure
+## 📂 Project Structure
 
 The project structure are very simple, all we need is to look into 3 places.
 
