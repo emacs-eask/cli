@@ -56,5 +56,4 @@ jobs:
         echo $GITHUB_PATH
 
     - name: Test commands
-      #run: make test-commands
-      run: eask --version
+      run: make test-commands
