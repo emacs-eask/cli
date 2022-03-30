@@ -57,7 +57,7 @@ jobs:
       run: |
         ./test/commands/test_global.sh
         ./test/commands/test_local.sh
-        ./test/commands/exec/make.sh
+        #./test/commands/exec/make.sh
 
     - name: Test commands (Windows)
       if: matrix.os == 'windows-latest'
