@@ -268,8 +268,10 @@ Eask file in the workspace."
 
 (defun eask-file-load (location &optional noerror)
   "Load Eask file in the LOCATION."
-  (setq eask-file (expand-file-name location user-emacs-directory))
-  (eask--alias-env (load eask-file noerror)))
+  (when-let* ((target-eask-file (expand-file-name location user-emacs-directory))
+              (result (eask--alias-env (load target-eask-file noerror t))))
+    (setq eask-file target-eask-file)  ; assign eask file only if success
+    result))
 
 (defun eask--print-env-info ()
   "Display environment information at the very top of the execution."
@@ -299,7 +301,8 @@ Eask file in the workspace."
              (load (locate-user-emacs-file "init.el") t))
            ;; We accept Eask file in global scope, but it shouldn't be used
            ;; as a sandbox.
-           (unless (eask-file-try-load "./")
+           (if (eask-file-try-load "./")
+               (eask-debug "~ Found Eask file in %s" eask-file)
              (eask-warn "~ Default Eask file not found"))
            ,@body)
           (t
@@ -308,7 +311,8 @@ Eask file in the workspace."
                   (eask--first-init-p (not (file-directory-p user-emacs-directory)))
                   (user-init-file (locate-user-emacs-file "init.el"))
                   (custom-file (locate-user-emacs-file "custom.el")))
-             (unless (eask-file-try-load "../../")
+             (if (eask-file-try-load "../../")
+                 (eask-debug "~ Found Eask file in %s" eask-file)
                (eask-error "~ Eask file not found"))
              (ignore-errors (make-directory package-user-dir t))
              (run-hooks 'eask-before-command-hook)
@@ -407,7 +411,8 @@ Eask file in the workspace."
   (unless eask--ignore-error-p
     ;; XXX Log out the error explicitly, so the user will know what causes Emacs
     ;; to crash.
-    (eask-error "[ERROR] %s" (apply #'format-message args))
+    (let ((eask-log-level t))
+      (eask-error "%s" (apply #'format-message args)))
     (add-hook 'eask-after-command-hook #'eask--exit)))
 
 (advice-add 'error :before #'eask--trigger-error)
@@ -427,7 +432,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   :type 'boolean
   :group 'eask)
 
-(defcustom eask-log-level nil
+(defcustom eask-log-level t
   "Log messages with level."
   :type 'boolean
   :group 'eask)

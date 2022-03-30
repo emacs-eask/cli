@@ -14,9 +14,10 @@
 
 ;;; Code:
 
-(load-file (expand-file-name
-            "_prepare.el"
-            (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
+(load (expand-file-name
+       "_prepare.el"
+       (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
+      nil t)
 
 ;; Handle options
 (when (eask-strict-p) (setq byte-compile-error-on-warn t))

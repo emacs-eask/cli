@@ -9,9 +9,10 @@
 
 ;;; Code:
 
-(load-file (expand-file-name
-            "_prepare.el"
-            (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
+(load (expand-file-name
+       "_prepare.el"
+       (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
+      nil t)
 
 (defun eask--print-filename (filename)
   "Print out the FILENAME."
