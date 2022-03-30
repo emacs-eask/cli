@@ -28,6 +28,11 @@ Cask does not seem to support Windows (no WSL) after version `0.8.6`. In the
 early versions, they have used Python, but due to the Python supports on Windows
 are just not as good as Node.JS.
 
+#### Who should use this tool?
+
+People who like to use Emacs on Windows (no WSL), and would like to keep their
+Emacs configuration/packages consistent on every operating system!
+
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
