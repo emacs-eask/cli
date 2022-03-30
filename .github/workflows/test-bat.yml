@@ -1,4 +1,4 @@
-name: Error
+name: Bat
 
 on:
   push:
