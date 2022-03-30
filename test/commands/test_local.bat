@@ -38,6 +38,7 @@ eask compile
 eask lint
 eask list --depth=0
 eask concat
+eask outdated
 
 eask clean
 eask clean-elc

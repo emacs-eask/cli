@@ -32,14 +32,15 @@ cd '../parse-it'
 CMD="node ../eask/eask"
 
 echo "Testing local commands..."
-$CMD info
-$CMD archives
-$CMD install
-$CMD compile
-$CMD lint
-$CMD list --depth=0
-$CMD concat
+eask info
+eask archives
+eask install
+eask compile
+eask lint
+eask list --depth=0
+eask concat
+eask outdated
 
-$CMD clean
-$CMD clean-elc
-$CMD clean-all
+eask clean
+eask clean-elc
+eask clean-all

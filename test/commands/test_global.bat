@@ -33,3 +33,4 @@ echo "Testing global commands..."
 eask archives -g
 eask install -g spinner ivy beacon
 eask list -g --depth=0
+eask outdated -g
