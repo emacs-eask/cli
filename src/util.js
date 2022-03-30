@@ -85,7 +85,13 @@ async function e_call(argv, script, ...args) {
   let cmd = cmd_base.concat(cmd_args).concat(cmd_global);
   cmd = _remove_undefined(cmd);
 
-  console.log('¶ emacs ' + cmd.join(' '));
+  let env_status = (argv.global) ? 'global' : 'development';
+  console.log(`Running Eask in the ${env_status} environment`);
+  console.log('Press Ctrl+C to cancel.');
+  console.log('');
+  console.log('Executing script inside Emacs...');
+  if (argv.verbose == 4)
+    console.log('[DEBUG] emacs ' + cmd.join(' '));
   let process = child_process.spawn('emacs', cmd, { stdio: 'inherit' });
 
   process.on('close', function (code) {

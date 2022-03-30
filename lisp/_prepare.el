@@ -275,8 +275,9 @@ Eask file in the workspace."
 
 (defun eask--print-env-info ()
   "Display environment information at the very top of the execution."
-  (message "✓ Running emacs %s" emacs-version)
-  (message "✓ With system %s" system-type))
+  (message "")
+  (message "✓ Checking Emacs version %s... done!" emacs-version)
+  (message "✓ Checking system %s... done!" system-type))
 
 (defun eask-file-try-load (relative-path)
   "Try load eask file in RELATIVE-PATH."
@@ -302,9 +303,9 @@ Eask file in the workspace."
            ;; We accept Eask file in global scope, but it shouldn't be used
            ;; as a sandbox.
            (if (eask-file-try-load "./")
-               (eask-debug "✓ Found Eask file in %s" eask-file)
-             (eask-warn "✗ Default Eask file not found"))
-           ,@body)
+               (eask-debug "✓ Loading default Eask file in %s... done!" eask-file)
+             (eask-warn "✗ Loading default Eask file... missing."))
+           (message "") ,@body)
           (t
            (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
                   (package-user-dir (expand-file-name "elpa" user-emacs-directory))
@@ -312,12 +313,12 @@ Eask file in the workspace."
                   (user-init-file (locate-user-emacs-file "init.el"))
                   (custom-file (locate-user-emacs-file "custom.el")))
              (if (eask-file-try-load "../../")
-                 (eask-debug "✓ Found Eask file in %s" eask-file)
-               (eask-error "✗ Eask file not found"))
+                 (eask-debug "✓ Loading Eask file in %s... done!" eask-file)
+               (eask-error "✗ Loading Eask file... missing."))
              (ignore-errors (make-directory package-user-dir t))
              (run-hooks 'eask-before-command-hook)
              (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
-             ,@body
+             (message "") ,@body
              (run-hooks (intern (concat "eask-after-command-" (eask-command) "-hook")))
              (run-hooks 'eask-after-command-hook))))))))
 

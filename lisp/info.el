@@ -20,7 +20,6 @@
     (message "  %s" info)))
 
 (eask-start
-  (message "")
   (eask--print-info :name)
   (eask--print-info :version)
   (eask--print-info :description))
