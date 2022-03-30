@@ -232,7 +232,7 @@ other scripts internally.  See function `eask-call'.")
   '("package" "package-file" "files"
     "depends-on" "development"
     "source" "source-priority"
-    "exec-path" "exec-paths" "load-path" "load-paths")
+    "exec-paths" "load-paths")
   "List of Eask file keywords.")
 
 (defun eask--loop-file-keywords (func)
@@ -373,21 +373,13 @@ Eask file in the workspace."
     (delete-dups eask-depends-on-dev)
     (setq eask-depends-on (remove pkg eask-depends-on))))  ; remove it from production
 
-(defun eask-load-path (dir)
-  "Add DIR to load-path."
-  (add-to-list 'load-path (expand-file-name dir)))
-
 (defun eask-load-paths (&rest dirs)
   "Add all DIRS to load-path."
-  (dolist (dir dirs) (eask-load-path dir)))
-
-(defun eask-exec-path (dir)
-  "Add DIR to exec-path."
-  (add-to-list 'exec-path (expand-file-name dir)))
+  (dolist (dir dirs) (add-to-list 'load-path (expand-file-name dir))))
 
 (defun eask-exec-paths (&rest dirs)
   "Add all DIRS to exec-path."
-  (dolist (dir dirs) (eask-exec-path dir)))
+  (dolist (dir dirs) (add-to-list 'exec-path (expand-file-name dir))))
 
 (defun eask-source (name &optional location)
   "Add archive NAME with LOCATION."
