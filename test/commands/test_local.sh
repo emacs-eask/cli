@@ -29,7 +29,6 @@
 # Clone a project simulate Emacs package development
 git clone "https://github.com/jcs-elpa/parse-it" "../parse-it"
 cd '../parse-it'
-CMD="node ../eask/eask"
 
 echo "Testing local commands..."
 eask info
