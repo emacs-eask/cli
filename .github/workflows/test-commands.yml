@@ -63,6 +63,6 @@ jobs:
       if: matrix.os == 'windows-latest'
       shell: cmd
       run: |
-        start ./test/commands/test_global.bat
-        start ./test/commands/test_local.bat
-        start ./test/commands/exec/make.bat
+        ${{ github.workspace }}/test/commands/test_global.bat
+        ${{ github.workspace }}/test/commands/test_local.bat
+        ${{ github.workspace }}/test/commands/exec/make.bat
