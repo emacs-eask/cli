@@ -55,13 +55,13 @@ jobs:
     - name: Test commands (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       run: |
-        #${{ github.workspace }}/test/commands/test_global.sh
-        #${{ github.workspace }}/test/commands/test_local.sh
+        ${{ github.workspace }}/test/commands/test_global.sh
+        ${{ github.workspace }}/test/commands/test_local.sh
         ${{ github.workspace }}/test/commands/exec/make.sh
 
     - name: Test commands (Windows)
       if: matrix.os == 'windows-latest'
       run: |
-        #${{ github.workspace }}/test/commands/test_global.ps1
-        #${{ github.workspace }}/test/commands/test_local.ps1
+        ${{ github.workspace }}/test/commands/test_global.ps1
+        ${{ github.workspace }}/test/commands/test_local.ps1
         ${{ github.workspace }}/test/commands/exec/make.ps1
