@@ -26,5 +26,5 @@ echo "Test command 'exec'..."
 
 cd $(dirname "$0")
 
-eask install
+eask install github-elpa
 eask exec github-elpa -h
