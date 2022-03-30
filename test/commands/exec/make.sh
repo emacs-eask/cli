@@ -25,5 +25,5 @@
 echo "Test command 'exec'..."
 cd $(dirname "$0")
 
-eask install ert-runner
-eask exec ert-runner -h
+eask install github-elpa
+eask exec github-elpa -h
