@@ -21,7 +21,7 @@
 #
 
 echo "Test (trigger) error on GitHub Actions"
-cd %~dp0
+cd $PSScriptRoot
 
 # This should trigger an error!
 call eask info

@@ -21,7 +21,7 @@
 #
 
 echo "Test command 'exec'..."
-cd %~dp0
+cd $PSScriptRoot
 
 eask install ert-runner
 eask exec ert-runner -h
