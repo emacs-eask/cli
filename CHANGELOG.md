@@ -8,7 +8,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 0.4.x (Unreleased)
 > Released N/A
 
-* N/A
+* Add keywords `exec-path` and `exec-paths` (5334bc5e16e8d52a9e6a7f23781f2b42d333d11c)
 
 ## 0.3.x
 > Released Mar 30, 2022
