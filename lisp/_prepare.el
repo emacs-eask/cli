@@ -275,7 +275,7 @@ Eask file in the workspace."
 
 (defun eask--print-env-info ()
   "Display environment information at the very top of the execution."
-  (message "<$> Emacs:  %s" emacs-version)
+  (message "<$> Emacs: %s" emacs-version)
   (message "<$> System: %s" system-type))
 
 (defun eask-file-try-load (relative-path)
