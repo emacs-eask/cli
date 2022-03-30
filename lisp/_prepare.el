@@ -228,13 +228,11 @@ other scripts internally.  See function `eask-call'.")
      (setq command-switch-alist (append command-switch-alist alist))
      ,@body))
 
-(defun eask-fbound (symbol) (and (fboundp symbol) symbol))
-
 (defconst eask-file-keywords
   '("package" "package-file" "files"
     "depends-on" "development"
     "source" "source-priority"
-    "load-path" "load-paths")
+    "exec-path" "exec-paths" "load-path" "load-paths")
   "List of Eask file keywords.")
 
 (defun eask--loop-file-keywords (func)
@@ -251,17 +249,16 @@ for function `eask--alias-env'."
 Eask file in the workspace."
   (declare (indent 0) (debug t))
   `(let (result)
+     ;; XXX magic here is we replace all keyword functions with `eask-xxx'...
      (eask--loop-file-keywords
       (lambda (keyword api old)
-        (eval `(defvar ,old nil))
-        (eval `(setq ,old (eask-fbound (quote ,keyword))))
-        (eval `(defalias (quote ,keyword) (quote ,api)))))
+        (defalias old (symbol-function keyword))
+        (defalias keyword (symbol-function api))))
      (setq result (progn ,@body))
+     ;; XXX after loading Eask file, we revert those functions back to normal!
      (eask--loop-file-keywords
       (lambda (keyword api old)
-        ;; TODO: Revert the original function's definition; just in case,
-        ;; anything else don't go wrong
-        (eval `(defalias (quote ,keyword) (symbol-function ,old)))))
+        (defalias keyword (symbol-function old))))
      result))
 
 (defvar eask-file nil "The Eask file path.")
@@ -304,7 +301,7 @@ Eask file in the workspace."
            ;; as a sandbox.
            (if (eask-file-try-load "./")
                (eask-debug "✓ Loading default Eask file in %s... done!" eask-file)
-             (eask-warn "✗ Loading default Eask file... missing."))
+             (eask-warn "✗ Loading default Eask file... missing!"))
            (message "") ,@body)
           (t
            (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
@@ -314,7 +311,7 @@ Eask file in the workspace."
                   (custom-file (locate-user-emacs-file "custom.el")))
              (if (eask-file-try-load "../../")
                  (eask-debug "✓ Loading Eask file in %s... done!" eask-file)
-               (eask-error "✗ Loading Eask file... missing."))
+               (eask-error "✗ Loading Eask file... missing!"))
              (ignore-errors (make-directory package-user-dir t))
              (run-hooks 'eask-before-command-hook)
              (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
@@ -383,6 +380,14 @@ Eask file in the workspace."
 (defun eask-load-paths (&rest dirs)
   "Add all DIRS to load-path."
   (dolist (dir dirs) (eask-load-path dir)))
+
+(defun eask-exec-path (dir)
+  "Add DIR to exec-path."
+  (add-to-list 'exec-path (expand-file-name dir)))
+
+(defun eask-exec-paths (&rest dirs)
+  "Add all DIRS to exec-path."
+  (dolist (dir dirs) (eask-exec-path dir)))
 
 (defun eask-source (name &optional location)
   "Add archive NAME with LOCATION."
