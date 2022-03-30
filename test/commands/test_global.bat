@@ -30,7 +30,7 @@ mkdir "%UserProfile%/.emacs.d"
 robocopy /e "./test/mini.emacs.d/" "%UserProfile%/.emacs.d"
 
 echo "Testing global commands..."
-start eask archives -g
-start eask install -g spinner ivy beacon
-start eask list -g --depth=0
-start eask outdated -g
+call eask archives -g
+call eask install -g spinner ivy beacon
+call eask list -g --depth=0
+call eask outdated -g

@@ -26,4 +26,4 @@ echo "Test (trigger) error on GitHub Actions"
 cd %~dp0
 
 :: This should trigger an error!
-eask info
+call eask info

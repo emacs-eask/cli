@@ -31,15 +31,15 @@ git clone "https://github.com/jcs-elpa/parse-it" "../parse-it"
 cd "../parse-it"
 
 echo "Testing local commands..."
-eask info
-eask archives
-eask install
-eask compile
-eask lint
-eask list --depth=0
-eask concat
-eask outdated
+call eask info
+call eask archives
+call eask install
+call eask compile
+call eask lint
+call eask list --depth=0
+call eask concat
+call eask outdated
 
-eask clean
-eask clean-elc
-eask clean-all
+call eask clean
+call eask clean-elc
+call eask clean-all

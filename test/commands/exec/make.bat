@@ -25,5 +25,5 @@
 echo "Test command 'exec'..."
 cd %~dp0
 
-eask install ert-runner
-eask exec ert-runner -h
+call eask install ert-runner
+call eask exec ert-runner -h
