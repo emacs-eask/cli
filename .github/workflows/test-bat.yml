@@ -1,0 +1,27 @@
+name: Error
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+    - '**.md'
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Test batch
+      if: matrix.os == 'windows-latest'
+      run: |
+        ./test/test.bat
