@@ -302,8 +302,8 @@ Eask file in the workspace."
            ;; We accept Eask file in global scope, but it shouldn't be used
            ;; as a sandbox.
            (if (eask-file-try-load "./")
-               (eask-debug "~ Found Eask file in %s" eask-file)
-             (eask-warn "~ Default Eask file not found"))
+               (eask-debug "✓ Found Eask file in %s" eask-file)
+             (eask-warn "✗ Default Eask file not found"))
            ,@body)
           (t
            (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
@@ -312,8 +312,8 @@ Eask file in the workspace."
                   (user-init-file (locate-user-emacs-file "init.el"))
                   (custom-file (locate-user-emacs-file "custom.el")))
              (if (eask-file-try-load "../../")
-                 (eask-debug "~ Found Eask file in %s" eask-file)
-               (eask-error "~ Eask file not found"))
+                 (eask-debug "✓ Found Eask file in %s" eask-file)
+               (eask-error "✗ Eask file not found"))
              (ignore-errors (make-directory package-user-dir t))
              (run-hooks 'eask-before-command-hook)
              (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
@@ -432,7 +432,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   :type 'boolean
   :group 'eask)
 
-(defcustom eask-log-level t
+(defcustom eask-log-level nil
   "Log messages with level."
   :type 'boolean
   :group 'eask)
