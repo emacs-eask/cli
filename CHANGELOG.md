@@ -5,8 +5,13 @@ All notable changes to this project will be documented in this file.
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 
-## 0.3.x (Unreleased)
+## 0.4.x (Unreleased)
 > Released N/A
+
+* N/A
+
+## 0.3.x
+> Released Mar 30, 2022
 
 * Ensure use `throw` operation to trigger CI (0253edff816a85868daf708289872542d49af729)
 * Fix extra concatenation args (458d551d2e1981407929ada1ad8b4b4b430cf526)
@@ -22,6 +27,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add new options `--timestamps` and `--no-timestamps` (3f167d64e3115eea2580708f7eff2becce246537)
 * Add new option `--strict` (6d59d98999f2bd46e66e2a6d03064ee56678a591)
 * Add new options `--log-level` and `--no-log-level` (e5e03679db496ce77d1ba4adde1fc6b42d931ba9)
+* Improve output messages, more!
 
 ## 0.2.x
 > Released Mar 26, 2022
