@@ -10,6 +10,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 * Add Eask file keyword `exec-paths` (5334bc5e16e8d52a9e6a7f23781f2b42d333d11c)
 * Remove Eask file keyword `load-path` (a72fdacece54aa7acebfea3265bf9a0eace41778)
+* Add new command `eask checkdoc` (c10ccb908f8af5bc45094efff17364eecf0b6fbc)
 
 ## 0.3.x
 > Released Mar 30, 2022
