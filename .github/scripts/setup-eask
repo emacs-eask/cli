@@ -2,4 +2,4 @@
 
 npm install
 chmod -R 777 ./
-echo "${{ github.workspace }}/bin" >> "$GITHUB_PATH"
+echo "$GITHUB_WORKSPACE/bin" >> "$GITHUB_PATH"
