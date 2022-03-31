@@ -37,6 +37,10 @@ yargs
     description: 'report error instead of warnings',
     type: 'boolean',
   })
+  .option('allow-error', {
+    description: 'report error at the very end',
+    type: 'boolean',
+  })
   .option('timestamps', {
     description: 'log with timestamps',
     type: 'boolean',

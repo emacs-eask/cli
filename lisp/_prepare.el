@@ -156,6 +156,7 @@ the `eask-start' execution.")
 (defun eask-log-level-p ()     (eask--flag "--log-level"))      ; --log-level
 (defun eask-no-log-level-p ()  (eask--flag "--no-log-level"))   ; --no-log-level
 (defun eask-no-color-p ()      (eask--flag "--no-color"))       ; --no-color
+(defun eask-allow-error-p ()   (eask--flag "--allow-error"))    ; --allow-error
 
 ;;; String (with arguments)
 (defun eask-proxy ()       (eask--flag-value "--proxy"))        ; --proxy
@@ -212,7 +213,8 @@ other scripts internally.  See function `eask-call'.")
      "--debug" "--strict"
      "--timestamps" "--no-timestamps"
      "--log-level" "--no-log-level"
-     "--no-color"))
+     "--no-color"
+     "--allow-error"))
   "List of boolean type options")
 
 (defconst eask--option-args
@@ -428,16 +430,28 @@ Eask file in the workspace."
 
 (defun eask--exit (&rest _) "Send exit code." (kill-emacs 1))
 
-(defun eask--trigger-error (&rest args)
-  "Trigger error."
+(defun eask--trigger-error ()
+  "Trigger error at the right time."
+  (if (eask-allow-error-p)
+      (add-hook 'eask-after-command-hook #'eask--exit)
+    (eask--exit)))
+
+(defun eask--error (fnc &rest args)
+  "On error."
   (unless eask--ignore-error-p
     ;; XXX Log out the error explicitly, so the user will know what causes Emacs
     ;; to crash.
-    (let ((eask-log-level t))
-      (eask-error "%s" (apply #'format-message args)))
-    (add-hook 'eask-after-command-hook #'eask--exit)))
+    (eask-msg "%s" (eask--asni 'error (apply #'format-message args)))
+    (eask--trigger-error))
+  (when debug-on-error (apply fnc args)))
 
-(advice-add 'error :before #'eask--trigger-error)
+(advice-add 'error :around #'eask--error)
+
+(defun eask--warn (&rest args)
+  "On warn."
+  (eask-msg "%s" (eask--asni 'warn (apply #'format-message args))))
+
+(advice-add 'warn :override #'eask--warn)
 
 ;;
 ;;; Verbosity
@@ -498,13 +512,20 @@ and the BODY will be executed silently."
 (defun eask-log   (msg &rest args) (apply #'eask--msg 'log   "[LOG]"     msg args))
 (defun eask-info  (msg &rest args) (apply #'eask--msg 'info  "[INFO]"    msg args))
 (defun eask-warn  (msg &rest args) (apply #'eask--msg 'warn  "[WARNING]" msg args))
-(defun eask-error (msg &rest args) (apply #'eask--msg 'error "[ERROR]"   msg args))
+(defun eask-error (msg &rest args)
+  (apply #'eask--msg 'error "[ERROR]"   msg args)
+  (eask--trigger-error))
+
+(defun eask--asni (symbol string)
+  "Wrap STRING with log SYMBOL."
+  (let ((ansi-function (cdr (assq symbol eask-level-color))))
+    (funcall ansi-function string)))
 
 (defun eask--msg (symbol prefix msg &rest args)
   "If LEVEL is at or below `eask-verbosity', log message."
   (eask-with-verbosity symbol
-    (let* ((ansi-function (cdr (assq symbol eask-level-color)))
-           (output (funcall ansi-function (apply #'eask--format prefix msg args))))
+    (let* ((string (apply #'eask--format prefix msg args))
+           (output (eask--asni symbol string)))
       (message "%s" output))))
 
 (defun eask--format (prefix fmt &rest args)

@@ -59,6 +59,7 @@ function _global_options(argv) {
   flags.push(def_flag(argv.development, '--dev'));
   flags.push(def_flag(argv.debug, '--debug'));
   flags.push(def_flag(argv.strict, '--strict'));
+  flags.push(def_flag(argv['allow-error'], '--allow-error'));
   flags.push(def_flag(argv.timestamps, (argv.timestamps) ? '--timestamps' : '--no-timestamps'));
   flags.push(def_flag(argv['log-level'], (argv['log-level']) ? '--log-level' : '--no-log-level'));
   flags.push(def_flag(argv['color'], '--no-color'));
