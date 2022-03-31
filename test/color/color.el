@@ -4,7 +4,8 @@
 
 (let ((eask-verbosity 99)
       (eask-timestamps t)
-      (eask-log-level t))
+      (eask-log-level t)
+      (eask--ignore-error-p t))
   (eask-debug "This is %s message" (ansi-magenta "DEBUG"))
   (eask-log   "This is %s message" (ansi-magenta "LOG"))
   (eask-info  "This is %s message" (ansi-magenta "INFO"))
