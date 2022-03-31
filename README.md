@@ -54,6 +54,8 @@ Emacs configuration/packages consistent on every operating system!
 
 ## 📰 News
 
+* `0.4.0` - Add color logger
+* `0.3.0` - Add verbosity level and timestamps
 * `0.2.0` - Done basic error handling with exit code at the end of executions
 * `0.1.39` - Use `spawn` instead `exec`; now messages will be printed immediately
 * `0.1.0` - Project barebones are pretty much complete!
