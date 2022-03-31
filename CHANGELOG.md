@@ -12,6 +12,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Remove Eask file keyword `load-path` (a72fdacece54aa7acebfea3265bf9a0eace41778)
 * Add new command `eask checkdoc` (c10ccb908f8af5bc45094efff17364eecf0b6fbc)
 * Fix install dependencies when calling package init (e9be0bc42fea6620572c70aeaf0fc684e7a5ce5c)
+* Add color to the output (afa74da680150fb8f9d50187adf1922b21f83fc9)
 
 ## 0.3.x
 > Released Mar 30, 2022
