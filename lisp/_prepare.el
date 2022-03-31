@@ -449,17 +449,15 @@ Eask file in the workspace."
 
 (defun eask--trigger-error ()
   "Trigger error at the right time."
-  (if (eask-allow-error-p)
-      (add-hook 'eask-after-command-hook #'eask--exit)
-    (eask--exit)))
+  (unless eask--ignore-error-p
+    (if (eask-allow-error-p)
+        (add-hook 'eask-after-command-hook #'eask--exit)
+      (eask--exit))))
 
 (defun eask--error (fnc &rest args)
   "On error."
-  (unless eask--ignore-error-p
-    ;; XXX Log out the error explicitly, so the user will know what causes Emacs
-    ;; to crash.
-    (eask--unsilent (eask-msg "%s" (eask--ansi 'error (apply #'format-message args))))
-    (eask--trigger-error))
+  (eask--unsilent (eask-msg "%s" (eask--ansi 'error (apply #'format-message args))))
+  (eask--trigger-error)
   (when debug-on-error (apply fnc args)))
 
 (advice-add 'error :around #'eask--error)
