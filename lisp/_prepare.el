@@ -74,6 +74,7 @@ the `eask-start' execution.")
 
 (eask-load "./extern/ansi")
 (eask-load "./extern/package-build")
+(eask-load "./extern/s")
 
 ;;
 ;;; Util
@@ -295,9 +296,9 @@ Eask file in the workspace."
 
 (defun eask--print-env-info ()
   "Display environment information at the very top of the execution."
-  (message "")
-  (message "✓ Checking Emacs version %s... done!" emacs-version)
-  (message "✓ Checking system %s... done!" system-type))
+  (eask-msg "")
+  (eask-msg "✓ Checking Emacs version %s... done!" emacs-version)
+  (eask-msg "✓ Checking system %s... done!" system-type))
 
 (defun eask-file-try-load (relative-path)
   "Try load eask file in RELATIVE-PATH."
@@ -323,8 +324,8 @@ Eask file in the workspace."
            ;; We accept Eask file in global scope, but it shouldn't be used
            ;; as a sandbox.
            (if (eask-file-try-load "./")
-               (eask-debug "✓ Loading default Eask file in %s... done!" eask-file)
-             (eask-warn "✗ Loading default Eask file... missing!"))
+               (eask-msg "✓ Loading default Eask file in %s... done!" eask-file)
+             (eask-msg "✗ Loading default Eask file... missing!"))
            (message "") ,@body)
           (t
            (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
@@ -333,8 +334,8 @@ Eask file in the workspace."
                   (user-init-file (locate-user-emacs-file "init.el"))
                   (custom-file (locate-user-emacs-file "custom.el")))
              (if (eask-file-try-load "../../")
-                 (eask-debug "✓ Loading Eask file in %s... done!" eask-file)
-               (eask-error "✗ Loading Eask file... missing!"))
+                 (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
+               (eask-msg "✗ Loading Eask file... missing!"))
              (ignore-errors (make-directory package-user-dir t))
              (run-hooks 'eask-before-command-hook)
              (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
@@ -514,6 +515,13 @@ and the BODY will be executed silently."
                  fmt)
          args))
 
+(defun eask-msg (msg &rest args)
+  "Like message but replace unicodes with color."
+  (let* ((string (apply #'format msg args))
+         (string (s-replace "✓" (ansi-green "✓") string))
+         (string (s-replace "✗" (ansi-red "✗") string)))
+    (message string)))
+
 ;;
 ;;; File
 
@@ -564,7 +572,7 @@ and the BODY will be executed silently."
      (lambda (item)
        (cl-incf count)
        (when func (funcall func item))
-       (message (concat "  - %s [%" offset "d/%d] %s%s") prefix count total
+       (message (concat "%s [%" offset "d/%d] %s%s") prefix count total
                 (ansi-green "%s" item)
                 suffix))
      sequence)))
