@@ -130,10 +130,10 @@ This variable affects `with-ansi', `with-ansi-princ'."
                `(,alias (string &rest objects)
                         ,(list 'backquote (list fn ',string ',@objects)))))
            (append
-            (mapcar 'car ansi-colors)
-            (mapcar 'car ansi-on-colors)
-            (mapcar 'car ansi-styles)
-            (mapcar 'car ansi-csis)))
+             (mapcar 'car ansi-colors)
+             (mapcar 'car ansi-on-colors)
+             (mapcar 'car ansi-styles)
+             (mapcar 'car ansi-csis)))
        ,(cons 'ansi--concat body))))
 
 (defmacro with-ansi-princ (&rest body)
@@ -149,7 +149,8 @@ FORMAT-STRING and OBJECTS are processed same as `apply'."
                   effect-or-code
                 (ansi--code effect-or-code)))
         (text (apply 'format format-string objects)))
-    (format "\e[%dm%s\e[%sm" code text ansi-reset)))
+    (if ansi-inhibit-ansi text
+      (format "\e[%dm%s\e[%sm" code text ansi-reset))))
 
 (defun ansi-csi-apply (effect-or-char &optional reps)
   "Apply EFFECT-OR-CHAR REPS (1 default) number of times."

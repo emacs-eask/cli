@@ -9,7 +9,7 @@
 ;;
 ;;  Initialization options:
 ;;
-;;    [names..]     files you want checkdoc to run on
+;;    [files..]     files you want checkdoc to run on
 ;;
 
 ;;; Code:
@@ -18,6 +18,17 @@
        "_prepare.el"
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
+
+(defun eask--help-checkdoc ()
+  "Print help if command failed"
+  (message "")
+  (message "You need to specify file(s) you want the checkdoc to run on")
+  (message "")
+  (message "  $ eask %s FILE-1 FILE-2" (eask-command))
+  (message "")
+  (message "Or edit Eask file with [files] specifier")
+  (message "")
+  (message " [+] (files \"FILE-1\" \"FILE-2\")"))
 
 (defun eask--checkdoc-print-error (text start end &optional unfixable)
   "Print error for checkdoc."
@@ -41,17 +52,6 @@
   (if-let ((files (or (eask-args) (eask-package-el-files))))
       (mapcar #'eask--checkdoc-file files)
     (eask-info "(No files have been checked (checkdoc)")
-    (eask--checkdoc-help)))
-
-(defun eask--checkdoc-help ()
-  "Print help if command failed"
-  (message "")
-  (message "You need to specify file(s) you want the checkdoc to run on")
-  (message "")
-  (message "  $ eask %s FILE-1 FILE-2" (eask-command))
-  (message "")
-  (message "Or edit Eask file with [files] specifier")
-  (message "")
-  (message " [+] (files \"FILE-1\" \"FILE-2\")"))
+    (eask--help-checkdoc)))
 
 ;;; checkdoc.el ends here

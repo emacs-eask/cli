@@ -14,14 +14,22 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
+(defun eask--help-info ()
+  "Print help if command failed"
+  )
+
 (defun eask--print-info (key)
   "Print package information."
   (when-let ((info (eask-package-get key)))
     (message "  %s" info)))
 
 (eask-start
-  (eask--print-info :name)
-  (eask--print-info :version)
-  (eask--print-info :description))
+  (if eask-package
+      (progn
+        (eask--print-info :name)
+        (eask--print-info :version)
+        (eask--print-info :description))
+    (eask-info "(Eask file has no package information)")
+    (eask--help-info)))
 
 ;;; info.el ends here

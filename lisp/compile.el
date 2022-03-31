@@ -19,6 +19,17 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
+(defun eask--help-compile ()
+  "Print help if command failed"
+  (message "")
+  (message "You need to specify file(s) you want to compile")
+  (message "")
+  (message "  $ eask %s FILE-1 FILE-2" (eask-command))
+  (message "")
+  (message "Or edit Eask file with [files] specifier")
+  (message "")
+  (message " [+] (files \"FILE-1\" \"FILE-2\")"))
+
 ;; Handle options
 (when (eask-strict-p) (setq byte-compile-error-on-warn t))
 (when (= eask-verbosity 4) (setq byte-compile-verbose t))
@@ -41,17 +52,6 @@
             (when (eask--byte-compile-file filename) (push filename compiled))))
         (eask-info "(Total of %s files compiled)" (length compiled)))
     (eask-info "(No files have been compiled)")
-    (eask--compile-help)))
-
-(defun eask--compile-help ()
-  "Print help if command failed"
-  (message "")
-  (message "You need to specify file(s) you want to compile")
-  (message "")
-  (message "  $ eask %s FILE-1 FILE-2" (eask-command))
-  (message "")
-  (message "Or edit Eask file with [files] specifier")
-  (message "")
-  (message " [+] (files \"FILE-1\" \"FILE-2\")"))
+    (eask--help-compile)))
 
 ;;; compile.el ends here

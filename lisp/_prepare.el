@@ -458,6 +458,16 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   :type 'boolean
   :group 'eask)
 
+(defcustom eask-level-color
+  '((debug . ansi-blue)
+    (log   . ansi-white)
+    (info  . ansi-cyan)
+    (warn  . ansi-yellow)
+    (error . ansi-red))
+  "Alist of each log level's color, in (SYMBOL . ANSI-FUNCTION)."
+  :type 'alist
+  :group 'eask)
+
 (defun eask--verb2lvl (symbol)
   "Convert verbosity SYMBOL to level."
   (cl-case symbol
@@ -493,15 +503,12 @@ and the BODY will be executed silently."
 (defun eask-warn  (msg &rest args) (apply #'eask--msg 'warn  "[WARNING]" msg args))
 (defun eask-error (msg &rest args) (apply #'eask--msg 'error "[ERROR]"   msg args))
 
-(defmacro eask-log-2 (msg &rest args)
-  ""
-  (declare (indent 2) (debug t))
-  `(eask--msg 'log "[LOG]" (eask-with-ansi ,msg ,@args)))
-
-(defun eask--msg (level prefix msg &rest args)
+(defun eask--msg (symbol prefix msg &rest args)
   "If LEVEL is at or below `eask-verbosity', log message."
-  (eask-with-verbosity level
-    (message "%s" (apply #'eask--format prefix msg args))))
+  (eask-with-verbosity symbol
+    (let* ((ansi-function (cdr (assq symbol eask-level-color)))
+           (output (funcall ansi-function (apply #'eask--format prefix msg args))))
+      (message "%s" output))))
 
 (defun eask--format (prefix fmt &rest args)
   "Format Eask messages."
@@ -510,15 +517,6 @@ and the BODY will be executed silently."
                  (when eask-log-level (concat prefix " "))
                  fmt)
          args))
-
-(defmacro eask-with-ansi (fmt &rest args)
-  "Simply wrapper for macro `with-ansi'."
-  `(with-ansi (format ,fmt ,@args)))
-
-(defmacro eask-message (fmt &rest args)
-  "Like function `message' but with color."
-  (declare (indent 2) (debug t))
-  `(message (concat (eask-with-ansi ,fmt ,@args) "\n")))
 
 ;;
 ;;; File
