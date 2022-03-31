@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Copyright (C) 2022 Jen-Chieh Shen
 
 # This program is free software; you can redistribute it and/or modify
@@ -17,11 +19,10 @@
 
 ## Commentary:
 #
-# Test (trigger) error on GitHub Actions
+# Test color
 #
 
-echo "Test (trigger) error on GitHub Actions"
-cd $PSScriptRoot
+echo "Test color"
+cd $(dirname "$0")
 
-# This should trigger an error!
-eask info
+eask load color.el

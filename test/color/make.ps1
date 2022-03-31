@@ -23,5 +23,4 @@
 echo "Test (trigger) error on GitHub Actions"
 cd $PSScriptRoot
 
-# This should trigger an error!
-eask info
+eask load color.el
