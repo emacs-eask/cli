@@ -26,3 +26,4 @@ echo "Test color"
 cd $(dirname "$0")
 
 eask load color.el
+eask load color.el --no-color
