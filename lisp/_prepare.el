@@ -38,6 +38,44 @@
 (advice-add 'load-file :around #'eask--load-file--adv)
 
 ;;
+;;; Execution
+
+(defconst eask--script (nth 1 (member "-scriptload" command-line-args))
+  "Script currently executing.")
+
+(defun eask-command ()
+  "What's the current command?"
+  (file-name-sans-extension (file-name-nondirectory eask--script)))
+
+(defun eask-script (script)
+  "Return full script filename."
+  (let* ((script-el (concat script ".el"))
+         (lisp-dir (file-name-directory eask--script))
+         (script-file (expand-file-name script-el lisp-dir)))
+    script-file))
+
+(defvar eask-loading-file-p nil
+  "This became t; if we are loading script from another file and not expecting
+the `eask-start' execution.")
+
+(defun eask-load (script)
+  "Load another eask script; so we can reuse functions across all scripts."
+  (let ((eask-loading-file-p t)) (eask-call script)))
+
+(defun eask-call (script)
+  "Call another eask script."
+  (if-let* ((script-file (eask-script script))
+            ((file-exists-p script-file)))
+      (load script-file nil t)
+    (error "Scripting missing %s..." script-file)))
+
+;;
+;;; Externals
+
+(eask-load "./extern/ansi")
+(eask-load "./extern/package-build")
+
+;;
 ;;; Util
 
 (defmacro eask--silent (&rest body)
@@ -116,6 +154,7 @@
 (defun eask-no-timestamps-p () (eask--flag "--no-timestamps"))  ; --no-timestamps
 (defun eask-log-level-p ()     (eask--flag "--log-level"))      ; --log-level
 (defun eask-no-log-level-p ()  (eask--flag "--no-log-level"))   ; --no-log-level
+(defun eask-no-color-p ()      (eask--flag "--no-color"))       ; --no-color
 
 ;;; String (with arguments)
 (defun eask-proxy ()       (eask--flag-value "--proxy"))        ; --proxy
@@ -137,6 +176,7 @@
   (when (eask-no-timestamps-p) (setq eask-timestamps nil))
   (when (eask-log-level-p) (setq eask-log-level t))
   (when (eask-no-log-level-p) (setq eask-log-level nil))
+  (when (eask-no-color-p) (setq ansi-inhibit-ansi t))
   (eask--add-proxy "http"     (eask-proxy))
   (eask--add-proxy "https"    (eask-proxy))
   (eask--add-proxy "http"     (eask-http-proxy))
@@ -149,38 +189,6 @@
 (defun eask--add-proxy (protocal host)
   "Add proxy."
   (when host (push (cons protocal (eask-proxy)) url-proxy-services)))
-
-;;
-;;; Execution
-
-(defconst eask--script (nth 1 (member "-scriptload" command-line-args))
-  "Script currently executing.")
-
-(defun eask-command ()
-  "What's the current command?"
-  (file-name-sans-extension (file-name-nondirectory eask--script)))
-
-(defun eask-script (script)
-  "Return full script filename."
-  (let* ((script-el (concat script ".el"))
-         (lisp-dir (file-name-directory eask--script))
-         (script-file (expand-file-name script-el lisp-dir)))
-    script-file))
-
-(defvar eask-loading-file-p nil
-  "This became t; if we are loading script from another file and not expecting
-the `eask-start' execution.")
-
-(defun eask-load (script)
-  "Load another eask script; so we can reuse functions across all scripts."
-  (let ((eask-loading-file-p t)) (eask-call script)))
-
-(defun eask-call (script)
-  "Call another eask script."
-  (if-let* ((script-file (eask-script script))
-            ((file-exists-p script-file)))
-      (load script-file nil t)
-    (error "Scripting missing %s..." script-file)))
 
 ;;
 ;;; Core
@@ -202,7 +210,8 @@ other scripts internally.  See function `eask-call'.")
    '("-g" "-f" "--depth" "--dev"
      "--debug" "--strict"
      "--timestamps" "--no-timestamps"
-     "--log-level" "--no-log-level"))
+     "--log-level" "--no-log-level"
+     "--no-color"))
   "List of boolean type options")
 
 (defconst eask--option-args
@@ -459,10 +468,24 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
     (`error 0)
     (t symbol)))
 
+(defun eask--reach-verbosity-p (symbol)
+  "Return t if SYMBOL reach verbosity (should be printed)."
+  (>= eask-verbosity (eask--verb2lvl symbol)))
+
+(defmacro eask-if-verbosity (symbol msg &rest body)
+  "We either print BODY or MSG depends on the verbosity level.
+
+If verbosity is reached, we print BODY and no MSG; otherwise, we print only MSG
+and the BODY will be executed silently."
+  (declare (indent 2) (debug t))
+  `(progn
+     (unless (eask--reach-verbosity-p ,symbol) ,msg)
+     (eask-with-verbosity ,symbol ,@body)))
+
 (defmacro eask-with-verbosity (symbol &rest body)
   "If LEVEL is above `eask-verbosity'; hide all messages in BODY."
   (declare (indent 1) (debug t))
-  `(if (>= eask-verbosity (eask--verb2lvl ,symbol)) (progn ,@body) (eask--silent ,@body)))
+  `(if (eask--reach-verbosity-p ,symbol) (progn ,@body) (eask--silent ,@body)))
 
 (defun eask-debug (msg &rest args) (apply #'eask--msg 'debug "[DEBUG]"   msg args))
 (defun eask-log   (msg &rest args) (apply #'eask--msg 'log   "[LOG]"     msg args))
@@ -470,28 +493,41 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (defun eask-warn  (msg &rest args) (apply #'eask--msg 'warn  "[WARNING]" msg args))
 (defun eask-error (msg &rest args) (apply #'eask--msg 'error "[ERROR]"   msg args))
 
+(defmacro eask-log-2 (msg &rest args)
+  ""
+  (declare (indent 2) (debug t))
+  `(eask--msg 'log "[LOG]" (eask-with-ansi ,msg ,@args)))
+
 (defun eask--msg (level prefix msg &rest args)
   "If LEVEL is at or below `eask-verbosity', log message."
   (eask-with-verbosity level
     (message "%s" (apply #'eask--format prefix msg args))))
 
-(defun eask--format (prefix format-control &rest format-args)
+(defun eask--format (prefix fmt &rest args)
   "Format Eask messages."
   (apply #'format
          (concat (when eask-timestamps (format-time-string "%Y-%m-%d %H:%M:%S "))
                  (when eask-log-level (concat prefix " "))
-                 format-control)
-         format-args))
+                 fmt)
+         args))
+
+(defmacro eask-with-ansi (fmt &rest args)
+  "Simply wrapper for macro `with-ansi'."
+  `(with-ansi (format ,fmt ,@args)))
+
+(defmacro eask-message (fmt &rest args)
+  "Like function `message' but with color."
+  (declare (indent 2) (debug t))
+  `(message (concat (eask-with-ansi ,fmt ,@args) "\n")))
 
 ;;
 ;;; File
 
-(eask-load "./extern/package-build")
-
 (defun eask-guess-package-name ()
   "Return the possible package name."
   (or (eask-package-get :name)
-      (file-name-nondirectory (file-name-sans-extension eask-package-file))))
+      (ignore-errors (file-name-nondirectory
+                      (file-name-sans-extension eask-package-file)))))
 
 (defun eask-package-files ()
   "Return package files in workspace."
@@ -533,8 +569,10 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
     (mapc
      (lambda (item)
        (cl-incf count)
-       (funcall func item)
-       (message (concat "  - %s [%" offset "d/%d] %s%s") prefix count total item suffix))
+       (when func (funcall func item))
+       (message (concat "  - %s [%" offset "d/%d] %s%s") prefix count total
+                (ansi-green "%s" item)
+                suffix))
      sequence)))
 
 ;;
