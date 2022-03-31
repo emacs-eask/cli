@@ -34,7 +34,7 @@ yargs
     type: 'boolean',
   })
   .option('strict', {
-    description: 'N/A',
+    description: 'report error instead of warnings',
     type: 'boolean',
   })
   .option('timestamps', {
