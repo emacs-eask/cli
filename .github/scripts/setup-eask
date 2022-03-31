@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+npm install
+chmod -R 777 ./
+echo "${{ github.workspace }}/bin" >> "$GITHUB_PATH"
