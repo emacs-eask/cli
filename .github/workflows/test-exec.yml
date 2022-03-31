@@ -41,11 +41,11 @@ jobs:
 
     - name: Prepare Eask (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
-      run: .github/script/setup-eask
+      run: ${{ github.workspace }}/.github/script/setup-eask
 
     - name: Prepare Eask (Windows)
       if: matrix.os == 'windows-latest'
-      run: .github/scripts/setup-eask.ps1
+      run: ${{ github.workspace }}/.github/scripts/setup-eask.ps1
 
     - name: Test commands (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
