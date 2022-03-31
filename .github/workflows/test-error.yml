@@ -40,15 +40,12 @@ jobs:
     - name: Prepare Eask (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       run: |
-        npm install
         chmod -R 777 ./
-        echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
+        .github/scripts/setup-eask
 
     - name: Prepare Eask (Windows)
       if: matrix.os == 'windows-latest'
-      run: |
-        npm install
-        echo "${{ github.workspace }}/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      run: .github/scripts/setup-eask.ps1
 
     - name: Test commands (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
