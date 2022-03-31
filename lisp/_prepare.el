@@ -126,9 +126,10 @@ the `eask-start' execution.")
 
 (defun eask-pkg-init ()
   "Package initialization."
-  (eask-with-verbosity 'log
+  (eask-with-verbosity 'debug
     (package-initialize)
     (package-refresh-contents))
+  (eask-msg (ansi-green "Loading package information... done"))
   (eask-install-dependencies)
   (eask--silent
     (eask--update-exec-path)
@@ -553,11 +554,16 @@ and the BODY will be executed silently."
                  fmt)
          args))
 
+(defun eask--msg-paint-kwds (string)
+  "Paint keywords from STRING."
+  (let* ((string (s-replace "✓" (ansi-green "✓") string))
+         (string (s-replace "✗" (ansi-red "✗") string)))
+    string))
+
 (defun eask-msg (msg &rest args)
   "Like message but replace unicodes with color."
   (let* ((string (apply #'format msg args))
-         (string (s-replace "✓" (ansi-green "✓") string))
-         (string (s-replace "✗" (ansi-red "✗") string)))
+         (string (eask--msg-paint-kwds string)))
     (message string)))
 
 ;;

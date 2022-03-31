@@ -44,8 +44,8 @@
 (defun eask--checkdoc-file (filename)
   "Run checkdoc on FILENAME."
   (let ((filename (expand-file-name filename)))
-    (message "")
-    (message "`%s` with checkdoc" filename)
+    (eask-msg "")
+    (eask-msg "`%s` with checkdoc" (ansi-green filename))
     (checkdoc-file filename)))
 
 (eask-start
