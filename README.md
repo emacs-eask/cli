@@ -214,7 +214,11 @@ The sandbox logic is stored inside file `./lisp/_prepare.el`.
 ## 📝 Todo list
 
 - [ ] logging with color
-- [ ] Add `checkdoc` command
+- [ ] Add `elint` command
+- [ ] Add `elsa` command
+- [ ] Add `lint-declare` command
+- [ ] Add `lint-indent` command
+- [ ] Add `lint-regexps` command
 - [ ] Add `add-source` command
 
 ## Contribute
