@@ -14,11 +14,15 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
-(defun eask--help-install-deps ()
-  "Print help if command failed."
-  )
-
 (eask-start
-  (eask-pkg-init))
+  (let ((dep eask-depends-on) (dep-dev eask-depends-on-dev))
+    (cond
+     ((and (not dep) (not dep-dev))
+      (eask-msg "✗ (No dependencies are specify in your Eask file)")
+      (eask-msg "")
+      (eask-msg "You can add dependencies by using specifier [depends-on]")
+      (eask-msg "")
+      (eask-msg "  [+] (depends-on \"PACKAGE-NAME\")"))
+     (t (eask-pkg-init)))))
 
 ;;; install-deps.el ends here
