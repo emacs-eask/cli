@@ -19,18 +19,22 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
+(defun eask--package-lint-file (filename)
+  "Package lint FILENAME."
+  (let ((filename (expand-file-name filename)))
+    (message "")
+    (message "`%s` with package-lint" filename)
+    (with-temp-buffer
+      (emacs-lisp-mode)
+      (insert-file-contents filename)
+      (package-lint-current-buffer)))
+  (with-current-buffer "*Package-Lint*" (message "%s" (buffer-string))))
+
 (eask-start
   (eask-package-install 'package-lint)
   (if-let ((files (or (eask-args) (eask-package-el-files))))
       (progn
-        (dolist (el files)
-          (message "")
-          (message "`%s` with package-lint" el)
-          (with-temp-buffer
-            (emacs-lisp-mode)
-            (insert-file-contents el)
-            (package-lint-current-buffer))
-          (with-current-buffer "*Package-Lint*" (message "%s" (buffer-string))))
+        (mapcar #'eask--package-lint-file files)
         (eask-info "(Total of %s files linted)" (length files)))
     (eask-info "(No files have been linted)")))
 

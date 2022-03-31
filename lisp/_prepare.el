@@ -61,6 +61,19 @@
     (add-to-list 'load-path (file-name-directory filename)))
   (delete-dups load-path))
 
+(defun eask-install-dependencies ()
+  "Install dependencies defined in Eask file."
+  ;;
+  ;; XXX Without ignore-errors guard, it will trigger error
+  ;;
+  ;;   Can't find library xxxxxxx.el
+  ;;
+  ;; But we can remove this after Emacs 28, since function `find-library-name'
+  ;; has replaced the function `signal' instead of the `error'.
+  (eask-ignore-errors
+    (mapc #'eask-package-install eask-depends-on)
+    (when (eask-dev-p) (mapc #'eask-package-install eask-depends-on-dev))))
+
 (defun eask-pkg-init ()
   "Package initialization."
   (eask-with-verbosity 'log
@@ -68,7 +81,8 @@
     (package-refresh-contents))
   (eask--silent
     (eask--update-exec-path)
-    (eask--update-load-path)))
+    (eask--update-load-path))
+  (eask-install-dependencies))
 
 (defun eask-package-install (pkg)
   "Install the package PKG."
@@ -488,7 +502,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
     (delete-dups files)
     (setq files (cl-remove-if-not #'file-exists-p files))
     (unless files
-      (eask-info "No matching file(s) found in %s: %s" default-directory eask-files))
+      (eask-debug "No matching file(s) found in %s: %s" default-directory eask-files))
     files))
 
 (defun eask-package-el-files ()

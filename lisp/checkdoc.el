@@ -6,6 +6,11 @@
 ;;
 ;;   $ eask checkdoc
 ;;
+;;
+;;  Initialization options:
+;;
+;;    [names..]     files you want checkdoc to run on
+;;
 
 ;;; Code:
 
@@ -25,11 +30,28 @@
 
 (setq checkdoc-create-error-function #'eask--checkdoc-print-error)
 
+(defun eask--checkdoc-file (filename)
+  "Run checkdoc on FILENAME."
+  (let ((filename (expand-file-name filename)))
+    (message "")
+    (message "`%s` with checkdoc" filename)
+    (checkdoc-file filename)))
+
 (eask-start
-  (if-let ((files (eask-args)))
-      (mapcar #'checkdoc-file files)
-    (message "You need to specify the file you want the checkdoc to run on")
-    (message "For example,")
-    (message "  eask checkdoc FILE-1 FILE-2")))
+  (if-let ((files (or (eask-args) (eask-package-el-files))))
+      (mapcar #'eask--checkdoc-file files)
+    (eask-info "(No files have been checked (checkdoc)")
+    (eask--checkdoc-help)))
+
+(defun eask--checkdoc-help ()
+  "Print help if command failed"
+  (message "")
+  (message "You need to specify file(s) you want the checkdoc to run on")
+  (message "")
+  (message "  $ eask %s FILE-1 FILE-2" (eask-command))
+  (message "")
+  (message "Or edit Eask file with [files] specifier")
+  (message "")
+  (message " [+] (files \"FILE-1\" \"FILE-2\")"))
 
 ;;; checkdoc.el ends here

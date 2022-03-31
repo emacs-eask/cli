@@ -24,7 +24,7 @@
 (when (= eask-verbosity 4) (setq byte-compile-verbose t))
 
 (defun eask--byte-compile-file (filename)
-  "Byte compile FILENAME with display messages."
+  "Byte compile FILENAME."
   (let* ((filename (expand-file-name filename))
          (result (byte-compile-file filename)) (compiled (eq result t)))
     (unless byte-compile-verbose
@@ -34,10 +34,24 @@
 
 (eask-start
   (eask-pkg-init)
-  (let ((files (or (eask-args) (eask-package-el-files))) compiled)
-    (eask-with-verbosity 'log
-      (dolist (filename files)
-        (when (eask--byte-compile-file filename) (push filename compiled))))
-    (eask-info "(Total of %s files compiled)" (length compiled))))
+  (if-let ((files (or (eask-args) (eask-package-el-files))))
+      (let (compiled)
+        (eask-with-verbosity 'log
+          (dolist (filename files)
+            (when (eask--byte-compile-file filename) (push filename compiled))))
+        (eask-info "(Total of %s files compiled)" (length compiled)))
+    (eask-info "(No files have been compiled)")
+    (eask--compile-help)))
+
+(defun eask--compile-help ()
+  "Print help if command failed"
+  (message "")
+  (message "You need to specify file(s) you want to compile")
+  (message "")
+  (message "  $ eask %s FILE-1 FILE-2" (eask-command))
+  (message "")
+  (message "Or edit Eask file with [files] specifier")
+  (message "")
+  (message " [+] (files \"FILE-1\" \"FILE-2\")"))
 
 ;;; compile.el ends here
