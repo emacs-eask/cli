@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
 
 npm install
-chmod -R 777 ./
 echo "$GITHUB_WORKSPACE/bin" >> "$GITHUB_PATH"

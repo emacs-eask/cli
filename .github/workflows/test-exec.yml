@@ -41,7 +41,9 @@ jobs:
 
     - name: Prepare Eask (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
-      run: .github/scripts/setup-eask
+      run: |
+        chmod -R 777 ./
+        .github/scripts/setup-eask
 
     - name: Prepare Eask (Windows)
       if: matrix.os == 'windows-latest'
