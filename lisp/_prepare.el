@@ -84,6 +84,11 @@ the `eask-start' execution.")
   (declare (indent 0) (debug t))
   `(let ((inhibit-message t) message-log-max) ,@body))
 
+(defmacro eask--unsilent (&rest body)
+  "Execute BODY with message."
+  (declare (indent 0) (debug t))
+  `(let (inhibit-message) ,@body))
+
 ;;
 ;;; Package
 
@@ -100,36 +105,47 @@ the `eask-start' execution.")
     (add-to-list 'load-path (file-name-directory filename)))
   (delete-dups load-path))
 
+(defun eask-dependencies ()
+  "Return list of dependencies."
+  (append eask-depends-on eask-depends-on-dev))
+
 (defun eask-install-dependencies ()
   "Install dependencies defined in Eask file."
-  ;;
-  ;; XXX Without ignore-errors guard, it will trigger error
-  ;;
-  ;;   Can't find library xxxxxxx.el
-  ;;
-  ;; But we can remove this after Emacs 28, since function `find-library-name'
-  ;; has replaced the function `signal' instead of the `error'.
-  (eask-ignore-errors
-    (mapc #'eask-package-install eask-depends-on)
-    (when (eask-dev-p) (mapc #'eask-package-install eask-depends-on-dev))))
+  (when (eask-dependencies)
+    (eask-log "Installing dependencies...")
+    ;;
+    ;; XXX Without ignore-errors guard, it will trigger error
+    ;;
+    ;;   Can't find library xxxxxxx.el
+    ;;
+    ;; But we can remove this after Emacs 28, since function `find-library-name'
+    ;; has replaced the function `signal' instead of the `error'.
+    (eask-ignore-errors
+      (mapc #'eask-package-install eask-depends-on)
+      (when (eask-dev-p) (mapc #'eask-package-install eask-depends-on-dev)))))
 
 (defun eask-pkg-init ()
   "Package initialization."
   (eask-with-verbosity 'log
     (package-initialize)
     (package-refresh-contents))
+  (eask-install-dependencies)
   (eask--silent
     (eask--update-exec-path)
-    (eask--update-load-path))
-  (eask-install-dependencies))
+    (eask--update-load-path)))
 
 (defun eask-package-install (pkg)
   "Install the package PKG."
   (package-initialize)
-  (let ((pkg (if (stringp pkg) (intern pkg) pkg)))
-    (unless (package-installed-p pkg)
-      (package-refresh-contents)
-      (package-install pkg))
+  (let ((pkg-string (ansi-green (format "%s" pkg)))
+        (pkg (if (stringp pkg) (intern pkg) pkg)))
+    (if (package-installed-p pkg)
+        (eask-msg "  - Skipping %s... already installed" pkg-string)
+      (eask-if-verbosity 'debug
+          (eask-msg "  - Installing %s... downloading" pkg-string)
+        (package-refresh-contents)
+        (package-install pkg))
+      (eask-msg "  - Installing %s... done" pkg-string))
     (require pkg nil t)))
 
 ;;
@@ -441,7 +457,7 @@ Eask file in the workspace."
   (unless eask--ignore-error-p
     ;; XXX Log out the error explicitly, so the user will know what causes Emacs
     ;; to crash.
-    (eask-msg "%s" (eask--asni 'error (apply #'format-message args)))
+    (eask--unsilent (eask-msg "%s" (eask--ansi 'error (apply #'format-message args))))
     (eask--trigger-error))
   (when debug-on-error (apply fnc args)))
 
@@ -449,7 +465,8 @@ Eask file in the workspace."
 
 (defun eask--warn (&rest args)
   "On warn."
-  (eask-msg "%s" (eask--asni 'warn (apply #'format-message args))))
+  (eask--unsilent
+    (eask-msg "%s" (eask--ansi 'warn (apply #'format-message args)))))
 
 (advice-add 'warn :override #'eask--warn)
 
@@ -516,7 +533,7 @@ and the BODY will be executed silently."
   (apply #'eask--msg 'error "[ERROR]"   msg args)
   (eask--trigger-error))
 
-(defun eask--asni (symbol string)
+(defun eask--ansi (symbol string)
   "Wrap STRING with log SYMBOL."
   (let ((ansi-function (cdr (assq symbol eask-level-color))))
     (funcall ansi-function string)))
@@ -525,7 +542,7 @@ and the BODY will be executed silently."
   "If LEVEL is at or below `eask-verbosity', log message."
   (eask-with-verbosity symbol
     (let* ((string (apply #'eask--format prefix msg args))
-           (output (eask--asni symbol string)))
+           (output (eask--ansi symbol string)))
       (message "%s" output))))
 
 (defun eask--format (prefix fmt &rest args)
