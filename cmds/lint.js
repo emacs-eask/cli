@@ -21,7 +21,7 @@
 
 const util = require("../src/util");
 
-exports.command = ['lint [names..]'];
+exports.command = ['lint [names..]', 'lint-package [names..]'];
 exports.desc = 'lint the package using package-lint';
 exports.builder = {
   names: {
