@@ -535,9 +535,10 @@ and the BODY will be executed silently."
   (eask--trigger-error))
 
 (defun eask--ansi (symbol string)
-  "Wrap STRING with log SYMBOL."
-  (let ((ansi-function (cdr (assq symbol eask-level-color))))
-    (funcall ansi-function string)))
+  "Paint STRING with color defined by log level."
+  (if-let ((ansi-function (cdr (assq symbol eask-level-color))))
+      (funcall ansi-function string)
+    string))
 
 (defun eask--msg (symbol prefix msg &rest args)
   "If LEVEL is at or below `eask-verbosity', log message."
