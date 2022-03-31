@@ -53,6 +53,10 @@ yargs
     description: 'log without level',
     type: 'boolean',
   })
+  .option('no-color', {
+    description: 'disable color output',
+    type: 'boolean',
+  })
   .option('proxy', {
     description: 'update proxy for HTTP and HTTPS to host',
     type: 'string',
