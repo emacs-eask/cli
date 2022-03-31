@@ -13,6 +13,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add new command `eask checkdoc` (c10ccb908f8af5bc45094efff17364eecf0b6fbc)
 * Fix install dependencies when calling package init (e9be0bc42fea6620572c70aeaf0fc684e7a5ce5c)
 * Add color to the output (afa74da680150fb8f9d50187adf1922b21f83fc9)
+* Add new option `--allow-error` (c9c4cf24a6d42633f8c725385c7e4910774075ff)
+* Add new command `eask install-deps` (955a36231fa968e1fdedd29ae9c818385d21f93e)
 
 ## 0.3.x
 > Released Mar 30, 2022
