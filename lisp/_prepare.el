@@ -445,18 +445,15 @@ Eask file in the workspace."
   "Log level for all messages; 4 means trace most anything, 0 means nothing.
 
 Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
-  :type 'integer
-  :group 'eask)
+  :type 'integer)
 
 (defcustom eask-timestamps nil
   "Log messages with timestamps."
-  :type 'boolean
-  :group 'eask)
+  :type 'boolean)
 
 (defcustom eask-log-level nil
   "Log messages with level."
-  :type 'boolean
-  :group 'eask)
+  :type 'boolean)
 
 (defcustom eask-level-color
   '((debug . ansi-blue)
@@ -465,8 +462,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
     (warn  . ansi-yellow)
     (error . ansi-red))
   "Alist of each log level's color, in (SYMBOL . ANSI-FUNCTION)."
-  :type 'alist
-  :group 'eask)
+  :type 'alist)
 
 (defun eask--verb2lvl (symbol)
   "Convert verbosity SYMBOL to level."
@@ -578,7 +574,6 @@ and the BODY will be executed silently."
 
 (defcustom eask-dist-path "dist"
   "Name of default target directory for building packages."
-  :type 'string
-  :group 'eask)
+  :type 'string)
 
 ;;; _prepare.el ends here
