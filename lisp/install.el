@@ -31,7 +31,7 @@
   (eask-pkg-init)
   (if-let ((names (eask-args)))
       ;; If package [name..] are specified, we try to install it
-      (eask-progress "Installing" names "... done!" #'eask-package-install)
+      (eask-progress "  - Installing" names "... done!" #'eask-package-install)
     ;; Else we try to install package from the working directory
     (if-let* ((packaged (eask-packaged-file))
               (target (or packaged eask-package-file)))
