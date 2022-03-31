@@ -24,7 +24,7 @@
 (eask-load "package")  ; load dist path
 
 (defun eask--help-install ()
-  "Print help if command failed"
+  "Print help if command failed."
   )
 
 (eask-start
