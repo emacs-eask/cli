@@ -518,16 +518,6 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   "Return t if SYMBOL reach verbosity (should be printed)."
   (>= eask-verbosity (eask--verb2lvl symbol)))
 
-(defmacro eask-if-verbosity (symbol msg &rest body)
-  "We either print BODY or MSG depends on the verbosity level.
-
-If verbosity is reached, we print BODY and no MSG; otherwise, we print only MSG
-and the BODY will be executed silently."
-  (declare (indent 2) (debug t))
-  `(progn
-     (unless (eask--reach-verbosity-p ,symbol) ,msg)
-     (eask-with-verbosity ,symbol ,@body)))
-
 (defmacro eask-with-verbosity (symbol &rest body)
   "If LEVEL is above `eask-verbosity'; hide all messages in BODY."
   (declare (indent 1) (debug t))
@@ -568,11 +558,19 @@ and the BODY will be executed silently."
          (string (s-replace "✗" (ansi-red "✗") string)))
     string))
 
-(defun eask-msg (msg &rest args)
-  "Like message but replace unicodes with color."
+(defun eask--format-paint-kwds (msg &rest args)
+  "Paint keywords after format MSG and ARGS."
   (let* ((string (apply #'format msg args))
          (string (eask--msg-paint-kwds string)))
-    (message string)))
+    string))
+
+(defun eask-msg (msg &rest args)
+  "Like function `message' but replace unicodes with color."
+  (message (apply #'eask--format-paint-kwds msg args)))
+
+(defun eask-write (msg &rest args)
+  "Like function `eask-msg' but without newline at the end."
+  (princ (apply #'eask--format-paint-kwds msg args) 'external-debugging-output))
 
 ;;
 ;;; File
@@ -615,6 +613,11 @@ and the BODY will be executed silently."
 
 ;;
 ;;; Progress
+
+(defmacro eask-with-progress (msg-start body msg-end)
+  "Progress BODY wrapper with prefix and suffix messages."
+  (declare (indent 0) (debug t))
+  `(progn (eask-write ,msg-start) ,body (eask-msg ,msg-end)))
 
 (defun eask-progress (prefix sequence suffix func)
   "Progress SEQUENCE with messages."
