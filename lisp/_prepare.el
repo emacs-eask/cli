@@ -319,13 +319,15 @@ Eask file in the workspace."
         (defalias keyword (symbol-function old))))
      result))
 
-(defvar eask-file nil "The Eask file path.")
+(defvar eask-file nil "The Eask file's filename.")
+(defvar eask-file-root nil "The Eask file's directory .")
 
 (defun eask-file-load (location &optional noerror)
   "Load Eask file in the LOCATION."
   (when-let* ((target-eask-file (expand-file-name location user-emacs-directory))
               (result (eask--alias-env (load target-eask-file noerror t))))
-    (setq eask-file target-eask-file)  ; assign eask file only if success
+    (setq eask-file target-eask-file  ; assign eask file only if success
+          eask-file-root (file-name-directory target-eask-file))
     result))
 
 (defun eask--print-env-info ()

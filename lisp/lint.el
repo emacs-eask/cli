@@ -21,9 +21,10 @@
 
 (defun eask--package-lint-file (filename)
   "Package lint FILENAME."
-  (let ((filename (expand-file-name filename)))
+  (let* ((filename (expand-file-name filename))
+         (file (s-replace eask-file-root "" filename)))
     (message "")
-    (message "`%s` with package-lint" filename)
+    (message "`%s` with package-lint" file)
     (with-temp-buffer
       (emacs-lisp-mode)
       (insert-file-contents filename)

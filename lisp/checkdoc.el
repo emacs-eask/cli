@@ -30,8 +30,12 @@
   (message "")
   (message " [+] (files \"FILE-1\" \"FILE-2\")"))
 
+(require 'checkdoc)
+(defvar eask--checkdoc-error nil "Error flag.")
+
 (defun eask--checkdoc-print-error (text start end &optional unfixable)
   "Print error for checkdoc."
+  (setq eask--checkdoc-error t)
   (let ((msg (concat (checkdoc-buffer-label) ":"
                      (int-to-string (count-lines (point-min) (or start (point-min))))
                      ": " text)))
@@ -43,10 +47,14 @@
 
 (defun eask--checkdoc-file (filename)
   "Run checkdoc on FILENAME."
-  (let ((filename (expand-file-name filename)))
+  (let* ((filename (expand-file-name filename))
+         (file (s-replace eask-file-root "" filename))
+         (eask--checkdoc-error))
     (eask-msg "")
-    (eask-msg "`%s` with checkdoc" (ansi-green filename))
-    (checkdoc-file filename)))
+    (eask-msg "`%s` with checkdoc (%s)" (ansi-green file) checkdoc-version)
+    (checkdoc-file filename)
+    (unless eask--checkdoc-error
+      (eask-msg "No issues found"))))
 
 (eask-start
   (if-let ((files (or (eask-args) (eask-package-el-files))))
