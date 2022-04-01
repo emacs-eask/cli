@@ -27,6 +27,8 @@ echo "Copy test configuration"
 mkdir "$env:USERPROFILE/.emacs.d"
 robocopy /e "./test/mini.emacs.d/" "$env:USERPROFILE/.emacs.d"
 
+ls "$env:USERPROFILE/.emacs.d"
+
 echo "Testing global commands..."
 eask archives -g
 eask install -g spinner ivy beacon
