@@ -23,8 +23,6 @@
 # (mini.emacs.d), and place it under to the default Emacs directory!
 #
 
-SETLOCAL EnableDelayedExpansion
-
 echo "Copy test configuration"
 mkdir "$env:USERPROFILE/.emacs.d"
 robocopy /e "./test/mini.emacs.d/" "$env:USERPROFILE/.emacs.d"
