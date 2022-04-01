@@ -108,15 +108,26 @@ the `eask-start' execution.")
 
 (defun eask-dependencies ()
   "Return list of dependencies."
-  (append eask-depends-on eask-depends-on-dev))
+  (append eask-depends-on (and (eask-dev-p) eask-depends-on-dev)))
+
+(defun eask--install-dpes (deps msg)
+  "Install DEPS."
+  (let* ((deps (mapcar #'intern deps))
+         (len (length deps))
+         (ies (if (= len 1) "y" "ies"))
+         (pkg-installed (cl-remove-if #'package-installed-p deps))
+         (installed (length pkg-installed)) (skipped (- len installed)))
+    (eask-log "Installing %s %s dependenc%s..." len msg ies)
+    (mapc #'eask-package-install deps)
+    (eask-info "(Total of dependenc%s %s installed, %s skipped)"
+               ies installed skipped)))
 
 (defun eask-install-dependencies ()
   "Install dependencies defined in Eask file."
-  (when (eask-dependencies)
-    (let ((len (length (eask-dependencies))))
-      (eask-log "Installing %s package dependenc%s..." len (if (= len 1) "y" "ies")))
-    (mapc #'eask-package-install eask-depends-on)
-    (when (eask-dev-p) (mapc #'eask-package-install eask-depends-on-dev))))
+  (when eask-depends-on
+    (eask--install-dpes eask-depends-on "package"))
+  (when (and eask-depends-on-dev (eask-dev-p))
+    (eask--install-dpes eask-depends-on-dev "development")))
 
 (defun eask-pkg-init ()
   "Package initialization."
@@ -133,8 +144,7 @@ the `eask-start' execution.")
 
 (defun eask-package-install (pkg)
   "Install the package PKG."
-  (package-initialize)
-  (package-refresh-contents)
+  (eask--silent (package-initialize))
   (let* ((pkg (if (stringp pkg) (intern pkg) pkg))
          (pkg-string (ansi-green (format "%s" pkg)))
          (pkg-version (ansi-yellow (eask-package-version-string pkg))))

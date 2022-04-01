@@ -27,12 +27,23 @@
   "Print help if command failed."
   )
 
+(defun eask--install-packages (names)
+  "Install packages."
+  (let* ((names (mapcar #'intern names))
+         (len (length names)) (s (if (= len 1) "" "s"))
+         (pkg-not-installed (cl-remove-if #'package-installed-p names))
+         (installed (length pkg-not-installed)) (skipped (- len installed)))
+    (eask-log "Installing specified %s package%s..." len s)
+    (mapc #'eask-package-install names)
+    (eask-info "(Total of package%s %s installed, %s skipped)"
+               s installed skipped)))
+
 (eask-start
-  (eask-pkg-init)
   (if-let ((names (eask-args)))
       ;; If package [name..] are specified, we try to install it
-      (mapc #'eask-package-install names)
+      (eask--install-packages names)
     ;; Else we try to install package from the working directory
+    (eask-pkg-init)
     (if-let* ((packaged (eask-packaged-file))
               (target (or packaged eask-package-file)))
         (progn
@@ -40,7 +51,9 @@
               (eask-info "✓ Loading packaged artefact in %s... done!" target)
             (eask-info "? Packaged artefact not found, install directly to %s..." target))
           (add-to-list 'load-path (expand-file-name (eask-packaged-name) package-user-dir))
-          (package-install-file target))
+          (package-install-file target)
+          (eask-info "✓ Done. (See %s)"
+                     (file-name-directory (locate-library (eask-guess-package-name)))))
       (eask-info "(No files have been intalled)")
       (eask--help-install))))
 
