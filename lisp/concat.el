@@ -38,7 +38,7 @@
 
     (eask-with-verbosity 'log
       (with-temp-buffer
-        (eask-progress "  - Visiting" files "... append!" #'insert-file-contents)
+        (eask-progress-seq "  - Visiting" files "append! ✓" #'insert-file-contents)
         (write-region (buffer-string) nil target-filename)
         (eask-info "Done. (Wrote file in %s)" target-filename)))))
 

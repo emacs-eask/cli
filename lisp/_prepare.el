@@ -671,17 +671,19 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   (declare (indent 0) (debug t))
   `(progn (eask-write ,msg-start) ,body (eask-msg ,msg-end)))
 
-(defun eask-progress (prefix sequence suffix func)
+(defun eask-progress-seq (prefix sequence suffix func)
   "Progress SEQUENCE with messages."
   (let* ((total (length sequence)) (count 0)
          (offset (format "%s" (length (format "%s" total)))))
     (mapc
      (lambda (item)
        (cl-incf count)
-       (when func (funcall func item))
-       (message (concat "%s [%" offset "d/%d] %s%s") prefix count total
-                (ansi-green "%s" item)
-                suffix))
+
+       (eask-with-progress
+         (format (concat "%s [%" offset "d/%d] %s... ") prefix count total
+                 (ansi-green "%s" item))
+         (when func (funcall func item))
+         suffix))
      sequence)))
 
 ;;
