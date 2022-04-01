@@ -112,7 +112,8 @@ the `eask-start' execution.")
 (defun eask-install-dependencies ()
   "Install dependencies defined in Eask file."
   (when (eask-dependencies)
-    (eask-log "Installing dependencies...")
+    (let ((len (length (eask-dependencies))))
+      (eask-log "Installing %s dependenc%s..." len (if (= len 1) "y" "ies")))
     ;;
     ;; XXX Without ignore-errors guard, it will trigger error
     ;;
