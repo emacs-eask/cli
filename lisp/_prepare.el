@@ -73,6 +73,7 @@ the `eask-start' execution.")
 ;;; Externals
 
 (eask-load "./extern/ansi")
+(eask-load "./extern/package")
 (eask-load "./extern/package-build")
 (eask-load "./extern/s")
 
@@ -114,13 +115,6 @@ the `eask-start' execution.")
   (when (eask-dependencies)
     (let ((len (length (eask-dependencies))))
       (eask-log "Installing %s package dependenc%s..." len (if (= len 1) "y" "ies")))
-    ;;
-    ;; XXX Without ignore-errors guard, it will trigger error
-    ;;
-    ;;   Can't find library xxxxxxx.el
-    ;;
-    ;; But we can remove this after Emacs 28, since function `find-library-name'
-    ;; has replaced the function `signal' instead of the `error'.
     (mapc #'eask-package-install eask-depends-on)
     (when (eask-dev-p) (mapc #'eask-package-install eask-depends-on-dev))))
 
@@ -150,18 +144,19 @@ the `eask-start' execution.")
         (eask-with-verbosity 'debug
           (message "")
           (package-refresh-contents)
+          ;; XXX Without ignore-errors guard, it will trigger error
+          ;;
+          ;;   Can't find library xxxxxxx.el
+          ;;
+          ;; But we can remove this after Emacs 28, since function `find-library-name'
+          ;; has replaced the function `signal' instead of the `error'.
           (eask-ignore-errors (package-install pkg)))
         "done ✓"))
     (require pkg nil t)))
 
-(defun eask-package-desc (pkg)
-  "Return a PKG descriptor."
-  (or (cadr (assq pkg package-alist))
-      (cadr (assq pkg package-archive-contents))))
-
 (defun eask-package-version (pkg)
   "Return PKG's version."
-  (if-let ((desc (eask-package-desc pkg)))
+  (if-let ((desc (package-get-descriptor pkg)))
       (package-version-join (package-desc-version desc))
     "-"))
 
