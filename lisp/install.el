@@ -25,7 +25,10 @@
 
 (defun eask--help-install ()
   "Print help if command failed."
-  )
+  (eask-msg "")
+  (eask-msg "Make sure you have specify a (package-file ..) inside your Eask file!")
+  (eask-msg "")
+  (eask-msg "  [+] (package-file \"PKG-MAIN.el\")"))
 
 (defun eask--install-packages (names)
   "Install packages."
@@ -44,6 +47,7 @@
       (eask--install-packages names)
     ;; Else we try to install package from the working directory
     (eask-pkg-init)
+    (eask-log "Searching for package to install in path...")
     (if-let* ((packaged (eask-packaged-file))
               (target (or packaged eask-package-file)))
         (progn
@@ -54,7 +58,7 @@
           (package-install-file target)
           (eask-info "✓ Done. (See %s)"
                      (file-name-directory (locate-library (eask-guess-package-name)))))
-      (eask-info "(No files have been intalled)")
+      (eask-info "✗ (No files have been intalled)")
       (eask--help-install))))
 
 ;;; install.el ends here
