@@ -21,6 +21,7 @@
 
 (eask-start
   (eask-install-dependencies)
+  (eask--setup-paths)
   (setq commander-args (cddr argv))  ; by pass `--' as well
   (let* ((program (eask-argv 1))
          (exe (executable-find program))

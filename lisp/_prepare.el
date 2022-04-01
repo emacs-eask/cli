@@ -135,6 +135,10 @@ the `eask-start' execution.")
   (when (and eask-depends-on-dev (eask-dev-p))
     (eask--install-deps eask-depends-on-dev "development")))
 
+(defun eask--setup-paths ()
+  "Setup both `exec-path' and `load-path'."
+  (eask--update-exec-path) (eask--update-load-path))
+
 (defun eask-pkg-init ()
   "Package initialization."
   (eask-with-progress
@@ -142,10 +146,7 @@ the `eask-start' execution.")
     (eask-with-verbosity 'debug
       (message "")
       (package-initialize) (package-refresh-contents))
-    (ansi-green "done"))
-  (eask--silent
-    (eask--update-exec-path)
-    (eask--update-load-path)))
+    (ansi-green "done")))
 
 (defun eask-package-install (pkg)
   "Install the package PKG."

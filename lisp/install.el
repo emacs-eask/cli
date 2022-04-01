@@ -40,7 +40,7 @@
     (eask-log "Installing specified %s package%s..." len s)
     (mapc #'eask-package-install names)
     (eask-info "(Total of %s package%s installed, %s skipped)"
-               s installed skipped)))
+               installed s skipped)))
 
 (eask-start
   (if-let ((names (eask-args)))
