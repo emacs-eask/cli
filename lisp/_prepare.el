@@ -155,6 +155,7 @@ the `eask-start' execution.")
 
 (defun eask-package-desc (pkg)
   "Return a PKG descriptor."
+  (unless package--initialized (package-initialize 'no-activate))
   (or (cadr (assq pkg package-alist))
       (cadr (assq pkg package-archive-contents))))
 
