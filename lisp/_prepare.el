@@ -90,6 +90,11 @@ the `eask-start' execution.")
   (declare (indent 0) (debug t))
   `(let (inhibit-message) ,@body))
 
+(defun eask--sinr (len-or-list form-1 form-2)
+  "If LEN-OR-LIST has length of 1; return FORM-1, else FORM-2."
+  (let ((len (if (numberp len-or-list) len-or-list (length len-or-list))))
+    (if (= 1 len) form-1 form-2)))
+
 ;;
 ;;; Package
 
@@ -110,24 +115,24 @@ the `eask-start' execution.")
   "Return list of dependencies."
   (append eask-depends-on (and (eask-dev-p) eask-depends-on-dev)))
 
-(defun eask--install-dpes (deps msg)
+(defun eask--install-deps (deps msg)
   "Install DEPS."
   (let* ((deps (mapcar #'intern deps))
          (len (length deps))
-         (ies (if (= len 1) "y" "ies"))
+         (ies (eask--sinr len "y" "ies"))
          (pkg-installed (cl-remove-if #'package-installed-p deps))
          (installed (length pkg-installed)) (skipped (- len installed)))
     (eask-log "Installing %s %s dependenc%s..." len msg ies)
     (mapc #'eask-package-install deps)
-    (eask-info "(Total of dependenc%s %s installed, %s skipped)"
+    (eask-info "(Total of %s dependenc%s installed, %s skipped)"
                ies installed skipped)))
 
 (defun eask-install-dependencies ()
   "Install dependencies defined in Eask file."
   (when eask-depends-on
-    (eask--install-dpes eask-depends-on "package"))
+    (eask--install-deps eask-depends-on "package"))
   (when (and eask-depends-on-dev (eask-dev-p))
-    (eask--install-dpes eask-depends-on-dev "development")))
+    (eask--install-deps eask-depends-on-dev "development")))
 
 (defun eask-pkg-init ()
   "Package initialization."

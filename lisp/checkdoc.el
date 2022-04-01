@@ -53,13 +53,17 @@
     (eask-msg "")
     (eask-msg "`%s` with checkdoc (%s)" (ansi-green file) checkdoc-version)
     (checkdoc-file filename)
-    (unless eask--checkdoc-error
-      (eask-msg "No issues found"))))
+    (unless eask--checkdoc-error (eask-msg "No issues found"))))
 
 (eask-start
-  (if-let ((files (or (eask-args) (eask-package-el-files))))
-      (mapcar #'eask--checkdoc-file files)
-    (eask-info "(No files have been checked (checkdoc)")
+  (if-let* ((files (or (eask-args) (eask-package-el-files)))
+            (len (length files))
+            (s (eask--sinr len "" "s"))
+            (have (eask--sinr len "has" "have")))
+      (progn
+        (mapcar #'eask--checkdoc-file files)
+        (eask-info "(Total of %s file%s %s checked)" len s have))
+    (eask-info "(No files have been checked (checkdoc))")
     (eask--help-checkdoc)))
 
 ;;; checkdoc.el ends here
