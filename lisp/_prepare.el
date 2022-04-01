@@ -162,13 +162,18 @@ the `eask-start' execution.")
 
 (defun eask-package-version (name &optional current)
   "Return PKG's version."
+  (message "Name: %s" name)
   (when-let ((desc (eask-package-desc name current)))
+    (message "Found: %s" desc)
     (package-desc-version desc)))
 
 (defun eask-package-version-string (pkg)
   "Return PKG's version."
-  (or (ignore-errors (package-version-join (eask-package-version pkg)))
-      "unknown"))
+  (if-let ((version (eask-package-version pkg)))
+      (progn
+        (message ">>>>>>>>>>>>> %s" version)
+        (package-version-join version))
+    "unknown"))
 
 ;;
 ;;; Flag
@@ -366,6 +371,8 @@ Eask file in the workspace."
            (if (eask-file-try-load "./")
                (eask-msg "✓ Loading default Eask file in %s... done!" eask-file)
              (eask-msg "✗ Loading default Eask file... missing!"))
+           (message "Test!!!!! %s" (expand-file-name "~/.emacs.d/init.el"))
+           (message "Test!!!!! %s" (file-exists-p "~/.emacs.d/init.el"))
            (message "")
            (eask-with-progress
              (ansi-green "Loading package information before configuration... ")
