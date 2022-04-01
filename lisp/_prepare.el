@@ -112,24 +112,19 @@ the `eask-start' execution.")
 (defun eask-install-dependencies ()
   "Install dependencies defined in Eask file."
   (when (eask-dependencies)
-    (eask-log "Installing dependencies...")
-    ;;
-    ;; XXX Without ignore-errors guard, it will trigger error
-    ;;
-    ;;   Can't find library xxxxxxx.el
-    ;;
-    ;; But we can remove this after Emacs 28, since function `find-library-name'
-    ;; has replaced the function `signal' instead of the `error'.
-    (eask-ignore-errors
-      (mapc #'eask-package-install eask-depends-on)
-      (when (eask-dev-p) (mapc #'eask-package-install eask-depends-on-dev)))))
+    (let ((len (length (eask-dependencies))))
+      (eask-log "Installing %s package dependenc%s..." len (if (= len 1) "y" "ies")))
+    (mapc #'eask-package-install eask-depends-on)
+    (when (eask-dev-p) (mapc #'eask-package-install eask-depends-on-dev))))))
 
 (defun eask-pkg-init ()
   "Package initialization."
-  (eask-with-verbosity 'debug
-    (package-initialize)
-    (package-refresh-contents))
-  (eask-msg (ansi-green "Loading package information... done"))
+  (eask-with-progress
+    (ansi-green "Loading package information... ")
+    (eask-with-verbosity 'debug
+      (message "")
+      (package-initialize) (package-refresh-contents))
+    (ansi-green "done"))
   (eask-install-dependencies)
   (eask--silent
     (eask--update-exec-path)
@@ -148,6 +143,18 @@ the `eask-start' execution.")
         (package-install pkg))
       (eask-msg "  - Installing %s... done" pkg-string))
     (require pkg nil t)))
+
+(defun eask-package-desc (pkg)
+  "Return a PKG descriptor."
+  (or (cadr (assq pkg package-alist))
+      (cadr (assq pkg package-archive-contents))))
+
+(defun eask-package-version (pkg)
+  "Return PKG's version."
+  (if-let* ((desc (eask-package-desc pkg))
+            (vlist (package-desc-version desc)))
+      (package-version-join vlist)
+    "-"))
 
 ;;
 ;;; Flag
@@ -304,13 +311,15 @@ Eask file in the workspace."
         (defalias keyword (symbol-function old))))
      result))
 
-(defvar eask-file nil "The Eask file path.")
+(defvar eask-file nil "The Eask file's filename.")
+(defvar eask-file-root nil "The Eask file's directory .")
 
 (defun eask-file-load (location &optional noerror)
   "Load Eask file in the LOCATION."
   (when-let* ((target-eask-file (expand-file-name location user-emacs-directory))
               (result (eask--alias-env (load target-eask-file noerror t))))
-    (setq eask-file target-eask-file)  ; assign eask file only if success
+    (setq eask-file target-eask-file  ; assign eask file only if success
+          eask-file-root (file-name-directory target-eask-file))
     result))
 
 (defun eask--print-env-info ()
@@ -606,6 +615,11 @@ and the BODY will be executed silently."
 
 ;;
 ;;; Progress
+
+(defmacro eask-with-progress (msg-start body msg-end)
+  "Progress BODY wrapper with prefix and suffix messages."
+  (declare (indent 0) (debug t))
+  `(progn (eask-write ,msg-start) ,body (eask-msg ,msg-end)))
 
 (defun eask-progress (prefix sequence suffix func)
   "Progress SEQUENCE with messages."
