@@ -126,10 +126,12 @@ the `eask-start' execution.")
 
 (defun eask-pkg-init ()
   "Package initialization."
-  (eask-with-verbosity 'debug
-    (package-initialize)
-    (package-refresh-contents))
-  (eask-msg (ansi-green "Loading package information... done"))
+  (eask-with-progress
+    (eask-write (ansi-green "Loading package information... "))
+    (eask-with-verbosity 'debug
+      (message "")
+      (package-initialize) (package-refresh-contents))
+    (eask-msg (ansi-green "done")))
   (eask-install-dependencies)
   (eask--silent
     (eask--update-exec-path)
@@ -141,12 +143,12 @@ the `eask-start' execution.")
   (let ((pkg-string (ansi-green (format "%s" pkg)))
         (pkg (if (stringp pkg) (intern pkg) pkg)))
     (if (package-installed-p pkg)
-        (eask-msg "  - Skipping %s... already installed" pkg-string)
-      (eask-if-verbosity 'debug
-          (eask-msg "  - Installing %s... downloading" pkg-string)
-        (package-refresh-contents)
-        (package-install pkg))
-      (eask-msg "  - Installing %s... done" pkg-string))
+        (eask-msg "  - Skipping %s... already installed ✗" pkg-string)
+      (eask-with-progress
+        (eask-write "  - Installing %s... " pkg-string)
+        (eask-with-verbosity 'debug
+          (package-refresh-contents) (package-install pkg))
+        (eask-msg "done ✓")))
     (require pkg nil t)))
 
 ;;
@@ -335,17 +337,24 @@ Eask file in the workspace."
          (setq eask--initialized-p t)
          (cond
           ((eask-global-p)
-           (eask-pkg-init)
-           (eask-with-verbosity 'debug
-             (load (locate-user-emacs-file "early-init.el") t)
-             (load (locate-user-emacs-file "../.emacs") t)
-             (load (locate-user-emacs-file "init.el") t))
            ;; We accept Eask file in global scope, but it shouldn't be used
            ;; as a sandbox.
            (if (eask-file-try-load "./")
                (eask-msg "✓ Loading default Eask file in %s... done!" eask-file)
              (eask-msg "✗ Loading default Eask file... missing!"))
-           (message "") ,@body)
+           (message "")
+           (eask-with-progress
+             (eask-write (ansi-green "Loading package information before configuration... "))
+             (eask--silent (package-initialize))
+             (eask-msg (ansi-green "done")))
+           (eask-with-progress
+             (eask-write (ansi-green "Loading your configuration... "))
+             (eask-with-verbosity 'debug
+               (load (locate-user-emacs-file "early-init.el") t)
+               (load (locate-user-emacs-file "../.emacs") t)
+               (load (locate-user-emacs-file "init.el") t))
+             (eask-msg (ansi-green "done")))
+           ,@body)
           (t
            (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
                   (package-user-dir (expand-file-name "elpa" user-emacs-directory))
@@ -355,10 +364,11 @@ Eask file in the workspace."
              (if (eask-file-try-load "../../")
                  (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
                (eask-msg "✗ Loading Eask file... missing!"))
+             (message "")
              (ignore-errors (make-directory package-user-dir t))
              (run-hooks 'eask-before-command-hook)
              (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
-             (message "") ,@body
+             ,@body
              (run-hooks (intern (concat "eask-after-command-" (eask-command) "-hook")))
              (run-hooks 'eask-after-command-hook))))))))
 
@@ -559,11 +569,19 @@ and the BODY will be executed silently."
          (string (s-replace "✗" (ansi-red "✗") string)))
     string))
 
-(defun eask-msg (msg &rest args)
-  "Like message but replace unicodes with color."
+(defun eask--format-paint-kwds (msg &rest args)
+  "Paint keywords after format MSG and ARGS."
   (let* ((string (apply #'format msg args))
          (string (eask--msg-paint-kwds string)))
-    (message string)))
+    string))
+
+(defun eask-msg (msg &rest args)
+  "Like function `message' but replace unicodes with color."
+  (message (apply #'eask--format-paint-kwds msg args)))
+
+(defun eask-write (msg &rest args)
+  "Like function `eask-msg' but without newline at the end."
+  (princ (apply #'eask--format-paint-kwds msg args) 'external-debugging-output))
 
 ;;
 ;;; File
@@ -606,6 +624,11 @@ and the BODY will be executed silently."
 
 ;;
 ;;; Progress
+
+(defmacro eask-with-progress (form-start body form-end)
+  ""
+  (declare (indent 0) (debug t))
+  `(progn ,form-start ,body ,form-end))
 
 (defun eask-progress (prefix sequence suffix func)
   "Progress SEQUENCE with messages."
