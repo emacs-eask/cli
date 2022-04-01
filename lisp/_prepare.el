@@ -125,11 +125,11 @@ the `eask-start' execution.")
     (eask-log "Installing %s %s dependenc%s..." len msg ies)
     (mapc #'eask-package-install deps)
     (eask-info "(Total of %s dependenc%s installed, %s skipped)"
-               ies installed skipped)))
+               installed ies skipped)))
 
 (defun eask-install-dependencies ()
   "Install dependencies defined in Eask file."
-  (eask-pkg-init)
+  (package-initialize)
   (when eask-depends-on
     (eask--install-deps eask-depends-on "package"))
   (when (and eask-depends-on-dev (eask-dev-p))

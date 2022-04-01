@@ -32,6 +32,7 @@
 
 (defun eask--install-packages (names)
   "Install packages."
+  (eask-pkg-init)
   (let* ((names (mapcar #'intern names))
          (len (length names)) (s (eask--sinr len "" "s"))
          (pkg-not-installed (cl-remove-if #'package-installed-p names))
