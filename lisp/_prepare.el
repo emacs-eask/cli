@@ -395,16 +395,18 @@ Eask file in the workspace."
 ;;; Eask file
 
 (defconst eask-source-mapping
-  (let ((secure (if (gnutls-available-p) "s" "")))
-    `((gnu          . ,(format "http%s://elpa.gnu.org/packages/"                   secure))
-      (nongnu       . ,(format "http%s://elpa.nongnu.org/nongnu/"                  secure))
-      (celpa        . ,(format "http%s://celpa.conao3.com/packages/"               secure))
-      (jcs-elpa     . ,(format "http%s://jcs-emacs.github.io/jcs-elpa/packages/"   secure))
-      (marmalade    . ,(format "http%s://marmalade-repo.org/packages/"             secure))
-      (melpa        . ,(format "http%s://melpa.org/packages/"                      secure))
-      (melpa-stable . ,(format "http%s://stable.melpa.org/packages/"               secure))
-      (org          . ,(format "http%s://orgmode.org/elpa/"                        secure))
-      (shmelpa      . ,(format "http%s://shmelpa.commandlinesystems.com/packages/" secure))))
+  (let* ((secure (and (gnutls-available-p)
+                      (not (eq network-security-level 'low))))
+         (proto (if secure "s" "")))
+    `((gnu          . ,(format "http%s://elpa.gnu.org/packages/"                   proto))
+      (nongnu       . ,(format "http%s://elpa.nongnu.org/nongnu/"                  proto))
+      (celpa        . ,(format "http%s://celpa.conao3.com/packages/"               proto))
+      (jcs-elpa     . ,(format "http%s://jcs-emacs.github.io/jcs-elpa/packages/"   proto))
+      (marmalade    . ,(format "http%s://marmalade-repo.org/packages/"             proto))
+      (melpa        . ,(format "http%s://melpa.org/packages/"                      proto))
+      (melpa-stable . ,(format "http%s://stable.melpa.org/packages/"               proto))
+      (org          . ,(format "http%s://orgmode.org/elpa/"                        proto))
+      (shmelpa      . ,(format "http%s://shmelpa.commandlinesystems.com/packages/" proto))))
   "Mapping of source name and url.")
 
 (defvar eask-package        nil)
