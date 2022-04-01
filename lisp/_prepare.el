@@ -4,6 +4,7 @@
 
 (require 'package)
 (require 'project)
+(require 'nsm)
 (require 'url-vars)
 
 (require 'cl-lib)
