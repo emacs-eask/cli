@@ -178,7 +178,7 @@ the `eask-start' execution.")
 (defun eask-package-desc (name &optional current)
   "Build package description by PKG-NAME."
   (cadr (assq name (if current package-alist
-                     (or package-alist package-archive-contents)))))
+                     (or package-archive-contents package-alist)))))
 
 (defun eask-package-version (name &optional current)
   "Return PKG's version."
