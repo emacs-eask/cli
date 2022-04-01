@@ -47,6 +47,7 @@
       (eask--install-packages names)
     ;; Else we try to install package from the working directory
     (eask-pkg-init)
+    (eask-install-dependencies)
     (eask-log "Searching for package to install in path...")
     (if-let* ((packaged (eask-packaged-file))
               (target (or packaged eask-package-file)))

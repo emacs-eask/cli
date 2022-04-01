@@ -137,7 +137,6 @@ the `eask-start' execution.")
       (message "")
       (package-initialize) (package-refresh-contents))
     (ansi-green "done"))
-  (eask-install-dependencies)
   (eask--silent
     (eask--update-exec-path)
     (eask--update-load-path)))
