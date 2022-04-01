@@ -50,7 +50,8 @@
         (eask-with-verbosity 'log
           (dolist (filename files)
             (when (eask--byte-compile-file filename) (push filename compiled))))
-        (eask-info "(Total of %s files compiled)" (length compiled)))
+        (eask-info "(Total of %s file%s compiled)" (length compiled)
+                   (eask--sinr compiled "" "s")))
     (eask-info "(No files have been compiled)")
     (eask--help-compile)))
 
