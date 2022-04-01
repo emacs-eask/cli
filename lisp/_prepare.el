@@ -113,7 +113,7 @@ the `eask-start' execution.")
   "Install dependencies defined in Eask file."
   (when (eask-dependencies)
     (let ((len (length (eask-dependencies))))
-      (eask-log "Installing %s dependenc%s..." len (if (= len 1) "y" "ies")))
+      (eask-log "Installing %s package dependenc%s..." len (if (= len 1) "y" "ies")))
     ;;
     ;; XXX Without ignore-errors guard, it will trigger error
     ;;
@@ -121,9 +121,8 @@ the `eask-start' execution.")
     ;;
     ;; But we can remove this after Emacs 28, since function `find-library-name'
     ;; has replaced the function `signal' instead of the `error'.
-    (eask-ignore-errors
-      (mapc #'eask-package-install eask-depends-on)
-      (when (eask-dev-p) (mapc #'eask-package-install eask-depends-on-dev)))))
+    (mapc #'eask-package-install eask-depends-on)
+    (when (eask-dev-p) (mapc #'eask-package-install eask-depends-on-dev))))
 
 (defun eask-pkg-init ()
   "Package initialization."
@@ -150,7 +149,8 @@ the `eask-start' execution.")
         (format "  - Installing %s (%s)... " pkg-string pkg-version)
         (eask-with-verbosity 'debug
           (message "")
-          (package-refresh-contents) (package-install pkg))
+          (package-refresh-contents)
+          (eask-ignore-errors (package-install pkg)))
         "done ✓"))
     (require pkg nil t)))
 
