@@ -165,8 +165,8 @@ the `eask-start' execution.")
 
 (defun eask-package-version-string (pkg)
   "Return PKG's version."
-  (ignore-errors (package-version-join (eask-package-version pkg))
-                 "unknown"))
+  (or (ignore-errors (package-version-join (eask-package-version pkg)))
+      "unknown"))
 
 ;;
 ;;; Flag
