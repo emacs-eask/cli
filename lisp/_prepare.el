@@ -394,9 +394,13 @@ Eask file in the workspace."
 ;;
 ;;; Eask file
 
+(defun eask-network-insecure-p ()
+  "Are we attempt to use insecure connection?"
+  (eq network-security-level 'low))
+
 (defconst eask-source-mapping
   (let* ((secure (and (gnutls-available-p)
-                      (not (eq network-security-level 'low))))
+                      (not (eask-network-insecure-p))))
          (proto (if secure "s" "")))
     `((gnu          . ,(format "http%s://elpa.gnu.org/packages/"                   proto))
       (nongnu       . ,(format "http%s://elpa.nongnu.org/nongnu/"                  proto))
