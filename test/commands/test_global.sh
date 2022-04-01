@@ -26,7 +26,7 @@
 #
 
 echo "Copy test configuration"
-cp -R ./test/mini.emacs.d/ ~/.emacs.d
+./test/mini.emacs.d/scripts/copy_config.sh
 
 echo "Testing global commands..."
 eask archives -g

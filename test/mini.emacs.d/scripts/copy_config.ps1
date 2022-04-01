@@ -17,16 +17,9 @@
 
 ## Commentary:
 #
-# Here we test all global (~/.emacs.d/) that the Emacser can be use daily!
-#
-# Notice, to make global commands work; we need a minimum configuration
-# (mini.emacs.d), and place it under to the default Emacs directory!
+# Copy configuration over to ~/.emacs.d/
 #
 
-./test/mini.emacs.d/scripts/copy_config.ps1
-
-echo "Testing global commands..."
-eask archives -g
-eask install -g spinner ivy beacon
-eask list -g --depth=0
-eask outdated -g
+echo "Copy test configuration"
+mkdir "$env:USERPROFILE/AppData/Roaming/.emacs.d"
+robocopy /e "./test/mini.emacs.d/" "$env:USERPROFILE/AppData/Roaming/.emacs.d"

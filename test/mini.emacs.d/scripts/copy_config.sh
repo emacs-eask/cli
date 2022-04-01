@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Copyright (C) 2022 Jen-Chieh Shen
 
 # This program is free software; you can redistribute it and/or modify
@@ -17,16 +19,8 @@
 
 ## Commentary:
 #
-# Here we test all global (~/.emacs.d/) that the Emacser can be use daily!
-#
-# Notice, to make global commands work; we need a minimum configuration
-# (mini.emacs.d), and place it under to the default Emacs directory!
+# Copy configuration over to ~/.emacs.d/
 #
 
-./test/mini.emacs.d/scripts/copy_config.ps1
-
-echo "Testing global commands..."
-eask archives -g
-eask install -g spinner ivy beacon
-eask list -g --depth=0
-eask outdated -g
+echo "Copy test configuration"
+cp -R ./test/mini.emacs.d/ ~/.emacs.d
