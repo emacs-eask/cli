@@ -136,12 +136,11 @@ the `eask-start' execution.")
   (let* ((pkg (if (stringp pkg) (intern pkg) pkg))
          (pkg-string (ansi-green (format "%s" pkg)))
          ;;(pkg-version (ansi-yellow (eask-package-version pkg)))
-         (pkg-version "NOT WORKING")
          )
     (if (package-installed-p pkg)
-        (eask-msg "  - Skipping %s (%s)... already installed ✗" pkg-string pkg-version)
+        (eask-msg "  - Skipping %s (-)... already installed ✗" pkg-string)
       (eask-with-progress
-        (format "  - Installing %s (%s)... " pkg-string pkg-version)
+        (format "  - Installing %s (-)... " pkg-string)
         (eask-with-verbosity 'debug
           (message "")
           (package-refresh-contents)
@@ -154,18 +153,6 @@ the `eask-start' execution.")
           (eask-ignore-errors (package-install pkg)))
         "done ✓"))
     (require pkg nil t)))
-
-(defun eask-package-desc (pkg)
-  "Return a PKG descriptor."
-  (or (cadr (assq pkg package-alist))
-      (cadr (assq pkg package-archive-contents))))
-
-(defun eask-package-version (pkg)
-  "Return PKG's version."
-  (if-let* ((desc (eask-package-desc pkg))
-            (vlist (package-desc-version desc)))
-      (package-version-join vlist)
-    "-"))
 
 ;;
 ;;; Flag
