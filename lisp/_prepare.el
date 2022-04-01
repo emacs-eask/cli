@@ -120,37 +120,38 @@ the `eask-start' execution.")
 (defun eask-pkg-init ()
   "Package initialization."
   (eask-with-progress
-   (ansi-green "Loading package information... ")
-   (eask-with-verbosity 'debug
-                        (message "")
-                        (package-initialize) (package-refresh-contents))
-   (ansi-green "done"))
+    (ansi-green "Loading package information... ")
+    (eask-with-verbosity 'debug
+      (message "")
+      (package-initialize) (package-refresh-contents))
+    (ansi-green "done"))
   (eask-install-dependencies)
   (eask--silent
-   (eask--update-exec-path)
-   (eask--update-load-path)))
+    (eask--update-exec-path)
+    (eask--update-load-path)))
 
 (defun eask-package-install (pkg)
   "Install the package PKG."
   (package-initialize)
+  (package-refresh-contents)
   (let* ((pkg (if (stringp pkg) (intern pkg) pkg))
          (pkg-string (ansi-green (format "%s" pkg)))
          (pkg-version (ansi-yellow (eask-package-version-string pkg))))
     (if (package-installed-p pkg)
         (eask-msg "  - Skipping %s (%s)... already installed ✗" pkg-string pkg-version)
       (eask-with-progress
-       (format "  - Installing %s (%s)... " pkg-string pkg-version)
-       (eask-with-verbosity 'debug
-                            (message "")
-                            (package-refresh-contents)
-                            ;; XXX Without ignore-errors guard, it will trigger error
-                            ;;
-                            ;;   Can't find library xxxxxxx.el
-                            ;;
-                            ;; But we can remove this after Emacs 28, since function `find-library-name'
-                            ;; has replaced the function `signal' instead of the `error'.
-                            (eask-ignore-errors (package-install pkg)))
-       "done ✓"))
+        (format "  - Installing %s (%s)... " pkg-string pkg-version)
+        (eask-with-verbosity 'debug
+          (message "")
+          (package-refresh-contents)
+          ;; XXX Without ignore-errors guard, it will trigger error
+          ;;
+          ;;   Can't find library xxxxxxx.el
+          ;;
+          ;; But we can remove this after Emacs 28, since function `find-library-name'
+          ;; has replaced the function `signal' instead of the `error'.
+          (eask-ignore-errors (package-install pkg)))
+        "done ✓"))
     (require pkg nil t)))
 
 (defun eask-package-desc (name &optional current)
@@ -349,46 +350,46 @@ Eask file in the workspace."
   (declare (indent 0) (debug t))
   `(unless eask-loading-file-p
      (eask--setup-env
-      (if eask--initialized-p (progn ,@body)
-        (eask--handle-global-options)
-        (eask--print-env-info)
-        (setq eask--initialized-p t)
-        (cond
-         ((eask-global-p)
-          ;; We accept Eask file in global scope, but it shouldn't be used
-          ;; as a sandbox.
-          (if (eask-file-try-load "./")
-              (eask-msg "✓ Loading default Eask file in %s... done!" eask-file)
-            (eask-msg "✗ Loading default Eask file... missing!"))
-          (message "")
-          (eask-with-progress
-           (ansi-green "Loading package information before configuration... ")
-           (eask--silent (package-initialize))
-           (ansi-green "done"))
-          (eask-with-progress
-           (ansi-green "Loading your configuration... ")
-           (eask-with-verbosity 'debug
-                                (load (locate-user-emacs-file "early-init.el") t)
-                                (load (locate-user-emacs-file "../.emacs") t)
-                                (load (locate-user-emacs-file "init.el") t))
-           (ansi-green "done"))
-          ,@body)
-         (t
-          (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
-                 (package-user-dir (expand-file-name "elpa" user-emacs-directory))
-                 (eask--first-init-p (not (file-directory-p user-emacs-directory)))
-                 (user-init-file (locate-user-emacs-file "init.el"))
-                 (custom-file (locate-user-emacs-file "custom.el")))
-            (if (eask-file-try-load "../../")
-                (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
-              (eask-msg "✗ Loading Eask file... missing!"))
-            (message "")
-            (ignore-errors (make-directory package-user-dir t))
-            (run-hooks 'eask-before-command-hook)
-            (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
-            ,@body
-            (run-hooks (intern (concat "eask-after-command-" (eask-command) "-hook")))
-            (run-hooks 'eask-after-command-hook))))))))
+       (if eask--initialized-p (progn ,@body)
+         (eask--handle-global-options)
+         (eask--print-env-info)
+         (setq eask--initialized-p t)
+         (cond
+          ((eask-global-p)
+           ;; We accept Eask file in global scope, but it shouldn't be used
+           ;; as a sandbox.
+           (if (eask-file-try-load "./")
+               (eask-msg "✓ Loading default Eask file in %s... done!" eask-file)
+             (eask-msg "✗ Loading default Eask file... missing!"))
+           (message "")
+           (eask-with-progress
+             (ansi-green "Loading package information before configuration... ")
+             (eask--silent (package-initialize))
+             (ansi-green "done"))
+           (eask-with-progress
+             (ansi-green "Loading your configuration... ")
+             (eask-with-verbosity 'debug
+               (load (locate-user-emacs-file "early-init.el") t)
+               (load (locate-user-emacs-file "../.emacs") t)
+               (load (locate-user-emacs-file "init.el") t))
+             (ansi-green "done"))
+           ,@body)
+          (t
+           (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
+                  (package-user-dir (expand-file-name "elpa" user-emacs-directory))
+                  (eask--first-init-p (not (file-directory-p user-emacs-directory)))
+                  (user-init-file (locate-user-emacs-file "init.el"))
+                  (custom-file (locate-user-emacs-file "custom.el")))
+             (if (eask-file-try-load "../../")
+                 (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
+               (eask-msg "✗ Loading Eask file... missing!"))
+             (message "")
+             (ignore-errors (make-directory package-user-dir t))
+             (run-hooks 'eask-before-command-hook)
+             (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
+             ,@body
+             (run-hooks (intern (concat "eask-after-command-" (eask-command) "-hook")))
+             (run-hooks 'eask-after-command-hook))))))))
 
 ;;
 ;;; Eask file
@@ -493,7 +494,7 @@ Eask file in the workspace."
 (defun eask--warn (&rest args)
   "On warn."
   (eask--unsilent
-   (eask-msg "%s" (eask--ansi 'warn (apply #'format-message args)))))
+    (eask-msg "%s" (eask--ansi 'warn (apply #'format-message args)))))
 
 (advice-add 'warn :override #'eask--warn)
 
@@ -559,9 +560,9 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (defun eask--msg (symbol prefix msg &rest args)
   "If LEVEL is at or below `eask-verbosity', log message."
   (eask-with-verbosity symbol
-                       (let* ((string (apply #'eask--format prefix msg args))
-                              (output (eask--ansi symbol string)))
-                         (message "%s" output))))
+    (let* ((string (apply #'eask--format prefix msg args))
+           (output (eask--ansi symbol string)))
+      (message "%s" output))))
 
 (defun eask--format (prefix fmt &rest args)
   "Format Eask messages."
