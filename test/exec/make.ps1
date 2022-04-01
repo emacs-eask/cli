@@ -23,5 +23,5 @@
 echo "Test command 'exec'..."
 cd $PSScriptRoot
 
-eask install github-elpa
+eask install-deps
 eask exec github-elpa -h
