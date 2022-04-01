@@ -19,12 +19,6 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
-(defun eask-package-version (name where)
-  "Get version of the package by NAME.
-
-Argument WHERE is the alist of package information."
-  (when-let ((pkg (cadr (assq name where)))) (package-desc-version pkg)))
-
 (defun eask-package-upgrade (pkg-desc)
   "Upgrade package using PKG-DESC."
   (let ((force (eask-force-p))
@@ -35,8 +29,8 @@ Argument WHERE is the alist of package information."
 
 (defun eask-package--upgradable-p (pkg)
   "Return non-nil if PKG can be upgraded."
-  (let ((current (eask-package-version pkg package-alist))
-        (latest (eask-package-version pkg package-archive-contents)))
+  (let ((current (eask-package-version pkg t))
+        (latest (eask-package-version pkg nil)))
     (version-list-< current latest)))
 
 (defun eask-package--upgrades ()
