@@ -41,6 +41,10 @@ yargs
     description: 'report error at the very end',
     type: 'boolean',
   })
+  .option('insecure', {
+    description: 'allow insecure connection',
+    type: 'boolean',
+  })
   .option('timestamps', {
     description: 'log with timestamps',
     type: 'boolean',

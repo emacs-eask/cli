@@ -68,6 +68,7 @@ function _global_options(argv) {
   flags.push(def_flag(argv['http-proxy'], '--http-proxy', argv['http-proxy']));
   flags.push(def_flag(argv['https-proxy'], '--https-proxy', argv['https-proxy']));
   flags.push(def_flag(argv['no-proxy'], '--no-proxy', argv['no-proxy']));
+  flags.push(def_flag(argv.insecure, '--insecure', argv.insecure));
   flags.push(def_flag(argv.verbose, '--verbose', argv.verbose));
   return flags;
 }

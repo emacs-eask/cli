@@ -194,6 +194,7 @@ the `eask-start' execution.")
 (defun eask-no-log-level-p ()  (eask--flag "--no-log-level"))   ; --no-log-level
 (defun eask-no-color-p ()      (eask--flag "--no-color"))       ; --no-color
 (defun eask-allow-error-p ()   (eask--flag "--allow-error"))    ; --allow-error
+(defun eask-insecure-p ()      (eask--flag "--insecure"))       ; --insecure
 
 ;;; String (with arguments)
 (defun eask-proxy ()       (eask--flag-value "--proxy"))        ; --proxy
@@ -211,6 +212,7 @@ the `eask-start' execution.")
   "Handle global options."
   (when (eask-debug-p) (setq debug-on-error t))
   (when (eask-verbose) (setq eask-verbosity (eask-verbose)))
+  (when (eask-insecure-p) (setq network-security-level 'low))
   (when (eask-timestamps-p) (setq eask-timestamps t))
   (when (eask-no-timestamps-p) (setq eask-timestamps nil))
   (when (eask-log-level-p) (setq eask-log-level t))
@@ -251,7 +253,8 @@ other scripts internally.  See function `eask-call'.")
      "--timestamps" "--no-timestamps"
      "--log-level" "--no-log-level"
      "--no-color"
-     "--allow-error"))
+     "--allow-error"
+     "--insecure"))
   "List of boolean type options")
 
 (defconst eask--option-args
