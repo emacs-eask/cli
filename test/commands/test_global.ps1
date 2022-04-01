@@ -24,8 +24,8 @@
 #
 
 echo "Copy test configuration"
-mkdir "%UserProfile%/.emacs.d"
-robocopy /e "./test/mini.emacs.d/" "%UserProfile%/.emacs.d"
+mkdir "$UserProfile/.emacs.d"
+robocopy /e "./test/mini.emacs.d/" "$UserProfile/.emacs.d"
 
 echo "Testing global commands..."
 eask archives -g
