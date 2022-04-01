@@ -127,11 +127,11 @@ the `eask-start' execution.")
 (defun eask-pkg-init ()
   "Package initialization."
   (eask-with-progress
-    (eask-write (ansi-green "Loading package information... "))
+    (ansi-green "Loading package information... ")
     (eask-with-verbosity 'debug
       (message "")
       (package-initialize) (package-refresh-contents))
-    (eask-msg (ansi-green "done")))
+    (ansi-green "done"))
   (eask-install-dependencies)
   (eask--silent
     (eask--update-exec-path)
@@ -140,16 +140,29 @@ the `eask-start' execution.")
 (defun eask-package-install (pkg)
   "Install the package PKG."
   (package-initialize)
-  (let ((pkg-string (ansi-green (format "%s" pkg)))
-        (pkg (if (stringp pkg) (intern pkg) pkg)))
+  (let* ((pkg (if (stringp pkg) (intern pkg) pkg))
+         (pkg-string (ansi-green (format "%s" pkg)))
+         (pkg-version (ansi-yellow (eask-package-version pkg))))
     (if (package-installed-p pkg)
-        (eask-msg "  - Skipping %s... already installed ✗" pkg-string)
+        (eask-msg "  - Skipping %s (%s)... already installed ✗" pkg-string pkg-version)
       (eask-with-progress
-        (eask-write "  - Installing %s... " pkg-string)
+        (format "  - Installing %s (%s)... " pkg-string pkg-version)
         (eask-with-verbosity 'debug
+          (message "")
           (package-refresh-contents) (package-install pkg))
-        (eask-msg "done ✓")))
+        "done ✓"))
     (require pkg nil t)))
+
+(defun eask-package-desc (pkg)
+  "Return a PKG descriptor."
+  (or (cadr (assq pkg package-alist))
+      (cadr (assq pkg package-archive-contents))))
+
+(defun eask-package-version (pkg)
+  "Return PKG's version."
+  (if-let ((desc (eask-package-desc pkg)))
+      (package-version-join (package-desc-version desc))
+    "-"))
 
 ;;
 ;;; Flag
@@ -344,16 +357,16 @@ Eask file in the workspace."
              (eask-msg "✗ Loading default Eask file... missing!"))
            (message "")
            (eask-with-progress
-             (eask-write (ansi-green "Loading package information before configuration... "))
+             (ansi-green "Loading package information before configuration... ")
              (eask--silent (package-initialize))
-             (eask-msg (ansi-green "done")))
+             (ansi-green "done"))
            (eask-with-progress
-             (eask-write (ansi-green "Loading your configuration... "))
+             (ansi-green "Loading your configuration... ")
              (eask-with-verbosity 'debug
                (load (locate-user-emacs-file "early-init.el") t)
                (load (locate-user-emacs-file "../.emacs") t)
                (load (locate-user-emacs-file "init.el") t))
-             (eask-msg (ansi-green "done")))
+             (ansi-green "done"))
            ,@body)
           (t
            (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
@@ -615,10 +628,10 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 ;;
 ;;; Progress
 
-(defmacro eask-with-progress (form-start body form-end)
-  ""
+(defmacro eask-with-progress (msg-start body msg-end)
+  "Empty progress wrapper."
   (declare (indent 0) (debug t))
-  `(progn ,form-start ,body ,form-end))
+  `(progn (eask-write ,msg-start) ,body (eask-msg ,msg-end)))
 
 (defun eask-progress (prefix sequence suffix func)
   "Progress SEQUENCE with messages."
