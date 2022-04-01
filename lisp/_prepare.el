@@ -518,6 +518,15 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   "Return t if SYMBOL reach verbosity (should be printed)."
   (>= eask-verbosity (eask--verb2lvl symbol)))
 
+(defmacro eask-if-verbosity (symbol msg &rest body)
+  "We either print BODY or MSG depends on the verbosity level.
+If verbosity is reached, we print BODY and no MSG; otherwise, we print only MSG
+and the BODY will be executed silently."
+  (declare (indent 2) (debug t))
+  `(progn
+     (unless (eask--reach-verbosity-p ,symbol) ,msg)
+     (eask-with-verbosity ,symbol ,@body)))
+
 (defmacro eask-with-verbosity (symbol &rest body)
   "If LEVEL is above `eask-verbosity'; hide all messages in BODY."
   (declare (indent 1) (debug t))
