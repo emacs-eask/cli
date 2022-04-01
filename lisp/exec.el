@@ -20,7 +20,7 @@
       nil t)
 
 (eask-start
-  (eask-install-dependencies)
+  (eask-pkg-init)
   (eask--setup-paths)
   (setq commander-args (cddr argv))  ; by pass `--' as well
   (let* ((program (eask-argv 1))
@@ -30,6 +30,6 @@
                 (progn
                   (eask-info "Execute command %s..." command)
                   (zerop (shell-command command))))
-      (error "Error from execution."))))
+      (error "Error from the execution."))))
 
 ;;; exec.el ends here
