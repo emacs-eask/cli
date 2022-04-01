@@ -372,6 +372,7 @@ Eask file in the workspace."
                (eask-msg "✓ Loading default Eask file in %s... done!" eask-file)
              (eask-msg "✗ Loading default Eask file... missing!"))
            (message "Test!!!!! %s" (expand-file-name "~/.emacs.d/init.el"))
+           (message "Test!!!!! %s" (locate-user-emacs-file "init.el"))
            (message "Test!!!!! %s" (file-exists-p "~/.emacs.d/init.el"))
            (message "")
            (eask-with-progress

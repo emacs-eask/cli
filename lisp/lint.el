@@ -24,7 +24,7 @@
   (with-current-buffer "*Package-Lint*"
     (goto-char (point-min))
     (while (not (eobp))
-      (let ((line (thing-at-point 'line)))
+      (let ((line (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
         (cond ((string-match-p " error: " line) (eask-error line))
               ((string-match-p " warning: " line) (eask-warn line))
               (t (eask-log line))))
