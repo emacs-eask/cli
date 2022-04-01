@@ -135,12 +135,11 @@ the `eask-start' execution.")
   (package-initialize)
   (let* ((pkg (if (stringp pkg) (intern pkg) pkg))
          (pkg-string (ansi-green (format "%s" pkg)))
-         ;;(pkg-version (ansi-yellow (eask-package-version pkg)))
-         )
+         (pkg-version (ansi-yellow (eask-package-version pkg))))
     (if (package-installed-p pkg)
-        (eask-msg "  - Skipping %s (-)... already installed ✗" pkg-string)
+        (eask-msg "  - Skipping %s (%s)... already installed ✗" pkg-string pkg-version)
       (eask-with-progress
-        (format "  - Installing %s (-)... " pkg-string)
+        (format "  - Installing %s (%s)... " pkg-string pkg-version)
         (eask-with-verbosity 'debug
           (message "")
           (package-refresh-contents)
@@ -153,6 +152,17 @@ the `eask-start' execution.")
           (eask-ignore-errors (package-install pkg)))
         "done ✓"))
     (require pkg nil t)))
+
+(defun eask-package-desc (name &optional current)
+  "Build package description by PKG-NAME."
+  (cadr (assq name (if current package-alist package-archive-contents))))
+
+(defun eask-package-version (pkg)
+  "Return PKG's version."
+  (if-let* ((desc (eask-package-desc pkg))
+            (vlist (package-desc-version desc)))
+      (package-version-join vlist)
+    "-"))
 
 ;;
 ;;; Flag

@@ -19,10 +19,6 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
-(defun eask-package-desc (name &optional current)
-  "Build package description by PKG-NAME."
-  (cadr (assq name (if current package-alist package-archive-contents))))
-
 (eask-start
   (eask-pkg-init)
   (if-let* ((name (elt argv 0)) (name (intern name))
