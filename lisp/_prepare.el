@@ -155,14 +155,14 @@ the `eask-start' execution.")
 
 (defun eask-package-desc (pkg)
   "Return a PKG descriptor."
-  (unless package--initialized (package-initialize 'no-activate))
   (or (cadr (assq pkg package-alist))
       (cadr (assq pkg package-archive-contents))))
 
 (defun eask-package-version (pkg)
   "Return PKG's version."
-  (if-let ((desc (eask-package-desc pkg)))
-      (package-version-join (package-desc-version desc))
+  (if-let* ((desc (eask-package-desc pkg))
+            (vlist (package-desc-version desc)))
+      (package-version-join vlist)
     "-"))
 
 ;;
