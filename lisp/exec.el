@@ -19,17 +19,26 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
+(defun eask--help-exec ()
+  "Print help if command failed."
+  (eask-msg "")
+  (eask-msg "You would need to specify the program name in order to make execution!")
+  (eask-msg "")
+  (eask-msg "  $ eask exec [program] [options..]"))
+
 (eask-start
   (eask-pkg-init)
+  ;; XXX This is the hack by adding all `bin' folders from local elpa.
   (eask--setup-paths)
   (setq commander-args (cddr argv))  ; by pass `--' as well
-  (let* ((program (eask-argv 1))
-         (exe (executable-find program))
-         (command (mapconcat #'identity (append (list program) commander-args) " ")))
-    (unless (or (ignore-errors (load exe t t))
-                (progn
-                  (eask-info "Execute command %s..." command)
-                  (zerop (shell-command command))))
-      (error "Error from the execution."))))
+  (if-let* ((program (eask-argv 1))
+            (command (mapconcat #'identity (append (list program) commander-args) " ")))
+      (unless (or (ignore-errors (load (executable-find program) t t))
+                  (progn
+                    (eask-info "Execute command %s..." command)
+                    (zerop (shell-command command))))
+        (error "Error from the execution."))
+    (eask-info "✗ (No exeuction output)")
+    (eask--help-exec)))
 
 ;;; exec.el ends here
