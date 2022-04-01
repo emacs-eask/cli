@@ -112,19 +112,24 @@ the `eask-start' execution.")
 (defun eask-install-dependencies ()
   "Install dependencies defined in Eask file."
   (when (eask-dependencies)
-    (let ((len (length (eask-dependencies))))
-      (eask-log "Installing %s package dependenc%s..." len (if (= len 1) "y" "ies")))
-    (mapc #'eask-package-install eask-depends-on)
-    (when (eask-dev-p) (mapc #'eask-package-install eask-depends-on-dev))))
+    (eask-log "Installing dependencies...")
+    ;;
+    ;; XXX Without ignore-errors guard, it will trigger error
+    ;;
+    ;;   Can't find library xxxxxxx.el
+    ;;
+    ;; But we can remove this after Emacs 28, since function `find-library-name'
+    ;; has replaced the function `signal' instead of the `error'.
+    (eask-ignore-errors
+      (mapc #'eask-package-install eask-depends-on)
+      (when (eask-dev-p) (mapc #'eask-package-install eask-depends-on-dev)))))
 
 (defun eask-pkg-init ()
   "Package initialization."
-  (eask-with-progress
-    (ansi-green "Loading package information... ")
-    (eask-with-verbosity 'debug
-      (message "")
-      (package-initialize) (package-refresh-contents))
-    (ansi-green "done"))
+  (eask-with-verbosity 'debug
+    (package-initialize)
+    (package-refresh-contents))
+  (eask-msg (ansi-green "Loading package information... done"))
   (eask-install-dependencies)
   (eask--silent
     (eask--update-exec-path)
@@ -133,39 +138,16 @@ the `eask-start' execution.")
 (defun eask-package-install (pkg)
   "Install the package PKG."
   (package-initialize)
-  (let* ((pkg (if (stringp pkg) (intern pkg) pkg))
-         (pkg-string (ansi-green (format "%s" pkg)))
-         ;;(pkg-version (ansi-yellow (eask-package-version pkg)))
-         (pkg-version "NOT WORKING")
-         )
+  (let ((pkg-string (ansi-green (format "%s" pkg)))
+        (pkg (if (stringp pkg) (intern pkg) pkg)))
     (if (package-installed-p pkg)
-        (eask-msg "  - Skipping %s (%s)... already installed ✗" pkg-string pkg-version)
-      (eask-with-progress
-        (format "  - Installing %s (%s)... " pkg-string pkg-version)
-        (eask-with-verbosity 'debug
-          (message "")
-          (package-refresh-contents)
-          ;; XXX Without ignore-errors guard, it will trigger error
-          ;;
-          ;;   Can't find library xxxxxxx.el
-          ;;
-          ;; But we can remove this after Emacs 28, since function `find-library-name'
-          ;; has replaced the function `signal' instead of the `error'.
-          (eask-ignore-errors (package-install pkg)))
-        "done ✓"))
+        (eask-msg "  - Skipping %s... already installed" pkg-string)
+      (eask-if-verbosity 'debug
+          (eask-msg "  - Installing %s... downloading" pkg-string)
+        (package-refresh-contents)
+        (package-install pkg))
+      (eask-msg "  - Installing %s... done" pkg-string))
     (require pkg nil t)))
-
-(defun eask-package-desc (pkg)
-  "Return a PKG descriptor."
-  (or (cadr (assq pkg package-alist))
-      (cadr (assq pkg package-archive-contents))))
-
-(defun eask-package-version (pkg)
-  "Return PKG's version."
-  (if-let* ((desc (eask-package-desc pkg))
-            (vlist (package-desc-version desc)))
-      (package-version-join vlist)
-    "-"))
 
 ;;
 ;;; Flag
@@ -322,15 +304,13 @@ Eask file in the workspace."
         (defalias keyword (symbol-function old))))
      result))
 
-(defvar eask-file nil "The Eask file's filename.")
-(defvar eask-file-root nil "The Eask file's directory .")
+(defvar eask-file nil "The Eask file path.")
 
 (defun eask-file-load (location &optional noerror)
   "Load Eask file in the LOCATION."
   (when-let* ((target-eask-file (expand-file-name location user-emacs-directory))
               (result (eask--alias-env (load target-eask-file noerror t))))
-    (setq eask-file target-eask-file  ; assign eask file only if success
-          eask-file-root (file-name-directory target-eask-file))
+    (setq eask-file target-eask-file)  ; assign eask file only if success
     result))
 
 (defun eask--print-env-info ()
@@ -355,24 +335,17 @@ Eask file in the workspace."
          (setq eask--initialized-p t)
          (cond
           ((eask-global-p)
+           (eask-pkg-init)
+           (eask-with-verbosity 'debug
+             (load (locate-user-emacs-file "early-init.el") t)
+             (load (locate-user-emacs-file "../.emacs") t)
+             (load (locate-user-emacs-file "init.el") t))
            ;; We accept Eask file in global scope, but it shouldn't be used
            ;; as a sandbox.
            (if (eask-file-try-load "./")
                (eask-msg "✓ Loading default Eask file in %s... done!" eask-file)
              (eask-msg "✗ Loading default Eask file... missing!"))
-           (message "")
-           (eask-with-progress
-             (ansi-green "Loading package information before configuration... ")
-             (eask--silent (package-initialize))
-             (ansi-green "done"))
-           (eask-with-progress
-             (ansi-green "Loading your configuration... ")
-             (eask-with-verbosity 'debug
-               (load (locate-user-emacs-file "early-init.el") t)
-               (load (locate-user-emacs-file "../.emacs") t)
-               (load (locate-user-emacs-file "init.el") t))
-             (ansi-green "done"))
-           ,@body)
+           (message "") ,@body)
           (t
            (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
                   (package-user-dir (expand-file-name "elpa" user-emacs-directory))
@@ -382,11 +355,10 @@ Eask file in the workspace."
              (if (eask-file-try-load "../../")
                  (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
                (eask-msg "✗ Loading Eask file... missing!"))
-             (message "")
              (ignore-errors (make-directory package-user-dir t))
              (run-hooks 'eask-before-command-hook)
              (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
-             ,@body
+             (message "") ,@body
              (run-hooks (intern (concat "eask-after-command-" (eask-command) "-hook")))
              (run-hooks 'eask-after-command-hook))))))))
 
@@ -537,6 +509,16 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   "Return t if SYMBOL reach verbosity (should be printed)."
   (>= eask-verbosity (eask--verb2lvl symbol)))
 
+(defmacro eask-if-verbosity (symbol msg &rest body)
+  "We either print BODY or MSG depends on the verbosity level.
+
+If verbosity is reached, we print BODY and no MSG; otherwise, we print only MSG
+and the BODY will be executed silently."
+  (declare (indent 2) (debug t))
+  `(progn
+     (unless (eask--reach-verbosity-p ,symbol) ,msg)
+     (eask-with-verbosity ,symbol ,@body)))
+
 (defmacro eask-with-verbosity (symbol &rest body)
   "If LEVEL is above `eask-verbosity'; hide all messages in BODY."
   (declare (indent 1) (debug t))
@@ -577,19 +559,11 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
          (string (s-replace "✗" (ansi-red "✗") string)))
     string))
 
-(defun eask--format-paint-kwds (msg &rest args)
-  "Paint keywords after format MSG and ARGS."
+(defun eask-msg (msg &rest args)
+  "Like message but replace unicodes with color."
   (let* ((string (apply #'format msg args))
          (string (eask--msg-paint-kwds string)))
-    string))
-
-(defun eask-msg (msg &rest args)
-  "Like function `message' but replace unicodes with color."
-  (message (apply #'eask--format-paint-kwds msg args)))
-
-(defun eask-write (msg &rest args)
-  "Like function `eask-msg' but without newline at the end."
-  (princ (apply #'eask--format-paint-kwds msg args) 'external-debugging-output))
+    (message string)))
 
 ;;
 ;;; File
@@ -632,11 +606,6 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 
 ;;
 ;;; Progress
-
-(defmacro eask-with-progress (msg-start body msg-end)
-  "Progress BODY wrapper with prefix and suffix messages."
-  (declare (indent 0) (debug t))
-  `(progn (eask-write ,msg-start) ,body (eask-msg ,msg-end)))
 
 (defun eask-progress (prefix sequence suffix func)
   "Progress SEQUENCE with messages."
