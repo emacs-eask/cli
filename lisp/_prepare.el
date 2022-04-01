@@ -133,15 +133,26 @@ the `eask-start' execution.")
 (defun eask-package-install (pkg)
   "Install the package PKG."
   (package-initialize)
-  (let ((pkg-string (ansi-green (format "%s" pkg)))
-        (pkg (if (stringp pkg) (intern pkg) pkg)))
+  (let* ((pkg (if (stringp pkg) (intern pkg) pkg))
+         (pkg-string (ansi-green (format "%s" pkg)))
+         ;;(pkg-version (ansi-yellow (eask-package-version pkg)))
+         (pkg-version "NOT WORKING")
+         )
     (if (package-installed-p pkg)
-        (eask-msg "  - Skipping %s... already installed" pkg-string)
-      (eask-if-verbosity 'debug
-          (eask-msg "  - Installing %s... downloading" pkg-string)
-        (package-refresh-contents)
-        (package-install pkg))
-      (eask-msg "  - Installing %s... done" pkg-string))
+        (eask-msg "  - Skipping %s (%s)... already installed ✗" pkg-string pkg-version)
+      (eask-with-progress
+        (format "  - Installing %s (%s)... " pkg-string pkg-version)
+        (eask-with-verbosity 'debug
+          (message "")
+          (package-refresh-contents)
+          ;; XXX Without ignore-errors guard, it will trigger error
+          ;;
+          ;;   Can't find library xxxxxxx.el
+          ;;
+          ;; But we can remove this after Emacs 28, since function `find-library-name'
+          ;; has replaced the function `signal' instead of the `error'.
+          (eask-ignore-errors (package-install pkg)))
+        "done ✓"))
     (require pkg nil t)))
 
 (defun eask-package-desc (pkg)
@@ -344,17 +355,24 @@ Eask file in the workspace."
          (setq eask--initialized-p t)
          (cond
           ((eask-global-p)
-           (eask-pkg-init)
-           (eask-with-verbosity 'debug
-             (load (locate-user-emacs-file "early-init.el") t)
-             (load (locate-user-emacs-file "../.emacs") t)
-             (load (locate-user-emacs-file "init.el") t))
            ;; We accept Eask file in global scope, but it shouldn't be used
            ;; as a sandbox.
            (if (eask-file-try-load "./")
                (eask-msg "✓ Loading default Eask file in %s... done!" eask-file)
              (eask-msg "✗ Loading default Eask file... missing!"))
-           (message "") ,@body)
+           (message "")
+           (eask-with-progress
+             (ansi-green "Loading package information before configuration... ")
+             (eask--silent (package-initialize))
+             (ansi-green "done"))
+           (eask-with-progress
+             (ansi-green "Loading your configuration... ")
+             (eask-with-verbosity 'debug
+               (load (locate-user-emacs-file "early-init.el") t)
+               (load (locate-user-emacs-file "../.emacs") t)
+               (load (locate-user-emacs-file "init.el") t))
+             (ansi-green "done"))
+           ,@body)
           (t
            (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
                   (package-user-dir (expand-file-name "elpa" user-emacs-directory))
@@ -364,10 +382,11 @@ Eask file in the workspace."
              (if (eask-file-try-load "../../")
                  (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
                (eask-msg "✗ Loading Eask file... missing!"))
+             (message "")
              (ignore-errors (make-directory package-user-dir t))
              (run-hooks 'eask-before-command-hook)
              (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
-             (message "") ,@body
+             ,@body
              (run-hooks (intern (concat "eask-after-command-" (eask-command) "-hook")))
              (run-hooks 'eask-after-command-hook))))))))
 
@@ -517,15 +536,6 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (defun eask--reach-verbosity-p (symbol)
   "Return t if SYMBOL reach verbosity (should be printed)."
   (>= eask-verbosity (eask--verb2lvl symbol)))
-
-(defmacro eask-if-verbosity (symbol msg &rest body)
-  "We either print BODY or MSG depends on the verbosity level.
-If verbosity is reached, we print BODY and no MSG; otherwise, we print only MSG
-and the BODY will be executed silently."
-  (declare (indent 2) (debug t))
-  `(progn
-     (unless (eask--reach-verbosity-p ,symbol) ,msg)
-     (eask-with-verbosity ,symbol ,@body)))
 
 (defmacro eask-with-verbosity (symbol &rest body)
   "If LEVEL is above `eask-verbosity'; hide all messages in BODY."
