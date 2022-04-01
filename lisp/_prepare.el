@@ -115,7 +115,7 @@ the `eask-start' execution.")
     (let ((len (length (eask-dependencies))))
       (eask-log "Installing %s package dependenc%s..." len (if (= len 1) "y" "ies")))
     (mapc #'eask-package-install eask-depends-on)
-    (when (eask-dev-p) (mapc #'eask-package-install eask-depends-on-dev))))))
+    (when (eask-dev-p) (mapc #'eask-package-install eask-depends-on-dev))))
 
 (defun eask-pkg-init ()
   "Package initialization."
@@ -615,11 +615,6 @@ and the BODY will be executed silently."
 
 ;;
 ;;; Progress
-
-(defmacro eask-with-progress (msg-start body msg-end)
-  "Progress BODY wrapper with prefix and suffix messages."
-  (declare (indent 0) (debug t))
-  `(progn (eask-write ,msg-start) ,body (eask-msg ,msg-end)))
 
 (defun eask-progress (prefix sequence suffix func)
   "Progress SEQUENCE with messages."
