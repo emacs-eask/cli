@@ -32,7 +32,6 @@
 
 (defun eask--install-packages (names)
   "Install packages."
-  (eask-pkg-init)
   (let* ((names (mapcar #'intern names))
          (len (length names)) (s (eask--sinr len "" "s"))
          (pkg-not-installed (cl-remove-if #'package-installed-p names))
@@ -43,6 +42,7 @@
                installed s skipped)))
 
 (eask-start
+  (eask-pkg-init)
   (if-let ((names (eask-args)))
       ;; If package [name..] are specified, we try to install it
       (eask--install-packages names)
