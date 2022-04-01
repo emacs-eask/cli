@@ -20,7 +20,6 @@
       nil t)
 
 (eask-start
-  (eask-pkg-init)
   (eask-install-dependencies)
   (setq commander-args (cddr argv))  ; by pass `--' as well
   (let* ((program (eask-argv 1))

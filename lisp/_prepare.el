@@ -129,6 +129,7 @@ the `eask-start' execution.")
 
 (defun eask-install-dependencies ()
   "Install dependencies defined in Eask file."
+  (eask-pkg-init)
   (when eask-depends-on
     (eask--install-deps eask-depends-on "package"))
   (when (and eask-depends-on-dev (eask-dev-p))
