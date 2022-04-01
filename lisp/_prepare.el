@@ -73,7 +73,6 @@ the `eask-start' execution.")
 ;;; Externals
 
 (eask-load "./extern/ansi")
-(eask-load "./extern/package")
 (eask-load "./extern/package-build")
 (eask-load "./extern/s")
 
@@ -154,9 +153,14 @@ the `eask-start' execution.")
         "done ✓"))
     (require pkg nil t)))
 
+(defun eask-package-desc (pkg)
+  "Return a PKG descriptor."
+  (or (cadr (assq pkg package-alist))
+      (cadr (assq pkg package-archive-contents))))
+
 (defun eask-package-version (pkg)
   "Return PKG's version."
-  (if-let ((desc (package-get-descriptor pkg)))
+  (if-let ((desc (eask-package-desc pkg)))
       (package-version-join (package-desc-version desc))
     "-"))
 
@@ -627,7 +631,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 ;;; Progress
 
 (defmacro eask-with-progress (msg-start body msg-end)
-  "Empty progress wrapper."
+  "Progress BODY wrapper with prefix and suffix messages."
   (declare (indent 0) (debug t))
   `(progn (eask-write ,msg-start) ,body (eask-msg ,msg-end)))
 
