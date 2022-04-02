@@ -1,9 +1,16 @@
 ---
-title: About CI/CD
-permalink: about-cicd
+title: CI/CD
+permalink: ci-cd
 ---
 
-# About CI/CD
+# Continuous Integration and Continuous Development (CI/CD)
+
+Eask can be run in any test environment, as long the platform allows
+you to install Node onto their platform.
+
+## GitHub Actions
+
+Here is an example using the GitHub Actions service.
 
 ```yml
 jobs:
@@ -46,3 +53,34 @@ jobs:
         eask lint
 ```
 
+This example is testing your Emacs Lisp package in the below environment;
+
+* Emacs: `27.2` and `snapshot`
+* Node: `14.x`
+* Eask: `snapshot` (latest)
+
+with these following `actions`,
+
+* [setup-emacs](https://github.com/purcell/setup-emacs) to install Emacs on Unix system (Linux/macOS)
+* [setup-emacs-windows](https://github.com/jcs090218/setup-emacs-windows) to install Emacs on Windows
+* [setup-node](https://github.com/actions/setup-node) to set up `Node` and `npm`
+* [setup-eask](https://github.com/emacs-eask/setup-eask) to install desired Eask version
+
+### Setup Eask locally
+
+You can install Eask locally using scripts from `.github/scripts/setup-eask` (Unix)
+or `.github/scripts/setup-eask.ps1` (Windows).
+
+```yml
+    - uses: actions/checkout@v2
+
+    - name: Prepare Eask (Unix)
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
+      run: |
+        chmod -R 777 ./
+        .github/scripts/setup-eask
+
+    - name: Prepare Eask (Windows)
+      if: matrix.os == 'windows-latest'
+      run: .github/scripts/setup-eask.ps1
+```
