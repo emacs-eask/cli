@@ -5,6 +5,8 @@ permalink: contributing
 
 # Contributing
 
+This document provides guidelines and information on contributing to Eask.
+
 ## Code of Conduct
 
 Contributors to Eask should abide by the [Contributor Covenant](https://www.contributor-covenant.org/version/1/4/code-of-conduct).

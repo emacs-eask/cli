@@ -3,7 +3,7 @@ title: Installation
 permalink: installation
 ---
 
-# 💾 Installation
+# Installation
 
 This document guides you through the installation of Eask.
 
@@ -16,7 +16,7 @@ and below, or with other flavours of Emacs, e.g. XEmacs.
 2. [yargs](https://github.com/yargs/yargs) to parse commands and options.
 3. [Emacs](https://www.gnu.org/software/emacs/) of course; make sure this is inside your environment PATH!
 
-## Install through NPM
+## 💾 Install through NPM
 
 The easiest way to install is through tool [npm](https://www.npmjs.com/),
 
@@ -24,7 +24,7 @@ The easiest way to install is through tool [npm](https://www.npmjs.com/),
 $ npm install -g @emacs-eask/eask
 ```
 
-## Manual installation
+## 💾 Manual installation
 
 Alternatively, you can clone it directly from this repo
 
@@ -39,7 +39,7 @@ $ cd eask
 $ npm install
 ```
 
-## Setup
+## 🏡 Setup
 
 Make sure you set up the environment path variable according to your system,
 
