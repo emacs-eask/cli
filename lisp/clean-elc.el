@@ -16,8 +16,11 @@
 
 (defun eask--delete-file (filename)
   "Delete FILENAME from disk."
-  (ignore-errors (delete-file filename))
-  (message "Deleting %s..." filename))
+  (eask-with-progress
+    (format "Deleting %s... " filename)
+    (eask-with-verbosity 'log
+      (ignore-errors (delete-file filename)))
+    "done ✓"))
 
 (eask-start
   (if-let* ((files (eask-package-elc-files))
