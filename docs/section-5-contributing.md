@@ -17,9 +17,10 @@ Contributors to Eask should abide by the [Contributor Covenant](https://www.cont
 
 To make changes to Eask, you should have:
 
-1. [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/) for being the CLI layer
-2. [yargs](https://github.com/yargs/yargs) to parse commands and options.
-3. [Emacs](https://www.gnu.org/software/emacs/) of course; make sure this is inside your environment PATH!
+1. [Node.js](https://nodejs.org/en/) the development environment.
+2. [npm](https://www.npmjs.com/) for the package manager.
+3. [yargs](https://github.com/yargs/yargs) for parsing the command-line.
+4. [Emacs](https://www.gnu.org/software/emacs/), 26.1 or above!
 
 ## 📂 State of the project
 
