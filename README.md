@@ -21,3 +21,4 @@ run on by default. If you use WSL or other environment system file Cygwin/MSYS
 ## 🔗 Links
 
 * [Documentation](https://emacs-eask.github.io/)
+* [Command-line interface](https://emacs-eask.github.io/eask/usage)
