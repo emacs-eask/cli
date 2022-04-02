@@ -5,7 +5,7 @@ permalink: dsl
 
 # Eask Domain Specific Language (DSL)
 
-This document provides a reference on the [DSL](https://en.wikipedia.org/wiki/Domain-specific_language#:~:text=A%20domain%2Dspecific%20language%20(DSL,is%20broadly%20applicable%20across%20domains.).
+This document provides a reference on the [DSL](https://en.wikipedia.org/wiki/Domain-specific_language).
 
 ## Example
 
@@ -22,4 +22,3 @@ The syntaxes are very similar to the `Cask` file, but different.
 
 Remember, `Eask` is just the regular elisp file, and should be read it from
 the Emacs itself!
-
