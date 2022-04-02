@@ -25,6 +25,14 @@ are just not as good as Node.JS.
 People who like to use Emacs on Windows (no WSL), and would like to keep their
 Emacs configuration/packages consistent on every operating system!
 
+## 📰 News
+
+* `0.4.0` - Add color logger
+* `0.3.0` - Add verbosity level and timestamps
+* `0.2.0` - Done basic error handling with exit code at the end of executions
+* `0.1.39` - Use `spawn` instead `exec`; now messages will be printed immediately
+* `0.1.0` - Project barebones are pretty much complete!
+
 ## 📝 Todo list
 
 - [ ] Add `elint` command
@@ -33,3 +41,8 @@ Emacs configuration/packages consistent on every operating system!
 - [ ] Add `lint-indent` command
 - [ ] Add `lint-regexps` command
 - [ ] Add `add-source` command
+
+## 📂 Related Projects
+
+* [cask](https://github.com/cask/cask) - Project management tool for Emacs
+* [makem.sh](https://github.com/alphapapa/makem.sh) - Makefile-like script for building and testing Emacs Lisp packages

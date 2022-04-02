@@ -1,9 +1,9 @@
 ---
-title: License
+title: GNU General Public License
 permalink: license
 ---
 
-## GNU General Public License
+# GNU General Public License
 
 ```
                     GNU GENERAL PUBLIC LICENSE
