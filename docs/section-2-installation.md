@@ -5,11 +5,26 @@ permalink: installation
 
 # 💾 Installation
 
+This document guides you through the installation of Eask.
+
+## Prerequisites
+
+Eask requires GNU Emacs 26 and Node 14 or later! It will not work with Emacs 25
+and below, or with other flavours of Emacs, e.g. XEmacs.
+
+1. [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/) for being the CLI layer
+2. [yargs](https://github.com/yargs/yargs) to parse commands and options.
+3. [Emacs](https://www.gnu.org/software/emacs/) of course; make sure this is inside your environment PATH!
+
+## Install through NPM
+
 The easiest way to install is through tool [npm](https://www.npmjs.com/),
 
 ```sh
 $ npm install -g @emacs-eask/eask
 ```
+
+## Manual installation
 
 Alternatively, you can clone it directly from this repo
 
@@ -24,12 +39,14 @@ $ cd eask
 $ npm install
 ```
 
+## Setup
+
 Make sure you set up the environment path variable according to your system,
 
 On Linux/macOS,
 
 ```sh
-PATH=$PATH:/path/to/eask/bin
+export PATH="$HOME/eask/bin:$PATH"
 ```
 
 On Windows,
