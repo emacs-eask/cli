@@ -20,4 +20,4 @@ $ eask init
 $ eask outdated
 ```
 
-![](/assets/screenshot/outdated.png)
+![](./assets/screenshot/outdated.png)
