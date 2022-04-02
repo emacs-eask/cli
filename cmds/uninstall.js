@@ -21,7 +21,7 @@
 
 const util = require("../src/util");
 
-exports.command = 'uninstall [names..]';
+exports.command = ['uninstall [names..]'];
 exports.desc = 'uninstall packages';
 exports.builder = {
   names: {

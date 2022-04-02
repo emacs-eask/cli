@@ -21,7 +21,7 @@
 
 const util = require("../src/util");
 
-exports.command = "pkg-file";
+exports.command = ['pkg-file'];
 exports.desc = "generate -pkg file";
 
 exports.handler = async (argv) => {

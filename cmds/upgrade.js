@@ -21,7 +21,7 @@
 
 const util = require("../src/util");
 
-exports.command = 'upgrade [names..]';
+exports.command = ['upgrade [names..]'];
 exports.desc = 'upgrade packages';
 exports.builder = {
   names: {
