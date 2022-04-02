@@ -19,4 +19,6 @@ current Eask version with `eask --version`.
 > ⚠️ Warning
 >
 > If you installed Eask with `npm`, then you should probably upgrade it through
-> `npm`. Otherwise you would just have to ensure `git` is installed.
+> `npm`. Otherwise you would just have to ensure the `git` is installed.
+
+

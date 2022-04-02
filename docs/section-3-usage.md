@@ -15,3 +15,9 @@ command to create a Eask-file automatically, containing boilerplate code:
 ```sh
 $ eask init
 ```
+
+```sh
+$ eask outdated
+```
+
+![](/assets/screenshot/outdated.png)
