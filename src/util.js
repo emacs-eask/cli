@@ -31,7 +31,7 @@ function _remove_undefined(arr) {
 }
 
 /* Return plugin directory */
-function _plugin_dir() { return path.join(__dirname, '..'); }
+function plugin_dir() { return path.join(__dirname, '..'); }
 
 /**
  * Define flag with proper alias flag.
@@ -80,7 +80,7 @@ function _global_options(argv) {
  */
 async function e_call(argv, script, ...args) {
   let _script = 'lisp/' + script + '.el';
-  let _path = path.join(_plugin_dir(), _script);
+  let _path = path.join(plugin_dir(), _script);
 
   let cmd_base = ['-Q', '--batch', '--script', _path];
   let cmd_args = args.flat();
@@ -106,5 +106,6 @@ async function e_call(argv, script, ...args) {
 /*
  * Module Exports
  */
+module.exports.plugin_dir = plugin_dir;
 module.exports.def_flag = def_flag;
 module.exports.e_call = e_call;
