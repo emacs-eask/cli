@@ -1,5 +1,5 @@
 ---
-title: section-3-usage.md
+title: Usage
 permalink: usage
 ---
 

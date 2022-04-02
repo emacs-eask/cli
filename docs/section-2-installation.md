@@ -1,5 +1,5 @@
 ---
-title: section-2-installation.md
+title: Installation
 permalink: installation
 ---
 
