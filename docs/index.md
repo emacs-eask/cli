@@ -9,7 +9,7 @@ on consistency! [Cask]() and [makem.sh]() both rely on bash which Windows doesn'
 run on by default. If you use WSL or other environment system file Cygwin/MSYS
 ; then this may not be the tool you are looking for! 👀
 
-## Why Node.JS?
+## ❓ Why Node.JS?
 
 Node has a better support on all kind of terminal applications (compare to just
 the shell script)! Like colorful interface, entire npm community, etc; so you
@@ -20,7 +20,7 @@ Cask does not seem to support Windows (no WSL) after version `0.8.6`. In the
 early versions, they have used Python, but due to the Python supports on Windows
 are just not as good as Node.JS.
 
-## Who should use this tool?
+## ❓ Who should use this tool?
 
 People who like to use Emacs on Windows (no WSL), and would like to keep their
 Emacs configuration/packages consistent on every operating system!
