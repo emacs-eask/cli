@@ -37,21 +37,28 @@
 (defun eask--byte-compile-file (filename)
   "Byte compile FILENAME."
   (let* ((filename (expand-file-name filename))
-         (result (byte-compile-file filename)) (compiled (eq result t)))
-    (unless byte-compile-verbose
-      (if compiled (message "Compiling %s..." filename)
-        (message "Skipping %s..." filename)))
-    compiled))
+         (result))
+    (eask-with-progress
+      (format "Compiling %s..." filename)
+      (eask-with-verbosity 'debug
+        (setq result (byte-compile-file filename)
+              result (eq result t)))
+      (if result "done ✓" "skipped ✗"))
+    result))
+
+(defun eask--compile-files (files)
+  "Compile sequence of files."
+  (let* ((compiled (cl-remove-if-not #'eask--byte-compile-file files))
+         (compiled (length compiled))
+         (skipped (- (length files) compiled)))
+    (eask-info "(Total of %s file%s compiled, %s skipped)" compiled
+               (eask--sinr compiled "" "s")
+               skipped)))
 
 (eask-start
   (eask-pkg-init)
   (if-let ((files (or (eask-args) (eask-package-el-files))))
-      (let (compiled)
-        (eask-with-verbosity 'log
-          (dolist (filename files)
-            (when (eask--byte-compile-file filename) (push filename compiled))))
-        (eask-info "(Total of %s file%s compiled)" (length compiled)
-                   (eask--sinr compiled "" "s")))
+      (eask--compile-files files)
     (eask-info "(No files have been compiled)")
     (eask--help-compile)))
 
