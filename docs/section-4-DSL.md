@@ -12,7 +12,7 @@ This document provides a reference on the [DSL](https://en.wikipedia.org/wiki/Do
 `Eask` is the magic file that `eask` will read it as the init file in Emacs.
 The syntaxes are very similar to the `Cask` file, but different.
 
-```el
+```elisp
 (source "gnu")
 
 (package "your-package" "1.0.0" "Your package description")
@@ -25,7 +25,7 @@ the Emacs itself!
 
 ## Advanced Usage
 
-```el
+```elisp
 ; Regular Eask file content...
 
 (setq byte-compile-error-on-warn t)  ; Singal error if warning occurred
@@ -37,7 +37,7 @@ each command. The name of the hook follows the rule of
 
 For example, to enable compile on warn on `byte-compile` command
 
-```el
+```elisp
 (add-hook 'eask-before-command-compile-hook 
           (lambda () (setq byte-compile-error-on-warn t)))
 ```
