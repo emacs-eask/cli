@@ -3,7 +3,7 @@ title: GNU General Public License
 permalink: license
 ---
 
-# GNU General Public License
+Licensed under GPLv3. See under for details.
 
 ```
                     GNU GENERAL PUBLIC LICENSE
