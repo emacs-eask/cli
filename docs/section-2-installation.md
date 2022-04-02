@@ -7,7 +7,7 @@ permalink: installation
 
 This document guides you through the installation of Eask.
 
-## Prerequisites
+## 🚩 Prerequisites
 
 Eask requires GNU Emacs 26 and Node 14 or later! It will not work with Emacs 25
 and below, or with other flavours of Emacs, e.g. XEmacs.

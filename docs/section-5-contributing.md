@@ -13,7 +13,7 @@ Contributors to Eask should abide by the [Contributor Covenant](https://www.cont
 
 ## Developing Eask
 
-### Prerequisites
+### 🚩 Prerequisites
 
 To make changes to Eask, you should have:
 
