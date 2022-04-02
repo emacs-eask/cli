@@ -29,7 +29,7 @@ the Emacs itself!
 
 `eask` provides some hooks so you can define your own action before/after
 each command. The name of the hook follows the rule of
-`eask-{before/after}-command-{NAME}-hook`.
+`eask-BEFORE/AFTER-command-NAME-hook`.
 
 For example, to enable compile on warn on `byte-compile` command
 
