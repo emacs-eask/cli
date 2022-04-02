@@ -3,7 +3,7 @@ title: About CI/CD
 permalink: about-cicd
 ---
 
-## About CI/CD
+# About CI/CD
 
 ```yml
 jobs:

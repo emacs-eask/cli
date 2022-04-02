@@ -30,39 +30,6 @@ run on by default. If you use WSL or other environment system file Cygwin/MSYS
 
 * [Documentation](https://emacs-eask.github.io/)
 
-## 📝 About Eask file
-
-`Eask` is the magic file that `eask` will read it as the init file in Emacs.
-The syntaxes are very similar to the `Cask` file, but different.
-
-```el
-(source "gnu")
-
-(package "your-package" "1.0.0" "Your package description")
-
-(package-file "your-package-file.el")
-```
-
-Remember, `Eask` is just the regular elisp file, and should be read it from
-the Emacs itself!
-
-```el
-; Regular Eask file content...
-
-(setq byte-compile-error-on-warn t)  ; Singal error if warning occurred
-```
-
-`eask` provides some hooks so you can define your own action before/after
-each command. The name of the hook follows the rule of
-`eask-{before/after}-command-{%name%}-hook`.
-
-For example, to enable compile on warn on `byte-compile` command
-
-```el
-(add-hook 'eask-before-command-compile-hook 
-          (lambda () (setq byte-compile-error-on-warn t)))
-```
-
 ## 📂 Related Projects
 
 * [cask](https://github.com/cask/cask) - Project management tool for Emacs
@@ -70,10 +37,10 @@ For example, to enable compile on warn on `byte-compile` command
 
 ## 📂 State of the project
 
-The project barebones are pretty much done, we are currently looking for
+The project's barebones are pretty much done, we are currently looking for
 contirbutors to give us feedback and improve our TUI/UX for this tool!
 
-We are also looking for advices to add more Emacser often use commands and
+We are also looking for advice to add more Emacser often use commands and
 options, so these features are prepared by default! Like command `lint` 
 (package-lint) or option `--debug` refers to `debug-on-error` to `t`!
 
@@ -97,22 +64,3 @@ The project structure are very simple, all we need is to look into 3 places.
 folders are command files that correspond to each other.
 
 The sandbox logic is stored inside file `./lisp/_prepare.el`.
-
-### 📌 Dependencies
-
-* [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/)
-* [yargs](https://github.com/yargs/yargs) to parse commands and options.
-* [Emacs](https://www.gnu.org/software/emacs/) of course; make sure this is inside your environment PATH!
-
-## 📝 Todo list
-
-- [ ] Add `elint` command
-- [ ] Add `elsa` command
-- [ ] Add `lint-declare` command
-- [ ] Add `lint-indent` command
-- [ ] Add `lint-regexps` command
-- [ ] Add `add-source` command
-
-## Contribute
-
-N/A
