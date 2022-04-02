@@ -15,7 +15,7 @@ Some potential variables can cause faulty Eask,
 * Installed Eask correctly
 * Node version should be `14.x` or above
 
-## ‼️ Error when running a Eask command
+## ⛔️ Error when running a Eask command
 
 If you run a Eask command and get an error, there are a few things you can try
 yourself:
