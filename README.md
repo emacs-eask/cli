@@ -18,6 +18,6 @@ on consistency! [Cask]() and [makem.sh]() both rely on bash which Windows doesn'
 run on by default. If you use WSL or other environment system file Cygwin/MSYS
 ; then this may not be the tool you are looking for! 👀
 
-## 🔗 Link
+## 🔗 Links
 
 * [Documentation](https://emacs-eask.github.io/)
