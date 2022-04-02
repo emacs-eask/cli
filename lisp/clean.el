@@ -21,6 +21,6 @@
     (ignore-errors (delete-directory target-dir t))
     (if eask--first-init-p
         (eask-info "(Workspace already cleaned)")
-      (eask-info "Done (workspace `%s` is cleaned)" target-dir))))
+      (eask-info "✓ Done (workspace `%s` is cleaned)" target-dir))))
 
 ;;; clean.el ends here

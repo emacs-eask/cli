@@ -23,11 +23,11 @@
     "done ✓"))
 
 (eask-start
-  (if-let* ((files (eask-package-elc-files))
-            (len (length files)))
+  (if-let ((files (eask-package-elc-files)))
       (progn
-        (eask-with-verbosity 'log (mapc #'eask--delete-file files))
-        (eask-info "(Total of %s .elc file%s deleted)" len (eask--sinr len "" "s")))
+        (mapc #'eask--delete-file files)
+        (eask-info "✓ (Total of %s .elc file%s deleted)" (length files)
+                   (eask--sinr files "" "s")))
     (eask-info "(No .elc file found in workspace)")))
 
 ;;; clean-elc.el ends here
