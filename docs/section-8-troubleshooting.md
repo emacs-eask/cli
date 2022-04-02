@@ -14,4 +14,9 @@ yourself:
 
 * Make sure that you have the latest Eask version. You can determine the
 current Eask version with `eask --version`.
-* Upgrade Eask
+* Upgrade Eask with `eask upgrade-eask`.
+
+> ⚠️ Warning
+>
+> If you installed Eask with `npm`, then you should probably upgrade it through
+> `npm`. Otherwise you would just have to ensure `git` is installed.
