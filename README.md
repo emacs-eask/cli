@@ -18,40 +18,6 @@ on consistency! [Cask]() and [makem.sh]() both rely on bash which Windows doesn'
 run on by default. If you use WSL or other environment system file Cygwin/MSYS
 ; then this may not be the tool you are looking for! 👀
 
-#### Why Node.JS?
-
-Node has a better support on all kind of terminal applications (compare to just
-the shell script)! Like colorful interface, entire npm community, etc; so you
-can build cross-platform software with fewer hassles! Especially, after Microsoft
-had bought the NPM inc, and would likely to support their own system well.
-
-Cask does not seem to support Windows (no WSL) after version `0.8.6`. In the
-early versions, they have used Python, but due to the Python supports on Windows
-are just not as good as Node.JS.
-
-#### Who should use this tool?
-
-People who like to use Emacs on Windows (no WSL), and would like to keep their
-Emacs configuration/packages consistent on every operating system!
-
-<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
-**Table of Contents**
-
-- [eask](#eask)
-    - [📰 News](#📰-news)
-    - [💾 Installation](#💾-installation)
-    - [About CI/CD](#about-cicd)
-    - [📝 About Eask file](#📝-about-eask-file)
-    - [📂 Related Projects](#📂-related-projects)
-    - [📂 State of the project](#📂-state-of-the-project)
-    - [🏆 Goals for the project](#🏆-goals-for-the-project)
-    - [📂 Project Structure](#📂-project-structure)
-        - [📌 Dependencies](#📌-dependencies)
-    - [📝 Todo list](#📝-todo-list)
-    - [Contribute](#contribute)
-
-<!-- markdown-toc end -->
-
 ## 📰 News
 
 * `0.4.0` - Add color logger
@@ -60,86 +26,9 @@ Emacs configuration/packages consistent on every operating system!
 * `0.1.39` - Use `spawn` instead `exec`; now messages will be printed immediately
 * `0.1.0` - Project barebones are pretty much complete!
 
-## 💾 Installation
+## 🔗 Link
 
-The easiest way to install is through tool [npm](https://www.npmjs.com/),
-
-```sh
-$ npm install -g @emacs-eask/eask
-```
-
-Alternatively, you can clone it directly from this repo
-
-```sh
-# clone the repo
-$ git clone https://github.com/emacs-eask/eask
-
-# change the working directory to eask
-$ cd eask
-
-# install the requirements
-$ npm install
-```
-
-Make sure you set up the environment path variable according to your system,
-
-On Linux/macOS,
-
-```sh
-PATH=$PATH:/path/to/eask/bin
-```
-
-On Windows,
-
-```batch
-set PATH=%PATH%;c:/path/to/eask/bin
-```
-
-Once you have set it up correctly, try `eask --version` then you should see 
-the current eask's version number! 🎉 🎊
-
-## About CI/CD
-
-```yml
-jobs:
-  test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        emacs-version: [27.2, snapshot]
-
-    steps:
-    - uses: actions/checkout@v2
-
-    # Install Emacs on Linux/macOS
-    - uses: purcell/setup-emacs@master
-      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
-      with:
-        version: ${{ matrix.emacs-version }}
-
-    # Install Emacs on Windows
-    - uses: jcs090218/setup-emacs-windows@master
-      if: matrix.os == 'windows-latest'
-      with:
-        version: ${{ matrix.emacs-version }}
-
-    # You need node for eask
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-
-    # Install eask
-    - uses: emacs-eask/setup-eask@master
-      with:
-        version: 'snapshot'
-
-    - name: Run tests
-      run: |
-        eask install
-        eask compile
-        eask lint
-```
+* [Documentation](https://emacs-eask.github.io/)
 
 ## 📝 About Eask file
 
