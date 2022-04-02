@@ -16,6 +16,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add new option `--allow-error` (c9c4cf24a6d42633f8c725385c7e4910774075ff)
 * Add new command `eask install-deps` (955a36231fa968e1fdedd29ae9c818385d21f93e)
 * Add new option `--insecure` (9c41e5ce65b9e92f1e807ed43ba735bfa7cac7e2)
+* Add new command `eask upgrade-eask` (e1f21fec84a5461c0c027a4560bfdb84428e6f99)
+* Add new command `eask locate` (cef319d0820932cf619bd8836a7b0f7b36742746)
 
 ## 0.3.x
 > Released Mar 30, 2022
