@@ -24,12 +24,14 @@ yourself:
 Eask version with `eask --version`.
 * Upgrade Eask with `eask upgrade-eask`.
 
+---
 > ⚠️ Warning
 >
 > If you installed Eask with `npm`, then you should probably upgrade it through
 > `npm`. Otherwise you would just have to ensure the `git` is installed.
 
 * If the error persists, try to reinstall Eask from scratch.
+---
 
 If Eask still does not work, please [report an issue](https://github.com/emacs-eask/eask/issues/new)
 to the issue tracker.
