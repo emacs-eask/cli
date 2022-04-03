@@ -25,10 +25,12 @@ Eask version with `eask --version`.
 * Upgrade Eask with `eask upgrade-eask`.
 
 ---
+
 > ⚠️ Warning
 >
 > If you installed Eask with `npm`, then you should probably upgrade it through
 > `npm`. Otherwise you would just have to ensure the `git` is installed.
+
 ---
 
 * If the error persists, try to reinstall Eask from scratch.
