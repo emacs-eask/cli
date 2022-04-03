@@ -4,6 +4,11 @@ title: Introduction
 
 # Introduction
 
+Eask is a command-line tool that helps you while developing Emacs Lisp packages.
+It creates a sandbox environment so you can manage, build and test your
+packages cleanly. It can also be used as a package manager in any personal
+Emacs configuration. Eask aims to be:
+
 * **Consist** enough to sandbox across all systems
 * **General** enough to have Emacsers often used commands (byte-compile, checkdoc, etc)
 * **Robust** enought to provide useful results even in the presense of user's errors
