@@ -23,6 +23,7 @@ influencing your personal confiugration. Eask aims to be:
 
 ## 🧪 Testing
 
+[![pages-build-deployment](https://github.com/emacs-eask/eask/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/pages/pages-build-deployment)
 [![Compile](https://github.com/emacs-eask/eask/actions/workflows/test-redefine.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-redefine.yml)
 [![Commands](https://github.com/emacs-eask/eask/actions/workflows/test-commands.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-commands.yml)
 [![Exec](https://github.com/emacs-eask/eask/actions/workflows/test-exec.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-exec.yml)
