@@ -22,7 +22,8 @@ yourself:
 
 * Make sure that you have the latest Eask version. You can determine the current
 Eask version with `eask --version`.
-* Upgrade Eask with `eask upgrade-eask`.
+* Upgrade Eask with `eask upgrade-eask`. Or `npm install -g @emacs-eask/eask@latest`
+instead if chose to installed from `npm`.
 
 ---
 

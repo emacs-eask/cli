@@ -31,6 +31,23 @@ To make changes to Eask, you should have:
 3. [yargs](https://github.com/yargs/yargs) for parsing the command-line.
 4. [Emacs](https://www.gnu.org/software/emacs/), 26.1 or above!
 
+### Building
+
+To build the development environment, you would have to install Eask using
+the [manual installation](https://emacs-eask.github.io/eask/installation#-manual-installation)
+method. (Not install through NPM) Make sure you have setup the environment
+PATH variable, so you can call `eask` from the terminal.
+
+After you have step throught the installation, try:
+
+```sh
+eask locate
+```
+
+It should print out the location of your working Eask workspace. You should
+able to identify the Eask workspace, even you have multiple Eask version
+installed!
+
 ### 📂 Project Structure
 
 The project structure are very simple, all we need is to look into 3 places.
@@ -46,3 +63,15 @@ folders are command files that correspond to each other.
 The sandbox logic is stored inside file `./lisp/_prepare.el`.
 
 ### Testing
+
+We set
+
+## Documentation
+
+WIP
+
+## Pull requests
+
+If all tests passes, and Eask can operates normally with updated documentation
+(if any), please send us a [pull request](https://github.com/emacs-eask/eask/pulls)
+with your changes. 🎊
