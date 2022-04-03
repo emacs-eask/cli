@@ -30,6 +30,7 @@ run on by default. If you use WSL or other environment system file Cygwin/MSYS
 
 ## 📝 Todo list
 
+- [ ] Colorized `eask install` compile log
 - [ ] Add `elint` command
 - [ ] Add `elsa` command
 - [ ] Add `lint-declare` command
