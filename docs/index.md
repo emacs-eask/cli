@@ -7,8 +7,7 @@ title: Introduction
 * **Consist** enough to sandbox across all systems
 * **General** enough to have Emacsers often used commands (byte-compile, checkdoc, etc)
 * **Robust** enought to provide useful results even in the presense of user's errors
-* **Dependency-free** so that the tool is stable
-* *Extra:* Package Management Tool for your personal configuration/package
+* **Dependency-free** so that the tool can be run on any platform
 
 ## ❓ Why Eask?
 

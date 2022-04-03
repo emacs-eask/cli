@@ -13,10 +13,12 @@
 [![Error](https://github.com/emacs-eask/eask/actions/workflows/test-error.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-error.yml)
 [![Color](https://github.com/emacs-eask/eask/actions/workflows/test-color.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-color.yml)
 
-Eask is heavily inspired by Cask, so they are somewhat related! This tool focuses
-on consistency! [Cask]() and [makem.sh]() both rely on bash which Windows doesn't
-run on by default. If you use WSL or other environment system file Cygwin/MSYS
-; then this may not be the tool you are looking for! 👀
+
+
+* **Consist** enough to sandbox across all systems
+* **General** enough to have Emacsers often used commands (byte-compile, checkdoc, etc)
+* **Robust** enought to provide useful results even in the presense of user's errors
+* **Dependency-free** so that the tool can be run on any platform
 
 ## 🔗 Links
 
