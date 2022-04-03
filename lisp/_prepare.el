@@ -148,7 +148,6 @@ the `eask-start' execution.")
   (eask-with-progress
     (ansi-green "Loading package information... ")
     (eask-with-verbosity 'debug
-      (message "")
       (package-initialize) (package-refresh-contents))
     (ansi-green "done")))
 
@@ -163,7 +162,6 @@ the `eask-start' execution.")
       (eask-with-progress
         (format "  - Installing %s (%s)... " pkg-string pkg-version)
         (eask-with-verbosity 'debug
-          (message "")
           (package-refresh-contents)
           ;; XXX Without ignore-errors guard, it will trigger error
           ;;
@@ -573,7 +571,8 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (defmacro eask-with-verbosity (symbol &rest body)
   "If LEVEL is above `eask-verbosity'; hide all messages in BODY."
   (declare (indent 1) (debug t))
-  `(if (eask--reach-verbosity-p ,symbol) (progn ,@body) (eask--silent ,@body)))
+  `(if (eask--reach-verbosity-p ,symbol) (progn ,@body)
+     (eask--silent ,@body)))
 
 (defun eask-debug (msg &rest args) (apply #'eask--msg 'debug "[DEBUG]"   msg args))
 (defun eask-log   (msg &rest args) (apply #'eask--msg 'log   "[LOG]"     msg args))
@@ -669,7 +668,8 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (defmacro eask-with-progress (msg-start body msg-end)
   "Progress BODY wrapper with prefix and suffix messages."
   (declare (indent 0) (debug t))
-  `(progn (eask-write ,msg-start) ,body (eask-msg ,msg-end)))
+  `(progn (ignore-errors (eask-write ,msg-start)) ,body
+          (ignore-errors (eask-msg ,msg-end))))
 
 (defun eask-progress-seq (prefix sequence suffix func)
   "Progress SEQUENCE with messages."
@@ -685,6 +685,16 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
          (when func (funcall func item))
          suffix))
      sequence)))
+
+(defun eask-print-log ()
+  "Loop through each line and print each line with corresponds log level."
+  (goto-char (point-min))
+  (while (not (eobp))
+    (let ((line (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
+      (cond ((string-match-p " [eE]rror: " line) (eask-error line))
+            ((string-match-p " [Ww]arning: " line) (eask-warn line))
+            (t (eask-log line))))
+    (forward-line 1)))
 
 ;;
 ;;; User customization

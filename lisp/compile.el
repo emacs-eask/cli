@@ -31,19 +31,32 @@
   (message " [+] (files \"FILE-1\" \"FILE-2\")"))
 
 ;; Handle options
-(when (eask-strict-p) (setq byte-compile-error-on-warn t))
-(when (= eask-verbosity 4) (setq byte-compile-verbose t))
+(add-hook 'eask-before-command-hook
+          (lambda ()
+            (when (eask-strict-p) (setq byte-compile-error-on-warn t))
+            (when (= eask-verbosity 4) (setq byte-compile-verbose t))))
+
+(defconst eask-compile-log-buffer-name "*Compile-Log*")
+
+(defun eask--print-compile-log ()
+  "Print `*Compile-Log*' buffer."
+  (when (get-buffer eask-compile-log-buffer-name)
+    (with-current-buffer eask-compile-log-buffer-name
+      (eask-print-log)
+      (message ""))))
 
 (defun eask--byte-compile-file (filename)
   "Byte compile FILENAME."
+  (ignore-errors (kill-buffer eask-compile-log-buffer-name))
   (let* ((filename (expand-file-name filename))
          (result))
     (eask-with-progress
-      (format "Compiling %s..." filename)
+      (unless byte-compile-verbose (format "Compiling %s..." filename))
       (eask-with-verbosity 'debug
         (setq result (byte-compile-file filename)
               result (eq result t)))
       (if result "done ✓" "skipped ✗"))
+    (eask--print-compile-log)
     result))
 
 (defun eask--compile-files (files)

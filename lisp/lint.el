@@ -22,13 +22,7 @@
 (defun eask--print-package-lint-buffer ()
   "Print `*Package-Lint*' buffer."
   (with-current-buffer "*Package-Lint*"
-    (goto-char (point-min))
-    (while (not (eobp))
-      (let ((line (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
-        (cond ((string-match-p " error: " line) (eask-error line))
-              ((string-match-p " warning: " line) (eask-warn line))
-              (t (eask-log line))))
-      (forward-line 1))))
+    (eask-print-log)))
 
 (defun eask--package-lint-file (filename)
   "Package lint FILENAME."
