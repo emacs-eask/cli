@@ -38,7 +38,7 @@ yargs
     type: 'boolean',
   })
   .option('allow-error', {
-    description: 'report error at the very end',
+    description: 'continue the executioon even there is error reported',
     type: 'boolean',
   })
   .option('insecure', {
