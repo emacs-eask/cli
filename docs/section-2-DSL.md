@@ -7,6 +7,23 @@ permalink: dsl
 
 This document provides a reference on the [DSL](https://en.wikipedia.org/wiki/Domain-specific_language).
 
+## Package metadata
+
+##### Function **pacakge** name version description
+
+Declare a package with the given name, version and description:
+
+```elisp
+(package "ert-runner" "0.7.0" "Opinionated Ert testing workflow")
+```
+
+All arguments are strings. The version must be a version understood by Emacs’
+built-in `version-to-list`.
+
+## Package contents
+
+## Dependencies
+
 ## Example
 
 `Eask` is the magic file that `eask` will read it as the init file in Emacs.
@@ -20,10 +37,10 @@ The syntaxes are very similar to the `Cask` file, but different.
 (package-file "your-package-file.el")
 ```
 
+## Advanced Usage
+
 Remember, `Eask` is just the regular elisp file, and should be read it from
 the Emacs itself!
-
-## Advanced Usage
 
 ```elisp
 ; Regular Eask file content...
