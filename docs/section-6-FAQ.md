@@ -1,7 +1,6 @@
 ---
 title: FAQ
 permalink: faq
-order: 10
 ---
 
 # Frequently Asked Question (FAQ)
