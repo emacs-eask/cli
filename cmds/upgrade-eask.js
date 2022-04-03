@@ -29,15 +29,21 @@ exports.handler = async (argv) => {
   process.chdir(util.plugin_dir());
   let proc = child_process.spawn('git', ['pull'], { stdio: 'inherit' });
 
+  // You would just need to register the error event, or else it can't print
+  // the help instruction below.
+  proc.on('error', function () { });
+
   proc.on('close', function (code) {
     if (code == 0) {
       process.stdout.write('✓ Done upgrading Eask to the latest version');
       return;
     }
-    console.log('✗ Failed to upgrade Eask');
+    // Help instruction here!
+    console.log('✗ Failed to upgrade Eask, possible causes are:');
     console.log('');
-    console.log('You probably have installed Eask with npm, try');
+    console.log('  [1] Make sure you have git installed');
+    console.log('  [2] You probably have installed Eask with npm, try');
     console.log('');
-    process.stdout.write('  $ npm install -g emacs-eask/eask@latest');
+    process.stdout.write('    $ npm install -g emacs-eask/eask@latest');
   });
 };
