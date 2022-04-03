@@ -5,7 +5,7 @@
 [![npm-dm](https://img.shields.io/npm/dm/@emacs-eask/eask.svg)](https://npmcharts.com/compare/@emacs-eask/eask?minimal=true)
 
 # eask
-> A set of command-line tools to build Emacs packages
+> Node base CLI for building and testing Emacs Lisp packages
 
 [![Compile](https://github.com/emacs-eask/eask/actions/workflows/test-redefine.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-redefine.yml)
 [![Commands](https://github.com/emacs-eask/eask/actions/workflows/test-commands.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-commands.yml)
@@ -13,10 +13,9 @@
 [![Error](https://github.com/emacs-eask/eask/actions/workflows/test-error.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-error.yml)
 [![Color](https://github.com/emacs-eask/eask/actions/workflows/test-color.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-color.yml)
 
-Eask is a command-line tool that helps you while developing Emacs Lisp packages.
-It creates a sandbox environment so you can manage, build and test your
-packages cleanly. It can also be used as a package manager in any personal
-Emacs configuration. Eask aims to be:
+Eask is a command-line tool that helps you build, lint, and test Emacs Lisp
+packages. It creates a clean environment to sandbox your elisp code without
+influencing your personal confiugration. Eask aims to be:
 
 * **Consist** enough to sandbox across all systems
 * **General** enough to have Emacsers often used commands (byte-compile, checkdoc, etc)
