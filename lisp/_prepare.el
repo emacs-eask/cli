@@ -686,15 +686,16 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
          suffix))
      sequence)))
 
-(defun eask-print-log ()
+(defun eask-print-log-buffer (&optional buffer-or-name)
   "Loop through each line and print each line with corresponds log level."
-  (goto-char (point-min))
-  (while (not (eobp))
-    (let ((line (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
-      (cond ((string-match-p " [eE]rror: " line) (eask-error line))
-            ((string-match-p " [Ww]arning: " line) (eask-warn line))
-            (t (eask-log line))))
-    (forward-line 1)))
+  (with-current-buffer (or buffer-or-name (current-buffer))
+    (goto-char (point-min))
+    (while (not (eobp))
+      (let ((line (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
+        (cond ((string-match-p " [eE]rror: " line) (eask-error line))
+              ((string-match-p " [Ww]arning: " line) (eask-warn line))
+              (t (eask-log line))))
+      (forward-line 1))))
 
 ;;
 ;;; User customization

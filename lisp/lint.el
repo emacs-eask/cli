@@ -19,11 +19,6 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
-(defun eask--print-package-lint-buffer ()
-  "Print `*Package-Lint*' buffer."
-  (with-current-buffer "*Package-Lint*"
-    (eask-print-log)))
-
 (defun eask--package-lint-file (filename)
   "Package lint FILENAME."
   (let* ((filename (expand-file-name filename))
@@ -34,7 +29,7 @@
       (emacs-lisp-mode)
       (insert-file-contents filename)
       (package-lint-current-buffer)))
-  (eask--print-package-lint-buffer))
+  (eask-print-log-buffer "*Package-Lint*"))
 
 (eask-start
   (eask-package-install 'package-lint)

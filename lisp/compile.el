@@ -36,17 +36,20 @@
             (when (eask-strict-p) (setq byte-compile-error-on-warn t))
             (when (= eask-verbosity 4) (setq byte-compile-verbose t))))
 
-(defconst eask-compile-log-buffer-name "*Compile-Log*")
+(defconst eask-compile-log-buffer-name "*Compile-Log*"
+  "Byte-compile log buffer name.")
 
 (defun eask--print-compile-log ()
   "Print `*Compile-Log*' buffer."
   (when (get-buffer eask-compile-log-buffer-name)
     (with-current-buffer eask-compile-log-buffer-name
-      (eask-print-log)
+      (eask-print-log-buffer)
       (message ""))))
 
 (defun eask--byte-compile-file (filename)
   "Byte compile FILENAME."
+  ;; *Compile-Log* does not kill itself. Make sure it's clean before we do
+  ;; next byte-compile task.
   (ignore-errors (kill-buffer eask-compile-log-buffer-name))
   (let* ((filename (expand-file-name filename))
          (result))
