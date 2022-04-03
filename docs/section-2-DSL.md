@@ -17,7 +17,7 @@ Declare a package with the given name, version and description:
 (package "ert-runner" "0.7.0" "Opinionated Ert testing workflow")
 ```
 
-All arguments are strings. The version must be a version understood by Emacs’
+All arguments are strings. The version must be a version understood by Emacs'
 built-in `version-to-list`.
 
 ## Package contents
