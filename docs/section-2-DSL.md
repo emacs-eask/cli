@@ -9,7 +9,7 @@ This document provides a reference on the [DSL](https://en.wikipedia.org/wiki/Do
 
 ## Package metadata
 
-##### Function **pacakge** name version description
+#### Function **pacakge** name version description
 
 Declare a package with the given name, version and description:
 
