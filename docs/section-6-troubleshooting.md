@@ -35,5 +35,5 @@ Eask version with `eask --version`.
 
 If Eask still does not work, please [report an issue](https://github.com/emacs-eask/eask/issues/new)
 to the issue tracker.
-Please include Eask output with the `--verbose` and `--debug` options enabled,
+Please include Eask output with the `--verbose 4` and `--debug` options enabled,
 to give us as much information as possible.
