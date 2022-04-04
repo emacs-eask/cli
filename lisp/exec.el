@@ -33,11 +33,13 @@
   (setq commander-args (cddr argv))  ; by pass `--' as well
   (if-let* ((program (eask-argv 1))
             (command (mapconcat #'identity (append (list program) commander-args) " ")))
-      (unless (or (ignore-errors (load (executable-find program) t t))
-                  (progn
-                    (eask-info "Execute command %s..." command)
-                    (zerop (shell-command command))))
-        (error "Error from the execution."))
+      (unless (ignore-errors (load (executable-find program) t t))
+        (if (progn
+              (eask-info "Execute command %s..." command)
+              (zerop (shell-command command "*output*" "*error*")))
+            (with-current-buffer "*output*" (eask-msg (buffer-string)))
+          (with-current-buffer "*error*" (eask-msg (buffer-string)))
+          (error "Error from the execution.")))
     (eask-info "✗ (No exeuction output)")
     (eask--help-exec)))
 
