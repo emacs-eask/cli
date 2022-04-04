@@ -5,7 +5,7 @@ permalink: troubleshooting
 
 # Troubleshooting
 
-This document help you troubleshoot Eask.
+This document helps you troubleshoot Eask.
 
 ## 🚩 Possible Error Variables
 

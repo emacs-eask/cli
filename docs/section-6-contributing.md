@@ -14,7 +14,7 @@ Contributors to Eask should abide by the [Contributor Covenant](https://www.cont
 ## 📂 State of the project
 
 The project's barebones are pretty much done, we are currently looking for
-contirbutors to give us feedback and improve our TUI/UX for this tool!
+contributors to give us feedback and improve our TUI/UX for this tool!
 
 We are also looking for advice to add more Emacser often use commands and
 options, so these features are prepared by default! Like command `lint` 
