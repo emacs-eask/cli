@@ -21,11 +21,19 @@
 
 (defun eask-package-upgrade (pkg-desc)
   "Upgrade package using PKG-DESC."
-  (let ((force (eask-force-p))
-        (old-pkg (cadr (assq (package-desc-name pkg-desc) package-alist))))
-    (when force (package-delete old-pkg))
-    (package-install pkg-desc)
-    (unless force (package-delete old-pkg))))
+  (let* ((pkg-string (package-desc-name pkg-desc))
+         (pkg-string (ansi-green (format "%s" pkg-string)))
+         (version-new (package-desc-version pkg-desc))
+         (version-new (ansi-yellow (package-version-join version-new)))
+         (old-pkg-desc (cadr (assq (package-desc-name pkg-desc) package-alist))))
+    (eask-with-progress
+      (format "  - Upgrading %s (%s)..." pkg-string version-new)
+      (eask-with-verbosity 'debug
+        (package-refresh-contents)
+        (when (eask-force-p) (package-delete old-pkg-desc))
+        (package-install pkg-desc)
+        (unless (eask-force-p) (package-delete old-pkg-desc)))
+      "done ✓")))
 
 (defun eask-package--upgradable-p (pkg)
   "Return non-nil if PKG can be upgraded."
@@ -36,16 +44,19 @@
 (defun eask-package--upgrades ()
   "Return a list of upgradable package description."
   (let (upgrades)
-    (dolist (pkg (mapcar #'car package-alist))
-      (when (eask-package--upgradable-p pkg)
-        (push (cadr (assq pkg package-archive-contents)) upgrades)))
+    (eask-with-progress
+      (ansi-green "Collecting information for upgradable packages...")
+      (dolist (pkg (mapcar #'car package-alist))
+        (when (eask-package--upgradable-p pkg)
+          (push (cadr (assq pkg package-archive-contents)) upgrades)))
+      (ansi-green "done ✓"))
     upgrades))
 
 (defun eask-package-upgrade-all ()
   "Upgrade for archive packages."
   (if-let ((upgrades (eask-package--upgrades)))
       (progn
-        (dolist (pkg-desc upgrades) (eask-package-upgrade pkg-desc))
+        (mapcar #'eask-package-upgrade upgrades)
         (eask-info "(Done upgrading all packages)"))
     (eask-info "(All packages are up to date)")))
 
