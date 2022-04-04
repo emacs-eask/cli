@@ -408,7 +408,7 @@ Eask file in the workspace."
                (eask-msg "✗ Loading Eask file... missing!"))
              (message "")
              (ignore-errors (make-directory package-user-dir t))
-             (eask-setup-paths)
+             (eask--silent (eask-setup-paths))
              (run-hooks 'eask-before-command-hook)
              (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
              ,@body
@@ -621,7 +621,8 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 
 (defun eask-write (msg &rest args)
   "Like function `eask-msg' but without newline at the end."
-  (princ (apply #'eask--format-paint-kwds msg args) 'external-debugging-output))
+  (unless inhibit-message
+    (princ (apply #'eask--format-paint-kwds msg args) 'external-debugging-output)))
 
 ;;
 ;;; File
