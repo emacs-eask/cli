@@ -48,6 +48,9 @@
        ;; 2) Execute `commander' (ert-runner, github-elpa, and elsa, etc)
        (let ((el (locate-library name))) (ignore-errors (load el t t)))
        ;; 3) Execute `shell-command'
+       ;;
+       ;; TODO `shell-command' would jump out of Emacs and does not share the
+       ;; same environment PATH.
        (let ((command (mapconcat #'identity (append (list name) commander-args) " ")))
          (eask--shell-command command)))
     (eask-info "✗ (No exeuction output)")
