@@ -26,20 +26,25 @@
   (eask-msg "")
   (eask-msg "  $ eask exec [program] [options..]"))
 
+(defun eask--shell-command (command)
+  "Wrap `shell-command' with better output to terminal."
+  (eask-info "Execute command %s..." command)
+  (let ((code (shell-command command "*output*" "*error*")))
+    (if (zerop code)
+        (with-current-buffer "*output*" (eask-msg (buffer-string)))
+      (with-current-buffer "*error*" (eask-msg (ansi-red (buffer-string))))
+      (error "Error from the execution, exit code %s" code))))
+
 (eask-start
   (eask-pkg-init)
   ;; XXX This is the hack by adding all `bin' folders from local elpa.
   (eask-setup-paths)
   (setq commander-args (cddr argv))  ; by pass `--' as well
   (if-let* ((program (eask-argv 1))
+            (program (or (executable-find program) program))
             (command (mapconcat #'identity (append (list program) commander-args) " ")))
-      (unless (ignore-errors (load (executable-find program) t t))
-        (if (progn
-              (eask-info "Execute command %s..." command)
-              (zerop (shell-command command "*output*" "*error*")))
-            (with-current-buffer "*output*" (eask-msg (buffer-string)))
-          (with-current-buffer "*error*" (eask-msg (buffer-string)))
-          (error "Error from the execution.")))
+      (or (ignore-errors (load program t t))
+          (eask--shell-command command))
     (eask-info "✗ (No exeuction output)")
     (eask--help-exec)))
 
