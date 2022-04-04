@@ -1,9 +1,9 @@
 ---
-title: Eask API
+title: Developer API
 permalink: api
 ---
 
-# Eask Application Programming Interface (API)
+# Developer Application Programming Interface (API)
 
 This document provides a reference of the public Eask API, which you may use in
 your own projects and extensions to Eask.

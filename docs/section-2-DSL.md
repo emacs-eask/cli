@@ -1,9 +1,9 @@
 ---
-title: Eask DSL
+title: Domain Specific Language
 permalink: dsl
 ---
 
-# Eask Domain Specific Language (DSL)
+# Domain Specific Language (DSL)
 
 This document provides a reference on the [DSL](https://en.wikipedia.org/wiki/Domain-specific_language).
 
