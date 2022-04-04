@@ -18,17 +18,13 @@
   "Print help if command failed"
   )
 
-(defun eask--print-info (key)
-  "Print package information."
-  (when-let ((info (eask-package-get key)))
-    (eask-msg "  ■ %s" (ansi-yellow info))))
-
 (eask-start
   (if eask-package
       (progn
-        (eask--print-info :name)
-        (eask--print-info :version)
-        (eask--print-info :description))
+        (eask-msg "### %s (%s) ###" (eask-package-get :name) (eask-package-get :version))
+        (eask-msg "")
+        (eask-msg (eask-package-get :description))
+        (eask-msg ""))
     (eask-info "(Eask file has no package information)")
     (eask--help-info)))
 
