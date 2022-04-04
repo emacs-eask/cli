@@ -28,7 +28,7 @@
 
 (defun eask--shell-command (command)
   "Wrap `shell-command' with better output to terminal."
-  (eask-info "Execute command %s..." command)
+  (eask-info "Executing command: %s..." command)
   (let ((code (shell-command command "*output*" "*error*")))
     (if (zerop code)
         (eask-with-verbosity 'debug
