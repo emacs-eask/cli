@@ -24,4 +24,6 @@ echo "Test command 'exec'..."
 cd $PSScriptRoot
 
 eask install-deps
+eask exec ert-runner -h
 eask exec github-elpa -h
+eask exec echo hello world
