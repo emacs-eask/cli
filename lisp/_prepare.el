@@ -135,7 +135,7 @@ the `eask-start' execution.")
   (when (and eask-depends-on-dev (eask-dev-p))
     (eask--install-deps eask-depends-on-dev "development")))
 
-(defun eask--setup-paths ()
+(defun eask-setup-paths ()
   "Setup both `exec-path' and `load-path'."
   (eask-with-progress
     (ansi-green "Updating the environment PATHs... ")
@@ -170,8 +170,7 @@ the `eask-start' execution.")
           ;; But we can remove this after Emacs 28, since function `find-library-name'
           ;; has replaced the function `signal' instead of the `error'.
           (eask-ignore-errors (package-install pkg)))
-        "done ✓"))
-    (require pkg nil t)))
+        "done ✓"))))
 
 (defun eask-package-desc (name &optional current)
   "Build package description by PKG-NAME."
@@ -409,6 +408,7 @@ Eask file in the workspace."
                (eask-msg "✗ Loading Eask file... missing!"))
              (message "")
              (ignore-errors (make-directory package-user-dir t))
+             (eask-setup-paths)
              (run-hooks 'eask-before-command-hook)
              (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
              ,@body
