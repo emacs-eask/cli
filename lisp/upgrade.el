@@ -19,15 +19,20 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
+(defun eask--package-version-string (pkg-desc)
+  "Get package version string with color."
+  (let ((version (package-desc-version pkg-desc)))
+    (ansi-yellow (package-version-join version))))
+
 (defun eask-package-upgrade (pkg-desc)
   "Upgrade package using PKG-DESC."
   (let* ((pkg-string (package-desc-name pkg-desc))
          (pkg-string (ansi-green (format "%s" pkg-string)))
-         (version-new (package-desc-version pkg-desc))
-         (version-new (ansi-yellow (package-version-join version-new)))
-         (old-pkg-desc (cadr (assq (package-desc-name pkg-desc) package-alist))))
+         (version-new (eask--package-version-string pkg-desc))
+         (old-pkg-desc (cadr (assq (package-desc-name pkg-desc) package-alist)))
+         (version-old (eask--package-version-string old-pkg-desc)))
     (eask-with-progress
-      (format "  - Upgrading %s (%s)..." pkg-string version-new)
+      (format "  - Upgrading %s from (%s) to (%s)..." pkg-string version-old version-new)
       (eask-with-verbosity 'debug
         (package-refresh-contents)
         (when (eask-force-p) (package-delete old-pkg-desc))
