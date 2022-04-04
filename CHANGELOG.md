@@ -26,7 +26,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Colorized compile log for `eask compile` command (cfc31054d1ce4e077b4b501bc38adc41660c4cab)
 * No longer require package after installation! (9175c8b5cbdf97b6410cd35b438db406f4f841be)
 * Hide script name in commands list (7ec2967152e11f1bbbd9a48d94835a7a8cd5aa1f)
-* Integreate SPEC for `depends-on` DSL (4250ea837e41d1357b2ce98e4902c38e73adb59e)
+* Integrate SPEC for `depends-on` DSL (4250ea837e41d1357b2ce98e4902c38e73adb59e)
 
 ## 0.3.x
 > Released Mar 30, 2022
