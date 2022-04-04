@@ -31,6 +31,7 @@ cd "../parse-it"
 echo "Testing local commands..."
 eask info
 eask archives
+eask package
 eask install-deps
 eask install
 eask compile
