@@ -24,9 +24,8 @@
 # dependencies management tool.
 #
 
-# Clone a project simulate Emacs package development
-git clone "https://github.com/jcs-elpa/parse-it" "../parse-it"
-cd "../parse-it"
+# Naviate to the test package
+cd "./test/mini.emacs.pkg/"
 
 echo "Testing local commands..."
 eask info

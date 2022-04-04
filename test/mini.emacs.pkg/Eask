@@ -5,5 +5,14 @@
          "Minimal Emacs package to simulate development environment; only for testing purposes!")
 
 (package-file "mini.emacs.pkg.el")
+(files "*.el" "extern/*.el")
 
 (depends-on "emacs" "26.1")
+(depends-on "f")
+(depends-on "s")
+(depends-on "watch-cursor"
+            :repo "jcs-elpa/watch-cursor" :fetcher 'github)
+(depends-on "organize-imports-java"
+            :repo "jcs-elpa/organize-imports-java"
+            :fetcher 'github
+            :files '(:defaults "sdk" "default"))
