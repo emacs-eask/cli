@@ -5,8 +5,13 @@ All notable changes to this project will be documented in this file.
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 
-## 0.4.x (Unreleased)
+## 0.5.x (Unreleased)
 > Released N/A
+
+* N/A
+
+## 0.4.x
+> Released Apr 5, 2022
 
 * Add Eask file keyword `exec-paths` (5334bc5e16e8d52a9e6a7f23781f2b42d333d11c)
 * Remove Eask file keyword `load-path` (a72fdacece54aa7acebfea3265bf9a0eace41778)
