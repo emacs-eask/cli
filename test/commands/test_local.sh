@@ -44,3 +44,6 @@ eask outdated
 eask clean
 eask clean-elc
 eask clean-all
+
+eask locate
+eask upgrade-eask
