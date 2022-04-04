@@ -32,7 +32,7 @@
          (old-pkg-desc (cadr (assq (package-desc-name pkg-desc) package-alist)))
          (version-old (eask--package-version-string old-pkg-desc)))
     (eask-with-progress
-      (format "  - Upgrading %s from (%s) to (%s)..." pkg-string version-old version-new)
+      (format "  - Upgrading %s (%s) -> (%s)..." pkg-string version-old version-new)
       (eask-with-verbosity 'debug
         (package-refresh-contents)
         (when (eask-force-p) (package-delete old-pkg-desc))
