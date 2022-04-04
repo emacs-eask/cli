@@ -138,10 +138,10 @@ the `eask-start' execution.")
 (defun eask-setup-paths ()
   "Setup both `exec-path' and `load-path'."
   (eask-with-progress
-    (ansi-green "Updating the environment PATHs... ")
+    (ansi-green "Updating environment PATHs... ")
     (eask-with-verbosity 'debug
       (eask--update-exec-path) (eask--update-load-path))
-    (ansi-green "done")))
+    (ansi-green "done ✓")))
 
 (defun eask-pkg-init ()
   "Package initialization."
@@ -149,7 +149,7 @@ the `eask-start' execution.")
     (ansi-green "Loading package information... ")
     (eask-with-verbosity 'debug
       (package-initialize) (package-refresh-contents))
-    (ansi-green "done")))
+    (ansi-green "done ✓")))
 
 (defun eask-package-install (pkg)
   "Install the package PKG."
