@@ -49,17 +49,17 @@
     ;; Else we try to install package from the working directory
     (eask-install-dependencies)
     (eask-log "Searching for package artefact to install in path...")
-    (if-let* ((packaged (eask-packaged-file))
-              (target (or packaged eask-package-file)))
-        (progn
-          (if packaged
-              (eask-info "✓ Loading packaged artefact in %s... done!" target)
-            (eask-info "? Packaged artefact not found, install directly to %s..." target))
-          (add-to-list 'load-path (expand-file-name (eask-packaged-name) package-user-dir))
-          (package-install-file target)
-          (eask-info "✓ Done. (See %s)"
-                     (file-name-directory (locate-library (eask-guess-package-name)))))
-      (eask-info "✗ (No files have been intalled)")
-      (eask--help-install))))
+    (let ((packaged (eask-packaged-file)))
+      (if-let ((target (or packaged eask-package-file)))
+          (progn
+            (if packaged
+                (eask-info "✓ Loading packaged artefact in %s... done!" target)
+              (eask-info "? Packaged artefact not found, install directly to %s..." target))
+            (add-to-list 'load-path (expand-file-name (eask-packaged-name) package-user-dir))
+            (package-install-file target)
+            (eask-info "✓ Done. (See %s)"
+                       (file-name-directory (locate-library (eask-guess-package-name)))))
+        (eask-info "✗ (No files have been intalled)")
+        (eask--help-install)))))
 
 ;;; install.el ends here
