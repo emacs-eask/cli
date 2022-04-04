@@ -31,7 +31,8 @@
   (eask-info "Execute command %s..." command)
   (let ((code (shell-command command "*output*" "*error*")))
     (if (zerop code)
-        (with-current-buffer "*output*" (eask-msg (buffer-string)))
+        (eask-with-verbosity 'debug
+          (with-current-buffer "*output*" (eask-msg (buffer-string))))
       (with-current-buffer "*error*" (eask-msg (ansi-red (buffer-string))))
       (error "Error from the execution, exit code %s" code))))
 
@@ -40,11 +41,15 @@
   ;; XXX This is the hack by adding all `bin' folders from local elpa.
   (eask-setup-paths)
   (setq commander-args (cddr argv))  ; by pass `--' as well
-  (if-let* ((program (eask-argv 1))
-            (program (or (executable-find program) program))
-            (command (mapconcat #'identity (append (list program) commander-args) " ")))
-      (or (ignore-errors (load program t t))
-          (eask--shell-command command))
+  (if-let ((name (eask-argv 1)))
+      (or
+       ;; 1) Execute executable if found
+       (let ((program (executable-find name))) (ignore-errors (load program t t)))
+       ;; 2) Execute `commander' (ert-runner, github-elpa, and elsa, etc)
+       (let ((el (locate-library name))) (ignore-errors (load el t t)))
+       ;; 3) Execute `shell-command'
+       (let ((command (mapconcat #'identity (append (list name) commander-args) " ")))
+         (eask--shell-command command)))
     (eask-info "✗ (No exeuction output)")
     (eask--help-exec)))
 
