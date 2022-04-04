@@ -115,21 +115,46 @@ the `eask-start' execution.")
   "Return list of dependencies."
   (append eask-depends-on (and (eask-dev-p) eask-depends-on-dev)))
 
+(defun eask--extract-dependency-name (deps)
+  "Return a list of DEPS' name."
+  (mapcar (lambda (dep)
+            (if (listp dep) (format "%s" (car dep))  ; detect recipe!
+              (intern dep)))  ; string we `intern'
+          deps))
+
 (defun eask--install-deps (deps msg)
   "Install DEPS."
-  (let* ((deps (mapcar #'intern deps))
+  (let* ((deps-name (eask--extract-dependency-name deps))
          (len (length deps))
          (ies (eask--sinr len "y" "ies"))
-         (pkg-installed (cl-remove-if #'package-installed-p deps))
+         (pkg-installed (cl-remove-if #'package-installed-p deps-name))
          (installed (length pkg-installed)) (skipped (- len installed)))
     (eask-log "Installing %s %s dependenc%s..." len msg ies)
-    (mapc #'eask-package-install deps)
+    (mapc #'eask-package-install deps-name)
     (eask-info "(Total of %s dependenc%s installed, %s skipped)"
                installed ies skipped)))
 
 (defun eask-install-dependencies ()
   "Install dependencies defined in Eask file."
   (package-initialize)
+  (when (eask-depends-on-recipe-p)
+    (eask-log "Installing required external packages...")
+    (eask-package-install 'package-build)
+    (eask-with-progress
+      "Building temporary archives (this may take awhile)... "
+      (eask-with-verbosity 'debug (github-elpa-build))
+      "done ✓")
+    (eask-with-progress
+      "Adding local archives... "
+      (eask-with-verbosity 'debug
+        (setq package-archives
+              `(,@package-archives ("local" . ,github-elpa-archive-dir))
+              ;; If the local archives is added, we set the priority to a very
+              ;; high number so user we always use the specified dependencies!
+              package-archive-priorities
+              `(,@package-archive-priorities ("local" . 90)))
+        (eask-call "archives"))
+      "done ✓"))
   (when eask-depends-on
     (eask--install-deps eask-depends-on "package"))
   (when (and eask-depends-on-dev (eask-dev-p))
@@ -186,7 +211,7 @@ the `eask-start' execution.")
   "Return PKG's version."
   (if-let ((version (eask-package-version pkg)))
       (package-version-join version)
-    "unknown"))
+    "latest"))
 
 ;;
 ;;; Flag
@@ -459,21 +484,41 @@ Eask file in the workspace."
   "Set files patterns."
   (setq eask-files patterns))
 
-(defun eask-depends-on (pkg &optional minimum-version &rest _rcp)
+(defun eask-depends-on-recipe-p ()
+  "Return non-nil if there are recipes in dependencies."
+  (or (cl-some #'listp eask-depends-on)
+      (and (eask-dev-p) (cl-some #'listp eask-depends-on-dev))))
+
+(defun eask-depends-on (pkg &rest args)
   "Specify a dependency of this package."
-  (if (string= pkg "emacs")
-      (when (and minimum-version (version< emacs-version minimum-version))
-        (error "This requires Emacs %s and above!" minimum-version))
-    (push pkg eask-depends-on)
-    (delete-dups eask-depends-on))
-  pkg)
+  (cond
+   ((string= pkg "emacs")
+    (let ((minimum-version (car args)))
+      (when (version< emacs-version minimum-version)
+        (error "This requires Emacs %s and above!" minimum-version)))
+    pkg)
+   ;; No argument specify
+   ((zerop (length args))
+    (if (member pkg eask-depends-on)
+        (error "You have redefined dependencies with the same name: %s" pkg)
+      (push pkg eask-depends-on))
+    pkg)
+   ;; recipe are entered
+   (t
+    (let ((recipe (append (list (intern pkg)) args)))
+      (if (member recipe eask-depends-on)
+          (error "You have redefined dependencies with the same name: %s" pkg)
+        (push recipe eask-depends-on)
+        (eask-load "./extern/github-elpa")
+        (write-region (pp-to-string recipe) nil (expand-file-name pkg github-elpa-recipes-dir)))
+      recipe))))
 
 (defun eask-development (&rest dep)
   "Development scope."
   (dolist (pkg dep)
     (push pkg eask-depends-on-dev)
     (delete-dups eask-depends-on-dev)
-    (setq eask-depends-on (remove pkg eask-depends-on))))  ; remove it from production
+    (setq eask-depends-on (remove pkg eask-depends-on))))
 
 (defun eask-load-paths (&rest dirs)
   "Add all DIRS to load-path."
