@@ -9,7 +9,7 @@ This document provides a reference on the [DSL](https://en.wikipedia.org/wiki/Do
 
 ## Package metadata
 
-#### 🔎 **pacakge** (`name` `version` `description`)
+### 🔎 **pacakge** (`name` `version` `description`)
 
 Declare a package with the given name, version and description:
 
@@ -20,30 +20,30 @@ Declare a package with the given name, version and description:
 All arguments are strings. The version must be a version understood by Emacs'
 built-in `version-to-list`.
 
-#### 🔎 **pacakge-file** (`file`)
+### 🔎 **pacakge-file** (`file`)
 
 Package entry file.
 
 ## Package contents
 
-#### 🔎 **files** (`&rest patterns`)
+### 🔎 **files** (`&rest patterns`)
 
 N/A
 
 ## Dependencies
 
-#### 🔎 **depends-on** (`package-name` `&optional minimum-version`)
-#### 🔎 **depends-on** (`package-name` `&rest recipe`)
+### 🔎 **depends-on** (`package-name` `&optional minimum-version`)
+### 🔎 **depends-on** (`package-name` `&rest recipe`)
 
 Specify a dependency of this package.
 
-#### 🔎 **development** `&rest body`
+### 🔎 **development** `&rest body`
 
 Scope all depends-on expressions in body to development.
 
 
-#### 🔎 **source** (`alias`)
-#### 🔎 **source** (`name` `name`)
+### 🔎 **source** (`alias`)
+### 🔎 **source** (`name` `name`)
 
 Add a package archive to install dependencies from.
 
