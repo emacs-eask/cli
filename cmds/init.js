@@ -48,13 +48,13 @@ exports.handler = async ({}) => {
   await ask(`description: `, (answer) => { description = answer; });
   await ask(`entry-point: (${basename}.el) `, (answer) => { entry_point = answer || `${basename}.el`; });
 
-  let content = `(source "gnu")
-
-(package "${name}"
+  let content = `(package "${name}"
          "${version}"
          "${description}")
 
 (package-file "${entry_point}")
+
+(source "gnu")
 `;
 
   await ask(`About to write to ${EASK_FILE}:
