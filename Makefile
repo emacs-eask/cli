@@ -9,5 +9,6 @@ EASK ?= eask
 ## Development
 test-redefine:
 	@echo "Test redefine..."
+	$(EASK) clean-all
 	$(EASK) concat
 	$(EASK) load ./test/development/compile/test-redefine.el
