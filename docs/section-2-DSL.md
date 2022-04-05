@@ -48,7 +48,14 @@ Scope all depends-on expressions in body to development.
 Add a package archive to install dependencies from.
 
 * `gnu` - The standard GNU ELPA archive at (https://elpa.gnu.org/packages/)
-* `nongnu` (https://elpa.nongnu.org/nongnu/)
+* `nongnu` - The standard NonGNU ELPA archive at (https://elpa.nongnu.org/nongnu/)
+* `celpa` - Conao3’s Emacs Lisp Package Archive at (https://celpa.conao3.com/)
+* `jcs-elpa` - Jen-Chieh Shen’s Emacs Lisp Package Archive at (https://jcs-emacs.github.io/jcs-elpa/packages/)
+* `marmalade` - (https://marmalade-repo.org/packages/)
+* `melpa` - (https://melpa.org/packages/)
+* `melpa-stable` - (https://stable.melpa.org/packages/)
+* `org` - (https://orgmode.org/elpa/)
+* `shmelpa` - (https://shmelpa.commandlinesystems.com/packages/)
 
 #### 🔎 **source-priority** (`alias` `priority`)
 
