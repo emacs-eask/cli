@@ -30,6 +30,8 @@ jobs:
       with:
         node-version: '14'
 
+    - uses: actions/checkout@v2
+
     - name: Prepare Eask (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       run: |
@@ -39,8 +41,6 @@ jobs:
     - name: Prepare Eask (Windows)
       if: matrix.os == 'windows-latest'
       run: .github/scripts/setup-eask.ps1
-
-    - uses: actions/checkout@v2
 
     - name: Test commands
       run: make test-redefine
