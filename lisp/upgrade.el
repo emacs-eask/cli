@@ -42,8 +42,8 @@
 
 (defun eask-package--upgradable-p (pkg)
   "Return non-nil if PKG can be upgraded."
-  (let ((current (eask-package-version pkg t))
-        (latest (eask-package-version pkg nil)))
+  (let ((current (eask-package--version pkg t))
+        (latest (eask-package--version pkg nil)))
     (version-list-< current latest)))
 
 (defun eask-package--upgrades ()

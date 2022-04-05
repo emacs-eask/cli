@@ -181,7 +181,7 @@ the `eask-start' execution.")
   (eask--silent (package-initialize))
   (let* ((pkg (if (stringp pkg) (intern pkg) pkg))
          (pkg-string (ansi-green (format "%s" pkg)))
-         (pkg-version (ansi-yellow (eask-package-version-string pkg))))
+         (pkg-version (ansi-yellow (eask-package--version-string pkg))))
     (if (package-installed-p pkg)
         (eask-msg "  - Skipping %s (%s)... already installed ✗" pkg-string pkg-version)
       (eask-with-progress
@@ -202,14 +202,14 @@ the `eask-start' execution.")
   (cadr (assq name (if current package-alist
                      (or package-archive-contents package-alist)))))
 
-(defun eask-package-version (name &optional current)
+(defun eask-package--version (name &optional current)
   "Return PKG's version."
   (when-let ((desc (eask-package-desc name current)))
     (package-desc-version desc)))
 
-(defun eask-package-version-string (pkg)
+(defun eask-package--version-string (pkg)
   "Return PKG's version."
-  (if-let ((version (eask-package-version pkg)))
+  (if-let ((version (eask-package--version pkg)))
       (package-version-join version)
     "latest"))
 
@@ -468,9 +468,13 @@ Eask file in the workspace."
 (defvar eask-depends-on     nil)
 (defvar eask-depends-on-dev nil)
 
-(defun eask-package-get (key)
+(defun eask-package--get (key)
   "Return package info by KEY."
   (plist-get eask-package key))
+
+(defun eask-package-name () (eask-package--get :name))
+(defun eask-package-version () (eask-package--get :version))
+(defun eask-package-description () (eask-package--get :description))
 
 (defun eask-package (name version description)
   "Set the package information."
@@ -674,7 +678,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 
 (defun eask-guess-package-name ()
   "Return the possible package name."
-  (or (eask-package-get :name)
+  (or (eask-package-name)
       (ignore-errors (file-name-nondirectory
                       (file-name-sans-extension eask-package-file)))))
 

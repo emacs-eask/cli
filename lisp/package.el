@@ -30,7 +30,7 @@
 (defun eask-packaged-name ()
   "Find a possible packaged name."
   (let ((name (eask-guess-package-name))
-        (version (eask-package-get :version)))
+        (version (eask-package-version)))
     (concat name "-" version)))
 
 (defun eask--packaged-file (ext)
@@ -53,7 +53,7 @@
     (eask-package-install 'package-build)
     (eask-load "./extern/package-build")  ; override
 
-    (let* ((version (eask-package-get :version))
+    (let* ((version (eask-package-version))
            (rcp (eask-package-dir-recipe))
            (package-build-working-dir default-directory)
            (package-build-archive-dir eask-dist-path))

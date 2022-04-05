@@ -21,9 +21,9 @@
 (eask-start
   (if eask-package
       (progn
-        (eask-msg "### %s (%s) ###" (eask-package-get :name) (eask-package-get :version))
+        (eask-msg "### %s (%s) ###" (eask-package-name) (eask-package-version))
         (eask-msg "")
-        (eask-msg (eask-package-get :description))
+        (eask-msg (eask-package-description))
         (eask-msg ""))
     (eask-info "(Eask file has no package information)")
     (eask--help-info)))

@@ -16,8 +16,8 @@
 
 (eask-start
   (let* ((name (eask-guess-package-name))
-         (version (eask-package-get :version))
-         (description (eask-package-get :description))
+         (version (eask-package-version))
+         (description (eask-package-description))
          (pkg-file (expand-file-name (concat name "-pkg.el"))))
     (write-region
      (pp-to-string `(define-package ,name ,version ,description))
