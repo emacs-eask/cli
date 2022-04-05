@@ -54,16 +54,6 @@
     (checkdoc-file filename)
     (unless eask--checkdoc-error (eask-msg "No issues found"))))
 
-(defun eask--checkdoc-file (filename)
-  "Run checkdoc on FILENAME."
-  (let* ((filename (expand-file-name filename))
-         (file (s-replace eask-file-root "" filename))
-         (eask--checkdoc-error))
-    (eask-msg "")
-    (eask-msg "`%s` with checkdoc (%s)" (ansi-green file) checkdoc-version)
-    (checkdoc-file filename)
-    (unless eask--checkdoc-error (eask-msg "No issues found"))))
-
 (eask-start
   (require 'checkdoc)
   (if-let* ((files (or (eask-args) (eask-package-el-files)))
