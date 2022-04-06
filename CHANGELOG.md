@@ -8,7 +8,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 0.5.x (Unreleased)
 > Released N/A
 
-* N/A
+* Unified dependencies list with data structure of list, and no longer have string (9f09f93ec866e32d14dd2f6c53ee8fde6cd4b986)
 
 ## 0.4.x
 > Released Apr 5, 2022
