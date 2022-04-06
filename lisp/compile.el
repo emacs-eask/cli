@@ -54,7 +54,7 @@
   (let* ((filename (expand-file-name filename))
          (result))
     (eask-with-progress
-      (unless byte-compile-verbose (format "Compiling %s..." filename))
+      (unless byte-compile-verbose (format "Compiling %s... " filename))
       (eask-with-verbosity 'debug
         (setq result (byte-compile-file filename)
               result (eq result t)))

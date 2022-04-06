@@ -48,17 +48,26 @@
       (eask--install-packages names)
     ;; Else we try to install package from the working directory
     (eask-install-dependencies)
-    (eask-log "Searching for package artefact to install in path...")
-    (let ((packaged (eask-packaged-file)))
-      (if-let ((target (or packaged eask-package-file)))
+    (let* ((name (eask-guess-package-name))
+           (packaged (eask-packaged-file))
+           (target (or packaged eask-package-file)))
+      (eask-with-progress
+        "Searching for package artefact to install..."
+        (if packaged (eask-debug "Found artefact in %s" target)
+          (eask-debug "Artefact missing, install directly to %s" target))
+        (if packaged "found ✓" "missing ✗"))
+      (if target
           (progn
-            (if packaged
-                (eask-info "✓ Loading packaged artefact in %s... done!" target)
-              (eask-info "? Packaged artefact not found, install directly to %s..." target))
             (add-to-list 'load-path (expand-file-name (eask-packaged-name) package-user-dir))
-            (package-install-file target)
-            (eask-info "✓ Done. (See %s)"
-                       (file-name-directory (locate-library (eask-guess-package-name)))))
+            (eask-with-progress
+              (format "  - Installing %s (%s)... "
+                      (ansi-green name)
+                      (ansi-yellow (eask-package-version)))
+              (eask-with-verbosity 'debug
+                (package-install-file target))
+              "done ✓")
+            (eask-info "(Installed in %s)"
+                       (file-name-directory (locate-library name))))
         (eask-info "✗ (No files have been intalled)")
         (eask--help-install)))))
 
