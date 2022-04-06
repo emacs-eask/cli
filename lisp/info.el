@@ -21,10 +21,21 @@
 (eask-start
   (if eask-package
       (progn
-        (eask-msg "### %s (%s) ###" (eask-package-name) (eask-package-version))
+        (eask-msg "")
+        (eask-msg "%s (%s)" (ansi-green (eask-package-name)) (ansi-yellow (eask-package-version)))
         (eask-msg "")
         (eask-msg (eask-package-description))
-        (eask-msg ""))
+        (when eask-package-file
+          (eask-msg "")
+          (eask-msg "entry: %s" (eask-root-del eask-package-file)))
+        (when eask-depends-on
+          (eask-msg "")
+          (eask-msg "dependencies:")
+          (dolist (dep eask-depends-on) (eask-msg "  %s" dep)))
+        (when eask-depends-on-dev
+          (eask-msg "")
+          (eask-msg "devDependencies:")
+          (dolist (dep eask-depends-on-dev) (eask-msg "  %s" dep))))
     (eask-info "(Eask file has no package information)")
     (eask--help-info)))
 
