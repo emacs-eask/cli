@@ -51,21 +51,13 @@
     (let* ((name (eask-guess-package-name))
            (packaged (eask-packaged-file))
            (target (or packaged eask-package-file)))
-      (eask-with-progress
-        "Searching for package artefact to install..."
-        (if packaged (eask-debug "Found artefact in %s" target)
-          (eask-debug "Artefact missing, install directly to %s" target))
-        (if packaged "found ✓" "missing ✗"))
+      (eask-log "Searching for artefact to install...")
+      (if packaged (eask-info "✓ Found artefact in %s" target)
+        (eask-info "? Missing artefact, install directly from %s" target))
       (if target
           (progn
             (add-to-list 'load-path (expand-file-name (eask-packaged-name) package-user-dir))
-            (eask-with-progress
-              (format "  - Installing %s (%s)... "
-                      (ansi-green name)
-                      (ansi-yellow (eask-package-version)))
-              (eask-with-verbosity 'debug
-                (package-install-file target))
-              "done ✓")
+            (package-install-file target)
             (eask-info "(Installed in %s)"
                        (file-name-directory (locate-library name))))
         (eask-info "✗ (No files have been intalled)")

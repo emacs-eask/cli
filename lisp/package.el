@@ -59,8 +59,7 @@
            (package-build-archive-dir eask-dist-path))
       (eask-with-progress
         (format "Building artefact %s (%s)... " (eask-package-name) version)
-        (eask-with-verbosity 'debug
-          (package-build--package rcp version))
+        (package-build--package rcp version)
         "done ✓"))
 
     (setq packaged (eask-packaged-file))
