@@ -374,6 +374,10 @@ Eask file in the workspace."
 (defvar eask-file nil "The Eask file's filename.")
 (defvar eask-file-root nil "The Eask file's directory .")
 
+(defun eask-root-del (filename)
+  "Remove Eask file root path from FILENAME."
+  (s-replace eask-file-root "" filename))
+
 (defun eask-file-load (location &optional noerror)
   "Load Eask file in the LOCATION."
   (when-let* ((target-eask-file (expand-file-name location user-emacs-directory))

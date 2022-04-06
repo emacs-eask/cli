@@ -47,7 +47,7 @@
 (defun eask--checkdoc-file (filename)
   "Run checkdoc on FILENAME."
   (let* ((filename (expand-file-name filename))
-         (file (s-replace eask-file-root "" filename))
+         (file (eask-root-del filename))
          (eask--checkdoc-error))
     (eask-msg "")
     (eask-msg "`%s` with checkdoc (%s)" (ansi-green file) checkdoc-version)
