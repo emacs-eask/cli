@@ -18,6 +18,14 @@
   "Print help if command failed"
   )
 
+(defun eask--print-deps (title deps)
+  "Print dependencies."
+  (when deps
+    (eask-msg "")
+    (eask-msg title)
+    (dolist (dep deps)
+      (eask-msg "%s %s" (car dep) (cdr dep)))))
+
 (eask-start
   (if eask-package
       (progn
@@ -28,14 +36,8 @@
         (when eask-package-file
           (eask-msg "")
           (eask-msg "entry: %s" (eask-root-del eask-package-file)))
-        (when eask-depends-on
-          (eask-msg "")
-          (eask-msg "dependencies:")
-          (dolist (dep eask-depends-on) (eask-msg "  %s" dep)))
-        (when eask-depends-on-dev
-          (eask-msg "")
-          (eask-msg "devDependencies:")
-          (dolist (dep eask-depends-on-dev) (eask-msg "  %s" dep))))
+        (eask--print-deps "dependencies:" eask-depends-on)
+        (eask--print-deps "devDependencies:" eask-depends-on-dev))
     (eask-info "(Eask file has no package information)")
     (eask--help-info)))
 

@@ -117,10 +117,7 @@ the `eask-start' execution.")
 
 (defun eask--extract-dependency-name (deps)
   "Return a list of DEPS' name."
-  (mapcar (lambda (dep)
-            (if (listp dep) (format "%s" (car dep))  ; detect recipe!
-              (intern dep)))  ; string we `intern'
-          deps))
+  (mapcar (lambda (dep) (format "%s" (car dep))) deps))
 
 (defun eask--install-deps (deps msg)
   "Install DEPS."
@@ -137,7 +134,7 @@ the `eask-start' execution.")
 (defun eask-install-dependencies ()
   "Install dependencies defined in Eask file."
   (package-initialize)
-  (when (eask-depends-on-recipe-p)
+  (when eask-depends-on-recipe-p
     (eask-log "Installing required external packages...")
     (eask-package-install 'package-build)
     (eask-with-progress
@@ -384,6 +381,7 @@ Eask file in the workspace."
               (result (eask--alias-env (load target-eask-file noerror t))))
     (setq eask-file target-eask-file  ; assign eask file only if success
           eask-file-root (file-name-directory target-eask-file))
+    (run-hooks 'eask-file-loaded-hook)
     result))
 
 (defun eask--print-env-info ()
@@ -492,10 +490,13 @@ Eask file in the workspace."
   "Set files patterns."
   (setq eask-files patterns))
 
-(defun eask-depends-on-recipe-p ()
-  "Return non-nil if there are recipes in dependencies."
-  (or (cl-some #'listp eask-depends-on)
-      (and (eask-dev-p) (cl-some #'listp eask-depends-on-dev))))
+(defvar eask-depends-on-recipe-p nil
+  "Set to t if package depends on recipe.")
+
+(add-hook 'eask-file-loaded-hook
+          (lambda ()
+            (setq eask-depends-on (reverse eask-depends-on)
+                  eask-depends-on-dev (reverse eask-depends-on-dev))))
 
 (defun eask-depends-on (pkg &rest args)
   "Specify a dependency of this package."
@@ -506,11 +507,13 @@ Eask file in the workspace."
         (error "This requires Emacs %s and above!" minimum-version)))
     pkg)
    ;; No argument specify
-   ((zerop (length args))
-    (if (member pkg eask-depends-on)
-        (error "You have redefined dependencies with the same name: %s" pkg)
-      (push pkg eask-depends-on))
-    pkg)
+   ((<= (length args) 1)
+    (let* ((minimum-version (or (car args) "latest"))
+           (recipe (list pkg minimum-version)))
+      (if (member pkg eask-depends-on)
+          (error "You have redefined dependencies with the same name: %s" pkg)
+        (push recipe eask-depends-on))
+      recipe))
    ;; recipe are entered
    (t
     (let ((recipe (append (list (intern pkg)) args)))
@@ -518,7 +521,8 @@ Eask file in the workspace."
           (error "You have redefined dependencies with the same name: %s" pkg)
         (push recipe eask-depends-on)
         (eask-load "./extern/github-elpa")
-        (write-region (pp-to-string recipe) nil (expand-file-name pkg github-elpa-recipes-dir)))
+        (write-region (pp-to-string recipe) nil (expand-file-name pkg github-elpa-recipes-dir))
+        (setq eask-depends-on-recipe-p t))
       recipe))))
 
 (defun eask-development (&rest dep)
@@ -757,5 +761,17 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (defcustom eask-dist-path "dist"
   "Name of default target directory for building packages."
   :type 'string)
+
+(defcustom eask-before-command-hook nil
+  "Hook runs before command is executed."
+  :type 'hook)
+
+(defcustom eask-after-command-hook nil
+  "Hook runs after command is executed."
+  :type 'hook)
+
+(defcustom eask-file-loaded-hook nil
+  "Hook runs after Easkfile is loaded."
+  :type 'hook)
 
 ;;; _prepare.el ends here
