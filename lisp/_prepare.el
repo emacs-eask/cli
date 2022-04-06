@@ -95,6 +95,12 @@ the `eask-start' execution.")
   (let ((len (if (numberp len-or-list) len-or-list (length len-or-list))))
     (if (= 1 len) form-1 form-2)))
 
+(defun eask-seq-str-max (sequence)
+  "Return max length in list of strings."
+  (let ((result 0))
+    (mapc (lambda (elm) (setq result (max result (length (format "%s" elm))))) sequence)
+    result))
+
 ;;
 ;;; Package
 
@@ -115,19 +121,19 @@ the `eask-start' execution.")
   "Return list of dependencies."
   (append eask-depends-on (and (eask-dev-p) eask-depends-on-dev)))
 
-(defun eask--extract-dependency-name (deps)
-  "Return a list of DEPS' name."
-  (mapcar (lambda (dep) (format "%s" (car dep))) deps))
+(defun eask--extract-deps-name (dependencies)
+  "Use `car' to get all names from DEPENDENCIES."
+  (mapcar (lambda (dep) (format "%s" (car dep))) dependencies))
 
-(defun eask--install-deps (deps msg)
-  "Install DEPS."
-  (let* ((deps-name (eask--extract-dependency-name deps))
-         (len (length deps))
+(defun eask--install-deps (dependencies msg)
+  "Install DEPENDENCIES."
+  (let* ((names (eask--extract-deps-name dependencies))
+         (len (length dependencies))
          (ies (eask--sinr len "y" "ies"))
-         (pkg-installed (cl-remove-if #'package-installed-p deps-name))
+         (pkg-installed (cl-remove-if #'package-installed-p names))
          (installed (length pkg-installed)) (skipped (- len installed)))
     (eask-log "Installing %s %s dependenc%s..." len msg ies)
-    (mapc #'eask-package-install deps-name)
+    (mapc #'eask-package-install names)
     (eask-info "(Total of %s dependenc%s installed, %s skipped)"
                installed ies skipped)))
 

@@ -45,21 +45,17 @@
       (dolist (req reqs)
         (eask-print-pkg (car req) (1+ depth) max-depth pkg-alist)))))
 
-(defun eask-seq-max-str (sequence)
-  "Return max length in SEQUENCE."
-  (let ((result 0))
-    (mapc (lambda (elm) (setq result (max result (length (format "%s" elm))))) sequence)
-    result))
-
 (defun eask--list (list pkg-alist &optional depth)
   "List packages."
-  (let ((eask-list-package-name-width (+ (eask-seq-max-str list) 1)))
+  (let ((eask-list-package-name-width (+ (eask-seq-str-max list) 1)))
     (dolist (name list)
       (eask-print-pkg name 0 (or depth (eask-depth) 999) pkg-alist))))
 
 (eask-start
   (eask-pkg-init)
   (eask--list package-activated-list package-alist)
-  (eask-info "(Total of %s packages installed)" (length package-activated-list)))
+  (eask-info "(Total of %s package%s installed)"
+             (length package-activated-list)
+             (eask--sinr package-activated-list "" "s")))
 
 ;;; list.el ends here

@@ -18,13 +18,15 @@
   "Print help if command failed"
   )
 
-(defun eask--print-deps (title deps)
+(defun eask--print-deps (title dependencies)
   "Print dependencies."
-  (when deps
+  (when dependencies
     (eask-msg "")
     (eask-msg title)
-    (dolist (dep deps)
-      (eask-msg "%s %s" (car dep) (cdr dep)))))
+    (let* ((names (eask--extract-deps-name dependencies))
+           (offset (format "%s" (eask-seq-str-max names))))
+      (dolist (dep dependencies)
+        (eask-msg (concat "  %-" offset "s %s") (car dep) (cdr dep))))))
 
 (eask-start
   (if eask-package
