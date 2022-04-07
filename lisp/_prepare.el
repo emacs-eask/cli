@@ -79,7 +79,7 @@ the `eask-start' execution.")
   `(when (version< emacs-version ,version) ,@body))
 
 (defmacro eask-defvar-bound (symbol &rest body)
-  "Define function if not found."
+  "Define variable if not found."
   (declare (indent 1) (debug t))
   `(unless (boundp ,symbol)
      (eask-debug "Import missing variable %s" ,symbol)
