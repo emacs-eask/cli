@@ -6,7 +6,7 @@ title: Introduction
 
 Eask is a command-line tool that helps you build, lint, and test Emacs Lisp
 packages. It creates a clean environment to sandbox your elisp code without
-influencing your personal confiugration. Eask aims to be:
+influencing your personal configuration. Eask aims to be:
 
 * **Consistent** enough to sandbox across all systems
 * **General** enough to have Emacsers often used commands (byte-compile, checkdoc, etc)
