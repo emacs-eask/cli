@@ -21,14 +21,15 @@
 
 (defun eask--help-checkdoc ()
   "Print help if command failed"
-  (message "")
-  (message "You need to specify file(s) you want the checkdoc to run on")
-  (message "")
-  (message "  $ eask %s FILE-1 FILE-2" (eask-command))
-  (message "")
-  (message "Or edit Eask file with [files] specifier")
-  (message "")
-  (message " [+] (files \"FILE-1\" \"FILE-2\")"))
+  (eask-msg "")
+  (eask-msg "💡 You need to specify file(s) you want the checkdoc to run on")
+  (eask-msg "")
+  (eask-msg "    $ eask %s FILE-1 FILE-2" (eask-command))
+  (eask-msg "")
+  (eask-msg "💡 Or edit Eask file with [files] specifier")
+  (eask-msg "")
+  (eask-msg "   [+] (files \"FILE-1\" \"FILE-2\")")
+  (eask-msg ""))
 
 (defvar eask--checkdoc-error nil "Error flag.")
 

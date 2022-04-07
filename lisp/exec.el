@@ -22,9 +22,10 @@
 (defun eask--help-exec ()
   "Print help if command failed."
   (eask-msg "")
-  (eask-msg "You would need to specify the program name in order to make execution!")
+  (eask-msg "💡 You would need to specify the program name in order to make execution!")
   (eask-msg "")
-  (eask-msg "  $ eask exec [program] [options..]"))
+  (eask-msg "    $ eask exec [program] [options..]")
+  (eask-msg ""))
 
 (defun eask--shell-command (command)
   "Wrap `shell-command' with better output to terminal."

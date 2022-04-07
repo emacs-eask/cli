@@ -178,12 +178,23 @@ the `eask-start' execution.")
         (package--archives-initialize))
       (ansi-green "done ✓"))))
 
-(defun eask-package-install (pkg)
-  "Install the package PKG."
-  (eask-pkg-init)
-  (let* ((pkg (if (stringp pkg) (intern pkg) pkg))
+(defun eask--pkg-transaction-vars (pkg)
+  "Return 1 symbol and 2 strings."
+  (let* (;; Ensure symbol
+         (pkg (if (stringp pkg) (intern pkg) pkg))
+         ;; Wrap package name with color
          (pkg-string (ansi-green (format "%s" pkg)))
+         ;; Wrap version number with color
          (pkg-version (ansi-yellow (eask-package--version-string pkg))))
+    (list pkg pkg-string pkg-version)))
+
+(defun eask-package-install (pkg)
+  "Install the package."
+  (eask-pkg-init)
+  (let* ((pkg-info (eask--pkg-transaction-vars pkg))
+         (pkg         (nth 0 pkg-info))
+         (pkg-string  (nth 1 pkg-info))
+         (pkg-version (nth 2 pkg-info)))
     (if (package-installed-p pkg)
         (eask-msg "  - Skipping %s (%s)... already installed ✗" pkg-string pkg-version)
       (eask-with-progress
@@ -196,6 +207,21 @@ the `eask-start' execution.")
           ;; But we can remove this after Emacs 28, since function `find-library-name'
           ;; has replaced the function `signal' instead of the `error'.
           (eask-ignore-errors (package-install pkg)))
+        "done ✓"))))
+
+(defun eask-package-delete (pkg)
+  "Delete the package."
+  (eask-pkg-init)
+  (let* ((pkg-info (eask--pkg-transaction-vars pkg))
+         (pkg         (nth 0 pkg-info))
+         (pkg-string  (nth 1 pkg-info))
+         (pkg-version (nth 2 pkg-info)))
+    (if (not (package-installed-p pkg))
+        (eask-msg "  - Skipping %s (%s)... not installed ✗" pkg-string pkg-version)
+      (eask-with-progress
+        (format "  - Uninstalling %s (%s)... " pkg-string pkg-version)
+        (eask-with-verbosity 'debug
+          (package-delete (eask-package-desc pkg t) (eask-force-p)))
         "done ✓"))))
 
 (defun eask-package-desc (name &optional current)
@@ -485,7 +511,9 @@ Eask file in the workspace."
 
 (defun eask-package-file (file)
   "Set package file."
-  (setq eask-package-file (expand-file-name file)))
+  (if eask-package-file
+      (error "Multiple package-file detected, please specify one unique pacakge-file")
+    (setq eask-package-file (expand-file-name file))))
 
 (defun eask-files (&rest patterns)
   "Set files patterns."
@@ -512,14 +540,14 @@ Eask file in the workspace."
     (let* ((minimum-version (or (car args) "latest"))
            (recipe (list pkg minimum-version)))
       (if (member pkg eask-depends-on)
-          (error "You have redefined dependencies with the same name: %s" pkg)
+          (error "Duplicate dependencies with name: %s" pkg)
         (push recipe eask-depends-on))
       recipe))
    ;; recipe are entered
    (t
     (let ((recipe (append (list (intern pkg)) args)))
       (if (member recipe eask-depends-on)
-          (error "You have redefined dependencies with the same name: %s" pkg)
+          (error "Duplicate dependencies with name: %s" pkg)
         (push recipe eask-depends-on)
         (eask-load "./extern/github-elpa")
         (write-region (pp-to-string recipe) nil (expand-file-name pkg github-elpa-recipes-dir))

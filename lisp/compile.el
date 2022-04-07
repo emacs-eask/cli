@@ -21,14 +21,15 @@
 
 (defun eask--help-compile ()
   "Print help if command failed"
-  (message "")
-  (message "You need to specify file(s) you want to compile")
-  (message "")
-  (message "  $ eask %s FILE-1 FILE-2" (eask-command))
-  (message "")
-  (message "Or edit Eask file with [files] specifier")
-  (message "")
-  (message " [+] (files \"FILE-1\" \"FILE-2\")"))
+  (eask-msg "")
+  (eask-msg "💡 You need to specify file(s) you want to compile")
+  (eask-msg "")
+  (eask-msg "    $ eask %s FILE-1 FILE-2" (eask-command))
+  (eask-msg "")
+  (eask-msg "💡 Or edit Eask file with [files] specifier")
+  (eask-msg "")
+  (eask-msg "   [+] (files \"FILE-1\" \"FILE-2\")")
+  (eask-msg ""))
 
 ;; Handle options
 (add-hook 'eask-before-command-hook
