@@ -19,7 +19,7 @@
 
 ;;
 ;;; Emacs 27.1
-(defvar package-quickstart-file)
+(defvar package-quickstart-file nil)
 
 (eask-defun-fbound 'package-activate-all
   (defun package-activate-all ()
