@@ -27,7 +27,8 @@ influencing your personal confiugration. Eask aims to be:
 
 [![pages-build-deployment](https://github.com/emacs-eask/eask/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/pages/pages-build-deployment)
 [![Compile](https://github.com/emacs-eask/eask/actions/workflows/test-redefine.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-redefine.yml)
-[![Commands](https://github.com/emacs-eask/eask/actions/workflows/test-commands.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-commands.yml)
+[![Commands (Global)](https://github.com/emacs-eask/eask/actions/workflows/test-global.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-global.yml)
+[![Commands (Local)](https://github.com/emacs-eask/eask/actions/workflows/test-local.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-local.yml)
 [![Exec](https://github.com/emacs-eask/eask/actions/workflows/test-exec.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-exec.yml)
 [![Color](https://github.com/emacs-eask/eask/actions/workflows/test-color.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-color.yml)
 
