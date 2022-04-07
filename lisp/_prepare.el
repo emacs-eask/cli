@@ -73,24 +73,10 @@ the `eask-start' execution.")
 ;;
 ;;; Util
 
-(defmacro eask-defvc (version &rest body)
-  "Define scope if Emacs version is under VERSION."
+(defmacro eask-defvc= (version &rest body)
+  "Define scope if Emacs version is equal VERSION."
   (declare (indent 1) (debug t))
-  `(when (version< emacs-version ,version) ,@body))
-
-(defmacro eask-defvar-bound (symbol &rest body)
-  "Define variable if not found."
-  (declare (indent 1) (debug t))
-  `(unless (boundp ,symbol)
-     (eask-debug "Import missing variable %s" ,symbol)
-     ,@body))
-
-(defmacro eask-defun-fbound (symbol &rest body)
-  "Define function if not found."
-  (declare (indent 1) (debug t))
-  `(unless (fboundp ,symbol)
-     (eask-debug "Import missing function %s" ,symbol)
-     ,@body))
+  `(when (= emacs-major-version ,version) ,@body))
 
 (defmacro eask--silent (&rest body)
   "Execute BODY without message."

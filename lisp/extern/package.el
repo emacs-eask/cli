@@ -10,8 +10,8 @@
 (require 'package)
 
 ;;
-;;; Emacs 28.1
-(eask-defun-fbound 'package--archives-initialize
+;;; Emacs 27
+(eask-defvc= 27
   (defun package--archives-initialize ()
     "Make sure the list of installed and remote packages are initialized."
     (unless package--initialized
@@ -20,28 +20,25 @@
       (package-refresh-contents))))
 
 ;;
-;;; Emacs 27.1
-(eask-defvar-bound 'package-quickstart-file
+;;; Emacs 26
+(eask-defvc= 26
   (defvar package-quickstart-file
-    (locate-user-emacs-file "package-quickstart.el")))
+    (locate-user-emacs-file "package-quickstart.el"))
 
-(eask-defun-fbound 'package--alist
   (defun package--alist ()
     "Return `package-alist', after computing it if needed."
     (or package-alist
         (progn (package-load-all-descriptors)
-               package-alist))))
+               package-alist)))
 
-(eask-defun-fbound 'package--activate-all
   (defun package--activate-all ()
     (dolist (elt (package--alist))
       (condition-case err
           (package-activate (car elt))
         ;; Don't let failure of activation of a package arbitrarily stop
         ;; activation of further packages.
-        (error (message "%s" (error-message-string err)))))))
+        (error (message "%s" (error-message-string err))))))
 
-(eask-defun-fbound 'package-activate-all
   (defun package-activate-all ()
     "Activate all installed packages.
 The variable `package-load-list' controls which packages to load."
