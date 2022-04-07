@@ -15,6 +15,7 @@
       nil t)
 
 (eask-start
+  (eask-pkg-init)
   (cond ((not (eask-dependencies))
          (eask-msg "✗ (No dependencies are specify in your Eask file)")
          (eask-msg "")

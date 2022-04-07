@@ -173,15 +173,16 @@ the `eask-start' execution.")
 
 (defun eask-pkg-init ()
   "Package initialization."
-  (eask-with-progress
-    (ansi-green "Loading package information... ")
-    (eask-with-verbosity 'debug
-      (package-initialize) (package-refresh-contents))
-    (ansi-green "done ✓")))
+  (unless (or package--initialized package-archive-contents)
+    (eask-with-progress
+      (ansi-green "Loading package information... ")
+      (eask-with-verbosity 'debug
+        (package--archives-initialize))
+      (ansi-green "done ✓"))))
 
 (defun eask-package-install (pkg)
   "Install the package PKG."
-  (eask--silent (package-initialize))
+  (eask-pkg-init)
   (let* ((pkg (if (stringp pkg) (intern pkg) pkg))
          (pkg-string (ansi-green (format "%s" pkg)))
          (pkg-version (ansi-yellow (eask-package--version-string pkg))))
@@ -190,7 +191,6 @@ the `eask-start' execution.")
       (eask-with-progress
         (format "  - Installing %s (%s)... " pkg-string pkg-version)
         (eask-with-verbosity 'debug
-          (package-refresh-contents)
           ;; XXX Without ignore-errors guard, it will trigger error
           ;;
           ;;   Can't find library xxxxxxx.el
