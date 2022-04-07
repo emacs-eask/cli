@@ -76,7 +76,9 @@ the `eask-start' execution.")
 (defmacro eask-defun-fbound (symbol &rest body)
   "Define function if not found."
   (declare (indent 1) (debug t))
-  `(unless (fboundp symbol) ,@body))
+  `(unless (fboundp ,symbol)
+     (eask-debug "Import missing function %s" ,symbol)
+     ,@body))
 
 (defmacro eask--silent (&rest body)
   "Execute BODY without message."
