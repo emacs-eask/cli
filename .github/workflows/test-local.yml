@@ -1,4 +1,4 @@
-name: Commands (Local)
+name: Local
 
 on:
   push:

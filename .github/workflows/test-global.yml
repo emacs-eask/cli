@@ -1,4 +1,4 @@
-name: Commands (Global)
+name: Global
 
 on:
   push:
