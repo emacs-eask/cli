@@ -71,14 +71,6 @@ the `eask-start' execution.")
     (error "Scripting missing %s..." script-file)))
 
 ;;
-;;; Externals
-
-(eask-load "./extern/ansi")
-(eask-load "./extern/package")
-(eask-load "./extern/package-build")
-(eask-load "./extern/s")
-
-;;
 ;;; Util
 
 (defmacro eask-defun-fbound (symbol &rest body)
@@ -106,6 +98,14 @@ the `eask-start' execution.")
   (let ((result 0))
     (mapc (lambda (elm) (setq result (max result (length (format "%s" elm))))) sequence)
     result))
+
+;;
+;;; Externals
+
+(eask-load "./extern/ansi")
+(eask-load "./extern/package")
+(eask-load "./extern/package-build")
+(eask-load "./extern/s")
 
 ;;
 ;;; Package
