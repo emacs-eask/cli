@@ -45,3 +45,4 @@ eask clean-all
 
 eask locate
 eask upgrade-eask
+eask refresh
