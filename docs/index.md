@@ -30,6 +30,8 @@ run on by default. If you use WSL or other environment system file Cygwin/MSYS
 
 ## 📝 Todo list
 
+- [ ] Handle condition, package doesn't in archives
+- [ ] Clean up package refresh content
 - [ ] Colorized `eask install` compile log
 - [ ] Add `elint` command
 - [ ] Add `elsa` command
