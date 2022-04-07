@@ -4,12 +4,13 @@
 ;;
 ;; Command use to uninstall Emacs packages,
 ;;
-;;   $ eask uninstall <name>
+;;   $ eask uninstall [names..]
 ;;
 ;;
 ;;  Initialization options:
 ;;
-;;    <name>     name of the package to uninstall
+;;    [names..]     name of the package to uninstall; else we uninstall pacakge
+;;                  from current workspace
 ;;
 
 ;;; Code:
@@ -19,11 +20,40 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
+(defun eask--help-uninstall ()
+  "Print help if command failed."
+  (eask-msg "")
+  (eask-msg "")
+  (eask-msg "💡 Make sure you have specify a (package-file ..) inside your Eask file!")
+  (eask-msg "")
+  (eask-msg "    [+] (package-file \"PKG-MAIN.el\")")
+  (eask-msg "")
+  (eask-msg "💡 Or specify package names as arguments")
+  (eask-msg "")
+  (eask-msg "    $ eask uninstall PKG-1 PKG-2")
+  (eask-msg ""))
+
+(defun eask--uninstall-packages(names)
+  "Uninstall packages."
+  (let* ((names (mapcar #'intern names))
+         (len (length names)) (s (eask--sinr len "" "s"))
+         (pkg-installed (cl-remove-if-not #'package-installed-p names))
+         (deleted (length pkg-installed)) (skipped (- len deleted)))
+    (eask-log "Uninstalling %s specified package%s..." len s)
+    (mapc #'eask-package-delete names)
+    (eask-info "(Total of %s package%s deleted, %s skipped)"
+               deleted s skipped)))
+
 (eask-start
   (eask-pkg-init)
-  (if-let* ((name (elt argv 0)) (name (intern name))
-            ((package-installed-p name)))
-      (package-delete (eask-package-desc name t) (eask-force-p))
-    (eask-info "Package `%s` does not exists" name)))
+  (if-let ((names (eask-args)))
+      (eask--uninstall-packages names)
+    (if-let* ((name (eask-guess-package-name))
+              ((package-installed-p name)))
+        (progn
+          (eask-package-delete name)
+          (eask-info "(Deleted %s)" name))
+      (eask-info "✗ (No files have been unintalled)")
+      (eask--help-uninstall))))
 
 ;;; uninstall.el ends here
