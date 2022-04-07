@@ -19,6 +19,8 @@
 
 ;;
 ;;; Emacs 27.1
+(defvar package-quickstart-file)
+
 (eask-defun-fbound 'package-activate-all
   (defun package-activate-all ()
     "Activate all installed packages.
