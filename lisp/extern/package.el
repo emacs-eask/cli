@@ -19,7 +19,7 @@
 
 ;;
 ;;; Emacs 27.1
-(eask-defvc "27.1"
+(eask-defvar-bound 'package-quickstart-file
   (defcustom package-quickstart-file
     (locate-user-emacs-file "package-quickstart.el")
     "Location of the file used to speed up activation of packages at startup."
