@@ -102,14 +102,6 @@ the `eask-start' execution.")
     result))
 
 ;;
-;;; Externals
-
-(eask-load "./extern/ansi")
-(eask-load "./extern/package")
-(eask-load "./extern/package-build")
-(eask-load "./extern/s")
-
-;;
 ;;; Package
 
 (defun eask--update-exec-path ()
@@ -784,5 +776,13 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (defcustom eask-file-loaded-hook nil
   "Hook runs after Easkfile is loaded."
   :type 'hook)
+
+;;
+;;; Externals
+
+(eask-load "./extern/ansi")
+(eask-load "./extern/package")
+(eask-load "./extern/package-build")
+(eask-load "./extern/s")
 
 ;;; _prepare.el ends here
