@@ -19,7 +19,13 @@
 
 ;;
 ;;; Emacs 27.1
-(defvar package-quickstart-file nil)
+(eask-defvc "27.1"
+  (defcustom package-quickstart-file
+    (locate-user-emacs-file "package-quickstart.el")
+    "Location of the file used to speed up activation of packages at startup."
+    :type 'file
+    :initialize #'custom-initialize-delay
+    :version "27.1"))
 
 (eask-defun-fbound 'package-activate-all
   (defun package-activate-all ()

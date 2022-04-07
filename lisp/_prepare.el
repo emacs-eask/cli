@@ -73,6 +73,11 @@ the `eask-start' execution.")
 ;;
 ;;; Util
 
+(defmacro eask-defvc (version &rest body)
+  "Define scope if Emacs version is under VERSION."
+  (declare (indent 1) (debug t))
+  `(when (version< emacs-version ,version) ,@body))
+
 (defmacro eask-defun-fbound (symbol &rest body)
   "Define function if not found."
   (declare (indent 1) (debug t))
