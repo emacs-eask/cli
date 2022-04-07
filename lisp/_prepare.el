@@ -74,11 +74,17 @@ the `eask-start' execution.")
 ;;; Externals
 
 (eask-load "./extern/ansi")
+(eask-load "./extern/package")
 (eask-load "./extern/package-build")
 (eask-load "./extern/s")
 
 ;;
 ;;; Util
+
+(defmacro eask-defun-fbound (symbol &rest body)
+  "Define function if not found."
+  (declare (indent 1) (debug t))
+  `(unless (fboundp symbol) ,@body))
 
 (defmacro eask--silent (&rest body)
   "Execute BODY without message."
