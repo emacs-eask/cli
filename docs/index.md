@@ -32,6 +32,8 @@ run on by default. If you use WSL or other environment system file Cygwin/MSYS
 
 - [ ] Handle condition, package doesn't in archives
 - [ ] Colorized `eask install` compile log
+- [ ] Add `reinstall` command
+- [ ] Add `search` command
 - [ ] Add `elint` command
 - [ ] Add `elsa` command
 - [ ] Add `lint-declare` command
@@ -45,3 +47,4 @@ The design of Eask was greatly influenced by the following projects:
 
 * [cask](https://github.com/cask/cask) - Project management tool for Emacs
 * [makem.sh](https://github.com/alphapapa/makem.sh) - Makefile-like script for building and testing Emacs Lisp packages
+* [epm](https://github.com/xuchunyang/epm) - Emacs Package Manager
