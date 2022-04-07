@@ -9,6 +9,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 > Released N/A
 
 * Unified dependencies list with data structure of list, and no longer have string (9f09f93ec866e32d14dd2f6c53ee8fde6cd4b986)
+* Add new command `eask refresh` (5423d84a59c88d52c2279f27a189573eb525a82b)
 
 ## 0.4.x
 > Released Apr 5, 2022
