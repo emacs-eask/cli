@@ -29,7 +29,10 @@ echo "Copy test configuration"
 ./test/mini.emacs.d/scripts/copy_config.sh
 
 echo "Testing global commands..."
-eask archives -g
-eask install -g spinner ivy beacon
-eask list --depth=0 -g
-eask outdated -g
+eask archives  -g
+
+eask install   -g spinner ivy beacon company fuzzy
+eask uninstall -g ivy fuzzy
+
+eask list      -g --depth=0
+eask outdated  -g

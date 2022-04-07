@@ -26,7 +26,10 @@
 ./test/mini.emacs.d/scripts/copy_config.ps1
 
 echo "Testing global commands..."
-eask archives -g
-eask install -g spinner ivy beacon
-eask list -g --depth=0
-eask outdated -g
+eask archives  -g
+
+eask install   -g spinner ivy beacon company fuzzy
+eask uninstall -g ivy fuzzy
+
+eask list      -g --depth=0
+eask outdated  -g

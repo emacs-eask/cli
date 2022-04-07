@@ -45,6 +45,9 @@ eask clean
 eask clean-elc
 eask clean-all
 
+eask install   alt-codes beacon
+eask uninstall alt-codes ivy
+
 eask locate
 eask upgrade-eask
 eask refresh
