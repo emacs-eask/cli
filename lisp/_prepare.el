@@ -73,10 +73,10 @@ the `eask-start' execution.")
 ;;
 ;;; Util
 
-(defmacro eask-defvc= (version &rest body)
-  "Define scope if Emacs version is equal VERSION."
+(defmacro eask-defvc< (version &rest body)
+  "Define scope if Emacs version is below VERSION."
   (declare (indent 1) (debug t))
-  `(when (= emacs-major-version ,version) ,@body))
+  `(when (< emacs-major-version ,version) ,@body))
 
 (defmacro eask--silent (&rest body)
   "Execute BODY without message."

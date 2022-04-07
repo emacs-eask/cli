@@ -7,11 +7,9 @@
 
 ;;; Code:
 
-(require 'package)
-
 ;;
 ;;; Emacs 27
-(eask-defvc= 27
+(eask-defvc< 27
   (defun package--archives-initialize ()
     "Make sure the list of installed and remote packages are initialized."
     (unless package--initialized
@@ -21,7 +19,7 @@
 
 ;;
 ;;; Emacs 26
-(eask-defvc= 26
+(eask-defvc< 26
   (defvar package-quickstart-file
     (locate-user-emacs-file "package-quickstart.el"))
 
