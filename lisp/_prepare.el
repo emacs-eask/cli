@@ -139,7 +139,7 @@ the `eask-start' execution.")
 
 (defun eask-install-dependencies ()
   "Install dependencies defined in Eask file."
-  (package-initialize)
+  (eask-pkg-init)
   (when eask-depends-on-recipe-p
     (eask-log "Installing required external packages...")
     (eask-package-install 'package-build)
@@ -418,10 +418,7 @@ Eask file in the workspace."
                (eask-msg "✓ Loading default Eask file in %s... done!" eask-file)
              (eask-msg "✗ Loading default Eask file... missing!"))
            (message "")
-           (eask-with-progress
-             (ansi-green "Loading package information before configuration... ")
-             (eask--silent (package-initialize))
-             (ansi-green "done"))
+           (package-activate-all)
            (eask-with-progress
              (ansi-green "Loading your configuration... ")
              (eask-with-verbosity 'debug
