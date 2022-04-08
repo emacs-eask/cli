@@ -14,10 +14,6 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
-(defun eask--help-info ()
-  "Print help if command failed"
-  )
-
 (defun eask--print-deps (title dependencies)
   "Print dependencies."
   (when dependencies
@@ -26,7 +22,12 @@
     (let* ((names (eask--extract-deps-name dependencies))
            (offset (format "%s" (eask-seq-str-max names))))
       (dolist (dep dependencies)
-        (eask-msg (concat "  %-" offset "s %s") (car dep) (cdr dep))))))
+        (let* ((target-version (cdr dep))
+               (target-version (if (= (length target-version) 1)
+                                   (nth 0 target-version)
+                                 "specified")))
+          (eask-msg (concat "  %-" offset "s (%s)") (car dep) target-version)
+          (eask-debug "    Recipe: %s" (car dep)))))))
 
 (eask-start
   (if eask-package
@@ -41,6 +42,6 @@
         (eask--print-deps "dependencies:" eask-depends-on)
         (eask--print-deps "devDependencies:" eask-depends-on-dev))
     (eask-info "(Eask file has no package information)")
-    (eask--help-info)))
+    (eask-help 'info)))
 
 ;;; info.el ends here

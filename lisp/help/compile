@@ -1,0 +1,8 @@
+    
+💡 You need to specify file(s) you want to compile
+
+    $ eask compile FILE-1 FILE-2
+    
+💡 Or edit Eask file with [files] specifier
+   
+   [+] (files \"FILE-1\" \"FILE-2\")

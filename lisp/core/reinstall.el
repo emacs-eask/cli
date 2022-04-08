@@ -21,10 +21,6 @@
 
 (eask-load "core/package")  ; load dist path
 
-(defun eask--help-reinstall ()
-  "Print help if command failed."
-  )
-
 (defun eask--reinstall-packages (names)
   "Install packages."
   (let* ((names (mapcar #'intern names))

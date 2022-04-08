@@ -20,19 +20,6 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
-(defun eask--help-uninstall ()
-  "Print help if command failed."
-  (eask-msg "")
-  (eask-msg "")
-  (eask-msg "💡 Make sure you have specify a (package-file ..) inside your Eask file!")
-  (eask-msg "")
-  (eask-msg "    [+] (package-file \"PKG-MAIN.el\")")
-  (eask-msg "")
-  (eask-msg "💡 Or specify package names as arguments")
-  (eask-msg "")
-  (eask-msg "    $ eask uninstall PKG-1 PKG-2")
-  (eask-msg ""))
-
 (defun eask--uninstall-packages(names)
   "Uninstall packages."
   (let* ((names (mapcar #'intern names))
@@ -54,6 +41,6 @@
           (eask-package-delete name)
           (eask-info "(Deleted %s)" name))
       (eask-info "✗ (No files have been unintalled)")
-      (eask--help-uninstall))))
+      (eask-help 'uninstall))))
 
 ;;; uninstall.el ends here

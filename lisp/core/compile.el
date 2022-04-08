@@ -19,18 +19,6 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
-(defun eask--help-compile ()
-  "Print help if command failed"
-  (eask-msg "")
-  (eask-msg "💡 You need to specify file(s) you want to compile")
-  (eask-msg "")
-  (eask-msg "    $ eask %s FILE-1 FILE-2" (eask-command))
-  (eask-msg "")
-  (eask-msg "💡 Or edit Eask file with [files] specifier")
-  (eask-msg "")
-  (eask-msg "   [+] (files \"FILE-1\" \"FILE-2\")")
-  (eask-msg ""))
-
 ;; Handle options
 (add-hook 'eask-before-command-hook
           (lambda ()
@@ -77,6 +65,6 @@
   (if-let ((files (or (eask-args) (eask-package-el-files))))
       (eask--compile-files files)
     (eask-info "(No files have been compiled)")
-    (eask--help-compile)))
+    (eask-help 'compile)))
 
 ;;; compile.el ends here

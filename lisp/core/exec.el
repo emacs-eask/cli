@@ -19,14 +19,6 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
-(defun eask--help-exec ()
-  "Print help if command failed."
-  (eask-msg "")
-  (eask-msg "💡 You would need to specify the program name in order to make execution!")
-  (eask-msg "")
-  (eask-msg "    $ eask exec [program] [options..]")
-  (eask-msg ""))
-
 (defun eask--shell-command (command)
   "Wrap `shell-command' with better output to terminal."
   (eask-info "Executing command: %s..." command)
@@ -55,6 +47,6 @@
        (let ((command (mapconcat #'identity (append (list name) commander-args) " ")))
          (eask--shell-command command)))
     (eask-info "✗ (No exeuction output)")
-    (eask--help-exec)))
+    (eask-help 'exec)))
 
 ;;; exec.el ends here

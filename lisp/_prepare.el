@@ -44,16 +44,18 @@
 (defconst eask--script (nth 1 (member "-scriptload" command-line-args))
   "Script currently executing.")
 
+(defconst eask-lisp-root
+  (expand-file-name
+   (concat (file-name-directory eask--script) "../"))
+  "Source lisp directory; should always end with slash.")
+
 (defun eask-command ()
   "What's the current command?"
   (file-name-sans-extension (file-name-nondirectory eask--script)))
 
 (defun eask-script (script)
   "Return full script filename."
-  (let* ((script-el (concat "../" script ".el"))
-         (lisp-dir (file-name-directory eask--script))
-         (script-file (expand-file-name script-el lisp-dir)))
-    script-file))
+  (concat eask-lisp-root script ".el"))
 
 (defvar eask-loading-file-p nil
   "This became t; if we are loading script from another file and not expecting
@@ -400,7 +402,7 @@ Eask file in the workspace."
      result))
 
 (defvar eask-file nil "The Eask file's filename.")
-(defvar eask-file-root nil "The Eask file's directory .")
+(defvar eask-file-root nil "The Eask file's directory.")
 
 (defun eask-root-del (filename)
   "Remove Eask file root path from FILENAME."
@@ -785,6 +787,20 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
               ((string-match-p " [Ww]arning: " line) (eask-warn line))
               (t (eask-log line))))
       (forward-line 1))))
+
+;;
+;;; Help
+
+(defun eask-help (command)
+  "Show help."
+  (let* ((command (format "%s" command))  ; convert to string
+         (help-file (concat eask-lisp-root "help/" command)))
+    (if (file-exists-p help-file)
+        (with-temp-buffer
+          (insert-file-contents help-file)
+          (unless (string= (buffer-string) "")
+            (eask-msg (buffer-string))))
+      (error "Help manual missig %s" help-file))))
 
 ;;
 ;;; User customization

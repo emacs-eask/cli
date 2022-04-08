@@ -23,14 +23,6 @@
 
 (eask-load "core/package")  ; load dist path
 
-(defun eask--help-install ()
-  "Print help if command failed."
-  (eask-msg "")
-  (eask-msg "💡 Make sure you have specify a (package-file ..) inside your Eask file!")
-  (eask-msg "")
-  (eask-msg "    [+] (package-file \"PKG-MAIN.el\")")
-  (eask-msg ""))
-
 (defun eask--install-packages (names)
   "Install packages."
   (let* ((names (mapcar #'intern names))
@@ -62,6 +54,6 @@
             (eask-info "(Installed in %s)"
                        (file-name-directory (locate-library name))))
         (eask-info "✗ (No files have been intalled)")
-        (eask--help-install)))))
+        (eask-help 'install)))))
 
 ;;; install.el ends here

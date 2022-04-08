@@ -19,18 +19,6 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
-(defun eask--help-checkdoc ()
-  "Print help if command failed"
-  (eask-msg "")
-  (eask-msg "💡 You need to specify file(s) you want the checkdoc to run on")
-  (eask-msg "")
-  (eask-msg "    $ eask %s FILE-1 FILE-2" (eask-command))
-  (eask-msg "")
-  (eask-msg "💡 Or edit Eask file with [files] specifier")
-  (eask-msg "")
-  (eask-msg "   [+] (files \"FILE-1\" \"FILE-2\")")
-  (eask-msg ""))
-
 (defvar eask--checkdoc-error nil "Error flag.")
 
 (defun eask--checkdoc-print-error (text start end &optional unfixable)
@@ -65,6 +53,6 @@
         (mapcar #'eask--checkdoc-file files)
         (eask-info "(Total of %s file%s %s checked)" len s have))
     (eask-info "(No files have been checked (checkdoc))")
-    (eask--help-checkdoc)))
+    (eask-help 'checkdoc)))
 
 ;;; checkdoc.el ends here
