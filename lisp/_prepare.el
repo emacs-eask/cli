@@ -27,16 +27,15 @@
 
 (setq make-backup-files nil)
 
-(unless (bound-and-true-p eask--initialized-p)
-  (setq package-enable-at-startup  nil            ; To avoid initializing twice
-        package-check-signature    nil
-        package-archives           nil            ; Leave it to custom use
-        package-archive-priorities nil))
+(setq package-enable-at-startup  nil            ; To avoid initializing twice
+      package-check-signature    nil
+      package-archives           nil            ; Leave it to custom use
+      package-archive-priorities nil)
 
-(defun eask--load-file--adv (fnc &rest args)
+(defun eask--load--adv (fnc &rest args)
   "Prevent `_prepare.el' loading twice."
   (unless (string= (nth 0 args) (eask-script "_prepare")) (apply fnc args)))
-(advice-add 'load-file :around #'eask--load-file--adv)
+(advice-add 'load :around #'eask--load--adv)
 
 ;;
 ;;; Execution
