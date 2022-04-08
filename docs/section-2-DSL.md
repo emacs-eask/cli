@@ -124,6 +124,26 @@ Example:
 (source-priority "gnu" 5)
 ```
 
+#### 🔎 **load-paths** (`&rest paths`)
+
+Specify paths to add to `load-path`
+
+Example:
+
+```elisp
+(load-paths "/lisp/")
+```
+
+#### 🔎 **exec-paths** (`&rest paths`)
+
+Specify paths to add to `exec-path`
+
+Example:
+
+```elisp
+(load-paths "/bin/")
+```
+
 ## Example
 
 `Eask` is the magic file that `eask` will read it as the init file in Emacs.
@@ -176,3 +196,8 @@ Eask is executed this way.
 ```
 [Eask environment] -> [before hooks] -> [command execution] -> [after hooks]
 ```
+
+* **Eask environment** builds sandbox and reads Eask file information
+* **before hooks** are hooks run before command task
+* **command execution** is the primary command task
+* **after hooks** are hooks run after command task
