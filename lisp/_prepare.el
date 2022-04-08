@@ -142,7 +142,7 @@ the `eask-start' execution.")
     (eask-log "Installing required external packages...")
     (eask-package-install 'package-build)
     (eask-with-progress
-      "Building temporary archives (this may take awhile)... "
+      "Building temporary archives (this may take a while)... "
       (eask-with-verbosity 'debug (github-elpa-build))
       "done ✓")
     (eask-with-progress
@@ -154,7 +154,8 @@ the `eask-start' execution.")
               ;; high number so user we always use the specified dependencies!
               package-archive-priorities
               `(,@package-archive-priorities ("local" . 90)))
-        (eask-call "core/archives"))
+        (eask-call "core/archives")
+        (eask-pkg-init t))
       "done ✓"))
   (when eask-depends-on
     (eask--install-deps eask-depends-on "package"))
@@ -169,13 +170,13 @@ the `eask-start' execution.")
       (eask--update-exec-path) (eask--update-load-path))
     (ansi-green "done ✓")))
 
-(defun eask-pkg-init ()
+(defun eask-pkg-init (&optional force)
   "Package initialization."
-  (unless (or package--initialized package-archive-contents)
+  (when (or (not package--initialized) (not package-archive-contents) force)
     (eask-with-progress
       (ansi-green "Loading package information... ")
       (eask-with-verbosity 'debug
-        (package--archives-initialize))
+        (package-initialize t) (package-refresh-contents))
       (ansi-green "done ✓"))))
 
 (defun eask--pkg-transaction-vars (pkg)

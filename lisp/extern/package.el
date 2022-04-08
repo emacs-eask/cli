@@ -8,16 +8,6 @@
 ;;; Code:
 
 ;;
-;;; Emacs 28
-(eask-defvc< 28
-  (defun package--archives-initialize ()
-    "Make sure the list of installed and remote packages are initialized."
-    (unless package--initialized
-      (package-initialize t))
-    (unless package-archive-contents
-      (package-refresh-contents))))
-
-;;
 ;;; Emacs 27
 (eask-defvc< 27
   (defvar package-quickstart-file
