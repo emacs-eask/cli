@@ -50,9 +50,9 @@ jobs:
     - name: Test Color (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       run: |
-        ${{ github.workspace }}/test/color/make.sh
+        ${{ github.workspace }}/test/color/run.sh
 
     - name: Test Color (Windows)
       if: matrix.os == 'windows-latest'
       run: |
-        ${{ github.workspace }}/test/color/make.ps1
+        ${{ github.workspace }}/test/color/run.ps1

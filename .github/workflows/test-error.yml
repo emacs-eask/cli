@@ -50,9 +50,9 @@ jobs:
     - name: Test Error (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       run: |
-        ${{ github.workspace }}/test/error/make.sh
+        ${{ github.workspace }}/test/error/run.sh
 
     - name: Test Error (Windows)
       if: matrix.os == 'windows-latest'
       run: |
-        ${{ github.workspace }}/test/error/make.ps1
+        ${{ github.workspace }}/test/error/run.ps1
