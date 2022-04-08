@@ -9,7 +9,7 @@ This document provides a reference on the [DSL](https://en.wikipedia.org/wiki/Do
 
 ## Package metadata
 
-#### 🔎 **pacakge** (`name` `version` `description`)
+#### 🔎 **package** (`name` `version` `description`)
 
 Declare a package with the given name, version, and description:
 
@@ -20,15 +20,29 @@ Declare a package with the given name, version, and description:
 All arguments are strings. The version must be a version understood by Emacs'
 built-in `version-to-list`.
 
-#### 🔎 **pacakge-file** (`file`)
+#### 🔎 **package-file** (`file` `version` `description`)
 
-Package entry file.
+Define this package and its runtime dependencies from the package headers 
+of a file (used only for package development).
+
+Example:
+
+```elisp
+(package-file "foo.el")
+```
 
 ## Package contents
 
 #### 🔎 **files** (`&rest patterns`)
 
-WIP
+Specify list of files that are included in this project.
+
+Example:
+
+```elisp
+(files "foo.el")
+(files "*.el" "core/*.el")
+```
 
 ## Dependencies
 
@@ -37,14 +51,43 @@ WIP
 
 Specify a dependency of this package.
 
+Example:
+
+```elisp
+(depends-on "dash")
+(depends-on "company")
+(depends-on "auto-rename-tag" 
+            :repo "jcs-elpa/auto-rename-tag" 
+            :fetcher 'github)
+(depends-on "lsp-ui" 
+            :repo "emacs-lsp/lsp-ui"
+            :fetcher 'github
+            :files '(:defaults "lsp-ui-doc.html" "resources"))
+```
+
 #### 🔎 **development** (`&rest body`)
 
-Scope all depends-on expressions in body to development.
+Scope all `depends-on` expressions in body to development.
+
+Example:
+
+```elisp
+(development
+ (depends-on "ert-runner")
+ (depends-on "elsa"))
+```
 
 #### 🔎 **source** (`alias`)
-#### 🔎 **source** (`name` `name`)
+#### 🔎 **source** (`name` `url`)
 
 Add a package archive to install dependencies from.
+
+Example:
+
+```elisp
+(source "gnu")
+(source "gnu" "https://elpa.gnu.org/packages/")
+```
 
 Available aliases:
 
@@ -58,18 +101,13 @@ Available aliases:
 * `org` ([https://orgmode.org/elpa/](https://orgmode.org/elpa/))
 * `shmelpa` ([https://shmelpa.commandlinesystems.com/packages/](https://shmelpa.commandlinesystems.com/packages/))
 
-Example:
-
-```elisp
-(source "gnu")
-(source "gnu" "https://elpa.gnu.org/packages/")
-```
-
 *💡 You can use `--insecure` to make `https` to `http`, but not recommended*
 
-#### 🔎 **source-priority** (`alias` `priority`)
+#### 🔎 **source-priority** (`name` `priority`)
 
 Set archive priority.
+
+Example:
 
 ```elisp
 (source-priority "gnu" 5)
@@ -80,20 +118,22 @@ Set archive priority.
 ## Example
 
 `Eask` is the magic file that `eask` will read it as the init file in Emacs.
-The syntaxes are very similar to the `Cask` file, but different.
+The syntaxes are similar to the `Cask` file, but different.
 
 ```elisp
-(source "gnu")
-
-(package "your-package" "1.0.0" "Your package description")
+(package "your-package" 
+         "1.0.0" 
+         "Your package description")
 
 (package-file "your-package-file.el")
+
+(source "gnu")
 ```
 
 ## Advanced Usage
 
-Remember, `Eask` is just the regular elisp file, and should be read it from
-the Emacs itself!
+`Eask` is just the regular Emacs Lisp file and should be read from the
+Emacs itself!
 
 ```elisp
 ; Regular Eask file content...
@@ -103,11 +143,11 @@ the Emacs itself!
 
 `eask` provides some hooks so you can define your own action before/after
 each command. The name of the hook follows the rule of
-`eask-BEFORE/AFTER-command-NAME-hook`.
+`eask-{`before`/`after`}-{`command_name`}-hook`.
 
 For example, to enable compile on warn on `byte-compile` command
 
 ```elisp
-(add-hook 'eask-before-command-compile-hook 
+(add-hook 'eask-before-compile-hook 
           (lambda () (setq byte-compile-error-on-warn t)))
 ```

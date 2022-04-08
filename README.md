@@ -23,7 +23,7 @@ influencing your personal confiugration. Eask aims to be:
 
 ## 🧪 Testing
 
-##### ✔️ Tests puppose to be `green`
+##### ✔️ Tests puppose to be `GREEN`
 
 ###### Documentation
 
@@ -44,6 +44,6 @@ influencing your personal confiugration. Eask aims to be:
 
 [![Color](https://github.com/emacs-eask/eask/actions/workflows/test-color.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-color.yml)
 
-##### ❌ Tests puppose to be `red`
+##### ❌ Tests puppose to be `RED`
 
 [![Error](https://github.com/emacs-eask/eask/actions/workflows/test-error.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-error.yml)
