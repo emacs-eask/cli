@@ -475,9 +475,9 @@ Eask file in the workspace."
              (ignore-errors (make-directory package-user-dir t))
              (eask--silent (eask-setup-paths))
              (run-hooks 'eask-before-command-hook)
-             (run-hooks (intern (concat "eask-before-command-" (eask-command) "-hook")))
+             (run-hooks (intern (concat "eask-before-" (eask-command) "-hook")))
              ,@body
-             (run-hooks (intern (concat "eask-after-command-" (eask-command) "-hook")))
+             (run-hooks (intern (concat "eask-after-" (eask-command) "-hook")))
              (run-hooks 'eask-after-command-hook))))))))
 
 ;;
