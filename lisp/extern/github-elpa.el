@@ -2,15 +2,16 @@
 ;;; Commentary:
 ;;; Code:
 
-(defvar github-elpa-working-dir (expand-file-name "./temp-elpa/.working/" user-emacs-directory))
-(defvar github-elpa-archive-dir (expand-file-name "./temp-elpa/packages/" user-emacs-directory))
-(defvar github-elpa-recipes-dir (expand-file-name "./temp-elpa/recipes/" user-emacs-directory))
+(unless eask-depends-on-recipe-p
+  (defvar github-elpa-working-dir (expand-file-name "./temp-elpa/.working/" user-emacs-directory))
+  (defvar github-elpa-archive-dir (expand-file-name "./temp-elpa/packages/" user-emacs-directory))
+  (defvar github-elpa-recipes-dir (expand-file-name "./temp-elpa/recipes/" user-emacs-directory))
 
-(ignore-errors (make-directory   github-elpa-working-dir t))
-(ignore-errors (make-directory   github-elpa-archive-dir t))
+  (ignore-errors (make-directory   github-elpa-working-dir t))
+  (ignore-errors (make-directory   github-elpa-archive-dir t))
 
-(ignore-errors (delete-directory github-elpa-recipes-dir t))
-(ignore-errors (make-directory   github-elpa-recipes-dir t))
+  (ignore-errors (delete-directory github-elpa-recipes-dir t))
+  (ignore-errors (make-directory   github-elpa-recipes-dir t)))
 
 (defun github-elpa-build ()
   "Github elpa build."

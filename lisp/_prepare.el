@@ -177,8 +177,9 @@ the `eask-start' execution.")
 (defun eask-pkg-init (&optional force)
   "Package initialization."
   (when (or (not package--initialized) (not package-archive-contents) force
-            ;; XXX when it's global, we would need to initialize once for
-            ;; certain commands.
+            ;; XXX we need to initialize once in global scope since most Emacs
+            ;; configuration would likely to set `package-archives' variable
+            ;; themselves.
             (and (eask-global-p) (not eask--package-initialized)))
     (setq eask--package-initialized t)
     (eask-with-progress
@@ -557,7 +558,11 @@ Eask file in the workspace."
           (error "Duplicate dependencies with name: %s" pkg)
         (push recipe eask-depends-on)
         (eask-load "extern/github-elpa")
-        (write-region (pp-to-string recipe) nil (expand-file-name pkg github-elpa-recipes-dir))
+        (eask-with-verbosity 'debug
+          (eask-with-progress
+            (ansi-blue (format "Generating recipe for package %s... " (ansi-yellow pkg)))
+            (write-region (pp-to-string recipe) nil (expand-file-name pkg github-elpa-recipes-dir))
+            (ansi-blue "done ✓")))
         (setq eask-depends-on-recipe-p t))
       recipe))))
 
