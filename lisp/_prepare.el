@@ -479,18 +479,15 @@ Eask file in the workspace."
   (eq network-security-level 'low))
 
 (defconst eask-source-mapping
-  (let* ((secure (and (gnutls-available-p)
-                      (not (eask-network-insecure-p))))
-         (proto (if secure "s" "")))
-    `((gnu          . ,(format "http%s://elpa.gnu.org/packages/"                   proto))
-      (nongnu       . ,(format "http%s://elpa.nongnu.org/nongnu/"                  proto))
-      (celpa        . ,(format "http%s://celpa.conao3.com/packages/"               proto))
-      (jcs-elpa     . ,(format "http%s://jcs-emacs.github.io/jcs-elpa/packages/"   proto))
-      (marmalade    . ,(format "http%s://marmalade-repo.org/packages/"             proto))
-      (melpa        . ,(format "http%s://melpa.org/packages/"                      proto))
-      (melpa-stable . ,(format "http%s://stable.melpa.org/packages/"               proto))
-      (org          . ,(format "http%s://orgmode.org/elpa/"                        proto))
-      (shmelpa      . ,(format "http%s://shmelpa.commandlinesystems.com/packages/" proto))))
+  `((gnu          . "https://elpa.gnu.org/packages/")
+    (nongnu       . "https://elpa.nongnu.org/nongnu/")
+    (celpa        . "https://celpa.conao3.com/packages/")
+    (jcs-elpa     . "https://jcs-emacs.github.io/jcs-elpa/packages/")
+    (marmalade    . "https://marmalade-repo.org/packages/")
+    (melpa        . "https://melpa.org/packages/")
+    (melpa-stable . "https://stable.melpa.org/packages/")
+    (org          . "https://orgmode.org/elpa/")
+    (shmelpa      . "https://shmelpa.commandlinesystems.com/packages/"))
   "Mapping of source name and url.")
 
 (defvar eask-package        nil)
@@ -575,6 +572,9 @@ Eask file in the workspace."
   "Add archive NAME with LOCATION."
   (setq location (or location (cdr (assq (intern name) eask-source-mapping))))
   (unless location (error "Unknown package archive: %s" name))
+  (when (and (gnutls-available-p)
+             (not (eask-network-insecure-p)))
+    (setq location (s-replace "https://" "http://" location)))
   (push (cons name location) package-archives))
 
 (defun eask-source-priority (archive-id &optional priority)
