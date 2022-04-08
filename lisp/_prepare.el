@@ -435,6 +435,16 @@ Eask file in the workspace."
   (or (eask-file-load (concat relative-path "Easkfile") t)
       (eask-file-load (concat relative-path "Eask") t)))
 
+(defmacro eask--with-hooks (&rest body)
+  "Execute BODY with before/after hooks."
+  (declare (indent 0) (debug t))
+  `(progn
+     (run-hooks 'eask-before-command-hook)
+     (run-hooks (intern (concat "eask-before-" (eask-command) "-hook")))
+     ,@body
+     (run-hooks (intern (concat "eask-after-" (eask-command) "-hook")))
+     (run-hooks 'eask-after-command-hook)))
+
 (defmacro eask-start (&rest body)
   "Execute BODY with workspace setup."
   (declare (indent 0) (debug t))
@@ -460,7 +470,7 @@ Eask file in the workspace."
                (load (locate-user-emacs-file "../.emacs") t)
                (load (locate-user-emacs-file "init.el") t))
              (ansi-green "done"))
-           ,@body)
+           (eask--with-hooks ,@body))
           (t
            (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
                   (package-user-dir (expand-file-name "elpa" user-emacs-directory))
@@ -476,9 +486,7 @@ Eask file in the workspace."
              (eask--silent (eask-setup-paths))
              (run-hooks 'eask-before-command-hook)
              (run-hooks (intern (concat "eask-before-" (eask-command) "-hook")))
-             ,@body
-             (run-hooks (intern (concat "eask-after-" (eask-command) "-hook")))
-             (run-hooks 'eask-after-command-hook))))))))
+             (eask--with-hooks ,@body))))))))
 
 ;;
 ;;; Eask file
