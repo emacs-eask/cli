@@ -1,4 +1,6 @@
+(source "gnu")
 (source "melpa")
+(source "jcs-elpa")
 
 (package "mini.emacs.pkg"
          "0.0.1"

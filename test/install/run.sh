@@ -19,11 +19,26 @@
 
 ## Commentary:
 #
-# Test (trigger) error on GitHub Actions
+# Test commands related to install, and uninstall
 #
 
-echo "Test (trigger) error on GitHub Actions"
-cd $(dirname "$0")
+echo "Test commands related to install, and uninstall"
 
-# This should trigger an error!
-eask info
+# Naviate to the test package
+cd "./test/mini.emacs.pkg/"
+
+echo "Install dependencies"
+eask install-deps
+
+echo "Install project package"
+eask package
+eask install
+
+echo "Install by sepcifying packages"
+eask install beacon company-fuzzy lsp-ltex
+
+echo "Uninstall by sepcifying packages"
+eask uninstall beacon lsp-ltex
+
+echo "Uninstall project package"
+eask uninstall

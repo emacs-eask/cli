@@ -30,9 +30,6 @@ cd "./test/mini.emacs.pkg/"
 echo "Testing local commands..."
 eask info
 eask archives
-eask package
-eask install-deps
-eask install
 eask compile
 eask lint
 eask list --depth=0
@@ -42,9 +39,6 @@ eask outdated
 eask clean
 eask clean-elc
 eask clean-all
-
-eask install   alt-codes beacon
-eask uninstall alt-codes ivy
 
 eask locate
 eask upgrade-eask

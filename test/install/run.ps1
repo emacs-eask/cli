@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Copyright (C) 2022 Jen-Chieh Shen
 
 # This program is free software; you can redistribute it and/or modify
@@ -19,29 +17,26 @@
 
 ## Commentary:
 #
-# Here we test all local (workspace) commands by simulating a Emacs
-# pacakge development environment!
+# Test command `exec`
 #
-# Notice, below we clone a random packae (repo) that uses Eask as the
-# dependencies management tool.
-#
+
+echo "Test commands related to install, and uninstall"
 
 # Naviate to the test package
 cd "./test/mini.emacs.pkg/"
 
-echo "Testing local commands..."
-eask info
-eask archives
-eask compile
-eask lint
-eask list --depth=0
-eask concat
-eask outdated
+echo "Install dependencies"
+eask install-deps
 
-eask clean
-eask clean-elc
-eask clean-all
+echo "Install project package"
+eask package
+eask install
 
-eask locate
-eask upgrade-eask
-eask refresh
+echo "Install by sepcifying packages"
+eask install beacon company-fuzzy lsp-ltex
+
+echo "Uninstall by sepcifying packages"
+eask uninstall beacon lsp-ltex
+
+echo "Uninstall project package"
+eask uninstall
