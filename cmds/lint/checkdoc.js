@@ -32,5 +32,5 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'checkdoc', argv.files);
+  await util.e_call(argv, 'lint/checkdoc', argv.files);
 };
