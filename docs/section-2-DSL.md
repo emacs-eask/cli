@@ -51,19 +51,28 @@ Example:
 
 Specify a dependency of this package.
 
-Example:
+Example: (specify by archives)
 
 ```elisp
+(depends-on "emacs" "26.1")
 (depends-on "dash")
 (depends-on "company")
+```
+
+Example: (specify with recipe format)
+
+```elisp
 (depends-on "auto-rename-tag" 
             :repo "jcs-elpa/auto-rename-tag" 
             :fetcher 'github)
+
 (depends-on "lsp-ui" 
             :repo "emacs-lsp/lsp-ui"
             :fetcher 'github
             :files '(:defaults "lsp-ui-doc.html" "resources"))
 ```
+
+*💡 Tip: Install dependencies with `eask install-deps`!*
 
 #### 🔎 **development** (`&rest body`)
 
@@ -76,6 +85,8 @@ Example:
  (depends-on "ert-runner")
  (depends-on "elsa"))
 ```
+
+*💡 You would need to specify the `--dev` option for development dependencies!*
 
 #### 🔎 **source** (`alias`)
 #### 🔎 **source** (`name` `url`)
@@ -113,8 +124,6 @@ Example:
 (source-priority "gnu" 5)
 ```
 
-## Execution Order for Eask
-
 ## Example
 
 `Eask` is the magic file that `eask` will read it as the init file in Emacs.
@@ -122,7 +131,7 @@ The syntaxes are similar to the `Cask` file, but different.
 
 ```elisp
 (package "your-package" 
-         "1.0.0" 
+         "0.1.2" 
          "Your package description")
 
 (package-file "your-package-file.el")
@@ -133,7 +142,7 @@ The syntaxes are similar to the `Cask` file, but different.
 ## Advanced Usage
 
 `Eask` is just the regular Emacs Lisp file and should be read from the
-Emacs itself!
+Emacs itself! You can do:
 
 ```elisp
 ; Regular Eask file content...
@@ -141,13 +150,29 @@ Emacs itself!
 (setq byte-compile-error-on-warn t)  ; Singal error if warning occurred
 ```
 
-`eask` provides some hooks so you can define your own action before/after
-each command. The name of the hook follows the rule of
-`eask-{`before`/`after`}-{`command_name`}-hook`.
+`eask` provides some hooks so you can make execution before/after each 
+command. The name of the hook looks like,
 
-For example, to enable compile on warn on `byte-compile` command
+```elisp
+eask-{`before`/`after`}-{`command_name`}-hook
+```
+
+For example, to enable compile on warn on `compile` command
 
 ```elisp
 (add-hook 'eask-before-compile-hook 
           (lambda () (setq byte-compile-error-on-warn t)))
+```
+
+Or hooks run on every command?
+
+* `eask-before-command-hook`
+* `eask-after-command-hook`
+
+## Execution Order for Eask
+
+Eask is executed this way.
+
+```
+[Eask environment] -> [before hooks] -> [command execution] -> [after hooks]
 ```
