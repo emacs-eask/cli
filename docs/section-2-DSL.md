@@ -11,7 +11,7 @@ This document provides a reference on the [DSL](https://en.wikipedia.org/wiki/Do
 
 #### 🔎 **pacakge** (`name` `version` `description`)
 
-Declare a package with the given name, version and description:
+Declare a package with the given name, version, and description:
 
 ```elisp
 (package "ert-runner" "0.7.0" "Opinionated Ert testing workflow")
@@ -28,7 +28,7 @@ Package entry file.
 
 #### 🔎 **files** (`&rest patterns`)
 
-N/A
+WIP
 
 ## Dependencies
 
@@ -37,10 +37,9 @@ N/A
 
 Specify a dependency of this package.
 
-#### 🔎 **development** `&rest body`
+#### 🔎 **development** (`&rest body`)
 
 Scope all depends-on expressions in body to development.
-
 
 #### 🔎 **source** (`alias`)
 #### 🔎 **source** (`name` `name`)
@@ -49,15 +48,15 @@ Add a package archive to install dependencies from.
 
 Available aliases:
 
-* `gnu` - ([https://elpa.gnu.org/packages/](https://elpa.gnu.org/packages/))
-* `nongnu` - ([https://elpa.nongnu.org/nongnu/](https://elpa.nongnu.org/nongnu/))
-* `celpa` - ([https://celpa.conao3.com/](https://celpa.conao3.com/))
-* `jcs-elpa` - ([https://jcs-emacs.github.io/jcs-elpa/packages/](https://jcs-emacs.github.io/jcs-elpa/packages/))
-* `marmalade` - ([https://marmalade-repo.org/packages/](https://marmalade-repo.org/packages/))
-* `melpa` - ([https://melpa.org/packages/](https://melpa.org/packages/))
-* `melpa-stable` - ([https://stable.melpa.org/packages/](https://stable.melpa.org/packages/))
-* `org` - ([https://orgmode.org/elpa/](https://orgmode.org/elpa/))
-* `shmelpa` - ([https://shmelpa.commandlinesystems.com/packages/](https://shmelpa.commandlinesystems.com/packages/))
+* `gnu` ([https://elpa.gnu.org/packages/](https://elpa.gnu.org/packages/))
+* `nongnu` ([https://elpa.nongnu.org/nongnu/](https://elpa.nongnu.org/nongnu/))
+* `celpa` ([https://celpa.conao3.com/](https://celpa.conao3.com/))
+* `jcs-elpa` ([https://jcs-emacs.github.io/jcs-elpa/packages/](https://jcs-emacs.github.io/jcs-elpa/packages/))
+* `marmalade` ([https://marmalade-repo.org/packages/](https://marmalade-repo.org/packages/))
+* `melpa` ([https://melpa.org/packages/](https://melpa.org/packages/))
+* `melpa-stable` ([https://stable.melpa.org/packages/](https://stable.melpa.org/packages/))
+* `org` ([https://orgmode.org/elpa/](https://orgmode.org/elpa/))
+* `shmelpa` ([https://shmelpa.commandlinesystems.com/packages/](https://shmelpa.commandlinesystems.com/packages/))
 
 Example:
 
@@ -66,8 +65,17 @@ Example:
 (source "gnu" "https://elpa.gnu.org/packages/")
 ```
 
+*💡 You can use `--insecure` to make `https` to `http`, but not recommended*
+
 #### 🔎 **source-priority** (`alias` `priority`)
 
+Set archive priority.
+
+```elisp
+(source-priority "gnu" 5)
+```
+
+## Execution Order for Eask
 
 ## Example
 
