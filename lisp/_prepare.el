@@ -50,7 +50,7 @@
 
 (defun eask-script (script)
   "Return full script filename."
-  (let* ((script-el (concat script ".el"))
+  (let* ((script-el (concat "../" script ".el"))
          (lisp-dir (file-name-directory eask--script))
          (script-file (expand-file-name script-el lisp-dir)))
     script-file))
@@ -154,7 +154,7 @@ the `eask-start' execution.")
               ;; high number so user we always use the specified dependencies!
               package-archive-priorities
               `(,@package-archive-priorities ("local" . 90)))
-        (eask-call "archives"))
+        (eask-call "core/archives"))
       "done ✓"))
   (when eask-depends-on
     (eask--install-deps eask-depends-on "package"))
@@ -429,8 +429,8 @@ Eask file in the workspace."
   "Execute BODY with workspace setup."
   (declare (indent 0) (debug t))
   `(unless eask-loading-file-p
-     (eask--setup-env
-       (if eask--initialized-p (progn ,@body)
+     (if eask--initialized-p (progn ,@body)
+       (eask--setup-env
          (eask--handle-global-options)
          (eask--print-env-info)
          (setq eask--initialized-p t)
@@ -461,6 +461,7 @@ Eask file in the workspace."
                  (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
                (eask-msg "✗ Loading Eask file... missing!"))
              (message "")
+             (package-activate-all)
              (ignore-errors (make-directory package-user-dir t))
              (eask--silent (eask-setup-paths))
              (run-hooks 'eask-before-command-hook)
@@ -549,7 +550,7 @@ Eask file in the workspace."
       (if (member recipe eask-depends-on)
           (error "Duplicate dependencies with name: %s" pkg)
         (push recipe eask-depends-on)
-        (eask-load "./extern/github-elpa")
+        (eask-load "extern/github-elpa")
         (write-region (pp-to-string recipe) nil (expand-file-name pkg github-elpa-recipes-dir))
         (setq eask-depends-on-recipe-p t))
       recipe))))
@@ -806,9 +807,9 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 ;;
 ;;; Externals
 
-(eask-load "./extern/ansi")
-(eask-load "./extern/package")
-(eask-load "./extern/package-build")
-(eask-load "./extern/s")
+(eask-load "extern/ansi")
+(eask-load "extern/package")
+(eask-load "extern/package-build")
+(eask-load "extern/s")
 
 ;;; _prepare.el ends here

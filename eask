@@ -5,7 +5,9 @@ const yargs = require("yargs");
 yargs
   .usage('Usage: eask <command> [options..]')
   .scriptName('')
-  .commandDir('cmds')
+  .commandDir('cmds', {
+    recurse: true,
+  })
   .showHelpOnFail(true)
   .help(
     'help',

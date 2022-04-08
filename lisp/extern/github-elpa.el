@@ -12,7 +12,7 @@
 
 (defun github-elpa-build ()
   "Github elpa build."
-  (eask-load "./extern/package-build")  ; override
+  (eask-load "extern/package-build")  ; override
   (let ((package-build-working-dir github-elpa-working-dir)
         (package-build-archive-dir github-elpa-archive-dir)
         (package-build-recipes-dir github-elpa-recipes-dir))
