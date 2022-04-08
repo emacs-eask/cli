@@ -1,10 +1,10 @@
-(source "melpa")
-
 (package "exec"
          "0.0.1"
          "Test project for command exec")
 
 (package-file "exec.el")
+
+(source "melpa")
 
 (depends-on "emacs" "26.1")
 (depends-on "ert-runner")
