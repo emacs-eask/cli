@@ -25,11 +25,23 @@ influencing your personal confiugration. Eask aims to be:
 
 ##### ✔️ Tests puppose to be `green`
 
+###### Documentation
+
 [![pages-build-deployment](https://github.com/emacs-eask/eask/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/pages/pages-build-deployment)
+
+###### Development
+
 [![Compile](https://github.com/emacs-eask/eask/actions/workflows/test-redefine.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-redefine.yml)
+
+###### Commands
+
 [![Global](https://github.com/emacs-eask/eask/actions/workflows/test-global.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-global.yml)
 [![Local](https://github.com/emacs-eask/eask/actions/workflows/test-local.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-local.yml)
+[![Install](https://github.com/emacs-eask/eask/actions/workflows/test-install.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-install.yml)
 [![Exec](https://github.com/emacs-eask/eask/actions/workflows/test-exec.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-exec.yml)
+
+###### Features
+
 [![Color](https://github.com/emacs-eask/eask/actions/workflows/test-color.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-color.yml)
 
 ##### ❌ Tests puppose to be `red`
