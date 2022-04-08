@@ -1,8 +1,17 @@
     
-💡 You need to specify file(s) you want the checkdoc to run on
+💡 You need to specify file(s) you want the checkdoc to run
    
     $ eask checkdoc FILE-1 FILE-2
     
-💡 Or edit Eask file with [files] specifier
+💡 Or edit Eask file with [package-file] or [files] specifier
+
+    [+] (package-file "ENTRY")         ; One argument with a string
+    [+] (files "FILE-1" "FILE-2" ...)  ; All arguments are wildcard patterns
+
+For example,
+    
+    [+] (files "*.el")
+
+💡 Tip: You can use command [files] to show all selected files
    
-   [+] (files "FILE-1" "FILE-2")
+    $ eask files

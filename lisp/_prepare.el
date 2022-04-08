@@ -172,9 +172,16 @@ the `eask-start' execution.")
       (eask--update-exec-path) (eask--update-load-path))
     (ansi-green "done ✓")))
 
+(defvar eask--package-initialized nil
+  "Flag for package initialization in global scope.")
+
 (defun eask-pkg-init (&optional force)
   "Package initialization."
-  (when (or (not package--initialized) (not package-archive-contents) force)
+  (when (or (not package--initialized) (not package-archive-contents) force
+            ;; XXX when it's global, we would need to initialize once for
+            ;; certain commands.
+            (and (eask-global-p) (not eask--package-initialized)))
+    (setq eask--package-initialized t)
     (eask-with-progress
       (ansi-green "Loading package information... ")
       (eask-with-verbosity 'debug
@@ -433,10 +440,10 @@ Eask file in the workspace."
   (declare (indent 0) (debug t))
   `(unless eask-loading-file-p
      (if eask--initialized-p (progn ,@body)
+       (setq eask--initialized-p t)
        (eask--setup-env
          (eask--handle-global-options)
          (eask--print-env-info)
-         (setq eask--initialized-p t)
          (cond
           ((eask-global-p)
            ;; We accept Eask file in global scope, but it shouldn't be used
