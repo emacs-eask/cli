@@ -25,5 +25,5 @@ exports.command = ['refresh'];
 exports.desc = 'download package archives';
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, util.locate_lisp('refresh', __dirname));
+  await util.e_call(argv, 'core/refresh');
 };
