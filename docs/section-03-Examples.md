@@ -13,11 +13,15 @@ Here are a few examples of how a `Eask`-file might look like.
 The syntaxes are similar to the `Cask` file, but different.
 
 ```elisp
-(package "your-package"
-         "0.1.2"
+(package "Emacs configuration's name"
+         "0.1.0"
          "Your Emacs configuration's description")  ; optional
 
 (package-file "init.el")  ; optional
+
+(files "early-init.el" "init.el"
+       "lisp/*.el"
+       "site-lisp/*.el")
 
 (source "gnu")
 (source "melpa")
@@ -42,7 +46,7 @@ The syntaxes are similar to the `Cask` file, but different.
 
 ```elisp
 (package "your-package"
-         "0.1.2"
+         "0.1.0"
          "Your package description")
 
 (package-file "your-package-file.el")

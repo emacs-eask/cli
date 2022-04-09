@@ -9,89 +9,79 @@ This document explains how to use Eask, and provides a reference of its commands
 
 ## Quickstart
 
-Start by creating a file named `Eask` in the project root. Use eask init
+Start by creating a file named `Eask` in the project root. Use `eask init`
 command to create a Eask-file automatically, containing boilerplate code:
 
-```sh
-$ eask init
+#### eask init
+
+Eask will generate file like:
+
+```elisp
+(package "PACKAGE-NAME"
+         "VERSION"
+         "YOUR PACKAGE SUMMARY")
+
+(package-file "PACKAGE-FILE")
+
+(source "gnu")
 ```
+
+💡 See section [Examples](https://emacs-eask.github.io/eask/examples) for more information!
 
 To install all dependencies:
 
-```sh
-$ eask install-deps
-```
+#### eask install-deps
 
 WIP
 
-```sh
-$ eask install
-```
+#### eask install
 
 WIP
 
-```sh
-$ eask uninstall
-```
+#### eask uninstall
 
 WIP
 
-```sh
-$ eask package
-```
+#### eask package
 
 WIP
 
-```sh
-$ eask outdated
-```
+#### eask outdated
 
 ### Clean up
 
 WIP
 
-```sh
-$ eask clean
-```
+#### eask clean
 
 WIP
 
-```sh
-$ eask clean-elc
-```
+#### eask clean-elc
 
 WIP
 
-```sh
-$ eask clean-all
-```
+#### eask clean-all
+
+WIP
 
 ![](./assets/screenshot/outdated.png)
 
 ### Linting
 
-WIP
-
-```sh
-$ eask lint
-```
+#### eask lint
 
 WIP
 
-```sh
-$ eask checkdoc
-```
+#### eask checkdoc
+
+WIP
 
 ### Options
 
-WIP
-
-```
---global, -g
-```
+#### --global, -g
 
 WIP
 
-```
---development, --dev
-```
+#### --development, --dev
+
+WIP
