@@ -22,17 +22,25 @@ To install all dependencies:
 $ eask install-deps
 ```
 
+WIP
+
 ```sh
 $ eask install
 ```
+
+WIP
 
 ```sh
 $ eask uninstall
 ```
 
+WIP
+
 ```sh
 $ eask package
 ```
+
+WIP
 
 ```sh
 $ eask outdated
@@ -40,13 +48,19 @@ $ eask outdated
 
 ### Clean up
 
+WIP
+
 ```sh
 $ eask clean
 ```
 
+WIP
+
 ```sh
 $ eask clean-elc
 ```
+
+WIP
 
 ```sh
 $ eask clean-all
@@ -56,9 +70,13 @@ $ eask clean-all
 
 ### Linting
 
+WIP
+
 ```sh
 $ eask lint
 ```
+
+WIP
 
 ```sh
 $ eask checkdoc
@@ -66,9 +84,13 @@ $ eask checkdoc
 
 ### Options
 
+WIP
+
 ```
 --global, -g
 ```
+
+WIP
 
 ```
 --development, --dev
