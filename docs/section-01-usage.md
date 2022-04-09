@@ -28,6 +28,10 @@ Eask will generate file like:
 
 💡 See section [Examples](https://emacs-eask.github.io/eask/examples) for more information!
 
+#### eask info
+
+WIP
+
 #### eask install-deps
 
 To install all dependencies:
@@ -48,29 +52,31 @@ WIP
 
 ### Clean up
 
-WIP
-
 #### eask clean
 
-WIP
+Delete `.eask` from current workspace.
+
+⛔️ DO NOT: Specify `--global, -g`, or else it will kill your entire `~/.emacs.d`
+
+```elisp
+$ eask clean -g
+```
 
 #### eask clean-elc
 
-WIP
+Delete all `.elc` files. This would respect to your `Eask` file.
 
 #### eask clean-all
 
-WIP
-
-![](./assets/screenshot/outdated.png)
+This is equivalent to `eask clean` + `eask clean-elc`.
 
 ### Linting
 
-#### eask lint
+#### eask lint [FILES..]
 
 WIP
 
-#### eask checkdoc
+#### eask checkdoc [FILES..]
 
 WIP
 
@@ -78,8 +84,45 @@ WIP
 
 #### --global, -g
 
-WIP
+Use `~/.emacs.d/` instead of package development environment. This is used
+for Emacs configuration.
+
+Install package `auto-complete` for your Emacs configuration:
+
+```sh
+$ eask install auto-complete -g
+```
 
 #### --development, --dev
+
+Notify command with development scope enabled.
+
+If we attempt to install development dependencies:
+
+```sh
+$ eask install --dev
+```
+
+#### --force, -f
+
+Force command's execution.
+
+Force to uninstall package `dash` even it's dependencies from other packages
+
+```sh
+$ eask uninstall dash -f
+```
+
+#### --debug
+
+Enable `debug-on-error`.
+
+This is equivalent to:
+
+```elisp
+(setq debug-on-error t)
+```
+
+#### --strict
 
 WIP
