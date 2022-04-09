@@ -28,11 +28,9 @@ Eask will generate file like:
 
 💡 See section [Examples](https://emacs-eask.github.io/eask/examples) for more information!
 
-To install all dependencies:
-
 #### eask install-deps
 
-WIP
+To install all dependencies:
 
 #### eask install
 
