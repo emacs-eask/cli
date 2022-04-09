@@ -137,7 +137,8 @@ the `eask-start' execution.")
   (eask-pkg-init)
   (when eask-depends-on-recipe-p
     (eask-log "Installing required external packages...")
-    (eask-package-install 'package-build 'melpa)
+    (eask-with-archives "melpa"
+      (eask-package-install 'package-build))
     (eask-with-progress
       "Building temporary archives (this may take a while)... "
       (eask-with-verbosity 'debug (github-elpa-build))
@@ -183,32 +184,46 @@ the `eask-start' execution.")
          (pkg-version (ansi-yellow (eask-package--version-string pkg))))
     (list pkg pkg-string pkg-version)))
 
-(defmacro eask--with-archive (archive &rest body)
+(defmacro eask-with-archives (archives &rest body)
   "Scope that temporary makes ARCHIVE available."
   (declare (indent 1) (debug t))
-  `(let ((package-archives package-archives)) (eask-source ,archive) ,@body))
+  `(let ((package-archives package-archives)
+         (archives (if (listp ,archives) ,archives (list ,archives)))
+         (added))
+     (dolist (archive archives)
+       (unless (assoc archive package-archives)
+         (setq added t)
+         (eask-with-progress
+           (format "Add required archives (%s)... " (ansi-yellow archive))
+           (eask-source archive)
+           "done ✓")))
+     (when added
+       (eask-with-progress
+         "Refresh archives information... "
+         (eask--silent (eask-pkg-init t))
+         "done ✓"))
+     ,@body))
 
-(defun eask-package-install (pkg &optional archive)
+(defun eask-package-install (pkg)
   "Install the package."
-  (eask--with-archive
-      (eask-pkg-init)
-    (let* ((pkg-info (eask--pkg-transaction-vars pkg))
-           (pkg         (nth 0 pkg-info))
-           (pkg-string  (nth 1 pkg-info))
-           (pkg-version (nth 2 pkg-info)))
-      (if (package-installed-p pkg)
-          (eask-msg "  - Skipping %s (%s)... already installed ✗" pkg-string pkg-version)
-        (eask-with-progress
-          (format "  - Installing %s (%s)... " pkg-string pkg-version)
-          (eask-with-verbosity 'debug
-            ;; XXX Without ignore-errors guard, it will trigger error
-            ;;
-            ;;   Can't find library xxxxxxx.el
-            ;;
-            ;; But we can remove this after Emacs 28, since function `find-library-name'
-            ;; has replaced the function `signal' instead of the `error'.
-            (eask-ignore-errors (package-install pkg)))
-          "done ✓")))))
+  (eask-pkg-init)
+  (let* ((pkg-info (eask--pkg-transaction-vars pkg))
+         (pkg         (nth 0 pkg-info))
+         (pkg-string  (nth 1 pkg-info))
+         (pkg-version (nth 2 pkg-info)))
+    (if (package-installed-p pkg)
+        (eask-msg "  - Skipping %s (%s)... already installed ✗" pkg-string pkg-version)
+      (eask-with-progress
+        (format "  - Installing %s (%s)... " pkg-string pkg-version)
+        (eask-with-verbosity 'debug
+          ;; XXX Without ignore-errors guard, it will trigger error
+          ;;
+          ;;   Can't find library xxxxxxx.el
+          ;;
+          ;; But we can remove this after Emacs 28, since function `find-library-name'
+          ;; has replaced the function `signal' instead of the `error'.
+          (eask-ignore-errors (package-install pkg)))
+        "done ✓"))))
 
 (defun eask-package-delete (pkg)
   "Delete the package."
@@ -540,7 +555,7 @@ Eask file in the workspace."
         (push `("local" . ,github-elpa-archive-dir) package-archives)
         ;; If the local archives is added, we set the priority to a very
         ;; high number so user we always use the specified dependencies!
-        (push `("local" . 999) package-archive-priorities))
+        (push `("local" . 90) package-archive-priorities))
       "done!")))
 
 (add-hook 'eask-file-loaded-hook #'eask--setup-dependencies)
