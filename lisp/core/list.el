@@ -25,7 +25,8 @@
 (defun eask--align (depth &optional rest)
   "Format string to align starting from the version number."
   (concat (spaces-string (* depth 2))  ; indent for depth
-          " [+] %-" (number-to-string (- eask-list-package-name-width (* depth 2)))
+          " " (if (= depth 0) "[+]" "[+]") " %-"
+          (number-to-string (- eask-list-package-name-width (* depth 2)))
           "s " rest))
 
 (defun eask-print-pkg (name depth max-depth pkg-alist)
