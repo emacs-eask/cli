@@ -51,12 +51,12 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: .github/scripts/setup-eask.ps1
 
-    - name: Test Error (Unix)
+    - name: Testing... (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       run: |
         ${{ github.workspace }}/test/search/run.sh
 
-    - name: Test Error (Windows)
+    - name: Testing... (Windows)
       if: matrix.os == 'windows-latest'
       run: |
         ${{ github.workspace }}/test/search/run.ps1
