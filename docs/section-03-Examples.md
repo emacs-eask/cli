@@ -5,6 +5,8 @@ permalink: examples
 
 # Examples
 
+Here are a few examples of how a `Eask`-file might look like.
+
 ## Emacs Configuration
 
 `Eask` is the magic file that `eask` will read it as the init file in Emacs.
@@ -12,12 +14,25 @@ The syntaxes are similar to the `Cask` file, but different.
 
 ```elisp
 (package "your-package"
-         "0.1.2" 
-         "Your package description")
+         "0.1.2"
+         "Your Emacs configuration's description")  ; optional
 
-(package-file "your-package-file.el")
+(package-file "init.el")  ; optional
 
 (source "gnu")
+(source "melpa")
+
+(depends-on "auto-complete")
+(depends-on "dash")
+(depends-on "f")
+(depends-on "flycheck")
+(depends-on "helm")
+(depends-on "magit")
+(depends-on "popup")
+(depends-on "projectile")
+(depends-on "s")
+(depends-on "smartparens")
+(depends-on "yasnippet")
 ```
 
 ## Package Development
@@ -60,7 +75,26 @@ For example, to enable compile on warn on `compile` command
           (lambda () (setq byte-compile-error-on-warn t)))
 ```
 
+This is also equivalent to option `--strict`:
+
+```sh
+$ eask compile [FILES..] --strict
+```
+
 Or hooks run on every command?
 
 * `eask-before-command-hook`
 * `eask-after-command-hook`
+
+## Real project examples
+
+These are some projects and configurations using Eask:
+
+* [auto-highlight-symbol](https://github.com/elp-revive/auto-highlight-symbol)
+* [emacs-dashboard](https://github.com/emacs-dashboard/emacs-dashboard)
+* [flycheck-languagetool](https://github.com/emacs-languagetool/flycheck-languagetool)
+* [grammarly](https://github.com/emacs-grammarly/grammarly)
+* [popup-el](https://github.com/auto-complete/popup-el)
+* [line-reminder](https://github.com/emacs-vs/line-reminder)
+* [jcs-emacs](https://github.com/jcs-emacs/jcs-emacs)
+* [jcs-elpa](https://github.com/jcs-emacs/jcs-elpa)
