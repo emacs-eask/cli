@@ -151,6 +151,7 @@ Eask is executed this way:
 ![](./assets/flowchart/execution order.png)
 
 * **Eask environment** builds sandbox and reads Eask file information
+* **Emacs configuration** only being executed when `-g` option is enabled
 * **before hooks** are hooks run before command task
 * **command execution** is the primary command task
 * **after hooks** are hooks run after command task
