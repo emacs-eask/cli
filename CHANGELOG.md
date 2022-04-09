@@ -12,6 +12,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add new command `eask refresh` (5423d84a59c88d52c2279f27a189573eb525a82b)
 * Move help manual to it's folder (4036319d3d40ea37270103adbfb102dd0d6b24d5)
 * Move command files by category (2b405c5cc65eb9a3099b2bc4b6b3b41395d7ba0f)
+* Add new command `eask search` (840646c1b91fcbed689d33cb6890bf482b9b1913)
 
 ## 0.4.x
 > Released Apr 5, 2022
