@@ -27,7 +27,7 @@
     (dolist (package (mapcar #'car package-archive-contents))
       (when (string-match-p query (format "%s" package))
         (push package result)))
-    (reverse result)))
+    result))
 
 (eask-start
   (eask-pkg-init)

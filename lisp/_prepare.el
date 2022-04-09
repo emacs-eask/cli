@@ -335,7 +335,7 @@ other scripts internally.  See function `eask-call'.")
 
 (defconst eask--option-switches
   (eask--form-options
-   '("-g" "-f" "--depth" "--dev"
+   '("-g" "-f" "--dev"
      "--debug" "--strict"
      "--timestamps" "--no-timestamps"
      "--log-level" "--no-log-level"
@@ -348,7 +348,7 @@ other scripts internally.  See function `eask-call'.")
   (eask--form-options
    '("--proxy" "--http-proxy" "--https-proxy" "--no-proxy"
      "--verbose" "--silent"
-     "--dest"))
+     "--depth" "--dest"))
   "List of arguments (number/string) type options.")
 
 (defconst eask--command-list
