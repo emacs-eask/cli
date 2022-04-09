@@ -837,7 +837,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
         (with-temp-buffer
           (insert-file-contents help-file)
           (unless (string= (buffer-string) "")
-            (eask-msg (buffer-string))))
+            (eask-msg (ansi-white (buffer-string)))))
       (error "Help manual missig %s" help-file))))
 
 ;;

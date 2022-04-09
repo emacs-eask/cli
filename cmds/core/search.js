@@ -29,8 +29,14 @@ exports.builder = {
     requiresArg: false,
     type: 'array',
   },
+  depth: {
+    description: 'dependency depth level to print',
+    requiresArg: true,
+    type: 'number',
+  },
 };
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'core/search', argv.queries);
+  await util.e_call(argv, 'core/search', argv.queries
+                    , util.def_flag(argv.depth, '--depth', argv.depth));
 };

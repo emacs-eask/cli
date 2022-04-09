@@ -1,4 +1,4 @@
 
 💡 You would need to specify queries
 
-    $ eask search QUERY-1 QUERY-2
+    $ eask search QUERY-1 QUERY-2 ..
