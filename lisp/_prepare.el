@@ -194,7 +194,7 @@ the `eask-start' execution.")
        (unless (assoc archive package-archives)
          (setq added t)
          (eask-with-progress
-           (format "Add required archives (%s)... " (ansi-yellow archive))
+           (format "Adding required archives (%s)... " (ansi-yellow archive))
            (eask-source archive)
            "done ✓")))
      (when added
