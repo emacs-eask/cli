@@ -33,7 +33,6 @@ run on by default. If you use WSL or other environment system file Cygwin/MSYS
 - [ ] Handle condition, package doesn't in archives
 - [ ] Colorized `eask install` compile log
 - [ ] Add `reinstall` command
-- [ ] Add `search` command
 - [ ] Add `elint` command
 - [ ] Add `elsa` command
 - [ ] Add `lint-declare` command
