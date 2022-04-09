@@ -19,7 +19,7 @@
   (when dependencies
     (eask-msg "")
     (eask-msg title)
-    (let* ((names (eask--extract-deps-name dependencies))
+    (let* ((names (mapcar #'car dependencies))
            (offset (format "%s" (eask-seq-str-max names))))
       (dolist (dep dependencies)
         (let* ((target-version (cdr dep))
