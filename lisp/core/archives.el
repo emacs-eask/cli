@@ -16,7 +16,11 @@
 
 (defun eask--print-archive (archive)
   "Print the archive."
-  (message "  %-15s %-40s" (car archive) (cdr archive)))
+  (let* ((extract (mapcar #'car package-archives))
+         (len (eask-seq-str-max extract))
+         (len (format "%s" len)))
+    (message (concat "  [+] %-" len "s  %s")
+             (car archive) (cdr archive))))
 
 (eask-start
   (if package-archives

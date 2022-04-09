@@ -120,13 +120,9 @@ the `eask-start' execution.")
   "Return list of dependencies."
   (append eask-depends-on (and (eask-dev-p) eask-depends-on-dev)))
 
-(defun eask--extract-deps-name (dependencies)
-  "Use `car' to get all names from DEPENDENCIES."
-  (mapcar (lambda (dep) (format "%s" (car dep))) dependencies))
-
 (defun eask--install-deps (dependencies msg)
   "Install DEPENDENCIES."
-  (let* ((names (eask--extract-deps-name dependencies))
+  (let* ((names (mapcar #'car dependencies))
          (len (length dependencies))
          (ies (eask--sinr len "y" "ies"))
          (pkg-installed (cl-remove-if #'package-installed-p names))
@@ -146,18 +142,7 @@ the `eask-start' execution.")
       "Building temporary archives (this may take a while)... "
       (eask-with-verbosity 'debug (github-elpa-build))
       "done ✓")
-    (eask-with-progress
-      "Adding local archives... "
-      (eask-with-verbosity 'debug
-        (setq package-archives
-              `(,@package-archives ("local" . ,github-elpa-archive-dir))
-              ;; If the local archives is added, we set the priority to a very
-              ;; high number so user we always use the specified dependencies!
-              package-archive-priorities
-              `(,@package-archive-priorities ("local" . 90)))
-        (eask-call "core/archives")
-        (eask-pkg-init t))
-      "done ✓"))
+    (eask-pkg-init t))
   (when eask-depends-on
     (eask--install-deps eask-depends-on "package"))
   (when (and eask-depends-on-dev (eask-dev-p))
@@ -538,10 +523,23 @@ Eask file in the workspace."
 (defvar eask-depends-on-recipe-p nil
   "Set to t if package depends on recipe.")
 
-(add-hook 'eask-file-loaded-hook
-          (lambda ()
-            (setq eask-depends-on (reverse eask-depends-on)
-                  eask-depends-on-dev (reverse eask-depends-on-dev))))
+(defun eask--setup-dependencies ()
+  "Setup dependencies list."
+  (setq eask-depends-on (reverse eask-depends-on)
+        eask-depends-on-dev (reverse eask-depends-on-dev))
+  (when eask-depends-on-recipe-p
+    (eask-with-progress
+      "✓ Checking local archives... "
+      (eask-with-verbosity 'debug
+        (setq package-archives
+              `(,@package-archives ("local" . ,github-elpa-archive-dir))
+              ;; If the local archives is added, we set the priority to a very
+              ;; high number so user we always use the specified dependencies!
+              package-archive-priorities
+              `(,@package-archive-priorities ("local" . 999))))
+      "done!")))
+
+(add-hook 'eask-file-loaded-hook #'eask--setup-dependencies)
 
 (defun eask-depends-on (pkg &rest args)
   "Specify a dependency of this package."
