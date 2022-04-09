@@ -25,6 +25,7 @@
 echo "Test command 'search'..."
 cd $(dirname "$0")
 
+eask search
 eask search company
 eask search company dash --depth 0
 eask search company dash f s --depth 0 -g
