@@ -39,6 +39,7 @@ influencing your personal confiugration. Eask aims to be:
 [![Local](https://github.com/emacs-eask/eask/actions/workflows/test-local.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-local.yml)
 [![Install](https://github.com/emacs-eask/eask/actions/workflows/test-install.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-install.yml)
 [![Exec](https://github.com/emacs-eask/eask/actions/workflows/test-exec.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-exec.yml)
+[![Search](https://github.com/emacs-eask/eask/actions/workflows/test-search.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-search.yml)
 
 ###### Features
 
