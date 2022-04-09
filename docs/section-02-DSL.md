@@ -148,7 +148,7 @@ Example:
 
 Eask is executed this way:
 
-![](./assets/flowshart/execution order.png)
+![](./assets/flowchart/execution order.png)
 
 * **Eask environment** builds sandbox and reads Eask file information
 * **before hooks** are hooks run before command task
