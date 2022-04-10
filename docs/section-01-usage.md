@@ -7,6 +7,40 @@ permalink: usage
 
 This document explains how to use Eask, and provides a reference of its commands and options.
 
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [Usage](#usage)
+  * [Quickstart](#quickstart)
+    + [Finding Emacs](#finding-emacs)
+  * [Commands](#commands)
+      - [eask init](#eask-init)
+      - [eask info](#eask-info)
+      - [eask install-deps](#eask-install-deps)
+      - [eask install](#eask-install)
+      - [eask uninstall](#eask-uninstall)
+      - [eask package](#eask-package)
+    + [Management](#management)
+      - [eask upgrade](#eask-upgrade)
+      - [eask list](#eask-list)
+      - [eask list-all](#eask-list-all)
+      - [eask outdated](#eask-outdated)
+    + [Clean up](#clean-up)
+      - [eask clean](#eask-clean)
+      - [eask clean-elc](#eask-clean-elc)
+      - [eask clean-all](#eask-clean-all)
+    + [Lint](#lint)
+      - [eask lint [FILES..]](#eask-lint--files-)
+      - [eask checkdoc [FILES..]](#eask-checkdoc--files-)
+  * [Options](#options)
+      - [--global, -g](#--global---g)
+      - [--development, --dev](#--development----dev)
+      - [--force, -f](#--force---f)
+      - [--debug](#--debug)
+      - [--strict](#--strict)
+
+<!-- markdown-toc end -->
+
 ## Quickstart
 
 Start by creating a file named `Eask` in the project root. Use **eask init*
@@ -119,13 +153,49 @@ $ eask uninstall
 
 WIP
 
+### Management
+
+#### eask upgrade
+
+Upgrade all packages.
+
+```sh
+$ eask [GLOBAL-OPTIONS] upgrade
+```
+
+#### eask list
+
+List out all installed packages.
+
+```sh
+$ eask [GLOBAL-OPTIONS] list [--depth]
+```
+
+#### eask list-all
+
+List out all available packages.
+
+```sh
+$ eask [GLOBAL-OPTIONS] list-all [--depth]
+```
+
 #### eask outdated
+
+List out all outdated packages.
+
+```sh
+$ eask [GLOBAL-OPTIONS] outdated [--depth]
+```
 
 ### Clean up
 
 #### eask clean
 
 Delete `.eask` from current workspace.
+
+```sh
+$ eask [GLOBAL-OPTIONS] clean
+```
 
 ⛔️ Don't specify option `--global, -g`, or else it will delete your entire
 `~/.emacs.d`
@@ -138,11 +208,22 @@ $ eask clean -g
 
 Delete all `.elc` files. This would respect to your `Eask` file.
 
+```sh
+$ eask [GLOBAL-OPTIONS] clean-elc
+```
+
 #### eask clean-all
 
-This is equivalent to `eask clean` + `eask clean-elc`.
+This command are combination of all other clean commands.
 
-### Linting
+* `clean`
+* `clean-elc`
+
+```sh
+$ eask [GLOBAL-OPTIONS] clean-all
+```
+
+### Lint
 
 #### eask lint [FILES..]
 
