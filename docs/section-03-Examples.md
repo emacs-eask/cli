@@ -26,6 +26,7 @@ The syntaxes are similar to the `Cask` file, but different.
 (source "gnu")
 (source "melpa")
 
+(depends-on "emacs" "26.1")
 (depends-on "auto-complete")
 (depends-on "dash")
 (depends-on "f")
@@ -52,6 +53,11 @@ The syntaxes are similar to the `Cask` file, but different.
 (package-file "your-package-file.el")
 
 (source "gnu")
+
+(depends-on "emacs" "26.1")
+(depends-on "dash")
+(depends-on "f")
+(depends-on "s")
 ```
 
 ## Advanced Usage
