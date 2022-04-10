@@ -41,7 +41,7 @@ The gneeral syntax of the **eask** program is:
 $ eask [GLOBAL-OPTIONS] [COMMAND] [COMMAND-OPTIONS] [COMMAND-ARGUMENTS]
 ```
 
-#### eask init
+#### 🔎 eask init
 
 Eask will generate file like:
 
@@ -59,7 +59,7 @@ Eask will generate file like:
 
 💡 See section [Examples](https://emacs-eask.github.io/eask/examples) for more information!
 
-#### eask info
+#### 🔎 eask info
 
 Show information about the project or configuration.
 
@@ -67,7 +67,7 @@ Show information about the project or configuration.
 $ eask [GLOBAL-OPTIONS] info
 ```
 
-#### eask install-deps
+#### 🔎 eask install-deps
 
 To install all dependencies.
 
@@ -77,7 +77,7 @@ $ eask [GLOBAL-OPTIONS] install-deps [--dev]
 
 💡 Specify option [--dev] to install dependencies from the development scope.
 
-#### eask install
+#### 🔎 eask install
 
 To install packages.
 
@@ -97,7 +97,7 @@ Or else, it will install the package from the current development:
 $ eask install
 ```
 
-#### eask uninstall
+#### 🔎 eask uninstall
 
 To uninstall/delete packages.
 
@@ -117,7 +117,7 @@ Or else, it will uninstall the package from the current development:
 $ eask uninstall
 ```
 
-#### eask package
+#### 🔎 eask package
 
 Build the package artifact.
 
@@ -128,7 +128,7 @@ $ eask package [DESTINATION]
 If [DESTINATION] is not specified, it will export to the `/dist` folder
 by default.
 
-#### eask compile
+#### 🔎 eask compile
 
 Byte-compile files.
 
@@ -148,7 +148,7 @@ Or compile files that are already specified in your `Eask`-file.
 $ eask compile
 ```
 
-#### eask autoloads
+#### 🔎 eask autoloads
 
 Generate autoload file.
 
@@ -156,7 +156,7 @@ Generate autoload file.
 $ eask [GLOBAL-OPTIONS] autoloads
 ```
 
-#### eask pkg-file
+#### 🔎 eask pkg-file
 
 Write a package descriptor file to `project-pkg.el` in the project root.
 
@@ -168,7 +168,7 @@ $ eask [GLOBAL-OPTIONS] pkg-file
 [Multi-file Packages (elisp)](https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html#Multi_002dfile-Packages)
 for details.
 
-#### eask package-directory
+#### 🔎 eask package-directory
 
 Print path to package directory, where all dependencies are installed.
 
@@ -176,7 +176,7 @@ Print path to package directory, where all dependencies are installed.
 $ eask [GLOBAL-OPTIONS] package-directory
 ```
 
-#### eask paths
+#### 🔎 eask paths
 
 Print the `PATH` environment variable of this project.
 
@@ -184,7 +184,7 @@ Print the `PATH` environment variable of this project.
 $ eask [GLOBAL-OPTIONS] path
 ```
 
-#### eask load-path
+#### 🔎 eask load-path
 
 Print the load path containing the dependencies of the current project.
 
@@ -192,7 +192,7 @@ Print the load path containing the dependencies of the current project.
 $ eask [GLOBAL-OPTIONS] load-path
 ```
 
-#### eask files
+#### 🔎 eask files
 
 Print the list of all package files.
 
@@ -200,25 +200,25 @@ Print the list of all package files.
 $ eask [GLOBAL-OPTIONS] files
 ```
 
-#### eask exec
+#### 🔎 eask exec
 
 WIP
 
-#### eask eval
+#### 🔎 eask eval
 
 WIP
 
-#### eask load
+#### 🔎 eask load
 
 WIP
 
-#### eask concate
+#### 🔎 eask concate
 
 WIP
 
 ### Management
 
-#### eask archives
+#### 🔎 eask archives
 
 List out all package archives.
 
@@ -226,7 +226,7 @@ List out all package archives.
 $ eask [GLOBAL-OPTIONS] archives
 ```
 
-#### eask search
+#### 🔎 eask search
 
 Search packages from archives.
 
@@ -234,7 +234,7 @@ Search packages from archives.
 $ eask [GLOBAL-OPTIONS] search [QUEIRES..]
 ```
 
-#### eask upgrade
+#### 🔎 eask upgrade
 
 Upgrade all packages.
 
@@ -242,7 +242,7 @@ Upgrade all packages.
 $ eask [GLOBAL-OPTIONS] upgrade
 ```
 
-#### eask list
+#### 🔎 eask list
 
 List out all installed packages.
 
@@ -250,7 +250,7 @@ List out all installed packages.
 $ eask [GLOBAL-OPTIONS] list [--depth]
 ```
 
-#### eask list-all
+#### 🔎 eask list-all
 
 List out all available packages.
 
@@ -258,7 +258,7 @@ List out all available packages.
 $ eask [GLOBAL-OPTIONS] list-all [--depth]
 ```
 
-#### eask outdated
+#### 🔎 eask outdated
 
 List out all outdated packages.
 
@@ -266,7 +266,7 @@ List out all outdated packages.
 $ eask [GLOBAL-OPTIONS] outdated [--depth]
 ```
 
-#### eask refresh
+#### 🔎 eask refresh
 
 Download package archives.
 
@@ -276,7 +276,7 @@ $ eask [GLOBAL-OPTIONS] refresh
 
 ### Cleanup
 
-#### eask clean
+#### 🔎 eask clean
 
 Delete `.eask` from the current workspace.
 
@@ -291,7 +291,7 @@ $ eask [GLOBAL-OPTIONS] clean
 $ eask clean -g
 ```
 
-#### eask clean-elc
+#### 🔎 eask clean-elc
 
 Delete all `.elc` files. This would respect to your `Eask` file.
 
@@ -299,7 +299,7 @@ Delete all `.elc` files. This would respect to your `Eask` file.
 $ eask [GLOBAL-OPTIONS] clean-elc
 ```
 
-#### eask clean-all
+#### 🔎 eask clean-all
 
 This command is combination of all other clean commands.
 
@@ -312,7 +312,7 @@ $ eask [GLOBAL-OPTIONS] clean-all
 
 ### Lint
 
-#### eask lint [FILES..]
+#### 🔎 eask lint [FILES..]
 
 Lint package using [package-lint](https://github.com/purcell/package-lint).
 
@@ -320,7 +320,7 @@ Lint package using [package-lint](https://github.com/purcell/package-lint).
 $ eask [GLOBAL-OPTIONS] lint [FILES..]
 ```
 
-#### eask checkdoc [FILES..]
+#### 🔎 eask checkdoc [FILES..]
 
 Run checkdoc.
 
@@ -330,7 +330,7 @@ $ eask [GLOBAL-OPTIONS] checkdoc [FILES..]
 
 ### Utilities
 
-#### eask upgrade-eask
+#### 🔎 eask upgrade-eask
 
 Upgrade Eask to the latest version.
 
@@ -338,7 +338,7 @@ Upgrade Eask to the latest version.
 $ eask [GLOBAL-OPTIONS] upgrade-eask
 ```
 
-#### eask locate
+#### 🔎 eask locate
 
 Show Eask installed location
 
@@ -350,7 +350,7 @@ $ eask [GLOBAL-OPTIONS] locate
 
 The following options are available on all Eask commands:
 
-#### --global, -g
+#### 🔎 --global, -g
 
 Use `~/.emacs.d/` instead of package development environment. This is used
 for Emacs configuration.
@@ -361,7 +361,7 @@ Install package `auto-complete` for your Emacs configuration:
 $ eask install auto-complete -g
 ```
 
-#### --development, --dev
+#### 🔎 --development, --dev
 
 Notify command with development scope enabled.
 
@@ -371,7 +371,7 @@ If we attempt to install development dependencies:
 $ eask install --dev
 ```
 
-#### --force, -f
+#### 🔎 --force, -f
 
 Force command's execution.
 
@@ -381,7 +381,7 @@ Force to uninstall package `dash` even it's dependencies from other packages
 $ eask uninstall dash -f
 ```
 
-#### --debug
+#### 🔎 --debug
 
 Enable debug information.
 
@@ -391,7 +391,7 @@ This is equivalent to:
 (setq debug-on-error t)
 ```
 
-#### --strict
+#### 🔎 --strict
 
 Trigger error instead of warnings.
 
@@ -401,27 +401,27 @@ For instance, in **eask compile**:
 (setq byte-compile-error-on-warn t)
 ```
 
-#### --allow-error
+#### 🔎 --allow-error
 
 Continue the execution without killing the Emacs.
 
-#### --insecure
+#### 🔎 --insecure
 
 Connect archives with HTTP instead of HTTPS.
 
-#### --timestamps, --no-timestamps
+#### 🔎 --timestamps, --no-timestamps
 
 Enable/Disable timestamps.
 
-#### --log-level, --no-log-level
+#### 🔎 --log-level, --no-log-level
 
 Enable/Disable log header.
 
-#### --no-color
+#### 🔎 --no-color
 
 Disable color output.
 
-#### --proxy <proxy>
+#### 🔎 --proxy <proxy>
 
 Set Emacs proxy for HTTP and HTTPS:
 
@@ -429,7 +429,7 @@ Set Emacs proxy for HTTP and HTTPS:
 $ eask --proxy "localhost:8888" install
 ```
 
-#### --http-proxy <proxy>
+#### 🔎 --http-proxy <proxy>
 
 Set Emacs proxy for HTTP only.
 
@@ -437,13 +437,13 @@ Set Emacs proxy for HTTP only.
 
 Set Emacs proxy for HTTPS only.
 
-#### --no-proxy <pattern>
+#### 🔎 --no-proxy <pattern>
 
 Do not use a proxy for any URL matching pattern.
 
 **<pattern>** is an Emacs regular expression.
 
-#### --verbose, -v
+#### 🔎 --verbose, -v
 
 Set verbosity from 0 to 4.
 
@@ -451,10 +451,10 @@ Set verbosity from 0 to 4.
 --verbose 4
 ```
 
-#### --version
+#### 🔎 --version
 
 Show version number.
 
-#### --help
+#### 🔎 --help
 
 Show help.
