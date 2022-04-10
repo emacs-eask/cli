@@ -20,7 +20,7 @@ JavaScript, the main file is located in **src/util.js**.
 
 ## Project Structure
 
-The project structure are very simple, all we need is to look into 3 places.
+There are **three** places you need to look into it:
 
 1. `eask` file at the root of the project
 2. `cmds` folder with all available commands
@@ -29,8 +29,6 @@ The project structure are very simple, all we need is to look into 3 places.
 
 `eask` is the node entry, and the main yargs definition! `cmds` and `lisp`
 folders are command files that correspond to each other.
-
-The sandbox logic is stored inside file `./lisp/_prepare.el`.
 
 ## Execution Order for Eask
 
