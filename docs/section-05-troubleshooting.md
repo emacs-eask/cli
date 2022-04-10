@@ -11,7 +11,7 @@ This document helps you troubleshoot Eask.
 
 Some potential variables can cause faulty Eask,
 
-* Emacs installed, and setup with `PATH`
+* Emacs installed, and set up with `PATH`
 * Installed Eask correctly
 * Node version should be `14.x` or above
 
@@ -38,5 +38,5 @@ If you installed Eask with `npm`, then you should probably upgrade it through
 
 If Eask still does not work, please [report an issue](https://github.com/emacs-eask/eask/issues/new)
 to the issue tracker.
-Please include Eask output with the `--verbose 4` and `--debug` options enabled,
+Please include Eask output with the [--verbose 4] and [--debug] options enabled,
 to give us as much information as possible.
