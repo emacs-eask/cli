@@ -42,11 +42,12 @@ exports.handler = async ({}) => {
     process.exit(0);
   }
 
-  let name, version, description, entry_point;
+  let name, version, description, entry_point, emacs_version;
   await ask(`package name: (${basename}) `, (answer) => { name = answer || basename; });
   await ask(`version: (1.0.0) `, (answer) => { version = answer || '1.0.0'; });
   await ask(`description: `, (answer) => { description = answer; });
   await ask(`entry-point: (${basename}.el) `, (answer) => { entry_point = answer || `${basename}.el`; });
+  await ask(`emacs-version: (26.1) `, (answer) => { emacs_version = answer || '26.1'; });
 
   let content = `(package "${name}"
          "${version}"
@@ -55,6 +56,8 @@ exports.handler = async ({}) => {
 (package-file "${entry_point}")
 
 (source "gnu")
+
+(depends-on "emacs" "${emacs_version}")
 `;
 
   await ask(`About to write to ${EASK_FILE}:

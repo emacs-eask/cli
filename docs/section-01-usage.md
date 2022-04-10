@@ -87,6 +87,8 @@ Eask will generate file like:
 (package-file "PACKAGE-FILE")
 
 (source "gnu")
+
+(depends-on "emacs" "26.1")
 ```
 
 💡 See section [Examples](https://emacs-eask.github.io/eask/examples) for more information!
