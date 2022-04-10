@@ -32,7 +32,8 @@
   (eask-print-log-buffer "*Package-Lint*"))
 
 (eask-start
-  (eask-package-install 'package-lint)
+  (eask-with-archives "melpa"
+    (eask-package-install 'package-lint))
   (if-let ((files (or (eask-args) (eask-package-el-files))))
       (progn
         (mapcar #'eask--package-lint-file files)
