@@ -7,53 +7,6 @@ permalink: usage
 
 This document explains how to use Eask, and provides a reference of its commands and options.
 
-<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
-**Table of Contents**
-
-* [Quickstart](#quickstart)
-  + [Finding Emacs](#finding-emacs)
-* [Commands and options](#commands-and-options)
-    - [eask init](#eask-init)
-    - [eask info](#eask-info)
-    - [eask install-deps](#eask-install-deps)
-    - [eask install](#eask-install)
-    - [eask uninstall](#eask-uninstall)
-    - [eask package](#eask-package)
-    - [eask compile](#eask-compile)
-  + [Management](#management)
-    - [eask search](#eask-search)
-    - [eask upgrade](#eask-upgrade)
-    - [eask list](#eask-list)
-    - [eask list-all](#eask-list-all)
-    - [eask outdated](#eask-outdated)
-  + [Cleanup](#cleanup)
-    - [eask clean](#eask-clean)
-    - [eask clean-elc](#eask-clean-elc)
-    - [eask clean-all](#eask-clean-all)
-  + [Lint](#lint)
-    - [eask lint [FILES..]](#eask-lint--files-)
-    - [eask checkdoc [FILES..]](#eask-checkdoc--files-)
-* [Global Options](#global-options)
-    - [--global, -g](#--global---g)
-    - [--development, --dev](#--development----dev)
-    - [--force, -f](#--force---f)
-    - [--debug](#--debug)
-    - [--strict](#--strict)
-    - [--allow-error](#--allow-error)
-    - [--insecure](#--insecure)
-    - [--timestamps, --no-timestamps](#--timestamps----no-timestamps)
-    - [--log-level, --no-log-level](#--log-level----no-log-level)
-    - [--no-color](#--no-color)
-    - [--proxy <proxy>](#--proxy--proxy-)
-    - [--http-proxy <proxy>](#--http-proxy--proxy-)
-    - [--https-proxy <proxy>](#--https-proxy--proxy-)
-    - [--no-proxy <pattern>](#--no-proxy--pattern-)
-    - [--verbose, -v](#--verbose---v)
-    - [--version](#--version)
-    - [--help](#--help)
-
-<!-- markdown-toc end -->
-
 ## Quickstart
 
 Start by creating a file named `Eask` in the project root. Use **eask init*
@@ -195,7 +148,43 @@ Or compile files that are already specified in your `Eask`-file.
 $ eask compile
 ```
 
+#### eask autoloads
+
+Generate autoload file.
+
+```sh
+$ eask [GLOBAL-OPTIONS] autoloads
+```
+
+#### eask pkg-file
+
+Write a package descriptor file to `project-pkg.el` in the project root.
+
+```sh
+$ eask [GLOBAL-OPTIONS] pkg-file
+```
+
+`project` is the project name, as declared in `Eask`-file. See
+[Multi-file Packages (elisp)](https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html#Multi_002dfile-Packages)
+for details.
+
+#### eask package-directory
+
+Print path to package directory, where all dependencies are installed.
+
+```sh
+$ eask [GLOBAL-OPTIONS] package-directory
+```
+
 ### Management
+
+#### eask archives
+
+List out all package archives.
+
+```sh
+$ eask [GLOBAL-OPTIONS] archives
+```
 
 #### eask search
 
@@ -289,6 +278,24 @@ Run checkdoc.
 
 ```sh
 $ eask [GLOBAL-OPTIONS] checkdoc [FILES..]
+```
+
+### Utilities
+
+#### eask upgrade-eask
+
+Upgrade Eask to the latest version.
+
+```sh
+$ eask [GLOBAL-OPTIONS] upgrade-eask
+```
+
+#### eask locate
+
+Show Eask installed location
+
+```sh
+$ eask [GLOBAL-OPTIONS] locate
 ```
 
 ## Global Options
@@ -386,7 +393,7 @@ Set Emacs proxy for HTTPS only.
 
 Do not use a proxy for any URL matching pattern.
 
-pattern is an Emacs regular expression.
+**<pattern>** is an Emacs regular expression.
 
 #### --verbose, -v
 
