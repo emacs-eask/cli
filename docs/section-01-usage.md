@@ -33,12 +33,12 @@ path. Use **emacs --version** to check your Emacs version.
 
 There is currently no way to specify an Emacs version to execute.
 
-## Commands and options
+## Commands
 
 The gneeral syntax of the **eask** program is:
 
 ```sh
-$ eask 
+$ eask [GLOBAL-OPTIONS] [COMMAND] [COMMAND-OPTIONS] [COMMAND-ARGUMENTS]
 ```
 
 #### eask init
@@ -110,7 +110,7 @@ WIP
 
 WIP
 
-### Options
+## Options
 
 #### --global, -g
 
