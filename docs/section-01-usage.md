@@ -61,17 +61,59 @@ Eask will generate file like:
 
 Show information about the project or configuration.
 
+```sh
+$ eask [GLOBAL-OPTIONS] info
+```
+
 #### eask install-deps
 
-To install all dependencies:
+To install all dependencies.
+
+```sh
+$ eask [GLOBAL-OPTIONS] install-deps [--dev]
+```
+
+💡 Specify option [--dev] to install dependencies from the development scope.
 
 #### eask install
 
-WIP
+To install packages.
+
+```sh
+$ eask [GLOBAL-OPTIONS] install [PACKAGES..]
+```
+
+Install packages by specifying arguments:
+
+```sh
+$ eask install auto-complete helm magit
+```
+
+Or else, it will install the package from the current development:
+
+```sh
+$ eask install
+```
 
 #### eask uninstall
 
-WIP
+To uninstall/delete packages.
+
+```sh
+$ eask [GLOBAL-OPTIONS] uninstall [PACKAGES..]
+```
+
+Uninstall packages by specifying arguments:
+
+```sh
+$ eask uninstall dash f s
+```
+
+Or else, it will uninstall the package from the current development:
+
+```sh
+$ eask uninstall
+```
 
 #### eask package
 
