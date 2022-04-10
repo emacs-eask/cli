@@ -25,8 +25,6 @@ built-in `version-to-list`.
 Define this package and its runtime dependencies from the package headers 
 of a file (used only for package development).
 
-Example:
-
 ```elisp
 (package-file "foo.el")
 ```
@@ -36,8 +34,6 @@ Example:
 #### 🔎 **files** (`&rest patterns`)
 
 Specify list of files that are included in this project.
-
-Example:
 
 ```elisp
 (files "foo.el")
@@ -51,7 +47,7 @@ Example:
 
 Specify a dependency of this package.
 
-Example: (specify by archives)
+Specify dependencies that are listed in **archives**:
 
 ```elisp
 (depends-on "emacs" "26.1")
@@ -59,7 +55,7 @@ Example: (specify by archives)
 (depends-on "company")
 ```
 
-Example: (specify with recipe format)
+Specify dependencies in **recipe** format:
 
 ```elisp
 (depends-on "auto-rename-tag" 
@@ -78,8 +74,6 @@ Example: (specify with recipe format)
 
 Scope all `depends-on` expressions in body to development.
 
-Example:
-
 ```elisp
 (development
  (depends-on "ert-runner")
@@ -92,8 +86,6 @@ Example:
 #### 🔎 **source** (`name` `url`)
 
 Add a package archive to install dependencies from.
-
-Example:
 
 ```elisp
 (source "gnu")
@@ -118,8 +110,6 @@ Available aliases:
 
 Set archive priority.
 
-Example:
-
 ```elisp
 (source-priority "gnu" 5)
 ```
@@ -128,8 +118,6 @@ Example:
 
 Specify paths to add to `load-path`
 
-Example:
-
 ```elisp
 (load-paths "/lisp/")
 ```
@@ -137,8 +125,6 @@ Example:
 #### 🔎 **exec-paths** (`&rest paths`)
 
 Specify paths to add to `exec-path`
-
-Example:
 
 ```elisp
 (load-paths "/bin/")
