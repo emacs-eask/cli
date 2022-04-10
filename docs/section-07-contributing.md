@@ -48,20 +48,6 @@ It should print out the location of your working Eask workspace. You should
 able to identify the Eask workspace, even you have multiple Eask version
 installed!
 
-### 📂 Project Structure
-
-The project structure are very simple, all we need is to look into 3 places.
-
-1. `eask` file at the root of the project
-2. `cmds` folder with all available commands
-3. `lisp` folder with all elisp code
-  - `lisp/extern` is the external modules/packages we used
-
-`eask` is the node entry, and the main yargs definition! `cmds` and `lisp`
-folders are command files that correspond to each other.
-
-The sandbox logic is stored inside file `./lisp/_prepare.el`.
-
 ### Testing
 
 Eask does not offer local testing, all our tests are accomplished using GitHub

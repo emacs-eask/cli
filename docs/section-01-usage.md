@@ -9,8 +9,37 @@ This document explains how to use Eask, and provides a reference of its commands
 
 ## Quickstart
 
-Start by creating a file named `Eask` in the project root. Use `eask init`
-command to create a Eask-file automatically, containing boilerplate code:
+Start by creating a file named `Eask` in the project root. Use **eask init*
+command to create a Eask-file. You will be asked to enter few questions
+to create the file.
+
+```sh
+$ eask init
+```
+
+To install all dependencies, run:
+
+```sh
+$ eask install-deps
+```
+
+💡 Use [-g] options for your Emacs configuration. Otherwise, it will create
+a directory named `.eask` and install all dependencies into it.
+
+### Finding Emacs
+
+By default, Eask will use whatever the Emacs version exists in your environment
+path. Use **emacs --version** to check your Emacs version.
+
+There is currently no way to specify an Emacs version to execute.
+
+## Commands and options
+
+The gneeral syntax of the **eask** program is:
+
+```sh
+$ eask 
+```
 
 #### eask init
 
@@ -30,7 +59,7 @@ Eask will generate file like:
 
 #### eask info
 
-WIP
+Show information about the project or configuration.
 
 #### eask install-deps
 
@@ -56,7 +85,8 @@ WIP
 
 Delete `.eask` from current workspace.
 
-⛔️ DO NOT: Specify `--global, -g`, or else it will kill your entire `~/.emacs.d`
+⛔️ Don't specify option `--global, -g`, or else it will delete your entire
+`~/.emacs.d`
 
 ```elisp
 $ eask clean -g
