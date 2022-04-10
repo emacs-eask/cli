@@ -176,6 +176,46 @@ Print path to package directory, where all dependencies are installed.
 $ eask [GLOBAL-OPTIONS] package-directory
 ```
 
+#### eask paths
+
+Print the `PATH` environment variable of this project.
+
+```sh
+$ eask [GLOBAL-OPTIONS] path
+```
+
+#### eask load-path
+
+Print the load path containing the dependencies of the current project.
+
+```sh
+$ eask [GLOBAL-OPTIONS] load-path
+```
+
+#### eask files
+
+Print the list of all package files.
+
+```sh
+$ eask [GLOBAL-OPTIONS] files
+```
+
+#### eask exec
+
+WIP
+
+#### eask eval
+
+WIP
+
+#### eask load
+
+WIP
+
+#### eask concate
+
+WIP
+
 ### Management
 
 #### eask archives
@@ -224,6 +264,14 @@ List out all outdated packages.
 
 ```sh
 $ eask [GLOBAL-OPTIONS] outdated [--depth]
+```
+
+#### eask refresh
+
+Download package archives.
+
+```sh
+$ eask [GLOBAL-OPTIONS] refresh
 ```
 
 ### Cleanup
