@@ -10,34 +10,47 @@ This document explains how to use Eask, and provides a reference of its commands
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
-- [Usage](#usage)
-  * [Quickstart](#quickstart)
-    + [Finding Emacs](#finding-emacs)
-  * [Commands](#commands)
-      - [eask init](#eask-init)
-      - [eask info](#eask-info)
-      - [eask install-deps](#eask-install-deps)
-      - [eask install](#eask-install)
-      - [eask uninstall](#eask-uninstall)
-      - [eask package](#eask-package)
-    + [Management](#management)
-      - [eask upgrade](#eask-upgrade)
-      - [eask list](#eask-list)
-      - [eask list-all](#eask-list-all)
-      - [eask outdated](#eask-outdated)
-    + [Clean up](#clean-up)
-      - [eask clean](#eask-clean)
-      - [eask clean-elc](#eask-clean-elc)
-      - [eask clean-all](#eask-clean-all)
-    + [Lint](#lint)
-      - [eask lint [FILES..]](#eask-lint--files-)
-      - [eask checkdoc [FILES..]](#eask-checkdoc--files-)
-  * [Options](#options)
-      - [--global, -g](#--global---g)
-      - [--development, --dev](#--development----dev)
-      - [--force, -f](#--force---f)
-      - [--debug](#--debug)
-      - [--strict](#--strict)
+* [Quickstart](#quickstart)
+  + [Finding Emacs](#finding-emacs)
+* [Commands and options](#commands-and-options)
+    - [eask init](#eask-init)
+    - [eask info](#eask-info)
+    - [eask install-deps](#eask-install-deps)
+    - [eask install](#eask-install)
+    - [eask uninstall](#eask-uninstall)
+    - [eask package](#eask-package)
+    - [eask compile](#eask-compile)
+  + [Management](#management)
+    - [eask search](#eask-search)
+    - [eask upgrade](#eask-upgrade)
+    - [eask list](#eask-list)
+    - [eask list-all](#eask-list-all)
+    - [eask outdated](#eask-outdated)
+  + [Cleanup](#cleanup)
+    - [eask clean](#eask-clean)
+    - [eask clean-elc](#eask-clean-elc)
+    - [eask clean-all](#eask-clean-all)
+  + [Lint](#lint)
+    - [eask lint [FILES..]](#eask-lint--files-)
+    - [eask checkdoc [FILES..]](#eask-checkdoc--files-)
+* [Global Options](#global-options)
+    - [--global, -g](#--global---g)
+    - [--development, --dev](#--development----dev)
+    - [--force, -f](#--force---f)
+    - [--debug](#--debug)
+    - [--strict](#--strict)
+    - [--allow-error](#--allow-error)
+    - [--insecure](#--insecure)
+    - [--timestamps, --no-timestamps](#--timestamps----no-timestamps)
+    - [--log-level, --no-log-level](#--log-level----no-log-level)
+    - [--no-color](#--no-color)
+    - [--proxy <proxy>](#--proxy--proxy-)
+    - [--http-proxy <proxy>](#--http-proxy--proxy-)
+    - [--https-proxy <proxy>](#--https-proxy--proxy-)
+    - [--no-proxy <pattern>](#--no-proxy--pattern-)
+    - [--verbose, -v](#--verbose---v)
+    - [--version](#--version)
+    - [--help](#--help)
 
 <!-- markdown-toc end -->
 
@@ -67,7 +80,7 @@ path. Use **emacs --version** to check your Emacs version.
 
 There is currently no way to specify an Emacs version to execute.
 
-## Commands
+## Commands and options
 
 The gneeral syntax of the **eask** program is:
 
@@ -153,9 +166,44 @@ $ eask uninstall
 
 #### eask package
 
-WIP
+Build the package artifact.
+
+```sh
+$ eask package [DESTINATION]
+```
+
+If [DESTINATION] is not specified, it will export to the `/dist` folder
+by default.
+
+#### eask compile
+
+Byte-compile files.
+
+```sh
+$ eask compile [FILES..]
+```
+
+Compile files by specifying arguments:
+
+```sh
+$ eask compile file-1.el file-2.el
+```
+
+Or compile files that are already specified in your `Eask`-file.
+
+```sh
+$ eask compile
+```
 
 ### Management
+
+#### eask search
+
+Search packages from archives.
+
+```sh
+$ eask [GLOBAL-OPTIONS] search [QUEIRES..]
+```
 
 #### eask upgrade
 
@@ -189,17 +237,17 @@ List out all outdated packages.
 $ eask [GLOBAL-OPTIONS] outdated [--depth]
 ```
 
-### Clean up
+### Cleanup
 
 #### eask clean
 
-Delete `.eask` from current workspace.
+Delete `.eask` from the current workspace.
 
 ```sh
 $ eask [GLOBAL-OPTIONS] clean
 ```
 
-⛔️ Don't specify option `--global, -g`, or else it will delete your entire
+⛔️ Don't specify the option `--global, -g`, or else it will delete your entire
 `~/.emacs.d`
 
 ```elisp
@@ -216,7 +264,7 @@ $ eask [GLOBAL-OPTIONS] clean-elc
 
 #### eask clean-all
 
-This command are combination of all other clean commands.
+This command is combination of all other clean commands.
 
 * `clean`
 * `clean-elc`
@@ -229,13 +277,23 @@ $ eask [GLOBAL-OPTIONS] clean-all
 
 #### eask lint [FILES..]
 
-WIP
+Lint package using [package-lint](https://github.com/purcell/package-lint).
+
+```sh
+$ eask [GLOBAL-OPTIONS] lint [FILES..]
+```
 
 #### eask checkdoc [FILES..]
 
-WIP
+Run checkdoc.
 
-## Options
+```sh
+$ eask [GLOBAL-OPTIONS] checkdoc [FILES..]
+```
+
+## Global Options
+
+The following options are available on all Eask commands:
 
 #### --global, -g
 
@@ -270,7 +328,7 @@ $ eask uninstall dash -f
 
 #### --debug
 
-Enable `debug-on-error`.
+Enable debug information.
 
 This is equivalent to:
 
@@ -280,4 +338,68 @@ This is equivalent to:
 
 #### --strict
 
-WIP
+Trigger error instead of warnings.
+
+For instance, in **eask compile**:
+
+```elisp
+(setq byte-compile-error-on-warn t)
+```
+
+#### --allow-error
+
+Continue the execution without killing the Emacs.
+
+#### --insecure
+
+Connect archives with HTTP instead of HTTPS.
+
+#### --timestamps, --no-timestamps
+
+Enable/Disable timestamps.
+
+#### --log-level, --no-log-level
+
+Enable/Disable log header.
+
+#### --no-color
+
+Disable color output.
+
+#### --proxy <proxy>
+
+Set Emacs proxy for HTTP and HTTPS:
+
+```sh
+$ eask --proxy "localhost:8888" install
+```
+
+#### --http-proxy <proxy>
+
+Set Emacs proxy for HTTP only.
+
+#### --https-proxy <proxy>
+
+Set Emacs proxy for HTTPS only.
+
+#### --no-proxy <pattern>
+
+Do not use a proxy for any URL matching pattern.
+
+pattern is an Emacs regular expression.
+
+#### --verbose, -v
+
+Set verbosity from 0 to 4.
+
+```sh
+--verbose 4
+```
+
+#### --version
+
+Show version number.
+
+#### --help
+
+Show help.
