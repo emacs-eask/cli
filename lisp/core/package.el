@@ -50,7 +50,8 @@
     (ignore-errors (make-directory eask-dist-path t))
 
     (eask-pkg-init)
-    (eask-package-install 'package-build)
+    (eask-with-archives "melpa"
+      (eask-package-install 'package-build))
     (eask-load "./extern/package-build")  ; override
 
     (let* ((version (eask-package-version))
