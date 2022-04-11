@@ -14,6 +14,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Move command files by category (2b405c5cc65eb9a3099b2bc4b6b3b41395d7ba0f)
 * Add new command `eask search` (840646c1b91fcbed689d33cb6890bf482b9b1913)
 * Restrict `package` definition in `Eask`-file (ba6ed6853c98d19d88971af745ad9a8b2d794ae5)
+* Add new command `eask ert-runner` (8647d37c80c5349d8b3b3b17b8570a91bb91339c)
+* Add new command `eask ert` (29c5722fa5b8fea8add30d6de0169166cfd7c17f)
 
 ## 0.4.x
 > Released Apr 5, 2022
