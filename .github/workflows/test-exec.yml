@@ -57,9 +57,9 @@ jobs:
     - name: Testing... (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       run: |
-        ${{ github.workspace }}/test/exec/run.sh
+        ${{ github.workspace }}/test/commands/exec/run.sh
 
     - name: Testing... (Windows)
       if: matrix.os == 'windows-latest'
       run: |
-        ${{ github.workspace }}/test/exec/run.ps1
+        ${{ github.workspace }}/test/commands/exec/run.ps1
