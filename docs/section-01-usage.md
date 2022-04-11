@@ -202,7 +202,10 @@ $ eask [GLOBAL-OPTIONS] files
 
 #### 🔎 eask exec
 
-WIP
+
+```sh
+$ eask [GLOBAL-OPTIONS] exec
+```
 
 #### 🔎 eask eval
 
