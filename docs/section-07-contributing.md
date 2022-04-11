@@ -41,7 +41,7 @@ PATH variable, so you can call `eask` from the terminal.
 After you have step throught the installation, try:
 
 ```sh
-eask locate
+$ eask locate
 ```
 
 It should print out the location of your working Eask workspace. You should
