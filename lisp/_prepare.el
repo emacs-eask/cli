@@ -529,12 +529,14 @@ Eask file in the workspace."
 
 (defun eask-package (name version description)
   "Set the package information."
-  (setq eask-package `(:name ,name :version ,version :description ,description)))
+  (if eask-package
+      (error "Detect multiple package, you can only have one package definition")
+    (setq eask-package `(:name ,name :version ,version :description ,description))))
 
 (defun eask-package-file (file)
   "Set package file."
   (if eask-package-file
-      (error "Multiple package-file detected, please specify one unique pacakge-file")
+      (error "Detect multiple package-file, you can only have one package-file definition")
     (setq eask-package-file (expand-file-name file))))
 
 (defun eask-files (&rest patterns)
