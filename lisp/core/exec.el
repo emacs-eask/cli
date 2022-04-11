@@ -21,7 +21,7 @@
 
 (defun eask--shell-command (command)
   "Wrap `shell-command' with better output to terminal."
-  (eask-info "Executing command: %s..." command)
+  (eask-info "Executing command: %s" command)
   (let ((code (shell-command command "*output*" "*error*")))
     (if (zerop code)
         (eask-with-verbosity 'debug
@@ -44,7 +44,8 @@
        ;;
        ;; TODO `shell-command' would jump out of Emacs and does not share the
        ;; same environment PATH.
-       (let ((command (mapconcat #'identity (append (list name) commander-args) " ")))
+       (let* ((program (or (executable-find name) name))
+              (command (mapconcat #'identity (append (list program) commander-args) " ")))
          (eask--shell-command command)))
     (eask-info "✗ (No exeuction output)")
     (eask-help 'exec)))
