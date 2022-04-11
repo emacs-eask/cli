@@ -763,10 +763,14 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
       (ignore-errors (file-name-nondirectory
                       (file-name-sans-extension eask-package-file)))))
 
+(defun eask-expand-file-specs (specs)
+  "Expand file SPECS."
+  (mapcar (lambda (elm) (expand-file-name (car elm) default-directory))
+          (package-build-expand-file-specs default-directory specs nil t)))
+
 (defun eask-package-files ()
   "Return package files in workspace."
-  (let ((files (mapcar (lambda (elm) (expand-file-name (car elm) default-directory))
-                       (package-build-expand-file-specs default-directory eask-files nil t))))
+  (let ((files (eask-expand-file-specs eask-files)))
     ;; Package file is part of package-files
     (when eask-package-file (push eask-package-file files))
     (delete-dups files)
