@@ -202,22 +202,38 @@ $ eask [GLOBAL-OPTIONS] files
 
 #### 🔎 eask exec
 
+Execute the system command with the given arguments.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] exec
+$ eask [GLOBAL-OPTIONS] exec [COMMAND] [ARGUMENTS ...]
 ```
+
+This is only compatible with Cask's exec command. Eask does not play with
+your environment $PATH; all execution only happens inside Emacs.
 
 #### 🔎 eask eval
 
-WIP
+Evaluate `FORM` as a lisp form.
+
+```sh
+$ eask [GLOBAL-OPTIONS] eval [FORM]
+```
 
 #### 🔎 eask load
 
-WIP
+Load Emacs Lisp files in order.
+
+```sh
+$ eask [GLOBAL-OPTIONS] load [FILES..]
+```
 
 #### 🔎 eask concate
 
-WIP
+Concatenate all Emacs Lisp files into one big file.
+
+```sh
+$ eask [GLOBAL-OPTIONS] concate [FILES..]
+```
 
 ### Management
 
