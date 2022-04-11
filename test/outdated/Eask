@@ -1,0 +1,14 @@
+(package "outdated"
+         "0.0.1"
+         "Test project for command outdated")
+
+(package-file "outdated.el")
+
+(source "gnu")
+(source "nongnu")
+(source "melpa")
+
+(depends-on "auto-rename-tag")
+(depends-on "company-fuzzy")
+
+(setq network-security-level 'low)  ; see https://github.com/jcs090218/setup-emacs-windows/issues/156#issuecomment-932956432
