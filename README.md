@@ -13,7 +13,7 @@ influencing your personal confiugration. Eask aims to be:
 
 * **Consistent** enough to sandbox across all systems
 * **General** enough to have Emacsers often used commands (byte-compile, checkdoc, etc)
-* **Robust** enought to provide useful results even in the presense of user's errors
+* **Robust** enough to provide useful results even in the presense of user's errors
 * **Dependency-free** so that the tool can be run on any platform
 
 ## 🔗 Links
