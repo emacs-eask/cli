@@ -347,6 +347,18 @@ Run checkdoc.
 $ eask [GLOBAL-OPTIONS] checkdoc [FILES..]
 ```
 
+#### 🔎 eask ert [FILES..]
+
+```sh
+$ eask [GLOBAL-OPTIONS] ert [FILES..]
+```
+
+#### 🔎 eask ert-runner [FILES..]
+
+```sh
+$ eask [GLOBAL-OPTIONS] ert-runner [FILES..]
+```
+
 ### Utilities
 
 #### 🔎 eask upgrade-eask
