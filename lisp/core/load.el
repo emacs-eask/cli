@@ -15,6 +15,6 @@
       nil t)
 
 (eask-start
-  (mapc #'load-file (eask-args)))
+  (mapc #'load-file (eask-expand-file-specs (eask-args))))
 
 ;;; load.el ends here

@@ -34,7 +34,8 @@
 (eask-start
   (eask-with-archives "melpa"
     (eask-package-install 'package-lint))
-  (if-let ((files (or (eask-args) (eask-package-el-files))))
+  (if-let ((files (or (eask-expand-file-specs (eask-args))
+                      (eask-package-el-files))))
       (progn
         (mapcar #'eask--package-lint-file files)
         (eask-info "(Total of %s files linted)" (length files)))

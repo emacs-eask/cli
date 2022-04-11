@@ -62,7 +62,8 @@
 
 (eask-start
   (eask-pkg-init)
-  (if-let ((files (or (eask-args) (eask-package-el-files))))
+  (if-let ((files (or (eask-expand-file-specs (eask-args))
+                      (eask-package-el-files))))
       (eask--compile-files files)
     (eask-info "(No files have been compiled)")
     (eask-help 'compile)))

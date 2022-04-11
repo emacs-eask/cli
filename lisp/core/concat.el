@@ -25,7 +25,8 @@
 
 (eask-start
   (let* ((name (eask-guess-package-name))
-         (files (or (eask-args) (eask-package-el-files)))
+         (files (or (eask-expand-file-specs (eask-args))
+                    (eask-package-el-files)))
          (eask-dist-path (or (eask-dest) eask-dist-path))
          (eask-dist-path (expand-file-name eask-dist-path))
          (target-file (concat name ".built.el"))

@@ -45,7 +45,8 @@
 
 (eask-start
   (require 'checkdoc)
-  (if-let* ((files (or (eask-args) (eask-package-el-files)))
+  (if-let* ((files (or (eask-expand-file-specs (eask-args))
+                       (eask-package-el-files)))
             (len (length files))
             (s (eask--sinr len "" "s"))
             (have (eask--sinr len "has" "have")))
