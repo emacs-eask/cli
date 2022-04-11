@@ -1,8 +1,8 @@
-(package "outdated"
+(package "outdated-upgrade"
          "0.0.1"
-         "Test project for command outdated")
+         "Test project for command outdated and upgrade")
 
-(package-file "outdated.el")
+(package-file "outdated-upgrade.el")
 
 (source "gnu")
 (source "nongnu")

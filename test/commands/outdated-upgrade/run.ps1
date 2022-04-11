@@ -25,3 +25,5 @@ cd $PSScriptRoot
 
 eask outdated
 eask outdated --depth 0
+
+eask upgrade

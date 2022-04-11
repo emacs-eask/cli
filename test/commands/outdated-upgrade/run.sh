@@ -27,3 +27,5 @@ cd $(dirname "$0")
 
 eask outdated
 eask outdated --depth 0
+
+eask upgrade
