@@ -26,15 +26,14 @@
 
 (defun eask-package-upgrade (pkg-desc)
   "Upgrade package using PKG-DESC."
-  (let* ((pkg-string (package-desc-name pkg-desc))
-         (pkg-string (ansi-green (format "%s" pkg-string)))
+  (let* ((name (package-desc-name pkg-desc))
+         (pkg-string (ansi-green (format "%s" name)))
          (version-new (eask--package-version-string pkg-desc))
-         (old-pkg-desc (cadr (assq (package-desc-name pkg-desc) package-alist)))
+         (old-pkg-desc (eask-package-desc name t))
          (version-old (eask--package-version-string old-pkg-desc)))
     (eask-with-progress
       (format "  - Upgrading %s (%s) -> (%s)..." pkg-string version-old version-new)
       (eask-with-verbosity 'debug
-        (package-refresh-contents)
         (when (eask-force-p) (package-delete old-pkg-desc))
         (package-install pkg-desc)
         (unless (eask-force-p) (package-delete old-pkg-desc)))
