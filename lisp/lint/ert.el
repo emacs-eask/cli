@@ -22,10 +22,12 @@
 (require 'ert)
 
 (eask-start
+  (eask-pkg-init)
   (if-let ((files (eask-expand-file-specs (eask-args))))
       (progn
         (eask-call "core/load")
         (ert-run-tests-batch))
+    (eask-info "(No tests found.)")
     (eask-help 'ert)))
 
 ;;; ert.el ends here
