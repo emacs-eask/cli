@@ -32,6 +32,7 @@ influencing your personal confiugration. Eask aims to be:
 ###### Development
 
 [![Compile](https://github.com/emacs-eask/eask/actions/workflows/test-redefine.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-redefine.yml)
+[![Compat](https://github.com/emacs-eask/eask/actions/workflows/test-compat.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-compat.yml)
 
 ###### Commands
 
