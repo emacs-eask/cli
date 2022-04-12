@@ -17,6 +17,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add new command `eask ert-runner` (8647d37c80c5349d8b3b3b17b8570a91bb91339c)
 * Add new command `eask ert` (29c5722fa5b8fea8add30d6de0169166cfd7c17f)
 * Handle error `Failed to download ‘xxx’ archive` (29887c80c33b9f909151b465cb99160160cc96c3)
+* Handle Emacs version while installing packages (8cafd4f2d34829da5832241cf105753658019abf)
 
 ## 0.4.x
 > Released Apr 5, 2022
