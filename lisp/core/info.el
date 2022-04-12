@@ -14,13 +14,17 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
+(defvar eask--max-offset 0)
+
 (defun eask--print-deps (title dependencies)
   "Print dependencies."
   (when dependencies
     (eask-msg "")
     (eask-msg title)
     (let* ((names (mapcar #'car dependencies))
-           (offset (format "%s" (eask-seq-str-max names))))
+           (offset (eask-seq-str-max names)))
+      (setq eask--max-offset (max offset eask--max-offset)
+            offset (format "%s" eask--max-offset))
       (dolist (dep dependencies)
         (let* ((target-version (cdr dep))
                (target-version (if (= (length target-version) 1)
