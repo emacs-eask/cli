@@ -28,17 +28,17 @@ echo "Test commands related to install, and uninstall"
 cd "./test/mini.emacs.pkg/"
 
 echo "Install dependencies"
-eask install-deps --verbose 4
+eask install-deps
 
-# echo "Install project package"
-# eask package
-# eask install
+echo "Install project package"
+eask package
+eask install
 
-# echo "Install by sepcifying packages"
-# eask install beacon company-fuzzy lsp-ltex
+echo "Install by sepcifying packages"
+eask install beacon company-fuzzy lsp-ltex
 
-# echo "Uninstall by sepcifying packages"
-# eask uninstall beacon lsp-ltex
+echo "Uninstall by sepcifying packages"
+eask uninstall beacon lsp-ltex
 
-# echo "Uninstall project package"
-# eask uninstall
+echo "Uninstall project package"
+eask uninstall
