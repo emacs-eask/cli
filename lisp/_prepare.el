@@ -196,7 +196,9 @@ the `eask-start' execution.")
       (ansi-green "Loading package information... ")
       (eask-with-verbosity 'debug
         (package-initialize t) (package-refresh-contents)
-        (eask--download-archives))
+        (message "????????????????????????????????????")
+        (eask--download-archives)
+        (message "-----------------------------------"))
       (ansi-green "done ✓"))))
 
 (defun eask--pkg-transaction-vars (pkg)
