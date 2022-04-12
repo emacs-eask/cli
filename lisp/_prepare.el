@@ -101,6 +101,28 @@ the `eask-start' execution.")
     result))
 
 ;;
+;;; Archive
+
+(defun eask--download-archives ()
+  "If archives download failed; download it manually."
+  (dolist (archive package-archives)
+    (let* ((location (cdr archive))
+           (name (car archive))
+           (file "archive-contents")
+           (dir (expand-file-name (concat "archives/" name) package-user-dir))
+           (local-file (expand-file-name file dir))
+           (url (url-expand-file-name file location))
+           (local-archive-p (string= name "local")))
+      (unless (file-exists-p local-file)
+        (eask-with-progress
+          (format "Downloading archive `%s' manually... " (ansi-yellow name))
+          (unless local-archive-p
+            (url-copy-file url local-file t))
+          (if local-archive-p "skipped ✗" "done ✓"))))))
+
+(add-hook 'package--post-download-archives-hook #'eask--download-archives)
+
+;;
 ;;; Package
 
 (defun eask--update-exec-path ()
