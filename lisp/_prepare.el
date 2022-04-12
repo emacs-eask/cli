@@ -298,6 +298,7 @@ the `eask-start' execution.")
   "Return PKG's version."
   (if-let ((version (eask-package--version pkg)))
       (package-version-join version)
+    ;; Just in case, but this should never happens!
     "latest"))
 
 ;;
