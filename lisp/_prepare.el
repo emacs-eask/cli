@@ -119,10 +119,15 @@ the `eask-start' execution.")
         (eask-with-progress
           (format "Downloading archive `%s' manually... " (ansi-yellow name))
           (unless local-archive-p
-            (ignore-errors (make-directory dir t))
-            (url-copy-file url local-file t)
-            (when (file-exists-p local-file) (setq download-p t)))
-          (if local-archive-p "skipped ✗" "done ✓")))
+            (if (url-file-exists-p url)
+                (progn
+                  (ignore-errors (make-directory dir t))
+                  (url-copy-file url local-file t)
+                  (setq download-p t))
+              (eask-debug "No archive-contents found in `%s'" (ansi-yellow name))))
+          (cond (download-p      "done ✓")
+                (local-archive-p "skipped ✗")
+                (t               "failed ✗"))))
       (when download-p (eask-pkg-init t)))))
 
 ;;
