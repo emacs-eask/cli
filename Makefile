@@ -14,4 +14,4 @@ test-redefine:
 
 test-compat:
 	@echo "Test compatibility..."
-	$(EASK) load ./test/compat.el
+	$(EASK) load ./test/development/compat.el
