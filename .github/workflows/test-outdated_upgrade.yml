@@ -1,4 +1,4 @@
-name: CI
+name: Outdated_Upgrade
 
 on:
   push:
