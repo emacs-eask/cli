@@ -3,7 +3,7 @@
          "Minimal Emacs package to simulate development environment; only for testing purposes!")
 
 (package-file "mini.emacs.pkg.el")
-(files "*.el" "extern/*.el")
+(files "*.el" "files/*.el")
 
 (source "gnu")
 (source "melpa")
