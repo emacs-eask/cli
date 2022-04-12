@@ -112,14 +112,17 @@ the `eask-start' execution.")
            (dir (expand-file-name (concat "archives/" name) package-user-dir))
            (local-file (expand-file-name file dir))
            (url (url-expand-file-name file location))
+           (download-p)
            (local-archive-p (string= name "local")))  ; exclude local elpa
       (unless (file-exists-p local-file)
         (eask-with-progress
           (format "Downloading archive `%s' manually... " (ansi-yellow name))
           (unless local-archive-p
             (ignore-errors (make-directory dir t))
-            (url-copy-file url local-file t))
-          (if local-archive-p "skipped ✗" "done ✓"))))))
+            (url-copy-file url local-file t)
+            (when (file-exists-p local-file) (setq download-p t)))
+          (if local-archive-p "skipped ✗" "done ✓")))
+      (when download-p (eask-pkg-init t)))))
 
 ;;
 ;;; Package
