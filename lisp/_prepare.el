@@ -111,7 +111,8 @@ the `eask-start' execution.")
            (file "archive-contents")
            (dir (expand-file-name (concat "archives/" name) package-user-dir))
            (local-file (expand-file-name file dir))
-           (url (url-expand-file-name file location))
+           (url (format
+                 "https://raw.githubusercontent.com/emacs-eask/archives/master/%s/%s" name file))
            (download-p)
            (local-archive-p (string= name "local")))  ; exclude local elpa
       (unless (file-exists-p local-file)
@@ -196,9 +197,7 @@ the `eask-start' execution.")
       (ansi-green "Loading package information... ")
       (eask-with-verbosity 'debug
         (package-initialize t) (package-refresh-contents)
-        (message "????????????????????????????????????")
-        (eask--download-archives)
-        (message "-----------------------------------"))
+        (eask--download-archives))
       (ansi-green "done ✓"))))
 
 (defun eask--pkg-transaction-vars (pkg)
