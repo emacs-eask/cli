@@ -242,8 +242,19 @@ the `eask-start' execution.")
          (pkg         (nth 0 pkg-info))
          (pkg-string  (nth 1 pkg-info))
          (pkg-version (nth 2 pkg-info)))
-    (if (package-installed-p pkg)
-        (eask-msg "  - Skipping %s (%s)... already installed ✗" pkg-string pkg-version)
+    (cond
+     ((package-installed-p pkg)
+      (eask-msg "  - Skipping %s (%s)... already installed ✗" pkg-string pkg-version))
+     ((when-let* ((desc (eask-package-desc pkg))
+                  (req-emacs (assoc 'emacs (package-desc-reqs desc)))
+                  (req-emacs (package-version-join (nth 0 (cdr req-emacs))))
+                  (_ (version< emacs-version req-emacs)))
+        (if (eask-strict-p)
+            (eask-error "  - Skipping %s (%s)... it requires Emacs %s and above ✗"
+                        pkg (eask-package--version-string pkg) emacs-version)
+          (eask-msg "  - Skipping %s (%s)... it requires Emacs %s and above ✗"
+                    pkg-string pkg-version (ansi-yellow emacs-version)))))
+     (t
       (eask-with-progress
         (format "  - Installing %s (%s)... " pkg-string pkg-version)
         (eask-with-verbosity 'debug
@@ -254,7 +265,7 @@ the `eask-start' execution.")
           ;; But we can remove this after Emacs 28, since function `find-library-name'
           ;; has replaced the function `signal' instead of the `error'.
           (eask-ignore-errors (package-install pkg)))
-        "done ✓"))))
+        "done ✓")))))
 
 (defun eask-package-delete (pkg)
   "Delete the package."
