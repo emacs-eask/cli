@@ -22,6 +22,7 @@ run on by default. If you use WSL or other environment system file Cygwin/MSYS
 
 ## 📰 News
 
+* `0.5.0` - Handle error for failed archive
 * `0.4.0` - Add color logger
 * `0.3.0` - Add verbosity level and timestamps
 * `0.2.0` - Done basic error handling with exit code at the end of executions
