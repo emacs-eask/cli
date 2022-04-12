@@ -21,11 +21,6 @@
 
 (require 'ert)
 
-;; Handle options
-(add-hook 'eask-before-command-hook
-          (lambda ()
-            (when (<= eask-verbosity 3) (setq ert-quiet t))))
-
 (eask-start
   (if-let ((files (eask-expand-file-specs (eask-args))))
       (progn
