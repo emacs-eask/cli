@@ -18,3 +18,24 @@ test-compat:
 
 color:
 	./test/color/run.sh
+
+error:
+	./test/error/run.sh
+
+command_global:
+	./test/commands/global/run.sh
+
+command_local:
+	./test/commands/local/run.sh
+
+command_exec:
+	./test/commands/exec/run.sh
+
+command_install:
+	./test/commands/install/run.sh
+
+command_outdated_upgrade:
+	./test/commands/outdated_upgrade/run.sh
+
+command_search:
+	./test/commands/search/run.sh

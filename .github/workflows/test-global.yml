@@ -54,12 +54,6 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: .github/scripts/setup-eask.ps1
 
-    - name: Testing... (Unix)
-      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
+    - name: Testing...
       run: |
-        ${{ github.workspace }}/test/commands/global/run.sh
-
-    - name: Testing... (Windows)
-      if: matrix.os == 'windows-latest'
-      run: |
-        ${{ github.workspace }}/test/commands/global/run.ps1
+        make command_global
