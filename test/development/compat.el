@@ -13,6 +13,6 @@
       (setq exists-p (fboundp func))
       (if exists-p "done ✓" "missing ✗"))
     (unless exists-p
-      (kill-emacs 1))))
+      (eask-error "Missing %s in Emacs version %s... " func emacs-version))))
 
 ;;; compat.el ends here
