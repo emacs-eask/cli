@@ -117,6 +117,7 @@ the `eask-start' execution.")
         (eask-with-progress
           (format "Downloading archive `%s' manually... " (ansi-yellow name))
           (unless local-archive-p
+            (ignore-errors (make-directory dir t))
             (url-copy-file url local-file t))
           (if local-archive-p "skipped ✗" "done ✓"))))))
 
