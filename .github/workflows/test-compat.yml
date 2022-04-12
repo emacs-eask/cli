@@ -1,4 +1,4 @@
-name: Compile
+name: Compat
 
 on:
   push:
@@ -20,9 +20,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
         emacs-version:
+          - 26.3
+          - 27.2
           - 28.1
+          - snapshot
 
     steps:
     - uses: purcell/setup-emacs@master
@@ -46,5 +49,5 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: .github/scripts/setup-eask.ps1
 
-    - name: Test compile
-      run: make test-redefine
+    - name: Test Emacs compatibility
+      run: make test-compat
