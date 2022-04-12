@@ -1,4 +1,4 @@
-name: Outdated
+name: Outdated_Upgrade
 
 on:
   push:
