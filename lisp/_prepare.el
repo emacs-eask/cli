@@ -274,13 +274,15 @@ the `eask-start' execution.")
          (pkg         (nth 0 pkg-info))
          (pkg-string  (nth 1 pkg-info))
          (pkg-version (nth 2 pkg-info)))
-    (if (not (package-installed-p pkg))
-        (eask-msg "  - Skipping %s (%s)... not installed ✗" pkg-string pkg-version)
+    (cond
+     ((not (package-installed-p pkg))
+      (eask-msg "  - Skipping %s (%s)... not installed ✗" pkg-string pkg-version))
+     (t
       (eask-with-progress
         (format "  - Uninstalling %s (%s)... " pkg-string pkg-version)
         (eask-with-verbosity 'debug
           (package-delete (eask-package-desc pkg t) (eask-force-p)))
-        "done ✓"))))
+        "done ✓")))))
 
 (defun eask-package-desc (name &optional current)
   "Build package description by PKG-NAME."
