@@ -112,15 +112,13 @@ the `eask-start' execution.")
            (dir (expand-file-name (concat "archives/" name) package-user-dir))
            (local-file (expand-file-name file dir))
            (url (url-expand-file-name file location))
-           (local-archive-p (string= name "local")))
+           (local-archive-p (string= name "local")))  ; exclude local elpa
       (unless (file-exists-p local-file)
         (eask-with-progress
           (format "Downloading archive `%s' manually... " (ansi-yellow name))
           (unless local-archive-p
             (url-copy-file url local-file t))
           (if local-archive-p "skipped ✗" "done ✓"))))))
-
-(add-hook 'package--post-download-archives-hook #'eask--download-archives)
 
 ;;
 ;;; Package
@@ -193,7 +191,8 @@ the `eask-start' execution.")
     (eask-with-progress
       (ansi-green "Loading package information... ")
       (eask-with-verbosity 'debug
-        (package-initialize t) (package-refresh-contents))
+        (package-initialize t) (package-refresh-contents)
+        (eask--download-archives))
       (ansi-green "done ✓"))))
 
 (defun eask--pkg-transaction-vars (pkg)
