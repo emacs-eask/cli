@@ -248,7 +248,7 @@ the `eask-start' execution.")
      ((when-let* ((desc (eask-package-desc pkg))
                   (req-emacs (assoc 'emacs (package-desc-reqs desc)))
                   (req-emacs (package-version-join (nth 0 (cdr req-emacs))))
-                  (_ (version< emacs-version req-emacs)))
+                  ((version< emacs-version req-emacs)))
         (if (eask-strict-p)
             (eask-error "  - Skipping %s (%s)... it requires Emacs %s and above ✗"
                         pkg (eask-package--version-string pkg) emacs-version)
