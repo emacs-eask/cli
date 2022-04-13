@@ -25,7 +25,6 @@
             (when (= eask-verbosity 4) (setq ert-runner-verbose t))))
 
 (eask-start
-  (eask-pkg-init)
   (eask-with-archives "melpa"
     (eask-package-install 'ert-runner))
   (require 'ert-runner))
