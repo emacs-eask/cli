@@ -7,9 +7,7 @@
 
 ;;; Code:
 
-;;
-;;; Emacs 27
-(eask-defvc< 27
+(eask-defvc< 28
   (defvar package-quickstart-file
     (locate-user-emacs-file "package-quickstart.el"))
 
