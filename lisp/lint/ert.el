@@ -21,12 +21,18 @@
 
 (require 'ert)
 
+(defun eask--ert-test (filename)
+  "Run ert for FILENAME."
+  (eask-msg "")
+  (eask-msg "`%s` with ert" (ansi-green filename))
+  (eask-ignore-errors (load filename t t))
+  (ert-run-tests-batch)
+  (ert-delete-all-tests))
+
 (eask-start
   (eask-pkg-init)
   (if-let ((files (eask-expand-file-specs (eask-args))))
-      (progn
-        (eask-call "core/load")
-        (ert-run-tests-batch))
+      (mapc #'eask--ert-test files)
     (eask-info "(No tests found.)")
     (eask-help 'ert)))
 
