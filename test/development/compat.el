@@ -2,9 +2,10 @@
 
 ;;; Commentary:
 ;;
-;; Test for Emacs' function existense.
+;; Test for Emacs' functions and variables existense.
 ;;
-;; 
+;; See the test result in
+;; (https://github.com/emacs-eask/eask/actions/workflows/test-outdated_upgrade.yml).
 ;;
 
 ;;; Code:
@@ -13,10 +14,10 @@
 ;;; Test functions
 
 (defconst compat-functions
-  '(url-file-exists-p
-    package--alist
+  '(package--alist
     package--activate-all
-    package-activate-all)
+    package-activate-all
+    url-file-exists-p)
   "List of function to check Emacs compatibility.")
 
 (dolist (func compat-functions)
