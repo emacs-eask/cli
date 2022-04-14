@@ -19,6 +19,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Handle error `Failed to download ‘xxx’ archive` (29887c80c33b9f909151b465cb99160160cc96c3)
 * Handle Emacs version while installing packages (8cafd4f2d34829da5832241cf105753658019abf)
 * Make error/warning log check compatible to older Emacs version (397d3740f1eee5f8e078116d323eeca9479f5114)
+* DSL `files` support multiple definition (3948a1d2366b82eb0a7e11bf1131867881c83ad7)
 
 ## 0.4.x
 > Released Apr 5, 2022
