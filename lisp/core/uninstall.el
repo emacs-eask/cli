@@ -35,12 +35,12 @@
   (eask-pkg-init)
   (if-let ((names (eask-args)))
       (eask--uninstall-packages names)
-    (if-let* ((name (eask-guess-package-name))
+    (if-let* ((name (intern (eask-guess-package-name)))
               ((package-installed-p name)))
         (progn
           (eask-package-delete name)
           (eask-info "(Deleted %s)" name))
-      (eask-info "✗ (No files have been unintalled)")
+      (eask-info "✗ (No packages have been unintalled)")
       (eask-help 'uninstall))))
 
 ;;; uninstall.el ends here
