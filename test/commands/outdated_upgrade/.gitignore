@@ -10,5 +10,5 @@
 dist/
 
 # packaging
-!*-autoloads.el
+*-autoloads.el
 !*-pkg.el

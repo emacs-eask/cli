@@ -599,10 +599,10 @@ Eask file in the workspace."
     (eask-with-progress
       "✓ Checking local archives... "
       (eask-with-verbosity 'debug
-        (push `("local" . ,github-elpa-archive-dir) package-archives)
+        (add-to-list 'package-archives `("local" . ,github-elpa-archive-dir) t)
         ;; If the local archives is added, we set the priority to a very
         ;; high number so user we always use the specified dependencies!
-        (push `("local" . 90) package-archive-priorities))
+        (add-to-list 'package-archive-priorities `("local" . 90) t))
       "done!")))
 
 (add-hook 'eask-file-loaded-hook #'eask--setup-dependencies)
