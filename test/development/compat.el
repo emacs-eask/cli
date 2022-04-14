@@ -1,6 +1,16 @@
 ;;; compat.el --- Test Emacs compatibility  -*- lexical-binding: t; -*-
+
 ;;; Commentary:
+;;
+;; Test for Emacs' function existense.
+;;
+;; 
+;;
+
 ;;; Code:
+
+;;
+;;; Test functions
 
 (defconst compat-functions
   '(url-file-exists-p
@@ -17,6 +27,9 @@
       (if exists-p "done ✓" "missing ✗"))
     (unless exists-p
       (eask-error "Missing function %s in Emacs version %s... " func emacs-version))))
+
+;;
+;;; Test variables
 
 (defconst compat-variables
   '(package-quickstart-file)
