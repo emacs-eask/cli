@@ -23,13 +23,15 @@
 
 (setq noninteractive nil)  ; avoid redefined
 
+;; Handle if ert doesn't exit Emacs itself.
+(add-hook 'eask-after-command-hook (lambda () (kill-emacs 0)))
+
 (eask-start
   (if-let ((files (eask-expand-file-specs (eask-args))))
       (progn
         (eask-pkg-init)
-        (eask-ignore-errors
-          (mapc #'load-file files)
-          (ert-run-tests-batch)))
+        (eask-ignore-errors (mapc #'load-file files))
+        (ert-run-tests-batch))
     (eask-info "(No tests found.)")
     (eask-help 'ert)))
 
