@@ -137,13 +137,13 @@ the `eask-start' execution.")
   "Add all bin directory to `exec-path'."
   (dolist (filename (directory-files-recursively package-user-dir "^\\([^.]\\|\\.[^.]\\|\\.\\..\\)"))
     (when (string-suffix-p "bin/" (file-name-directory filename))
-      (add-to-list 'exec-path (file-name-directory filename))))
+      (add-to-list 'exec-path (file-name-directory filename) t)))
   (delete-dups exec-path))
 
 (defun eask--update-load-path ()
   "Add all load-path for all .el files."
   (dolist (filename (eask-package-el-files))
-    (add-to-list 'load-path (file-name-directory filename)))
+    (add-to-list 'load-path (file-name-directory filename) t))
   (delete-dups load-path))
 
 (defun eask-dependencies ()
@@ -647,11 +647,11 @@ Eask file in the workspace."
 
 (defun eask-load-paths (&rest dirs)
   "Add all DIRS to load-path."
-  (dolist (dir dirs) (add-to-list 'load-path (expand-file-name dir))))
+  (dolist (dir dirs) (add-to-list 'load-path (expand-file-name dir) t)))
 
 (defun eask-exec-paths (&rest dirs)
   "Add all DIRS to exec-path."
-  (dolist (dir dirs) (add-to-list 'exec-path (expand-file-name dir))))
+  (dolist (dir dirs) (add-to-list 'exec-path (expand-file-name dir) t)))
 
 (defun eask-source (name &optional location)
   "Add archive NAME with LOCATION."
@@ -662,11 +662,11 @@ Eask file in the workspace."
   (when (and (gnutls-available-p)
              (not (eask-network-insecure-p)))
     (setq location (s-replace "https://" "http://" location)))
-  (push (cons name location) package-archives))
+  (add-to-list 'package-archives (cons name location) t))
 
 (defun eask-source-priority (archive-id &optional priority)
   "Add PRIORITY for to ARCHIVE-ID."
-  (push (cons archive-id priority) package-archive-priorities))
+  (add-to-list 'package-archive-priorities (cons archive-id priority) t))
 
 ;;
 ;;; Error Handling
