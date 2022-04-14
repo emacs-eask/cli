@@ -37,6 +37,6 @@
   (if-let ((names (eask-args)))
       ;; If package [name..] are specified, we try to install it
       (eask--reinstall-packages names)
-    ))
+    (eask-help 'reinstall)))
 
 ;;; reinstall.el ends here

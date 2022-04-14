@@ -1,8 +1,8 @@
-
+    
 💡 Make sure you have specify a (package-file ..) inside your Eask file!
    
     [+] (package-file "PKG-MAIN.el")
     
 💡 Or specify package names as arguments
    
-    $ eask uninstall PKG-1 PKG-2
+    $ eask reinstall PKG-1 PKG-2
