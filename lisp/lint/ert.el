@@ -21,10 +21,23 @@
 
 (require 'ert)
 
-(setq noninteractive nil)  ; avoid redefined
+(defvar ert--prevent-loop nil)
+(defvar ert--error nil)
 
-;; Handle if ert doesn't exit Emacs itself.
-(add-hook 'eask-after-command-hook (lambda () (kill-emacs 0)))
+(defun eask--ert-message (func &rest args)
+  "Colorized ert messages."
+  (if ert--prevent-loop (apply func args)
+    (let ((ert--prevent-loop t)
+          (case-fold-search))
+      (cond
+       ((string-match-p "^[ ]+FAILED " (apply #'format args))
+        (setq ert--error t)
+        (eask-msg (ansi-red (apply #'format args))))
+       ((string-match-p "^[ ]+passed " (apply #'format args))
+        (eask-msg (ansi-green (apply #'format args))))
+       (t (apply func args))))))
+
+(advice-add 'message :around #'eask--ert-message)
 
 (eask-start
   (if-let ((files (eask-expand-file-specs (eask-args))))
@@ -32,7 +45,9 @@
         (eask-pkg-init)
         (eask-ignore-errors
           (mapc #'load-file files)
-          (ert-run-tests-batch)))
+          (ert-run-tests-batch))
+        (when ert--error
+          (eask-error "ERT test failed.")))
     (eask-info "(No tests found.)")
     (eask-help 'ert)))
 
