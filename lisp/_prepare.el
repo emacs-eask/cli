@@ -894,9 +894,9 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 ;;
 ;;; User customization
 
-(defcustom eask-dist-path "dist"
-  "Name of default target directory for building packages."
-  :type 'string)
+(defcustom eask-file-loaded-hook nil
+  "Hook runs after Easkfile is loaded."
+  :type 'hook)
 
 (defcustom eask-before-command-hook nil
   "Hook runs before command is executed."
@@ -906,9 +906,9 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   "Hook runs after command is executed."
   :type 'hook)
 
-(defcustom eask-file-loaded-hook nil
-  "Hook runs after Easkfile is loaded."
-  :type 'hook)
+(defcustom eask-dist-path "dist"
+  "Name of default target directory for building packages."
+  :type 'string)
 
 ;;
 ;;; Externals
