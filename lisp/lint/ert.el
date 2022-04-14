@@ -21,13 +21,16 @@
 
 (require 'ert)
 
-(defvar ert--prevent-loop nil)
-(defvar ert--error nil)
+(defvar ert--message-loop nil
+  "Prevent inifinite recursive message function.")
+
+(defvar ert--error nil
+  "Set to t when error occured during ERT test.")
 
 (defun eask--ert-message (func &rest args)
   "Colorized ert messages."
-  (if ert--prevent-loop (apply func args)
-    (let ((ert--prevent-loop t)
+  (if ert--message-loop (apply func args)
+    (let ((ert--message-loop t)
           (case-fold-search))
       (cond
        ((string-match-p "^[ ]+FAILED " (apply #'format args))
