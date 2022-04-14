@@ -586,7 +586,7 @@ Eask file in the workspace."
 
 (defun eask-files (&rest patterns)
   "Set files patterns."
-  (setq eask-files patterns))
+  (setq eask-files (append eask-files patterns)))
 
 (defvar eask-depends-on-recipe-p nil
   "Set to t if package depends on recipe.")
