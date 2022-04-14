@@ -1122,20 +1122,17 @@
 	   ("Jonas Bernoulli" . "jonas@bernoul.li"))
 	  (:commit . "0b49d7a869b8fef3537a75df4db693ca3e3935a3"))])
  (pacmacs .
-	  [(0 1)
+	  [(0 1 1)
 	   ((emacs
 	     (24 4))
 	    (dash
-	     (2 18 0))
-	    (cl-lib
-	     (0 5))
-	    (f
-	     (0 18 0)))
+	     (2 18 0)))
 	   "Pacman for Emacs" tar
 	   ((:url . "http://github.com/codingteam/pacmacs.el")
 	    (:maintainer "Alexey Kutepov" . "reximkut@gmail.com")
 	    (:authors
-	     ("Codingteam" . "codingteam@conference.jabber.ru")))])
+	     ("Codingteam" . "codingteam@conference.jabber.ru"))
+	    (:commit . "071d008ebd734f469b87597cbdd34139a92e5308"))])
  (parseclj .
 	   [(1 1 0)
 	    ((emacs
