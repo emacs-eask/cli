@@ -1,5 +1,5 @@
 ---
-title: Developer API
+title: Development API
 permalink: api
 ---
 
