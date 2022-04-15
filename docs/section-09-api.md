@@ -115,15 +115,37 @@ Return `t` if the `insecure` option is enabled.
 $ eask [command] --insecure
 ```
 
-#### 🔎 Function: eask-depth-p ()
+#### 🔎 Function: eask-proxy ()
+#### 🔎 Function: eask-http-proxy ()
+#### 🔎 Function: eask-https-proxy ()
+#### 🔎 Function: eask-no-proxy ()
 
-Return an **integer** represents the depth.
+Return a **string** represents `hostname` + `port number`.
 
 ```sh
-$ eask [command] --verbose 4
+$ eask [command] --proxy "localhost:1000"
+$ eask [command] --http-proxy "localhost:2000"
+$ eask [command] --https-proxy "localhost:3000"
+$ eask [command] --no-proxy "localhost:4000"
 ```
 
-#### 🔎 Function: eask-verbose-p ()
+#### 🔎 Function: eask-destination ()
+
+Return a **string** represents the destination (output path).
+
+```sh
+$ eask [command] --dest "./dist"  # or --destination
+```
+
+#### 🔎 Function: eask-depth ()
+
+Return an **integer** represents the depth of the current print level.
+
+```sh
+$ eask [command] --depth 4
+```
+
+#### 🔎 Function: eask-verbose ()
 
 Return an **integer** represents the verbosity level.
 
