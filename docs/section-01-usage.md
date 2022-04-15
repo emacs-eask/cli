@@ -452,7 +452,7 @@ Enable/Disable log header.
 
 Disable color output.
 
-#### 🔎 --proxy <proxy>
+#### 🔎 --proxy `<proxy>`
 
 Set Emacs proxy for HTTP and HTTPS:
 
@@ -460,21 +460,21 @@ Set Emacs proxy for HTTP and HTTPS:
 $ eask --proxy "localhost:8888" install
 ```
 
-#### 🔎 --http-proxy <proxy>
+#### 🔎 --http-proxy `<proxy>`
 
 Set Emacs proxy for HTTP only.
 
-#### --https-proxy <proxy>
+#### --https-proxy `<proxy>`
 
 Set Emacs proxy for HTTPS only.
 
-#### 🔎 --no-proxy <pattern>
+#### 🔎 --no-proxy `<pattern>`
 
 Do not use a proxy for any URL matching pattern.
 
-**<pattern>** is an Emacs regular expression.
+`<pattern>`is an Emacs regular expression.
 
-#### 🔎 --verbose, -v
+#### 🔎 --verbose, -v `<integer>`
 
 Set verbosity from 0 to 4.
 
