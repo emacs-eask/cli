@@ -401,6 +401,6 @@ shadow backends that come after it.  Recommended usages:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8-emacs-unix
+;; coding: utf-8
 ;; End:
 ;;; company-autoloads.el ends here
