@@ -2276,7 +2276,7 @@
 	    ("Protesilaos Stavrou" . "info@protesilaos.com"))
 	   (:commit . "cdb7892a2b7e8e7cc644b8e24e5ab6bf0c51584d"))])
  (pyim .
-       [(4 1 0)
+       [(4 1 1)
 	((emacs
 	  (25 1))
 	 (async
@@ -2290,7 +2290,7 @@
 	 (:authors
 	  ("Ye Wenbin" . "wenbinye@163.com")
 	  ("Feng Shu" . "tumashu@163.com"))
-	 (:commit . "75ead11eeaaf801e342bb18d7c0ff93ed1c123ff"))])
+	 (:commit . "b3de11c39318c821d1febe4946b63ea1ed7b060b"))])
  (pyim-basedict .
 		[(0 5 0)
 		 nil "The default pinyin dict of pyim" tar
