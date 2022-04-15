@@ -6,3 +6,9 @@
 💡 Or specify package names as arguments
    
     $ eask reinstall PKG-1 PKG-2
+    
+💡 You would need to first install packages before reinstalling!
+
+  Try the command:
+
+    $ eask install

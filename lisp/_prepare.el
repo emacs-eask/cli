@@ -284,6 +284,24 @@ the `eask-start' execution.")
           (package-delete (eask-package-desc pkg t) (eask-force-p)))
         "done ✓")))))
 
+(defun eask-package-reinstall (pkg)
+  "Reinstall the package."
+  (eask-pkg-init)
+  (let* ((pkg-info (eask--pkg-transaction-vars pkg))
+         (pkg         (nth 0 pkg-info))
+         (pkg-string  (nth 1 pkg-info))
+         (pkg-version (nth 2 pkg-info)))
+    (cond
+     ((not (package-installed-p pkg))
+      (eask-msg "  - Skipping %s (%s)... not installed ✗" pkg-string pkg-version))
+     (t
+      (eask-with-progress
+        (format "  - Reinstalling %s (%s)... " pkg-string pkg-version)
+        (eask-with-verbosity 'debug
+          (package-delete (eask-package-desc pkg t) t)
+          (eask-ignore-errors (package-install pkg)))
+        "done ✓")))))
+
 (defun eask-package-desc (name &optional current)
   "Build package description by PKG-NAME."
   (cadr (assq name (if current package-alist
