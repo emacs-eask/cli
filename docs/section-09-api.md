@@ -15,10 +15,128 @@ your projects and extensions to Eask.
   (message "Hello World!~"))
 ```
 
+## Flags
+
+#### 🔎 Function: eask-global-p ()
+
+Return `t` if the `global` option is enabled.
+
+```sh
+$ eask [command] -g  # or --global
+```
+
+#### 🔎 Function: eask-force-p ()
+
+Return `t` if the `force` option is enabled.
+
+```sh
+$ eask [command] -f  # or --force
+```
+
+#### 🔎 Function: eask-dev-p ()
+
+Return `t` if the `development` option is enabled.
+
+```sh
+$ eask [command] --dev  # or --development
+```
+
+#### 🔎 Function: eask-debug-p ()
+
+Return `t` if the `debug` option is enabled.
+
+```sh
+$ eask [command] --debug
+```
+
+#### 🔎 Function: eask-strict-p ()
+
+Return `t` if the `strict` option is enabled.
+
+```sh
+$ eask [command] --strict
+```
+
+#### 🔎 Function: eask-timestamps-p ()
+#### 🔎 Function: eask-no-timestamps-p ()
+
+Return `t`/`nil` if the `timestamps` option is enabled/disabled.
+
+These flags can't co-exist in the same command.
+
+```sh
+$ eask [command] --timestamps
+```
+
+the opposing flag:
+
+```sh
+$ eask [command] --no-timestamps
+```
+
+#### 🔎 Function: eask-log-level-p ()
+#### 🔎 Function: eask-no-log-level-p ()
+
+Return `t`/`nil` if the `log-level` option is enabled/disabled.
+
+These flags can't co-exist in the same command.
+
+```sh
+$ eask [command] --log-level
+```
+
+the opposing flag:
+
+```sh
+$ eask [command] --no-log-level
+```
+
+#### 🔎 Function: eask-no-color-p ()
+
+Return `t` if the `color` option is enabled.
+
+```sh
+$ eask [command] --no-color
+```
+
+#### 🔎 Function: eask-allow-error-p ()
+
+Return `t` if the `allow-error` option is enabled.
+
+```sh
+$ eask [command] --allow-error
+```
+
+#### 🔎 Function: eask-insecure-p ()
+
+Return `t` if the `insecure` option is enabled.
+
+```sh
+$ eask [command] --insecure
+```
+
+#### 🔎 Function: eask-depth-p ()
+
+Return an **integer** represents the depth.
+
+```sh
+$ eask [command] --verbose 4
+```
+
+#### 🔎 Function: eask-verbose-p ()
+
+Return an **integer** represents the verbosity level.
+
+```sh
+$ eask [command] --verbose 4
+```
+
 ## `Eask`-file
 
 These functions are the actual implementation of `Eask`-file DSL; and
 have the word `eask-` as the function prefix.
+
+See [DSL](https://emacs-eask.github.io/eask/dsl) section for more information.
 
 #### 🔎 Function: eask-package (`name` `version` `description`)
 
