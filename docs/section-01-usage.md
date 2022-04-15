@@ -440,11 +440,13 @@ Continue the execution without killing the Emacs.
 
 Connect archives with HTTP instead of HTTPS.
 
-#### 🔎 --timestamps, --no-timestamps
+#### 🔎 --timestamps
+#### 🔎 --no-timestamps
 
 Enable/Disable timestamps.
 
-#### 🔎 --log-level, --no-log-level
+#### 🔎 --log-level
+#### 🔎 --no-log-level
 
 Enable/Disable log header.
 
