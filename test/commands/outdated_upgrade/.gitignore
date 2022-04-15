@@ -6,9 +6,9 @@
 !*.elc
 
 # eask packages
-!.eask/
+.eask/
 dist/
 
 # packaging
-!*-autoloads.el
-!*-pkg.el
+*-autoloads.el
+*-pkg.el
