@@ -23,7 +23,7 @@
 (dolist (func compat-functions)
   (let ((exists-p))
     (eask-with-progress
-      (format "  - Checked function %s... " func)
+      (format "  - Checked function %s... " (ansi-green func))
       (setq exists-p (fboundp func))
       (if exists-p "done ✓" "missing ✗"))
     (unless exists-p
@@ -39,7 +39,7 @@
 (dolist (var compat-variables)
   (let ((exists-p))
     (eask-with-progress
-      (format "  - Checked variable %s... " var)
+      (format "  - Checked variable %s... " (ansi-green var))
       (setq exists-p (boundp var))
       (if exists-p "done ✓" "missing ✗"))
     (unless exists-p
