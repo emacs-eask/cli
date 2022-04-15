@@ -36,6 +36,8 @@
        ((string-match-p "^[ ]+FAILED " (apply #'format args))
         (setq ert--error t)
         (eask-msg (ansi-red (apply #'format args))))
+       ((string-match-p "^[ ]+SKIPPED " (apply #'format args))
+        (eask-msg (ansi-white (apply #'format args))))
        ((string-match-p "^[ ]+passed " (apply #'format args))
         (eask-msg (ansi-green (apply #'format args))))
        (t (apply func args))))))
