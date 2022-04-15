@@ -420,7 +420,8 @@ other scripts internally.  See function `eask-call'.")
 (defmacro eask--setup-env (&rest body)
   "Execute BODY with workspace setup."
   (declare (indent 0) (debug t))
-  `(let (alist)
+  `(let ((load-file-name) (buffer-file-name)  ; initialize for batch-mode
+         (alist))
      (dolist (cmd eask--command-list)
        (push (cons cmd '(lambda (&rest _))) alist))
      (setq command-switch-alist (append command-switch-alist alist))
