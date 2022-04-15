@@ -58,6 +58,8 @@ Alias of `source-priority`.
 
 ## Logging
 
+Logger utility with timestamps and log level.
+
 #### 🔎 Variable: eask-verbosity
 
 Verbosity level represent as an integer.
