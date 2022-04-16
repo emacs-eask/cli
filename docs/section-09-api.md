@@ -10,6 +10,8 @@ your projects and extensions to Eask.
 
 ## Core
 
+#### 🔎 Macro: eask-start (`&rest body`)
+
 ```elisp
 (eask-start
   (message "Hello World!~"))
