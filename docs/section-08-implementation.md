@@ -14,15 +14,20 @@ through the CLI. All commands are split into its file and are organized in the
 **lisp/_prepare.el**.
 
 The CLI, is used to find the corresponding lisp file and feed it into the
-Emacs executable. It would parse all options and converted them to Emacs
-understandable options on the lisp scripts end. Is is written in plain 
+Emacs executable. It would parse all options and convert them to Emacs
+understandable options on the lisp scripts end. It is written in plain 
 JavaScript, the main file is located in **src/util.js**.
 
-## The [yargs](https://github.com/yargs/yargs) command
+## The [yargs](https://github.com/yargs/yargs) command and options
 
 The yargs command file is written in JavaScript, and located under the **cmds**
-folder. Each file under will be named with `[command_name].js`.
+folder. Each file under, will be named with convention `[command_name].js`.
+This file should define basic command-line parsing rules, and prepared
+correct data so it can get feed to the Emacs session.
 
+```js
+const util = require("../../src/util");
+```
 
 ## Project Structure
 
