@@ -377,6 +377,14 @@ Show Eask installed location
 $ eask [GLOBAL-OPTIONS] locate
 ```
 
+#### 🔎 eask check-eask
+
+Lint an `Eask`-file.
+
+```sh
+$ eask [GLOBAL-OPTIONS] check-eask
+```
+
 ## Global Options
 
 The following options are available on all Eask commands:
