@@ -52,6 +52,10 @@
   "What's the current command?"
   (file-name-sans-extension (file-name-nondirectory eask--script)))
 
+(defun eask-checker-p ()
+  "Return t if running Eask as the checker."
+  (member (eask-command) '("check-eask")))
+
 (defun eask-script (script)
   "Return full script filename."
   (concat eask-lisp-root script ".el"))
@@ -69,7 +73,7 @@ the `eask-start' execution.")
   (if-let* ((script-file (eask-script script))
             ((file-exists-p script-file)))
       (load script-file nil t)
-    (error "Scripting missing %s..." script-file)))
+    (eask-error "Scripting missing %s..." script-file)))
 
 ;;
 ;;; Util
@@ -594,13 +598,13 @@ Eask file in the workspace."
 (defun eask-package (name version description)
   "Set the package information."
   (if eask-package
-      (error "Detect multiple package, you can only have one package definition")
+      (eask-error "Detect multiple package, you can only have one package definition")
     (setq eask-package `(:name ,name :version ,version :description ,description))))
 
 (defun eask-package-file (file)
   "Set package file."
   (if eask-package-file
-      (error "Detect multiple package-file, you can only have one package-file definition")
+      (eask-error "Detect multiple package-file, you can only have one package-file definition")
     (setq eask-package-file (expand-file-name file))))
 
 (defun eask-files (&rest patterns)
@@ -632,21 +636,21 @@ Eask file in the workspace."
    ((string= pkg "emacs")
     (let ((minimum-version (car args)))
       (when (version< emacs-version minimum-version)
-        (error "This requires Emacs %s and above!" minimum-version)))
+        (eask-error "This requires Emacs %s and above!" minimum-version)))
     pkg)
    ;; No argument specify
    ((<= (length args) 1)
     (let* ((minimum-version (or (car args) "latest"))
            (recipe (list pkg minimum-version)))
-      (if (member pkg eask-depends-on)
-          (error "Duplicate dependencies with name: %s" pkg)
+      (if (member recipe eask-depends-on)
+          (eask-error "Duplicate dependencies with name: %s" pkg)
         (push recipe eask-depends-on))
       recipe))
    ;; recipe are entered
    (t
     (let ((recipe (append (list (intern pkg)) args)))
       (if (member recipe eask-depends-on)
-          (error "Duplicate dependencies with name: %s" pkg)
+          (eask-error "Duplicate dependencies with name: %s" pkg)
         (push recipe eask-depends-on)
         (eask-load "extern/github-elpa")
         (eask-with-verbosity 'debug
@@ -675,9 +679,9 @@ Eask file in the workspace."
 (defun eask-source (name &optional location)
   "Add archive NAME with LOCATION."
   (when (assoc name package-archives)
-    (error "Duplicate package archives are not allowed: %s" name))
+    (eask-error "Duplicate package archives are usually unnecessary: %s" name))
   (setq location (or location (cdr (assq (intern name) eask-source-mapping))))
-  (unless location (error "Unknown package archive: %s" name))
+  (unless location (eask-error "Unknown package archive: %s" name))
   (when (and (gnutls-available-p)
              (not (eask-network-insecure-p)))
     (setq location (s-replace "https://" "http://" location)))
@@ -701,26 +705,31 @@ Eask file in the workspace."
 (defun eask--exit (&rest _) "Send exit code." (kill-emacs 1))
 
 (defun eask--trigger-error ()
-  "Trigger error at the right time."
-  (unless eask--ignore-error-p
-    (if (eask-allow-error-p)
+  "Trigger error event."
+  (when (and (not eask--ignore-error-p)
+             (not (eask-checker-p)))  ; ignore when checking Eask-file
+    (if (eask-allow-error-p)  ; Trigger error at the right time
         (add-hook 'eask-after-command-hook #'eask--exit)
       (eask--exit))))
 
 (defun eask--error (fnc &rest args)
   "On error."
-  (eask--unsilent (eask-msg "%s" (eask--ansi 'error (apply #'format-message args))))
-  (eask--trigger-error)
+  (let ((msg (eask--ansi 'error (apply #'format-message args))))
+    (eask--unsilent (eask-msg "%s" msg))
+    (run-hook-with-args 'eask-on-error-hook 'error msg)
+    (eask--trigger-error))
   (when debug-on-error (apply fnc args)))
 
 (advice-add 'error :around #'eask--error)
 
-(defun eask--warn (&rest args)
+(defun eask--warn (fnc &rest args)
   "On warn."
-  (eask--unsilent
-    (eask-msg "%s" (eask--ansi 'warn (apply #'format-message args)))))
+  (let ((msg (eask--ansi 'warn (apply #'format-message args))))
+    (eask--unsilent (eask-msg "%s" msg))
+    (run-hook-with-args 'eask-on-warning-hook 'warn msg))
+  (apply fnc args))
 
-(advice-add 'warn :override #'eask--warn)
+(advice-add 'warn :around #'eask--warn)
 
 ;;
 ;;; Verbosity
@@ -772,9 +781,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (defun eask-log   (msg &rest args) (apply #'eask--msg 'log   "[LOG]"     msg args))
 (defun eask-info  (msg &rest args) (apply #'eask--msg 'info  "[INFO]"    msg args))
 (defun eask-warn  (msg &rest args) (apply #'eask--msg 'warn  "[WARNING]" msg args))
-(defun eask-error (msg &rest args)
-  (apply #'eask--msg 'error "[ERROR]"   msg args)
-  (eask--trigger-error))
+(defun eask-error (msg &rest args) (apply #'eask--msg 'error "[ERROR]"   msg args))
 
 (defun eask--ansi (symbol string)
   "Paint STRING with color defined by log level."
@@ -786,8 +793,11 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   "If LEVEL is at or below `eask-verbosity', log message."
   (eask-with-verbosity symbol
     (let* ((string (apply #'eask--format prefix msg args))
-           (output (eask--ansi symbol string)))
-      (message "%s" output))))
+           (output (eask--ansi symbol string))
+           (func (cl-case symbol
+                   ((or error warn) symbol)
+                   (t #'message))))
+      (funcall func "%s" output))))
 
 (defun eask--format (prefix fmt &rest args)
   "Format Eask messages."
@@ -908,7 +918,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
           (insert-file-contents help-file)
           (unless (string= (buffer-string) "")
             (eask-msg (ansi-white (buffer-string)))))
-      (error "Help manual missig %s" help-file))))
+      (eask-error "Help manual missig %s" help-file))))
 
 ;;
 ;;; User customization
@@ -923,6 +933,14 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 
 (defcustom eask-after-command-hook nil
   "Hook runs after command is executed."
+  :type 'hook)
+
+(defcustom eask-on-error-hook nil
+  "Hook runs when error is triggered."
+  :type 'hook)
+
+(defcustom eask-on-warning-hook nil
+  "Hook runs when warning is triggered."
   :type 'hook)
 
 (defcustom eask-dist-path "dist"
