@@ -19,8 +19,6 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['exec [args..]'];
 exports.desc = 'execute command with correct load-path set up';
 exports.builder = {
@@ -32,5 +30,5 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'core/exec', '--', process.argv.slice(3));
+  await UTIL.e_call(argv, 'core/exec', '--', process.argv.slice(3));
 };

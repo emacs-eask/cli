@@ -19,11 +19,9 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['check-eask [files..]'];
 exports.desc = 'run eask checker';
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'util/check-eask');
+  await UTIL.e_call(argv, 'UTIL/check-eask');
 };

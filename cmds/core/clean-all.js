@@ -19,11 +19,9 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['clean-all'];
 exports.desc = 'do all cleaning tasks';
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'core/clean-all');
+  await UTIL.e_call(argv, 'core/clean-all');
 };

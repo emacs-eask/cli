@@ -19,11 +19,9 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['outdated'];
 exports.desc = 'show all outdated dependencies';
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'core/outdated');
+  await UTIL.e_call(argv, 'core/outdated');
 };

@@ -19,11 +19,9 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['install-deps', 'install-dependencies'];
 exports.desc = 'automatically install package dependencies';
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'core/install-deps');
+  await UTIL.e_call(argv, 'core/install-deps');
 };

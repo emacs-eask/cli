@@ -19,11 +19,9 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['refresh'];
 exports.desc = 'download package archives';
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'core/refresh');
+  await UTIL.e_call(argv, 'core/refresh');
 };

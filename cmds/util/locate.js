@@ -19,11 +19,9 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['locate'];
 exports.desc = 'print out Eask installed location';
 
 exports.handler = async (argv) => {
-  process.stdout.write(`✓ Eask located in '` + util.plugin_dir() + `'`);
+  process.stdout.write(`✓ Eask located in '` + UTIL.plugin_dir() + `'`);
 };

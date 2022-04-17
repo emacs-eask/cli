@@ -19,8 +19,6 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['ert-runner [files..]'];
 exports.desc = 'run ert tests using ert-runner';
 exports.builder = {
@@ -32,5 +30,5 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'lint/ert-runner', argv.files);
+  await UTIL.e_call(argv, 'lint/ert-runner', argv.files);
 };

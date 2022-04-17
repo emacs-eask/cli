@@ -19,8 +19,6 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['load [files..]'];
 exports.desc = 'load files';
 exports.builder = {
@@ -32,5 +30,5 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'core/load', argv.files);
+  await UTIL.e_call(argv, 'core/load', argv.files);
 };

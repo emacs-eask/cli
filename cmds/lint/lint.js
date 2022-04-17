@@ -19,8 +19,6 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['lint [names..]', 'lint-package [names..]'];
 exports.desc = 'lint the package using package-lint';
 exports.builder = {
@@ -32,5 +30,5 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'lint/lint', argv.names);
+  await UTIL.e_call(argv, 'lint/lint', argv.names);
 };

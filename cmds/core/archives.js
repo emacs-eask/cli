@@ -19,11 +19,9 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['archives', 'sources'];
 exports.desc = 'list out all package archives';
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'core/archives');
+  await UTIL.e_call(argv, 'core/archives');
 };

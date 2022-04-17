@@ -19,8 +19,6 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['concat [names..]', 'concatenate [names..]'];
 exports.desc = 'concatenate all elisp files';
 exports.builder = {
@@ -38,7 +36,7 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'core/concat'
+  await UTIL.e_call(argv, 'core/concat'
                     , argv.names
-                    , util.def_flag(argv.dest, '--dest', argv.dest));
+                    , UTIL.def_flag(argv.dest, '--dest', argv.dest));
 };

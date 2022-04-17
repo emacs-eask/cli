@@ -19,8 +19,6 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['upgrade [names..]'];
 exports.desc = 'upgrade packages';
 exports.builder = {
@@ -32,5 +30,5 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'core/upgrade', argv.names);
+  await UTIL.e_call(argv, 'core/upgrade', argv.names);
 };

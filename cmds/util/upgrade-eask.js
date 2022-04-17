@@ -19,14 +19,13 @@
 
 "use strict";
 
-const util = require("../../src/util");
 const child_process = require("child_process");
 
 exports.command = ['upgrade-eask'];
 exports.desc = 'upgrade Eask itself';
 
 exports.handler = async (argv) => {
-  process.chdir(util.plugin_dir());
+  process.chdir(UTIL.plugin_dir());
   let proc = child_process.spawn('git', ['pull'], { stdio: 'inherit' });
 
   // You would just need to register the error event, or else it can't print

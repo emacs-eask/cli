@@ -19,8 +19,6 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['compile [names..]', 'build [names..]'];
 exports.desc = 'byte compile all Emacs Lisp files in the package';
 exports.builder = {
@@ -32,5 +30,5 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'core/compile', argv.names);
+  await UTIL.e_call(argv, 'core/compile', argv.names);
 };

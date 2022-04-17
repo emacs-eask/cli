@@ -19,8 +19,6 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['list'];
 exports.desc = 'list all installed packages';
 exports.builder = {
@@ -32,6 +30,6 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'core/list'
-                    , util.def_flag(argv.depth, '--depth', argv.depth));
+  await UTIL.e_call(argv, 'core/list'
+                    , UTIL.def_flag(argv.depth, '--depth', argv.depth));
 };

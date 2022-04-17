@@ -19,8 +19,6 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['search [queries..]'];
 exports.desc = 'search packages';
 exports.builder = {
@@ -37,6 +35,6 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'core/search', argv.queries
-                    , util.def_flag(argv.depth, '--depth', argv.depth));
+  await UTIL.e_call(argv, 'core/search', argv.queries
+                    , UTIL.def_flag(argv.depth, '--depth', argv.depth));
 };

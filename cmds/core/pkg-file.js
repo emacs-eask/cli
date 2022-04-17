@@ -19,11 +19,9 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['pkg-file'];
 exports.desc = "generate -pkg file";
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'pkg-file');
+  await UTIL.e_call(argv, 'pkg-file');
 };

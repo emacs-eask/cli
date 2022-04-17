@@ -19,11 +19,9 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['load-path'];
 exports.desc = 'print the load-path from workspace';
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'core/load-path');
+  await UTIL.e_call(argv, 'core/load-path');
 };

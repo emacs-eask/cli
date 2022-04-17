@@ -19,8 +19,6 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['package [destintation]'];
 exports.desc = 'Build a package artefact, and put it into the given destination';
 exports.builder = {
@@ -33,5 +31,5 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'core/package', argv.dest);
+  await UTIL.e_call(argv, 'core/package', argv.dest);
 };

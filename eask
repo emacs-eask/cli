@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-const yargs = require("yargs");
+const env = require('./src/env');
+const yargs = require('yargs');
 
 yargs
   .usage('Usage: eask <command> [options..]')

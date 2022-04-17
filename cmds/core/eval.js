@@ -19,8 +19,6 @@
 
 "use strict";
 
-const util = require("../../src/util");
-
 exports.command = ['eval [form]'];
 exports.desc = 'evaluate lisp form with a proper PATH';
 exports.builder = {
@@ -32,5 +30,5 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'core/eval', '\"' + argv.form.replace(/[\\$'"]/g, "\\$&") + '\"');
+  await UTIL.e_call(argv, 'core/eval', '\"' + argv.form.replace(/[\\$'"]/g, "\\$&") + '\"');
 };
