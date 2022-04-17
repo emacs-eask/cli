@@ -397,7 +397,7 @@ for Emacs configuration.
 Install package `auto-complete` for your Emacs configuration:
 
 ```sh
-$ eask install auto-complete -g
+$ eask -g [COMMAND]
 ```
 
 #### 🔎 --development, --dev
@@ -407,17 +407,17 @@ Notify command with development scope enabled.
 If we attempt to install development dependencies:
 
 ```sh
-$ eask install --dev
+$ eask --dev [COMMAND]
 ```
 
 #### 🔎 --force, -f
 
 Force command's execution.
 
-Force to uninstall package `dash` even it's dependencies from other packages
+Force to uninstall the package `dash` even it's a dependency from another packages
 
 ```sh
-$ eask uninstall dash -f
+$ eask -f [COMMAND]
 ```
 
 #### 🔎 --debug
@@ -467,7 +467,7 @@ Disable color output.
 Set Emacs proxy for HTTP and HTTPS:
 
 ```sh
-$ eask --proxy "localhost:8888" install
+$ eask --proxy "localhost:8888" [COMMAND]
 ```
 
 #### 🔎 --http-proxy `<proxy>`
@@ -489,7 +489,7 @@ Do not use a proxy for any URL matching pattern.
 Set verbosity from 0 to 4.
 
 ```sh
---verbose 4
+$ eask --verbose 4 [COMMAND]
 ```
 
 #### 🔎 --version

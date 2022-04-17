@@ -18,6 +18,12 @@ Emacs executable. It would parse all options and converted them to Emacs
 understandable options on the lisp scripts end. Is is written in plain 
 JavaScript, the main file is located in **src/util.js**.
 
+## The [yargs](https://github.com/yargs/yargs) command
+
+The yargs command file is written in JavaScript, and located under the **cmds**
+folder. Each file under will be named with `[command_name].js`.
+
+
 ## Project Structure
 
 There are **three** places you need to look into it:

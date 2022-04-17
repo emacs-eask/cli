@@ -8,13 +8,25 @@ permalink: api
 This document provides a reference to the public Eask API, which you may use in
 your projects and extensions to Eask.
 
-## Core
+## Command
+
+#### 🔎 Snippet: _prepare.el
+
+```elisp
+(load (expand-file-name
+       "../_prepare.el"
+       (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
+      nil t)
+```
 
 #### 🔎 Macro: eask-start (`&rest body`)
 
+Command entry point. Each command file should contain one of this macro.
+
 ```elisp
 (eask-start
-  (message "Hello World!~"))
+  ;; TODO: design your command here!
+  )
 ```
 
 ## Flags
@@ -23,24 +35,27 @@ your projects and extensions to Eask.
 
 Return `t` if the `global` option is enabled.
 
-```sh
-$ eask [command] -g  # or --global
+```elisp
+(if (eask-global-p)
+    user-emacs-directory   ; ~/.emacs.d
+  user-emacs-directory)    ; ./.eask/{emacs-version}/
 ```
 
 #### 🔎 Function: eask-force-p ()
 
 Return `t` if the `force` option is enabled.
 
-```sh
-$ eask [command] -f  # or --force
+```elisp
+(package-delete .. (eask-force-p))
 ```
 
 #### 🔎 Function: eask-dev-p ()
 
 Return `t` if the `development` option is enabled.
 
-```sh
-$ eask [command] --dev  # or --development
+```elisp
+(when (eask-dev-p)
+  (package-install 'ert-runner))  ; install development dependency
 ```
 
 #### 🔎 Function: eask-debug-p ()
@@ -55,8 +70,8 @@ $ eask [command] --debug
 
 Return `t` if the `strict` option is enabled.
 
-```sh
-$ eask [command] --strict
+```elisp
+(setq byte-compile-error-on-warn (eask-strict-p))
 ```
 
 #### 🔎 Function: eask-timestamps-p ()
@@ -66,14 +81,9 @@ Return `t`/`nil` if the `timestamps` option is enabled/disabled.
 
 These flags can't co-exist in the same command.
 
-```sh
-$ eask [command] --timestamps
-```
-
-the opposing flag:
-
-```sh
-$ eask [command] --no-timestamps
+```elisp
+(when (and (eask-timestamps-p) (eask-no-timestamps-p))
+  (error "This is impossible!"))
 ```
 
 #### 🔎 Function: eask-log-level-p ()
@@ -83,38 +93,37 @@ Return `t`/`nil` if the `log-level` option is enabled/disabled.
 
 These flags can't co-exist in the same command.
 
-```sh
-$ eask [command] --log-level
-```
-
-the opposing flag:
-
-```sh
-$ eask [command] --no-log-level
+```elisp
+(when (and (eask-log-level-p) (eask-no-log-level-p))
+  (error "This is impossible!"))
 ```
 
 #### 🔎 Function: eask-no-color-p ()
 
 Return `t` if the `color` option is enabled.
 
-```sh
-$ eask [command] --no-color
+```elisp
+(unless (eask-no-color-p)
+  (ansi-color-filter-apply "This string has no ansi code!"))
 ```
 
 #### 🔎 Function: eask-allow-error-p ()
 
 Return `t` if the `allow-error` option is enabled.
 
-```sh
-$ eask [command] --allow-error
+```elisp
+(unless (eask-allow-error-p)
+  (error "Stop here."))
 ```
 
 #### 🔎 Function: eask-insecure-p ()
 
 Return `t` if the `insecure` option is enabled.
 
-```sh
-$ eask [command] --insecure
+```elisp
+(when (eask-insecure-p)
+  ;; Do some dangerous tasks?
+  )
 ```
 
 #### 🔎 Function: eask-proxy ()
