@@ -14,7 +14,8 @@
 ;;; Test functions
 
 (defconst compat-functions
-  '(package--alist
+  '(ansi-color-filter-apply
+    package--alist
     package--activate-all
     package-activate-all
     url-file-exists-p)

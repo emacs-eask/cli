@@ -2,6 +2,7 @@
 ;;; Commentary: Prepare to setup Eask environment for sandboxing
 ;;; Code:
 
+(require 'ansi-color)
 (require 'package)
 (require 'project)
 (require 'nsm)

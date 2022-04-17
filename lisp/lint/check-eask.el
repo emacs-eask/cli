@@ -18,12 +18,14 @@
 
 (defun eask--write-log (level msg)
   "Write the log."
-  (let* ((level (format "%s" level))
+  (let* ((level-string (cl-case level
+                         (`error "Error")
+                         (`warn  "Warning")))
          (log (format "%s:%s:%s %s: %s" (file-name-nondirectory load-file-name)
                       (line-number-at-pos) (current-column)
-                      (capitalize level)
+                      level-string
                       msg)))
-    (push log eask--checker-log)))
+    (push (ansi-color-filter-apply log) eask--checker-log)))
 
 (add-hook 'eask-on-error-hook #'eask--write-log)
 (add-hook 'eask-on-warning-hook #'eask--write-log)
