@@ -25,5 +25,5 @@ exports.command = ['check-eask [files..]'];
 exports.desc = 'run eask checker';
 
 exports.handler = async (argv) => {
-  await util.e_call(argv, 'lint/check-eask');
+  await util.e_call(argv, 'util/check-eask');
 };
