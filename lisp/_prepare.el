@@ -599,13 +599,13 @@ Eask file in the workspace."
 (defun eask-package (name version description)
   "Set the package information."
   (if eask-package
-      (eask-error "Detect multiple package, you can only have one package definition")
+      (eask-error "Multiple definition of `package'")
     (setq eask-package `(:name ,name :version ,version :description ,description))))
 
 (defun eask-package-file (file)
   "Set package file."
   (if eask-package-file
-      (eask-error "Detect multiple package-file, you can only have one package-file definition")
+      (eask-error "Multiple definition of `package-file'")
     (setq eask-package-file (expand-file-name file))))
 
 (defun eask-files (&rest patterns)
@@ -644,14 +644,14 @@ Eask file in the workspace."
     (let* ((minimum-version (or (car args) "latest"))
            (recipe (list pkg minimum-version)))
       (if (member recipe eask-depends-on)
-          (eask-error "Duplicate dependencies with name `%s'" pkg)
+          (eask-error "Define dependencies with the same name `%s'" pkg)
         (push recipe eask-depends-on))
       recipe))
    ;; recipe are entered
    (t
     (let ((recipe (append (list (intern pkg)) args)))
       (if (member recipe eask-depends-on)
-          (eask-error "Duplicate dependencies with name `%s'" pkg)
+          (eask-error "Define dependencies with the same name `%s'" pkg)
         (push recipe eask-depends-on)
         (eask-load "extern/github-elpa")
         (eask-with-verbosity 'debug
@@ -680,7 +680,7 @@ Eask file in the workspace."
 (defun eask-source (name &optional location)
   "Add archive NAME with LOCATION."
   (when (assoc name package-archives)
-    (eask-error "Duplicate package archives are usually unnecessary `%s'" name))
+    (eask-error "Multiple definition of `(source \"%s\")'" name))
   (setq location (or location (cdr (assq (intern name) eask-source-mapping))))
   (unless location (eask-error "Unknown package archive `%s'" name))
   (when (and location
