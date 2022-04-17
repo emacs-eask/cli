@@ -12,6 +12,8 @@ your projects and extensions to Eask.
 
 #### 🔎 Snippet: _prepare.el
 
+Each command 
+
 ```elisp
 (load (expand-file-name
        "../_prepare.el"
@@ -21,7 +23,7 @@ your projects and extensions to Eask.
 
 #### 🔎 Macro: eask-start (`&rest body`)
 
-Command entry point. Each command file should contain one of this macro.
+Command entry point. Each command file should contain this macro somewhere in the file.
 
 ```elisp
 (eask-start
@@ -62,8 +64,9 @@ Return `t` if the `development` option is enabled.
 
 Return `t` if the `debug` option is enabled.
 
-```sh
-$ eask [command] --debug
+```elisp
+(when (eask-debug-p)
+  (error "Executing in debug mode..."))
 ```
 
 #### 🔎 Function: eask-strict-p ()
@@ -144,24 +147,25 @@ $ eask [command] --no-proxy "localhost:4000"
 
 Return a **string** represents the destination (output path).
 
-```sh
-$ eask [command] --dest "./dist"  # or --destination
+```elisp
+(write-file (or (eask-destination) "./dist"))  ; write file to destination
 ```
 
 #### 🔎 Function: eask-depth ()
 
 Return an **integer** represents the depth of the current print level.
 
-```sh
-$ eask [command] --depth 4
+```elisp
+(setq print-level (eask-depth))
 ```
 
 #### 🔎 Function: eask-verbose ()
 
 Return an **integer** represents the verbosity level.
 
-```sh
-$ eask [command] --verbose 4
+```elisp
+(when (= (eask-verbose) 4)
+  (setq byte-compile-verbose t))
 ```
 
 ## `Eask`-file
