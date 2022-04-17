@@ -18,7 +18,7 @@ Emacs executable. It would parse all options and convert them to Emacs
 understandable options on the lisp scripts end. It is written in plain 
 JavaScript, the main file is located in **src/util.js**.
 
-## [yargs](https://github.com/yargs/yargs) commands and options
+## Yargs commands and options
 
 The yargs command file is written in JavaScript, and located under the **cmds**
 folder. Each file under, will be named with convention `[command_name].js`.
@@ -35,6 +35,39 @@ exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/archives');
 };
 ```
+
+This is a standard yargs command file, which contains all the information we
+need to pass it to the Emacs session.
+
+* **exports.command** is the argument pattern but it also accepts alias (array)
+* **exports.desc** is the command description
+* **exports.handler** is an asynchronous function that handles command exection
+* **UTIL** is a global variable that points to the `src/util.js` module.
+* **`'core/archives'`** is the elisp file under **lisp** folder (without .el extension).
+
+`eask` is a JavaScript file that holds all our global options.
+
+```js
+yargs
+  .usage('Usage: eask <command> [options..]')
+  .help(
+    'help',
+    'Show usage instructions.'
+  )
+  .option('global', {
+    description: 'change default workspace to ~/.emacs.d/',
+    alias: 'g',
+    type: 'boolean',
+  })
+..
+```
+
+For **local** options, please use `exports.builder` and specify under its'
+command file.
+
+See [yargs/docs/advanced.md](https://github.com/yargs/yargs/blob/main/docs/advanced.md)
+, the official documentation for more information and get the better explanation
+would help!
 
 ## Project Structure
 
