@@ -22,6 +22,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * DSL `files` support multiple definition (3948a1d2366b82eb0a7e11bf1131867881c83ad7)
 * Colorized ERT tests result (1b55b51eb4fbe5e602bd7aed8d8e05e372a0cd95)
 * Simulate batch-mode (d67098c10a683cd05893d8fda46105229f287394)
+* Add new command `eask check-eask` (621fb8eefe41f513c9fe090daaec24c1ee9083e6)
 
 ## 0.4.x
 > Released Apr 5, 2022
