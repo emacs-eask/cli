@@ -27,7 +27,7 @@
         (eask-with-verbosity 'debug
           (with-current-buffer "*output*" (eask-msg (buffer-string))))
       (with-current-buffer "*error*" (eask-msg (ansi-red (buffer-string))))
-      (error "Error from the execution, exit code %s" code))))
+      (eask-error "Error from the execution, exit code %s" code))))
 
 (eask-start
   (eask-pkg-init)
