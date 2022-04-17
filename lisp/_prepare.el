@@ -644,14 +644,14 @@ Eask file in the workspace."
     (let* ((minimum-version (or (car args) "latest"))
            (recipe (list pkg minimum-version)))
       (if (member recipe eask-depends-on)
-          (eask-error "Duplicate dependencies with name: %s" pkg)
+          (eask-error "Duplicate dependencies with name `%s'" pkg)
         (push recipe eask-depends-on))
       recipe))
    ;; recipe are entered
    (t
     (let ((recipe (append (list (intern pkg)) args)))
       (if (member recipe eask-depends-on)
-          (eask-error "Duplicate dependencies with name: %s" pkg)
+          (eask-error "Duplicate dependencies with name `%s'" pkg)
         (push recipe eask-depends-on)
         (eask-load "extern/github-elpa")
         (eask-with-verbosity 'debug
@@ -680,10 +680,11 @@ Eask file in the workspace."
 (defun eask-source (name &optional location)
   "Add archive NAME with LOCATION."
   (when (assoc name package-archives)
-    (eask-error "Duplicate package archives are usually unnecessary: %s" name))
+    (eask-error "Duplicate package archives are usually unnecessary `%s'" name))
   (setq location (or location (cdr (assq (intern name) eask-source-mapping))))
-  (unless location (eask-error "Unknown package archive: %s" name))
-  (when (and (gnutls-available-p)
+  (unless location (eask-error "Unknown package archive `%s'" name))
+  (when (and location
+             (gnutls-available-p)
              (not (eask-network-insecure-p)))
     (setq location (s-replace "https://" "http://" location)))
   (add-to-list 'package-archives (cons name location) t))
