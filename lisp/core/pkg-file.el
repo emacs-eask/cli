@@ -18,10 +18,11 @@
   (let* ((name (eask-guess-package-name))
          (version (eask-package-version))
          (description (eask-package-description))
+         (reqs (package-desc-reqs eask-package-desc))
          (pkg-file (expand-file-name (concat name "-pkg.el"))))
     (write-region
-     (pp-to-string `(define-package ,name ,version ,description))
+     (pp-to-string `(define-package ,name ,version ,description ,reqs))
      nil pkg-file)
-    (eask-info "Write file %s..." pkg-file)))
+    (eask-info "(Generated pkg-file -> %s)" pkg-file)))
 
 ;;; pkg-file.el ends here
