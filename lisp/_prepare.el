@@ -582,12 +582,13 @@ Eask file in the workspace."
     (shmelpa      . "https://shmelpa.commandlinesystems.com/packages/"))
   "Mapping of source name and url.")
 
-(defvar eask-package        nil)
-(defvar eask-package-file   nil)
-(defvar eask-package-desc   nil)
-(defvar eask-files          nil)
-(defvar eask-depends-on     nil)
-(defvar eask-depends-on-dev nil)
+(defvar eask-package          nil)
+(defvar eask-package-file     nil)
+(defvar eask-package-desc     nil)
+(defvar eask-files            nil)
+(defvar eask-depends-on-emacs nil)
+(defvar eask-depends-on       nil)
+(defvar eask-depends-on-dev   nil)
 
 (defun eask-package--get (key)
   "Return package info by KEY."
@@ -644,9 +645,11 @@ Eask file in the workspace."
   "Specify a dependency of this package."
   (cond
    ((string= pkg "emacs")
-    (let ((minimum-version (car args)))
-      (when (version< emacs-version minimum-version)
-        (eask-error "This requires Emacs %s and above!" minimum-version)))
+    (let* ((minimum-version (car args))
+           (recipe (list pkg minimum-version)))
+      (if (version< emacs-version minimum-version)
+          (eask-error "This requires Emacs %s and above!" minimum-version)
+        (push recipe eask-depends-on-emacs)))
     pkg)
    ;; No argument specify
    ((<= (length args) 1)
