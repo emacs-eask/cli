@@ -24,12 +24,14 @@
 (defun eask--write-log (level msg)
   "Write the log."
   (when (string= (buffer-name) " *load*")
-    (with-current-buffer (eask--load-buffer)
+    (with-current-buffer (or (eask--load-buffer) (buffer-name))
       (let* ((level-string (cl-case level
                              (`error "Error")
                              (`warn  "Warning")))
-             (log (format "%s:%s:%s %s: %s" (file-name-nondirectory load-file-name)
-                          (line-number-at-pos) (current-column)
+             (log (format "%s:%s:%s %s: %s"
+                          (file-name-nondirectory (or load-file-name eask-file))
+                          (if load-file-name (line-number-at-pos) 0)
+                          (if load-file-name (current-column) 0)
                           level-string
                           msg)))
         (push (ansi-color-filter-apply log) eask--checker-log)))))

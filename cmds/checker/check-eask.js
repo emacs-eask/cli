@@ -23,5 +23,5 @@ exports.command = ['check-eask [files..]'];
 exports.desc = 'run eask checker';
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'util/check-eask');
+  await UTIL.e_call(argv, 'checker/check-eask');
 };
