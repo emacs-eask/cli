@@ -645,12 +645,14 @@ Eask file in the workspace."
   "Specify a dependency of this package."
   (cond
    ((string= pkg "emacs")
-    (let* ((minimum-version (car args))
-           (recipe (list pkg minimum-version)))
-      (if (version< emacs-version minimum-version)
-          (eask-error "This requires Emacs %s and above!" minimum-version)
-        (push recipe eask-depends-on-emacs)))
-    pkg)
+    (if eask-depends-on-emacs
+        (eask-error "Define dependencies with the same name `%s'" pkg)
+      (let* ((minimum-version (car args))
+             (recipe (list pkg minimum-version)))
+        (if (version< emacs-version minimum-version)
+            (eask-error "This requires Emacs %s and above!" minimum-version)
+          (push recipe eask-depends-on-emacs))
+        recipe)))
    ;; No argument specify
    ((<= (length args) 1)
     (let* ((minimum-version (or (car args) "latest"))
