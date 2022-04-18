@@ -553,15 +553,17 @@ Eask file in the workspace."
                   (user-init-file (locate-user-emacs-file "init.el"))
                   (custom-file (locate-user-emacs-file "custom.el")))
              (if (eask-file-try-load "../../")
-                 (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
-               (eask-msg "✗ Loading Eask file... missing!"))
-             (message "")
-             (package-activate-all)
-             (ignore-errors (make-directory package-user-dir t))
-             (eask--silent (eask-setup-paths))
-             (run-hooks 'eask-before-command-hook)
-             (run-hooks (intern (concat "eask-before-" (eask-command) "-hook")))
-             (eask--with-hooks ,@body))))))))
+                 (progn
+                   (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
+                   (message "")
+                   (package-activate-all)
+                   (ignore-errors (make-directory package-user-dir t))
+                   (eask--silent (eask-setup-paths))
+                   (run-hooks 'eask-before-command-hook)
+                   (run-hooks (intern (concat "eask-before-" (eask-command) "-hook")))
+                   (eask--with-hooks ,@body))
+               (eask-msg "✗ Loading Eask file... missing!")
+               (eask-help 'init)))))))))
 
 ;;
 ;;; Eask file

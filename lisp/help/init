@@ -1,0 +1,8 @@
+
+💡 You need to specify an Eask-file in your workspace; to create one use
+
+    $ eask init
+
+💡 Or you can execute the command with the -g (--global) option
+
+    $ eask [COMMAND] -g
