@@ -23,6 +23,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Colorized ERT tests result (1b55b51eb4fbe5e602bd7aed8d8e05e372a0cd95)
 * Simulate batch-mode (d67098c10a683cd05893d8fda46105229f287394)
 * Add new command `eask check-eask` (621fb8eefe41f513c9fe090daaec24c1ee9083e6)
+* Use built-in `pkg-file` generate function for command `eask pkg-file` (4aa327bf43b84dfed128f8898b1c0885afc1edf9)
 
 ## 0.4.x
 > Released Apr 5, 2022
