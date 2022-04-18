@@ -584,7 +584,7 @@ Eask file in the workspace."
 
 (defvar eask-package          nil)
 (defvar eask-package-file     nil)
-(defvar eask-package-desc     nil)
+(defvar eask-package-desc     nil)  ; package descriptor
 (defvar eask-files            nil)
 (defvar eask-depends-on-emacs nil)
 (defvar eask-depends-on       nil)
@@ -594,8 +594,8 @@ Eask file in the workspace."
   "Return package info by KEY."
   (plist-get eask-package key))
 
-(defun eask-package-name () (eask-package--get :name))
-(defun eask-package-version () (eask-package--get :version))
+(defun eask-package-name ()        (eask-package--get :name))
+(defun eask-package-version ()     (eask-package--get :version))
 (defun eask-package-description () (eask-package--get :description))
 
 (defun eask-package (name version description)
