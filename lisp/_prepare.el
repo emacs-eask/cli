@@ -584,6 +584,7 @@ Eask file in the workspace."
 
 (defvar eask-package        nil)
 (defvar eask-package-file   nil)
+(defvar eask-package-desc   nil)
 (defvar eask-files          nil)
 (defvar eask-depends-on     nil)
 (defvar eask-depends-on-dev nil)
@@ -606,7 +607,15 @@ Eask file in the workspace."
   "Set package file."
   (if eask-package-file
       (eask-error "Multiple definition of `package-file'")
-    (setq eask-package-file (expand-file-name file))))
+    (setq eask-package-file (expand-file-name file))
+    (if (file-exists-p eask-package-file)
+        (progn
+          (with-temp-buffer
+            (insert-file-contents eask-package-file)
+            (setq eask-package-desc (ignore-errors (package-buffer-info))))
+          (unless eask-package-desc
+            (eask-warn "Failed to construct buffer-info, try to lint the package-file `%s'" file)))
+      (eask-warn "Missing the package-file `%s'" file))))
 
 (defun eask-files (&rest patterns)
   "Set files patterns."
@@ -680,7 +689,7 @@ Eask file in the workspace."
 (defun eask-source (name &optional location)
   "Add archive NAME with LOCATION."
   (when (assoc name package-archives)
-    (eask-error "Multiple definition of `(source \"%s\")'" name))
+    (eask-error "Multiple definition of source `%s'" name))
   (setq location (or location (cdr (assq (intern name) eask-source-mapping))))
   (unless location (eask-error "Unknown package archive `%s'" name))
   (when (and location
@@ -729,7 +738,7 @@ Eask file in the workspace."
   (let ((msg (eask--ansi 'warn (apply #'format-message args))))
     (eask--unsilent (eask-msg "%s" msg))
     (run-hook-with-args 'eask-on-warning-hook 'warn msg))
-  (apply fnc args))
+  (eask--silent (apply fnc args)))
 
 (advice-add 'warn :around #'eask--warn)
 
