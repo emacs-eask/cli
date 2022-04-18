@@ -8,7 +8,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 0.6.x (Unreleased)
 > Released N/A
 
-* N/A
+* Clean up `ansi-apply`, now accept object for the first argument (67277ffb70ff8966d452da76fd50ad3cfb41ef08)
 
 ## 0.5.x
 > Released Apr 18, 2022
