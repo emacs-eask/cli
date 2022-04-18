@@ -11,6 +11,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Clean up `ansi-apply`, now accept object for the first argument (67277ffb70ff8966d452da76fd50ad3cfb41ef08)
 * Ensure Eask-file exists before executing the command (d40e29a042c1886d5748480d789a8d7b36735a09)
 * Add checker rules for package metadata (f69efac5e1f66ee73424e17d733cd732d3a28eda)
+* Add checker rules for unmatch dependencies (ab42f7f39dd0db6cbbbdfbfec5e7fae397936b99)
 
 ## 0.5.x
 > Released Apr 18, 2022
