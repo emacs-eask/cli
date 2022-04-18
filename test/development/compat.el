@@ -18,6 +18,7 @@
     package--alist
     package--activate-all
     package-activate-all
+    package-generate-description-file
     url-file-exists-p)
   "List of function to check Emacs compatibility.")
 
