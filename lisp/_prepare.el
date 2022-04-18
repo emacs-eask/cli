@@ -614,7 +614,7 @@ Eask file in the workspace."
             (insert-file-contents eask-package-file)
             (setq eask-package-desc (ignore-errors (package-buffer-info))))
           (unless eask-package-desc
-            (eask-warn "Failed to construct buffer-info, try to lint the package-file `%s'" file)))
+            (eask-warn "Failed to construct package-descriptor, lint the package-file `%s'" file)))
       (eask-warn "Missing the package-file `%s'" file))))
 
 (defun eask-files (&rest patterns)
