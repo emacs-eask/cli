@@ -602,7 +602,11 @@ Eask file in the workspace."
   "Set the package information."
   (if eask-package
       (eask-error "Multiple definition of `package'")
-    (setq eask-package `(:name ,name :version ,version :description ,description))))
+    (setq eask-package `(:name ,name :version ,version :description ,description))
+    (progn  ; Run checker
+      (eask--checker-string "Name" name)
+      (version= version "0.1.0")
+      (eask--checker-string "Description" description))))
 
 (defun eask-package-file (file)
   "Set package file."
@@ -935,6 +939,16 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
           (unless (string= (buffer-string) "")
             (eask-msg (ansi-white (buffer-string)))))
       (eask-error "Help manual missig %s" help-file))))
+
+;;
+;;; Checker
+
+(defun eask--checker-string (name var)
+  "Run checker for VAR."
+  (unless (stringp var)
+    (eask-error "%s must be a string" name))
+  (when (string-empty-p var)
+    (eask-warn "%s cannot be an empty string" name)))
 
 ;;
 ;;; User customization
