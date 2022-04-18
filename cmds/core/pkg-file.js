@@ -23,5 +23,5 @@ exports.command = ['pkg-file'];
 exports.desc = "generate -pkg file";
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'pkg-file');
+  await UTIL.e_call(argv, 'core/pkg-file');
 };
