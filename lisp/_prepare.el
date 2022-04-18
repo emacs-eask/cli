@@ -215,7 +215,7 @@ the `eask-start' execution.")
   (let* (;; Ensure symbol
          (pkg (if (stringp pkg) (intern pkg) pkg))
          ;; Wrap package name with color
-         (pkg-string (ansi-green (format "%s" pkg)))
+         (pkg-string (ansi-green pkg))
          ;; Wrap version number with color
          (pkg-version (ansi-yellow (eask-package--version-string pkg))))
     (list pkg pkg-string pkg-version)))
@@ -910,7 +910,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 
        (eask-with-progress
          (format (concat "%s [%" offset "d/%d] %s... ") prefix count total
-                 (ansi-green "%s" item))
+                 (ansi-green item))
          (when func (funcall func item))
          suffix))
      sequence)))

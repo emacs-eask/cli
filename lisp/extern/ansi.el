@@ -145,10 +145,12 @@ This variable affects `with-ansi', `with-ansi-princ'."
 (defun ansi-apply (effect-or-code format-string &rest objects)
   "Apply EFFECT-OR-CODE to text.
 FORMAT-STRING and OBJECTS are processed same as `apply'."
-  (let ((code (if (numberp effect-or-code)
-                  effect-or-code
-                (ansi--code effect-or-code)))
-        (text (apply 'format format-string objects)))
+  (let* ((format-string (if (stringp format-string) format-string
+                          (format "%s" format-string)))
+         (code (if (numberp effect-or-code)
+                   effect-or-code
+                 (ansi--code effect-or-code)))
+         (text (apply 'format format-string objects)))
     (if ansi-inhibit-ansi text
       (format "\e[%dm%s\e[%sm" code text ansi-reset))))
 
