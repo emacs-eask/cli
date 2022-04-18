@@ -12,6 +12,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Ensure Eask-file exists before executing the command (d40e29a042c1886d5748480d789a8d7b36735a09)
 * Add checker rules for package metadata (f69efac5e1f66ee73424e17d733cd732d3a28eda)
 * Add checker rules for unmatch dependencies (ab42f7f39dd0db6cbbbdfbfec5e7fae397936b99)
+* Print more information for command `eask info` (6d74139fe16c5bdddd0942b66bad21c3b34c6f5a)
 
 ## 0.5.x
 > Released Apr 18, 2022
