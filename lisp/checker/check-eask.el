@@ -23,7 +23,7 @@
 
 (defun eask--write-log (level msg)
   "Write the log."
-  (unless (string= " *temp*" (buffer-name))
+  (unless (string= " *temp*" (buffer-name))  ; avoid error from `package-file' directive
     (with-current-buffer (or (eask--load-buffer) (buffer-name))
       (let* ((level-string (cl-case level
                              (`error "Error")
