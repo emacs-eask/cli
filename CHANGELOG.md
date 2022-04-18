@@ -5,8 +5,13 @@ All notable changes to this project will be documented in this file.
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 
-## 0.5.x (Unreleased)
+## 0.6.x (Unreleased)
 > Released N/A
+
+* N/A
+
+## 0.5.x
+> Released Apr 18, 2022
 
 * Unified dependencies list with data structure of list, and no longer have string (9f09f93ec866e32d14dd2f6c53ee8fde6cd4b986)
 * Add new command `eask refresh` (5423d84a59c88d52c2279f27a189573eb525a82b)
