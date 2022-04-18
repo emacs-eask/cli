@@ -32,7 +32,6 @@ run on by default. If you use WSL or other environment system file Cygwin/MSYS
 ## 📝 Todo list
 
 - [ ] Handle condition, package doesn't in archives
-- [ ] Update command `eask info` to display more information using the package descriptor
 - [ ] Add `elisp-lint` command
 - [ ] Add `elint` command
 - [ ] Add `elsa` command

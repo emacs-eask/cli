@@ -33,6 +33,11 @@
           (eask-msg (concat "  %-" offset "s (%s)") (car dep) target-version)
           (eask-debug "    Recipe: %s" (car dep)))))))
 
+(defun eask--package-desc-url ()
+  "Return url from package descriptor."
+  (when-let ((extras (package-desc-extras eask-package-desc)))
+    (cdr (assoc :url extras))))
+
 (eask-start
   (if eask-package
       (progn
@@ -42,11 +47,16 @@
                   (ansi-yellow (eask-package-version))
                   (ansi-cyan (length eask-depends-on))
                   (ansi-cyan (length eask-depends-on-dev)))
-        (eask-msg "")
         (eask-msg (eask-package-description))
+        (eask-msg (ansi-cyan (eask--package-desc-url)))
+        (when eask-package-desc
+          (when-let ((keywords (package-desc--keywords eask-package-desc)))
+            (eask-msg "")
+            (eask-msg "keywords: %s" (mapconcat #'identity keywords ", "))))
+        (eask-msg "")
         (when eask-package-file
-          (eask-msg "")
           (eask-msg "entry: %s" (eask-root-del eask-package-file)))
+        (eask-msg "kind: %s" (if (eask-package-multi-p) "tar" "single"))
         (eask--print-deps "dependencies:" eask-depends-on)
         (eask--print-deps "devDependencies:" eask-depends-on-dev))
     (eask-info "(Eask file has no package information)")
