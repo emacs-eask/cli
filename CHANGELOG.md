@@ -9,6 +9,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 > Released N/A
 
 * Clean up `ansi-apply`, now accept object for the first argument (67277ffb70ff8966d452da76fd50ad3cfb41ef08)
+* Ensure Eask-file exists before executing the command (d40e29a042c1886d5748480d789a8d7b36735a09)
 
 ## 0.5.x
 > Released Apr 18, 2022
