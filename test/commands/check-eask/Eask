@@ -9,12 +9,17 @@
 ;;
 ;;; Below are error to lint
 
-(package-file "check-eask.el")  ; duplicate `package-file`
+(package "" "" "")              ; duplicate `package` directive
+
+(package-file "check-eask.el")  ; duplicate `package-file` directive
 
 (source "gnu")                  ; duplicate archives
 (source "gnu")
 
 (source "magic-archive")        ; Unkown archive
 
-(depends-on "s")                ; duplicate dependencies
+(depends-on "emacs" "26.1")     ; duplicate `emacs` dependency
+(depends-on "emacs")
+
+(depends-on "s")                ; duplicate dependency
 (depends-on "s")
