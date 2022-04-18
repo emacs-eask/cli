@@ -949,13 +949,22 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   "Return errors if required metadata is missing."
   (unless eask-package (eask-error "Missing metadata package")))
 
+(defun eask--check-strings (fmt f p)
+  "Test strings (F and P); then print FMT if not equal."
+  (unless (string= f p) (eask-warn fmt f p)))
+
 (defun eask--checker-metadata ()
   "Report warnings if metadata doesn't match."
   (when (and eask-package-desc eask-package)
-    (let ((f-name (eask-package-name))
-          (p-name (package-desc-name eask-package-desc)))
-      (unless (string= f-name p-name)
-        (eask-warn "Metadata package name doesn't match: %s %s" f-name p-name)))))
+    (eask--check-strings
+     "Metadata package name doesn't match: %s %s"
+     (eask-package-name) (package-desc-name eask-package-desc))
+    (eask--check-strings
+     "Metadata version doesn't match: %s %s"
+     (eask-package-version) (package-version-join (package-desc-version eask-package-desc)))
+    (eask--check-strings
+     "Metadata summary doesn't match: %s %s"
+     (eask-package-description) (package-desc-summary eask-package-desc))))
 
 (add-hook 'eask-file-loaded-hook #'eask--checker-existence)
 (add-hook 'eask-file-loaded-hook #'eask--checker-metadata)
