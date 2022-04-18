@@ -955,7 +955,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 
 (defun eask--checker-metadata ()
   "Report warnings if metadata doesn't match."
-  (when (and eask-package-desc eask-package)
+  (when (and eask-package eask-package-desc)
     (eask--check-strings
      "Metadata package name doesn't match: '%s' '%s'"
      (eask-package-name) (package-desc-name eask-package-desc))
@@ -964,7 +964,19 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
      (eask-package-version) (package-version-join (package-desc-version eask-package-desc)))
     (eask--check-strings
      "Metadata summary doesn't match: '%s' '%s'"
-     (eask-package-description) (package-desc-summary eask-package-desc))))
+     (eask-package-description) (package-desc-summary eask-package-desc))
+    (let* ((dependencies (append eask-depends-on-emacs eask-depends-on))
+           (dependencies (mapcar #'car dependencies))
+           (dependencies (mapcar (lambda (elm) (format "%s" elm)) dependencies))
+           (requirements (package-desc-reqs eask-package-desc))
+           (requirements (mapcar #'car requirements))
+           (requirements (mapcar (lambda (elm) (format "%s" elm)) requirements)))
+      (dolist (req requirements)
+        (unless (member req dependencies)
+          (eask-warn "Unmatch dependency from Eask-file '%s'" req)))
+      (dolist (dep dependencies)
+        (unless (member dep requirements)
+          (eask-warn "Unmatch dependency from package-file '%s'" dep))))))
 
 (add-hook 'eask-file-loaded-hook #'eask--checker-existence)
 (add-hook 'eask-file-loaded-hook #'eask--checker-metadata)
