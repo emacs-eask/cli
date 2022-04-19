@@ -29,7 +29,8 @@ command_local:
 	./test/commands/local/run.sh
 
 command_check_eask:
-	./test/checker/check-eask/run.sh
+	./test/checker/dsl/run.sh
+	./test/checker/metadata/run.sh
 
 command_exec:
 	./test/commands/exec/run.sh
