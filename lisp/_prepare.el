@@ -122,17 +122,17 @@ the `eask-start' execution.")
            (local-archive-p (string= name "local")))  ; exclude local elpa
       (unless (file-exists-p local-file)
         (eask-with-progress
-          (format "Downloading archive `%s' manually... " (ansi-yellow name))
-          (unless local-archive-p
-            (if (url-file-exists-p url)
-                (progn
-                  (ignore-errors (make-directory dir t))
-                  (url-copy-file url local-file t)
-                  (setq download-p t))
-              (eask-debug "No archive-contents found in `%s'" (ansi-yellow name))))
-          (cond (download-p      "done ✓")
-                (local-archive-p "skipped ✗")
-                (t               "failed ✗"))))
+         (format "Downloading archive `%s' manually... " (ansi-yellow name))
+         (unless local-archive-p
+           (if (url-file-exists-p url)
+               (progn
+                 (ignore-errors (make-directory dir t))
+                 (url-copy-file url local-file t)
+                 (setq download-p t))
+             (eask-debug "No archive-contents found in `%s'" (ansi-yellow name))))
+         (cond (download-p      "done ✓")
+               (local-archive-p "skipped ✗")
+               (t               "failed ✗"))))
       (when download-p (eask-pkg-init t)))))
 
 ;;
@@ -173,11 +173,11 @@ the `eask-start' execution.")
   (when eask-depends-on-recipe-p
     (eask-log "Installing required external packages...")
     (eask-with-archives "melpa"
-      (eask-package-install 'package-build))
+                        (eask-package-install 'package-build))
     (eask-with-progress
-      "Building temporary archives (this may take a while)... "
-      (eask-with-verbosity 'debug (github-elpa-build))
-      "done ✓")
+     "Building temporary archives (this may take a while)... "
+     (eask-with-verbosity 'debug (github-elpa-build))
+     "done ✓")
     (eask-pkg-init t))
   (when eask-depends-on
     (eask--install-deps eask-depends-on "package"))
@@ -187,10 +187,10 @@ the `eask-start' execution.")
 (defun eask-setup-paths ()
   "Setup both `exec-path' and `load-path'."
   (eask-with-progress
-    (ansi-green "Updating environment PATHs... ")
-    (eask-with-verbosity 'debug
-      (eask--update-exec-path) (eask--update-load-path))
-    (ansi-green "done ✓")))
+   (ansi-green "Updating environment PATHs... ")
+   (eask-with-verbosity 'debug
+                        (eask--update-exec-path) (eask--update-load-path))
+   (ansi-green "done ✓")))
 
 (defvar eask--package-initialized nil
   "Flag for package initialization in global scope.")
@@ -204,11 +204,11 @@ the `eask-start' execution.")
             (and (eask-global-p) (not eask--package-initialized)))
     (setq eask--package-initialized t)
     (eask-with-progress
-      (ansi-green "Loading package information... ")
-      (eask-with-verbosity 'debug
-        (package-initialize t) (package-refresh-contents)
-        (eask--download-archives))
-      (ansi-green "done ✓"))))
+     (ansi-green "Loading package information... ")
+     (eask-with-verbosity 'debug
+                          (package-initialize t) (package-refresh-contents)
+                          (eask--download-archives))
+     (ansi-green "done ✓"))))
 
 (defun eask--pkg-transaction-vars (pkg)
   "Return 1 symbol and 2 strings."
@@ -230,14 +230,14 @@ the `eask-start' execution.")
        (unless (assoc archive package-archives)
          (setq added t)
          (eask-with-progress
-           (format "Adding required archives (%s)... " (ansi-yellow archive))
-           (eask-source archive)
-           "done ✓")))
+          (format "Adding required archives (%s)... " (ansi-yellow archive))
+          (eask-source archive)
+          "done ✓")))
      (when added
        (eask-with-progress
-         "Refresh archives information... "
-         (eask--silent (eask-pkg-init t))
-         "done ✓"))
+        "Refresh archives information... "
+        (eask--silent (eask-pkg-init t))
+        "done ✓"))
      ,@body))
 
 (defun eask-package-install (pkg)
@@ -261,16 +261,16 @@ the `eask-start' execution.")
                     pkg-string pkg-version (ansi-yellow emacs-version)))))
      (t
       (eask-with-progress
-        (format "  - Installing %s (%s)... " pkg-string pkg-version)
-        (eask-with-verbosity 'debug
-          ;; XXX Without ignore-errors guard, it will trigger error
-          ;;
-          ;;   Can't find library xxxxxxx.el
-          ;;
-          ;; But we can remove this after Emacs 28, since function `find-library-name'
-          ;; has replaced the function `signal' instead of the `error'.
-          (eask-ignore-errors (package-install pkg)))
-        "done ✓")))))
+       (format "  - Installing %s (%s)... " pkg-string pkg-version)
+       (eask-with-verbosity 'debug
+                            ;; XXX Without ignore-errors guard, it will trigger error
+                            ;;
+                            ;;   Can't find library xxxxxxx.el
+                            ;;
+                            ;; But we can remove this after Emacs 28, since function `find-library-name'
+                            ;; has replaced the function `signal' instead of the `error'.
+                            (eask-ignore-errors (package-install pkg)))
+       "done ✓")))))
 
 (defun eask-package-delete (pkg)
   "Delete the package."
@@ -284,10 +284,10 @@ the `eask-start' execution.")
       (eask-msg "  - Skipping %s (%s)... not installed ✗" pkg-string pkg-version))
      (t
       (eask-with-progress
-        (format "  - Uninstalling %s (%s)... " pkg-string pkg-version)
-        (eask-with-verbosity 'debug
-          (package-delete (eask-package-desc pkg t) (eask-force-p)))
-        "done ✓")))))
+       (format "  - Uninstalling %s (%s)... " pkg-string pkg-version)
+       (eask-with-verbosity 'debug
+                            (package-delete (eask-package-desc pkg t) (eask-force-p)))
+       "done ✓")))))
 
 (defun eask-package-reinstall (pkg)
   "Reinstall the package."
@@ -301,11 +301,11 @@ the `eask-start' execution.")
       (eask-msg "  - Skipping %s (%s)... not installed ✗" pkg-string pkg-version))
      (t
       (eask-with-progress
-        (format "  - Reinstalling %s (%s)... " pkg-string pkg-version)
-        (eask-with-verbosity 'debug
-          (package-delete (eask-package-desc pkg t) t)
-          (eask-ignore-errors (package-install pkg)))
-        "done ✓")))))
+       (format "  - Reinstalling %s (%s)... " pkg-string pkg-version)
+       (eask-with-verbosity 'debug
+                            (package-delete (eask-package-desc pkg t) t)
+                            (eask-ignore-errors (package-install pkg)))
+       "done ✓")))))
 
 (defun eask-package-desc (name &optional current)
   "Build package description by PKG-NAME."
@@ -527,43 +527,43 @@ Eask file in the workspace."
      (if eask--initialized-p (progn ,@body)
        (setq eask--initialized-p t)
        (eask--setup-env
-         (eask--handle-global-options)
-         (eask--print-env-info)
-         (cond
-          ((eask-global-p)
-           ;; We accept Eask file in global scope, but it shouldn't be used
-           ;; as a sandbox.
-           (if (eask-file-try-load "./")
-               (eask-msg "✓ Loading default Eask file in %s... done!" eask-file)
-             (eask-msg "✗ Loading default Eask file... missing!"))
-           (message "")
-           (package-activate-all)
-           (eask-with-progress
-             (ansi-green "Loading your configuration... ")
-             (eask-with-verbosity 'debug
-               (load (locate-user-emacs-file "early-init.el") t)
-               (load (locate-user-emacs-file "../.emacs") t)
-               (load (locate-user-emacs-file "init.el") t))
-             (ansi-green "done"))
-           (eask--with-hooks ,@body))
-          (t
-           (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
-                  (package-user-dir (expand-file-name "elpa" user-emacs-directory))
-                  (eask--first-init-p (not (file-directory-p user-emacs-directory)))
-                  (user-init-file (locate-user-emacs-file "init.el"))
-                  (custom-file (locate-user-emacs-file "custom.el")))
-             (if (eask-file-try-load "../../")
-                 (progn
-                   (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
-                   (message "")
-                   (package-activate-all)
-                   (ignore-errors (make-directory package-user-dir t))
-                   (eask--silent (eask-setup-paths))
-                   (run-hooks 'eask-before-command-hook)
-                   (run-hooks (intern (concat "eask-before-" (eask-command) "-hook")))
-                   (eask--with-hooks ,@body))
-               (eask-msg "✗ Loading Eask file... missing!")
-               (eask-help 'init)))))))))
+        (eask--handle-global-options)
+        (eask--print-env-info)
+        (cond
+         ((eask-global-p)
+          ;; We accept Eask file in global scope, but it shouldn't be used
+          ;; as a sandbox.
+          (if (eask-file-try-load "./")
+              (eask-msg "✓ Loading default Eask file in %s... done!" eask-file)
+            (eask-msg "✗ Loading default Eask file... missing!"))
+          (message "")
+          (package-activate-all)
+          (eask-with-progress
+           (ansi-green "Loading your configuration... ")
+           (eask-with-verbosity 'debug
+                                (load (locate-user-emacs-file "early-init.el") t)
+                                (load (locate-user-emacs-file "../.emacs") t)
+                                (load (locate-user-emacs-file "init.el") t))
+           (ansi-green "done"))
+          (eask--with-hooks ,@body))
+         (t
+          (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
+                 (package-user-dir (expand-file-name "elpa" user-emacs-directory))
+                 (eask--first-init-p (not (file-directory-p user-emacs-directory)))
+                 (user-init-file (locate-user-emacs-file "init.el"))
+                 (custom-file (locate-user-emacs-file "custom.el")))
+            (if (eask-file-try-load "../../")
+                (progn
+                  (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
+                  (message "")
+                  (package-activate-all)
+                  (ignore-errors (make-directory package-user-dir t))
+                  (eask--silent (eask-setup-paths))
+                  (run-hooks 'eask-before-command-hook)
+                  (run-hooks (intern (concat "eask-before-" (eask-command) "-hook")))
+                  (eask--with-hooks ,@body))
+              (eask-msg "✗ Loading Eask file... missing!")
+              (eask-help 'init)))))))))
 
 ;;
 ;;; Eask file
@@ -637,13 +637,13 @@ Eask file in the workspace."
         eask-depends-on-dev (reverse eask-depends-on-dev))
   (when eask-depends-on-recipe-p
     (eask-with-progress
-      "✓ Checking local archives... "
-      (eask-with-verbosity 'debug
-        (add-to-list 'package-archives `("local" . ,github-elpa-archive-dir) t)
-        ;; If the local archives is added, we set the priority to a very
-        ;; high number so user we always use the specified dependencies!
-        (add-to-list 'package-archive-priorities `("local" . 90) t))
-      "done!")))
+     "✓ Checking local archives... "
+     (eask-with-verbosity 'debug
+                          (add-to-list 'package-archives `("local" . ,github-elpa-archive-dir) t)
+                          ;; If the local archives is added, we set the priority to a very
+                          ;; high number so user we always use the specified dependencies!
+                          (add-to-list 'package-archive-priorities `("local" . 90) t))
+     "done!")))
 
 (add-hook 'eask-file-loaded-hook #'eask--setup-dependencies)
 
@@ -675,10 +675,10 @@ Eask file in the workspace."
         (push recipe eask-depends-on)
         (eask-load "extern/github-elpa")
         (eask-with-verbosity 'debug
-          (eask-with-progress
-            (ansi-blue (format "Generating recipe for package %s... " (ansi-yellow pkg)))
-            (write-region (pp-to-string recipe) nil (expand-file-name pkg github-elpa-recipes-dir))
-            (ansi-blue "done ✓")))
+                             (eask-with-progress
+                              (ansi-blue (format "Generating recipe for package %s... " (ansi-yellow pkg)))
+                              (write-region (pp-to-string recipe) nil (expand-file-name pkg github-elpa-recipes-dir))
+                              (ansi-blue "done ✓")))
         (setq eask-depends-on-recipe-p t))
       recipe))))
 
@@ -814,12 +814,12 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (defun eask--msg (symbol prefix msg &rest args)
   "If LEVEL is at or below `eask-verbosity', log message."
   (eask-with-verbosity symbol
-    (let* ((string (apply #'eask--format prefix msg args))
-           (output (eask--ansi symbol string))
-           (func (cl-case symbol
-                   ((or error warn) symbol)
-                   (t #'message))))
-      (funcall func "%s" output))))
+                       (let* ((string (apply #'eask--format prefix msg args))
+                              (output (eask--ansi symbol string))
+                              (func (cl-case symbol
+                                      ((or error warn) symbol)
+                                      (t #'message))))
+                         (funcall func "%s" output))))
 
 (defun eask--format (prefix fmt &rest args)
   "Format Eask messages."
@@ -911,10 +911,10 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
        (cl-incf count)
 
        (eask-with-progress
-         (format (concat "%s [%" offset "d/%d] %s... ") prefix count total
-                 (ansi-green item))
-         (when func (funcall func item))
-         suffix))
+        (format (concat "%s [%" offset "d/%d] %s... ") prefix count total
+                (ansi-green item))
+        (when func (funcall func item))
+        suffix))
      sequence)))
 
 (defun eask-print-log-buffer (&optional buffer-or-name)
@@ -973,10 +973,10 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
            (requirements (mapcar (lambda (elm) (format "%s" elm)) requirements)))
       (dolist (req requirements)
         (unless (member req dependencies)
-          (eask-warn "Unmatch dependency '%s'; add (depends-on \"%s\" \"VERSION\") to your Eask-file" req req)))
+          (eask-warn "Unmatch dependency '%s'; add (depends-on \"%s\") to Eask-file or consider removing it" req req)))
       (dolist (dep dependencies)
         (unless (member dep requirements)
-          (eask-warn "Unmatch dependency '%s'; add (%s \"VERSION\") to your package-file" dep dep))))))
+          (eask-warn "Unmatch dependency '%s'; add (%s \"VERSION\") to package-file or consider removing it" dep dep))))))
 
 (add-hook 'eask-file-loaded-hook #'eask--checker-existence)
 (add-hook 'eask-file-loaded-hook #'eask--checker-metadata)
