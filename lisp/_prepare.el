@@ -622,7 +622,7 @@ Eask file in the workspace."
             (setq eask-package-desc (ignore-errors (package-buffer-info))))
           (unless eask-package-desc
             (eask-warn "Failed to construct package-descriptor, lint the package-file `%s'" file)))
-      (eask-warn "Missing the package-file `%s'" file))))
+      (eask-warn "Package-file seems to be missing `%s'" file))))
 
 (defun eask-files (&rest patterns)
   "Set files patterns."
@@ -957,13 +957,13 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   "Report warnings if metadata doesn't match."
   (when (and eask-package eask-package-desc)
     (eask--check-strings
-     "Metadata package name doesn't match: '%s' '%s'"
+     "Unmatch package name '%s'; it should be '%s'"
      (eask-package-name) (package-desc-name eask-package-desc))
     (eask--check-strings
-     "Metadata version doesn't match: '%s' '%s'"
+     "Unmatch version '%s'; it should be '%s'"
      (eask-package-version) (package-version-join (package-desc-version eask-package-desc)))
     (eask--check-strings
-     "Metadata summary doesn't match: '%s' '%s'"
+     "Unmatch summary '%s'; it should be '%s'"
      (eask-package-description) (package-desc-summary eask-package-desc))
     (let* ((dependencies (append eask-depends-on-emacs eask-depends-on))
            (dependencies (mapcar #'car dependencies))
@@ -973,10 +973,10 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
            (requirements (mapcar (lambda (elm) (format "%s" elm)) requirements)))
       (dolist (req requirements)
         (unless (member req dependencies)
-          (eask-warn "Unmatch dependency from Eask-file '%s'" req)))
+          (eask-warn "Unmatch dependency '%s'; add (depends-on \"%s\" \"VERSION\") to your Eask-file" req req)))
       (dolist (dep dependencies)
         (unless (member dep requirements)
-          (eask-warn "Unmatch dependency from package-file '%s'" dep))))))
+          (eask-warn "Unmatch dependency '%s'; add (%s \"VERSION\") to your package-file" dep dep))))))
 
 (add-hook 'eask-file-loaded-hook #'eask--checker-existence)
 (add-hook 'eask-file-loaded-hook #'eask--checker-metadata)
