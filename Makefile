@@ -29,7 +29,7 @@ command_local:
 	./test/commands/local/run.sh
 
 command_check_eask:
-	./test/commands/check-eask/run.sh
+	./test/checker/check-eask/run.sh
 
 command_exec:
 	./test/commands/exec/run.sh
