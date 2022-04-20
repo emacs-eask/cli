@@ -29,7 +29,6 @@ jobs:
 
     steps:
     - uses: jcs090218/setup-emacs@master
-      if: matrix.os == 'windows-latest'
       with:
         version: ${{ matrix.emacs-version }}
 
