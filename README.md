@@ -42,7 +42,7 @@ influencing your personal confiugration. Eask aims to be:
 [![Exec](https://github.com/emacs-eask/eask/actions/workflows/test-exec.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-exec.yml)
 [![Search](https://github.com/emacs-eask/eask/actions/workflows/test-search.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-search.yml)
 [![Outdated_Upgrade](https://github.com/emacs-eask/eask/actions/workflows/test-outdated_upgrade.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-outdated_upgrade.yml)
-[![Checker](https://github.com/emacs-eask/eask/actions/workflows/test-check-eask.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-check-eask.yml)
+[![Checker](https://github.com/emacs-eask/eask/actions/workflows/test-checker.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-checker.yml)
 
 ###### Features
 
