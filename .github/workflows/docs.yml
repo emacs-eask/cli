@@ -7,6 +7,7 @@ on:
       - docs
     paths:
       - docs/**
+  workflow_dispatch:
 
 jobs:
   publish-doc:
