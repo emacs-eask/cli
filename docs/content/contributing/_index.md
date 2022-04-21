@@ -1,9 +1,7 @@
 ---
 title: Contributing
-permalink: contributing
+weight: 8
 ---
-
-# Contributing
 
 This document provides guidelines and information on contributing to Eask.
 

@@ -1,15 +1,23 @@
 baseURL = 'https://emacs-eask.github.io/'
 languageCode = 'en-us'
 title = 'Emacs Eask'
+license = 'MIT'
+
 theme = [
   'geekdoc',
 ]
 
+pygmentsUseClasses = true
+pygmentsCodeFences = true
+
+disablePathToLower = true
+enableGitInfo = true
+
 [markup.highlight]
-noClasses = false
+  noClasses = false
 
 [params]
-themeStyle = "original"
-
-[outputs]
-home = [ "HTML", "RSS", "JSON"]
+  geekdocToC = 3
+  geekdocLogo = './assets/images/eask-small.png'
+  geekdocRepo = 'https://github.com/emacs-eask/eask/'
+  

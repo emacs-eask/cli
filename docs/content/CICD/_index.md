@@ -1,9 +1,7 @@
 ---
-title: CI/CD
-permalink: ci-cd
+title: CI / CD
+weight: 5
 ---
-
-# Continuous Integration and Continuous Development (CI/CD)
 
 Eask can be run in any test environment, as long the platform allows
 you to install Node onto their platform.
@@ -24,8 +22,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    # Install Emacs
-    - uses: jcs090218/setup-emacs@master
+    # Install Emacs on Linux/macOS
+    - uses: purcell/setup-emacs@master
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
+      with:
+        version: ${{ matrix.emacs-version }}
+
+    # Install Emacs on Windows
+    - uses: jcs090218/setup-emacs-windows@master
+      if: matrix.os == 'windows-latest'
       with:
         version: ${{ matrix.emacs-version }}
 

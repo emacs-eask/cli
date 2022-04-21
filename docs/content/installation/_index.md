@@ -1,9 +1,7 @@
 ---
 title: Installation
-permalink: installation
+weight: 1
 ---
-
-# Installation
 
 This document guides you through the installation of Eask.
 
@@ -57,3 +55,4 @@ set PATH=%PATH%;c:/path/to/eask/bin
 
 Once you have set it up correctly, try `eask --version` then you should see 
 the current eask's version number! 🎉 🎊
+

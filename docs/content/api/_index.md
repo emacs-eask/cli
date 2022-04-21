@@ -1,9 +1,7 @@
 ---
 title: Development API
-permalink: api
+weight: 10
 ---
-
-# Development API
 
 This document provides a reference to the public Eask API, which you may use in
 your projects and extensions to Eask.

@@ -1,9 +1,7 @@
 ---
 title: FAQ
-permalink: faq
+weight: 7
 ---
-
-# Frequently Asked Question (FAQ)
 
 ## ❓ Why Node.JS?
 

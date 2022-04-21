@@ -1,9 +1,7 @@
 ---
 title: Implementation
-permalink: implementation
+weight: 9
 ---
-
-# Implementation
 
 Eask consists of two components: a command-line tool (the Eask CLI),
 and a Elisp scripts.

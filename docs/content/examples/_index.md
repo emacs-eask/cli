@@ -1,9 +1,7 @@
 ---
 title: Examples
-permalink: examples
+weight: 4
 ---
-
-# Examples
 
 Here are a few examples of how a `Eask`-file might look like.
 

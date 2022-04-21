@@ -1,9 +1,7 @@
 ---
-title: Domain Specific Language
-permalink: dsl
+title: Domain Specific Language (DSL)
+weight: 3
 ---
-
-# Domain Specific Language (DSL)
 
 This document provides a reference on the [DSL](https://en.wikipedia.org/wiki/Domain-specific_language).
 

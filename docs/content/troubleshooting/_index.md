@@ -1,9 +1,7 @@
 ---
 title: Troubleshooting
-permalink: troubleshooting
+weight: 6
 ---
-
-# Troubleshooting
 
 This document helps you troubleshoot Eask.
 

@@ -1,6 +1,6 @@
 ---
 title: GNU General Public License
-permalink: license
+weight: 11
 ---
 
 Licensed under GPLv3. See under for details.
