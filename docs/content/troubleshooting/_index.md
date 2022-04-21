@@ -23,14 +23,12 @@ Eask version with `eask --version`.
 * Upgrade Eask with `eask upgrade-eask`. Or `npm install -g @emacs-eask/eask@latest`
 if you chose to install from `npm`.
 
----
+{{< hint warning >}}
+**⚠ Warning**
 
-⚠ Warning
-
-If you installed Eask with `npm`, then you should probably upgrade it through 
-`npm`. Otherwise you would just have to ensure the `git` is installed.
-
----
+If you installed Eask with **npm**, then you should probably upgrade it through 
+**npm**. Otherwise you would just have to ensure the **git** is installed.
+{{< /hint >}}
 
 * If the error persists, try to reinstall Eask from scratch.
 

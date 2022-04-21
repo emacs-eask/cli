@@ -9,12 +9,8 @@ theme = [
 
 pygmentsUseClasses = true
 pygmentsCodeFences = true
-
 disablePathToLower = true
 enableGitInfo = true
-
-[markup.highlight]
-  noClasses = false
 
 [params]
   geekdocToC = 3
