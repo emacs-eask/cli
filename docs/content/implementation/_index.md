@@ -102,7 +102,7 @@ folders are command files that correspond to each other.
 
 Eask is executed this way:
 
-![](./assets/flowchart/execution order.png)
+![](./flowchart/execution order.png)
 
 * **Eask environment** builds sandbox and reads Eask file information
 * **Emacs configuration** is only being executed when `-g` option is enabled

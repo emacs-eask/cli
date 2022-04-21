@@ -18,6 +18,6 @@ enableGitInfo = true
 
 [params]
   geekdocToC = 3
-  geekdocLogo = './assets/images/eask-small.png'
+  geekdocLogo = './logo.png'
   geekdocRepo = 'https://github.com/emacs-eask/eask/'
   
