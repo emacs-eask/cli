@@ -1,0 +1,54 @@
+name: Docs
+
+on:
+  push:
+    branches:
+      - master
+      - docs
+    paths:
+      - docs/**
+
+
+jobs:
+  publish-doc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.91.2'
+
+      - name: Generate markdown files
+        run: |
+          cd docs/theme/geekdoc
+          npm install
+          npm run build
+
+      - name: Check out GitHub page repo
+        uses: actions/checkout@v2
+        with:
+          repository: emacs-eask/emacs-eask.github.io
+          path: emacs-eask.github.io
+          token: ${{ secrets.PAT }}
+
+      - name: Build doc artifacts with Hugo
+        run: hugo --destination ../emacs-eask.github.io
+        working-directory: doc
+
+      # TODO: Generate better commit message
+      - name: Publish doc artifacts
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -F- <<-_UBLT_COMMIT_MSG_
+          auto: ${{ github.event.head_commit.message }}
+
+          SourceCommit: https://github.com/emacs-eask/eask/commit/${{ github.sha }}
+          _UBLT_COMMIT_MSG_
+          git push
+        working-directory: emacs-eask.github.io

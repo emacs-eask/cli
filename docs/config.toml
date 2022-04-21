@@ -1,0 +1,15 @@
+baseURL = 'https://emacs-eask.github.io/'
+languageCode = 'en-us'
+title = 'Emacs Eask'
+theme = [
+  'geekdoc',
+]
+
+[markup.highlight]
+noClasses = false
+
+[params]
+themeStyle = "original"
+
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
