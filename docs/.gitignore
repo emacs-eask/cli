@@ -3,3 +3,4 @@ _site
 .bundle
 
 /archetypes
+.hugo_build.lock
