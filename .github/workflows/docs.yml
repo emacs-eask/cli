@@ -8,7 +8,6 @@ on:
     paths:
       - docs/**
 
-
 jobs:
   publish-doc:
     runs-on: ubuntu-latest
