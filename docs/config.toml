@@ -12,6 +12,14 @@ pygmentsCodeFences = true
 disablePathToLower = true
 enableGitInfo = true
 
+[markup]
+  [markup.goldmark.renderer]
+    # Needed for mermaid shortcode
+    unsafe = true
+  [markup.tableOfContents]
+    startLevel = 1
+    endLevel = 9
+
 [params]
   geekdocToC = 3
   geekdocLogo = './logo.png'

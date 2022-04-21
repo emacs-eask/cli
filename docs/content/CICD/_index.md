@@ -6,6 +6,7 @@ weight: 5
 Eask can be run in any test environment, as long the platform allows
 you to install Node onto their platform.
 
+{{< toc-tree >}}
 ## GitHub Actions
 
 Here is an example using the GitHub Actions service.
@@ -22,15 +23,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    # Install Emacs on Linux/macOS
-    - uses: purcell/setup-emacs@master
-      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
-      with:
-        version: ${{ matrix.emacs-version }}
-
-    # Install Emacs on Windows
-    - uses: jcs090218/setup-emacs-windows@master
-      if: matrix.os == 'windows-latest'
+    # Install Emacs
+    - uses: jcs090218/setup-emacs@master
       with:
         version: ${{ matrix.emacs-version }}
 
