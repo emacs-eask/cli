@@ -6,7 +6,6 @@ weight: 5
 Eask can be run in any test environment, as long the platform allows
 you to install Node onto their platform.
 
-{{< toc-tree >}}
 ## GitHub Actions
 
 Here is an example using the GitHub Actions service.

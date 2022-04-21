@@ -9,6 +9,8 @@ theme = [
 
 pygmentsUseClasses = true
 pygmentsCodeFences = true
+
+# Geekdoc configuration
 disablePathToLower = true
 enableGitInfo = true
 
@@ -24,4 +26,6 @@ enableGitInfo = true
   geekdocToC = 3
   geekdocLogo = './logo.png'
   geekdocRepo = 'https://github.com/emacs-eask/eask/'
-  
+
+  geekdocSearch = true
+  geekdocSearchShowParent = true  
