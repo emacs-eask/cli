@@ -41,7 +41,7 @@ jobs:
 
     - name: Build doc artifacts with Hugo
       run: hugo --destination ../emacs-eask.github.io
-      working-directory: doc
+      working-directory: docs
 
     # TODO: Generate better commit message
     - name: Publish doc artifacts
