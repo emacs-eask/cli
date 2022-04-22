@@ -20,6 +20,7 @@ params:
   geekdocToC: 3
   geekdocLogo: './logo.png'
   geekdocRepo: 'https://github.com/emacs-eask/eask/'
+  geekdocEditPath: 'edit/master/docs/'
 
   geekdocSearch: true
   geekdocSearchShowParent: true
