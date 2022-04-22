@@ -1,0 +1,14 @@
+---
+more:
+  - name: News
+    external: true
+    ref: "https://emacs-eask.github.io/#-news"
+    icon: "notification"
+  - name: Releases
+    ref: "https://github.com/emacs-eask/eask/releases"
+    external: true
+    icon: "download"
+  - name: "View Source"
+    ref: "https://github.com/emacs-eask/eask"
+    external: true
+    icon: "github"
