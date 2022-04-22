@@ -1,6 +1,5 @@
 ---
-title: Introduction
-geekdocNav: false
+title: Eask
 ---
 
 Eask is a command-line tool that helps you build, lint, and test Emacs Lisp
