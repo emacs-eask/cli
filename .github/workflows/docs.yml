@@ -27,8 +27,8 @@ jobs:
         node-version: '16'
 
     - name: Build theme
+      working-directory: ./docs/themes/geekdoc
       run: |
-        cd docs/themes/geekdoc
         npm install
         npm run build
 
@@ -40,7 +40,7 @@ jobs:
         token: ${{ secrets.PAT }}
 
     - name: Build doc artifacts with Hugo
-      run: hugo --destination ../emacs-eask.github.io
+      run: hugo --destination ../emacs-eask.github.io --minify
       working-directory: docs
 
     # TODO: Generate better commit message
