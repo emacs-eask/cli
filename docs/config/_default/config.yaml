@@ -1,0 +1,48 @@
+---
+baseURL: https://emacs-eask.github.io/
+title: Emacs Eask
+theme: geekdoc
+license: 'MIT'
+
+pygmentsUseClasses: true
+pygmentsCodeFences: true
+timeout: 180000
+pluralizeListTitles: false
+
+defaultContentLanguage: en
+
+disablePathToLower: true
+enableGitInfo: true
+
+enableRobotsTXT: true
+
+params:
+  geekdocToC: 3
+  geekdocLogo: './logo.png'
+  geekdocRepo: 'https://github.com/emacs-eask/eask/'
+
+  geekdocSearch: true
+  geekdocSearchShowParent: true
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  tableOfContents:
+    startLevel: 1
+    endLevel: 9
+
+taxonomies:
+  tag: tags
+
+outputs:
+  home:
+    - HTML
+  page:
+    - HTML
+  section:
+    - HTML
+  taxonomy:
+    - HTML
+  term:
+    - HTML
