@@ -3,12 +3,12 @@ more:
   - name: News
     external: true
     ref: "https://emacs-eask.github.io/#-news"
-    icon: "notification"
+    icon: gdoc_notification
   - name: Releases
     ref: "https://github.com/emacs-eask/eask/releases"
     external: true
-    icon: "download"
+    icon: gdoc_download
   - name: "View Source"
     ref: "https://github.com/emacs-eask/eask"
     external: true
-    icon: "github"
+    icon: gdoc_github
