@@ -367,6 +367,10 @@ the `eask-start' execution.")
   "Handle global options."
   (when (eask-debug-p) (setq debug-on-error t))
   (when (eask-verbose) (setq eask-verbosity (eask-verbose)))
+  (cl-case eask-verbosity
+    (1 (setq print-length 0))
+    (2 (setq print-length 1))
+    (3 (setq print-length 2)))
   (when (eask-insecure-p) (setq network-security-level 'low))
   (when (eask-timestamps-p) (setq eask-timestamps t))
   (when (eask-no-timestamps-p) (setq eask-timestamps nil))
