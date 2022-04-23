@@ -13,6 +13,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add checker rules for package metadata (f69efac5e1f66ee73424e17d733cd732d3a28eda)
 * Add checker rules for unmatch dependencies (ab42f7f39dd0db6cbbbdfbfec5e7fae397936b99)
 * Print more information for command `eask info` (6d74139fe16c5bdddd0942b66bad21c3b34c6f5a)
+* Print archive name while listing packages (b1cacc71c48821142d41e5a740e7f09ba5b37bb1)
 
 ## 0.5.x
 > Released Apr 18, 2022
