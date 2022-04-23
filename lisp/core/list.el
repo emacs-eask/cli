@@ -19,15 +19,23 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
-(defvar eask-list-package-name-width nil
-  "Width spaces for the package name.")
+(defvar eask--list-pkg-name-offset nil)
+(defvar eask--list-pkg-version-offset nil)
+(defvar eask--list-pkg-archive-offset nil)
+
+(defun eask--format-s (offset)
+  "Format OFFSET."
+  (concat " %-" (number-to-string offset) "s "))
 
 (defun eask--align (depth &optional rest)
   "Format string to align starting from the version number."
-  (concat (spaces-string (* depth 2))  ; indent for depth
-          " " (if (= depth 0) "[+]" "[+]") " %-"
-          (number-to-string (- eask-list-package-name-width (* depth 2)))
-          "s " rest))
+  (let ((prefix (if (= depth 0) "[+]" "[+]")))
+    (concat (spaces-string (* depth 2))  ; indent for depth
+            " " prefix
+            (eask--format-s (- eask--list-pkg-name-offset (* depth 2)))
+            (eask--format-s eask--list-pkg-version-offset)
+            (eask--format-s eask--list-pkg-archive-offset)
+            rest)))
 
 (defun eask-print-pkg (name depth max-depth pkg-alist)
   "Print NAME package information."
@@ -37,18 +45,35 @@
        (name (package-desc-name desc))
        (version (package-desc-version desc))
        (version (package-version-join version))
+       (archive (or (package-desc-archive desc) ""))
        (summary (package-desc-summary desc)))
     (if (= depth 0)
-        (message (eask--align depth "%-14s %-80s") name version summary)
+        (message (eask--align depth " %-80s") name version archive summary)
       (message (eask--align depth) name))
     (when-let ((reqs (package-desc-reqs desc))
                ((< depth max-depth)))
       (dolist (req reqs)
         (eask-print-pkg (car req) (1+ depth) max-depth pkg-alist)))))
 
+(defun eask--version-list (pkg-alist)
+  "Return list of versions."
+  (mapcar (lambda (elm)
+            (package-version-join (package-desc-version (cadr elm))))
+          pkg-alist))
+
+(defun eask--archive-list (pkg-alist)
+  "Return list of archives."
+  (mapcar (lambda (elm)
+            (or (package-desc-archive (cadr elm)) ""))
+          pkg-alist))
+
 (defun eask--list (list pkg-alist &optional depth)
   "List packages."
-  (let ((eask-list-package-name-width (+ (eask-seq-str-max list) 1)))
+  (let* ((eask--list-pkg-name-offset (eask-seq-str-max list))
+         (version-list (eask--version-list pkg-alist))
+         (eask--list-pkg-version-offset (eask-seq-str-max version-list))
+         (archive-list (eask--archive-list pkg-alist))
+         (eask--list-pkg-archive-offset (eask-seq-str-max archive-list)))
     (dolist (name list)
       (eask-print-pkg name 0 (or depth (eask-depth) 999) pkg-alist))))
 
