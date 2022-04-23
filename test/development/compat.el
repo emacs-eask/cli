@@ -35,7 +35,9 @@
 ;;; Test variables
 
 (defconst compat-variables
-  '(package-quickstart-file)
+  '(package-quickstart-file
+    print-level
+    print-length)
   "List of variables to check Emacs compatibility.")
 
 (dolist (var compat-variables)
