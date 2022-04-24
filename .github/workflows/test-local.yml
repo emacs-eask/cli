@@ -5,6 +5,7 @@ on:
     branches:
       - master
     paths:
+      - '**.yml'
       - lisp/**
       - cmds/**
   pull_request:
