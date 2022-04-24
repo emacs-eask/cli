@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+    paths:
+      - lisp/**
+      - cmds/**
   pull_request:
     branches:
       - master
