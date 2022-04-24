@@ -8,6 +8,7 @@
 (require 'nsm)
 (require 'url-vars)
 
+(require 'backtrace)
 (require 'cl-lib)
 (require 'pp)
 (require 'rect)
