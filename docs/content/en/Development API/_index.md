@@ -6,9 +6,11 @@ weight: 10
 This document provides a reference to the public Eask API, which you may use in
 your projects and extensions to Eask.
 
-## Command
+{{< toc >}}
 
-#### 🔎 Snippet: _prepare.el
+# Entry Point
+
+## 🔍 Snippet: _prepare.el
 
 Load `lisp/_prepare.el` to start using other Eask API.
 
@@ -21,7 +23,7 @@ Load `lisp/_prepare.el` to start using other Eask API.
 
 Each Elisp scripts should have this snippet at the very top of the file.
 
-#### 🔎 Macro: eask-start (`&rest body`)
+## 🔍 Macro: eask-start (`&rest body`)
 
 Command entry point. Each command file should contain this macro somewhere in the file.
 
@@ -31,9 +33,9 @@ Command entry point. Each command file should contain this macro somewhere in th
   )
 ```
 
-## Flags
+# Flags
 
-#### 🔎 Function: eask-global-p ()
+## 🔍 Function: eask-global-p ()
 
 Return `t` if the `global` option is enabled.
 
@@ -43,7 +45,7 @@ Return `t` if the `global` option is enabled.
   user-emacs-directory)    ; ./.eask/{emacs-version}/
 ```
 
-#### 🔎 Function: eask-force-p ()
+## 🔍 Function: eask-force-p ()
 
 Return `t` if the `force` option is enabled.
 
@@ -51,7 +53,7 @@ Return `t` if the `force` option is enabled.
 (package-delete .. (eask-force-p))
 ```
 
-#### 🔎 Function: eask-dev-p ()
+## 🔍 Function: eask-dev-p ()
 
 Return `t` if the `development` option is enabled.
 
@@ -60,7 +62,7 @@ Return `t` if the `development` option is enabled.
   (package-install 'ert-runner))  ; install development dependency
 ```
 
-#### 🔎 Function: eask-debug-p ()
+## 🔍 Function: eask-debug-p ()
 
 Return `t` if the `debug` option is enabled.
 
@@ -69,7 +71,7 @@ Return `t` if the `debug` option is enabled.
   (error "Executing in debug mode..."))
 ```
 
-#### 🔎 Function: eask-strict-p ()
+## 🔍 Function: eask-strict-p ()
 
 Return `t` if the `strict` option is enabled.
 
@@ -77,8 +79,8 @@ Return `t` if the `strict` option is enabled.
 (setq byte-compile-error-on-warn (eask-strict-p))
 ```
 
-#### 🔎 Function: eask-timestamps-p ()
-#### 🔎 Function: eask-no-timestamps-p ()
+## 🔍 Function: eask-timestamps-p ()
+## 🔍 Function: eask-no-timestamps-p ()
 
 Return `t`/`nil` if the `timestamps` option is enabled/disabled.
 
@@ -89,8 +91,8 @@ These flags can't co-exist in the same command.
   (error "This is impossible!"))
 ```
 
-#### 🔎 Function: eask-log-level-p ()
-#### 🔎 Function: eask-no-log-level-p ()
+## 🔍 Function: eask-log-level-p ()
+## 🔍 Function: eask-no-log-level-p ()
 
 Return `t`/`nil` if the `log-level` option is enabled/disabled.
 
@@ -101,7 +103,7 @@ These flags can't co-exist in the same command.
   (error "This is impossible!"))
 ```
 
-#### 🔎 Function: eask-no-color-p ()
+## 🔍 Function: eask-no-color-p ()
 
 Return `t` if the `color` option is enabled.
 
@@ -110,7 +112,7 @@ Return `t` if the `color` option is enabled.
   (ansi-color-filter-apply "This string has no ansi code!"))
 ```
 
-#### 🔎 Function: eask-allow-error-p ()
+## 🔍 Function: eask-allow-error-p ()
 
 Return `t` if the `allow-error` option is enabled.
 
@@ -119,7 +121,7 @@ Return `t` if the `allow-error` option is enabled.
   (error "Stop here."))
 ```
 
-#### 🔎 Function: eask-insecure-p ()
+## 🔍 Function: eask-insecure-p ()
 
 Return `t` if the `insecure` option is enabled.
 
@@ -129,10 +131,10 @@ Return `t` if the `insecure` option is enabled.
   )
 ```
 
-#### 🔎 Function: eask-proxy ()
-#### 🔎 Function: eask-http-proxy ()
-#### 🔎 Function: eask-https-proxy ()
-#### 🔎 Function: eask-no-proxy ()
+## 🔍 Function: eask-proxy ()
+## 🔍 Function: eask-http-proxy ()
+## 🔍 Function: eask-https-proxy ()
+## 🔍 Function: eask-no-proxy ()
 
 Return a **string** represents `hostname` + `port number`.
 
@@ -143,7 +145,7 @@ $ eask [command] --https-proxy "localhost:3000"
 $ eask [command] --no-proxy "localhost:4000"
 ```
 
-#### 🔎 Function: eask-destination ()
+## 🔍 Function: eask-destination ()
 
 Return a **string** represents the destination (output path).
 
@@ -151,7 +153,7 @@ Return a **string** represents the destination (output path).
 (write-file (or (eask-destination) "./dist"))  ; write file to destination
 ```
 
-#### 🔎 Function: eask-depth ()
+## 🔍 Function: eask-depth ()
 
 Return an **integer** represents the depth of the current print level.
 
@@ -159,7 +161,7 @@ Return an **integer** represents the depth of the current print level.
 (setq print-level (eask-depth))
 ```
 
-#### 🔎 Function: eask-verbose ()
+## 🔍 Function: eask-verbose ()
 
 Return an **integer** represents the verbosity level.
 
@@ -168,54 +170,54 @@ Return an **integer** represents the verbosity level.
   (setq byte-compile-verbose t))
 ```
 
-## `Eask`-file
+# `Eask`-file
 
 These functions are the actual implementation of `Eask`-file DSL; and
 have the word `eask-` as the function prefix.
 
 See [DSL](https://emacs-eask.github.io/eask/dsl) section for more information.
 
-#### 🔎 Function: eask-package (`name` `version` `description`)
+## 🔍 Function: eask-package (`name` `version` `description`)
 
 Alias of `package`.
 
-#### 🔎 Function: eask-package-file (`file`)
+## 🔍 Function: eask-package-file (`file`)
 
 Alias of `package-file`.
 
-#### 🔎 Function: eask-files (`pkg` `&rest args`)
+## 🔍 Function: eask-files (`pkg` `&rest args`)
 
 Alias of `files`.
 
-#### 🔎 Function: eask-depends-on (`pkg` `&rest args`)
+## 🔍 Function: eask-depends-on (`pkg` `&rest args`)
 
 Alias of `depends-on`.
 
-#### 🔎 Function: eask-development (`&rest dependencies`)
+## 🔍 Function: eask-development (`&rest dependencies`)
 
 Alias of `development`.
 
-#### 🔎 Function: eask-load-paths (`&rest dirs`)
+## 🔍 Function: eask-load-paths (`&rest dirs`)
 
 Alias of `load-paths`.
 
-#### 🔎 Function: eask-exec-paths (`&rest dirs`)
+## 🔍 Function: eask-exec-paths (`&rest dirs`)
 
 Alias of `exec-paths`.
 
-#### 🔎 Function: eask-source
+## 🔍 Function: eask-source
 
 Alias of `source`.
 
-#### 🔎 Function: eask-source-priority
+## 🔍 Function: eask-source-priority
 
 Alias of `source-priority`.
 
-## Logging
+# Logging
 
 Logger utility with timestamps and log level.
 
-#### 🔎 Variable: eask-verbosity
+## 🔍 Variable: eask-verbosity
 
 Verbosity level represent as an integer.
 
@@ -223,7 +225,7 @@ Verbosity level represent as an integer.
 (setq eask-verbosity 4)  ; you could set from 0 to 4
 ```
 
-#### 🔎 Variable: eask-timestamps
+## 🔍 Variable: eask-timestamps
 
 Log messages with timestamps.
 
@@ -237,7 +239,7 @@ Output:
 2022-04-14 13:44:46 This is a message with timestamps
 ```
 
-#### 🔎 Variable: eask-log-level
+## 🔍 Variable: eask-log-level
 
 Log messages with level.
 
@@ -251,7 +253,7 @@ Output:
 [DEBUG] This is a DEBUG message with log level
 ```
 
-#### 🔎 Variable: eask-level-color
+## 🔍 Variable: eask-level-color
 
 Define each log level color.
 
@@ -264,7 +266,7 @@ Define each log level color.
         (error . ansi-red)))
 ```
 
-#### 🔎 Macro: eask-with-verbosity (`symbol` `&rest body`)
+## 🔍 Macro: eask-with-verbosity (`symbol` `&rest body`)
 
 Define executions with the verbosity level.
 
@@ -273,7 +275,7 @@ Define executions with the verbosity level.
   (message "Hello World!~"))
 ```
 
-#### 🔎 Function: eask-debug (`msg` `&rest args`)
+## 🔍 Function: eask-debug (`msg` `&rest args`)
 
 ```elisp
 (eask-debug "This is DEBUG message")
@@ -283,7 +285,7 @@ Define executions with the verbosity level.
 2022-04-14 17:31:54 [DEBUG] This is DEBUG message
 ```
 
-#### 🔎 Function: eask-log (`msg` `&rest args`)
+## 🔍 Function: eask-log (`msg` `&rest args`)
 
 ```elisp
 (eask-log "This is LOG message")
@@ -293,7 +295,7 @@ Define executions with the verbosity level.
 2022-04-14 17:31:54 [LOG] This is LOG message
 ```
 
-#### 🔎 Function: eask-info (`msg` `&rest args`)
+## 🔍 Function: eask-info (`msg` `&rest args`)
 
 ```elisp
 (eask-info "This is INFO message")
@@ -303,7 +305,7 @@ Define executions with the verbosity level.
 2022-04-14 17:31:54 [INFO] This is INFO message
 ```
 
-#### 🔎 Function: eask-warn (`msg` `&rest args`)
+## 🔍 Function: eask-warn (`msg` `&rest args`)
 
 ```elisp
 (eask-warn "This is WARNING message")
@@ -313,7 +315,7 @@ Define executions with the verbosity level.
 2022-04-14 17:31:54 [WARNING] This is WARNING message
 ```
 
-#### 🔎 Function: eask-error (`msg` `&rest args`)
+## 🔍 Function: eask-error (`msg` `&rest args`)
 
 ```elisp
 (eask-error "This is ERROR message")
@@ -323,7 +325,7 @@ Define executions with the verbosity level.
 2022-04-14 17:31:54 [ERROR] This is ERROR message
 ```
 
-#### 🔎 Function: eask-msg (`msg` `&rest args`)
+## 🔍 Function: eask-msg (`msg` `&rest args`)
 
 Like `message` function but will replace unicodes with color.
 
@@ -331,7 +333,7 @@ Like `message` function but will replace unicodes with color.
 (eask-msg "This is a message")
 ```
 
-#### 🔎 Function: eask-write (`msg` `&rest args`)
+## 🔍 Function: eask-write (`msg` `&rest args`)
 
 Like `eask-msg` function but without newline at the end.
 

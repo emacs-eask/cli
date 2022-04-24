@@ -5,9 +5,11 @@ weight: 3
 
 This document provides a reference on the [DSL](https://en.wikipedia.org/wiki/Domain-specific_language).
 
-## Package metadata
+{{< toc >}}
 
-> 🔎 **package** (`name` `version` `description`)
+# 🚩 Package metadata
+
+## 🔍 **package** (`name` `version` `description`)
 
 Declare a package with the given name, version, and description:
 
@@ -18,7 +20,7 @@ Declare a package with the given name, version, and description:
 All arguments are strings. The version must be a version understood by Emacs'
 built-in `version-to-list`.
 
-> 🔎 **package-file** (`file` `version` `description`)
+## 🔍 **package-file** (`file` `version` `description`)
 
 Define this package and its runtime dependencies from the package headers 
 of a file (used only for package development).
@@ -27,9 +29,9 @@ of a file (used only for package development).
 (package-file "foo.el")
 ```
 
-## Package contents
+# 🚩 Package contents
 
-> 🔎 **files** (`&rest patterns`)
+## 🔍 **files** (`&rest patterns`)
 
 Specify list of files that are included in this project.
 
@@ -38,11 +40,11 @@ Specify list of files that are included in this project.
 (files "*.el" "core/*.el")
 ```
 
-## Dependencies
+# 🚩 Dependencies
 
-> 🔎 **depends-on** (`package-name` `&optional minimum-version`)
+## 🔍 **depends-on** (`package-name` `&optional minimum-version`)
 
-> 🔎 **depends-on** (`package-name` `&rest recipe`)
+## 🔍 **depends-on** (`package-name` `&rest recipe`)
 
 Specify a dependency of this package.
 
@@ -71,7 +73,7 @@ Specify dependencies in **recipe** format:
 💡 *You can install dependencies with command **eask install-deps**!*
 {{< /hint >}}
 
-> 🔎 **development** (`&rest body`)
+## 🔍 **development** (`&rest body`)
 
 Scope all `depends-on` expressions in body to development.
 
@@ -85,9 +87,9 @@ Scope all `depends-on` expressions in body to development.
 💡 *You would need to specify the **--dev** option for development dependencies!*
 {{< /hint >}}
 
-> 🔎 **source** (`alias`)
+## 🔍 **source** (`alias`)
 
-> 🔎 **source** (`name` `url`)
+## 🔍 **source** (`name` `url`)
 
 Add a package archive to install dependencies from.
 
@@ -112,7 +114,7 @@ Available aliases:
 💡 *You can use **--insecure** to make **https** to **http**, but not recommended*
 {{< /hint >}}
 
-> 🔎 **source-priority** (`name` `priority`)
+## 🔍 **source-priority** (`name` `priority`)
 
 Set archive priority.
 
@@ -120,7 +122,7 @@ Set archive priority.
 (source-priority "gnu" 5)
 ```
 
-> 🔎 **load-paths** (`&rest paths`)
+## 🔍 **load-paths** (`&rest paths`)
 
 Specify paths to add to `load-path`
 
@@ -128,7 +130,7 @@ Specify paths to add to `load-path`
 (load-paths "/lisp/")
 ```
 
-> 🔎 **exec-paths** (`&rest paths`)
+## 🔍 **exec-paths** (`&rest paths`)
 
 Specify paths to add to `exec-path`
 

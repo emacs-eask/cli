@@ -5,6 +5,8 @@ weight: 6
 
 This document helps you troubleshoot Eask.
 
+{{< toc >}}
+
 ## 🚩 Possible Error Variables
 
 Some potential variables can cause faulty Eask,
