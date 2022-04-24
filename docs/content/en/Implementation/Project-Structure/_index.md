@@ -1,6 +1,6 @@
 ---
 title: 📂 Project Structure
-weight: 200
+weight: 0
 ---
 
 There are **three** places you need to look into it:
