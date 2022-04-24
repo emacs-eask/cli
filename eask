@@ -3,8 +3,14 @@
 const env = require('./src/env');
 const yargs = require('yargs');
 
+const usage = `eask is the main command, used to manage your Emacs dependencies
+
+Eask is a command-line tool that helps you build, lint, and test Emacs Lisp packages.
+
+Usage: eask <command> [options..]`;
+
 yargs
-  .usage('Usage: eask <command> [options..]')
+  .usage(usage)
   .scriptName('')
   .commandDir('cmds', {
     recurse: true,
