@@ -42,6 +42,6 @@
 (eask-start
   (if eask--checker-log
       (mapc #'eask-msg (reverse eask--checker-log))
-    (eask-msg "(No issue found)")))
+    (eask-msg "(No issues found)")))
 
 ;;; check-eask.el ends here
