@@ -27,7 +27,7 @@ jobs:
     # You need node for eask
     - uses: actions/setup-node@v2
       with:
-        node-version: '14'
+        node-version: '16'
 
     # Install eask
     - uses: emacs-eask/setup-eask@master

@@ -13,7 +13,7 @@ The former is the static site generator, and the latter is the static web pages 
 from GitHub.
 
 {{< hint info >}}
-💡 You can find all our documentation under the **docs/content/{language}/** folder.
+💡 You can find all our documentation under the **docs/content/** folder.
 {{< /hint >}}
 
 ### 🚩 Prerequisites
@@ -40,5 +40,5 @@ $ hugo server
 And that's it! Now you can open the browser with the url `localhost:1313`. 🎉
 
 {{< hint info >}}
-💡 You can specify -D option if you consider writing a draft.
+💡 You can specify **-D** option if you consider writing a draft.
 {{< /hint >}}
