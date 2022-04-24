@@ -1,6 +1,6 @@
 ---
 title: CI / CD
-weight: 5
+weight: 400
 ---
 
 Eask can be run in any test environment, as long the platform allows

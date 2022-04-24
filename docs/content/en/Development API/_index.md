@@ -1,6 +1,6 @@
 ---
 title: Development API
-weight: 10
+weight: 700
 ---
 
 This document provides a reference to the public Eask API, which you may use in

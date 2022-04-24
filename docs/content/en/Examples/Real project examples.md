@@ -10,7 +10,6 @@ These are some projects and configurations using Eask:
 ## Configuration
 
 * [jcs-emacs](https://github.com/jcs-emacs/jcs-emacs)
-* [jcs-elpa](https://github.com/jcs-emacs/jcs-elpa)
 
 ## Packages
 
@@ -20,3 +19,7 @@ These are some projects and configurations using Eask:
 * [grammarly](https://github.com/emacs-grammarly/grammarly)
 * [popup-el](https://github.com/auto-complete/popup-el)
 * [line-reminder](https://github.com/emacs-vs/line-reminder)
+
+## ELPA
+
+* [jcs-elpa](https://github.com/jcs-emacs/jcs-elpa)

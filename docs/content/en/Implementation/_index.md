@@ -1,6 +1,6 @@
 ---
 title: Implementation
-weight: 9
+weight: 600
 ---
 
 Eask consists of two components: a command-line tool (the Eask CLI),

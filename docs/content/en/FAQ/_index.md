@@ -1,6 +1,6 @@
 ---
 title: FAQ
-weight: 7
+weight: 900
 ---
 
 ## ❓ Why Node.JS?

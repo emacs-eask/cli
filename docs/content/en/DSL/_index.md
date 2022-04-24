@@ -1,6 +1,6 @@
 ---
-title: Domain Specific Language (DSL)
-weight: 3
+title: Domain Specific Language
+weight: 200
 ---
 
 This document provides a reference on the [DSL](https://en.wikipedia.org/wiki/Domain-specific_language).
@@ -70,7 +70,7 @@ Specify dependencies in **recipe** format:
 ```
 
 {{< hint ok >}}
-💡 *You can install dependencies with command **eask install-deps**!*
+💡 Install dependencies with command **eask install-deps**!
 {{< /hint >}}
 
 ## 🔍 **development** (`&rest body`)
@@ -84,7 +84,7 @@ Scope all `depends-on` expressions in body to development.
 ```
 
 {{< hint ok >}}
-💡 *You would need to specify the **--dev** option for development dependencies!*
+💡 You would need to specify the **--dev** option for development dependencies!
 {{< /hint >}}
 
 ## 🔍 **source** (`alias`)
@@ -111,7 +111,7 @@ Available aliases:
 * `shmelpa` ([https://shmelpa.commandlinesystems.com/packages/](https://shmelpa.commandlinesystems.com/packages/))
 
 {{< hint ok >}}
-💡 *You can use **--insecure** to make **https** to **http**, but not recommended*
+💡 Use **--insecure** to make **https** to **http**, but not recommended
 {{< /hint >}}
 
 ## 🔍 **source-priority** (`name` `priority`)

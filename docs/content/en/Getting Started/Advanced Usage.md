@@ -1,6 +1,6 @@
 ---
-title: Advanced Usage
-weight: 300
+title: 🔧 Advanced Usage
+weight: 400
 ---
 
 `Eask` is just the regular Emacs Lisp file and should be read from the
