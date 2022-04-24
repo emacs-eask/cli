@@ -44,7 +44,7 @@ jobs:
 This example is testing your Emacs Lisp package in the below environment;
 
 * Emacs: `27.2` and `snapshot`
-* Node: `14.x`
+* Node: `16.x`
 * Eask: `snapshot` (latest)
 
 with these following `actions`,
