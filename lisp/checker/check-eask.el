@@ -40,6 +40,8 @@
 (add-hook 'eask-on-warning-hook #'eask--write-log)
 
 (eask-start
-  (mapc #'eask-msg (reverse eask--checker-log)))
+  (if eask--checker-log
+      (mapc #'eask-msg (reverse eask--checker-log))
+    (eask-msg "(No issue found)")))
 
 ;;; check-eask.el ends here
