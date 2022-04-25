@@ -15,6 +15,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Print more information for command `eask info` (6d74139fe16c5bdddd0942b66bad21c3b34c6f5a)
 * Print archive name while listing packages (b1cacc71c48821142d41e5a740e7f09ba5b37bb1)
 * Set main file for package lint (cfd47289bea936163c133bcd4b68d9e6b758a356)
+* Print total files with command `eask info` (fe8dbe28fb7692aa6abdaa1d871cc986ebef8f14)
 
 ## 0.5.x
 > Released Apr 18, 2022
