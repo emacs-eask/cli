@@ -28,8 +28,8 @@
   "Package lint FILENAME."
   (let* ((filename (expand-file-name filename))
          (file (eask-root-del filename)))
-    (message "")
-    (message "`%s` with package-lint" file)
+    (eask-msg "")
+    (eask-msg "`%s` with package-lint" (ansi-green file))
     (with-current-buffer (find-file filename)
       (package-lint-current-buffer)
       (kill-this-buffer)))
