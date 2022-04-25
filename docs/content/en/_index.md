@@ -45,3 +45,4 @@ The design of Eask was greatly influenced by the following projects:
 * [cask](https://github.com/cask/cask) - Project management tool for Emacs
 * [makem.sh](https://github.com/alphapapa/makem.sh) - Makefile-like script for building and testing Emacs Lisp packages
 * [epm](https://github.com/xuchunyang/epm) - Emacs Package Manager
+* [eldev](https://github.com/doublep/eldev) - Elisp Development Tool
