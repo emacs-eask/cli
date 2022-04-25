@@ -48,8 +48,8 @@
                   (ansi-cyan (length eask-depends-on))
                   (ansi-cyan (length eask-depends-on-dev)))
         (eask-msg (eask-package-description))
-        (eask-msg (ansi-cyan (eask--package-desc-url)))
         (when eask-package-desc
+          (eask-msg (ansi-cyan (eask--package-desc-url)))
           (when-let ((keywords (package-desc--keywords eask-package-desc)))
             (eask-msg "")
             (eask-msg "keywords: %s" (mapconcat #'identity keywords ", "))))
