@@ -33,6 +33,10 @@ Command entry point. Each command file should contain this macro somewhere in th
   )
 ```
 
+# 🚩 Core
+
+## 🔍 
+
 # 🚩 Flags
 
 ## 🔍 Function: eask-global-p ()
@@ -272,8 +276,13 @@ Define executions with the verbosity level.
 
 ```elisp
 (eask-with-verbosity 'debug
-  (message "Hello World!~"))
+  ;; TODO: execution here..
+  )
 ```
+
+Everything in the scope of this macro will be muted unless the verbosity
+reaches. It will only be printed when you have specified `--verbose 4`
+global option.
 
 ## 🔍 Function: eask-debug (`msg` `&rest args`)
 
