@@ -17,6 +17,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Set main file for package lint (cfd47289bea936163c133bcd4b68d9e6b758a356)
 * Print total files with command `eask info` (fe8dbe28fb7692aa6abdaa1d871cc986ebef8f14)
 * Print unpacked size with command `eask info` (82cd36c34a4b978fe76b7f9b2099ea7929d31a60)
+* Add new command `eask buttercup` (4ef7b3a054971aafc57d0060f62cf70b4126c97c)
 
 ## 0.5.x
 > Released Apr 18, 2022
