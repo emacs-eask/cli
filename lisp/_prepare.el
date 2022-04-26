@@ -9,6 +9,7 @@
 (require 'url-vars)
 
 (require 'cl-lib)
+(require 'ls-lisp)
 (require 'pp)
 (require 'rect)
 (require 'subr-x)
@@ -892,6 +893,13 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (defun eask-package-single-p ()
   "Return t if single file package."
   (not (eask-package-multi-p)))
+
+(defun eask-unpacked-size ()
+  "Return unpacked size."
+  (let ((size 0))
+    (dolist (filename (eask-package-files))
+      (cl-incf size (file-attribute-size (file-attributes filename))))
+    (string-trim (ls-lisp-format-file-size size t))))
 
 ;;
 ;;; Progress

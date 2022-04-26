@@ -57,7 +57,9 @@
         (when eask-package-file
           (eask-msg "entry: %s" (eask-root-del eask-package-file)))
         (eask-msg "kind: %s" (if (eask-package-multi-p) "tar" "single"))
+        (eask-msg "")
         (eask-msg "total files: %s" (length (eask-package-files)))
+        (eask-msg "unpacked size: %s" (eask-unpacked-size))
         (eask--print-deps "dependencies:" eask-depends-on)
         (eask--print-deps "devDependencies:" eask-depends-on-dev))
     (eask-info "(Eask file has no package information)")
