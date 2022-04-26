@@ -15,6 +15,7 @@
 
 (defconst compat-functions
   '(ansi-color-filter-apply
+    ls-lisp-format-file-size
     package--alist
     package--activate-all
     package-activate-all
