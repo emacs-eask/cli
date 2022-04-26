@@ -222,7 +222,7 @@ the `eask-start' execution.")
     (list pkg pkg-string pkg-version)))
 
 (defmacro eask-with-archives (archives &rest body)
-  "Scope that temporary makes ARCHIVE available."
+  "Scope that temporary makes ARCHIVES available."
   (declare (indent 1) (debug t))
   `(let ((package-archives package-archives)
          (archives (if (listp ,archives) ,archives (list ,archives)))

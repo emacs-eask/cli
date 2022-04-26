@@ -23,7 +23,7 @@ Load `lisp/_prepare.el` to start using other Eask API.
 
 Each Elisp scripts should have this snippet at the very top of the file.
 
-## 🔍 Macro: eask-start (`&rest body`)
+## 🔍 Macro: eask-start (&rest `body`)
 
 Command entry point. Each command file should contain this macro somewhere in the file.
 
@@ -35,7 +35,147 @@ Command entry point. Each command file should contain this macro somewhere in th
 
 # 🚩 Core
 
-## 🔍 
+## 🔍 Variable: eask-lisp-root
+
+Points to `lisp` directory from the project root.
+
+## 🔍 Function: eask-command ()
+
+Return the current command in string.
+
+## 🔍 Function: eask-checker-p ()
+
+Return t if running Eask as the checker.
+
+## 🔍 Function: eask-script (`script`)
+
+Return full script filename.
+
+```elisp
+(eask-script "extern/pacakge")  ; {project-root}/lisp/extern/package.el
+```
+
+## 🔍 Function: eask-load (`script`)
+
+Load another eask script.
+
+```elisp
+(eask-load "extern/ansi")  ; load {project-root}/lisp/extern/ansi.el file
+```
+
+## 🔍 Function: eask-call (`script`)
+
+Call another eask script.
+
+```elisp
+(eask-call "core/clean-elc")  ; call command `eask clean-elc`
+```
+
+{{< hint info >}}
+💡 This is rarely used!
+{{< /hint >}}
+
+## 🔍 Macro: eask-defvc< (`version` &rest `body`)
+
+Define scope if Emacs version is below specific version.
+
+`VERSION` is an integer and will be compared with `emacs-major-version`.
+
+```elisp
+(eask-defvc< 28
+  ;; This is missing before Emacs 28; define it
+  (defvar package-native-compile nil)
+  )
+```
+
+{{< hint info >}}
+💡 This is used for Emacs compatibility!
+{{< /hint >}}
+
+## 🔍 Macro: eask--silent (&rest `body`)
+
+Mute all messages from standard output inside the scope.
+
+```elisp
+(eask--unsilent (message "You can't hear me! :("))
+```
+
+## 🔍 Macro: eask--unsilent (&rest `body`)
+
+Unmute all messages from standard output inside the scope.
+
+```elisp
+(eask--unsilent (message "You can hear me! :)"))
+```
+
+## 🔍 Function: eask-dependencies ()
+
+Return a list of dependencies.
+
+Elements should either be `(NAME . VERSION)` or `(NAME . RECIPE-FORMAT)`.
+
+## 🔍 Function: eask-pkg-init (&optional `force`)
+
+Initialize packages for use.
+
+```elisp
+(eask-start
+  (eask-pkg-init)
+  ;; Now you can use packages installed in `package-user-dir'
+  )
+```
+
+{{< hint info >}}
+💡 This is usually called after **eask-start**!
+{{< /hint >}}
+
+## 🔍 Macro: eask-with-archives (`archives` &rest `body`)
+
+Scope that temporary makes archives available.
+
+`ARCHIVES` can either be a string or a list of strings.
+
+```elisp
+(eask-with-archives "melpa"
+  (eask-package-install 'package-build))  ; install packages that are only defined in MELPA
+```
+
+{{< hint info >}}
+💡 This is handy when you need certain packages from certain archives.
+{{< /hint >}}
+
+## 🔍 Function: eask-package-desc (`name` &optional `current`)
+
+Build package descriptor for a package.
+
+`CURRENT` means installed packages; otherwise it will return any available
+packages from selected package archives.
+
+## 🔍 Function: eask-argv (`index`)
+
+Return a command-line argument by index.
+
+## 🔍 Function: eask-args ()
+
+Return a list that is extracted from command-line arguments.
+
+```sh
+$ eask info --verbose 4 foo bar
+```
+
+It will ignore `--verbose` and `4`, and only returns `foo`, and `bar`.
+
+## 🔍 Variable: eask-file
+
+Path to currently loaded Eask-file.
+
+## 🔍 Variable: eask-file-root
+
+Directory to currently loaded Eask-file.
+
+## 🔍 Function: eask-network-insecure-p ()
+
+Return `t` if the current Emacs session allows insecure network connections.
 
 # 🚩 Flags
 
@@ -181,6 +321,52 @@ have the word `eask-` as the function prefix.
 
 See [DSL](https://emacs-eask.github.io/eask/dsl) section for more information.
 
+## 🔍 Variable: eask-package
+
+It holds package's `NAME`, `VERSION`, and `DESCRIPTION` in a plist.
+
+```elisp
+(plist-get eask-package :name)  ; return package name
+```
+
+Three functions that are extended from this variable:
+
+* `(eask-package-name)`
+* `(eask-package-version)`
+* `(eask-package-description)`
+
+## 🔍 Variable: eask-package-file
+
+Points to package main file.
+
+## 🔍 Variable: eask-package-desc
+
+Package descriptor from the package main file.
+
+```elisp
+(package-desc-p eask-package-desc)  ; return t
+```
+
+{{< hint warning >}}
+⚠ This can be **nil** if the package main file cannot be parsed correctly!
+{{< /hint >}}
+
+## 🔍 Variable: eask-files
+
+Holds a list of files pattern in wildcard specification.
+
+## 🔍 Variable: eask-depends-on-emacs
+
+Holds information about Emacs minimum version.
+
+## 🔍 Variable: eask-depends-on
+
+Holds a list of dependencies.
+
+## 🔍 Variable: eask-depends-on-dev
+
+Holds a list of dependencies that are development used.
+
 ## 🔍 Function: eask-package (`name` `version` `description`)
 
 Alias of `package`.
@@ -189,23 +375,23 @@ Alias of `package`.
 
 Alias of `package-file`.
 
-## 🔍 Function: eask-files (`pkg` `&rest args`)
+## 🔍 Function: eask-files (`pkg` &rest `args`)
 
 Alias of `files`.
 
-## 🔍 Function: eask-depends-on (`pkg` `&rest args`)
+## 🔍 Function: eask-depends-on (`pkg` &rest `args`)
 
 Alias of `depends-on`.
 
-## 🔍 Function: eask-development (`&rest dependencies`)
+## 🔍 Function: eask-development (&rest `dependencies`)
 
 Alias of `development`.
 
-## 🔍 Function: eask-load-paths (`&rest dirs`)
+## 🔍 Function: eask-load-paths (&rest `dirs`)
 
 Alias of `load-paths`.
 
-## 🔍 Function: eask-exec-paths (`&rest dirs`)
+## 🔍 Function: eask-exec-paths (&rest `dirs`)
 
 Alias of `exec-paths`.
 
@@ -221,9 +407,21 @@ Alias of `source-priority`.
 
 Logger utility with timestamps and log level.
 
+The log level value is defined in function `eask--verb2lvl`.
+
+| Level   | Description                                                                                               | Value |
+|:--------|:----------------------------------------------------------------------------------------------------------|:------|
+| `debug` | Designates fine-grained informational events that are most useful to debug an application.                | 4     |
+| `log`   | Designates normal messages.                                                                               | 3     |
+| `info`  | Designates informational messages that highlight the progress of the application at coarse-grained level. | 2     |
+| `warn`  | Designates potentially harmful situations.                                                                | 1     |
+| `error` | Designates error events that might still allow the application to continue running.                       | 0     |
+
+The default level is `log`.
+
 ## 🔍 Variable: eask-verbosity
 
-Verbosity level represent as an integer.
+The verbosity level is represented as an integer.
 
 ```elisp
 (setq eask-verbosity 4)  ; you could set from 0 to 4
@@ -270,7 +468,7 @@ Define each log level color.
         (error . ansi-red)))
 ```
 
-## 🔍 Macro: eask-with-verbosity (`symbol` `&rest body`)
+## 🔍 Macro: eask-with-verbosity (`symbol` &rest `body`)
 
 Define executions with the verbosity level.
 
@@ -284,7 +482,7 @@ Everything in the scope of this macro will be muted unless the verbosity
 reaches. It will only be printed when you have specified `--verbose 4`
 global option.
 
-## 🔍 Function: eask-debug (`msg` `&rest args`)
+## 🔍 Function: eask-debug (`msg` &rest `args`)
 
 ```elisp
 (eask-debug "This is DEBUG message")
@@ -294,7 +492,7 @@ global option.
 2022-04-14 17:31:54 [DEBUG] This is DEBUG message
 ```
 
-## 🔍 Function: eask-log (`msg` `&rest args`)
+## 🔍 Function: eask-log (`msg` &rest `args`)
 
 ```elisp
 (eask-log "This is LOG message")
@@ -304,7 +502,7 @@ global option.
 2022-04-14 17:31:54 [LOG] This is LOG message
 ```
 
-## 🔍 Function: eask-info (`msg` `&rest args`)
+## 🔍 Function: eask-info (`msg` &rest `args`)
 
 ```elisp
 (eask-info "This is INFO message")
@@ -314,7 +512,7 @@ global option.
 2022-04-14 17:31:54 [INFO] This is INFO message
 ```
 
-## 🔍 Function: eask-warn (`msg` `&rest args`)
+## 🔍 Function: eask-warn (`msg` &rest `args`)
 
 ```elisp
 (eask-warn "This is WARNING message")
@@ -324,7 +522,7 @@ global option.
 2022-04-14 17:31:54 [WARNING] This is WARNING message
 ```
 
-## 🔍 Function: eask-error (`msg` `&rest args`)
+## 🔍 Function: eask-error (`msg` &rest `args`)
 
 ```elisp
 (eask-error "This is ERROR message")
@@ -334,7 +532,7 @@ global option.
 2022-04-14 17:31:54 [ERROR] This is ERROR message
 ```
 
-## 🔍 Function: eask-msg (`msg` `&rest args`)
+## 🔍 Function: eask-msg (`msg` &rest `args`)
 
 Like `message` function but will replace unicodes with color.
 
@@ -342,7 +540,7 @@ Like `message` function but will replace unicodes with color.
 (eask-msg "This is a message")
 ```
 
-## 🔍 Function: eask-write (`msg` `&rest args`)
+## 🔍 Function: eask-write (`msg` &rest `args`)
 
 Like `eask-msg` function but without newline at the end.
 

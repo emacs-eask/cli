@@ -21,6 +21,8 @@ WIP
 
 ## Step 2: Navigate or Create an elisp project
 
+WIP
+
 ## Step 3: Create `Eask`-file
 
 WIP
