@@ -547,3 +547,57 @@ Like `eask-msg` function but without newline at the end.
 ```elisp
 (eask-write "This is a message")
 ```
+
+# 🚩 File
+
+## 🔍 Function: eask-guess-package-name ()
+
+Return the possible package name.
+
+## 🔍 Function: eask-package-files ()
+
+WIP
+
+## 🔍 Function: eask-package-el-files ()
+
+WIP
+
+## 🔍 Function: eask-package-elc-files ()
+
+WIP
+
+## 🔍 Function: eask-package-multi-p ()
+
+WIP
+
+## 🔍 Function: eask-package-single-p ()
+
+WIP
+
+## 🔍 Function: eask-unpacked-size ()
+
+WIP
+
+# 🚩 Progress
+
+## 🔍 Macro: eask-with-progress (`msg-start` `body` `msg-end`)
+
+WIP
+
+## 🔍 Function: eask-print-log-buffer (&optional `buffer-or-name`)
+
+WIP
+
+# 🚩 Help
+
+## 🔍 Function: eask-help (`command`)
+
+Print help manual located under `lisp/help/` directory.
+
+```elisp
+(eask-help 'search)
+```
+
+{{< hint info >}}
+💡 This is used when a command failed, and would like to give users some tips!
+{{< /hint >}}
