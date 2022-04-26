@@ -72,10 +72,10 @@ the `eask-start' execution.")
 
 (defun eask-call (script)
   "Call another eask script."
-  (if-let* ((script-file (eask-script script))
-            ((file-exists-p script-file)))
-      (load script-file nil t)
-    (eask-error "Scripting missing %s..." script-file)))
+  (let ((script-file (eask-script script)))
+    (if (file-exists-p script-file)
+        (load script-file nil t)
+      (eask-error "Scripting missing %s..." script-file))))
 
 ;;
 ;;; Util
