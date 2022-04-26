@@ -1031,5 +1031,6 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (eask-load "extern/package")
 (eask-load "extern/package-build")
 (eask-load "extern/s")
+(eask-load "extern/subr-x")
 
 ;;; _prepare.el ends here
