@@ -599,5 +599,5 @@ Print help manual located under `lisp/help/` directory.
 ```
 
 {{< hint info >}}
-💡 This is used when a command failed, and would like to give users some tips!
+💡 This is used when a command fails, and would like to give users some tips!
 {{< /hint >}}
