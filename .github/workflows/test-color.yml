@@ -8,6 +8,7 @@ on:
       - '**.yml'
       - lisp/**
       - cmds/**
+      - test/**
   pull_request:
     branches:
       - master
