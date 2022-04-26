@@ -72,11 +72,10 @@ the `eask-start' execution.")
 
 (defun eask-call (script)
   "Call another eask script."
-  ;; XXX After we dropped Emacs 25.x; then we can use if-let* instead
-  (let ((script-file (eask-script script)))
-    (if (file-exists-p script-file)
-        (load script-file nil t)
-      (eask-error "Scripting missing %s..." script-file))))
+  (if-let* ((script-file (eask-script script))
+            ((file-exists-p script-file)))
+      (load script-file nil t)
+    (eask-error "Scripting missing %s..." script-file)))
 
 ;;
 ;;; Util
@@ -1032,6 +1031,5 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (eask-load "extern/package")
 (eask-load "extern/package-build")
 (eask-load "extern/s")
-(eask-load "extern/subr-x")
 
 ;;; _prepare.el ends here
