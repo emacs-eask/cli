@@ -72,6 +72,7 @@ the `eask-start' execution.")
 
 (defun eask-call (script)
   "Call another eask script."
+  ;; XXX After we dropped Emacs 25.x; then we can use if-let* instead
   (let ((script-file (eask-script script)))
     (if (file-exists-p script-file)
         (load script-file nil t)
