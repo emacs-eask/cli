@@ -335,6 +335,12 @@ $ eask [GLOBAL-OPTIONS] ert [FILES..]
 $ eask [GLOBAL-OPTIONS] ert-runner [FILES..]
 ```
 
+## 🔍 eask buttercup
+
+```sh
+$ eask [GLOBAL-OPTIONS] buttercup
+```
+
 # 🚩 Utilities
 
 ## 🔍 eask upgrade-eask
