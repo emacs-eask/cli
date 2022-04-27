@@ -311,6 +311,8 @@ $ eask [GLOBAL-OPTIONS] clean-all
 
 Lint package using [package-lint](https://github.com/purcell/package-lint).
 
+Alias: `lint-package`
+
 ```sh
 $ eask [GLOBAL-OPTIONS] lint [FILES..]
 ```
@@ -339,6 +341,14 @@ $ eask [GLOBAL-OPTIONS] ert-runner [FILES..]
 
 ```sh
 $ eask [GLOBAL-OPTIONS] buttercup
+```
+
+## 🔍 eask indent
+
+Alias: `lint-indent`
+
+```sh
+$ eask [GLOBAL-OPTIONS] indent [FILES..]
 ```
 
 # 🚩 Utilities
