@@ -38,12 +38,20 @@
 (eask-start
   (eask-with-archives "melpa"
     (eask-package-install 'package-lint))
-  (if-let ((files (or (eask-expand-file-specs (eask-args))
-                      (eask-package-el-files))))
-      (progn
-        (setq package-lint-main-file eask-package-file)
-        (mapcar #'eask--package-lint-file files)
-        (eask-info "(Total of %s files linted)" (length files)))
-    (eask-info "(No files have been linted)")))
+  (let* ((given-args (eask-args))
+         (files (if given-args (eask-expand-file-specs given-args)
+                  (eask-package-el-files))))
+    (if files
+        (progn
+          (setq package-lint-main-file eask-package-file)
+          (mapcar #'eask--package-lint-file files)
+          (eask-info "(Total of %s files linted)" (length files)))
+      (eask-info "(No files have been linted)")
+      (if given-args
+          (progn
+            (eask-log "")
+            (eask-log "Cannot find matching files with given pattern %s" (eask-args))
+            (eask-log ""))
+        (eask-help 'lint)))))
 
 ;;; lint.el ends here

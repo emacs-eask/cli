@@ -1,0 +1,8 @@
+    
+💡 Use directive (package-file ..) or (files ..) to specify package files
+   
+    [+] (package-file "PKG-MAIN.el")
+
+Or,
+
+    [+] (files "*.el")
