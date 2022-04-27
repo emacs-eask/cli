@@ -19,7 +19,7 @@
 
 "use strict";
 
-exports.command = ['lint [files..]', 'lint-package [files..]'];
+exports.command = ['indent [files..]', 'lint-indent [files..]'];
 exports.desc = 'lint the package using package-lint';
 exports.builder = {
   files: {
@@ -30,5 +30,5 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'lint/lint', argv.files);
+  await UTIL.e_call(argv, 'lint/indent', argv.files);
 };

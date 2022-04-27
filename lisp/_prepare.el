@@ -950,6 +950,12 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
             (eask-msg (ansi-white (buffer-string)))))
       (eask-error "Help manual missig %s" help-file))))
 
+(defun eask--print-no-matching-files ()
+  "Print message for no matching files found."
+  (eask-log "")
+  (eask-log "Cannot find matching files with given pattern %s" (eask-args))
+  (eask-log ""))
+
 ;;
 ;;; Checker
 

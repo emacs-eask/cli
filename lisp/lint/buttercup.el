@@ -4,12 +4,7 @@
 ;;
 ;; Command to run buttercup tests,
 ;;
-;;   $ eask buttercup [files..]
-;;
-;;
-;;  Initialization options:
-;;
-;;    [files..]     specify files to run ert tests
+;;   $ eask buttercup
 ;;
 
 ;;; Code:

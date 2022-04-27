@@ -45,8 +45,9 @@
 
 (eask-start
   (require 'checkdoc)
-  (if-let* ((files (or (eask-expand-file-specs (eask-args))
-                       (eask-package-el-files)))
+  (if-let* ((files (if (eask-args)
+                       (eask-expand-file-specs (eask-args))
+                     (eask-package-el-files)))
             (len (length files))
             (s (eask--sinr len "" "s"))
             (have (eask--sinr len "has" "have")))
@@ -54,6 +55,8 @@
         (mapcar #'eask--checkdoc-file files)
         (eask-info "(Total of %s file%s %s checked)" len s have))
     (eask-info "(No files have been checked (checkdoc))")
-    (eask-help 'checkdoc)))
+    (if (eask-args)
+        (eask--print-no-matching-files)
+      (eask-help 'checkdoc))))
 
 ;;; checkdoc.el ends here
