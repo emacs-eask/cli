@@ -11,11 +11,11 @@ This document helps you troubleshoot Eask.
 
 Some potential variables can cause faulty Eask,
 
-* Emacs installed, and set up with `PATH`
+* Emacs installed and set up with `PATH`
 * Installed Eask correctly
 * Node version should be `14.x` or above
 
-## ⛔️ Error when running a Eask command
+## ⛔️ Error when running an Eask command
 
 If you run an Eask command and get an error, there are a few things you can try
 yourself:
@@ -29,7 +29,7 @@ if you chose to install from `npm`.
 **⚠ Warning**
 
 If you installed Eask with **npm**, then you should probably upgrade it through 
-**npm**. Otherwise you would just have to ensure the **git** is installed.
+**npm**. Otherwise, you would just have to ensure the **git** is installed.
 {{< /hint >}}
 
 * If the error persists, try to reinstall Eask from scratch.
