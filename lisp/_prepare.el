@@ -955,7 +955,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 
 (defun eask--checker-existence ()
   "Return errors if required metadata is missing."
-  (unless eask-package (eask-error "Missing metadata package")))
+  (unless eask-package (eask-error "Missing metadata package; make sure you have create Eask-file with $ eask init!")))
 
 (defun eask--check-strings (fmt f p)
   "Test strings (F and P); then print FMT if not equal."
