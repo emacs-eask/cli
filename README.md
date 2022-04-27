@@ -19,7 +19,8 @@ influencing your personal confiugration. Eask aims to be:
 ## 🔗 Links
 
 * [Documentation](https://emacs-eask.github.io/)
-* [Command-line interface](https://emacs-eask.github.io/eask/usage)
+* [Command-line interface](https://emacs-eask.github.io/Getting-Started/Commands-and-options/)
+* [Examples](https://emacs-eask.github.io/Examples/Real-project-examples/)
 
 ## 🧪 Testing
 
