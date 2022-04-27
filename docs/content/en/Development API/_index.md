@@ -556,37 +556,64 @@ Return the possible package name.
 
 ## 🔍 Function: eask-package-files ()
 
-WIP
+Return a list of package files.
 
 ## 🔍 Function: eask-package-el-files ()
 
-WIP
+Return a list of package files with `.el` extension.
 
 ## 🔍 Function: eask-package-elc-files ()
 
-WIP
+Return a list of package files with `.elc` extension.
 
 ## 🔍 Function: eask-package-multi-p ()
 
-WIP
+Return `nil` if single file package.
 
 ## 🔍 Function: eask-package-single-p ()
 
-WIP
+Return `t` if single file package.
 
 ## 🔍 Function: eask-unpacked-size ()
 
-WIP
+Return size of the current package.
+
+{{< hint warning >}}
+⚠️ This returns a string not bytes.
+{{< /hint >}}
 
 # 🚩 Progress
 
 ## 🔍 Macro: eask-with-progress (`msg-start` `body` `msg-end`)
 
-WIP
+Create execution with the responsive message output.
+
+```elisp
+(eask-with-progress 
+  "Downloading files... "
+  (eask-with-verbosity 'debug  ; Often used with `eask-with-verbosity'
+    ;; Execute some operations..
+    )
+  "done ✓")
+```
+
+Expect output:
+
+```
+Downloading files... done ✓
+```
 
 ## 🔍 Function: eask-print-log-buffer (&optional `buffer-or-name`)
 
-WIP
+Print buffer and highlight the `errors` and `warnings`.
+
+```elisp
+(eask-print-log-buffer "*Package-Lint*")
+```
+
+{{< hint info >}}
+💡 This is handy for linters that create a buffer to display **errors** and **warnings**.
+{{< /hint >}}
 
 # 🚩 Help
 
