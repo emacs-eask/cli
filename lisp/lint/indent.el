@@ -38,8 +38,8 @@
     (if (/= tick (buffer-modified-tick))
         ;; Indentation changed: warn for each line.
         (dolist (line (eask--undo-lines buffer-undo-list))
-          (funcall report-func "%s:%s: Indentation mismatch" (buffer-name) line))
-      (eask-msg "No issues found"))))
+          (funcall report-func "%s:%s: mismatch indentation" (buffer-name) line))
+      (eask-log "No mismatch indentation found"))))
 
 (eask-start
   (if-let ((files (if (eask-args)
