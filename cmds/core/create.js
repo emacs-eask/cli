@@ -19,14 +19,26 @@
 
 "use strict";
 
-const child_process = require("child_process");
+const init = require('./init');
+const child_process = require('child_process');
 
-exports.command = ['upgrade-eask'];
-exports.desc = 'upgrade Eask itself';
+exports.command = ['create [name]', 'new [name]'];
+exports.desc = 'create a new elisp project';
+exports.builder = {
+  name: {
+    description: 'new project name',
+    requiresArg: false,
+    type: 'string',
+  },
+};
+
+const TEMPLATE_URL = 'https://github.com/emacs-eask/template-elisp';
 
 exports.handler = async (argv) => {
-  process.chdir(UTIL.plugin_dir());
-  let proc = child_process.spawn('git', ['pull'], { stdio: 'inherit' });
+  const project_name = argv.name;
+
+  let proc = child_process.spawn('git', ['clone', TEMPLATE_URL, project_name],
+                                 { stdio: 'inherit' });
 
   // You would just need to register the error event, or else it can't print
   // the help instruction below.
@@ -34,15 +46,22 @@ exports.handler = async (argv) => {
 
   proc.on('close', function (code) {
     if (code == 0) {
-      process.stdout.write('✓ Done upgrading Eask to the latest version');
+      console.log('✓ Done cloning the template project');
+      process.chdir(project_name);
+      cloned(argv);
       return;
     }
     // Help instruction here!
-    console.log('✗ Failed to upgrade Eask, possible causes are:');
+    console.log('✗ Error while cloning template project');
     console.log('');
     console.log('  [1] Make sure you have git installed and has the right permission');
-    console.log('  [2] You probably have installed Eask with npm, try the following command:');
-    console.log('');
-    process.stdout.write('    $ npm install -g emacs-eask/eask@latest');
+    process.stdout.write(`  [2] Failed because of the target directory isn't empty`);
   });
 };
+
+
+/* Operations after cloned */
+async function cloned(argv) {
+  await init.create_eask_file();
+  UTIL.e_call(argv, 'core/create');
+}

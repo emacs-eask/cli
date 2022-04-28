@@ -23,7 +23,7 @@ const path = require('path');
 const fs = require('fs');
 const readline = require('readline');
 
-const EASK_FILE = path.join(process.cwd(), '/Eask');
+var EASK_FILE;
 
 var instance;  /* `readline` instance */
 
@@ -31,11 +31,17 @@ exports.command = ['init'];
 exports.desc = 'create new Eask file in current directory';
 
 exports.handler = async ({}) => {
+  await create_eask_file();
+};
+
+async function create_eask_file(dir) {
   let basename = path.basename(process.cwd());
   instance = readline.createInterface({
     input: process.stdin,
     output: process.stdout
   });
+
+  EASK_FILE = path.join(process.cwd(), '/Eask');
 
   if (fs.existsSync(EASK_FILE)) {
     console.log('Eask file is already exists');
@@ -71,7 +77,7 @@ Is this OK? (yes) `,
               }
             });
   instance.close();
-};
+}
 
 /*
  * Ask question with callback
@@ -83,3 +89,5 @@ function ask(question, callback) {
     instance.question(question, (answer) => { callback(answer); resolve(); });
   });
 }
+
+module.exports.create_eask_file = create_eask_file;
