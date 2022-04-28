@@ -49,7 +49,7 @@ $ eask create project-name
 
 It should create a folder named `project-name` in your current working directory.
 
-{{< hint error >}}
+{{< hint danger >}}
 💡 This feature is still under development; hence it would **NOT** work!
 {{< /hint >}}
 
