@@ -33,3 +33,7 @@ The syntaxes are similar to the `Cask` file, but different.
 (depends-on "smartparens")
 (depends-on "yasnippet")
 ```
+
+{{< hint info >}}
+💡 You would need to use **-g** or **--global** option to manage your configuration's packages!
+{{< /hint >}}

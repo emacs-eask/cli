@@ -305,7 +305,9 @@ This command is combination of all other clean commands.
 $ eask [GLOBAL-OPTIONS] clean-all
 ```
 
-# 🚩 Lint
+# 🚩 Linter
+
+Commands that lint your Emacs package.
 
 ## 🔍 eask lint [FILES..]
 
@@ -353,6 +355,8 @@ $ eask [GLOBAL-OPTIONS] indent [FILES..]
 
 # 🚩 Utilities
 
+Other helper commands.
+
 ## 🔍 eask upgrade-eask
 
 Upgrade Eask to the latest version.
@@ -370,6 +374,8 @@ $ eask [GLOBAL-OPTIONS] locate
 ```
 
 # 🚩 Checker
+
+Commands to check your Eask-file.
 
 ## 🔍 eask check-eask
 

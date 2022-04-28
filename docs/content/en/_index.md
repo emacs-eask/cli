@@ -14,9 +14,10 @@ influencing your personal configuration. Eask aims to be:
 ## ❓ Why Eask?
 
 Eask is heavily inspired by Cask, so they are somewhat related! This tool focuses
-on consistency! [Cask]() and [makem.sh]() both rely on bash which Windows doesn't
-run on by default. If you use WSL or other environment system file Cygwin/MSYS
-; then this may not be the tool you are looking for! 👀
+on consistency! [Cask](https://github.com/cask/cask) and [makem.sh](https://github.com/alphapapa/makem.sh)
+both rely on bash which Windows doesn't run on by default. If you use WSL or other
+environment system file Cygwin/MSYS ; then this may not be the tool you are looking
+for! 👀
 
 ## 📰 News
 
@@ -29,14 +30,23 @@ run on by default. If you use WSL or other environment system file Cygwin/MSYS
 
 ## 📝 Todo list
 
-- [ ] Handle condition, package doesn't in archives
-- [ ] Add `elisp-lint` command
-- [ ] Add `elint` command
-- [ ] Add `elsa` command
-- [ ] Add `lint-declare` command
-- [ ] Add `lint-regexps` command
-- [ ] Add `add-source` command
-- [ ] Add `create` command to create template project?
+### Development
+
+- [ ] [DEV] Release with an executable, so we no longer have to rely on node!
+- [ ] [BUG] Handle condition, package doesn't in archives
+
+### Eask-file commands
+
+- [ ] [FEAT] Add `create` command to create template project?
+- [ ] [FEAT] Add `add-source` command
+
+### Linter
+
+- [ ] [FEAT] Add `elisp-lint` command
+- [ ] [FEAT] Add `elint` command
+- [ ] [FEAT] Add `elsa` command
+- [ ] [FEAT] Add `lint-declare` command
+- [ ] [FEAT] Add `lint-regexps` command
 
 ## 📂 Underlying Projects
 
