@@ -19,8 +19,10 @@
 
 "use strict";
 
-const init = require('./init');
+const fs = require('fs');
 const child_process = require('child_process');
+
+const init = require('./init');
 
 exports.command = ['create [name]', 'new [name]'];
 exports.desc = 'create a new elisp project';
@@ -34,10 +36,12 @@ exports.builder = {
 
 const TEMPLATE_URL = 'https://github.com/emacs-eask/template-elisp';
 
-exports.handler = async (argv) => {
-  const project_name = argv.name;
+var PROJECT_PATH;
 
-  let proc = child_process.spawn('git', ['clone', TEMPLATE_URL, project_name],
+exports.handler = async (argv) => {
+  PROJECT_PATH = argv.name;
+
+  let proc = child_process.spawn('git', ['clone', TEMPLATE_URL, PROJECT_PATH],
                                  { stdio: 'inherit' });
 
   // You would just need to register the error event, or else it can't print
@@ -47,8 +51,9 @@ exports.handler = async (argv) => {
   proc.on('close', function (code) {
     if (code == 0) {
       console.log('✓ Done cloning the template project');
-      process.chdir(project_name);
-      cloned(argv);
+      console.log('');
+      process.chdir(PROJECT_PATH);
+      _cloned(argv);
       return;
     }
     // Help instruction here!
@@ -60,8 +65,9 @@ exports.handler = async (argv) => {
 };
 
 
-/* Operations after cloned */
-async function cloned(argv) {
+/* Operations after _cloned */
+async function _cloned(argv) {
+  console.log('Initialize the Eask-file for your project...');
   await init.create_eask_file();
   UTIL.e_call(argv, 'core/create');
 }

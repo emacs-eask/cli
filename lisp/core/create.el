@@ -42,17 +42,24 @@
   (string-trim (shell-command-to-string "git config user.email")))
 
 (eask-start
-  (let ((template-package-file (expand-file-name (concat eask--template-project-name ".el"))))
-    (rename-file template-package-file eask-package-file)
-    (with-current-buffer (find-file eask-package-file)
-      (eask--replace-string-in-buffer eask--template-project-name (eask-package-name))
-      (eask--replace-string-in-buffer "{ SUMMARY }" (eask-package-description))
-      (eask--replace-string-in-buffer "{ YEAR }" (format-time-string "%Y"))
-      (eask--replace-string-in-buffer "{ FULL_NAME }" (eask--get-user))
-      (eask--replace-string-in-buffer "{ MAIL_ADDR }" (eask--get-mail))
-      (save-buffer))
-    (eask-msg "✓ Congratulations! Your new Elisp project is created in %s" eask-file-root)
-    (eask-msg "")
-    (eask-msg "Visit https://emacs-eask.github.io/ for quickstart guide and full documentation.")))
+  (eask-with-progress
+    "Preparing your new elisp project... "
+    (let ((template-package-file (expand-file-name (concat eask--template-project-name ".el"))))
+      (rename-file template-package-file eask-package-file)
+      (with-current-buffer (find-file eask-package-file)
+        (eask--replace-string-in-buffer eask--template-project-name (eask-package-name))
+        (eask--replace-string-in-buffer "{ SUMMARY }" (eask-package-description))
+        (eask--replace-string-in-buffer "{ YEAR }" (format-time-string "%Y"))
+        (eask--replace-string-in-buffer "{ FULL_NAME }" (eask--get-user))
+        (eask--replace-string-in-buffer "{ MAIL_ADDR }" (eask--get-mail))
+        (save-buffer)))
+    "done ✓")
+  (eask-msg "")
+  (eask-msg "Congratulations! Your new Elisp project is created in %s" eask-file-root)
+  (eask-msg "")
+  (eask-msg "  [1] Navigate to %s" eask-file-root)
+  (eask-msg "  [2] Try out the command `eask info`")
+  (eask-msg "")
+  (eask-msg "Visit https://emacs-eask.github.io/ for quickstart guide and full documentation."))
 
 ;;; create.el ends here
