@@ -34,9 +34,9 @@ run on by default. If you use WSL or other environment system file Cygwin/MSYS
 - [ ] Add `elint` command
 - [ ] Add `elsa` command
 - [ ] Add `lint-declare` command
-- [ ] Add `lint-indent` command
 - [ ] Add `lint-regexps` command
 - [ ] Add `add-source` command
+- [ ] Add `create` command to create template project?
 
 ## 📂 Underlying Projects
 

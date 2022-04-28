@@ -369,6 +369,8 @@ Show Eask installed location
 $ eask [GLOBAL-OPTIONS] locate
 ```
 
+# 🚩 Checker
+
 ## 🔍 eask check-eask
 
 Lint an `Eask`-file.
