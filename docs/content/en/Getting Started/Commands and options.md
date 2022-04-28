@@ -13,6 +13,14 @@ $ eask [GLOBAL-OPTIONS] [COMMAND] [COMMAND-OPTIONS] [COMMAND-ARGUMENTS]
 
 # 🚩 Core
 
+## 🔍 eask create
+
+Create an elisp project with the default `Eask`-file and CI/CD support.
+
+{{< hint info >}}
+💡 The templates project is located in https://github.com/emacs-eask/template-elisp
+{{< /hint >}}
+
 ## 🔍 eask init
 
 Eask will generate file like:
@@ -29,8 +37,8 @@ Eask will generate file like:
 (depends-on "emacs" "26.1")
 ```
 
-{{< hint ok >}}
-💡 *See section [Examples](https://emacs-eask.github.io/examples) for more information!*
+<!-- {{< hint ok >}} -->
+💡 See section [Examples](https://emacs-eask.github.io/examples) for more information!
 {{< /hint >}}
 
 ## 🔍 eask info
@@ -50,7 +58,7 @@ $ eask [GLOBAL-OPTIONS] install-deps [--dev]
 ```
 
 {{< hint ok >}}
-💡 *Specify option [--dev] to install dependencies from the development scope.*
+💡 Specify option [--dev] to install dependencies from the development scope.
 {{< /hint >}}
 
 ## 🔍 eask install
