@@ -37,7 +37,6 @@ for! 👀
 
 ### Eask-file commands
 
-- [ ] [FEAT] Add `create` command to create template project?
 - [ ] [FEAT] Add `add-source` command
 
 ### Linter
