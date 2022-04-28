@@ -37,7 +37,7 @@ Eask will generate file like:
 (depends-on "emacs" "26.1")
 ```
 
-<!-- {{< hint ok >}} -->
+{{< hint ok >}}
 💡 See section [Examples](https://emacs-eask.github.io/examples) for more information!
 {{< /hint >}}
 
