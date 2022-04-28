@@ -49,6 +49,10 @@ $ eask create project-name
 
 It should create a folder named `project-name` in your current working directory.
 
+{{< hint error >}}
+💡 This feature is still under development; hence it would **NOT** work!
+{{< /hint >}}
+
 ## Step 4: Create `Eask`-file
 
 If you choose to create project using the command `eask create`. The Eask-file
