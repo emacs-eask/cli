@@ -19,7 +19,6 @@
 
 "use strict";
 
-const fs = require('fs');
 const child_process = require('child_process');
 
 const init = require('./init');
@@ -36,12 +35,10 @@ exports.builder = {
 
 const TEMPLATE_URL = 'https://github.com/emacs-eask/template-elisp';
 
-var PROJECT_PATH;
-
 exports.handler = async (argv) => {
-  PROJECT_PATH = argv.name;
+  const project_name = argv.name;
 
-  let proc = child_process.spawn('git', ['clone', TEMPLATE_URL, PROJECT_PATH],
+  let proc = child_process.spawn('git', ['clone', TEMPLATE_URL, project_name],
                                  { stdio: 'inherit' });
 
   // You would just need to register the error event, or else it can't print
@@ -52,7 +49,7 @@ exports.handler = async (argv) => {
     if (code == 0) {
       console.log('✓ Done cloning the template project');
       console.log('');
-      process.chdir(PROJECT_PATH);
+      process.chdir(project_name);
       _cloned(argv);
       return;
     }
