@@ -18,7 +18,7 @@ $ eask [GLOBAL-OPTIONS] [COMMAND] [COMMAND-OPTIONS] [COMMAND-ARGUMENTS]
 Create an elisp project with the default `Eask`-file and CI/CD support.
 
 {{< hint info >}}
-💡 The templates project is located in https://github.com/emacs-eask/template-elisp
+💡 The template project is located in https://github.com/emacs-eask/template-elisp
 {{< /hint >}}
 
 ## 🔍 eask init
