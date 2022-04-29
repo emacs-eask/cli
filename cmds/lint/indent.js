@@ -20,10 +20,10 @@
 "use strict";
 
 exports.command = ['indent [files..]', 'lint-indent [files..]'];
-exports.desc = 'lint the package using package-lint';
+exports.desc = 'lint the package using indent-lint';
 exports.builder = {
   files: {
-    description: 'specify files to do package lint',
+    description: 'files you want indent-lint to run on',
     requiresArg: false,
     type: 'array',
   },

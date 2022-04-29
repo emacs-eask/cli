@@ -2,14 +2,14 @@
 
 ;;; Commentary:
 ;;
-;; Command use to ,
+;; Command use to check package with indent-lint,
 ;;
 ;;   $ eask indent [names..]
 ;;
 ;;
 ;;  Initialization options:
 ;;
-;;    [names..]     specify files to do indent lint
+;;    [names..]     files you want indent-lint to run on
 ;;
 
 ;;; Code:
