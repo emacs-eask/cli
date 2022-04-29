@@ -4,7 +4,9 @@
 
 (files
  "eask"
+ "bin"
  "cmds/**/*.js"
- "lisp/**/*.el")
+ "lisp/**/*.el"
+ "src")
 
 (depends-on "emacs" "26.1")
