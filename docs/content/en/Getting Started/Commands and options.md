@@ -361,6 +361,14 @@ Alias: `lint-indent`
 $ eask [GLOBAL-OPTIONS] indent [FILES..]
 ```
 
+## 🔍 eask declare
+
+Alias: `lint-declare`
+
+```sh
+$ eask [GLOBAL-OPTIONS] declare [FILES..]
+```
+
 # 🚩 Utilities
 
 Other helper commands.

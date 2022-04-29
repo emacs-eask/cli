@@ -20,6 +20,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add new command `eask buttercup` (4ef7b3a054971aafc57d0060f62cf70b4126c97c)
 * Add new command `eask indent` (99ec942878452ae1c27f027f4a577eefb70a0d92)
 * Add new command `eask create` (94b1075f919d53c0741c61ebea42a0fbed3d1ccf)
+* Add new command `eask declare` (04b3b51a6a07d3a84611b6082ca46f2aafece7bd)
 
 ## 0.5.x
 > Released Apr 18, 2022
