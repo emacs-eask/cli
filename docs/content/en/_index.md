@@ -45,7 +45,6 @@ for! 👀
 - [ ] [FEAT] Add `elisp-lint` command
 - [ ] [FEAT] Add `elint` command
 - [ ] [FEAT] Add `elsa` command
-- [ ] [FEAT] Add `lint-declare` command
 - [ ] [FEAT] Add `lint-regexps` command
 
 ## 📂 Underlying Projects
