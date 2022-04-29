@@ -60,18 +60,41 @@ Otherwise, do:
 $ eask init
 ```
 
-## Step 5: Start pacakge development
+## Step 5: Start the pacakge development
 
-To install all dependencies, run:
+To checkout your package information, run:
 
 ```sh
-$ eask install-deps
+$ eask info
 ```
 
-{{< hint ok >}}
-💡 *Use **-g** options for your Emacs configuration. Otherwise, it will create
-a folder named **.eask** and install all dependencies into it.*
+## Step 6: Manage package archives
+
+You can manage package archives by using the `source` directive in your **Eask**-file.
+
+```elisp
+(source "gnu")    ; default
+(source "melpa")  ; Add package archives
+```
+
+{{< hint info >}}
+💡 See [DSL/source](https://emacs-eask.github.io/DSL/#-source-alias) for more information!
 {{< /hint >}}
+
+## Step 7: Add some dependencies
+
+You can add dependenices by using `depends-on` directive in your **Eask**-file.
+
+```elisp
+...
+
+(depends-on "f")
+(depends-on "ht")
+```
+
+## Step 8: Install dependencies
+
+WIP
 
 ## 🔭 Finding Emacs
 
