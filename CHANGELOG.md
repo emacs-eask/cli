@@ -21,6 +21,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add new command `eask indent` (99ec942878452ae1c27f027f4a577eefb70a0d92)
 * Add new command `eask create` (94b1075f919d53c0741c61ebea42a0fbed3d1ccf)
 * Add new command `eask declare` (04b3b51a6a07d3a84611b6082ca46f2aafece7bd)
+* Add new command `eask regexps` (9121e1c37b2640a21cdd7abd1d0a2f51ac1768dd)
 
 ## 0.5.x
 > Released Apr 18, 2022
