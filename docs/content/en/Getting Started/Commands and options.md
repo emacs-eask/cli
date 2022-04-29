@@ -369,6 +369,14 @@ Alias: `lint-declare`
 $ eask [GLOBAL-OPTIONS] declare [FILES..]
 ```
 
+## 🔍 eask regexps
+
+Alias: `lint-regexps` and `relint`
+
+```sh
+$ eask [GLOBAL-OPTIONS] regexps [FILES..]
+```
+
 # 🚩 Utilities
 
 Other helper commands.

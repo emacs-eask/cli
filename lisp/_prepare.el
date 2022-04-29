@@ -95,6 +95,10 @@ the `eask-start' execution.")
   (declare (indent 0) (debug t))
   `(let (inhibit-message) ,@body))
 
+(defun eask-2str (obj)
+  "Convert OBJ to string."
+  (format "%s" obj))
+
 (defun eask--sinr (len-or-list form-1 form-2)
   "If LEN-OR-LIST has length of 1; return FORM-1, else FORM-2."
   (let ((len (if (numberp len-or-list) len-or-list (length len-or-list))))
@@ -103,7 +107,7 @@ the `eask-start' execution.")
 (defun eask-seq-str-max (sequence)
   "Return max length in list of strings."
   (let ((result 0))
-    (mapc (lambda (elm) (setq result (max result (length (format "%s" elm))))) sequence)
+    (mapc (lambda (elm) (setq result (max result (length (eask-2str elm))))) sequence)
     result))
 
 ;;
@@ -914,7 +918,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (defun eask-progress-seq (prefix sequence suffix func)
   "Progress SEQUENCE with messages."
   (let* ((total (length sequence)) (count 0)
-         (offset (format "%s" (length (format "%s" total)))))
+         (offset (eask-2str (length (eask-2str total)))))
     (mapc
      (lambda (item)
        (cl-incf count)
@@ -942,7 +946,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 
 (defun eask-help (command)
   "Show help."
-  (let* ((command (format "%s" command))  ; convert to string
+  (let* ((command (eask-2str command))  ; convert to string
          (help-file (concat eask-lisp-root "help/" command)))
     (if (file-exists-p help-file)
         (with-temp-buffer
@@ -982,10 +986,10 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
      (eask-package-description) (package-desc-summary eask-package-desc))
     (let* ((dependencies (append eask-depends-on-emacs eask-depends-on))
            (dependencies (mapcar #'car dependencies))
-           (dependencies (mapcar (lambda (elm) (format "%s" elm)) dependencies))
+           (dependencies (mapcar (lambda (elm) (eask-2str elm)) dependencies))
            (requirements (package-desc-reqs eask-package-desc))
            (requirements (mapcar #'car requirements))
-           (requirements (mapcar (lambda (elm) (format "%s" elm)) requirements)))
+           (requirements (mapcar (lambda (elm) (eask-2str elm)) requirements)))
       (dolist (req requirements)
         (unless (member req dependencies)
           (eask-warn "Unmatch dependency '%s'; add (depends-on \"%s\") to Eask-file or consider removing it" req req)))
