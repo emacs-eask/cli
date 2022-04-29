@@ -5,8 +5,13 @@ All notable changes to this project will be documented in this file.
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 
-## 0.6.x (Unreleased)
+## 0.7.x (Unreleased)
 > Released N/A
+
+* N/A
+
+## 0.6.x
+> Released Apr 29, 2022
 
 * Clean up `ansi-apply`, now accept object for the first argument (67277ffb70ff8966d452da76fd50ad3cfb41ef08)
 * Ensure Eask-file exists before executing the command (d40e29a042c1886d5748480d789a8d7b36735a09)
