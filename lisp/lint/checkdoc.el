@@ -19,11 +19,11 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
-(defvar eask--checkdoc-error nil "Error flag.")
+(defvar eask--checkdoc-errors nil "Error flag.")
 
 (defun eask--checkdoc-print-error (text start end &optional unfixable)
   "Print error for checkdoc."
-  (setq eask--checkdoc-error t)
+  (setq eask--checkdoc-errors t)
   (let ((msg (concat (checkdoc-buffer-label) ":"
                      (int-to-string (count-lines (point-min) (or start (point-min))))
                      ": " text)))
@@ -37,11 +37,11 @@
   "Run checkdoc on FILENAME."
   (let* ((filename (expand-file-name filename))
          (file (eask-root-del filename))
-         (eask--checkdoc-error))
+         (eask--checkdoc-errors))
     (eask-msg "")
     (eask-msg "`%s` with checkdoc (%s)" (ansi-green file) checkdoc-version)
     (checkdoc-file filename)
-    (unless eask--checkdoc-error (eask-msg "No issues found"))))
+    (unless eask--checkdoc-errors (eask-msg "No issues found"))))
 
 (eask-start
   (require 'checkdoc)

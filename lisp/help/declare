@@ -1,0 +1,17 @@
+    
+💡 You need to specify file(s) you want the check-declare to run
+   
+    $ eask declare FILE-1 FILE-2
+    
+💡 Or edit Eask file with [package-file] or [files] specifier
+
+    [+] (package-file "ENTRY")         ; One argument with a string
+    [+] (files "FILE-1" "FILE-2" ...)  ; All arguments are wildcard patterns
+
+For example,
+    
+    [+] (files "*.el")
+
+💡 Tip: You can use the command [files] to show all selected files
+   
+    $ eask files
