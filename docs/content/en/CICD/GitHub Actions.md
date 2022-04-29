@@ -24,12 +24,12 @@ jobs:
       with:
         version: ${{ matrix.emacs-version }}
 
-    # You need node for eask
+    # You need node for Eask
     - uses: actions/setup-node@v2
       with:
         node-version: '16'
 
-    # Install eask
+    # Install Eask
     - uses: emacs-eask/setup-eask@master
       with:
         version: 'snapshot'
@@ -49,8 +49,7 @@ This example is testing your Emacs Lisp package in the below environment;
 
 with these following `actions`,
 
-* [setup-emacs](https://github.com/purcell/setup-emacs) to install Emacs on Unix system (Linux/macOS)
-* [setup-emacs-windows](https://github.com/jcs090218/setup-emacs-windows) to install Emacs on Windows
+* [setup-emacs](https://github.com/jcs090218/setup-emacs) to install Emacs
 * [setup-node](https://github.com/actions/setup-node) to set up `Node` and `npm`
 * [setup-eask](https://github.com/emacs-eask/setup-eask) to install desired Eask version
 
