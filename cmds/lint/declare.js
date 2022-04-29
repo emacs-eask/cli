@@ -20,10 +20,10 @@
 "use strict";
 
 exports.command = ['declare [files..]', 'lint-declare [files..]'];
-exports.desc = 'run declare';
+exports.desc = 'run check-declare';
 exports.builder = {
   files: {
-    description: 'files you want checkdoc to run on',
+    description: 'files you want check-declare to run on',
     requiresArg: false,
     type: 'array',
   },

@@ -1,15 +1,15 @@
-;;; declare.el --- Run declare  -*- lexical-binding: t; -*-
+;;; declare.el --- Run check-declare  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
-;; Commmand use to run `declare' for all files
+;; Commmand use to run `check-declare' for all files
 ;;
 ;;   $ eask declare
 ;;
 ;;
 ;;  Initialization options:
 ;;
-;;    [files..]     files you want checkdoc to run on
+;;    [files..]     files you want check-declare to run on
 ;;
 
 ;;; Code:
