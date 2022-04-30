@@ -33,7 +33,7 @@
   (eask-pkg-init)
   ;; XXX This is the hack by adding all `bin' folders from local elpa.
   (eask-setup-paths)
-  (setq commander-args (cddr argv))  ; by pass `--' as well
+  (setq commander-args (cddr eask-argv))  ; by pass `--' as well
   (if-let ((name (eask-argv 1)))
       (or
        ;; 1) Execute executable if found

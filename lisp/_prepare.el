@@ -42,6 +42,9 @@
 ;;
 ;;; Execution
 
+(defconst eask-argv argv
+  "This stores the real argv; the argv will soon be replaced with `(eask-args)'.")
+
 (defconst eask--script (nth 1 (member "-scriptload" command-line-args))
   "Script currently executing.")
 
@@ -337,7 +340,7 @@ the `eask-start' execution.")
 
 (defun eask--flag (flag)
   "Return non-nil if FLAG exists.."
-  (member (concat "--eask" flag) argv))
+  (member (concat "--eask" flag) eask-argv))
 
 (defun eask--flag-value (flag)
   "Return value for FLAG."
@@ -433,11 +436,11 @@ other scripts internally.  See function `eask-call'.")
   "Return non-nil if ARG is known internal command."
   (member arg eask--command-list))
 
-(defun eask-argv (index) "Return argument value by INDEX." (elt argv index))
+(defun eask-argv (index) "Return argument value by INDEX." (elt eask-argv index))
 
 (defun eask-args ()
   "Get all arguments except options."
-  (let ((argv (cl-remove-if (lambda (arg) (member arg eask--option-switches)) argv))
+  (let ((argv (cl-remove-if (lambda (arg) (member arg eask--option-switches)) eask-argv))
         (args) (skip-next))
     (dolist (arg argv)
       (if skip-next (setq skip-next nil)
@@ -449,7 +452,7 @@ other scripts internally.  See function `eask-call'.")
 (defmacro eask--batch-mode (&rest body)
   "Initialize for batch-mode"
   (declare (indent 0) (debug t))
-  `(let (;;(command-line-args-left (eask-args))
+  `(let ((argv (eask-args))
          load-file-name buffer-file-name)
      ,@body))
 
@@ -547,8 +550,8 @@ Eask file in the workspace."
            ;; We accept Eask file in global scope, but it shouldn't be used
            ;; as a sandbox.
            (if (eask-file-try-load "./")
-               (eask-msg "✓ Loading default Eask file in %s... done!" eask-file)
-             (eask-msg "✗ Loading default Eask file... missing!"))
+               (eask-msg "✓ Loading config Eask file in %s... done!" eask-file)
+             (eask-msg "✗ Loading config Eask file... missing!"))
            (message "")
            (package-activate-all)
            (eask-with-progress
