@@ -3,6 +3,6 @@
 
     $ eask init
 
-Or you can generate the elisp project by:
+Or you can generate an elisp project by doing:
 
     $ eask create [project-name]
