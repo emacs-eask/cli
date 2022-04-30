@@ -1,0 +1,8 @@
+
+💡 You need Eask-file to show information about the config/package, to create one:
+
+    $ eask init
+
+Or you can generate the elisp project by:
+
+    $ eask create [project-name]
