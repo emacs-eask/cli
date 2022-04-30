@@ -22,6 +22,7 @@ for! 👀
 ## 📰 News
 
 * `0.6.0` - You can now use `eask create` to create an elisp project
+* `0.5.0` - Handle error for failed archive
 * `0.4.0` - Add color logger
 * `0.3.0` - Add verbosity level and timestamps
 * `0.2.0` - Done basic error handling with exit code at the end of executions
@@ -33,7 +34,6 @@ for! 👀
 ### Development
 
 - [ ] [DEV] Release with an executable, so we no longer have to rely on node!
-- [ ] [BUG] Handle condition, package doesn't in archives
 
 ### Eask-file commands
 
