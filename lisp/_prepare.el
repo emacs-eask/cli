@@ -446,15 +446,22 @@ other scripts internally.  See function `eask-call'.")
           (push arg args))))
     (reverse args)))
 
+(defmacro eask--batch-mode (&rest body)
+  "Initialize for batch-mode"
+  (declare (indent 0) (debug t))
+  `(let ((command-line-args-left (eask-args))
+         load-file-name buffer-file-name)
+     ,@body))
+
 (defmacro eask--setup-env (&rest body)
   "Execute BODY with workspace setup."
   (declare (indent 0) (debug t))
-  `(let ((load-file-name) (buffer-file-name)  ; initialize for batch-mode
-         (alist))
-     (dolist (cmd eask--command-list)
-       (push (cons cmd '(lambda (&rest _))) alist))
-     (setq command-switch-alist (append command-switch-alist alist))
-     ,@body))
+  `(eask--batch-mode
+     (let (alist)
+       (dolist (cmd eask--command-list)
+         (push (cons cmd '(lambda (&rest _))) alist))
+       (setq command-switch-alist (append command-switch-alist alist))
+       ,@body)))
 
 (defconst eask-file-keywords
   '("package" "package-file" "files"
