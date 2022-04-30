@@ -449,7 +449,7 @@ other scripts internally.  See function `eask-call'.")
 (defmacro eask--batch-mode (&rest body)
   "Initialize for batch-mode"
   (declare (indent 0) (debug t))
-  `(let ((command-line-args-left (eask-args))
+  `(let (;;(command-line-args-left (eask-args))
          load-file-name buffer-file-name)
      ,@body))
 
