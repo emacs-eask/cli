@@ -8,7 +8,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 0.7.x (Unreleased)
 > Released N/A
 
-* N/A
+* Reset `command-line-args-left` variable by default (fbda232e962e3566efb94d8061a4035709b7c6e2)
 
 ## 0.6.x
 > Released Apr 29, 2022
