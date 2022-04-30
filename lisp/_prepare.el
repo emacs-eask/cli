@@ -249,9 +249,15 @@ the `eask-start' execution.")
          "done ✓"))
      ,@body))
 
+(defun eask-package-installable-p (pkg)
+  "Return non-nil if package is installable."
+  (assq (if (stringp pkg) (intern pkg) pkg) package-archive-contents))
+
 (defun eask-package-install (pkg)
   "Install the package."
   (eask-pkg-init)
+  (unless (eask-package-installable-p pkg)
+    (eask-error "Package not installable `%s'; make sure package archives are included" pkg))
   (let* ((pkg-info (eask--pkg-transaction-vars pkg))
          (pkg         (nth 0 pkg-info))
          (pkg-string  (nth 1 pkg-info))
