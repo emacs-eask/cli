@@ -22,7 +22,18 @@ Emacs configuration/packages consistent on every operating system!
 ## ❓ Why yargs?
 
 [yargs](https://www.npmjs.com/package/yargs) has a vary wide community; and it
-has been used in many tools.
+has been used in many tools. It's cross-platform! And most importantly, this is
+one of the tools that work well on Linux, macOS, and Windows.
+
+The is also the major difference compared with Eask and other alternatives. [Cask](),
+[makem.sh](), or [Eldev]() rely more on `batch` and `bash`. We chose different
+route and would like to hand over heavy tasks to a high-level programming
+language, **`JavaScript`**. The development simply beame easier, since we would
+not need to care about different types of shells anymore!
+
+The drawback is the NodeJS runtime, but we can simply pack the entire CLI porgram
+into an executable! That way we would not need to install `Node` and `npm` before
+using eask!
 
 ## ❓ Why am I getting the error package target `tar`/`el` not found while installing?
 
