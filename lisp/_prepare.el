@@ -2,6 +2,9 @@
 ;;; Commentary: Prepare to setup Eask environment for sandboxing
 ;;; Code:
 
+(when (version< emacs-version "26.1")
+  (error "Eask requires Emacs 26.1 and above!"))
+
 (require 'ansi-color)
 (require 'package)
 (require 'project)
