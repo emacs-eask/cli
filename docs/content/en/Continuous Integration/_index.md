@@ -1,5 +1,5 @@
 ---
-title: CI / CD
+title: Continuous Integration
 weight: 400
 ---
 
