@@ -2,9 +2,6 @@
 ;;; Commentary: Prepare to setup Eask environment for sandboxing
 ;;; Code:
 
-(when (version< emacs-version "26.1")
-  (error "Eask requires Emacs 26.1 and above!"))
-
 (require 'ansi-color)
 (require 'package)
 (require 'project)
@@ -1061,5 +1058,11 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (eask-load "extern/package")
 (eask-load "extern/package-build")
 (eask-load "extern/s")
+
+;;
+;;; Requirement
+
+(when (version< emacs-version "26.1")
+  (eask-error "Eask requires Emacs 26.1 and above!"))
 
 ;;; _prepare.el ends here
