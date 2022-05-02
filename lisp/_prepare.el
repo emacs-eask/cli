@@ -166,7 +166,7 @@ the `eask-start' execution.")
 (defun eask--install-deps (dependencies msg)
   "Install DEPENDENCIES."
   (let* ((names (mapcar #'car dependencies))
-         (names (mapcar #'intern names))
+         (names (mapcar (lambda (elm) (if (stringp elm) (intern elm) elm)) names))
          (len (length dependencies))
          (ies (eask--sinr len "y" "ies"))
          (pkg-installed (cl-remove-if #'package-installed-p names))
