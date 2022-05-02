@@ -19,8 +19,8 @@
 
 "use strict";
 
-exports.command = ['ert [files..]'];
-exports.desc = 'run ert tests';
+exports.command = ['ert-runner [files..]'];
+exports.desc = 'run ert tests using ert-runner';
 exports.builder = {
   files: {
     description: 'specify files to do ert tests',
@@ -30,5 +30,5 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'lint/ert', argv.files);
+  await UTIL.e_call(argv, 'test/ert-runner', argv.files);
 };

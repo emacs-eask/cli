@@ -351,22 +351,12 @@ Run checkdoc.
 $ eask [GLOBAL-OPTIONS] checkdoc [FILES..]
 ```
 
-## 🔍 eask ert [FILES..]
+## 🔍 eask elint
+
+Run elint.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] ert [FILES..]
-```
-
-## 🔍 eask ert-runner [FILES..]
-
-```sh
-$ eask [GLOBAL-OPTIONS] ert-runner [FILES..]
-```
-
-## 🔍 eask buttercup
-
-```sh
-$ eask [GLOBAL-OPTIONS] buttercup
+$ eask [GLOBAL-OPTIONS] elint [FILES..]
 ```
 
 ## 🔍 eask indent
@@ -391,6 +381,26 @@ Alias: `lint-regexps`, `relint`
 
 ```sh
 $ eask [GLOBAL-OPTIONS] regexps [FILES..]
+```
+
+# 🚩 Testing
+
+## 🔍 eask ert [FILES..]
+
+```sh
+$ eask [GLOBAL-OPTIONS] ert [FILES..]
+```
+
+## 🔍 eask ert-runner [FILES..]
+
+```sh
+$ eask [GLOBAL-OPTIONS] ert-runner [FILES..]
+```
+
+## 🔍 eask buttercup
+
+```sh
+$ eask [GLOBAL-OPTIONS] buttercup
 ```
 
 # 🚩 Utilities
