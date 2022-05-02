@@ -211,6 +211,20 @@ Load Emacs Lisp files in order.
 $ eask [GLOBAL-OPTIONS] load [FILES..]
 ```
 
+## 🔍 eask activate
+
+Activate package; use to test the package activation
+
+```sh
+$ eask [GLOBAL-OPTIONS] activate [FILES..]
+```
+
+{{< hint info >}}
+💡 You can pass in **[FILES..]** so you can test your package activation fully!
+
+**[FILES..]** will be loaded after the package is activated.
+{{< /hint >}}
+
 ## 🔍 eask concate
 
 Concatenate all Emacs Lisp files into one big file.
