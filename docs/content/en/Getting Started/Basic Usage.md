@@ -28,6 +28,7 @@ Usage: eask <command> [options..]
 
 Commands:
   check-eask [files..]    run eask checker
+  activate [files..]      activate package; use to test package activation
   archives                list out all package archives                                                                                                               [aliases: sources]
   autoloads               generate autoloads file
   clean-all               do all cleaning tasks
