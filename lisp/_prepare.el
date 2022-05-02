@@ -102,6 +102,10 @@ the `eask-start' execution.")
   "Convert OBJ to string."
   (format "%s" obj))
 
+(defun eask-intern (obj)
+  "Safely intern OBJ."
+  (if (stringp obj) (intern obj) obj))
+
 (defun eask--sinr (len-or-list form-1 form-2)
   "If LEN-OR-LIST has length of 1; return FORM-1, else FORM-2."
   (let ((len (if (numberp len-or-list) len-or-list (length len-or-list))))
@@ -166,7 +170,7 @@ the `eask-start' execution.")
 (defun eask--install-deps (dependencies msg)
   "Install DEPENDENCIES."
   (let* ((names (mapcar #'car dependencies))
-         (names (mapcar (lambda (elm) (if (stringp elm) (intern elm) elm)) names))
+         (names (mapcar #'eask-intern names))
          (len (length dependencies))
          (ies (eask--sinr len "y" "ies"))
          (pkg-installed (cl-remove-if #'package-installed-p names))
