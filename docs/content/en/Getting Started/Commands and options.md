@@ -387,7 +387,7 @@ $ eask [GLOBAL-OPTIONS] declare [FILES..]
 
 ## 🔍 eask regexps
 
-Alias: `lint-regexps` and `relint`
+Alias: `lint-regexps`, `relint`
 
 ```sh
 $ eask [GLOBAL-OPTIONS] regexps [FILES..]
@@ -400,6 +400,8 @@ Other helper commands.
 ## 🔍 eask upgrade-eask
 
 Upgrade Eask to the latest version.
+
+Alias: `upgrade-self`
 
 ```sh
 $ eask [GLOBAL-OPTIONS] upgrade-eask

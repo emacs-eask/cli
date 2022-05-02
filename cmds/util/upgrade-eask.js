@@ -21,7 +21,7 @@
 
 const child_process = require("child_process");
 
-exports.command = ['upgrade-eask'];
+exports.command = ['upgrade-eask', 'upgrade-self'];
 exports.desc = 'upgrade Eask itself';
 
 exports.handler = async (argv) => {
