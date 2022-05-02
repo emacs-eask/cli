@@ -32,15 +32,21 @@ cd "./test/mini.emacs.pkg/"
 echo "Testing local commands..."
 eask info
 eask archives
-eask compile
-eask lint
 eask list --depth=0
 eask concat
 
+# Development
+eask compile
+eask lint
+eask checkdoc
+eask activate
+
+# Clean up
 eask clean
 eask clean-elc
 eask clean-all
 
+# Util
 eask locate
 eask upgrade-eask
 eask refresh
