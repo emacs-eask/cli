@@ -53,6 +53,8 @@ $ eask [GLOBAL-OPTIONS] info
 
 To install all dependencies.
 
+Alias: `install-dependencies`, `prepare`
+
 ```sh
 $ eask [GLOBAL-OPTIONS] install-deps [--dev]
 ```

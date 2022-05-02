@@ -19,7 +19,7 @@
 
 "use strict";
 
-exports.command = ['install-deps', 'install-dependencies'];
+exports.command = ['install-deps', 'install-dependencies', 'prepare'];
 exports.desc = 'automatically install package dependencies';
 
 exports.handler = async (argv) => {
