@@ -43,7 +43,7 @@ Commands:
   files                   print the list of all package files
   info                    display information about the current package
   init                    create new Eask file in current directory
-  install-deps            automatically install package dependencies                                                                                     [aliases: install-dependencies]
+  install-deps            automatically install package dependencies                                                                            [aliases: install-dependencies, prepare]
   install [names..]       install packages
   list-all                list all available packages
   list                    list all installed packages
@@ -58,16 +58,17 @@ Commands:
   search [queries..]      search packages
   uninstall [names..]     uninstall packages                                                                                                                           [aliases: delete]
   upgrade [names..]       upgrade packages
-  buttercup [files..]     run buttercup tests
   checkdoc [files..]      run checkdoc                                                                                                                          [aliases: lint-checkdoc]
   declare [files..]       run check-declare                                                                                                                      [aliases: lint-declare]
-  ert-runner [files..]    run ert tests using ert-runner
-  ert [files..]           run ert tests
+  elint [files..]         run elint
   indent [files..]        lint the package using indent-lint                                                                                                      [aliases: lint-indent]
   lint [files..]          lint the package using package-lint                                                                                                    [aliases: lint-package]
   regexps [files..]       run relint                                                                                                                     [aliases: lint-regexps, relint]
+  buttercup [files..]     run buttercup tests
+  ert-runner [files..]    run ert tests using ert-runner
+  ert [files..]           run ert tests
   locate                  print out Eask installed location
-  upgrade-eask            upgrade Eask itself
+  upgrade-eask            upgrade Eask itself                                                                                                                    [aliases: upgrade-self]
 
 Options:
       --version             Show version number                                                                                                                                [boolean]
