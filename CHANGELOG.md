@@ -11,6 +11,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Reset `command-line-args-left` variable by default (fbda232e962e3566efb94d8061a4035709b7c6e2)
 * Clean up `.git` directory after creating a new elisp project (d845fd281707f0ed47fa955139e1ebddd56b8f58)
 * Add new commnad `eask activate` (dab4321803315eac530afa04161bd315687c271a)
+* Make `default-directory` respect to `-g` flag (ffecfda6c982f145ccbd176fd02cc8bfb44352d7)
 
 ## 0.6.x
 > Released Apr 29, 2022
