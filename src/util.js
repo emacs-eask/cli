@@ -82,7 +82,7 @@ async function e_call(argv, script, ...args) {
   let _script = 'lisp/' + script + '.el';
   let _path = path.join(plugin_dir(), _script);
 
-  let cmd_base = ['-Q', '--batch', '--script', _path];
+  let cmd_base = ['-Q', '--script', _path];
   let cmd_args = args.flat();
   let cmd_global = _global_options(argv).flat();
   let cmd = cmd_base.concat(cmd_args).concat(cmd_global);
