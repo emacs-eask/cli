@@ -466,7 +466,9 @@ other scripts internally.  See function `eask-call'.")
   "Execute BODY with workspace setup."
   (declare (indent 0) (debug t))
   `(eask--batch-mode
-     (let (alist)
+     (let ((default-directory (if (eask-global-p) user-emacs-directory
+                                default-directory))
+           (alist))
        (dolist (cmd eask--command-list)
          (push (cons cmd '(lambda (&rest _))) alist))
        (setq command-switch-alist (append command-switch-alist alist))
