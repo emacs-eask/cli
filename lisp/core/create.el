@@ -42,6 +42,7 @@
   (string-trim (shell-command-to-string "git config user.email")))
 
 (eask-start
+  (ignore-errors (delete-directory ".git" t))
   (eask-with-progress
     "Preparing your new elisp project... "
     (let ((template-package-file (expand-file-name (concat eask--template-project-name ".el"))))
