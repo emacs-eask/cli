@@ -367,6 +367,14 @@ Run elint.
 $ eask [GLOBAL-OPTIONS] elint [FILES..]
 ```
 
+## 🔍 eask elsa
+
+Run elsa.
+
+```sh
+$ eask [GLOBAL-OPTIONS] elsa [FILES..]
+```
+
 ## 🔍 eask indent
 
 Alias: `lint-indent`
