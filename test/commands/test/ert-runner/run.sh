@@ -25,4 +25,5 @@
 echo "Test command 'ert-runner'..."
 cd $(dirname "$0")
 
+eask install-deps --dev
 eask ert-runner ./test/*.el

@@ -1,4 +1,4 @@
-;;; ert-test.el --- Test the command ert      -*- lexical-binding: t; -*-
+;;; ert-runner-test.el --- Test the command ert-runner  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022  Jen-Chieh Shen
 
@@ -17,15 +17,15 @@
 
 ;;; Commentary:
 
-;; Tests for the command ert
+;; Tests for the command ert-runner
 
 ;;; Code:
 
 (require 'ert)
 (require 'debug)
 
-(ert-deftest ert-test-1 ()
+(ert-deftest ert-runner-test-1 ()
   (should (= 1 1)))
 
-(provide 'ert-test)
-;;; ert-test.el ends here
+(provide 'ert-runner-test)
+;;; ert-runner-test.el ends here

@@ -1,4 +1,4 @@
-;;; ert-test.el --- Test the command ert      -*- lexical-binding: t; -*-
+;;; buttercup-test.el --- Test the command buttercup  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022  Jen-Chieh Shen
 
@@ -17,15 +17,16 @@
 
 ;;; Commentary:
 
-;; Tests for the command ert
+;; Tests for the command buttercup
 
 ;;; Code:
 
-(require 'ert)
+(require 'buttercup)
 (require 'debug)
 
-(ert-deftest ert-test-1 ()
-  (should (= 1 1)))
+(describe "A suite"
+  (it "contains a spec with an expectation"
+    (expect t :to-be t)))
 
-(provide 'ert-test)
-;;; ert-test.el ends here
+(provide 'buttercup-test)
+;;; buttercup-test.el ends here
