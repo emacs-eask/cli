@@ -32,23 +32,23 @@ influencing your personal confiugration. Eask aims to be:
 
 ###### Development
 
-[![Compile](https://github.com/emacs-eask/eask/actions/workflows/test-redefine.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-redefine.yml)
-[![Compat](https://github.com/emacs-eask/eask/actions/workflows/test-compat.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-compat.yml)
+[![Compile](https://github.com/emacs-eask/eask/actions/workflows/compile.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/compile.yml)
+[![Compat](https://github.com/emacs-eask/eask/actions/workflows/compat.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/compat.yml)
 
 ###### Commands
 
-[![Global](https://github.com/emacs-eask/eask/actions/workflows/test-global.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-global.yml)
-[![Local](https://github.com/emacs-eask/eask/actions/workflows/test-local.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-local.yml)
-[![Install](https://github.com/emacs-eask/eask/actions/workflows/test-install.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-install.yml)
-[![Exec](https://github.com/emacs-eask/eask/actions/workflows/test-exec.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-exec.yml)
-[![Search](https://github.com/emacs-eask/eask/actions/workflows/test-search.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-search.yml)
-[![Outdated_Upgrade](https://github.com/emacs-eask/eask/actions/workflows/test-outdated_upgrade.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-outdated_upgrade.yml)
-[![Checker](https://github.com/emacs-eask/eask/actions/workflows/test-checker.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-checker.yml)
+[![Global](https://github.com/emacs-eask/eask/actions/workflows/global.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/global.yml)
+[![Local](https://github.com/emacs-eask/eask/actions/workflows/local.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/local.yml)
+[![Install](https://github.com/emacs-eask/eask/actions/workflows/install.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/install.yml)
+[![Exec](https://github.com/emacs-eask/eask/actions/workflows/exec.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/exec.yml)
+[![Search](https://github.com/emacs-eask/eask/actions/workflows/search.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/search.yml)
+[![Outdated_Upgrade](https://github.com/emacs-eask/eask/actions/workflows/outdated_upgrade.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/outdated_upgrade.yml)
+[![Checker](https://github.com/emacs-eask/eask/actions/workflows/checker.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/checker.yml)
 
 ###### Features
 
-[![Color](https://github.com/emacs-eask/eask/actions/workflows/test-color.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-color.yml)
+[![Color](https://github.com/emacs-eask/eask/actions/workflows/color.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/color.yml)
 
 ##### ❌ Tests puppose to be `RED`
 
-[![Error](https://github.com/emacs-eask/eask/actions/workflows/test-error.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test-error.yml)
+[![Error](https://github.com/emacs-eask/eask/actions/workflows/error.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/error.yml)
