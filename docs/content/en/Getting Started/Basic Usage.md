@@ -1,3 +1,4 @@
+```
 ---
 title: 🔨 Basic Usage
 weight: 250
@@ -62,6 +63,7 @@ Commands:
   checkdoc [files..]      run checkdoc                                                                                                                          [aliases: lint-checkdoc]
   declare [files..]       run check-declare                                                                                                                      [aliases: lint-declare]
   elint [files..]         run elint
+  elsa [files..]          run elsa
   indent [files..]        lint the package using indent-lint                                                                                                      [aliases: lint-indent]
   lint [files..]          lint the package using package-lint                                                                                                    [aliases: lint-package]
   regexps [files..]       run relint                                                                                                                     [aliases: lint-regexps, relint]
@@ -91,8 +93,6 @@ Options:
       --no-proxy            set no-proxy to host                                                                                                                                [string]
   -v, --verbose             set verbosity from 0 to 4                                                                                                                           [number]
       --help                Show help                                                                                                                                          [boolean]
-```
-
 ## The `eask` Command
 
 The most common usage is probably to run eask with your current directory being

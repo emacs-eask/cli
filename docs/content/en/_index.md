@@ -43,7 +43,6 @@ for! 👀
 ### Linter
 
 - [ ] [FEAT] Add `elisp-lint` command
-- [ ] [FEAT] Add `elsa` command
 
 ## 📂 Underlying Projects
 
