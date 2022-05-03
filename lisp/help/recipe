@@ -1,0 +1,9 @@
+
+💡 Please specify URL: in your main package file
+
+    [+] ;; URL: https://example.com/your/repo/url
+
+Visit https://github.com/melpa/melpa#recipe-format for more information
+
+⛔ If you have a `multiple-packages-in-one-repository' condition; it will only work
+on the selected package file.
