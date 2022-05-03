@@ -227,6 +227,14 @@ $ eask [GLOBAL-OPTIONS] activate [FILES..]
 **[FILES..]** will be loaded after the package is activated.
 {{< /hint >}}
 
+## 🔍 eask recipe
+
+Suggest a recipe format
+
+```sh
+$ eask [GLOBAL-OPTIONS] recipe [FILES..]
+```
+
 ## 🔍 eask concate
 
 Concatenate all Emacs Lisp files into one big file.
