@@ -53,6 +53,7 @@ Commands:
   package-directory       print path to package directory
   package [destintation]  Build a package artefact, and put it into the given destination
   pkg-file                generate -pkg file
+  recipe                  suggest a recipe format
   refresh                 download package archives
   reinstall [names..]     reinstall packages
   search [queries..]      search packages
