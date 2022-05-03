@@ -1,8 +1,8 @@
-(package "ert"
+(package "search"
          "0.0.1"
-         "Test project for command `ert'")
+         "Test project for command `search'")
 
-(package-file "ert.el")
+(package-file "search.el")
 
 (source "gnu")
 (source "melpa")

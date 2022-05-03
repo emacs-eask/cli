@@ -46,3 +46,9 @@ command_search:
 
 test_ert:
 	./test/commands/test/ert/run.sh
+
+test_ert-runner:
+	./test/commands/test/ert-runner/run.sh
+
+test_buttercup:
+	./test/commands/test/buttercup/run.sh

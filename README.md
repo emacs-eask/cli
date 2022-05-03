@@ -49,6 +49,12 @@ influencing your personal confiugration. Eask aims to be:
 
 [![Color](https://github.com/emacs-eask/eask/actions/workflows/color.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/color.yml)
 
+###### Test
+
+[![Test ert](https://github.com/emacs-eask/eask/actions/workflows/test_ert-runner.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test_ert-runner.yml)
+[![Test ert-runner](https://github.com/emacs-eask/eask/actions/workflows/test_ert.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test_ert.yml)
+[![Test buttercup](https://github.com/emacs-eask/eask/actions/workflows/test_buttercup.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test_buttercup.yml)
+
 ##### ❌ Tests puppose to be `RED`
 
 [![Error](https://github.com/emacs-eask/eask/actions/workflows/error.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/error.yml)

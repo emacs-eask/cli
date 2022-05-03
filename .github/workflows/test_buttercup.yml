@@ -1,4 +1,4 @@
-name: Test Ert
+name: Test buttercup
 
 on:
   push:
@@ -53,5 +53,5 @@ jobs:
 
     - name: Testing...
       run: |
-        make test_ert
+        make test_buttercup
 
