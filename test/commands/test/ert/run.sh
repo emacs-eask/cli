@@ -19,13 +19,10 @@
 
 ## Commentary:
 #
-# Test command `search`
+# Test command `ert`
 #
 
-echo "Test command 'search'..."
+echo "Test command 'ert'..."
 cd $(dirname "$0")
 
-eask search
-eask search company
-eask search company dash --depth 0
-eask search company dash f s --depth 0 -g
+eask ert ./test/*.el

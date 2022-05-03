@@ -43,3 +43,6 @@ command_outdated_upgrade:
 
 command_search:
 	./test/commands/search/run.sh
+
+test_ert:
+	./test/commands/test/ert/run.sh

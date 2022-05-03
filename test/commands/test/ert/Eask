@@ -1,10 +1,14 @@
-(package "ert"
+(package "outdated-upgrade"
          "0.0.1"
-         "Test project for command `ert'")
+         "Test project for command outdated and upgrade")
 
-(package-file "ert.el")
+(package-file "outdated-upgrade.el")
 
 (source "gnu")
+(source "nongnu")
 (source "melpa")
+
+(depends-on "f")
+(depends-on "s")
 
 (setq network-security-level 'low)  ; see https://github.com/jcs090218/setup-emacs-windows/issues/156#issuecomment-932956432
