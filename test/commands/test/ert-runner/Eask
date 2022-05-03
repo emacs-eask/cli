@@ -2,7 +2,7 @@
          "0.0.1"
          "Test project for command ert-runner")
 
-(package-file "outdated-upgrade.el")
+(package-file "ert-runner.el")
 
 (source "gnu")
 (source "melpa")
