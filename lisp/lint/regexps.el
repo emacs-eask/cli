@@ -19,13 +19,16 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
+(defconst eask--relint-version nil
+  "`relint' version.")
+
 (defun eask--relint-file (filename)
   "Package lint FILENAME."
   (let* ((filename (expand-file-name filename))
          (file (eask-root-del filename))
          (errors))
     (eask-msg "")
-    (eask-msg "`%s` with relint" (ansi-green file))
+    (eask-msg "`%s` with relint (%s)" (ansi-green file) eask--relint-version)
     (with-current-buffer (find-file filename)
       (setq errors (relint-buffer (current-buffer)))
       (dolist (err errors)
@@ -43,6 +46,8 @@
 (eask-start
   (eask-with-archives "gnu"
     (eask-package-install 'relint))
+  (setq eask--relint-version (eask-package--version-string 'relint))
+  (require 'relint)
   (if-let ((files (eask-args-or-package-el-files)))
       (progn
         (setq package-lint-main-file eask-package-file)

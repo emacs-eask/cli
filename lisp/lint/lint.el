@@ -24,12 +24,15 @@
           (lambda ()
             (setq package-lint-batch-fail-on-warnings t)))
 
+(defconst eask--package-lint-version nil
+  "`package-lint' version.")
+
 (defun eask--package-lint-file (filename)
   "Package lint FILENAME."
   (let* ((filename (expand-file-name filename))
          (file (eask-root-del filename)))
     (eask-msg "")
-    (eask-msg "`%s` with package-lint" (ansi-green file))
+    (eask-msg "`%s` with package-lint (%s)" (ansi-green file) eask--package-lint-version)
     (with-current-buffer (find-file filename)
       (package-lint-current-buffer)
       (kill-this-buffer)))
@@ -38,6 +41,8 @@
 (eask-start
   (eask-with-archives "melpa"
     (eask-package-install 'package-lint))
+  (setq eask--package-lint-version (eask-package--version-string 'package-lint))
+  (require 'package-lint)
   (if-let ((files (eask-args-or-package-el-files)))
       (progn
         (setq package-lint-main-file eask-package-file)
