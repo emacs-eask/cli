@@ -40,6 +40,7 @@ eask compile
 eask lint
 eask checkdoc
 eask activate
+eask recipe
 
 # Clean up
 eask clean
