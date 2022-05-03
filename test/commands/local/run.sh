@@ -37,10 +37,17 @@ eask concat
 
 # Development
 eask compile
-eask lint
-eask checkdoc
 eask activate
 eask recipe
+
+# Linter
+eask lint
+eask checkdoc
+eask declare
+eask elsa
+eask elint
+eask indent
+eask relint
 
 # Clean up
 eask clean
