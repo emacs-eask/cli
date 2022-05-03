@@ -12,6 +12,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Clean up `.git` directory after creating a new elisp project (d845fd281707f0ed47fa955139e1ebddd56b8f58)
 * Add new commnad `eask activate` (dab4321803315eac530afa04161bd315687c271a)
 * Make `default-directory` respect to `-g` flag (ffecfda6c982f145ccbd176fd02cc8bfb44352d7)
+* Add new command `eask recipe` (3073fe89140a93fa91b8e81c2535240fb9e3ada1)
 
 ## 0.6.x
 > Released Apr 29, 2022
