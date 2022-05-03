@@ -32,9 +32,7 @@
 
 (eask-start
   (require 'elint)
-  (if-let* ((files (if (eask-args)
-                       (eask-expand-file-specs (eask-args))
-                     (eask-package-el-files)))
+  (if-let* ((files (eask-args-or-package-el-files))
             (len (length files))
             (s (eask--sinr len "" "s"))
             (have (eask--sinr len "has" "have")))

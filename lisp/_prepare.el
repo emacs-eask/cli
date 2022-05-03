@@ -875,8 +875,14 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 
 (defun eask-write (msg &rest args)
   "Like function `eask-msg' but without newline at the end."
-  (unless inhibit-message
-    (princ (apply #'eask--format-paint-kwds msg args) 'external-debugging-output)))
+  (princ (apply #'eask--format-paint-kwds msg args) 'external-debugging-output))
+
+(defun eask--print--around (fnc &rest args)
+  (unless inhibit-message (apply fnc args)))
+
+(advice-add #'princ :around #'eask--print--around)
+(advice-add #'print :around #'eask--print--around)
+(advice-add #'prin1 :around #'eask--print--around)
 
 ;;
 ;;; File
@@ -912,6 +918,12 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   (when-let ((elcs (mapcar (lambda (elm) (concat elm "c")) (eask-package-el-files))))
     (setq elcs (cl-remove-if-not (lambda (elm) (file-exists-p elm)) elcs))
     elcs))
+
+(defun eask-args-or-package-el-files ()
+  "Return args if specified, else return package files by default."
+  (if (eask-args)
+      (eask-expand-file-specs (eask-args))
+    (eask-package-el-files)))
 
 (defun eask-package-multi-p ()
   "Return t if multi-files package."

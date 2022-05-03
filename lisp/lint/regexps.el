@@ -43,9 +43,7 @@
 (eask-start
   (eask-with-archives "gnu"
     (eask-package-install 'relint))
-  (if-let ((files (if (eask-args)
-                      (eask-expand-file-specs (eask-args))
-                    (eask-package-el-files))))
+  (if-let ((files (eask-args-or-package-el-files)))
       (progn
         (setq package-lint-main-file eask-package-file)
         (mapcar #'eask--relint-file files)
