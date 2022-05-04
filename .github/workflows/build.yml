@@ -42,17 +42,17 @@ jobs:
     - name: Upload Linux x64
       uses: actions/upload-artifact@v1
       with:
-        name: ${{ env.VERSION }}-Linux-x64
+        name: eask_${{ env.VERSION }}_Linux-x64
         path: dist/eask-linux
 
     - name: Upload macOS x64
       uses: actions/upload-artifact@v1
       with:
-        name: ${{ env.VERSION }}-macOS-x64
+        name: eask_${{ env.VERSION }}_macOS-x64
         path: dist/eask-macos
 
     - name: Upload Windows x64
       uses: actions/upload-artifact@v1
       with:
-        name: ${{ env.VERSION }}-Windows-x64
+        name: eask_${{ env.VERSION }}_Windows-x64
         path: dist/eask-win.exe
