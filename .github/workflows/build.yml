@@ -104,9 +104,9 @@ jobs:
 
     - name: Prepare content...
       run: |
-        move README.md dist
-        move COPYING dist
-        ren eask-win.exe eask.exe
+        mv README.md dist
+        mv COPYING dist
+        mv eask-win.exe eask.exe
 
     - name: Upload Windows x64
       uses: actions/upload-artifact@v1
