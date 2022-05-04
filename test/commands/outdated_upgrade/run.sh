@@ -25,6 +25,7 @@
 echo "Test command 'search'..."
 cd $(dirname "$0")
 
+eask prepare --dev
 eask load make-outdate.el
 
 eask outdated
