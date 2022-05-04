@@ -1,2 +1,0 @@
-;;; Generated package description from f.el  -*- no-byte-compile: t -*-
-(define-package "f" "20020405.1534" "Modern API for working with files and directories" '((s "1.7.0") (dash "2.2.0")) :commit "b5cb884b3b4372a6f3d1d4428cf092ca1e5c8044" :authors '(("Johan Andersson" . "johan.rejeep@gmail.com")) :maintainer '("Johan Andersson" . "johan.rejeep@gmail.com") :keywords '("files" "directories") :url "http://github.com/rejeep/f.el")

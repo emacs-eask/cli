@@ -3,7 +3,7 @@
 /recipes
 
 # ignore generated files
-!*.elc
+*.elc
 
 # eask packages
 .eask/
