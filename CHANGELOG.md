@@ -14,6 +14,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Make `default-directory` respect to `-g` flag (ffecfda6c982f145ccbd176fd02cc8bfb44352d7)
 * Add new command `eask recipe` (3073fe89140a93fa91b8e81c2535240fb9e3ada1)
 * Add new command `eask elsa` (69b5f1519fb5a2493fb26f96ee3ef022526aa6a1)
+* Add `pkg` configuration, we can now pack to executables (79d2c454a14babc85fe3d8ae861be26e635ee12b)
 
 ## 0.6.x
 > Released Apr 29, 2022
