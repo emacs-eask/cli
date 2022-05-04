@@ -26,23 +26,15 @@
 
 (eask-pkg-init)
 
+(require 'f)
+
 (defconst make-outdate-version "20001122.1234"
   "Outdate version.")
-
-(defun mo--shell-execute (cmd &rest args)
-  "Return non-nil if CMD executed succesfully with ARGS."
-  (= 0 (shell-command (concat cmd " "
-                              (mapconcat #'shell-quote-argument args " ")))))
-
-(defun mo--move-path (path dest)
-  "Move PATH to DEST."
-  (mo--shell-execute (if eask-is-windows "move" "mv") (expand-file-name path) (expand-file-name dest)))
 
 (defun make-outdate-package (name)
   "Make package (NAME) outdate."
   (let* ((dir (file-name-directory (locate-library name)))
-         (pkg (concat dir name "-pkg.el"))
-         (main (concat dir name ".el")))
+         (pkg (concat dir name "-pkg.el")))
     (with-current-buffer (find-file pkg)
       (goto-char (point-min))
       (when (re-search-forward "\"[0-9.]*\"" nil t)
@@ -56,16 +48,9 @@
     (let ((dest (expand-file-name (concat name "-" make-outdate-version "/") package-user-dir)))
       (eask-info "Moving %s" dir)
       (eask-info "    to %s" dest)
-      (mo--move-path dir dest))
-    (with-current-buffer (find-file main)
-      (when (re-search-forward "Package-Version: [0-9.]*" nil t)
-        (save-excursion
-          (let ((end (point)))
-            (backward-sexp)
-            (delete-region (point) end)
-            (insert (format "%s" make-outdate-version)))))
-      (save-buffer)
-      (kill-this-buffer))))
+      (ignore-errors (make-directory dest t))
+      (f-copy-contents dir dest)
+      (ignore-errors (delete-directory dir t)))))
 
 (make-outdate-package "dash")
 (make-outdate-package "f")
