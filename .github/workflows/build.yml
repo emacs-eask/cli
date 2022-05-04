@@ -24,7 +24,7 @@ env:
   VERSION: 0.6.15
 
 jobs:
-  build:
+  build_linux:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/setup-node@v2
@@ -42,17 +42,71 @@ jobs:
     - name: Building...
       run: pkg package.json
 
+    - name: Prepare content...
+      run: |
+        mv README.md dist
+        mv COPYING dist
+        mv dist/eask-linux dist/eask
+
     - name: Upload Linux x64
       uses: actions/upload-artifact@v1
       with:
         name: eask_${{ env.VERSION }}_Linux-x64
-        path: dist/eask-linux
+        path: dist
+
+  build_macos:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install pkg
+      run: npm install -g pkg
+
+    - uses: actions/checkout@v2
+
+    - name: Preparing...
+      run: npm install
+
+    - name: Building...
+      run: pkg package.json
+
+    - name: Prepare content...
+      run: |
+        mv README.md dist
+        mv COPYING dist
+        mv dist/eask-macos dist/eask
 
     - name: Upload macOS x64
       uses: actions/upload-artifact@v1
       with:
         name: eask_${{ env.VERSION }}_macOS-x64
         path: dist/eask-macos
+
+  build_windows:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install pkg
+      run: npm install -g pkg
+
+    - uses: actions/checkout@v2
+
+    - name: Preparing...
+      run: npm install
+
+    - name: Building...
+      run: pkg package.json
+
+    - name: Prepare content...
+      run: |
+        move README.md dist
+        move COPYING dist
+        ren eask-win.exe eask.exe
 
     - name: Upload Windows x64
       uses: actions/upload-artifact@v1
