@@ -24,7 +24,7 @@ env:
   VERSION: 0.6.15
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/setup-node@v2
