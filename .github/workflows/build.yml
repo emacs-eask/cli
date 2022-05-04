@@ -82,7 +82,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: eask_${{ env.VERSION }}_macOS-x64
-        path: dist/eask-macos
+        path: dist
 
   build_windows:
     runs-on: ubuntu-latest
@@ -112,4 +112,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: eask_${{ env.VERSION }}_Windows-x64
-        path: dist/eask-win.exe
+        path: dist
