@@ -1,0 +1,4 @@
+
+💡 You can add dependencies by using specifier [depends-on]
+
+    [+] (depends-on "PKG-SPEC")
