@@ -24,7 +24,7 @@ env:
   VERSION: 0.6.15
 
 jobs:
-  build_linux:
+  linux_x64:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/setup-node@v2
@@ -53,7 +53,7 @@ jobs:
         name: eask_${{ env.VERSION }}_Linux-x64
         path: dist
 
-  build_macos:
+  macos_x64:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/setup-node@v2
@@ -82,7 +82,7 @@ jobs:
         name: eask_${{ env.VERSION }}_macOS-x64
         path: dist
 
-  build_windows:
+  windows_x64:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/setup-node@v2
