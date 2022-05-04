@@ -19,10 +19,10 @@
 
 ## Commentary:
 #
-# Test command `ert`
+# Test command `ert-runner`
 #
 
-echo "Test command 'ert'..."
+echo "Test command 'ert-runner'..."
 cd $(dirname "$0")
 
 eask ert-runner ./test/*.el
