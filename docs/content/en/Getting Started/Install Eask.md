@@ -40,6 +40,10 @@ WIP
 
 WIP
 
+### Scoop (Windows)
+
+WIP
+
 ## 💾 Source
 
 ### 🚩 Prerequisite Tools
