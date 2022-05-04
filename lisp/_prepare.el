@@ -875,14 +875,8 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 
 (defun eask-write (msg &rest args)
   "Like function `eask-msg' but without newline at the end."
-  (princ (apply #'eask--format-paint-kwds msg args) 'external-debugging-output))
-
-(defun eask--print--around (fnc &rest args)
-  (unless inhibit-message (apply fnc args)))
-
-(advice-add #'princ :around #'eask--print--around)
-(advice-add #'print :around #'eask--print--around)
-(advice-add #'prin1 :around #'eask--print--around)
+  (unless inhibit-message
+    (princ (apply #'eask--format-paint-kwds msg args) 'external-debugging-output)))
 
 ;;
 ;;; File
