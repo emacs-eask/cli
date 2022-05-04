@@ -8,9 +8,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 0.7.x (Unreleased)
 > Released N/A
 
-* Don't inhibit message for `print`, `princ`, or `prin1`; this is dangerous (1297f786fcebcae3ba743792fc6ff9706e8dfa6d)
+* N/A
 
-## 0.6.15
+## 0.6.16
 > Released Mar 4, 2022
 
 * Reset `command-line-args-left` variable by default (fbda232e962e3566efb94d8061a4035709b7c6e2)
@@ -20,6 +20,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add new command `eask recipe` (3073fe89140a93fa91b8e81c2535240fb9e3ada1)
 * Add new command `eask elsa` (69b5f1519fb5a2493fb26f96ee3ef022526aa6a1)
 * Add `pkg` configuration, we can now pack to executables (79d2c454a14babc85fe3d8ae861be26e635ee12b)
+* Don't inhibit message for `print`, `princ`, or `prin1`; this is dangerous (1297f786fcebcae3ba743792fc6ff9706e8dfa6d)
 
 ## 0.6.x
 > Released Apr 29, 2022
