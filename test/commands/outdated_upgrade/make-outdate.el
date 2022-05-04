@@ -58,6 +58,7 @@
       (mo--move-path dir dest))))
 
 (make-outdate-package "dash")
+(make-outdate-package "f")
 
 (provide 'make-outdate)
 ;;; make-outdate.el ends here
