@@ -8,7 +8,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 0.7.x (Unreleased)
 > Released N/A
 
-* N/A
+* Don't inhibit message for `print`, `princ`, or `prin1`; this is dangerous (1297f786fcebcae3ba743792fc6ff9706e8dfa6d)
 
 ## 0.6.15
 > Released Mar 4, 2022
