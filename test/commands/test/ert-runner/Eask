@@ -1,6 +1,6 @@
 (package "ert-runner"
          "0.0.1"
-         "Test project for command ert-runner")
+         "Test project for command `ert-runner'")
 
 (package-file "ert-runner.el")
 

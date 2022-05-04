@@ -19,11 +19,10 @@
 
 ## Commentary:
 #
-# Test command `ert-runner`
+# Test command `ert`
 #
 
-echo "Test command 'ert-runner'..."
+echo "Test command 'ert'..."
 cd $(dirname "$0")
 
-eask install-deps --dev
 eask ert-runner ./test/*.el
