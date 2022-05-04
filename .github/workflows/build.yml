@@ -21,7 +21,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  VERSION: 0.6.15
+  VERSION: 0.6.16
 
 jobs:
   linux_x64:
