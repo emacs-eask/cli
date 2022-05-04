@@ -41,7 +41,8 @@
 (defun make-outdate-package (name)
   "Make package (NAME) outdate."
   (let* ((dir (file-name-directory (locate-library name)))
-         (pkg (concat dir name "-pkg.el")))
+         (pkg (concat dir name "-pkg.el"))
+         (main (concat dir name ".el")))
     (with-current-buffer (find-file pkg)
       (goto-char (point-min))
       (when (re-search-forward "\"[0-9.]*\"" nil t)
@@ -55,7 +56,16 @@
     (let ((dest (expand-file-name (concat name "-" make-outdate-version "/") package-user-dir)))
       (eask-info "Moving %s" dir)
       (eask-info "    to %s" dest)
-      (mo--move-path dir dest))))
+      (mo--move-path dir dest))
+    (with-current-buffer (find-file main)
+      (when (re-search-forward "Package-Version: [0-9.]*" nil t)
+        (save-excursion
+          (let ((end (point)))
+            (backward-sexp)
+            (delete-region (point) end)
+            (insert (format "%s" make-outdate-version)))))
+      (save-buffer)
+      (kill-this-buffer))))
 
 (make-outdate-package "dash")
 (make-outdate-package "f")
