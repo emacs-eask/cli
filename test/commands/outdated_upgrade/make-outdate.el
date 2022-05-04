@@ -36,7 +36,6 @@
 
 (defun mo--move-path (path dest)
   "Move PATH to DEST."
-  (ignore-errors (make-directory dest t))
   (mo--shell-execute (if eask-is-windows "move" "mv") (expand-file-name path) (expand-file-name dest)))
 
 (defun make-outdate-package (name)
@@ -53,9 +52,9 @@
             (insert (format "\"%s\"" make-outdate-version)))))
       (save-buffer)
       (kill-this-buffer))
-    (let ((dest (expand-file-name (concat name "-" make-outdate-version) package-user-dir)))
+    (let ((dest (expand-file-name (concat name "-" make-outdate-version "/") package-user-dir)))
       (eask-info "Moving %s" dir)
-      (eask-info "to %s" dest)
+      (eask-info "    to %s" dest)
       (mo--move-path dir dest))))
 
 (make-outdate-package "dash")
