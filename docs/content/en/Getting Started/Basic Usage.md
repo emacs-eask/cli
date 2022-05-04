@@ -1,4 +1,3 @@
-```
 ---
 title: 🔨 Basic Usage
 weight: 250
@@ -93,6 +92,8 @@ Options:
       --no-proxy            set no-proxy to host                                                                                                                                [string]
   -v, --verbose             set verbosity from 0 to 4                                                                                                                           [number]
       --help                Show help                                                                                                                                          [boolean]
+```
+
 ## The `eask` Command
 
 The most common usage is probably to run eask with your current directory being
