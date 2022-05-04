@@ -58,7 +58,6 @@
       (eask-info "to %s" dest)
       (mo--move-path dir dest))))
 
-(make-outdate-package "f")
 (make-outdate-package "dash")
 
 (provide 'make-outdate)
