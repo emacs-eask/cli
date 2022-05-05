@@ -11,6 +11,10 @@ This document guides you through the installation of Eask.
 
 ### Binary (Cross-platform)
 
+{{< hint danger >}}
+The binaries are still WIP.
+{{< /hint >}}
+
 Download the appropriate version for your platform from [Eask Releases](https://github.com/emacs-eask/eask/releases).
 Once downloaded, the binary can be run from anywhere. You don’t need to install
 it into a global location. This works well for shared hosts and other systems
