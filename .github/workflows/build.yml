@@ -60,7 +60,7 @@ jobs:
         mv COPYING dist
         mv README.md dist
 
-    - name: Upload Linux x64
+    - name: Uploading...
       uses: actions/upload-artifact@v1
       with:
         name: eask_${{ env.VERSION }}_${{ matrix.targets }}
