@@ -22,10 +22,22 @@ concurrency:
 
 env:
   VERSION: 0.6.16
+  NODE: node16
 
 jobs:
-  linux_x64:
+  build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        targets:
+        - linux-x64
+        - macos-x64
+        - win-x64
+        - linux-arm64
+        - macos-arm64
+        - win-arm64
+
     steps:
     - uses: actions/setup-node@v2
       with:
@@ -40,7 +52,7 @@ jobs:
       run: npm install
 
     - name: Building...
-      run: pkg package.json -t node16-linux-x64
+      run: pkg package.json -t ${{ env.NODE }}-${{ matrix.targets }}
 
     - name: Prepare content...
       run: |
@@ -51,65 +63,5 @@ jobs:
     - name: Upload Linux x64
       uses: actions/upload-artifact@v1
       with:
-        name: eask_${{ env.VERSION }}_Linux-x64
-        path: dist
-
-  macos_x64:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '16'
-
-    - name: Install pkg
-      run: npm install -g pkg
-
-    - uses: actions/checkout@v2
-
-    - name: Preparing...
-      run: npm install
-
-    - name: Building...
-      run: pkg package.json -t node16-macos-x64
-
-    - name: Prepare content...
-      run: |
-        mv lisp dist
-        mv COPYING dist
-        mv README.md dist
-
-    - name: Upload macOS x64
-      uses: actions/upload-artifact@v1
-      with:
-        name: eask_${{ env.VERSION }}_macOS-x64
-        path: dist
-
-  windows_x64:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '16'
-
-    - name: Install pkg
-      run: npm install -g pkg
-
-    - uses: actions/checkout@v2
-
-    - name: Preparing...
-      run: npm install
-
-    - name: Building...
-      run: pkg package.json -t node16-win-x64
-
-    - name: Prepare content...
-      run: |
-        mv lisp dist
-        mv COPYING dist
-        mv README.md dist
-
-    - name: Upload Windows x64
-      uses: actions/upload-artifact@v1
-      with:
-        name: eask_${{ env.VERSION }}_Windows-x64
+        name: eask_${{ env.VERSION }}_${{ matrix.targets }}
         path: dist
