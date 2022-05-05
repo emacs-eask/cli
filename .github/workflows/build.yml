@@ -21,7 +21,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  VERSION: 0.6.16
+  VERSION: 0.6.17
   NODE: node16
 
 jobs:
