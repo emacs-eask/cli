@@ -19,4 +19,7 @@
 
 "use strict";
 
+const path = require('path');
+
 global.UTIL = require('./util');
+global.IS_PKG = !path.basename(process.execPath).startsWith('node');

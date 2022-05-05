@@ -31,7 +31,10 @@ function _remove_undefined(arr) {
 }
 
 /* Return plugin directory */
-function plugin_dir() { return path.join(__dirname, '..'); }
+function plugin_dir() {
+  let root = (IS_PKG) ? process.execPath : __dirname;
+  return path.join(root, '..');
+}
 
 /**
  * Define flag with proper alias flag.
