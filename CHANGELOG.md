@@ -10,8 +10,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 * N/A
 
-## 0.6.16
-> Released Mar 4, 2022
+## 0.6.17
+> Released Mar 5, 2022
 
 * Reset `command-line-args-left` variable by default (fbda232e962e3566efb94d8061a4035709b7c6e2)
 * Clean up `.git` directory after creating a new elisp project (d845fd281707f0ed47fa955139e1ebddd56b8f58)
@@ -21,6 +21,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add new command `eask elsa` (69b5f1519fb5a2493fb26f96ee3ef022526aa6a1)
 * Add `pkg` configuration, we can now pack to executables (79d2c454a14babc85fe3d8ae861be26e635ee12b)
 * Don't inhibit message for `print`, `princ`, or `prin1`; this is dangerous (1297f786fcebcae3ba743792fc6ff9706e8dfa6d)
+* Fix path for `pkg` build (b97bfa8cc46cedd967243a55d8fae83f106b081c)
 
 ## 0.6.x
 > Released Apr 29, 2022
