@@ -106,3 +106,36 @@ jobs:
         repository: ${{ env.REPO_BIN }}
         github_token: ${{ secrets.PAT }}
         branch: master
+
+    - name: Retry push 1
+      continue-on-error: true
+      run: git pull --rebase
+    - name: Push
+      continue-on-error: true
+      uses: ad-m/github-push-action@master
+      with:
+        repository: ${{ env.REPO_BIN }}
+        github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        branch: master
+
+    - name: Retry push 2
+      continue-on-error: true
+      run: git pull --rebase
+    - name: Push
+      continue-on-error: true
+      uses: ad-m/github-push-action@master
+      with:
+        repository: ${{ env.REPO_BIN }}
+        github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        branch: master
+
+    - name: Retry push 3
+      continue-on-error: true
+      run: git pull --rebase
+    - name: Push
+      continue-on-error: true
+      uses: ad-m/github-push-action@master
+      with:
+        repository: ${{ env.REPO_BIN }}
+        github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        branch: master
