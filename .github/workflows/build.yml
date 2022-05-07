@@ -23,6 +23,7 @@ concurrency:
 env:
   VERSION: 0.6.17
   NODE: node16
+  REPO_BIN: 'emacs-eask/binaries'
 
 jobs:
   build:
@@ -65,3 +66,43 @@ jobs:
       with:
         name: eask_${{ env.VERSION }}_${{ matrix.targets }}
         path: dist
+
+    - name: Zipping dist
+      run: tar -C "." -cvf ${{ matrix.targets }}.tar dist
+
+    - name: Move zip to HOME
+      run: mv ${{ matrix.targets }}.tar ~/
+
+    - name: Checkout binaries repository
+      uses: actions/checkout@v3
+      with:
+        repository: ${{ env.REPO_BIN }}
+        persist-credentials: false
+        fetch-depth: 0
+
+    - name: Clean up previous binaires
+      continue-on-error: true
+      run: rm -rf eask/${{ matrix.targets }}.tar
+
+    - name: Move binaires to repository
+      run: mv ~/${{ matrix.targets }}.tar ./
+
+    - name: Set git config
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+
+    - name: Commit
+      continue-on-error: true
+      run: |
+        git pull
+        git add .
+        git commit -m "Update binairs ${{ matrix.targets }}.tar"
+
+    - name: Push binaires
+      continue-on-error: true
+      uses: ad-m/github-push-action@master
+      with:
+        repository: ${{ env.REPO_BIN }}
+        github_token: ${{ secrets.PAT }}
+        branch: master
