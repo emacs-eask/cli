@@ -99,76 +99,10 @@ jobs:
         git add .
         git commit -m "Update binairs ${{ matrix.targets }}.tar"
 
-    - name: Push binaires
-      continue-on-error: true
-      uses: ad-m/github-push-action@master
-      with:
-        repository: ${{ env.REPO_BIN }}
-        github_token: ${{ secrets.PAT }}
-        branch: master
-
-    - name: Retry push 1
-      continue-on-error: true
-      run: git pull --rebase
     - name: Push
-      continue-on-error: true
-      uses: ad-m/github-push-action@master
+      uses: jcs090218/github-push-action@master
       with:
         repository: ${{ env.REPO_BIN }}
         github_token: ${{ secrets.PAT }}
         branch: master
-
-    - name: Retry push 2
-      continue-on-error: true
-      run: git pull --rebase
-    - name: Push
-      continue-on-error: true
-      uses: ad-m/github-push-action@master
-      with:
-        repository: ${{ env.REPO_BIN }}
-        github_token: ${{ secrets.PAT }}
-        branch: master
-
-    - name: Retry push 3
-      continue-on-error: true
-      run: git pull --rebase
-    - name: Push
-      continue-on-error: true
-      uses: ad-m/github-push-action@master
-      with:
-        repository: ${{ env.REPO_BIN }}
-        github_token: ${{ secrets.PAT }}
-        branch: master
-
-    - name: Retry push 4
-      continue-on-error: true
-      run: git pull --rebase
-    - name: Push
-      continue-on-error: true
-      uses: ad-m/github-push-action@master
-      with:
-        repository: ${{ env.REPO_BIN }}
-        github_token: ${{ secrets.PAT }}
-        branch: master
-
-    - name: Retry push 5
-      continue-on-error: true
-      run: git pull --rebase
-    - name: Push
-      continue-on-error: true
-      uses: ad-m/github-push-action@master
-      with:
-        repository: ${{ env.REPO_BIN }}
-        github_token: ${{ secrets.PAT }}
-        branch: master
-
-    - name: Retry push 6
-      continue-on-error: true
-      run: git pull --rebase
-    - name: Push
-      continue-on-error: true
-      uses: ad-m/github-push-action@master
-      with:
-        repository: ${{ env.REPO_BIN }}
-        github_token: ${{ secrets.PAT }}
-        branch: master
+        retry: 7
