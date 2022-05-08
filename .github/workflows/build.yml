@@ -68,7 +68,7 @@ jobs:
         path: dist
 
     - name: Zipping dist
-      run: tar -C "." -cvf ${{ matrix.targets }}.tar dist
+      run: tar -C "./dist" -cvf ${{ matrix.targets }}.tar dist
 
     - name: Move zip to HOME
       run: mv ${{ matrix.targets }}.tar ~/
