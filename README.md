@@ -13,7 +13,7 @@ influencing your personal confiugration. Eask aims to be:
 
 * **Consistent** enough to sandbox across all systems
 * **General** enough to have Emacsers often used commands (byte-compile, checkdoc, etc)
-* **Robust** enough to provide useful results even in the presense of user's errors
+* **Robust** enough to provide useful results even in the presence of user's errors
 * **Dependency-free** so that the tool can be run on any platform
 
 ## 🔗 Links
@@ -56,6 +56,6 @@ influencing your personal confiugration. Eask aims to be:
 [![Test ert-runner](https://github.com/emacs-eask/eask/actions/workflows/test_ert-runner.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test_ert-runner.yml)
 [![Test buttercup](https://github.com/emacs-eask/eask/actions/workflows/test_buttercup.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test_buttercup.yml)
 
-##### ❌ Tests puppose to be `RED`
+##### ❌ Tests purpose to be `RED`
 
 [![Error](https://github.com/emacs-eask/eask/actions/workflows/error.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/error.yml)
