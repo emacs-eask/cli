@@ -527,16 +527,16 @@ Eask file in the workspace."
     (run-hooks 'eask-file-loaded-hook)
     result))
 
+(defun eask-file-try-load (relative-path)
+  "Try load eask file in RELATIVE-PATH."
+  (or (eask-file-load (concat relative-path "Easkfile") t)
+      (eask-file-load (concat relative-path "Eask") t)))
+
 (defun eask--print-env-info ()
   "Display environment information at the very top of the execution."
   (eask-msg "")
   (eask-msg "✓ Checking Emacs version %s... done!" emacs-version)
   (eask-msg "✓ Checking system %s... done!" system-type))
-
-(defun eask-file-try-load (relative-path)
-  "Try load eask file in RELATIVE-PATH."
-  (or (eask-file-load (concat relative-path "Easkfile") t)
-      (eask-file-load (concat relative-path "Eask") t)))
 
 (defmacro eask--with-hooks (&rest body)
   "Execute BODY with before/after hooks."
