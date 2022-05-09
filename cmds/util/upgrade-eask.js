@@ -41,7 +41,9 @@ exports.handler = async (argv) => {
     console.log('✗ Failed to upgrade Eask, possible causes are:');
     console.log('');
     console.log('  [1] Make sure you have git installed and has the right permission');
-    console.log('  [2] You probably have installed Eask with npm, try the following command:');
+    console.log('  [2] You install Eask with other package management tool');
+    console.log('');
+    console.log('For example, if you install eask with npm:');
     console.log('');
     process.stdout.write('    $ npm install -g emacs-eask/eask@latest');
   });

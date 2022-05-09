@@ -470,7 +470,11 @@ other scripts internally.  See function `eask-call'.")
   "Execute BODY with workspace setup."
   (declare (indent 0) (debug t))
   `(eask--batch-mode
-     (let ((default-directory (if (eask-global-p) user-emacs-directory
+     (let (;; XXX: this will make command `info', `files' work as expected;
+           ;; but the relative paths file spec will be lost...
+           ;;
+           ;; So commands like `load' would NOT work!
+           (default-directory (if (eask-global-p) user-emacs-directory
                                 default-directory))
            (alist))
        (dolist (cmd eask--command-list)
