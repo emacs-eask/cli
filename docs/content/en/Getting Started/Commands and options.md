@@ -433,6 +433,10 @@ Alias: `upgrade-self`
 $ eask [GLOBAL-OPTIONS] upgrade-eask
 ```
 
+{{< hint warning >}}
+💡 This will only work if you install it from source!
+{{< /hint >}}
+
 ## 🔍 eask locate
 
 Show Eask installed location

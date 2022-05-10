@@ -24,38 +24,51 @@ influencing your personal confiugration. Eask aims to be:
 
 ## 🧪 Testing
 
-##### ✔️ Tests puppose to be `GREEN`
+##### ✔️ Tests purpose to be `GREEN`
 
 ###### Documentation
 
-[![Docs](https://github.com/emacs-eask/eask/actions/workflows/docs.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/docs.yml)
+| Description                            | Done | Status                                                                                                                                            |
+|----------------------------------------|------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| Keep the documentation page up to date | ✔    | [![Docs](https://github.com/emacs-eask/eask/actions/workflows/docs.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/docs.yml) |
 
 ###### Development
 
-[![Compile](https://github.com/emacs-eask/eask/actions/workflows/compile.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/compile.yml)
-[![Compat](https://github.com/emacs-eask/eask/actions/workflows/compat.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/compat.yml)
-[![Build](https://github.com/emacs-eask/eask/actions/workflows/build.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/build.yml)
+| Description                               | Done | Status                                                                                                                                                     |
+|-------------------------------------------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Compile source and check redefined        | ✔    | [![Compile](https://github.com/emacs-eask/eask/actions/workflows/compile.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/compile.yml) |
+| Compatbility check for each Emacs version | ✔    | [![Compat](https://github.com/emacs-eask/eask/actions/workflows/compat.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/compat.yml)    |
+| Build executables                         | ✔    | [![Build](https://github.com/emacs-eask/eask/actions/workflows/build.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/build.yml)       |
 
 ###### Commands
 
-[![Global](https://github.com/emacs-eask/eask/actions/workflows/global.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/global.yml)
-[![Local](https://github.com/emacs-eask/eask/actions/workflows/local.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/local.yml)
-[![Install](https://github.com/emacs-eask/eask/actions/workflows/install.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/install.yml)
-[![Exec](https://github.com/emacs-eask/eask/actions/workflows/exec.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/exec.yml)
-[![Search](https://github.com/emacs-eask/eask/actions/workflows/search.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/search.yml)
-[![Outdated_Upgrade](https://github.com/emacs-eask/eask/actions/workflows/outdated_upgrade.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/outdated_upgrade.yml)
-[![Checker](https://github.com/emacs-eask/eask/actions/workflows/checker.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/checker.yml)
+| Description                                 | Done | Status                                                                                                                                                                                |
+|---------------------------------------------|------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Test commands in global (config) mode       | ✔    | [![Global](https://github.com/emacs-eask/eask/actions/workflows/global.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/global.yml)                               |
+| Test commands in development (package) mode | ✔    | [![Local](https://github.com/emacs-eask/eask/actions/workflows/local.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/local.yml)                                  |
+| Test to install packages                    | ✔    | [![Install](https://github.com/emacs-eask/eask/actions/workflows/install.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/install.yml)                            |
+| Test execute shell commands                 | ✔    | [![Exec](https://github.com/emacs-eask/eask/actions/workflows/exec.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/exec.yml)                                     |
+| Test to search packages                     | ✔    | [![Search](https://github.com/emacs-eask/eask/actions/workflows/search.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/search.yml)                               |
+| Test to upgrade and check outdated packages | ✔    | [![Outdated_Upgrade](https://github.com/emacs-eask/eask/actions/workflows/outdated_upgrade.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/outdated_upgrade.yml) |
+| `Eask`-file checker                         | ✔    | [![Checker](https://github.com/emacs-eask/eask/actions/workflows/checker.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/checker.yml)                            |
 
 ###### Features
 
-[![Color](https://github.com/emacs-eask/eask/actions/workflows/color.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/color.yml)
+| Description  | Done | Status                                                                                                                                               |
+|--------------|------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Color output | ✔    | [![Color](https://github.com/emacs-eask/eask/actions/workflows/color.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/color.yml) |
 
 ###### Test
 
-[![Test ert](https://github.com/emacs-eask/eask/actions/workflows/test_ert.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test_ert.yml)
-[![Test ert-runner](https://github.com/emacs-eask/eask/actions/workflows/test_ert-runner.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test_ert-runner.yml)
-[![Test buttercup](https://github.com/emacs-eask/eask/actions/workflows/test_buttercup.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test_buttercup.yml)
+| Description               | Done | Status                                                                                                                                                                             |
+|---------------------------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Test `ert` command        | ✔    | [![Test ert](https://github.com/emacs-eask/eask/actions/workflows/test_ert.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test_ert.yml)                      |
+| Test `ert-runner` command | ✔    | [![Test ert-runner](https://github.com/emacs-eask/eask/actions/workflows/test_ert-runner.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test_ert-runner.yml) |
+| Test `buttercup` command  | ❌   | [![Test buttercup](https://github.com/emacs-eask/eask/actions/workflows/test_buttercup.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test_buttercup.yml)    |
 
 ##### ❌ Tests purpose to be `RED`
 
-[![Error](https://github.com/emacs-eask/eask/actions/workflows/error.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/error.yml)
+| Description                                       | Done | Status                                                                                                                                               |
+|---------------------------------------------------|------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Test to see if Eask can return non-zero exit code | ✔    | [![Error](https://github.com/emacs-eask/eask/actions/workflows/error.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/error.yml) |
+
