@@ -24,7 +24,7 @@ influencing your personal confiugration. Eask aims to be:
 
 ## 🧪 Testing
 
-##### ✔️ Tests purpose to be `GREEN`
+##### ✔️ Tests suppose to be `GREEN`
 
 ###### Documentation
 
@@ -66,7 +66,7 @@ influencing your personal confiugration. Eask aims to be:
 | Test `ert-runner` command | ✔    | [![Test ert-runner](https://github.com/emacs-eask/eask/actions/workflows/test_ert-runner.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test_ert-runner.yml) |
 | Test `buttercup` command  | ❌   | [![Test buttercup](https://github.com/emacs-eask/eask/actions/workflows/test_buttercup.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test_buttercup.yml)    |
 
-##### ❌ Tests purpose to be `RED`
+##### ❌ Tests suppose to be `RED`
 
 | Description                                       | Done | Status                                                                                                                                               |
 |---------------------------------------------------|------|------------------------------------------------------------------------------------------------------------------------------------------------------|
