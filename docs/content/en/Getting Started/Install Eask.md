@@ -38,7 +38,12 @@ WIP
 
 ### Chocolatey (Windows)
 
-WIP
+If you have [Chocolatey](https://chocolatey.org/) installed on your machine, you can
+install Eask with the following one-liner:
+
+```sh
+$ chcoc install eask
+```
 
 ### Scoop (Windows)
 
