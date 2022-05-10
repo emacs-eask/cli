@@ -34,7 +34,10 @@ for! 👀
 
 ### Development
 
-- [ ] [DEV] Release with an executable, so we no longer have to rely on node!
+- [ ] [DEV] Publish package to [homebrew]()
+- [ ] [DEV] Publish package to [Chocolatety]()
+- [ ] [DEV] Publish package to [Scoop]()
+- [ ] [DEV] Publish package to [MacPorts]()
 
 ### Eask-file commands
 
