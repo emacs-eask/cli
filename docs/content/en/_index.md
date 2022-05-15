@@ -47,6 +47,11 @@ for! 👀
 
 - [ ] [FEAT] Add `elisp-lint` command
 
+### Testing
+
+- [ ] [FEAT] Add `ecukes` command
+- [ ] [FEAT] Add `el-mock` command
+
 ## 📂 Underlying Projects
 
 The design of Eask was greatly influenced by the following projects:
