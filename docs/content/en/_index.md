@@ -50,7 +50,6 @@ for! 👀
 ### Testing
 
 - [ ] [FEAT] Add `ecukes` command
-- [ ] [FEAT] Add `el-mock` command
 
 ## 📂 Underlying Projects
 
