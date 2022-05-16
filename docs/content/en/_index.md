@@ -24,7 +24,7 @@ for! 👀
 The table were compiled by reading these projects’ documentation and source code,
 but the author is not an expert on these tools. Corrections are welcome.
 
-|          | Behind technology                 | Cross-Platform                                                   | Emacs Version | Size   |
+|          | Behind technology                 | Cross-Platform                                                   | Emacs Version | Size                |
 |----------|-----------------------------------|------------------------------------------------------------------|---------------|---------------------|
 | Cask     | Bash, Batch, and Python (Windows) | ❌ Good on Linux and macOS, but it's particularly bad on Windows | 24.5+         | 3,000+ lines        |
 | makem.sh | Shellscript                       | ❌ Doesn't work on Windows by default                            | 26.1+         | 1 file, 1200+ lines |
