@@ -59,3 +59,19 @@ The design of Eask was greatly influenced by the following projects:
 * [makem.sh](https://github.com/alphapapa/makem.sh) - Makefile-like script for building and testing Emacs Lisp packages
 * [epm](https://github.com/xuchunyang/epm) - Emacs Package Manager
 * [eldev](https://github.com/doublep/eldev) - Elisp Development Tool
+
+## ⚖️ Comparisons
+
+The table were compiled by reading these projects’ documentation and source code,
+but the author is not an expert on these tools. Corrections are welcome.
+
+|          | Behind technology                 | Cross-Platform                                                   | Emacs Version | Size   |
+|----------|-----------------------------------|------------------------------------------------------------------|---------------|---------------------|
+| Cask     | Bash, Batch, and Python (Windows) | ❌ Good on Linux and macOS, but it's particularly bad on Windows | 24.5+         | 3,000+ lines        |
+| makem.sh | Shellscript                       | ❌ Doesn't work on Windows by default                            | 26.1+         | 1 file, 1200+ lines |
+| Eldev    | Bash, Batch, and Powershel, etc   | ✔ Good, but qutie slow on Windows                                | 24.4+         | 4,000+ lines        |
+| Eask     | Node or Native Executables        | ✔ Good, and it can be compiled to native executables             | 26.1+         | 3,000+ lines        |
+
+{{< hint info >}}
+💡 **makem.sh** has a good comparisons document as well, visit their [site](https://github.com/alphapapa/makem.sh#comparisons)
+{{< /hint >}}
