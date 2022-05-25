@@ -35,7 +35,6 @@
                installed s skipped)))
 
 (eask-start
-  (eask-pkg-init)
   (if-let ((names (eask-args)))
       ;; If package [name..] are specified, we try to install it
       (eask--install-packages names)

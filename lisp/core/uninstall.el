@@ -32,7 +32,6 @@
                deleted s skipped)))
 
 (eask-start
-  (eask-pkg-init)
   (if-let ((names (eask-args)))
       (eask--uninstall-packages names)
     (if-let* ((name (intern (eask-guess-package-name)))
