@@ -102,6 +102,10 @@ the `eask-start' execution.")
   "Convert OBJ to string."
   (format "%s" obj))
 
+(defun eask-listify (obj)
+  "Turn OBJ to list."
+  (if (listp obj) obj (list obj)))
+
 (defun eask-intern (obj)
   "Safely intern OBJ."
   (if (stringp obj) (intern obj) obj))
@@ -182,7 +186,7 @@ the `eask-start' execution.")
 
 (defun eask-install-dependencies ()
   "Install dependencies defined in Eask file."
-  (eask-pkg-init)
+  (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (when eask-depends-on-recipe-p
     (eask-log "Installing required external packages...")
     (eask-with-archives "melpa"
@@ -233,11 +237,20 @@ the `eask-start' execution.")
          (pkg-version (ansi-yellow (eask-package--version-string pkg))))
     (list pkg pkg-string pkg-version)))
 
+(defmacro eask--pkg-process (pkg &rest body)
+  "Execute BODY with PKG's related variables."
+  (declare (indent 1) (debug t))
+  `(let* ((pkg-info (eask--pkg-transaction-vars ,pkg))
+          (pkg      (nth 0 pkg-info))
+          (name     (nth 1 pkg-info))
+          (version  (nth 2 pkg-info)))
+     ,@body))
+
 (defmacro eask-with-archives (archives &rest body)
   "Scope that temporary makes ARCHIVES available."
   (declare (indent 1) (debug t))
   `(let ((package-archives package-archives)
-         (archives (if (listp ,archives) ,archives (list ,archives)))
+         (archives (eask-listify ,archives))
          (added))
      (dolist (archive archives)
        (unless (assoc archive package-archives)
@@ -259,16 +272,15 @@ the `eask-start' execution.")
 
 (defun eask-package-install (pkg)
   "Install the package."
-  (eask-pkg-init)
-  (unless (eask-package-installable-p pkg)
-    (eask-error "Package not installable `%s'; make sure package archives are included" pkg))
-  (let* ((pkg-info (eask--pkg-transaction-vars pkg))
-         (pkg         (nth 0 pkg-info))
-         (pkg-string  (nth 1 pkg-info))
-         (pkg-version (nth 2 pkg-info)))
+  (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
+  (eask--pkg-process pkg
     (cond
      ((package-installed-p pkg)
-      (eask-msg "  - Skipping %s (%s)... already installed ✗" pkg-string pkg-version))
+      (eask-msg "  - Skipping %s (%s)... already installed ✗" name version))
+     ((progn
+        (eask-pkg-init)
+        (unless (eask-package-installable-p pkg)
+          (eask-error "Package not installable `%s'; make sure package archive is included" pkg))))
      ((when-let* ((desc (eask-package-desc pkg))
                   (req-emacs (assoc 'emacs (package-desc-reqs desc)))
                   (req-emacs (package-version-join (nth 0 (cdr req-emacs))))
@@ -277,54 +289,52 @@ the `eask-start' execution.")
             (eask-error "  - Skipping %s (%s)... it requires Emacs %s and above ✗"
                         pkg (eask-package--version-string pkg) emacs-version)
           (eask-msg "  - Skipping %s (%s)... it requires Emacs %s and above ✗"
-                    pkg-string pkg-version (ansi-yellow emacs-version)))))
+                    name version (ansi-yellow emacs-version)))))
      (t
-      (eask-with-progress
-        (format "  - Installing %s (%s)... " pkg-string pkg-version)
-        (eask-with-verbosity 'debug
-          ;; XXX Without ignore-errors guard, it will trigger error
-          ;;
-          ;;   Can't find library xxxxxxx.el
-          ;;
-          ;; But we can remove this after Emacs 28, since function `find-library-name'
-          ;; has replaced the function `signal' instead of the `error'.
-          (eask-ignore-errors (package-install pkg)))
-        "done ✓")))))
+      (eask--pkg-process pkg
+        (eask-with-progress
+          (format "  - Installing %s (%s)... " name version)
+          (eask-with-verbosity 'debug
+            ;; XXX Without ignore-errors guard, it will trigger error
+            ;;
+            ;;   Can't find library xxxxxxx.el
+            ;;
+            ;; But we can remove this after Emacs 28, since function `find-library-name'
+            ;; has replaced the function `signal' instead of the `error'.
+            (eask-ignore-errors (package-install pkg)))
+          "done ✓"))))))
 
 (defun eask-package-delete (pkg)
   "Delete the package."
-  (eask-pkg-init)
-  (let* ((pkg-info (eask--pkg-transaction-vars pkg))
-         (pkg         (nth 0 pkg-info))
-         (pkg-string  (nth 1 pkg-info))
-         (pkg-version (nth 2 pkg-info)))
+  (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
+  (eask--pkg-process pkg
     (cond
      ((not (package-installed-p pkg))
-      (eask-msg "  - Skipping %s (%s)... not installed ✗" pkg-string pkg-version))
+      (eask-msg "  - Skipping %s (%s)... not installed ✗" name version))
      (t
-      (eask-with-progress
-        (format "  - Uninstalling %s (%s)... " pkg-string pkg-version)
-        (eask-with-verbosity 'debug
-          (package-delete (eask-package-desc pkg t) (eask-force-p)))
-        "done ✓")))))
+      (eask--pkg-process pkg
+        (eask-with-progress
+          (format "  - Uninstalling %s (%s)... " name version)
+          (eask-with-verbosity 'debug
+            (package-delete (eask-package-desc pkg t) (eask-force-p)))
+          "done ✓"))))))
 
 (defun eask-package-reinstall (pkg)
   "Reinstall the package."
-  (eask-pkg-init)
-  (let* ((pkg-info (eask--pkg-transaction-vars pkg))
-         (pkg         (nth 0 pkg-info))
-         (pkg-string  (nth 1 pkg-info))
-         (pkg-version (nth 2 pkg-info)))
+  (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
+  (eask--pkg-process pkg
     (cond
      ((not (package-installed-p pkg))
-      (eask-msg "  - Skipping %s (%s)... not installed ✗" pkg-string pkg-version))
+      (eask-msg "  - Skipping %s (%s)... not installed ✗" name version))
      (t
-      (eask-with-progress
-        (format "  - Reinstalling %s (%s)... " pkg-string pkg-version)
-        (eask-with-verbosity 'debug
-          (package-delete (eask-package-desc pkg t) t)
-          (eask-ignore-errors (package-install pkg)))
-        "done ✓")))))
+      (eask-pkg-init)
+      (eask--pkg-process pkg
+        (eask-with-progress
+          (format "  - Reinstalling %s (%s)... " name version)
+          (eask-with-verbosity 'debug
+            (package-delete (eask-package-desc pkg t) t)
+            (eask-ignore-errors (package-install pkg)))
+          "done ✓"))))))
 
 (defun eask-package-desc (name &optional current)
   "Build package description by PKG-NAME."

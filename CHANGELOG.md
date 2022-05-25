@@ -8,7 +8,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 0.7.x (Unreleased)
 > Released N/A
 
-* N/A
+* Avoid loading package info unless it's needed (#13)
 
 ## 0.6.17
 > Released Mar 5, 2022
