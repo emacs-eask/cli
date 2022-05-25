@@ -35,6 +35,7 @@
                installed s skipped)))
 
 (eask-start
+  (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (if-let ((names (eask-args)))
       ;; If package [name..] are specified, we try to install it
       (eask--install-packages names)

@@ -271,7 +271,7 @@ the `eask-start' execution.")
 
 (defun eask-package-install (pkg)
   "Install the package."
-  (eask-defvc< 27 (eask-pkg-init))
+  (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (eask--pkg-process pkg
     (cond
      ((package-installed-p pkg)
@@ -305,7 +305,7 @@ the `eask-start' execution.")
 
 (defun eask-package-delete (pkg)
   "Delete the package."
-  (eask-defvc< 27 (eask-pkg-init))
+  (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (eask--pkg-process pkg
     (cond
      ((not (package-installed-p pkg))
@@ -320,7 +320,7 @@ the `eask-start' execution.")
 
 (defun eask-package-reinstall (pkg)
   "Reinstall the package."
-  (eask-defvc< 27 (eask-pkg-init))
+  (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (eask--pkg-process pkg
     (cond
      ((not (package-installed-p pkg))
