@@ -162,9 +162,11 @@ Print path to package directory, where all dependencies are installed.
 $ eask [GLOBAL-OPTIONS] package-directory
 ```
 
-## 🔍 eask paths
+## 🔍 eask path
 
 Print the `PATH` environment variable of this project.
+
+Alias: `exec-path`
 
 ```sh
 $ eask [GLOBAL-OPTIONS] path
