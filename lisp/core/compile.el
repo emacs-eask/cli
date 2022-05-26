@@ -61,7 +61,7 @@
                skipped)))
 
 (eask-start
-  (eask-pkg-init)
+  (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (if-let ((files (or (eask-expand-file-specs (eask-args))
                       (eask-package-el-files))))
       (eask--compile-files files)
