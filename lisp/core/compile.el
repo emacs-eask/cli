@@ -52,7 +52,7 @@
     result))
 
 (defun eask--compile-files (files)
-  "Compile sequence of files."
+  "Compile sequence of FILES."
   (let* ((compiled (cl-remove-if-not #'eask--byte-compile-file files))
          (compiled (length compiled))
          (skipped (- (length files) compiled)))

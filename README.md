@@ -7,11 +7,11 @@
 
 Eask is a command-line tool that helps you build, lint, and test Emacs Lisp
 packages. It creates a clean environment to sandbox your elisp code without
-influencing your personal confiugration. Eask aims to be:
+influencing your personal configuration. Eask aims to be:
 
 * **Consistent** enough to sandbox across all systems
 * **General** enough to have Emacsers often used commands (byte-compile, checkdoc, etc)
-* **Robust** enough to provide useful results even in the presence of user's errors
+* **Robust** enough to provide useful results even in the presence of user errors
 * **Dependency-free** so that the tool can be run on any platform
 
 ## 🔗 Links
@@ -35,7 +35,7 @@ influencing your personal confiugration. Eask aims to be:
 | Description                               | Done | Status                                                                                                                                                     |
 |-------------------------------------------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Compile source and check redefined        | ✔    | [![Compile](https://github.com/emacs-eask/eask/actions/workflows/compile.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/compile.yml) |
-| Compatbility check for each Emacs version | ✔    | [![Compat](https://github.com/emacs-eask/eask/actions/workflows/compat.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/compat.yml)    |
+| Compatibility check for each Emacs version | ✔    | [![Compat](https://github.com/emacs-eask/eask/actions/workflows/compat.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/compat.yml)    |
 | Build executables                         | ✔    | [![Build](https://github.com/emacs-eask/eask/actions/workflows/build.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/build.yml)       |
 
 ###### Commands
