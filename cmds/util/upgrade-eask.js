@@ -47,7 +47,7 @@ exports.handler = async (argv) => {
     console.log('');
     console.log('For example, if you install eask with npm:');
     console.log('');
-    console.log('    $ npm install -g emacs-eask/eask@latest');
+    console.log('    $ npm install -g @emacs-eask/eask@latest');
     console.log('');
     process.stdout.write('Visit https://emacs-eask.github.io/Getting-Started/Install-Eask/ to see all available install options');
   });
