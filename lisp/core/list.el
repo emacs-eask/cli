@@ -78,7 +78,7 @@
       (eask-print-pkg name 0 (or depth (eask-depth) 999) pkg-alist))))
 
 (eask-start
-  (eask-pkg-init)
+  (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (eask--list package-activated-list package-alist)
   (eask-info "(Total of %s package%s installed)"
              (length package-activated-list)

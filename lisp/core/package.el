@@ -49,7 +49,7 @@
         (packaged))
     (ignore-errors (make-directory eask-dist-path t))
 
-    (eask-pkg-init)
+    (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
     (eask-with-archives "melpa"
       (eask-package-install 'package-build))
     (eask-load "./extern/package-build")  ; override
