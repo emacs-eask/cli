@@ -1,3 +1,5 @@
+<a href="#"><img align="right" src="./docs/static/logo.png" width="20%"></a>
+
 # eask
 > Command-line tool for building and testing Emacs Lisp packages
 
@@ -69,4 +71,3 @@ influencing your personal configuration. Eask aims to be:
 | Description                                       | Done | Status                                                                                                                                               |
 |---------------------------------------------------|------|------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Test to see if Eask can return non-zero exit code | ✔    | [![Error](https://github.com/emacs-eask/eask/actions/workflows/error.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/error.yml) |
-
