@@ -36,13 +36,16 @@
   (setq commander-args (cddr eask-argv))  ; by pass `--' as well
   (if-let ((name (eask-argv 1)))
       (or
-       ;; 1) Execute executable if found
+       ;; 1) For Elisp executable (github-elpa)
        (let ((program (executable-find name))) (ignore-errors (load program t t)))
-       ;; 2) Execute `commander' (ert-runner, github-elpa, and elsa, etc)
+       ;; 2) Fallback executable isn't a pure elisp file (ert-runner, elsa, etc)
+       ;;
+       ;; This wouldn't work with packages that don't execute tasks during the
+       ;; load time.
        (let ((el (locate-library name))) (ignore-errors (load el t t)))
        ;; 3) Execute `shell-command'
        ;;
-       ;; TODO `shell-command' would jump out of Emacs and does not share the
+       ;; TODO: `shell-command' would jump out of Emacs and does not share the
        ;; same environment PATH.
        (let* ((program (or (executable-find name) name))
               (command (mapconcat #'identity (append (list program) commander-args) " ")))
