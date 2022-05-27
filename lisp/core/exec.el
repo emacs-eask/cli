@@ -30,7 +30,7 @@
       (eask-error "Error from the execution, exit code %s" code))))
 
 (eask-start
-  (eask-pkg-init)
+  (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   ;; XXX This is the hack by adding all `bin' folders from local elpa.
   (eask-setup-paths)
   (setq commander-args (cddr eask-argv))  ; by pass `--' as well
