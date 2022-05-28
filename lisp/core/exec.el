@@ -37,7 +37,7 @@
   (if-let ((name (eask-argv 1)))
       (or
        ;; 1) For Elisp executable (github-elpa)
-       (let ((program (executable-find name))) (ignore-errors (load program t t)))
+       (let ((program (executable-find name))) (ignore-errors (load program nil t)))
        ;; 2) Execute `shell-command'
        (let* ((program (or (executable-find name) name))
               (command (mapconcat #'identity (append (list program) commander-args) " ")))
