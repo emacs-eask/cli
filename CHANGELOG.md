@@ -10,6 +10,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 * Avoid loading package info unless it's needed (#13, #14, and #19)
 * Read `-pkg.el` file prior to package-file while exists (#21)
+* Simplify (rewrite) command exec (#22)
 
 ## 0.6.17
 > Released Mar 5, 2022

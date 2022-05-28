@@ -206,7 +206,9 @@ the `eask-start' execution.")
   (eask-with-progress
     (ansi-green "Updating environment PATHs... ")
     (eask-with-verbosity 'debug
-      (eask--update-exec-path) (eask--update-load-path))
+      (eask--update-exec-path) (eask--update-load-path)
+      (setenv "PATH" (string-join exec-path path-separator))
+      (setenv "EMACSLOADPATH" (string-join load-path path-separator)))
     (ansi-green "done ✓")))
 
 (defvar eask--package-initialized nil

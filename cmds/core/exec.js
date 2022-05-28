@@ -20,13 +20,12 @@
 "use strict";
 
 exports.command = ['exec [args..]'];
-exports.desc = 'execute command with correct load-path set up';
-exports.builder = {
-  args: {
-    description: 'execution arguments',
-    requiresArg: false,
-    type: 'array',
-  },
+exports.desc = 'execute command with correct environemnt PATH set up';
+exports.builder = async (yargs) => {
+  yargs.help(false);
+  yargs.version(false);
+  yargs.getOptions().narg = [];
+  //console.log(yargs.getOptions());
 };
 
 exports.handler = async (argv) => {

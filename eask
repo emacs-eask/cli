@@ -9,21 +9,22 @@ Eask is a command-line tool that helps you build, lint, and test Emacs Lisp pack
 
 Usage: eask <command> [options..]`;
 
+const epilogue = `For more informatiion, find the manual at https://emacs-eask.github.io/`;
+
 yargs
   .usage(usage)
   .scriptName('')
-  .commandDir('cmds', {
-    recurse: true,
-  })
-  .showHelpOnFail(true)
-  .help(
-    'help',
-    'Show usage instructions.'
-  )
+  .epilogue(epilogue)
+  .commandDir('cmds', { recurse: true, })
   .command({
     command: '*',
     handler() { yargs.showHelp(); }
   })
+  .showHelpOnFail(true)
+  .help(
+    'help',
+    'Show usage instructions'
+  )
   .option('global', {
     description: 'change default workspace to ~/.emacs.d/',
     alias: 'g',
@@ -99,4 +100,4 @@ yargs
   })
   .demandCommand()
   .wrap(yargs.terminalWidth())
-  .help().argv;
+  .argv;
