@@ -22,7 +22,8 @@
 (defun eask--shell-command (command)
   "Wrap `shell-command' with better output to terminal."
   (eask-info "Start command: %s" command)
-  (let ((code (shell-command command "*output*" "*error*")))
+  (let ((code (eask-with-verbosity 'debug
+                (shell-command command "*output*" "*error*"))))
     (if (zerop code)
         (with-current-buffer "*output*" (eask-msg (buffer-string)))
       (with-current-buffer "*error*" (eask-msg (ansi-red (buffer-string))))
