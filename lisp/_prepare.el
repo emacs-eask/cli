@@ -678,7 +678,7 @@ Eask file in the workspace."
         (eask-msg (concat
                    (if eask-package-desc "✓ " "✗ ")
                    "Try constructing the package-descriptor (%s)... "
-                   (if eask-package-desc "succeed! " "failed!"))
+                   (if eask-package-desc "succeeded! " "failed!"))
                   (file-name-nondirectory target-file))))))
 
 (defun eask-files (&rest patterns)
@@ -1034,13 +1034,13 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   (when-let* (((and eask-package eask-package-desc))
               (def-point (if (eask-pkg-el) "-pkg.el file" "package-file")))
     (eask--check-strings
-     "Unmatch package name '%s'; it should be '%s'"
+     "Unmatched package name '%s'; it should be '%s'"
      (eask-package-name) (package-desc-name eask-package-desc))
     (eask--check-strings
-     "Unmatch version '%s'; it should be '%s'"
+     "Unmatched version '%s'; it should be '%s'"
      (eask-package-version) (package-version-join (package-desc-version eask-package-desc)))
     (eask--check-strings
-     "Unmatch summary '%s'; it should be '%s'"
+     "Unmatched summary '%s'; it should be '%s'"
      (eask-package-description) (package-desc-summary eask-package-desc))
     (let* ((dependencies (append eask-depends-on-emacs eask-depends-on))
            (dependencies (mapcar #'car dependencies))
@@ -1050,10 +1050,10 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
            (requirements (mapcar (lambda (elm) (eask-2str elm)) requirements)))
       (dolist (req requirements)
         (unless (member req dependencies)
-          (eask-warn "Unmatch dependency '%s'; add (depends-on \"%s\") to Eask-file or consider removing it" req req)))
+          (eask-warn "Unmatched dependency '%s'; add (depends-on \"%s\") to Eask-file or consider removing it" req req)))
       (dolist (dep dependencies)
         (unless (member dep requirements)
-          (eask-warn "Unmatch dependency '%s'; add (%s \"VERSION\") to %s or consider removing it" dep dep def-point))))))
+          (eask-warn "Unmatched dependency '%s'; add (%s \"VERSION\") to %s or consider removing it" dep dep def-point))))))
 
 (add-hook 'eask-file-loaded-hook #'eask--checker-existence)
 (add-hook 'eask-file-loaded-hook #'eask--checker-metadata)
