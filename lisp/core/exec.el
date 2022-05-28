@@ -22,8 +22,7 @@
 (defun eask--shell-command (command)
   "Wrap `shell-command' with better output to terminal."
   (eask-info "Start command: %s" command)
-  (let ((code (eask-with-verbosity 'debug
-                (shell-command command "*output*" "*error*"))))
+  (let ((code (eask--silent (shell-command command "*output*" "*error*"))))
     (if (zerop code)
         (with-current-buffer "*output*" (eask-msg (buffer-string)))
       (with-current-buffer "*error*" (eask-msg (ansi-red (buffer-string))))
@@ -36,7 +35,7 @@
   (if-let ((name (eask-argv 1)))
       (or
        ;; 1) For Elisp executable (github-elpa)
-       (let ((program (executable-find name))) (ignore-errors (load program nil t)))
+       (let ((program (executable-find name))) (ignore-errors (load program t t)))
        ;; 2) Execute `shell-command'
        (let* ((program (or (executable-find name) name))
               (commands (cddr (eask-args)))
