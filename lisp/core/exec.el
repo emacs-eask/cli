@@ -24,8 +24,7 @@
   (eask-info "Start command: %s" command)
   (let ((code (shell-command command "*output*" "*error*")))
     (if (zerop code)
-        (eask-with-verbosity 'debug
-          (with-current-buffer "*output*" (eask-msg (buffer-string))))
+        (with-current-buffer "*output*" (eask-msg (buffer-string)))
       (with-current-buffer "*error*" (eask-msg (ansi-red (buffer-string))))
       (eask-error "Error from the execution, exit code %s" code))))
 

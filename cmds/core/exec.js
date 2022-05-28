@@ -24,6 +24,8 @@ exports.desc = 'execute command with correct environemnt PATH set up';
 exports.builder = async (yargs) => {
   yargs.help(false);
   yargs.version(false);
+  yargs.getOptions().narg = [];
+  //console.log(yargs.getOptions());
 };
 
 exports.handler = async (argv) => {

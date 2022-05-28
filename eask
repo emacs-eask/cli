@@ -14,9 +14,8 @@ const epilogue = `For more informatiion, find the manual at https://emacs-eask.g
 yargs
   .usage(usage)
   .scriptName('')
-  .commandDir('cmds', {
-    recurse: true,
-  })
+  .epilogue(epilogue)
+  .commandDir('cmds', { recurse: true, })
   .command({
     command: '*',
     handler() { yargs.showHelp(); }
@@ -99,7 +98,6 @@ yargs
     requiresArg: true,
     type: 'number',
   })
-  .epilogue(epilogue)
   .demandCommand()
   .wrap(yargs.terminalWidth())
   .argv;
