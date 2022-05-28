@@ -663,22 +663,19 @@ Eask file in the workspace."
       (eask-error "Multiple definition of `package-file'")
     (setq eask-package-file (expand-file-name file))
     (let ((package-file-exists (file-exists-p eask-package-file))
-          (desc-file (ignore-errors (expand-file-name (eask-pkg-el)))))
+          (def-point (if (eask-pkg-el) "-pkg.el file" "package-file"))
+          (target-file (if (eask-pkg-el) (expand-file-name (eask-pkg-el))
+                         eask-package-file)))
       (unless package-file-exists
         (eask-warn "Package-file seems to be missing `%s'" file))
-      (cond
-       (desc-file
-        (with-temp-buffer
-          (insert-file-contents desc-file)
-          (setq eask-package-desc (ignore-errors (package--read-pkg-desc 'dir))))
-        (unless eask-package-desc
-          (eask-warn "Failed to construct package-descriptor, check your -pkg.el file `%s'" (eask-pkg-el))))
-       (package-file-exists
-        (with-temp-buffer
-          (insert-file-contents eask-package-file)
-          (setq eask-package-desc (ignore-errors (package-buffer-info))))
-        (unless eask-package-desc
-          (eask-warn "Failed to construct package-descriptor, lint the package-file `%s'" file)))))))
+      (with-temp-buffer
+        (insert-file-contents target-file)
+        (setq eask-package-desc (ignore-errors
+                                  (if (eask-pkg-el)
+                                      (package--read-pkg-desc 'dir)
+                                    (package-buffer-info)))))
+      (unless eask-package-desc
+        (eask-warn "Failed to construct package-descriptor, check your %s `%s'" def-point target-file)))))
 
 (defun eask-files (&rest patterns)
   "Set files patterns."
@@ -1033,14 +1030,14 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   (when-let* (((and eask-package eask-package-desc))
               (def-point (if (eask-pkg-el) "-pkg.el file" "package-file")))
     (eask--check-strings
-     "Unmatch package name '%s'; it should be '%s' in your %s"
-     (eask-package-name) (package-desc-name eask-package-desc) def-point)
+     "Unmatch package name '%s'; it should be '%s'"
+     (eask-package-name) (package-desc-name eask-package-desc))
     (eask--check-strings
-     "Unmatch version '%s'; it should be '%s' in your %s"
-     (eask-package-version) (package-version-join (package-desc-version eask-package-desc)) def-point)
+     "Unmatch version '%s'; it should be '%s'"
+     (eask-package-version) (package-version-join (package-desc-version eask-package-desc)))
     (eask--check-strings
-     "Unmatch summary '%s'; it should be '%s' in your %s"
-     (eask-package-description) (package-desc-summary eask-package-desc) def-point)
+     "Unmatch summary '%s'; it should be '%s'"
+     (eask-package-description) (package-desc-summary eask-package-desc))
     (let* ((dependencies (append eask-depends-on-emacs eask-depends-on))
            (dependencies (mapcar #'car dependencies))
            (dependencies (mapcar (lambda (elm) (eask-2str elm)) dependencies))
