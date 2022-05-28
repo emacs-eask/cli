@@ -15,15 +15,15 @@ yargs
   .commandDir('cmds', {
     recurse: true,
   })
-  .showHelpOnFail(true)
-  .help(
-    'help',
-    'Show usage instructions.'
-  )
   .command({
     command: '*',
     handler() { yargs.showHelp(); }
   })
+  .showHelpOnFail(true)
+  .help(
+    'help',
+    'Show usage instructions'
+  )
   .option('global', {
     description: 'change default workspace to ~/.emacs.d/',
     alias: 'g',
@@ -99,4 +99,4 @@ yargs
   })
   .demandCommand()
   .wrap(yargs.terminalWidth())
-  .help().argv;
+  .argv;
