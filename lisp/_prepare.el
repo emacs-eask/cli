@@ -353,6 +353,11 @@ the `eask-start' execution.")
     ;; Just in case, but this should never happens!
     "latest"))
 
+(defun eask-pkg-el ()
+  "Return package description file if exists."
+  (let ((pkg-el (package--description-file default-directory)))
+    (when (file-readable-p pkg-el) pkg-el)))
+
 ;;
 ;;; Flag
 
@@ -657,14 +662,23 @@ Eask file in the workspace."
   (if eask-package-file
       (eask-error "Multiple definition of `package-file'")
     (setq eask-package-file (expand-file-name file))
-    (if (file-exists-p eask-package-file)
-        (progn
-          (with-temp-buffer
-            (insert-file-contents eask-package-file)
-            (setq eask-package-desc (ignore-errors (package-buffer-info))))
-          (unless eask-package-desc
-            (eask-warn "Failed to construct package-descriptor, lint the package-file `%s'" file)))
-      (eask-warn "Package-file seems to be missing `%s'" file))))
+    (let ((package-file-exists (file-exists-p eask-package-file))
+          (desc-file (ignore-errors (expand-file-name (eask-pkg-el)))))
+      (unless package-file-exists
+        (eask-warn "Package-file seems to be missing `%s'" file))
+      (cond
+       (desc-file
+        (with-temp-buffer
+          (insert-file-contents desc-file)
+          (setq eask-package-desc (ignore-errors (package--read-pkg-desc 'dir))))
+        (unless eask-package-desc
+          (eask-warn "Failed to construct package-descriptor, check your -pkg.el file `%s'" (eask-pkg-el))))
+       (package-file-exists
+        (with-temp-buffer
+          (insert-file-contents eask-package-file)
+          (setq eask-package-desc (ignore-errors (package-buffer-info))))
+        (unless eask-package-desc
+          (eask-warn "Failed to construct package-descriptor, lint the package-file `%s'" file)))))))
 
 (defun eask-files (&rest patterns)
   "Set files patterns."
@@ -1010,22 +1024,23 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   "Return errors if required metadata is missing."
   (unless eask-package (eask-error "Missing metadata package; make sure you have create Eask-file with $ eask init!")))
 
-(defun eask--check-strings (fmt f p)
+(defun eask--check-strings (fmt f p &rest args)
   "Test strings (F and P); then print FMT if not equal."
-  (unless (string= f p) (eask-warn fmt f p)))
+  (unless (string= f p) (apply #'eask-warn (append (list fmt f p) args))))
 
 (defun eask--checker-metadata ()
   "Report warnings if metadata doesn't match."
-  (when (and eask-package eask-package-desc)
+  (when-let* (((and eask-package eask-package-desc))
+              (def-point (if (eask-pkg-el) "-pkg.el file" "package-file")))
     (eask--check-strings
-     "Unmatch package name '%s'; it should be '%s'"
-     (eask-package-name) (package-desc-name eask-package-desc))
+     "Unmatch package name '%s'; it should be '%s' in your %s"
+     (eask-package-name) (package-desc-name eask-package-desc) def-point)
     (eask--check-strings
-     "Unmatch version '%s'; it should be '%s'"
-     (eask-package-version) (package-version-join (package-desc-version eask-package-desc)))
+     "Unmatch version '%s'; it should be '%s' in your %s"
+     (eask-package-version) (package-version-join (package-desc-version eask-package-desc)) def-point)
     (eask--check-strings
-     "Unmatch summary '%s'; it should be '%s'"
-     (eask-package-description) (package-desc-summary eask-package-desc))
+     "Unmatch summary '%s'; it should be '%s' in your %s"
+     (eask-package-description) (package-desc-summary eask-package-desc) def-point)
     (let* ((dependencies (append eask-depends-on-emacs eask-depends-on))
            (dependencies (mapcar #'car dependencies))
            (dependencies (mapcar (lambda (elm) (eask-2str elm)) dependencies))
@@ -1037,7 +1052,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
           (eask-warn "Unmatch dependency '%s'; add (depends-on \"%s\") to Eask-file or consider removing it" req req)))
       (dolist (dep dependencies)
         (unless (member dep requirements)
-          (eask-warn "Unmatch dependency '%s'; add (%s \"VERSION\") to package-file or consider removing it" dep dep))))))
+          (eask-warn "Unmatch dependency '%s'; add (%s \"VERSION\") to %s or consider removing it" dep dep def-point))))))
 
 (add-hook 'eask-file-loaded-hook #'eask--checker-existence)
 (add-hook 'eask-file-loaded-hook #'eask--checker-metadata)
