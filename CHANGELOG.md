@@ -9,6 +9,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 > Released N/A
 
 * Avoid loading package info unless it's needed (#13)
+* Simplify (rewrite) command exec (#22)
 
 ## 0.6.17
 > Released Mar 5, 2022
