@@ -662,20 +662,24 @@ Eask file in the workspace."
   (if eask-package-file
       (eask-error "Multiple definition of `package-file'")
     (setq eask-package-file (expand-file-name file))
-    (let ((package-file-exists (file-exists-p eask-package-file))
-          (def-point (if (eask-pkg-el) "-pkg.el file" "package-file"))
-          (target-file (if (eask-pkg-el) (expand-file-name (eask-pkg-el))
-                         eask-package-file)))
+    (let* ((package-file-exists (file-exists-p eask-package-file))
+           (def-point (if (eask-pkg-el) "-pkg.el file" "package-file"))
+           (target-file (cond ((eask-pkg-el) (expand-file-name (eask-pkg-el)))
+                              (package-file-exists eask-package-file))))
       (unless package-file-exists
         (eask-warn "Package-file seems to be missing `%s'" file))
-      (with-temp-buffer
-        (insert-file-contents target-file)
-        (setq eask-package-desc (ignore-errors
-                                  (if (eask-pkg-el)
-                                      (package--read-pkg-desc 'dir)
-                                    (package-buffer-info)))))
-      (unless eask-package-desc
-        (eask-warn "Failed to construct package-descriptor, check your %s `%s'" def-point target-file)))))
+      (when target-file
+        (with-temp-buffer
+          (insert-file-contents target-file)
+          (setq eask-package-desc (ignore-errors
+                                    (if (eask-pkg-el)
+                                        (package--read-pkg-desc 'dir)
+                                      (package-buffer-info)))))
+        (eask-msg (concat
+                   (if eask-package-desc "✓ " "✗ ")
+                   "Try constructing the package-descriptor (%s)... "
+                   (if eask-package-desc "succeed! " "failed!"))
+                  (file-name-nondirectory target-file))))))
 
 (defun eask-files (&rest patterns)
   "Set files patterns."
