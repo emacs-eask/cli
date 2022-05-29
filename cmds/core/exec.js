@@ -42,6 +42,10 @@ exports.handler = async (argv) => {
 
   await UTIL.e_call(argv, 'core/exec', '--', cmd);
 
+  if (!fs.existsSync(EASK_HOMEDIR)) {
+    return;
+  }
+
   let epf = EASK_HOMEDIR + 'exec-path';
   let lpf = EASK_HOMEDIR + 'load-path';
 
