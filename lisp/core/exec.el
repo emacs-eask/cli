@@ -19,15 +19,6 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
-(defun eask--shell-command (command)
-  "Wrap `shell-command' with better output to terminal."
-  (eask-info "Start command: %s" command)
-  (let ((code (eask--silent (shell-command command "*output*" "*error*"))))
-    (if (zerop code)
-        (with-current-buffer "*output*" (eask-msg (buffer-string)))
-      (with-current-buffer "*error*" (eask-msg (ansi-red (buffer-string))))
-      (eask-error "Error from the execution, exit code %s" code))))
-
 (defun eask--export-env ()
   "Export environments."
   (let* ((home-dir (getenv "EASK_HOMEDIR"))  ; temporary environment from node
@@ -47,7 +38,10 @@
        ;; 1) For Elisp executable (github-elpa)
        (let ((program (executable-find name))) (ignore-errors (load program nil t)))
        ;; 2) Export load-path and exec-path
-       (eask--export-env))
+       (eask-with-progress
+         "Exporting environments... "
+         (eask--export-env)
+         "done ✓"))
     (eask-info "✗ (No exeuction output)")
     (eask-help 'exec)))
 
