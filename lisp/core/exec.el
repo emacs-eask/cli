@@ -28,6 +28,15 @@
       (with-current-buffer "*error*" (eask-msg (ansi-red (buffer-string))))
       (eask-error "Error from the execution, exit code %s" code))))
 
+(defun eask--export-env ()
+  "Export environments."
+  (let* ((home-dir (getenv "EASK_HOMEDIR"))  ; temporary environment from node
+         (epf (expand-file-name "exec-path" home-dir))
+         (lpf (expand-file-name "load-path" home-dir)))
+    (ignore-errors (make-directory home-dir t))
+    (write-region (getenv "PATH") nil epf)
+    (write-region (getenv "EMACSLOADPATH") nil lpf)))
+
 (eask-start
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   ;; XXX This is the hack by adding all `bin' folders from local elpa.
@@ -37,11 +46,8 @@
       (or
        ;; 1) For Elisp executable (github-elpa)
        (let ((program (executable-find name))) (ignore-errors (load program nil t)))
-       ;; 2) Execute `shell-command'
-       (let* ((program (or (executable-find name) name))
-              (commands (cddr (eask-args)))
-              (command (mapconcat #'identity (append (list program) commands) " ")))
-         (eask--shell-command command)))
+       ;; 2) Export load-path and exec-path
+       (eask--export-env))
     (eask-info "✗ (No exeuction output)")
     (eask-help 'exec)))
 

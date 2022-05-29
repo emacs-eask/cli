@@ -19,6 +19,11 @@
 
 "use strict";
 
+const os = require('os');
+const fs = require('fs');
+const path = require('path');
+const child_process = require("child_process");
+
 exports.command = ['exec [args..]'];
 exports.desc = 'execute command with correct environemnt PATH set up';
 exports.builder = async (yargs) => {
@@ -28,6 +33,27 @@ exports.builder = async (yargs) => {
   //console.log(yargs.getOptions());
 };
 
+const EASK_HOMEDIR = os.homedir().replace(/\\/g, '/') + '/.eask/';
+
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/exec', '--', process.argv.slice(3));
+  process.env.EASK_HOMEDIR = EASK_HOMEDIR;  // setup environemnt, so Emacs can receive it
+
+  let cmd = process.argv.slice(3);
+
+  await UTIL.e_call(argv, 'core/exec', '--', cmd);
+
+  let epf = EASK_HOMEDIR + 'exec-path';
+  let lpf = EASK_HOMEDIR + 'load-path';
+
+  process.env.PATH = fs.readFileSync(epf, 'utf8');
+  process.env.EMACSLOADPATH = fs.readFileSync(lpf, 'utf8');;
+
+  let program = cmd[0];
+  let rest = cmd.slice(1);
+  let proc = child_process.spawn(program, rest, { stdio: 'inherit' });
+
+  proc.on('close', function (code) {
+    if (code == 0) return;
+    throw 'Exit with code: ' + code;
+  });
 };
