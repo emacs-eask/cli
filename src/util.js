@@ -82,27 +82,32 @@ function _global_options(argv) {
  * @param { string } args - the rest of the arguments
  */
 async function e_call(argv, script, ...args) {
-  let _script = 'lisp/' + script + '.el';
-  let _path = path.join(plugin_dir(), _script);
+  return new Promise(resolve => {
+    let _script = 'lisp/' + script + '.el';
+    let _path = path.join(plugin_dir(), _script);
 
-  let cmd_base = ['-Q', '--script', _path];
-  let cmd_args = args.flat();
-  let cmd_global = _global_options(argv).flat();
-  let cmd = cmd_base.concat(cmd_args).concat(cmd_global);
-  cmd = _remove_undefined(cmd);
+    let cmd_base = ['-Q', '--script', _path];
+    let cmd_args = args.flat();
+    let cmd_global = _global_options(argv).flat();
+    let cmd = cmd_base.concat(cmd_args).concat(cmd_global);
+    cmd = _remove_undefined(cmd);
 
-  let env_status = (argv.global) ? 'global' : 'development';
-  console.log(`Running Eask in the ${env_status} environment`);
-  console.log('Press Ctrl+C to cancel.');
-  console.log('');
-  console.log('Executing script inside Emacs...');
-  if (argv.verbose == 4)
-    console.log('[DEBUG] emacs ' + cmd.join(' '));
-  let process = child_process.spawn('emacs', cmd, { stdio: 'inherit' });
+    let env_status = (argv.global) ? 'global' : 'development';
+    console.log(`Running Eask in the ${env_status} environment`);
+    console.log('Press Ctrl+C to cancel.');
+    console.log('');
+    console.log('Executing script inside Emacs...');
+    if (argv.verbose == 4)
+      console.log('[DEBUG] emacs ' + cmd.join(' '));
+    let proc = child_process.spawn('emacs', cmd, { stdio: 'inherit' });
 
-  process.on('close', function (code) {
-    if (code == 0) return;
-    throw 'Exit with code: ' + code;
+    proc.on('close', function (code) {
+      if (code == 0) {
+        resolve(code);
+        return;
+      }
+      throw 'Exit with code: ' + code;
+    });
   });
 }
 
