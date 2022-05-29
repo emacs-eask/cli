@@ -24,7 +24,7 @@
   (let* ((home-dir (getenv "EASK_HOMEDIR"))  ; temporary environment from node
          (epf (expand-file-name "exec-path" home-dir))
          (lpf (expand-file-name "load-path" home-dir)))
-    (ignore-errors (make-directory home-dir t))
+    (ignore-errors (make-directory home-dir t))  ; generate dir ~/.eask/
     (write-region (getenv "PATH") nil epf)
     (write-region (getenv "EMACSLOADPATH") nil lpf)))
 
@@ -37,7 +37,7 @@
       (or
        ;; 1) For Elisp executable (github-elpa)
        (let ((program (executable-find name))) (ignore-errors (load program nil t)))
-       ;; 2) Export load-path and exec-path
+       ;; 2) Export environments, and return back to node for subcommand execution
        (eask-with-progress
          (ansi-green "Exporting environment PATHs... ")
          (eask--export-env)

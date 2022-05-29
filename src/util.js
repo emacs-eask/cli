@@ -99,9 +99,9 @@ async function e_call(argv, script, ...args) {
     console.log('Executing script inside Emacs...');
     if (argv.verbose == 4)
       console.log('[DEBUG] emacs ' + cmd.join(' '));
-    let process = child_process.spawn('emacs', cmd, { stdio: 'inherit' });
+    let proc = child_process.spawn('emacs', cmd, { stdio: 'inherit' });
 
-    process.on('close', function (code) {
+    proc.on('close', function (code) {
       if (code == 0) {
         resolve(code);
         return;
