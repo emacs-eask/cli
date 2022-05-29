@@ -39,9 +39,9 @@
        (let ((program (executable-find name))) (ignore-errors (load program nil t)))
        ;; 2) Export load-path and exec-path
        (eask-with-progress
-         "Exporting environments... "
+         (ansi-green "Exporting environment PATHs... ")
          (eask--export-env)
-         "done ✓"))
+         (ansi-green "done ✓")))
     (eask-info "✗ (No exeuction output)")
     (eask-help 'exec)))
 
