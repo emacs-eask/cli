@@ -1,4 +1,8 @@
 ;;; color.el --- Test to print color on the terminal  -*- lexical-binding: t; -*-
+
+;; Version: 0.0.1
+;; Package-Requires: ((emacs "26.1"))
+
 ;;; Commentary:
 ;;; Code:
 

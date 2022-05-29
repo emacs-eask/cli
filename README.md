@@ -24,8 +24,6 @@ influencing your personal configuration. Eask aims to be:
 
 ## 🧪 Testing
 
-##### ✔️ Tests suppose to be `GREEN`
-
 ###### Documentation
 
 | Description                            | Done | Status                                                                                                                                            |
@@ -52,12 +50,6 @@ influencing your personal configuration. Eask aims to be:
 | Test to upgrade and check outdated packages | ✔    | [![Outdated_Upgrade](https://github.com/emacs-eask/eask/actions/workflows/outdated_upgrade.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/outdated_upgrade.yml) |
 | `Eask`-file checker                         | ✔    | [![Checker](https://github.com/emacs-eask/eask/actions/workflows/checker.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/checker.yml)                            |
 
-###### Features
-
-| Description  | Done | Status                                                                                                                                               |
-|--------------|------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Color output | ✔    | [![Color](https://github.com/emacs-eask/eask/actions/workflows/color.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/color.yml) |
-
 ###### Test
 
 | Description               | Done | Status                                                                                                                                                                             |
@@ -65,9 +57,3 @@ influencing your personal configuration. Eask aims to be:
 | Test `ert` command        | ✔    | [![Test ert](https://github.com/emacs-eask/eask/actions/workflows/test_ert.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test_ert.yml)                      |
 | Test `ert-runner` command | ✔    | [![Test ert-runner](https://github.com/emacs-eask/eask/actions/workflows/test_ert-runner.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test_ert-runner.yml) |
 | Test `buttercup` command  | ❌   | [![Test buttercup](https://github.com/emacs-eask/eask/actions/workflows/test_buttercup.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test_buttercup.yml)    |
-
-##### ❌ Tests suppose to be `RED`
-
-| Description                                       | Done | Status                                                                                                                                               |
-|---------------------------------------------------|------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Test to see if Eask can return non-zero exit code | ✔    | [![Error](https://github.com/emacs-eask/eask/actions/workflows/error.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/error.yml) |

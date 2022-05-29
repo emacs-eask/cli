@@ -1,0 +1,9 @@
+(package "color"
+         "0.0.1"
+         "Test to print color on the terminal")
+
+(package-file "color.el")
+
+(source "gnu")
+
+(depends-on "emacs" "26.1")
