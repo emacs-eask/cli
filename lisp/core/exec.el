@@ -34,12 +34,13 @@
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   ;; XXX This is the hack by adding all `bin' folders from local elpa.
   (eask-setup-paths)
-  (setq commander-args (cddr argv))  ; by pass `--' as well
-  (ignore-errors (delete-directory eask--homedir t))
+  (ignore-errors (delete-directory eask--homedir t))  ; clean up
   (if-let ((name (eask-argv 1)))
       (or
        ;; 1) For Elisp executable (github-elpa)
-       (let ((program (executable-find name))) (ignore-errors (load program nil t)))
+       (let ((program (executable-find name)))
+         (setq commander-args (cddr argv))  ; by pass `--' as well
+         (ignore-errors (load program nil t)))
        ;; 2) Export environments, and return back to node for subcommand execution
        (eask-with-progress
          (ansi-green "Exporting environment PATHs... ")
