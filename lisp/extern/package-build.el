@@ -12,10 +12,11 @@ time of all files, making the tarball reproducible."
   (let ((tar (expand-file-name (concat name "-" version ".tar")
                                package-build-archive-dir))
         (dir (concat name "-" version)))
-    ;; XXX https://github.com/melpa/package-build/pull/34
+    ;; XXX: https://github.com/melpa/package-build/pull/34
     ;;
     ;; We definitely need to remove these two lines, or else it won't able to
     ;; build on Windows.
+    ;;
     ;; (when (eq system-type 'windows-nt)
     ;;   (setq tar (replace-regexp-in-string "^\\([a-z]\\):" "/\\1" tar)))
     (let ((default-directory directory))
@@ -49,6 +50,10 @@ time of all files, making the tarball reproducible."
                             name version commit files 'tar)
                            (error "%s[-pkg].el matching package name is missing"
                                   name))))
+               ;; XXX: https://github.com/emacs-eask/eask/issues/29
+               ;;
+               ;; Building directory recipe, ignore timestamp.
+               ;;
                ;;(mtime (package-build--get-timestamp rcp commit))
                (mtime 20220531.0000))
           (package-build--copy-package-files files source-dir target)
