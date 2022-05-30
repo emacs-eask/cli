@@ -21,7 +21,7 @@
 
 (defun eask-package-dir-recipe ()
   "Form a directory recipe."
-  (eask-load "./extern/package-recipe")
+  (eask-load "extern/package-recipe")
   (let ((name (eask-guess-package-name))
         (patterns (or eask-files package-build-default-files-spec))
         (path default-directory))
@@ -52,7 +52,7 @@
     (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
     (eask-with-archives "melpa"
       (eask-package-install 'package-build))
-    (eask-load "./extern/package-build")  ; override
+    (eask-load "extern/package-build")  ; override
 
     (let* ((version (eask-package-version))
            (rcp (eask-package-dir-recipe))
