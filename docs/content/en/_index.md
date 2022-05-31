@@ -55,6 +55,10 @@ but the author is not an expert on these tools. Corrections are welcome.
 - [ ] [DEV] Publish package to [Scoop]()
 - [ ] [DEV] Publish package to [MacPorts]()
 
+### Core commands
+
+- [ ] [FEAT] Add `publish` command; to publish package to eask archive?
+
 ### Eask-file commands
 
 - [ ] [FEAT] Add `add-source` command
