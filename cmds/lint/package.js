@@ -19,7 +19,7 @@
 
 "use strict";
 
-exports.command = ['lint [files..]', 'lint-package [files..]'];
+exports.command = ['package [files..]'];
 exports.desc = 'lint the package using package-lint';
 exports.builder = {
   files: {
