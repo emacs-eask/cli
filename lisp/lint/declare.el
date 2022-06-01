@@ -4,7 +4,7 @@
 ;;
 ;; Commmand use to run `check-declare' for all files
 ;;
-;;   $ eask declare
+;;   $ eask lint declare [files..]
 ;;
 ;;
 ;;  Initialization options:

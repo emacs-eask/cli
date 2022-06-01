@@ -19,7 +19,7 @@
 
 "use strict";
 
-exports.command = ['regexps [files..]', 'lint-regexps [files..]', 'relint [files..]'];
+exports.command = ['regexps [files..]', 'relint [files..]'];
 exports.desc = 'run relint';
 exports.builder = {
   files: {

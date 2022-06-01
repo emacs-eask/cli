@@ -41,13 +41,13 @@ eask activate
 eask recipe
 
 # Linter
-eask lint
-eask checkdoc
-eask declare
-eask elsa
-eask elint
-eask indent
-eask relint
+eask lint package
+eask lint checkdoc
+eask lint declare
+eask lint elsa
+eask lint elint
+eask lint indent
+eask lint relint
 
 # Clean up
 eask clean

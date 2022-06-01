@@ -12,6 +12,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Read `-pkg.el` file prior to package-file while exists (#21)
 * Simplify (rewrite) command exec (#22)
 * Move `exec` command to node layer (#27)
+* Move `test` and `lint` commands to it's subcommand (#31)
 
 ## 0.6.17
 > Released Mar 5, 2022

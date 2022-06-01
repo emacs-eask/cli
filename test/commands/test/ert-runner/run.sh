@@ -25,4 +25,4 @@
 echo "Test command 'ert-runner'..."
 cd $(dirname "$0")
 
-eask ert-runner ./test/*.el
+eask test ert-runner ./test/*.el

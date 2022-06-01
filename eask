@@ -15,7 +15,9 @@ yargs
   .usage(usage)
   .scriptName('')
   .epilogue(epilogue)
-  .commandDir('cmds', { recurse: true, })
+  .commandDir('cmds/core/')
+  .commandDir('cmds/checker/')
+  .commandDir('cmds/util/')
   .command({
     command: '*',
     handler() { yargs.showHelp(); }

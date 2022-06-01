@@ -4,7 +4,7 @@
 ;;
 ;; Commmand use to run `elint' for all files
 ;;
-;;   $ eask elint
+;;   $ eask lint elint [files..]
 ;;
 ;;
 ;;  Initialization options:

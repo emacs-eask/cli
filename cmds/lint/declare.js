@@ -19,7 +19,7 @@
 
 "use strict";
 
-exports.command = ['declare [files..]', 'lint-declare [files..]'];
+exports.command = ['declare [files..]'];
 exports.desc = 'run check-declare';
 exports.builder = {
   files: {

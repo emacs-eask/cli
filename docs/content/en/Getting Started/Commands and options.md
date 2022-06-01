@@ -343,82 +343,76 @@ $ eask [GLOBAL-OPTIONS] clean-all
 
 Commands that lint your Emacs package.
 
-## 🔍 eask lint [FILES..]
+## 🔍 eask lint package
 
 Lint package using [package-lint](https://github.com/purcell/package-lint).
 
-Alias: `lint-package`
-
 ```sh
-$ eask [GLOBAL-OPTIONS] lint [FILES..]
+$ eask [GLOBAL-OPTIONS] lint package [FILES..]
 ```
 
-## 🔍 eask checkdoc [FILES..]
+## 🔍 eask lint checkdoc
 
 Run checkdoc.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] checkdoc [FILES..]
+$ eask [GLOBAL-OPTIONS] lint checkdoc [FILES..]
 ```
 
-## 🔍 eask elint
+## 🔍 eask lint elint
 
 Run elint.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] elint [FILES..]
+$ eask [GLOBAL-OPTIONS] lint elint [FILES..]
 ```
 
-## 🔍 eask elsa
+## 🔍 eask lint elsa
 
 Run elsa.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] elsa [FILES..]
+$ eask [GLOBAL-OPTIONS] lint lint elsa [FILES..]
 ```
 
-## 🔍 eask indent
-
-Alias: `lint-indent`
+## 🔍 eask lint indent
 
 ```sh
-$ eask [GLOBAL-OPTIONS] indent [FILES..]
+$ eask [GLOBAL-OPTIONS] lint indent [FILES..]
 ```
 
-## 🔍 eask declare
-
-Alias: `lint-declare`
+## 🔍 eask lint declare
 
 ```sh
-$ eask [GLOBAL-OPTIONS] declare [FILES..]
+$ eask [GLOBAL-OPTIONS] lint declare [FILES..]
 ```
 
-## 🔍 eask regexps
+## 🔍 eask lint regexps
 
-Alias: `lint-regexps`, `relint`
+Alias: `lint relint`
 
 ```sh
-$ eask [GLOBAL-OPTIONS] regexps [FILES..]
+$ eask [GLOBAL-OPTIONS] lint regexps [FILES..]
 ```
 
 # 🚩 Testing
 
-## 🔍 eask ert [FILES..]
+## 🔍 eask test ert
 
 ```sh
-$ eask [GLOBAL-OPTIONS] ert [FILES..]
+$ eask [GLOBAL-OPTIONS] test ert [FILES..]
 ```
 
-## 🔍 eask ert-runner [FILES..]
+## 🔍 eask test ert-runner
 
 ```sh
-$ eask [GLOBAL-OPTIONS] ert-runner [FILES..]
+$ eask [GLOBAL-OPTIONS] test ert-runner
 ```
 
-## 🔍 eask buttercup
+## 🔍 eask test buttercup
 
 ```sh
-$ eask [GLOBAL-OPTIONS] buttercup
+$ eask [GLOBAL-OPTIONS] test buttercup
 ```
 
 # 🚩 Utilities

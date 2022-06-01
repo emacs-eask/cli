@@ -4,12 +4,12 @@
 ;;
 ;; Command use to check package with indent-lint,
 ;;
-;;   $ eask indent [names..]
+;;   $ eask lint indent [files..]
 ;;
 ;;
 ;;  Initialization options:
 ;;
-;;    [names..]     files you want indent-lint to run on
+;;    [files..]     files you want indent-lint to run on
 ;;
 
 ;;; Code:

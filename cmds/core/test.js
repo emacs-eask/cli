@@ -19,16 +19,10 @@
 
 "use strict";
 
-exports.command = ['checkdoc [files..]'];
-exports.desc = 'run checkdoc';
-exports.builder = {
-  files: {
-    description: 'files you want checkdoc to run on',
-    requiresArg: false,
-    type: 'array',
-  },
+exports.command = ['test <type>'];
+exports.desc = 'run test';
+exports.builder = function (yargs) {
+  return yargs.commandDir('../test/');
 };
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'lint/checkdoc', argv.files);
-};
+exports.handler = async (argv) => { };

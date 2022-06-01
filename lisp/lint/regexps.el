@@ -4,12 +4,12 @@
 ;;
 ;; Commmand use to run `relint' for all files
 ;;
-;;   $ eask regexps [names..]
+;;   $ eask lint regexps [files..]
 ;;
 ;;
 ;;  Initialization options:
 ;;
-;;    [names..]     files you want relint to run on
+;;    [files..]     files you want relint to run on
 ;;
 
 ;;; Code:
