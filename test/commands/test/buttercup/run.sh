@@ -26,4 +26,4 @@ echo "Test command 'buttercup'..."
 cd $(dirname "$0")
 
 easl install-deps --dev
-eask buttercup
+eask test buttercup
