@@ -4,7 +4,7 @@
 ;;
 ;; Commmand use to run `checkdoc' for all files
 ;;
-;;   $ eask checkdoc
+;;   $ eask lint checkdoc [files..]
 ;;
 ;;
 ;;  Initialization options:

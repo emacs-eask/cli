@@ -1,15 +1,15 @@
-;;; lint.el --- Lint the package using `package-lint'  -*- lexical-binding: t; -*-
+;;; package.el --- Lint the package using `package-lint'  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
 ;; Command use to lint current Emacs package,
 ;;
-;;   $ eask lint [names..]
+;;   $ eask lint package [files..]
 ;;
 ;;
 ;;  Initialization options:
 ;;
-;;    [names..]     specify files to do package lint
+;;    [files..]     specify files to do package lint
 ;;
 
 ;;; Code:
@@ -53,4 +53,4 @@
         (eask--print-no-matching-files)
       (eask-help 'lint))))
 
-;;; lint.el ends here
+;;; package.el ends here

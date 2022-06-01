@@ -4,12 +4,7 @@
 ;;
 ;; Command to run ert tests using ert-runner,
 ;;
-;;   $ eask ert-runner [files..]
-;;
-;;
-;;  Initialization options:
-;;
-;;    [files..]     specify files to run ert tests
+;;   $ eask ert-runner
 ;;
 
 ;;; Code:

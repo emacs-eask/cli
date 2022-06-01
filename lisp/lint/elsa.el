@@ -4,7 +4,7 @@
 ;;
 ;; Commmand use to run `elsa' for all files
 ;;
-;;   $ eask elsa
+;;   $ eask lint elsa [files..]
 ;;
 ;;
 ;;  Initialization options:
