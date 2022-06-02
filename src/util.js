@@ -50,6 +50,13 @@ function def_flag(arg, name, val = undefined) {
 }
 
 /**
+ * Setup the environment variables.
+ */
+function _setup_env() {
+  if (process.stdout.hasColors()) process.env.EASK_HASCOLORS = 'true';
+}
+
+/**
  * Handle global options
  *
  * @param { Object } argv - is a parsed object from yargs.
@@ -99,6 +106,8 @@ async function e_call(argv, script, ...args) {
     console.log('Executing script inside Emacs...');
     if (argv.verbose == 4)
       console.log('[DEBUG] emacs ' + cmd.join(' '));
+
+    _setup_env();
     let proc = child_process.spawn('emacs', cmd, { stdio: 'inherit' });
 
     proc.on('close', function (code) {
