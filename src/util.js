@@ -53,6 +53,7 @@ function def_flag(arg, name, val = undefined) {
  * Setup the environment variables so Emacs could receive them.
  */
 function _setup_env() {
+  console.log('??' + CI);
   if (process.stdout.isTTY === undefined) return;
   if (process.stdout.hasColors()) process.env.EASK_HASCOLORS = 'true';
 }
