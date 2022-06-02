@@ -53,7 +53,13 @@ function def_flag(arg, name, val = undefined) {
  * Setup the environment variables so Emacs could receive them.
  */
 function _setup_env() {
-  if (IS_CI || process.stdout.hasColors()) process.env.EASK_HASCOLORS = 'true';
+  if (IS_CI) {
+    process.env.EASK_HASCOLORS = 'true';
+  } else {
+    if (process.stdout.isTTY !== undefined) {
+      if (process.stdout.hasColors()) process.env.EASK_HASCOLORS = 'true';
+    }
+  }
 }
 
 /**
