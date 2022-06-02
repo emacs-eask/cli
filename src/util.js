@@ -21,6 +21,7 @@
 
 const path = require('path');
 const child_process = require("child_process");
+const tty = require('node:tty');
 
 /*
  * Remove `undefined` item from the array
@@ -53,9 +54,8 @@ function def_flag(arg, name, val = undefined) {
  * Setup the environment variables so Emacs could receive them.
  */
 function _setup_env() {
-  console.log(process.stdout);
-  console.log('-------------');
-  if (process.stdout.getColorDepth() >= 4) process.env.EASK_HASCOLORS = 'true';
+  console.log(process.stdout.isTTY);
+  if (process.stdout.hasColors()) process.env.EASK_HASCOLORS = 'true';
 }
 
 /**
