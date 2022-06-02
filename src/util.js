@@ -50,7 +50,7 @@ function def_flag(arg, name, val = undefined) {
 }
 
 /**
- * Setup the environment variables.
+ * Setup the environment variables so Emacs could receive them.
  */
 function _setup_env() {
   if (process.stdout.hasColors()) process.env.EASK_HASCOLORS = 'true';
