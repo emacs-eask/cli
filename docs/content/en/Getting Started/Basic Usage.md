@@ -20,7 +20,6 @@ $ eask help
 The output you see in your console should be similar to the following:
 
 ```
-$ path/to/project> eask
 eask is the main command, used to manage your Emacs dependencies
 
 Eask is a command-line tool that helps you build, lint, and test Emacs Lisp packages.
