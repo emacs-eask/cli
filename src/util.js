@@ -89,7 +89,6 @@ function _global_options(argv) {
  * @param { string } args - the rest of the arguments
  */
 async function e_call(argv, script, ...args) {
-  _setup_env();
   return new Promise(resolve => {
     let _script = 'lisp/' + script + '.el';
     let _path = path.join(plugin_dir(), _script);
@@ -107,6 +106,8 @@ async function e_call(argv, script, ...args) {
     console.log('Executing script inside Emacs...');
     if (argv.verbose == 4)
       console.log('[DEBUG] emacs ' + cmd.join(' '));
+
+    _setup_env();
     let proc = child_process.spawn('emacs', cmd, { stdio: 'inherit' });
 
     proc.on('close', function (code) {
