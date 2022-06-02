@@ -1,6 +1,6 @@
 <a href="#"><img align="right" src="./docs/static/logo.png" width="20%"></a>
 
-# eask
+# Eask
 > Command-line tool for building and testing Emacs Lisp packages
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-green.svg)](https://www.gnu.org/licenses/gpl-3.0)

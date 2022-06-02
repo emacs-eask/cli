@@ -303,7 +303,7 @@ Download package archives.
 $ eask [GLOBAL-OPTIONS] refresh
 ```
 
-# 🚩 Cleanup
+# 🚩 Cleaning
 
 ## 🔍 eask clean
 
