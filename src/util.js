@@ -53,7 +53,7 @@ function def_flag(arg, name, val = undefined) {
  * Setup the environment variables so Emacs could receive them.
  */
 function _setup_env() {
-  if (IS_CI) {
+  if (GITHUB_ACTIONS) {
     process.env.EASK_HASCOLORS = 'true';
   } else {
     if (process.stdout.isTTY !== undefined) {
