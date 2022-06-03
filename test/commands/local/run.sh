@@ -41,6 +41,7 @@ eask activate
 eask recipe
 
 # Linter
+eask prepare --dev
 eask lint package
 eask lint checkdoc
 eask lint declare
