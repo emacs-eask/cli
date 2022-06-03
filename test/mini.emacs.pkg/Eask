@@ -13,6 +13,7 @@
 (depends-on "emacs" "26.1")
 (depends-on "f")
 (depends-on "s")
+(depends-on "fringe-helper")
 (depends-on "watch-cursor"
             :repo "jcs-elpa/watch-cursor" :fetcher 'github)
 (depends-on "organize-imports-java"

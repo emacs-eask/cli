@@ -7,7 +7,7 @@
 ;; Description: Minimal Emacs package to simulate development environment; only for testing purposes!
 ;; Keyword: test
 ;; Version: 0.0.1
-;; Package-Requires: ((emacs "24.3"))
+;; Package-Requires: ((emacs "24.3") (s "1.12.0") (fringe-helper "1.0.1"))
 ;; URL: https://github.com/emacs-eask/mini.emacs.pkg
 
 ;; This file is NOT part of GNU Emacs.
@@ -33,7 +33,8 @@
 
 ;;; Code:
 
-(require 'cl-lib)
+(require 's)
+(require 'fringe-helper)
 
 (provide 'mini.emacs.pkg)
 ;;; mini.emacs.pkg.el ends here
