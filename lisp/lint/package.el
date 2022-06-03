@@ -45,6 +45,7 @@
   (require 'package-lint)
   (if-let ((files (eask-args-or-package-el-files)))
       (progn
+        (eask-pkg-init)
         (setq package-lint-main-file eask-package-file)
         (mapcar #'eask--package-lint-file files)
         (eask-info "(Total of %s files linted)" (length files)))
