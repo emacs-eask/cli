@@ -54,6 +54,11 @@ function def_flag(arg, name, val = undefined) {
  */
 function _setup_env() {
   if (GITHUB_ACTIONS) {
+    /* XXX: isTTY flag will always be undefined in GitHub Actions; we will have
+     * explicitly set environment variables.
+     *
+     * See https://github.com/actions/runner/issues/241
+     */
     process.env.EASK_HASCOLORS = 'true';
   } else {
     if (process.stdout.isTTY !== undefined) {
