@@ -43,7 +43,7 @@
          (ignore-errors (load program nil t)))
        ;; 2) Export environments, and return back to node for subcommand execution
        (eask-with-progress
-         (ansi-green "Exporting environment PATHs... ")
+         (ansi-green "Exporting environment variables... ")
          (eask--export-env)
          (ansi-green "done ✓")))
     (eask-info "✗ (No exeuction output)")

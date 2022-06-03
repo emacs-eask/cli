@@ -23,3 +23,5 @@ const path = require('path');
 
 global.UTIL = require('./util');
 global.IS_PKG = path.basename(process.execPath).startsWith('eask');
+
+global.GITHUB_ACTIONS = (process.env.GITHUB_WORKSPACE !== undefined);

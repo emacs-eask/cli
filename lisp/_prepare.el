@@ -204,7 +204,7 @@ the `eask-start' execution.")
 (defun eask-setup-paths ()
   "Setup both `exec-path' and `load-path'."
   (eask-with-progress
-    (ansi-green "Updating environment PATHs... ")
+    (ansi-green "Updating environment variables... ")
     (eask-with-verbosity 'debug
       (eask--update-exec-path) (eask--update-load-path)
       (setenv "PATH" (string-join exec-path path-separator))
@@ -361,7 +361,13 @@ the `eask-start' execution.")
     (when (file-readable-p pkg-el) pkg-el)))
 
 ;;
-;;; Flag
+;;; Environments
+
+(defconst eask-has-colors (getenv "EASK_HASCOLORS")
+  "Return non-nil if terminal support colors.")
+
+;;
+;;; Flags
 
 (defun eask--str2num (str) (ignore-errors (string-to-number str)))
 
@@ -409,6 +415,7 @@ the `eask-start' execution.")
   (when (eask-log-level-p) (setq eask-log-level t))
   (when (eask-no-log-level-p) (setq eask-log-level nil))
   (when (eask-no-color-p) (setq ansi-inhibit-ansi t))
+  (unless eask-has-colors (setq ansi-inhibit-ansi t))
   (eask--add-proxy "http"     (eask-proxy))
   (eask--add-proxy "https"    (eask-proxy))
   (eask--add-proxy "http"     (eask-http-proxy))
