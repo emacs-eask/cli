@@ -13,6 +13,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Simplify (rewrite) command exec (#22)
 * Move `exec` command to node layer (#27)
 * Move `test` and `lint` commands to it's subcommand (#31)
+* Aviod printing asni sequence in DUMB terminal (#34)
 
 ## 0.6.17
 > Released Mar 5, 2022
