@@ -35,13 +35,15 @@ eask archives
 eask list --depth=0
 eask concat
 
+# Preparation
+eask prepare --dev
+
 # Development
 eask compile
 eask activate
 eask recipe
 
 # Linter
-eask prepare --dev
 eask lint package
 eask lint checkdoc
 eask lint declare
