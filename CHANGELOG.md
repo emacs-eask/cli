@@ -20,7 +20,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Move `exec` command to node layer (#27)
 * Move `test` and `lint` commands to it's subcommand (#31)
 * Avoid printing asni sequence in DUMB terminal (#34)
-* Add implementation for package-build--get-timestamp (#36)package-build--get-timestamp` (#36)
+* Add implementation for `package-build--get-timestamp` (#36)
 
 ## 0.6.17
 > Released Mar 5, 2022
