@@ -38,32 +38,6 @@ time of all files, making the tarball reproducible."
                           #'string<))
         (message "  %s" line)))))
 
-(defun package-build--build-multi-file-package (rcp version commit files source-dir)
-  (let* ((name (oref rcp name))
-         (tmp-dir (file-name-as-directory (make-temp-file name t))))
-    (unwind-protect
-        (let* ((target (expand-file-name (concat name "-" version) tmp-dir))
-               (desc (let ((default-directory source-dir))
-                       (or (package-build--desc-from-package
-                            name version commit files)
-                           (package-build--desc-from-library
-                            name version commit files 'tar)
-                           (error "%s[-pkg].el matching package name is missing"
-                                  name))))
-               ;; XXX: https://github.com/emacs-eask/eask/issues/29
-               ;;
-               ;; Building directory recipe, ignore timestamp.
-               ;;
-               ;;(mtime (package-build--get-timestamp rcp commit))
-               (mtime 20220531.0000))
-          (package-build--copy-package-files files source-dir target)
-          (package-build--write-pkg-file desc target)
-          (package-build--generate-info-files files source-dir target)
-          (package-build--create-tar name version tmp-dir mtime)
-          (package-build--write-pkg-readme name files source-dir)
-          (package-build--write-archive-entry desc))
-      (delete-directory tmp-dir t nil))))
-
 ;;
 ;; NOTE: This is brought in cuz it's very useful, but we don't want to bring the
 ;; whole `package-build' package unless it's needed.
