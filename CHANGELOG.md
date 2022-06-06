@@ -14,12 +14,6 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Move `exec` command to node layer (#27)
 * Move `test` and `lint` commands to it's subcommand (#31)
 * Avoid printing asni sequence in DUMB terminal (#34)
-* Add implementation for `* Avoid loading package info unless it's needed (#13, #14, and #19)
-* Read `-pkg.el` file prior to package-file while exists (#21)
-* Simplify (rewrite) command exec (#22)
-* Move `exec` command to node layer (#27)
-* Move `test` and `lint` commands to it's subcommand (#31)
-* Avoid printing asni sequence in DUMB terminal (#34)
 * Add implementation for `package-build--get-timestamp` (#36)
 
 ## 0.6.17
