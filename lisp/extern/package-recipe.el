@@ -14,4 +14,7 @@
 
 (cl-defmethod package-build--get-commit ((_rcp package-directory-recipe)))
 
+(cl-defmethod package-build--get-timestamp ((_rcp package-directory-recipe) _rev)
+  (time-convert (current-time) 'integer))
+
 ;;; package-recipe.el ends here
