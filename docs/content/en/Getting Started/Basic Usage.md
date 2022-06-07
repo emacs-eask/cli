@@ -85,7 +85,7 @@ Options:
       --no-proxy            set no-proxy to host                                                                                                [string]
   -v, --verbose             set verbosity from 0 to 4                                                                                           [number]
 
-For more informatiion, find the manual at https://emacs-eask.github.io/
+For more information, find the manual at https://emacs-eask.github.io/
 ```
 
 ## The `eask` Command
