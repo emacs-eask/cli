@@ -1,5 +1,5 @@
 (package "eask"
-         "0.6.30"
+         "0.6.31"
          "A set of command-line tools to build Emacs packages")
 
 (files
