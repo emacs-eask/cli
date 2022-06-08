@@ -14,6 +14,9 @@
 
 (cl-defmethod package-build--get-commit ((_rcp package-directory-recipe)))
 
+;; XXX: remove this after we drop 26.x
+(eask-defvc< 27 (defun time-convert (&rest _) 1654667087))
+
 (cl-defmethod package-build--get-timestamp ((_rcp package-directory-recipe) _rev)
   (time-convert (current-time) 'integer))
 

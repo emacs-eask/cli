@@ -37,6 +37,7 @@ eask concat
 
 # Preparation
 eask prepare --dev
+eask package
 
 # Development
 eask compile

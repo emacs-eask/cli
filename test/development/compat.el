@@ -20,6 +20,7 @@
     package--activate-all
     package-activate-all
     package-generate-description-file
+    ;;time-convert  ; XXX: uncomment this after we drop 26.x
     url-file-exists-p)
   "List of function to check Emacs compatibility.")
 
