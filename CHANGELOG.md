@@ -15,6 +15,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Move `test` and `lint` commands to it's subcommand (#31)
 * Avoid printing asni sequence in DUMB terminal (#34)
 * Add implementation for `package-build--get-timestamp` (#36)
+* Fix `time-convert` missing in Emacs 26.x; improve CI test on `package` command (#38)
 
 ## 0.6.17
 > Released Mar 5, 2022
