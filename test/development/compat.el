@@ -10,6 +10,8 @@
 
 ;;; Code:
 
+(eask-load "extern/package-recipe")
+
 ;;
 ;;; Test functions
 
