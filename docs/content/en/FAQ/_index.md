@@ -72,3 +72,18 @@ like this:
 
 (depends-on "helm")
 ```
+
+## ❓ Why am I getting git errors with status 2?
+
+If you get this sample error message
+```
+Loading package information... done ✓
+  - Installing s (20210616.619)... Failed (status 2): git --no-pager remote get-url upstream .
+...
+```
+
+You may have `bug-reference-prog-mode` enabled. It is not yet compatible with Eask and
+should be disabled when running any of Eask’s commands.
+
+See [this issue](https://github.com/emacs-eask/eask/issues/39#issuecomment-1150770740) for
+more information.
