@@ -348,7 +348,7 @@ Package descriptor from the package main file.
 ```
 
 {{< hint warning >}}
-⚠ This can be **nil** if the package main file cannot be parsed correctly!
+⚠ This can be **nil** if the package-descriptor cannot be constructed correctly!
 {{< /hint >}}
 
 ## 🔍 Variable: eask-files
@@ -358,6 +358,14 @@ Holds a list of files pattern in wildcard specification.
 ## 🔍 Variable: eask-depends-on-emacs
 
 Holds information about Emacs minimum version.
+
+```elisp
+(depends-on "emacs" "26.1")
+```
+
+Function will return Emacs version in string.
+
+* `(eask-depends-emacs-version)` - return `"26.1"`
 
 ## 🔍 Variable: eask-depends-on
 
