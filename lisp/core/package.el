@@ -70,6 +70,6 @@
         (set-buffer-file-coding-system 'utf-8-unix)
         (save-buffer)))
 
-    (eask-info "(Builded in %s)" packaged)))
+    (eask-info "(Built in %s)" packaged)))
 
 ;;; package.el ends here
