@@ -3,6 +3,8 @@ title: FAQ
 weight: 900
 ---
 
+{{< toc >}}
+
 ## ❓ Why Node.JS?
 
 Node has better support on all kinds of terminal applications (compare to just
@@ -76,6 +78,7 @@ like this:
 ## ❓ Why am I getting git errors with status 2?
 
 If you get this sample error message
+
 ```
 Loading package information... done ✓
   - Installing s (20210616.619)... Failed (status 2): git --no-pager remote get-url upstream .
