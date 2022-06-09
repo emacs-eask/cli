@@ -5,7 +5,7 @@ weight: 300
 
 {{< toc >}}
 
-The gneeral syntax of the **eask** program is:
+The general syntax of the **eask** program is:
 
 ```sh
 $ eask [GLOBAL-OPTIONS] [COMMAND] [COMMAND-OPTIONS] [COMMAND-ARGUMENTS]

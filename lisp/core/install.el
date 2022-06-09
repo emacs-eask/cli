@@ -44,9 +44,9 @@
     (let* ((name (eask-guess-package-name))
            (packaged (eask-packaged-file))
            (target (or packaged eask-package-file)))
-      (eask-log "Searching for artefact to install...")
-      (if packaged (eask-info "✓ Found artefact in %s" target)
-        (eask-info "? Missing artefact, install directly from %s" target))
+      (eask-log "Searching for artifact to install...")
+      (if packaged (eask-info "✓ Found artifact in %s" target)
+        (eask-info "? Missing artifact, install directly from %s" target))
       (if target
           (progn
             (add-to-list 'load-path (expand-file-name (eask-packaged-name) package-user-dir))

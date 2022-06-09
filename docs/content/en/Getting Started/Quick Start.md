@@ -17,7 +17,8 @@ to run this tutorial.
 
 ## Step 1: Setup NodeJS runtime and `npm`
 
-Please checkout their official site [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-installer-to-install-nodejs-and-npm)
+Please check out their official site
+[here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-installer-to-install-nodejs-and-npm)
 and install `NodeJS` and `npm` corresponds to your current operating system
 
 ## Step 2: Install Eask
@@ -83,17 +84,17 @@ About to write to /path/to/project/Eask:
 Is this OK? (yes) yes ⏎
 ```
 
-You should able to see an `Eask` file in your project folder. 🎉🎊
+You should be able to see an `Eask` file in your project folder. 🎉🎊
 
 ## Step 5: Start the pacakge development
 
-To checkout your package information, run:
+To check your package information, run:
 
 ```sh
 $ eask info
 ```
 
-You should able to see the following information:
+You should be able to see the following information:
 
 ```
 Running Eask in the development environment

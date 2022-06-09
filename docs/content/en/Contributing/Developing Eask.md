@@ -21,15 +21,15 @@ the [manual installation](https://emacs-eask.github.io/eask/installation#-manual
 method. (Not install through NPM) Make sure you have setup the environment
 PATH variable, so you can call `eask` from the terminal.
 
-After you have step throught the installation, try:
+After you have step through the installation, try:
 
 ```sh
 $ eask locate
 ```
 
-It should print out the location of your working Eask workspace. You should
-able to identify the Eask workspace, even you have multiple Eask version
-installed!
+It should print out the location of your working Eask workspace. You
+should be able to identify the Eask workspace, even you have multiple
+Eask version installed!
 
 ### 📈 Testing
 

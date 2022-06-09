@@ -8,7 +8,7 @@ influencing your personal configuration. Eask aims to be:
 
 * **Consistent** enough to sandbox across all systems
 * **General** enough to have Emacsers often use commands (byte-compile, checkdoc, etc)
-* **Robust** enough to provide useful results even in the presense of user's errors
+* **Robust** enough to provide useful results even in the presence of user's errors
 * **Dependency-free** so that the tool can be run on any platform
 
 ## ❓ Why Eask?
@@ -38,13 +38,13 @@ but the author is not an expert on these tools. Corrections are welcome.
 ## 📰 News
 
 * `0.7.x` - Fix `default-directory` isn't honored by **-g** option
-* `0.6.x` - You can now use `eask create` to create an elisp project
+* `0.6.x` - You can now use `eask create` to create an Elisp project
 * `0.5.x` - Handle error for failed archive
 * `0.4.x` - Add color logger
 * `0.3.x` - Add verbosity level and timestamps
 * `0.2.x` - Done basic error handling with exit code at the end of executions
 * `0.1.39` - Use `spawn` instead `exec`; now messages will be printed immediately
-* `0.1.x` - Project barebones are pretty much complete!
+* `0.1.x` - Project bare-bones are pretty much complete!
 
 ## 📝 Todo list
 
