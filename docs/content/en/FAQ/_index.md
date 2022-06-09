@@ -8,7 +8,7 @@ weight: 900
 ## ❓ Why Node.JS?
 
 Node has better support on all kinds of terminal applications (compare to just
-the shell script)! Like colorful interface, entire npm community, etc; so you
+the shell script)! Like colorful interface, entire npm community, etc. So you
 can build cross-platform software with fewer hassles! Especially after Microsoft
 had bought the NPM inc, and would likely support their own system well.
 
@@ -23,19 +23,19 @@ Emacs configuration/packages consistent on every operating system!
 
 ## ❓ Why yargs?
 
-[yargs](https://www.npmjs.com/package/yargs) has a vary wide community; and it
+[yargs](https://www.npmjs.com/package/yargs) has a very wide community; and it
 has been used in many tools. It's cross-platform! And most importantly, this is
 one of the tools that work well on Linux, macOS, and Windows.
 
-The is also the major difference compared with Eask and other alternatives. [Cask](),
-[makem.sh](), or [Eldev]() rely more on `batch` and `bash`. We chose different
-route and would like to hand over heavy tasks to a high-level programming
-language, **`JavaScript`**. The development simply beame easier, since we would
-not need to care about different types of shells anymore!
+There is also the major difference compared with Eask and other alternatives.
+[Cask](), [makem.sh](), or [Eldev]() rely more on `batch` and `bash`. We chose a
+different route and would like to hand over heavy tasks to a high-level
+programming language, **`JavaScript`**. The development simply became easier,
+since we don't need to care about different types of shells anymore!
 
-The drawback is the NodeJS runtime, but we can simply pack the entire CLI porgram
-into an executable! That way we would not need to install `Node` and `npm` before
-using eask!
+The drawback is the NodeJS runtime, but we can simply pack the entire CLI
+program into an executable! That way we would not need to install `Node` and
+`npm` before using eask!
 
 ## ❓ Why am I getting the error package target `tar`/`el` not found while installing?
 
@@ -50,9 +50,9 @@ will pick up the latest `archive-contents` from sources unless you have been
 pinging sources too many times. Then the source could block your IP for few
 minutes.
 
-You can either wait for few minutes so the source has unlock you from their
-black list. Or wait for the back up archives to update to the latest version.
-The backup archives repository is [here](https://github.com/emacs-eask/archives).
+You can either wait for few minutes for the source to remove you from their
+black list. Or wait for the backup archives to update to the latest version. The
+backup archives repository is [here](https://github.com/emacs-eask/archives).
 
 ## ❓ Why am I getting the error package is not installable?
 

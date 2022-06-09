@@ -3,7 +3,7 @@ title: GNU General Public License
 weight: 1000
 ---
 
-Licensed under GPLv3. See under for details.
+Licensed under GPLv3. See below for details.
 
 ```
                     GNU GENERAL PUBLIC LICENSE

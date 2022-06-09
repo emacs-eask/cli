@@ -27,8 +27,8 @@ exports.builder = {
     requiresArg: false,
     type: 'array',
   },
-  destintation: {
-    description: 'optional output destintation',
+  destination: {
+    description: 'optional output destination',
     requiresArg: true,
     alias: 'dest',
     type: 'string',

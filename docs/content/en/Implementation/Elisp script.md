@@ -3,7 +3,7 @@ title: 📜 Elisp Script
 weight: 800
 ---
 
-Elisp scripts are located under **lisp** folder and will wait to get called
+Elisp scripts are located under the **lisp** folder and will wait to get called
 by the CLI. All Elisp scripts are written in Emacs Lisp and should have a
 similar structure below:
 
@@ -12,7 +12,7 @@ similar structure below:
        "../_prepare.el"
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
-      
+
 (eask-start
   (message "PWD is %s" default-directory))
 ```

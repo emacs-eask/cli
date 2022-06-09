@@ -19,10 +19,10 @@
 
 "use strict";
 
-exports.command = ['package [destintation]'];
-exports.desc = 'Build a package artefact, and put it into the given destination';
+exports.command = ['package [destination]'];
+exports.desc = 'Build a package artifact, and put it into the given destination';
 exports.builder = {
-  destintation: {
+  destination: {
     description: 'destination path/folder',
     requiresArg: false,
     alias: 'dest',

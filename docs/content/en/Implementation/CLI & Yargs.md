@@ -4,9 +4,9 @@ weight: 700
 ---
 
 The yargs command file is written in JavaScript, and located under the **cmds**
-folder. Each file under, will be named with convention `[command_name].js`.
-This file should define basic command-line parsing rules, and prepared
-correct data so it can get feeds to the Emacs session.
+folder. Each file under, will be named with convention `[command_name].js`. This
+file should define basic command-line parsing rules and correctly prepare data
+to feed the Emacs session.
 
 Let's look at the file `cmds/core/archives.js`:
 
@@ -22,9 +22,9 @@ exports.handler = async (argv) => {
 This is a standard yargs command file, which contains all the information we
 need to pass it to the Emacs session.
 
-* **exports.command** is the argument pattern but it also accepts alias (array)
+* **exports.command** is the argument pattern, but it also accepts alias (array)
 * **exports.desc** is the command description
-* **exports.handler** is an asynchronous function that handles command exection
+* **exports.handler** is an asynchronous function that handles command execution
 * **UTIL** is a global variable that points to the `src/util.js` module.
 * **`'core/archives'`** is the elisp file under **lisp** folder (without `.el` extension).
 
@@ -45,9 +45,10 @@ yargs
 ..
 ```
 
-For **local** options, please use `exports.builder` and specify under its'
+For **local** options, please use `exports.builder` and specify under its
 command file.
 
-See [yargs/docs/advanced.md](https://github.com/yargs/yargs/blob/main/docs/advanced.md)
-, the official documentation for more information and getting a better explanation
+See
+[yargs/docs/advanced.md](https://github.com/yargs/yargs/blob/main/docs/advanced.md),
+the official documentation for more information and getting a better explanation
 would help!

@@ -38,7 +38,7 @@ Commands:
   create [name]           create a new elisp project                                                                                      [aliases: new]
   eval [form]             evaluate lisp form with a proper PATH
   path                    print the PATH (exec-path) from workspace                                                                 [aliases: exec-path]
-  exec [args..]           execute command with correct environemnt PATH set up
+  exec [args..]           execute command with correct environment PATH set up
   files                   print the list of all package files
   info                    display information about the current package
   init                    create new Eask file in current directory
@@ -51,7 +51,7 @@ Commands:
   load [files..]          load files
   outdated                show all outdated dependencies
   package-directory       print path to package directory
-  package [destintation]  Build a package artefact, and put it into the given destination
+  package [destination]   Build a package artifact, and put it into the given destination
   pkg-file                generate -pkg file
   recipe                  suggest a recipe format
   refresh                 download package archives

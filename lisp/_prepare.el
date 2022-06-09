@@ -398,7 +398,7 @@ the `eask-start' execution.")
 (defun eask-http-proxy ()  (eask--flag-value "--http-proxy"))   ; --http-proxy
 (defun eask-https-proxy () (eask--flag-value "--https-proxy"))  ; --https-proxy
 (defun eask-no-proxy ()    (eask--flag-value "--no-proxy"))     ; --no-proxy
-(defun eask-destination () (eask--flag-value "--dest"))         ; --dest, --destintation
+(defun eask-destination () (eask--flag-value "--dest"))         ; --dest, --destination
 (defalias 'eask-dest #'eask-destination)
 
 ;;; Number (with arguments)

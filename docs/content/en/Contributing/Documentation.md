@@ -37,7 +37,7 @@ Then run the `hugo` command:
 $ hugo server
 ```
 
-And that's it! Now you can open the browser with the url `localhost:1313`. 🎉
+And that's it! Now you can open the browser with the URL `localhost:1313`. 🎉
 
 {{< hint info >}}
 💡 You can specify **-D** option if you consider writing a draft.

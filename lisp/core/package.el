@@ -1,15 +1,15 @@
-;;; package.el --- Build a package artefact  -*- lexical-binding: t; -*-
+;;; package.el --- Build a package artifact  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
-;; Build a package artefact, and put it into the given destination
+;; Build a package artifact, and put it into the given destination
 ;;
-;;   $ eask package [destintation]
+;;   $ eask package [destination]
 ;;
 ;;
 ;;  Positional options:
 ;;
-;;    [destintation]     destination path/folder
+;;    [destination]      destination path/folder
 ;;
 
 ;;; Code:
@@ -40,7 +40,7 @@
     (and (file-exists-p file) file)))
 
 (defun eask-packaged-file ()
-  "Return generated pacakge artefact."
+  "Return generated pacakge artifact."
   (or (eask--packaged-file "tar") (eask--packaged-file "el")))
 
 (eask-start
@@ -59,7 +59,7 @@
            (package-build-working-dir default-directory)
            (package-build-archive-dir eask-dist-path))
       (eask-with-progress
-        (format "Building artefact %s (%s)... " (eask-package-name) version)
+        (format "Building artifact %s (%s)... " (eask-package-name) version)
         (package-build--package rcp version)
         "done ✓"))
 

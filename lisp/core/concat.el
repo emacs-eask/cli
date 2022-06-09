@@ -13,7 +13,7 @@
 ;;
 ;;  Action options:
 ;;
-;;    [destintation]     optional output destintation
+;;    [destination]      optional output destination
 ;;
 
 ;;; Code:
