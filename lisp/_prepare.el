@@ -656,7 +656,7 @@ Eask file in the workspace."
 (defun eask-package-version ()     (eask-package--get :version))
 (defun eask-package-description () (eask-package--get :description))
 
-(defun eask-emacs-version ()
+(defun eask-depends-emacs-version ()
   "Get Eask-file Emacs version string."
   (nth 0 (cdar eask-depends-on-emacs)))
 
