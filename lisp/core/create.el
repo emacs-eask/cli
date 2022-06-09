@@ -53,6 +53,8 @@
         (eask--replace-string-in-buffer "{ YEAR }" (format-time-string "%Y"))
         (eask--replace-string-in-buffer "{ FULL_NAME }" (eask--get-user))
         (eask--replace-string-in-buffer "{ MAIL_ADDR }" (eask--get-mail))
+        (eask--replace-string-in-buffer "{ VERSION }" (eask-package-version))
+        (eask--replace-string-in-buffer "{ EMACS_VERSION }" (eask-emacs-version))
         (save-buffer))
       (with-current-buffer (find-file (expand-file-name "README.md"))
         (eask--replace-string-in-buffer eask--template-project-name (eask-package-name))
