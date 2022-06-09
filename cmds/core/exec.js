@@ -25,7 +25,7 @@ const path = require('path');
 const child_process = require("child_process");
 
 exports.command = ['exec [args..]'];
-exports.desc = "execute command with correct environment PATH set up";
+exports.desc = 'execute command with correct environment PATH set up';
 exports.builder = async (yargs) => {
   yargs.help(false);
   yargs.version(false);
@@ -36,7 +36,7 @@ exports.builder = async (yargs) => {
 const EASK_HOMEDIR = os.homedir().replace(/\\/g, '/') + '/.eask/';
 
 exports.handler = async (argv) => {
-  process.env.EASK_HOMEDIR = EASK_HOMEDIR; // setup environment, so Emacs can receive it
+  process.env.EASK_HOMEDIR = EASK_HOMEDIR;  // setup environment, so Emacs can receive it
 
   let cmd = process.argv.slice(3);
 
