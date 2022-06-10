@@ -12,13 +12,13 @@ as its Code of Conduct, and we expect project participants to adhere to it.
 Please read the full text so that you can understand what actions will and will
 not be tolerated.
 
-## Open Development
+## 🪑 Open Development
 
 All work on Eask happens directly on [GitHub](https://github.com/emacs-eask/eask).
 Both core team members and external contributors send pull requests which go
 through the same review process.
 
-## Semantic Versioning
+## 📌 Semantic Versioning
 
 Eask follows [semantic versioning](https://semver.org/). We release patch versions
 for critical bugfixes, minor versions for new features or non-essential changes,
@@ -28,7 +28,7 @@ about the upcoming changes and migrate their code in advance.
 
 Every significant change is documented in the [changelog file](https://github.com/emacs-eask/eask/blob/master/CHANGELOG.md).
 
-## Branch Organization
+## 💡 Branch Organization
 
 Submit all changes directly to the `master` branch. We don’t use separate branches
 for development or for upcoming releases. We do our best to keep `master` in good shape,
