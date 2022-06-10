@@ -3,6 +3,8 @@ title: FAQ
 weight: 900
 ---
 
+Here is a list of general frequently asked questions.
+
 {{< toc >}}
 
 ## ❓ Why Node.JS?
