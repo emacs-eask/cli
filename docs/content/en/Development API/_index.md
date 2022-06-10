@@ -319,7 +319,7 @@ Return an **integer** represents the verbosity level.
 These functions are the actual implementation of `Eask`-file DSL; and
 have the word `eask-` as the function prefix.
 
-See [DSL](https://emacs-eask.github.io/eask/dsl) section for more information.
+See [DSL](https://emacs-eask.github.io/DSL/) section for more information.
 
 ## 🔍 Variable: eask-package
 
