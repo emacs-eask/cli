@@ -35,6 +35,9 @@ command_check_eask:
 command_exec:
 	./test/commands/exec/run.sh
 
+command_emacs:
+	./test/commands/emacs/run.sh
+
 command_install:
 	./test/commands/install/run.sh
 
