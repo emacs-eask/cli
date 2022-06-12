@@ -9,11 +9,11 @@
 ;;
 ;;  Initialization options:
 ;;
-;;    [names..]          specify files to concatenate
+;;    [names..]         specify files to concatenate
 ;;
 ;;  Action options:
 ;;
-;;    [destination]      optional output destination
+;;    [destination]     optional output destination
 ;;
 
 ;;; Code:

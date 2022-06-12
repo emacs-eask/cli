@@ -196,8 +196,13 @@ Execute the system command with the given arguments.
 $ eask [GLOBAL-OPTIONS] exec [COMMAND] [ARGUMENTS ...]
 ```
 
-This is only compatible with Cask's exec command. Eask does not play with
-your environment $PATH; all execution only happens inside Emacs.
+## 🔍 eask emacs
+
+Execute emacs with the appropriate environment
+
+```sh
+$ eask [GLOBAL-OPTIONS] emacs [ARGUMENTS ...]
+```
 
 ## 🔍 eask eval
 
