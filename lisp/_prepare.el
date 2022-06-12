@@ -45,7 +45,8 @@
 (defconst eask-argv argv
   "This stores the real argv; the argv will soon be replaced with `(eask-args)'.")
 
-(defconst eask--script (nth 1 (member "-scriptload" command-line-args))
+(defconst eask--script (nth 1 (or (member "-scriptload" command-line-args)
+                                  (member "-l" command-line-args)))
   "Script currently executing.")
 
 (defconst eask-lisp-root
@@ -407,15 +408,16 @@ the `eask-start' execution.")
 
 (defun eask--handle-global-options ()
   "Handle global options."
-  (when (eask-debug-p) (setq debug-on-error t))
-  (when (eask-verbose) (setq eask-verbosity (eask-verbose)))
-  (when (eask-insecure-p) (setq network-security-level 'low))
-  (when (eask-timestamps-p) (setq eask-timestamps t))
+  (when (eask-debug-p)         (setq debug-on-error t))
+  (when (eask-verbose)         (setq eask-verbosity (eask-verbose)))
+  (when (eask-insecure-p)      (setq network-security-level 'low))
+  (when (eask-timestamps-p)    (setq eask-timestamps t))
   (when (eask-no-timestamps-p) (setq eask-timestamps nil))
-  (when (eask-log-level-p) (setq eask-log-level t))
-  (when (eask-no-log-level-p) (setq eask-log-level nil))
-  (when (eask-no-color-p) (setq ansi-inhibit-ansi t))
-  (unless eask-has-colors (setq ansi-inhibit-ansi t))
+  (when (eask-log-level-p)     (setq eask-log-level t))
+  (when (eask-no-log-level-p)  (setq eask-log-level nil))
+  (when (eask-no-color-p)      (setq ansi-inhibit-ansi t))
+  (unless eask-has-colors      (setq ansi-inhibit-ansi t))
+  (when (display-graphic-p)    (setq ansi-inhibit-ansi t))
   (eask--add-proxy "http"     (eask-proxy))
   (eask--add-proxy "https"    (eask-proxy))
   (eask--add-proxy "http"     (eask-http-proxy))

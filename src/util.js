@@ -52,7 +52,7 @@ function def_flag(arg, name, val = undefined) {
 /**
  * Setup the environment variables so Emacs could receive them.
  */
-function _setup_env() {
+function setup_env() {
   if (GITHUB_ACTIONS) {
     /* XXX: isTTY flag will always be undefined in GitHub Actions; we will have
      * explicitly set environment variables.
@@ -95,14 +95,23 @@ function _global_options(argv) {
 }
 
 /**
+ * Form elisp script path.
+ * @param { string } name - Name of the script without extension.
+ */
+function el_script(name) {
+  let _script = 'lisp/' + name + '.el';
+  let _path = path.join(plugin_dir(), _script);
+  return _path;
+}
+
+/**
  * Call emacs process
  * @param { string } script - name of the script from `../lisp`
  * @param { string } args - the rest of the arguments
  */
 async function e_call(argv, script, ...args) {
   return new Promise(resolve => {
-    let _script = 'lisp/' + script + '.el';
-    let _path = path.join(plugin_dir(), _script);
+    let _path = el_script(script);
 
     let cmd_base = ['-Q', '--script', _path];
     let cmd_args = args.flat();
@@ -118,7 +127,7 @@ async function e_call(argv, script, ...args) {
     if (argv.verbose == 4)
       console.log('[DEBUG] emacs ' + cmd.join(' '));
 
-    _setup_env();
+    setup_env();
     let proc = child_process.spawn('emacs', cmd, { stdio: 'inherit' });
 
     proc.on('close', function (code) {
@@ -136,4 +145,6 @@ async function e_call(argv, script, ...args) {
  */
 module.exports.plugin_dir = plugin_dir;
 module.exports.def_flag = def_flag;
+module.exports.setup_env = setup_env;
+module.exports.el_script = el_script;
 module.exports.e_call = e_call;
