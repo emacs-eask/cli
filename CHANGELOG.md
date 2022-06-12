@@ -17,6 +17,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add implementation for `package-build--get-timestamp` (#36)
 * Fix `time-convert` missing in Emacs 26.x; improve CI test on `package` command (#38)
 * Fix `eask create`, honour `version` and `emacs_version` (#41)
+* Add new command `eask emacs` (#46)
 
 ## 0.6.17
 > Released Mar 5, 2022
