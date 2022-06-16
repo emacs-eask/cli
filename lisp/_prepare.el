@@ -1101,7 +1101,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
       (eask--check-optional
        eask-website-url url
        "Unmatched website URL '%s'; it should be '%s'"
-       (format "Unmatched website URL '%s'; add ;; URL: %s to package-file" eask-website-url eask-website-url)
+       (format "Unmatched website URL '%s'; add ;; URL: %s to %s" eask-website-url eask-website-url def-point)
        (format "Unmatched website URL '%s'; add (website-url \"%s\") to Eask-file" url url)
        (format "URL header is optional, but it's often recommended")))
     (let ((keywords (package-desc--keywords eask-package-desc)))
