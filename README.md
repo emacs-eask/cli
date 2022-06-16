@@ -52,6 +52,12 @@ influencing your personal configuration. Eask aims to be:
 | Test to upgrade and check outdated packages | ✔    | [![Outdated_Upgrade](https://github.com/emacs-eask/eask/actions/workflows/outdated_upgrade.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/outdated_upgrade.yml) |
 | `Eask`-file checker                         | ✔    | [![Checker](https://github.com/emacs-eask/eask/actions/workflows/checker.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/checker.yml)                            |
 
+###### Options
+
+| Description          | Done | Status                                                                                                                                                     |
+|----------------------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Test option switches | ✔    | [![Options](https://github.com/emacs-eask/eask/actions/workflows/options.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/options.yml) |
+
 ###### Test
 
 | Description               | Done | Status                                                                                                                                                                             |
