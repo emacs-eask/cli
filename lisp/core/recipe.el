@@ -14,10 +14,8 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
-(eask-load "core/info")
-
 (eask-start
-  (if-let ((url (eask--package-desc-url)))
+  (if-let ((url (eask-package-desc-url)))
       (let* ((fetcher (cond ((string-match-p "github.com" url) 'github)
                             ((string-match-p "gitlab.com" url) 'gitlab)
                             (t 'git)))
