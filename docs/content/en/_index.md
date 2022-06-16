@@ -58,7 +58,6 @@ but the author is not an expert on these tools. Corrections are welcome.
 ### Core commands
 
 - [ ] [FEAT] Add `publish` command; to publish package to eask archive?
-- [ ] [FEAT] Add new DSL `url`; for homepage link
 
 ### Eask-file commands
 
