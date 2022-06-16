@@ -1,0 +1,9 @@
+(package "options"
+         "0.0.0"
+         "Test all options flag")
+
+(package-file "options.el")
+
+(source "gnu")
+
+(depends-on "emacs" "26.1")

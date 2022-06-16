@@ -1,5 +1,3 @@
-SHELL := /usr/bin/env bash
-
 EMACS ?= emacs
 EASK ?= eask
 
@@ -16,42 +14,45 @@ test-compat:
 	@echo "Test compatibility..."
 	$(EASK) load ./test/development/compat.el --allow-error
 
+test-options:
+	./test/options/run.sh
+
 color:
 	./test/color/run.sh
 
 error:
 	./test/error/run.sh
 
-command_global:
+command-global:
 	./test/commands/global/run.sh
 
-command_local:
+command-local:
 	./test/commands/local/run.sh
 
-command_check_eask:
+command-check-eask:
 	./test/checker/dsl/run.sh
 	./test/checker/metadata/run.sh
 
-command_exec:
+command-exec:
 	./test/commands/exec/run.sh
 
-command_emacs:
+command-emacs:
 	./test/commands/emacs/run.sh
 
-command_install:
+command-install:
 	./test/commands/install/run.sh
 
-command_outdated_upgrade:
+command-outdated-upgrade:
 	./test/commands/outdated_upgrade/run.sh
 
-command_search:
+command-search:
 	./test/commands/search/run.sh
 
-test_ert:
+test-ert:
 	./test/commands/test/ert/run.sh
 
-test_ert-runner:
+test-ert-runner:
 	./test/commands/test/ert-runner/run.sh
 
-test_buttercup:
+test-buttercup:
 	./test/commands/test/buttercup/run.sh

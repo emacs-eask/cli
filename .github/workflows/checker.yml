@@ -56,5 +56,5 @@ jobs:
 
     - name: Testing...
       run: |
-        make command_check_eask
+        make command-check-eask
 

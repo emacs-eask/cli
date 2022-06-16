@@ -56,4 +56,4 @@ jobs:
 
     - name: Testing...
       run: |
-        make command_exec
+        make command-exec

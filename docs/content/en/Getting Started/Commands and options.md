@@ -523,19 +523,19 @@ Connect archives with HTTP instead of HTTPS.
 
 ## 🔍 --timestamps
 
-## 🔍 --no-timestamps
-
 Enable/Disable timestamps.
 
 ## 🔍 --log-level
-
-## 🔍 --no-log-level
 
 Enable/Disable log header.
 
 ## 🔍 --no-color
 
 Disable color output.
+
+## 🔍 --elapsed-time
+
+Show elapsed time between each operation
 
 ## 🔍 --proxy `<proxy>`
 
