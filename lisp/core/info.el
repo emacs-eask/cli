@@ -33,11 +33,6 @@
           (eask-msg (concat "  %-" offset "s (%s)") (car dep) target-version)
           (eask-debug "    Recipe: %s" (car dep)))))))
 
-(defun eask--package-desc-url ()
-  "Return url from package descriptor."
-  (when-let ((extras (package-desc-extras eask-package-desc)))
-    (cdr (assoc :url extras))))
-
 (eask-start
   (if eask-package
       (progn
@@ -49,11 +44,11 @@
                   (ansi-cyan (length eask-depends-on-dev)))
         (eask-msg (eask-package-description))
         (when eask-package-desc
-          (when-let ((url (eask--package-desc-url)))
+          (when-let ((url (eask-package-desc-url)))
             (eask-msg (ansi-cyan url)))
           (when-let ((keywords (package-desc--keywords eask-package-desc)))
             (eask-msg "")
-            (eask-msg "keywords: %s" (mapconcat #'identity keywords ", "))))
+            (eask-msg "keywords: %s" (string-join keywords ", "))))
         (eask-msg "")
         (when eask-package-file
           (eask-msg "entry: %s" (eask-root-del eask-package-file)))

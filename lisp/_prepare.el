@@ -356,6 +356,11 @@ the `eask-start' execution.")
     ;; Just in case, but this should never happens!
     "latest"))
 
+(defun eask-package-desc-url ()
+  "Return url from package descriptor."
+  (when-let ((extras (package-desc-extras eask-package-desc)))
+    (cdr (assoc :url extras))))
+
 (defun eask-pkg-el ()
   "Return package description file if exists."
   (let ((pkg-el (package--description-file default-directory)))
@@ -507,7 +512,8 @@ other scripts internally.  See function `eask-call'.")
        ,@body)))
 
 (defconst eask-file-keywords
-  '("package" "package-file" "files"
+  '("package" "website-url" "keywords"
+    "package-file" "files"
     "depends-on" "development"
     "source" "source-priority"
     "exec-paths" "load-paths")
@@ -641,8 +647,10 @@ Eask file in the workspace."
   "Mapping of source name and url.")
 
 (defvar eask-package          nil)
-(defvar eask-package-file     nil)
 (defvar eask-package-desc     nil)  ; package descriptor
+(defvar eask-website-url      nil)
+(defvar eask-keywords         nil)
+(defvar eask-package-file     nil)
 (defvar eask-files            nil)
 (defvar eask-depends-on-emacs nil)
 (defvar eask-depends-on       nil)
@@ -669,6 +677,18 @@ Eask file in the workspace."
       (eask--checker-string "Name" name)
       (version= version "0.1.0")
       (eask--checker-string "Description" description))))
+
+(defun eask-website-url (url)
+  "Set website URL."
+  (if eask-website-url
+      (eask-error "Multiple definition of `website-url'")
+    (setq eask-website-url url)))
+
+(defun eask-keywords (&rest keywords)
+  "Set package keywords."
+  (if eask-keywords
+      (eask-error "Multiple definition of `keywords'")
+    (setq eask-keywords keywords)))
 
 (defun eask-package-file (file)
   "Set package file."
@@ -697,6 +717,22 @@ Eask file in the workspace."
 (defun eask-files (&rest patterns)
   "Set files patterns."
   (setq eask-files (append eask-files patterns)))
+
+(defun eask-source (name &optional location)
+  "Add archive NAME with LOCATION."
+  (when (assoc name package-archives)
+    (eask-error "Multiple definition of source `%s'" name))
+  (setq location (or location (cdr (assq (intern name) eask-source-mapping))))
+  (unless location (eask-error "Unknown package archive `%s'" name))
+  (when (and location
+             (gnutls-available-p)
+             (not (eask-network-insecure-p)))
+    (setq location (s-replace "https://" "http://" location)))
+  (add-to-list 'package-archives (cons name location) t))
+
+(defun eask-source-priority (archive-id &optional priority)
+  "Add PRIORITY for to ARCHIVE-ID."
+  (add-to-list 'package-archive-priorities (cons archive-id priority) t))
 
 (defvar eask-depends-on-recipe-p nil
   "Set to t if package depends on recipe.")
@@ -766,22 +802,6 @@ Eask file in the workspace."
 (defun eask-exec-paths (&rest dirs)
   "Add all DIRS to exec-path."
   (dolist (dir dirs) (add-to-list 'exec-path (expand-file-name dir) t)))
-
-(defun eask-source (name &optional location)
-  "Add archive NAME with LOCATION."
-  (when (assoc name package-archives)
-    (eask-error "Multiple definition of source `%s'" name))
-  (setq location (or location (cdr (assq (intern name) eask-source-mapping))))
-  (unless location (eask-error "Unknown package archive `%s'" name))
-  (when (and location
-             (gnutls-available-p)
-             (not (eask-network-insecure-p)))
-    (setq location (s-replace "https://" "http://" location)))
-  (add-to-list 'package-archives (cons name location) t))
-
-(defun eask-source-priority (archive-id &optional priority)
-  "Add PRIORITY for to ARCHIVE-ID."
-  (add-to-list 'package-archive-priorities (cons archive-id priority) t))
 
 ;;
 ;;; Error Handling
@@ -1057,6 +1077,13 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   "Test strings (F and P); then print FMT if not equal."
   (unless (string= f p) (apply #'eask-warn (append (list fmt f p) args))))
 
+(defun eask--check-optional (f p msg1 msg2 msg3 msg4)
+  "Conditional way to check optional headers, URL and KEYWORDS ."
+  (cond ((and f p) (eask--check-strings msg1 f p))
+        (f (eask-warn msg2))
+        (p (eask-warn msg3))
+        (t (eask-warn msg4))))
+
 (defun eask--checker-metadata ()
   "Report warnings if metadata doesn't match."
   (when-let* (((and eask-package eask-package-desc))
@@ -1070,6 +1097,24 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
     (eask--check-strings
      "Unmatched summary '%s'; it should be '%s'"
      (eask-package-description) (package-desc-summary eask-package-desc))
+    (let ((url (eask-package-desc-url)))
+      (eask--check-optional
+       eask-website-url url
+       "Unmatched website URL '%s'; it should be '%s'"
+       (format "Unmatched website URL '%s'; add ;; URL: %s to %s" eask-website-url eask-website-url def-point)
+       (format "Unmatched website URL '%s'; add (website-url \"%s\") to Eask-file" url url)
+       (format "URL header is optional, but it's often recommended")))
+    (let ((keywords (package-desc--keywords eask-package-desc)))
+      (cond
+       ((or keywords eask-keywords)
+        (dolist (keyword keywords)
+          (unless (member keyword eask-keywords)
+            (eask-warn "Unmatched keyword '%s'; add (keywords ... \"%s\") to Eask-file or consider removing it" keyword keyword)))
+        (dolist (keyword eask-keywords)
+          (unless (member keyword keywords)
+            (eask-warn "Unmatched keyword '%s'; add ;; Keywords ... %s to %s or consider removing it" keyword keyword def-point))))
+       (t
+        (eask-warn "Keywords header is optional, but it's often recommended"))))
     (let* ((dependencies (append eask-depends-on-emacs eask-depends-on))
            (dependencies (mapcar #'car dependencies))
            (dependencies (mapcar (lambda (elm) (eask-2str elm)) dependencies))

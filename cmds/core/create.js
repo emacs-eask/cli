@@ -23,7 +23,7 @@ const child_process = require('child_process');
 
 const init = require('./init');
 
-exports.command = ['create [name]', 'new [name]'];
+exports.command = ['create <name>', 'new <name>'];
 exports.desc = 'create a new elisp project';
 exports.builder = {
   name: {

@@ -20,6 +20,24 @@ Declare a package with the given name, version, and description:
 All arguments are strings. The version must be a version understood by Emacs'
 built-in `version-to-list`.
 
+## 🔍 **website-url** (`url`)
+
+Declare the package website.
+
+```elisp
+(website-url "https://github.com/owner/repo.git")
+```
+
+## 🔍 **keywords** (`&rest keywords`)
+
+Declare package keywords.
+
+```elisp
+(keywords "tool" "utility" "emacs")
+```
+
+# 🚩 Package contents
+
 ## 🔍 **package-file** (`file` `version` `description`)
 
 Define this package and its runtime dependencies from the package headers 
@@ -28,8 +46,6 @@ of a file (used only for package development).
 ```elisp
 (package-file "foo.el")
 ```
-
-# 🚩 Package contents
 
 ## 🔍 **files** (`&rest patterns`)
 
@@ -41,6 +57,41 @@ Specify list of files that are included in this project.
 ```
 
 # 🚩 Dependencies
+
+## 🔍 **source** (`alias`)
+
+## 🔍 **source** (`name` `url`)
+
+Add a package archive to install dependencies from.
+
+```elisp
+(source "gnu")
+(source "gnu" "https://elpa.gnu.org/packages/")
+```
+
+Available aliases:
+
+* `gnu` ([https://elpa.gnu.org/packages/](https://elpa.gnu.org/packages/))
+* `nongnu` ([https://elpa.nongnu.org/nongnu/](https://elpa.nongnu.org/nongnu/))
+* `celpa` ([https://celpa.conao3.com/](https://celpa.conao3.com/))
+* `jcs-elpa` ([https://jcs-emacs.github.io/jcs-elpa/packages/](https://jcs-emacs.github.io/jcs-elpa/packages/))
+* `marmalade` ([https://marmalade-repo.org/packages/](https://marmalade-repo.org/packages/))
+* `melpa` ([https://melpa.org/packages/](https://melpa.org/packages/))
+* `melpa-stable` ([https://stable.melpa.org/packages/](https://stable.melpa.org/packages/))
+* `org` ([https://orgmode.org/elpa/](https://orgmode.org/elpa/))
+* `shmelpa` ([https://shmelpa.commandlinesystems.com/packages/](https://shmelpa.commandlinesystems.com/packages/))
+
+{{< hint ok >}}
+💡 Use **--insecure** to make **https** to **http**, but not recommended
+{{< /hint >}}
+
+## 🔍 **source-priority** (`name` `priority`)
+
+Set archive priority.
+
+```elisp
+(source-priority "gnu" 5)
+```
 
 ## 🔍 **depends-on** (`package-name` `&optional minimum-version`)
 
@@ -86,41 +137,6 @@ Scope all `depends-on` expressions in body to development.
 {{< hint ok >}}
 💡 You would need to specify the **--dev** option for development dependencies!
 {{< /hint >}}
-
-## 🔍 **source** (`alias`)
-
-## 🔍 **source** (`name` `url`)
-
-Add a package archive to install dependencies from.
-
-```elisp
-(source "gnu")
-(source "gnu" "https://elpa.gnu.org/packages/")
-```
-
-Available aliases:
-
-* `gnu` ([https://elpa.gnu.org/packages/](https://elpa.gnu.org/packages/))
-* `nongnu` ([https://elpa.nongnu.org/nongnu/](https://elpa.nongnu.org/nongnu/))
-* `celpa` ([https://celpa.conao3.com/](https://celpa.conao3.com/))
-* `jcs-elpa` ([https://jcs-emacs.github.io/jcs-elpa/packages/](https://jcs-emacs.github.io/jcs-elpa/packages/))
-* `marmalade` ([https://marmalade-repo.org/packages/](https://marmalade-repo.org/packages/))
-* `melpa` ([https://melpa.org/packages/](https://melpa.org/packages/))
-* `melpa-stable` ([https://stable.melpa.org/packages/](https://stable.melpa.org/packages/))
-* `org` ([https://orgmode.org/elpa/](https://orgmode.org/elpa/))
-* `shmelpa` ([https://shmelpa.commandlinesystems.com/packages/](https://shmelpa.commandlinesystems.com/packages/))
-
-{{< hint ok >}}
-💡 Use **--insecure** to make **https** to **http**, but not recommended
-{{< /hint >}}
-
-## 🔍 **source-priority** (`name` `priority`)
-
-Set archive priority.
-
-```elisp
-(source-priority "gnu" 5)
-```
 
 ## 🔍 **load-paths** (`&rest paths`)
 
