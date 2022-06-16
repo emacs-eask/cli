@@ -67,7 +67,7 @@ yargs
     type: 'boolean',
   })
   .option('elapsed-time', {
-    description: 'show elapsed time between each opteraions',
+    description: 'show elapsed time between each operation',
     alias: 'et',
     type: 'boolean',
   })
