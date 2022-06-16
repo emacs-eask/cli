@@ -56,7 +56,7 @@
         (eask--replace-string-in-buffer "{ WEBSITE_URL }" (or eask-website-url ""))
         (eask--replace-string-in-buffer "{ VERSION }" (eask-package-version))
         (eask--replace-string-in-buffer "{ EMACS_VERSION }" (eask-depends-emacs-version))
-        (eask--replace-string-in-buffer "{ KEYWORDS }" (string-join eask-keywords))
+        (eask--replace-string-in-buffer "{ KEYWORDS }" (string-join eask-keywords " "))
         (save-buffer))
       (with-current-buffer (find-file (expand-file-name "README.md"))
         (eask--replace-string-in-buffer eask--template-project-name (eask-package-name))
