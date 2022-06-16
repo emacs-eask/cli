@@ -48,16 +48,23 @@ async function create_eask_file(dir) {
     process.exit(0);
   }
 
-  let name, version, description, entry_point, emacs_version;
+  let name, version, description, entry_point, emacs_version, website_url, keywords;
   await ask(`package name: (${basename}) `, (answer) => { name = answer || basename; });
   await ask(`version: (1.0.0) `, (answer) => { version = answer || '1.0.0'; });
   await ask(`description: `, (answer) => { description = answer; });
   await ask(`entry-point: (${basename}.el) `, (answer) => { entry_point = answer || `${basename}.el`; });
   await ask(`emacs-version: (26.1) `, (answer) => { emacs_version = answer || '26.1'; });
+  await ask(`website: `, (answer) => { website_url = answer; });
+  await ask(`keywords: `, (answer) => { keywords = answer; });
+
+  keywords = keywords.split(/[, ]+/).join('" "');
 
   let content = `(package "${name}"
          "${version}"
          "${description}")
+
+(website-url "${website_url}")
+(keywords "${keywords}")
 
 (package-file "${entry_point}")
 
