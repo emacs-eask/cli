@@ -11,6 +11,9 @@ The syntaxes are similar to the `Cask` file, but different.
          "0.1.0"
          "Your package description")
 
+(website-url "https://github.com/owner/repo")
+(keywords "example" "tool")
+
 (package-file "your-package-file.el")
 
 (source "gnu")

@@ -11,6 +11,9 @@ The syntaxes are similar to the `Cask` file, but different.
          "0.1.0"
          "Your Emacs configuration's description")  ; optional
 
+(website-url "https://github.com/owner/repo")
+(keywords "config")
+
 (package-file "init.el")  ; optional
 
 (files "early-init.el" "init.el"
