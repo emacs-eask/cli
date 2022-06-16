@@ -31,7 +31,7 @@ command-global:
 command-local:
 	./test/commands/local/run.sh
 
-command-check_eask:
+command-check-eask:
 	./test/checker/dsl/run.sh
 	./test/checker/metadata/run.sh
 
