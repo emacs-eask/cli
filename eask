@@ -62,16 +62,13 @@ yargs
     description: 'log with timestamps',
     type: 'boolean',
   })
-  .option('no-timestamps', {
-    description: 'log without timestamps',
-    type: 'boolean',
-  })
   .option('log-level', {
     description: 'log with level',
     type: 'boolean',
   })
-  .option('no-log-level', {
-    description: 'log without level',
+  .option('elapsed-time', {
+    description: 'show elapsed time between each opteraions',
+    alias: 'et',
     type: 'boolean',
   })
   .option('no-color', {

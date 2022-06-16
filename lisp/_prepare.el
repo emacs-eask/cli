@@ -387,12 +387,11 @@ the `eask-start' execution.")
 (defun eask-debug-p ()         (eask--flag "--debug"))          ; --debug
 (defun eask-strict-p ()        (eask--flag "--strict"))         ; --strict
 (defun eask-timestamps-p ()    (eask--flag "--timestamps"))     ; --timestamps
-(defun eask-no-timestamps-p () (eask--flag "--no-timestamps"))  ; --no-timestamps
 (defun eask-log-level-p ()     (eask--flag "--log-level"))      ; --log-level
-(defun eask-no-log-level-p ()  (eask--flag "--no-log-level"))   ; --no-log-level
-(defun eask-no-color-p ()      (eask--flag "--no-color"))       ; --no-color
+(defun eask-elapsed-time-p ()  (eask--flag "--elapsed-time"))   ; --elapsed-time, --et
 (defun eask-allow-error-p ()   (eask--flag "--allow-error"))    ; --allow-error
 (defun eask-insecure-p ()      (eask--flag "--insecure"))       ; --insecure
+(defun eask-no-color-p ()      (eask--flag "--no-color"))       ; --no-color
 
 ;;; String (with arguments)
 (defun eask-proxy ()       (eask--flag-value "--proxy"))        ; --proxy
@@ -408,16 +407,15 @@ the `eask-start' execution.")
 
 (defun eask--handle-global-options ()
   "Handle global options."
-  (when (eask-debug-p)         (setq debug-on-error t))
-  (when (eask-verbose)         (setq eask-verbosity (eask-verbose)))
-  (when (eask-insecure-p)      (setq network-security-level 'low))
-  (when (eask-timestamps-p)    (setq eask-timestamps t))
-  (when (eask-no-timestamps-p) (setq eask-timestamps nil))
-  (when (eask-log-level-p)     (setq eask-log-level t))
-  (when (eask-no-log-level-p)  (setq eask-log-level nil))
-  (when (eask-no-color-p)      (setq ansi-inhibit-ansi t))
-  (unless eask-has-colors      (setq ansi-inhibit-ansi t))
-  (when (display-graphic-p)    (setq ansi-inhibit-ansi t))
+  (when (eask-debug-p)        (setq debug-on-error t))
+  (when (eask-verbose)        (setq eask-verbosity (eask-verbose)))
+  (when (eask-insecure-p)     (setq network-security-level 'low))
+  (when (eask-timestamps-p)   (setq eask-timestamps t))
+  (when (eask-log-level-p)    (setq eask-log-level t))
+  (when (eask-elapsed-time-p) (setq eask-elapsed-time t))
+  (when (eask-no-color-p)     (setq ansi-inhibit-ansi t))
+  (unless eask-has-colors     (setq ansi-inhibit-ansi t))
+  (when (display-graphic-p)   (setq ansi-inhibit-ansi t))
   (eask--add-proxy "http"     (eask-proxy))
   (eask--add-proxy "https"    (eask-proxy))
   (eask--add-proxy "http"     (eask-http-proxy))
@@ -450,12 +448,12 @@ other scripts internally.  See function `eask-call'.")
   (eask--form-options
    '("-g" "-f" "--dev"
      "--debug" "--strict"
-     "--timestamps" "--no-timestamps"
-     "--log-level" "--no-log-level"
-     "--no-color"
      "--allow-error"
-     "--insecure"))
-  "List of boolean type options")
+     "--insecure"
+     "--timestamps" "--log-level"
+     "--elapsed-time"
+     "--no-color"))
+  "List of boolean type options.")
 
 (defconst eask--option-args
   (eask--form-options
@@ -981,11 +979,27 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 ;;
 ;;; Progress
 
+(defcustom eask-elapsed-time nil
+  "Log with elapsed time."
+  :type 'boolean)
+
+(defcustom eask-minimum-reported-time 0.1
+  "Minimal load time that will be reported."
+  :type 'number)
+
 (defmacro eask-with-progress (msg-start body msg-end)
   "Progress BODY wrapper with prefix and suffix messages."
   (declare (indent 0) (debug t))
-  `(progn (ignore-errors (eask-write ,msg-start)) ,body
-          (ignore-errors (eask-msg ,msg-end))))
+  `(if eask-elapsed-time
+       (let ((now (current-time)))
+         (ignore-errors (eask-write ,msg-start)) ,body
+         (let ((elapsed (float-time (time-subtract (current-time) now))))
+           (if (< elapsed eask-minimum-reported-time)
+               (ignore-errors (eask-msg ,msg-end))
+             (ignore-errors (eask-write ,msg-end))
+             (eask-msg (ansi-white (format " (%.3fs)" elapsed))))))
+     (ignore-errors (eask-write ,msg-start)) ,body
+     (ignore-errors (eask-msg ,msg-end))))
 
 (defun eask-progress-seq (prefix sequence suffix func)
   "Progress SEQUENCE with messages."
@@ -994,7 +1008,6 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
     (mapc
      (lambda (item)
        (cl-incf count)
-
        (eask-with-progress
          (format (concat "%s [%" offset "d/%d] %s... ") prefix count total
                  (ansi-green item))
