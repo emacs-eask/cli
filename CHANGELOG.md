@@ -20,6 +20,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add new command `eask emacs` (#46)
 * Remove two options contradict to default settings, `--no-timestamps` and `--no-log-level` (#48)
 * Add new option `--elapsed-time`, `--et` (#48)
+* Add two new DSL; `website-url` and `keywords` (#49)
 
 ## 0.6.17
 > Released Mar 5, 2022
