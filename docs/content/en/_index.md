@@ -59,7 +59,6 @@ but the author is not an expert on these tools. Corrections are welcome.
 
 - [ ] [FEAT] Add `publish` command; to publish package to eask archive?
 - [ ] [FEAT] Add new DSL `url`; for homepage link
-- [ ] [FEAT] Add option for elasped time measurement between operations
 
 ### Eask-file commands
 
