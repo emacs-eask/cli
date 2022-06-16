@@ -43,12 +43,11 @@
                   (ansi-cyan (length eask-depends-on))
                   (ansi-cyan (length eask-depends-on-dev)))
         (eask-msg (eask-package-description))
-        (when eask-package-desc
-          (when-let ((url (eask-package-desc-url)))
-            (eask-msg (ansi-cyan url)))
-          (when-let ((keywords (package-desc--keywords eask-package-desc)))
-            (eask-msg "")
-            (eask-msg "keywords: %s" (string-join keywords ", "))))
+        (when-let ((url (or (eask-package-desc-url) eask-website-url)))
+          (eask-msg (ansi-cyan url)))
+        (when-let ((keywords (or (eask-package-desc-keywords) eask-keywords)))
+          (eask-msg "")
+          (eask-msg "keywords: %s" (string-join keywords ", ")))
         (eask-msg "")
         (when eask-package-file
           (eask-msg "entry: %s" (eask-root-del eask-package-file)))

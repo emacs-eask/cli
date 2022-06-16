@@ -358,8 +358,13 @@ the `eask-start' execution.")
 
 (defun eask-package-desc-url ()
   "Return url from package descriptor."
-  (when-let ((extras (package-desc-extras eask-package-desc)))
-    (cdr (assoc :url extras))))
+  (when eask-package-desc
+    (when-let ((extras (package-desc-extras eask-package-desc)))
+      (cdr (assoc :url extras)))))
+
+(defun eask-package-desc-keywords ()
+  "Return keywords from package descriptor."
+  (when eask-package-desc (package-desc--keywords eask-package-desc)))
 
 (defun eask-pkg-el ()
   "Return package description file if exists."
@@ -1104,7 +1109,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
        (format "Unmatched website URL '%s'; add ;; URL: %s to %s" eask-website-url eask-website-url def-point)
        (format "Unmatched website URL '%s'; add (website-url \"%s\") to Eask-file" url url)
        (format "URL header is optional, but it's often recommended")))
-    (let ((keywords (package-desc--keywords eask-package-desc)))
+    (let ((keywords (eask-package-desc-keywords)))
       (cond
        ((or keywords eask-keywords)
         (dolist (keyword keywords)
