@@ -53,5 +53,5 @@ jobs:
 
     - name: Testing...
       run: |
-        make test_ert-runner
+        make test-ert-runner
 
