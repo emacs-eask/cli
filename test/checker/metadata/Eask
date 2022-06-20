@@ -3,10 +3,13 @@
 ;;
 ;;; Below are errors/warnings to lint
 
-(package "check-metadata?"             ; unmatch
-         "0.0.1?"                      ; unmatch and invalid version syntax
-         "Test for unmatch metadata?"  ; unmatch
+(package "check-metadata?"             ; unmatched
+         "0.0.1?"                      ; unmatched and invalid version syntax
+         "Test for unmatch metadata?"  ; unmatched
          )
+
+(website-url "https://github.com/emacs-eask/check-metadata?")  ; unmatched
+(keywords "metadata?")  ; missing
 
 (package-file "check-metadata.el")
 

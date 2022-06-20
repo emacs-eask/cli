@@ -4,11 +4,10 @@
 ;; Created date 2022-04-19 15:16:50
 
 ;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>
-;; Description: Test for unmatch metadata
-;; Keyword: metadata
+;; URL: https://github.com/emacs-eask/check-metadata
 ;; Version: 0.0.1
 ;; Package-Requires: ((emacs "24.3") (dash "0.1"))
-;; URL: https://github.com/emacs-eask/check-metadata
+;; Keywords: metadata
 
 ;; This file is NOT part of GNU Emacs.
 
