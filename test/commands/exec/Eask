@@ -1,6 +1,9 @@
 (package "exec"
          "0.0.1"
          "Test project for command exec")
+		 
+(website-url "https://github.com/emacs-eask/exec")
+(keywords "exec")
 
 (package-file "exec.el")
 

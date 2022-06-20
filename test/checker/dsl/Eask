@@ -6,21 +6,26 @@
 (package "check-dsl" "0.0.1" "Test for DSL")  ; duplicate `package` directive
 (package "" "" "")
 
-(package-file "check-dsl.el")  ; duplicate `package-file` directive
+(website-url "https://github.com/emacs-eask/check-dsl")  ; duplicate url
+(website-url "https://github.com/emacs-eask/check-dsl")
+(keywords "dsl")                                         ; duplicate keywords
+(keywords "dsl")
+
+(package-file "check-dsl.el")                            ; duplicate `package-file` directive
 (package-file "check-dsl.el")
 
-(source "gnu")                  ; duplicate archives
+(source "gnu")                                           ; duplicate archives
 (source "gnu")
 
-(source "magic-archive")        ; Unkown archive
+(source "magic-archive")                                 ; Unkown archive
 
-(depends-on "emacs" "26.1")     ; duplicate `emacs` dependency
+(depends-on "emacs" "26.1")                              ; duplicate `emacs` dependency
 (depends-on "emacs")
 
-(depends-on "dash")                ; duplicate dependency
+(depends-on "dash")                                      ; duplicate dependency
 (depends-on "dash")
 
 (development
- (depends-on "f")                ; duplicate dependency
+ (depends-on "f")                                        ; duplicate dependency
  (depends-on "f")
  )

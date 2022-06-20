@@ -4,11 +4,10 @@
 ;; Created date 2022-03-29 14:10:40
 
 ;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>
-;; Description: Test project for command exec.
-;; Keyword: exec
+;; URL: https://github.com/emacs-eask/exec
 ;; Version: 0.0.1
 ;; Package-Requires: ((emacs "26.1"))
-;; URL: https://github.com/eask/eask
+;; Keywords: exec
 
 ;; This file is NOT part of GNU Emacs.
 

@@ -4,11 +4,10 @@
 ;; Created date 2022-03-29 01:52:58
 
 ;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>
-;; Description: Minimal Emacs package to simulate development environment; only for testing purposes!
-;; Keyword: test
+;; URL: https://github.com/emacs-eask/mini.emacs.pkg
 ;; Version: 0.0.1
 ;; Package-Requires: ((emacs "24.3") (s "1.12.0") (fringe-helper "1.0.1"))
-;; URL: https://github.com/emacs-eask/mini.emacs.pkg
+;; Keywords: test
 
 ;; This file is NOT part of GNU Emacs.
 
