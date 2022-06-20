@@ -21,6 +21,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Remove two options contradict to default settings, `--no-timestamps` and `--no-log-level` (#48)
 * Add new option `--elapsed-time`, `--et` (#48)
 * Add two new DSL; `website-url` and `keywords` (#49)
+* Replace `time-convert` to compatible with older Emacs version (#50)
 
 ## 0.6.17
 > Released Mar 5, 2022
