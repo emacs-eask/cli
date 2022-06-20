@@ -18,6 +18,8 @@
   (eask-with-archives "melpa"
     (eask-package-install 'buttercup))
   (require 'buttercup)
-  (buttercup-run-discover))
+  ;; Propose fix from https://github.com/jorgenschaefer/emacs-buttercup/pull/217
+  (let ((load-path (cons "." load-path)))
+    (buttercup-run-discover)))
 
 ;;; buttercup.el ends here
