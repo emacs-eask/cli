@@ -64,4 +64,3 @@ influencing your personal configuration. Eask aims to be:
 |---------------------------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Test `ert` command        | ✔    | [![Test ert](https://github.com/emacs-eask/eask/actions/workflows/test_ert.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test_ert.yml)                      |
 | Test `ert-runner` command | ✔    | [![Test ert-runner](https://github.com/emacs-eask/eask/actions/workflows/test_ert-runner.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test_ert-runner.yml) |
-| Test `buttercup` command  | ❌   | [![Test buttercup](https://github.com/emacs-eask/eask/actions/workflows/test_buttercup.yml/badge.svg)](https://github.com/emacs-eask/eask/actions/workflows/test_buttercup.yml)    |
