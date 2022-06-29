@@ -22,9 +22,10 @@
 (defun eask-package-dir-recipe ()
   "Form a directory recipe."
   (eask-load "extern/package-recipe")
-  (let ((name (eask-guess-package-name))
-        (patterns (or eask-files package-build-default-files-spec))
-        (path default-directory))
+  (let* ((name (eask-guess-package-name))
+         (files (when eask-files (append eask-files (list eask-package-file))))
+         (patterns (or files package-build-default-files-spec))
+         (path default-directory))
     (package-directory-recipe name :name name :files patterns :dir path)))
 
 (defun eask-packaged-name ()
@@ -40,8 +41,9 @@
     (and (file-exists-p file) file)))
 
 (defun eask-packaged-file ()
-  "Return generated pacakge artifact."
-  (or (eask--packaged-file "tar") (eask--packaged-file "el")))
+  "Return generated package artifact; it could be a tar or el."
+  (if (eask-package-multi-p) (eask--packaged-file "tar")
+    (eask--packaged-file "el")))
 
 (eask-start
   (let ((eask-dist-path (or (eask-argv 0) eask-dist-path))
