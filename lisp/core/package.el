@@ -19,13 +19,17 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
+(defun eask-package-dir--patterns ()
+  "Return patterns for directory recipe."
+  (if eask-files (append eask-files (list eask-package-file))
+    package-build-default-files-spec))
+
 (defun eask-package-dir-recipe ()
   "Form a directory recipe."
   (eask-load "extern/package-recipe")
-  (let* ((name (eask-guess-package-name))
-         (files (when eask-files (append eask-files (list eask-package-file))))
-         (patterns (or files package-build-default-files-spec))
-         (path default-directory))
+  (let ((name (eask-guess-package-name))
+        (patterns (eask-package-dir--patterns))
+        (path default-directory))
     (package-directory-recipe name :name name :files patterns :dir path)))
 
 (defun eask-packaged-name ()
