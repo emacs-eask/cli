@@ -20,6 +20,6 @@
 
 (eask-start
   (mapc #'eask--print-filename (eask-package-files))
-  (eask-info "(Total of %s files listed)" (length (eask-package-files))))
+  (eask-info "(Total of %s item listed)" (length (eask-package-files))))
 
 ;;; files.el ends here
