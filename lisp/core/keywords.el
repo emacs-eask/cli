@@ -2,7 +2,7 @@
 
 ;;; Commentary:
 ;;
-;; List all available keywords that can be used inside the header section,
+;; List available keywords that can be used in the header section,
 ;;
 ;;   $ eask keywords
 ;;

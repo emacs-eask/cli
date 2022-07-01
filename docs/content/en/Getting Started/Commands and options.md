@@ -242,6 +242,14 @@ Suggest a recipe format
 $ eask [GLOBAL-OPTIONS] recipe [FILES..]
 ```
 
+## 🔍 eask keywords
+
+List available keywords that can be used in the header section.
+
+```sh
+$ eask [GLOBAL-OPTIONS] keywords
+```
+
 ## 🔍 eask concate
 
 Concatenate all Emacs Lisp files into one big file.

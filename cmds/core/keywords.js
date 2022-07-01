@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['keywords'];
-exports.desc = 'list all available keywords that can be used inside the header section';
+exports.desc = 'list available keywords that can be used in the header section';
 
 
 exports.handler = async (argv) => {
