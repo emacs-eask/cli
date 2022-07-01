@@ -43,6 +43,7 @@ eask package
 eask compile
 eask activate
 eask recipe
+eask keywords
 
 # Linter
 eask lint package
