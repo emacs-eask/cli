@@ -52,8 +52,8 @@ eask lint declare
 eask lint elsa
 eask lint elint
 eask lint indent
-eask lint relint
 eask lint keywords
+eask lint relint
 
 # Clean up
 eask clean
