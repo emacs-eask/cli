@@ -575,6 +575,12 @@ Eask file in the workspace."
   "Display environment information at the very top of the execution."
   (eask-msg "")
   (eask-msg "✓ Checking Emacs version %s... done!" emacs-version)
+  (eask-with-verbosity 'debug
+    (eask-msg "  ✓ Checking build number %s... done!" emacs-build-number)
+    (eask-msg "  ✓ Checking system configuration %s... done!" system-configuration)
+    (when-let ((emacs-build-time)
+               (time (format-time-string "%Y-%m-%d" emacs-build-time)))
+      (eask-msg "  ✓ Checking build time %s... done!" time)))
   (eask-msg "✓ Checking system %s... done!" system-type))
 
 (defmacro eask--with-hooks (&rest body)
