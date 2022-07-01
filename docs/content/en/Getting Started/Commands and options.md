@@ -390,8 +390,18 @@ $ eask [GLOBAL-OPTIONS] lint lint elsa [FILES..]
 
 ## 🔍 eask lint indent
 
+Run indent-lint.
+
 ```sh
 $ eask [GLOBAL-OPTIONS] lint indent [FILES..]
+```
+
+## 🔍 eask lint keywords
+
+Run keywords checker.
+
+```sh
+$ eask [GLOBAL-OPTIONS] lint keywords
 ```
 
 ## 🔍 eask lint declare
