@@ -26,6 +26,8 @@
     url-file-exists-p)
   "List of function to check Emacs compatibility.")
 
+(message "Starting compatibility test for functions...")
+
 (dolist (func compat-functions)
   (let ((exists-p))
     (eask-with-progress
@@ -44,6 +46,8 @@
     print-level
     print-length)
   "List of variables to check Emacs compatibility.")
+
+(message "Starting compatibility test for variables...")
 
 (dolist (var compat-variables)
   (let ((exists-p))
