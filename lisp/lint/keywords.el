@@ -26,18 +26,21 @@
     result))
 
 (eask-start
-  (let ((keywords (eask-package-desc-keywords)))
+  (let ((keywords (eask-package-desc-keywords))
+        (file (eask-root-del eask-package-file)))
     (cond
      ((not eask-package-file)
       (eask-report "Can't lint keywords without the package-file specified")
       (eask-help "lint/keywords-file"))
      ((not keywords)
-      (eask-report "Keywords header seems to be missing in the `%s' file" (eask-root-del eask-package-file))
+      (eask-report "Keywords header seems to be missing in the `%s' file" file)
       (eask-help "lint/keywords-header"))
      (t
+      (eask-msg "")
+      (eask-msg "`%s` with keywords-lint" (ansi-green file))
       (if (eask--defined-keywords keywords)
           (eask-info "(No issues found.)")
-        (eask-report "Missing stanard keywords, consider adding one to your Keywords header!")
+        (eask-report "Missing a standard keyword, consider adding one to the Keywords header!")
         (eask-help "lint/keywords"))))))
 
 ;;; keywords.el ends here

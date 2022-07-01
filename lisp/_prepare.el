@@ -555,7 +555,7 @@ Eask file in the workspace."
 
 (defun eask-root-del (filename)
   "Remove Eask file root path from FILENAME."
-  (s-replace eask-file-root "" filename))
+  (when (stringp filename) (s-replace eask-file-root "" filename)))
 
 (defun eask-file-load (location &optional noerror)
   "Load Eask file in the LOCATION."
