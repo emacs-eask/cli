@@ -27,7 +27,7 @@
 (defun eask-package-dir--patterns ()
   "Return patterns for directory recipe."
   (if eask-files
-      (if (eask--files-contain-el)  ; avoid error, single file does not match package name
+      (if (eask--files-contain-el)  ; avoid error, single file doesn't match package name
           eask-files
         (append eask-files (list eask-package-file)))
     package-build-default-files-spec))
@@ -79,7 +79,7 @@
 
     (setq packaged (eask-packaged-file))
 
-    (when (and eask-is-windows (string= (file-name-extension packaged) "el"))
+    (when (and eask-is-windows (eask-package-single-p))
       (with-current-buffer (find-file packaged)
         (set-buffer-file-coding-system 'utf-8-unix)
         (save-buffer)))

@@ -964,6 +964,10 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
       (ignore-errors (file-name-nondirectory
                       (file-name-sans-extension eask-package-file)))))
 
+(defun eask-files-spec ()
+  "Return files spec."
+  (or eask-files package-build-default-files-spec))
+
 (defun eask-expand-file-specs (specs)
   "Expand file SPECS."
   (mapcar (lambda (elm) (expand-file-name (car elm) default-directory))
@@ -971,13 +975,13 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 
 (defun eask-package-files ()
   "Return package files in workspace."
-  (let ((files (eask-expand-file-specs eask-files)))
+  (let ((files (eask-expand-file-specs (eask-files-spec))))
     ;; Package file is part of package-files
     (when eask-package-file (push eask-package-file files))
     (delete-dups files)
     (setq files (cl-remove-if-not #'file-exists-p files))
     (unless files
-      (eask-debug "No matching file(s) found in %s: %s" default-directory eask-files))
+      (eask-debug "No matching file(s) found in %s: %s" default-directory (eask-files-spec)))
     files))
 
 (defun eask-package-el-files ()

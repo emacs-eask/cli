@@ -39,9 +39,21 @@ time of all files, making the tarball reproducible."
         (message "  %s" line)))))
 
 ;;
-;; NOTE: This is brought in cuz it's very useful, but we don't want to bring the
-;; whole `package-build' package unless it's needed.
+;; NOTE: Following code are  brought in cuz it's very useful, but we don't want
+;; to bring the whole `package-build' package unless it's needed.
 ;;
+
+(defconst package-build-default-files-spec
+  '("*.el" "lisp/*.el"
+    "dir" "*.info" "*.texi" "*.texinfo"
+    "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
+    "docs/dir" "docs/*.info" "docs/*.texi" "docs/*.texinfo"
+    (:exclude
+     ".dir-locals.el" "lisp/.dir-locals.el"
+     "test.el" "tests.el" "*-test.el" "*-tests.el"
+     "lisp/test.el" "lisp/tests.el" "lisp/*-test.el" "lisp/*-tests.el"))
+  "Default value for :files attribute in recipes.")
+
 (defun package-build-expand-file-specs (dir specs &optional subdir allow-empty)
   "In DIR, expand SPECS, optionally under SUBDIR.
 The result is a list of (SOURCE . DEST), where SOURCE is a source
