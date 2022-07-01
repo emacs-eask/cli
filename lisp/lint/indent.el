@@ -32,13 +32,12 @@
   (eask-msg "")
   (eask-msg "`%s` with indent-lint" (ansi-green (eask-root-del file)))
   (find-file file)
-  (let ((report-func (if (eask-strict-p) #'eask-error #'eask-warn))
-        (tick (buffer-modified-tick)))
+  (let ((tick (buffer-modified-tick)))
     (eask--silent (indent-region (point-min) (point-max)))
     (if (/= tick (buffer-modified-tick))
         ;; Indentation changed: warn for each line.
         (dolist (line (eask--undo-lines buffer-undo-list))
-          (funcall report-func "%s:%s: mismatch indentation" (buffer-name) line))
+          (eask-report "%s:%s: mismatch indentation" (buffer-name) line))
       (eask-log "No mismatch indentation found"))))
 
 (eask-start
@@ -51,6 +50,6 @@
     (eask-info "(No files have been linted)")
     (if (eask-args)
         (eask--print-no-matching-files)
-      (eask-help 'indent))))
+      (eask-help "package/indent"))))
 
 ;;; indent.el ends here

@@ -52,6 +52,6 @@
     (eask-info "(No files have been linted)")
     (if (eask-args)
         (eask--print-no-matching-files)
-      (eask-help 'lint))))
+      (eask-help "lint/package"))))
 
 ;;; package.el ends here

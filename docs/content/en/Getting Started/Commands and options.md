@@ -242,6 +242,14 @@ Suggest a recipe format
 $ eask [GLOBAL-OPTIONS] recipe [FILES..]
 ```
 
+## 🔍 eask keywords
+
+List available keywords that can be used in the header section.
+
+```sh
+$ eask [GLOBAL-OPTIONS] keywords
+```
+
 ## 🔍 eask concate
 
 Concatenate all Emacs Lisp files into one big file.
@@ -382,8 +390,18 @@ $ eask [GLOBAL-OPTIONS] lint lint elsa [FILES..]
 
 ## 🔍 eask lint indent
 
+Run indent-lint.
+
 ```sh
 $ eask [GLOBAL-OPTIONS] lint indent [FILES..]
+```
+
+## 🔍 eask lint keywords
+
+Run keywords checker.
+
+```sh
+$ eask [GLOBAL-OPTIONS] lint keywords
 ```
 
 ## 🔍 eask lint declare

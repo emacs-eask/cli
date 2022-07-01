@@ -55,6 +55,6 @@
     (eask-info "(No files have been checked (checkdoc))")
     (if (eask-args)
         (eask--print-no-matching-files)
-      (eask-help 'checkdoc))))
+      (eask-help "lint/checkdoc"))))
 
 ;;; checkdoc.el ends here

@@ -43,6 +43,7 @@ eask package
 eask compile
 eask activate
 eask recipe
+eask keywords
 
 # Linter
 eask lint package
@@ -51,6 +52,7 @@ eask lint declare
 eask lint elsa
 eask lint elint
 eask lint indent
+eask lint keywords
 eask lint relint
 
 # Clean up

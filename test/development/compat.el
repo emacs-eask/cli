@@ -10,6 +10,8 @@
 
 ;;; Code:
 
+(require 'finder)
+
 ;;
 ;;; Test functions
 
@@ -37,7 +39,8 @@
 ;;; Test variables
 
 (defconst compat-variables
-  '(package-quickstart-file
+  '(finder-known-keywords
+    package-quickstart-file
     print-level
     print-length)
   "List of variables to check Emacs compatibility.")

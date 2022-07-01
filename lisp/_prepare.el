@@ -555,7 +555,7 @@ Eask file in the workspace."
 
 (defun eask-root-del (filename)
   "Remove Eask file root path from FILENAME."
-  (s-replace eask-file-root "" filename))
+  (when (stringp filename) (s-replace eask-file-root "" filename)))
 
 (defun eask-file-load (location &optional noerror)
   "Load Eask file in the LOCATION."
@@ -575,6 +575,12 @@ Eask file in the workspace."
   "Display environment information at the very top of the execution."
   (eask-msg "")
   (eask-msg "✓ Checking Emacs version %s... done!" emacs-version)
+  (eask-with-verbosity 'debug
+    (eask-msg "  ✓ Checking build number %s... done!" emacs-build-number)
+    (eask-msg "  ✓ Checking system configuration %s... done!" system-configuration)
+    (when-let ((emacs-build-time)
+               (time (format-time-string "%Y-%m-%d" emacs-build-time)))
+      (eask-msg "  ✓ Checking build time %s... done!" time)))
   (eask-msg "✓ Checking system %s... done!" system-type))
 
 (defmacro eask--with-hooks (&rest body)
@@ -944,6 +950,10 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   "Like function `eask-msg' but without newline at the end."
   (unless inhibit-message
     (princ (apply #'eask--format-paint-kwds msg args) 'external-debugging-output)))
+
+(defun eask-report (&rest args)
+  "Report error/warning depends on strict flag."
+  (apply (if (eask-strict-p) #'eask-error #'eask-warn) args))
 
 ;;
 ;;; File

@@ -1,0 +1,4 @@
+    
+💡 You need to specify keywords header in your package file, consider adding the following:
+   
+    [+] ;; Keywords: "..."
