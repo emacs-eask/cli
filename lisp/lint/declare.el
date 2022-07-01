@@ -44,6 +44,6 @@
     (eask-info "(No files have been checked (declare))")
     (if (eask-args)
         (eask--print-no-matching-files)
-      (eask-help 'declare))))
+      (eask-help "lint/declare"))))
 
 ;;; declare.el ends here

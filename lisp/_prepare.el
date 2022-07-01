@@ -951,6 +951,10 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   (unless inhibit-message
     (princ (apply #'eask--format-paint-kwds msg args) 'external-debugging-output)))
 
+(defun eask-report (&rest args)
+  "Report error/warning depends on strict flag."
+  (apply (if (eask-strict-p) #'eask-error #'eask-warn) args))
+
 ;;
 ;;; File
 

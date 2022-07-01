@@ -47,6 +47,6 @@
           (mapc #'load-file files)
           (ert-run-tests-batch-and-exit)))
     (eask-info "(No tests found.)")
-    (eask-help 'ert)))
+    (eask-help "test/ert")))
 
 ;;; ert.el ends here

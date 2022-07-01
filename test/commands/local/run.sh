@@ -53,6 +53,7 @@ eask lint elsa
 eask lint elint
 eask lint indent
 eask lint relint
+eask lint keywords
 
 # Clean up
 eask clean
