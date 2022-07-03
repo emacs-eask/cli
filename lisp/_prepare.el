@@ -56,7 +56,12 @@
 
 (defun eask-command ()
   "What's the current command?"
-  (file-name-sans-extension (file-name-nondirectory eask--script)))
+  (let* ((script-dir (file-name-directory eask--script))
+         (script-file (file-name-sans-extension (file-name-nondirectory eask--script)))
+         (module-name (s-replace eask-lisp-root "" script-dir))
+         (module-name (s-replace "/" "" module-name)))
+    (if (member module-name '("core")) script-file
+      (concat module-name "-" script-file))))
 
 (defun eask-checker-p ()
   "Return t if running Eask as the checker."
@@ -632,8 +637,6 @@ Eask file in the workspace."
                    (package-activate-all)
                    (ignore-errors (make-directory package-user-dir t))
                    (eask--silent (eask-setup-paths))
-                   (run-hooks 'eask-before-command-hook)
-                   (run-hooks (intern (concat "eask-before-" (eask-command) "-hook")))
                    (eask--with-hooks ,@body))
                (eask-msg "✗ Loading Eask file... missing!")
                (eask-help 'init)))))))))
