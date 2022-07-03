@@ -68,7 +68,7 @@ will return `lint-checkdoc' with a dash between two subcommands."
          (module-name (s-replace eask-lisp-root "" script-dir))
          (module-name (s-replace "/" "" module-name)))
     ;; Ignore if it's inside core module
-    (if (member module-name '("core")) script-file
+    (if (member module-name '("core" "checker")) script-file
       (concat module-name "-" script-file))))
 
 (defun eask-special-p ()
