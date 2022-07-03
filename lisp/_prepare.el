@@ -646,7 +646,9 @@ Eask file in the workspace."
              (if (or (eask-file-try-load "../../")
                      special)
                  (progn
-                   (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
+                   (if eask-file
+                       (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
+                     (eask-msg "✗ Loading Eask file... missing!"))
                    (message "")
                    (package-activate-all)
                    (unless special
