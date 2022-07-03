@@ -6,7 +6,7 @@ weight: 350
 {{< toc >}}
 
 Running the **`eask create`** generator from the command-line will create
-a directory structure the following elements:
+a directory with the following structure:
 
 ```
 .
@@ -52,5 +52,5 @@ from your repository.
 `{package-file}.el`
 
 This is the main package file; where you should write your elisp code.
-If you attempt to create a multiple file packages; you would need to
+If you attempt to create a multiple-file packages; you would need to
 edit the `Eask`-file accordingly.

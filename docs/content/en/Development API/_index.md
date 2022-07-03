@@ -43,9 +43,20 @@ Points to `lisp` directory from the project root.
 
 Return the current command in string.
 
+## 🔍 Function: eask-special-p ()
+
+Return `t` if the command that can be run without Eask-file existence.
+
+This allow some commands can still be executed without defining the user
+directory. This can be handy when you want to do normal operations without
+touching the user directory.
+
 ## 🔍 Function: eask-checker-p ()
 
-Return t if running Eask as the checker.
+Return `t` if running Eask as the checker.
+
+Without this flag, the process will be terminated once the error is occured.
+This flag allows you to run through operations without report error.
 
 ## 🔍 Function: eask-script (`script`)
 
@@ -224,7 +235,6 @@ Return `t` if the `strict` option is enabled.
 ```
 
 ## 🔍 Function: eask-timestamps-p ()
-## 🔍 Function: eask-no-timestamps-p ()
 
 Return `t`/`nil` if the `timestamps` option is enabled/disabled.
 
@@ -236,7 +246,6 @@ These flags can't co-exist in the same command.
 ```
 
 ## 🔍 Function: eask-log-level-p ()
-## 🔍 Function: eask-no-log-level-p ()
 
 Return `t`/`nil` if the `log-level` option is enabled/disabled.
 
@@ -545,7 +554,7 @@ global option.
 Like `message` function but will replace unicodes with color.
 
 ```elisp
-(eask-msg "This is a message")
+(eask-msg "Print this message with newline!")
 ```
 
 ## 🔍 Function: eask-write (`msg` &rest `args`)
@@ -553,8 +562,18 @@ Like `message` function but will replace unicodes with color.
 Like `eask-msg` function but without newline at the end.
 
 ```elisp
-(eask-write "This is a message")
+(eask-write "Print this message without newline...")
 ```
+
+## 🔍 Function: eask-report (&rest `args`)
+
+Report error/warning depends on strict flag.
+
+```elisp
+(eask-report "This can be warning or error")
+```
+
+See option [--strict](https://emacs-eask.github.io/Getting-Started/Commands-and-options/#---strict)
 
 # 🚩 File
 

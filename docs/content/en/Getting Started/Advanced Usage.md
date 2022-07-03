@@ -12,7 +12,7 @@ You can do:
 (setq byte-compile-error-on-warn t)  ; Signal error if warning occurred
 ```
 
-`eask` provides some hooks which enables you to execute code before and after
+`eask` provides some hooks which enable you to execute code before and after
 each command. The hooks look like so:
 
 ```elisp
