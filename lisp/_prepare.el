@@ -71,6 +71,10 @@ will return `lint-checkdoc' with a dash between two subcommands."
     (if (member module-name '("core")) script-file
       (concat module-name "-" script-file))))
 
+(defun eask-sepcial-p ()
+  "Return t if the command that can be run without Eask-file existence."
+  (member (eask-command) '("keywords")))
+
 (defun eask-checker-p ()
   "Return t if running Eask as the checker."
   (member (eask-command) '("check-eask")))
@@ -220,7 +224,7 @@ the `eask-start' execution.")
   (eask-with-progress
     (ansi-green "Updating environment variables... ")
     (eask-with-verbosity 'debug
-      (eask--update-exec-path) (eask--update-load-path)
+      ;;(eask--update-exec-path) (eask--update-load-path)
       (setenv "PATH" (string-join exec-path path-separator))
       (setenv "EMACSLOADPATH" (string-join load-path path-separator)))
     (ansi-green "done ✓")))
@@ -637,14 +641,17 @@ Eask file in the workspace."
                   (package-user-dir (expand-file-name "elpa" user-emacs-directory))
                   (eask--first-init-p (not (file-directory-p user-emacs-directory)))
                   (user-init-file (locate-user-emacs-file "init.el"))
-                  (custom-file (locate-user-emacs-file "custom.el")))
-             (if (eask-file-try-load "../../")
+                  (custom-file (locate-user-emacs-file "custom.el"))
+                  (special (eask-sepcial-p)))
+             (if (or (eask-file-try-load "../../")
+                     special)
                  (progn
                    (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
                    (message "")
                    (package-activate-all)
-                   (ignore-errors (make-directory package-user-dir t))
-                   (eask--silent (eask-setup-paths))
+                   (unless special
+                     (ignore-errors (make-directory package-user-dir t))
+                     (eask--silent (eask-setup-paths)))
                    (eask--with-hooks ,@body))
                (eask-msg "✗ Loading Eask file... missing!")
                (eask-help 'init)))))))))
