@@ -55,11 +55,19 @@
   "Source lisp directory; should always end with slash.")
 
 (defun eask-command ()
-  "What's the current command?"
+  "What's the current command?
+
+If the command is with subcommand, it will return command with concatenate with
+dash separator. For example, the following:
+
+   $ eask lint checkdoc [FILES..]
+
+will return `lint-checkdoc' with a dash between two subcommands."
   (let* ((script-dir (file-name-directory eask--script))
          (script-file (file-name-sans-extension (file-name-nondirectory eask--script)))
          (module-name (s-replace eask-lisp-root "" script-dir))
          (module-name (s-replace "/" "" module-name)))
+    ;; Ignore if it's inside core module
     (if (member module-name '("core")) script-file
       (concat module-name "-" script-file))))
 
