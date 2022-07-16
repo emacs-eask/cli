@@ -19,16 +19,15 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
-(defun eask--files-contain-el ()
-  "Return non-nil if DSL files contain el."
-  (cl-some (lambda (elm) (string-suffix-p ".el" elm))
-           (eask-expand-file-specs eask-files)))
-
 (defun eask-package-dir--patterns ()
   "Return patterns for directory recipe."
   (if eask-files
-      (if (eask--files-contain-el)  ; avoid error, single file doesn't match package name
+      (if (member eask-package-file (eask-expand-file-specs (eask-files-spec)))
+          ;; Else we return default
           eask-files
+        ;; If files DSL doesn't contain package main file, we added manually!
+        ;;
+        ;; This would avoid error, single file doesn't match package name.
         (append eask-files (list eask-package-file)))
     package-build-default-files-spec))
 
