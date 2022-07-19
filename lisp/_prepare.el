@@ -1130,9 +1130,14 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
     (eask--check-strings
      "Unmatched package name '%s'; it should be '%s'"
      (eask-package-name) (package-desc-name eask-package-desc))
-    (eask--check-strings
-     "Unmatched version '%s'; it should be '%s'"
-     (eask-package-version) (package-version-join (package-desc-version eask-package-desc)))
+    (when-let* ((ver-eask (eask-package-version))
+                (ver-pkg (package-desc-version eask-package-desc))
+                ;; `package-version-join' returns only one of the possible
+                ;; inverses, since `version-to-list' is a many-to-one operation
+                ((not (equal (version-to-list ver-eask) ver-pkg))))
+      (eask--check-strings
+       "Unmatched version '%s'; it should be '%s'"
+       ver-eask (package-version-join ver-pkg)))
     (eask--check-strings
      "Unmatched summary '%s'; it should be '%s'"
      (eask-package-description) (package-desc-summary eask-package-desc))
