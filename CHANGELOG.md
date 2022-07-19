@@ -25,6 +25,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Fix test buttercup with adding the current path to `load-path` (#53)
 * Return correct packaged file depends on multi-files flag (23cd251abd4e65c62549feb280e785d1ee9634a7)
 * Add keywords command and it's linter (#54)
+* Handle many-to-one condition for version string (0ac654face0557ff74c4a6048fc8bef59c915ec8)
 
 ## 0.6.17
 > Released Mar 5, 2022
