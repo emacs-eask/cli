@@ -21,6 +21,11 @@ Please check out their official site
 [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-installer-to-install-nodejs-and-npm)
 and install `NodeJS` and `npm` corresponds to your current operating system
 
+{{< hint ok >}}
+💡 If you don't prefer **NodeJS** and **npm**, you can install with [binary](https://emacs-eask.github.io/Getting-Started/Install-Eask/#binary-cross-platform)
+from our [release](https://github.com/emacs-eask/eask/releases) page.
+{{< /hint >}}
+
 ## Step 2: Install Eask
 
 ```sh
