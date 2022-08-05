@@ -71,15 +71,20 @@ You will be asked with some questions about the package you are going to create:
 package name: (your-project)
 version: (1.0.0)
 description: Your project description!
-entry-point: (your-project-file.el)
-emacs-version: (26.1)
+entry point: (your-project.el)
+emacs version: (26.1)
+website: https://example.com/project-url/
+keywords: tools example
 About to write to /path/to/project/Eask:
 
 (package "your-project"
          "1.0.0"
          "Your project description!")
 
-(package-file "your-project-file.el")
+(website-url "https://example.git/your-project/")
+(keywords "tools" "example")
+
+(package-file "your-project.el")
 
 (source "gnu")
 
