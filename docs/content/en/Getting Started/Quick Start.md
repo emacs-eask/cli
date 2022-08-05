@@ -81,7 +81,7 @@ About to write to /path/to/project/Eask:
          "1.0.0"
          "Your project description!")
 
-(website-url "https://example.git/your-project/")
+(website-url "https://example.com/project-url/")
 (keywords "tools" "example")
 
 (package-file "your-project.el")
