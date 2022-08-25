@@ -241,8 +241,8 @@ Return `t`/`nil` if the `timestamps` option is enabled/disabled.
 These flags can't co-exist in the same command.
 
 ```elisp
-(when (and (eask-timestamps-p) (eask-no-timestamps-p))
-  (error "This is impossible!"))
+(when (eask-timestamps-p)
+  (message "Print log with timestamps!"))
 ```
 
 ## 🔍 Function: eask-log-level-p ()
@@ -252,8 +252,15 @@ Return `t`/`nil` if the `log-level` option is enabled/disabled.
 These flags can't co-exist in the same command.
 
 ```elisp
-(when (and (eask-log-level-p) (eask-no-log-level-p))
-  (error "This is impossible!"))
+(when (eask-log-level-p)
+  (message "Print log with level prefix!"))
+```
+
+## 🔍 Function: eask-log-file-p ()
+
+```elisp
+(when (eask-log-file-p)
+  (message "Let's create a log file!"))
 ```
 
 ## 🔍 Function: eask-no-color-p ()

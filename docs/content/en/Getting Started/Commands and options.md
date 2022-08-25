@@ -547,11 +547,15 @@ Enable/Disable timestamps.
 
 Enable/Disable log header.
 
+## 🔍 --log-file, --lf
+
+Weather to generate log files.
+
 ## 🔍 --no-color
 
 Disable color output.
 
-## 🔍 --elapsed-time
+## 🔍 --elapsed-time, --et
 
 Show elapsed time between each operation
 

@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        emacs-version: [27.2, snapshot]
+        emacs-version: [26.3, 27.2, 28.1, snapshot]
 
     steps:
     - uses: actions/checkout@v2
