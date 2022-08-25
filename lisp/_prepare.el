@@ -990,7 +990,9 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 
 (defmacro eask--log-write-buffer (buffer file)
   "Write BUFFER to FILE."
-  `(write-region (with-current-buffer ,buffer (buffer-string)) nil (expand-file-name ,file log-dir)))
+  `(let ((buffer-file-coding-system 'utf-8))
+     (write-region (with-current-buffer ,buffer (buffer-string)) nil
+                   (expand-file-name ,file log-dir))))
 
 (add-hook 'kill-emacs-hook  ; Write log files
           (lambda (&rest _)
