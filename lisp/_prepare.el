@@ -415,6 +415,7 @@ the `eask-start' execution.")
 (defun eask-strict-p ()        (eask--flag "--strict"))         ; --strict
 (defun eask-timestamps-p ()    (eask--flag "--timestamps"))     ; --timestamps
 (defun eask-log-level-p ()     (eask--flag "--log-level"))      ; --log-level
+(defun eask-log-file-p ()      (eask--flag "--log-file"))       ; --log-file, --lf
 (defun eask-elapsed-time-p ()  (eask--flag "--elapsed-time"))   ; --elapsed-time, --et
 (defun eask-allow-error-p ()   (eask--flag "--allow-error"))    ; --allow-error
 (defun eask-insecure-p ()      (eask--flag "--insecure"))       ; --insecure
@@ -439,6 +440,7 @@ the `eask-start' execution.")
   (when (eask-insecure-p)     (setq network-security-level 'low))
   (when (eask-timestamps-p)   (setq eask-timestamps t))
   (when (eask-log-level-p)    (setq eask-log-level t))
+  (when (eask-log-file-p)     (setq eask-log-file t))
   (when (eask-elapsed-time-p) (setq eask-elapsed-time t))
   (when (eask-no-color-p)     (setq ansi-inhibit-ansi t))
   (unless eask-has-colors     (setq ansi-inhibit-ansi t))
@@ -478,6 +480,7 @@ other scripts internally.  See function `eask-call'.")
      "--allow-error"
      "--insecure"
      "--timestamps" "--log-level"
+     "--log-file"
      "--elapsed-time"
      "--no-color"))
   "List of boolean type options.")
@@ -974,6 +977,27 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (defun eask-report (&rest args)
   "Report error/warning depends on strict flag."
   (apply (if (eask-strict-p) #'eask-error #'eask-warn) args))
+
+;;
+;;; Log
+
+(defconst eask-log-path ".log"
+  "Directory path to create log files.")
+
+(defcustom eask-log-file nil
+  "Weather to generate log files."
+  :type 'boolean)
+
+(defmacro eask--log-write-buffer (buffer file)
+  "Write BUFFER to FILE."
+  `(write-region (with-current-buffer ,buffer (buffer-string)) nil (expand-file-name ,file log-dir)))
+
+(add-hook 'kill-emacs-hook  ; Write log files
+          (lambda (&rest _)
+            (when eask-log-file
+              (let ((log-dir (expand-file-name eask-log-path)))
+                (make-directory log-dir t)
+                (eask--log-write-buffer "*Messages*" "messages.log")))))
 
 ;;
 ;;; File

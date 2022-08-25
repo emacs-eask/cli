@@ -66,6 +66,11 @@ yargs
     description: 'log with level',
     type: 'boolean',
   })
+  .option('log-file', {
+    description: 'generate log files',
+    alias: 'lf',
+    type: 'boolean',
+  })
   .option('elapsed-time', {
     description: 'show elapsed time between each operation',
     alias: 'et',
