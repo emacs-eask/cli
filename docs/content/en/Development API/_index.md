@@ -21,6 +21,8 @@ Load `lisp/_prepare.el` to start using other Eask API.
       nil t)
 ```
 
+just a test
+
 Each Elisp scripts should have this snippet at the very top of the file.
 
 ## 🔍 Macro: eask-start (&rest `body`)
