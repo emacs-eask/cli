@@ -490,7 +490,7 @@ Weather to generate log files. (default: `nil`)
 Use `cat` to see the log,
 
 ```
-cat /.log/messages.log
+$ cat /.log/messages.log
 ```
 
 ## 🔍 Variable: eask-level-color
