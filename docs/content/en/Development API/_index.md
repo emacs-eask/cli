@@ -269,7 +269,7 @@ Return `t` if the `color` option is enabled.
 
 ```elisp
 (unless (eask-no-color-p)
-  (ansi-color-filter-apply "This string has no ansi code!"))
+  (message "This string has no ansi code!"))
 ```
 
 ## 🔍 Function: eask-allow-error-p ()
