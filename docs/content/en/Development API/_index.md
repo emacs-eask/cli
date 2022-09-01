@@ -467,7 +467,7 @@ Output:
 
 ## 🔍 Variable: eask-log-level
 
-Log messages with level.
+Log messages with level. (default: `nil`)
 
 ```elisp
 (setq eask-log-level t)
@@ -477,6 +477,20 @@ Output:
 
 ```
 [DEBUG] This is a DEBUG message with log level
+```
+
+## 🔍 Variable: eask-log-file
+
+Weather to generate log files. (default: `nil`)
+
+```elisp
+(setq eask-log-level t)
+```
+
+Use command `cat` to see the log,
+
+```
+$ cat /.log/messages.log
 ```
 
 ## 🔍 Variable: eask-level-color
