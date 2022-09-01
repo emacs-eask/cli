@@ -487,7 +487,7 @@ Weather to generate log files. (default: `nil`)
 (setq eask-log-level t)
 ```
 
-Use `cat` to see the log,
+Use command `cat` to see the log,
 
 ```
 $ cat /.log/messages.log
