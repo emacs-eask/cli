@@ -25,7 +25,7 @@ If you have [npm](https://www.npmjs.com/) installed on your machine, you can
 install Eask with the following one-liner:
 
 ```sh
-$ npm install -g @emacs-eask/eask
+$ npm install -g @emacs-eask/cli
 ```
 
 ### Homebrew (macOS or Linux)
