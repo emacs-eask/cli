@@ -29,10 +29,10 @@ from our [release](https://github.com/emacs-eask/eask/releases) page.
 ## Step 2: Install Eask
 
 ```sh
-$ npm install -g @emacs-eask/eask
+$ npm install -g @emacs-eask/cli
 ```
 
-To verify your new install:
+To verify your new installation:
 
 ```sh
 $ eask --version
