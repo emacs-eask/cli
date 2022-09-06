@@ -27,6 +27,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add keywords command and it's linter (#54)
 * Handle many-to-one condition for version string (0ac654face0557ff74c4a6048fc8bef59c915ec8)
 * Add new option `--log-file`, `--lf` to generate log files (#57)
+* Rename package to `@emacs-eask/cli` (#60)
 
 ## 0.6.17
 > Released Mar 5, 2022
