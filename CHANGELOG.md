@@ -5,8 +5,13 @@ All notable changes to this project will be documented in this file.
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 
-## 0.7.x (Unreleased)
+## 0.8.x (Unreleased)
 > Released N/A
+
+* N/A
+
+## 0.7.x
+> Released Sep 8, 2022
 
 * Avoid loading package info unless it's needed (#13, #14, and #19)
 * Read `-pkg.el` file prior to package-file while exists (#21)
