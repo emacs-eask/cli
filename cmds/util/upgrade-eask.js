@@ -45,7 +45,7 @@ exports.handler = async (argv) => {
     console.log('  [1] Make sure you have git installed and has the right permission');
     console.log('  [2] You install Eask with other package management tool');
     console.log('');
-    console.log('For example, if you install eask with npm:');
+    console.log('For example, if you have installed eask with npm:');
     console.log('');
     console.log('    $ npm install -g @emacs-eask/cli@latest');
     console.log('');
