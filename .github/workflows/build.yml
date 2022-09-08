@@ -10,6 +10,7 @@ on:
       - cmds/**
       - src/**
       - test/**
+      - '**.json'
   pull_request:
     branches:
       - master
