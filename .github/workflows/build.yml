@@ -55,7 +55,7 @@ jobs:
       run: npm install
 
     - name: Building...
-      run: pkg package.json -t ${{ env.NODE }}-${{ matrix.targets }}
+      run: npm run-script pkg-${{ matrix.targets }}
 
     - name: Prepare content...
       run: |
