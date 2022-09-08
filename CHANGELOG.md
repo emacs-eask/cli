@@ -11,7 +11,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * N/A
 
 ## 0.7.x
-> Released Sep 8, 2022
+> Released Sep 08, 2022
 
 * Avoid loading package info unless it's needed (#13, #14, and #19)
 * Read `-pkg.el` file prior to package-file while exists (#21)
@@ -35,7 +35,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Rename package to `@emacs-eask/cli` (#60)
 
 ## 0.6.17
-> Released Mar 5, 2022
+> Released Mar 05, 2022
 
 * Reset `command-line-args-left` variable by default (fbda232e962e3566efb94d8061a4035709b7c6e2)
 * Clean up `.git` directory after creating a new elisp project (d845fd281707f0ed47fa955139e1ebddd56b8f58)
@@ -86,7 +86,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Use built-in `pkg-file` generate function for command `eask pkg-file` (4aa327bf43b84dfed128f8898b1c0885afc1edf9)
 
 ## 0.4.x
-> Released Apr 5, 2022
+> Released Apr 05, 2022
 
 * Add Eask file keyword `exec-paths` (5334bc5e16e8d52a9e6a7f23781f2b42d333d11c)
 * Remove Eask file keyword `load-path` (a72fdacece54aa7acebfea3265bf9a0eace41778)
