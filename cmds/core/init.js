@@ -43,8 +43,8 @@ async function create_eask_file(dir) {
 
   EASK_FILE = path.join(process.cwd(), '/Eask');
 
-  if (fs.existsSync(EASK_FILE)) {
-    console.log('Eask file is already exists');
+  if (fs.existsSync(EASK_FILE) || fs.existsSync(EASK_FILE + 'file')) {
+    console.log('Eask-file is already exists');
     process.exit(0);
   }
 
