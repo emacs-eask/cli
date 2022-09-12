@@ -8,7 +8,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 0.8.x (Unreleased)
 > Released N/A
 
-* N/A
+* Handle Easkfile existence for command `eask init` (2f5edb3d9437d4ba55d2f014ca1ba1b65075eed8)
 
 ## 0.7.x
 > Released Sep 08, 2022
