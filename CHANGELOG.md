@@ -9,6 +9,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 > Released N/A
 
 * Handle Easkfile existence for command `eask init` (2f5edb3d9437d4ba55d2f014ca1ba1b65075eed8)
+* Generate log files in user directory (974a17e3b573520a775f813c72ecbd30a32012bf)
 
 ## 0.7.x
 > Released Sep 08, 2022
