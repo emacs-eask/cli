@@ -998,7 +998,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (add-hook 'kill-emacs-hook  ; Write log files
           (lambda (&rest _)
             (when eask-log-file
-              (let ((log-dir (expand-file-name eask-log-path)))
+              (let ((log-dir (expand-file-name eask-log-path eask-file-root)))
                 (make-directory log-dir t)
                 (eask--log-write-buffer "*Messages*" "messages.log")
                 (eask--log-write-buffer "*Warnings*" "warnings.log")
