@@ -5,7 +5,7 @@
 ;; Test for Emacs' functions and variables existense.
 ;;
 ;; See the test result in
-;; (https://github.com/emacs-eask/eask/actions/workflows/test-outdated_upgrade.yml).
+;; (https://github.com/emacs-eask/cli/actions/workflows/test-outdated_upgrade.yml).
 ;;
 
 ;;; Code:

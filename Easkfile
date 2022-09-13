@@ -2,7 +2,7 @@
          "0.7.1"
          "A set of command-line tools to build Emacs packages")
 
-(website-url "https://github.com/emacs-eask/eask")
+(website-url "https://github.com/emacs-eask/cli")
 (keywords "emacs" "package" "management" "cli")
 
 (files

@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/emacs-eask/eask.git"
+    "url": "https://github.com/emacs-eask/cli.git"
   },
   "keywords": [
     "emacs",

@@ -90,5 +90,5 @@ Loading package information... done ✓
 You may have `bug-reference-prog-mode` enabled. It is not yet compatible with Eask and
 should be disabled when running any of Eask’s commands.
 
-See [this issue](https://github.com/emacs-eask/eask/issues/39#issuecomment-1150770740) for
+See [this issue](https://github.com/emacs-eask/cli/issues/39#issuecomment-1150770740) for
 more information.

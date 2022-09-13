@@ -2,7 +2,7 @@
 ;;; Commentary:
 
 ;; Author:  Shen, Jen-Chieh <jcs090218@gmail.com>
-;; URL:     https://github.com/emacs-eask/eask
+;; URL:     https://github.com/emacs-eask/cli
 
 (setq package-archives
       '(("gnu"      . "http://elpa.gnu.org/packages/")

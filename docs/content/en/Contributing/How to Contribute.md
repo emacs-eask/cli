@@ -14,7 +14,7 @@ not be tolerated.
 
 ## 🪑 Open Development
 
-All work on Eask happens directly on [GitHub](https://github.com/emacs-eask/eask).
+All work on Eask happens directly on [GitHub](https://github.com/emacs-eask/cli).
 Both core team members and external contributors send pull requests which go
 through the same review process.
 
@@ -26,7 +26,7 @@ and major versions for any breaking changes. When we make breaking changes, we
 also introduce deprecation warnings in a minor version so that our users learn
 about the upcoming changes and migrate their code in advance.
 
-Every significant change is documented in the [changelog file](https://github.com/emacs-eask/eask/blob/master/CHANGELOG.md).
+Every significant change is documented in the [changelog file](https://github.com/emacs-eask/cli/blob/master/CHANGELOG.md).
 
 ## 💡 Branch Organization
 

@@ -5,10 +5,10 @@ more:
     ref: "https://emacs-eask.github.io/#-news"
     icon: gdoc_notification
   - name: Releases
-    ref: "https://github.com/emacs-eask/eask/releases"
+    ref: "https://github.com/emacs-eask/cli/releases"
     external: true
     icon: gdoc_download
   - name: "View Source"
-    ref: "https://github.com/emacs-eask/eask"
+    ref: "https://github.com/emacs-eask/cli"
     external: true
     icon: gdoc_github

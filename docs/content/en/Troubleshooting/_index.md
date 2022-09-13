@@ -35,6 +35,6 @@ If you installed Eask with **npm**, then you should probably upgrade it through
 * If the error persists, try to reinstall Eask from scratch.
 
 If Eask still does not work, please [report an
-issue](https://github.com/emacs-eask/eask/issues/new) to the issue tracker.
+issue](https://github.com/emacs-eask/cli/issues/new) to the issue tracker.
 Please include Eask output with the [--verbose 4] and [--debug] options enabled,
 to give us as much information as possible.

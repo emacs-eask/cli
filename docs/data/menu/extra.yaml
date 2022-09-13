@@ -1,6 +1,6 @@
 ---
 header:
   - name: GitHub
-    ref: https://github.com/emacs-eask/eask
+    ref: https://github.com/emacs-eask/cli
     icon: gdoc_github
     external: true
