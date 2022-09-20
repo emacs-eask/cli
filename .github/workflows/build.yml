@@ -107,4 +107,5 @@ jobs:
         repository: ${{ env.REPO_BIN }}
         github_token: ${{ secrets.PAT }}
         branch: master
+        rebase: true
         retry: 7
