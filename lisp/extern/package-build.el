@@ -4,14 +4,16 @@
 
 (require 'package-build nil t)
 
-(defun package-build--create-tar (name version directory mtime)
-  "Create a tar file containing the contents of VERSION of package NAME.
+(defun package-build--create-tar (rcp directory)
+  "Create a tar file containing the package version specified by RCP.
 DIRECTORY is a temporary directory that contains the directory
-that is put in the tarball.  MTIME is used as the modification
-time of all files, making the tarball reproducible."
-  (let ((tar (expand-file-name (concat name "-" version ".tar")
-                               package-build-archive-dir))
-        (dir (concat name "-" version)))
+that is put in the tarball."
+  (let* ((name (oref rcp name))
+         (version (oref rcp version))
+         (time (oref rcp time))
+         (tar (expand-file-name (concat name "-" version ".tar")
+                                package-build-archive-dir))
+         (dir (concat name "-" version)))
     ;; XXX: https://github.com/melpa/package-build/pull/34
     ;;
     ;; We definitely need to remove these two lines, or else it won't able to
@@ -29,7 +31,7 @@ time of all files, making the tarball reproducible."
        ;; prevent a reproducable tarball as described at
        ;; https://reproducible-builds.org/docs/archives.
        "--sort=name"
-       (format "--mtime=@%d" mtime)
+       (format "--mtime=@%d" time)
        "--owner=0" "--group=0" "--numeric-owner"
        "--pax-option=exthdr.name=%d/PaxHeaders/%f,delete=atime,delete=ctime"))
     (when (and package-build-verbose noninteractive)
