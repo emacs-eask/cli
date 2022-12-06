@@ -1044,7 +1044,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (defun eask-expand-file-specs (specs)
   "Expand file SPECS."
   (mapcar (lambda (elm) (expand-file-name (car elm) default-directory))
-          (package-build-expand-file-specs default-directory specs nil t)))
+          (package-build-expand-files-spec nil nil default-directory specs)))
 
 (defun eask-package-files ()
   "Return package files in workspace."
