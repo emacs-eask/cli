@@ -136,6 +136,11 @@ the `eask-start' execution.")
   (let ((len (if (numberp len-or-list) len-or-list (length len-or-list))))
     (if (= 1 len) form-1 form-2)))
 
+;; This is used to creating the directory recipe!
+(defun eask-current-time ()
+  "Return current time."
+  (let ((now (current-time))) (logior (lsh (car now) 16) (cadr now))))
+
 (defun eask-seq-str-max (sequence)
   "Return max length in list of strings."
   (let ((result 0))
