@@ -17,8 +17,9 @@ time of all files, making the tarball reproducible."
     ;; We definitely need to remove these two lines, or else it won't able to
     ;; build on Windows.
     ;;
-    ;; (when (eq system-type 'windows-nt)
-    ;;   (setq tar (replace-regexp-in-string "^\\([a-z]\\):" "/\\1" tar)))
+    (when (and (eq system-type 'windows-nt)
+               (not (string-prefix-p "bsdtar" eask-tar-version-string)))
+      (setq tar (replace-regexp-in-string "^\\([a-z]\\):" "/\\1" tar)))
     (let ((default-directory directory))
       (process-file
        package-build-tar-executable nil

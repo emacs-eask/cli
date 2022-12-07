@@ -22,6 +22,8 @@
 # Test command `exec`
 #
 
+set -e
+
 echo "Test command 'exec'..."
 cd $(dirname "$0")
 

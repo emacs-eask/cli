@@ -22,6 +22,8 @@
 # Test command `buttercup`
 #
 
+set -e
+
 echo "Test command 'buttercup'..."
 cd $(dirname "$0")
 

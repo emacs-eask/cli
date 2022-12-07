@@ -22,6 +22,8 @@
 # Test command `ert-runner`
 #
 
+set -e
+
 echo "Test command 'ert-runner'..."
 cd $(dirname "$0")
 

@@ -22,6 +22,8 @@
 # Test command `search`
 #
 
+set -e
+
 echo "Test command 'search'..."
 cd $(dirname "$0")
 

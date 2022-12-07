@@ -22,6 +22,8 @@
 # Test all options flag
 #
 
+set -e
+
 echo "Test all options flag"
 cd $(dirname "$0")
 

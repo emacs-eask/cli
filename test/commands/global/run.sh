@@ -25,6 +25,8 @@
 # (mini.emacs.d), and place it under to the default Emacs directory!
 #
 
+set -e
+
 echo "Copy test configuration"
 ./test/mini.emacs.d/scripts/copy_config.sh
 
