@@ -22,6 +22,8 @@
 # Test (trigger) error on GitHub Actions
 #
 
+set -e
+
 echo "Test (trigger) error on GitHub Actions"
 cd $(dirname "$0")
 

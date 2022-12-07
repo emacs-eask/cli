@@ -22,6 +22,8 @@
 # Test commands related to install, and uninstall
 #
 
+set -e
+
 echo "Test commands related to install, and uninstall"
 
 # Naviate to the test package

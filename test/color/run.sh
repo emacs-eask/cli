@@ -22,6 +22,8 @@
 # Test color
 #
 
+set -e
+
 echo "Test color"
 cd $(dirname "$0")
 

@@ -22,6 +22,8 @@
 # Test command `ert`
 #
 
+set -e
+
 echo "Test command 'ert'..."
 cd $(dirname "$0")
 

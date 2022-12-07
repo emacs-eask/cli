@@ -22,6 +22,8 @@
 # Test command `emacs`
 #
 
+set -e
+
 echo "Test command 'emacs'..."
 cd $(dirname "$0")
 

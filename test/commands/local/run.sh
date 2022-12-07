@@ -26,6 +26,8 @@
 # dependencies management tool.
 #
 
+set -e
+
 # Naviate to the test package
 cd "./test/mini.emacs.pkg/"
 

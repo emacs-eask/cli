@@ -22,6 +22,8 @@
 # Test command/checker `check-eask`
 #
 
+set -e
+
 # Naviate to the test package
 cd $(dirname "$0")
 
