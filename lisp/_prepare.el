@@ -397,6 +397,9 @@ the `eask-start' execution.")
 (defconst eask-has-colors (getenv "EASK_HASCOLORS")
   "Return non-nil if terminal support colors.")
 
+(defconst eask-homedir (getenv "EASK_HOMEDIR")  ; temporary environment from node
+  "Eask temporary storage.")
+
 ;;
 ;;; Flags
 
@@ -412,6 +415,7 @@ the `eask-start' execution.")
 
 ;;; Boolean
 (defun eask-global-p ()        (eask--flag "-g"))               ; -g, --global
+(defun eask-all-p ()           (eask--flag "-a"))               ; -a, --all
 (defun eask-quick-p ()         (eask--flag "-q"))               ; -q, --quick
 (defun eask-force-p ()         (eask--flag "-f"))               ; -f, --force
 (defun eask-dev-p ()           (eask--flag "--dev"))            ; --dev, --development
@@ -479,7 +483,7 @@ other scripts internally.  See function `eask-call'.")
 
 (defconst eask--option-switches
   (eask--form-options
-   '("-g" "-q" "-f" "--dev"
+   '("-g" "-a" "-q" "-f" "--dev"
      "--debug" "--strict"
      "--allow-error"
      "--insecure"
@@ -543,8 +547,9 @@ other scripts internally.  See function `eask-call'.")
 (defconst eask-file-keywords
   '("package" "website-url" "keywords"
     "package-file" "files"
-    "depends-on" "development"
+    "script"
     "source" "source-priority"
+    "depends-on" "development"
     "exec-paths" "load-paths")
   "List of Eask file keywords.")
 
@@ -553,7 +558,7 @@ other scripts internally.  See function `eask-call'.")
 for function `eask--alias-env'."
   (dolist (keyword eask-file-keywords)
     (let ((keyword-sym (intern keyword))
-          (api (intern (concat "eask-" keyword)))      ; existing function
+          (api (intern (concat "eask-f-" keyword)))      ; existing function
           (old (intern (concat "eask--f-" keyword))))  ; variable that holds function pointer
       (funcall func keyword-sym api old))))
 
@@ -695,6 +700,7 @@ Eask file in the workspace."
 (defvar eask-keywords         nil)
 (defvar eask-package-file     nil)
 (defvar eask-files            nil)
+(defvar eask-scripts          nil)
 (defvar eask-depends-on-emacs nil)
 (defvar eask-depends-on       nil)
 (defvar eask-depends-on-dev   nil)
@@ -711,7 +717,7 @@ Eask file in the workspace."
   "Get Eask-file Emacs version string."
   (nth 0 (cdar eask-depends-on-emacs)))
 
-(defun eask-package (name version description)
+(defun eask-f-package (name version description)
   "Set the package information."
   (if eask-package
       (eask-error "Multiple definition of `package'")
@@ -721,19 +727,19 @@ Eask file in the workspace."
       (version= version "0.1.0")
       (eask--checker-string "Description" description))))
 
-(defun eask-website-url (url)
+(defun eask-f-website-url (url)
   "Set website URL."
   (if eask-website-url
       (eask-error "Multiple definition of `website-url'")
     (setq eask-website-url url)))
 
-(defun eask-keywords (&rest keywords)
+(defun eask-f-keywords (&rest keywords)
   "Set package keywords."
   (if eask-keywords
       (eask-error "Multiple definition of `keywords'")
     (setq eask-keywords keywords)))
 
-(defun eask-package-file (file)
+(defun eask-f-package-file (file)
   "Set package file."
   (if eask-package-file
       (eask-error "Multiple definition of `package-file'")
@@ -757,11 +763,19 @@ Eask file in the workspace."
                    (if eask-package-desc "succeeded! " "failed!"))
                   (file-name-nondirectory target-file))))))
 
-(defun eask-files (&rest patterns)
+(defun eask-f-files (&rest patterns)
   "Set files patterns."
   (setq eask-files (append eask-files patterns)))
 
-(defun eask-source (name &optional location)
+(defun eask-f-script (name command &rest args)
+  "Add scripts' command."
+  (when (assoc name eask-scripts)
+    (eask-error "Run-script with the same key name is not allowed: `%s`" name))
+  (push (cons name
+              (mapconcat #'identity (append (list command) args) " "))
+        eask-scripts))
+
+(defun eask-f-source (name &optional location)
   "Add archive NAME with LOCATION."
   (when (assoc name package-archives)
     (eask-error "Multiple definition of source `%s'" name))
@@ -773,7 +787,7 @@ Eask file in the workspace."
     (setq location (s-replace "https://" "http://" location)))
   (add-to-list 'package-archives (cons name location) t))
 
-(defun eask-source-priority (archive-id &optional priority)
+(defun eask-f-source-priority (archive-id &optional priority)
   "Add PRIORITY for to ARCHIVE-ID."
   (add-to-list 'package-archive-priorities (cons archive-id priority) t))
 
@@ -796,7 +810,7 @@ Eask file in the workspace."
 
 (add-hook 'eask-file-loaded-hook #'eask--setup-dependencies)
 
-(defun eask-depends-on (pkg &rest args)
+(defun eask-f-depends-on (pkg &rest args)
   "Specify a dependency of this package."
   (cond
    ((string= pkg "emacs")
@@ -831,20 +845,20 @@ Eask file in the workspace."
         (setq eask-depends-on-recipe-p t))
       recipe))))
 
-(defun eask-development (&rest dep)
+(defun eask-f-development (&rest dep)
   "Development scope."
   (dolist (pkg dep)
     (push pkg eask-depends-on-dev)
     (delete-dups eask-depends-on-dev)
     (setq eask-depends-on (remove pkg eask-depends-on))))
 
-(defun eask-load-paths (&rest dirs)
-  "Add all DIRS to load-path."
-  (dolist (dir dirs) (add-to-list 'load-path (expand-file-name dir) t)))
-
-(defun eask-exec-paths (&rest dirs)
+(defun eask-f-exec-paths (&rest dirs)
   "Add all DIRS to exec-path."
   (dolist (dir dirs) (add-to-list 'exec-path (expand-file-name dir) t)))
+
+(defun eask-f-load-paths (&rest dirs)
+  "Add all DIRS to load-path."
+  (dolist (dir dirs) (add-to-list 'load-path (expand-file-name dir) t)))
 
 ;;
 ;;; Error Handling

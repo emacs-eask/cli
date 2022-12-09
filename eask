@@ -32,6 +32,11 @@ yargs
     alias: 'g',
     type: 'boolean',
   })
+  .option('all', {
+    description: `enable all flag`,
+    alias: 'a',
+    type: 'boolean',
+  })
 .option('quick', {
     description: `start cleanly without loading the configuration files`,
     alias: 'q',

@@ -56,6 +56,17 @@ Specify list of files that are included in this project.
 (files "*.el" "core/*.el")
 ```
 
+# 🚩 Tests
+
+## 🔍 **scripts** (`name` `command`)
+
+Add built-in scripts and their preset life cycle event as well as arbitrary
+scripts.
+
+```elisp
+(scripts "test" "echo This is a test!")
+```
+
 # 🚩 Dependencies
 
 ## 🔍 **source** (`alias`)

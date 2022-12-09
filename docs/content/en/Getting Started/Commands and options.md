@@ -258,6 +258,16 @@ Concatenate all Emacs Lisp files into one big file.
 $ eask [GLOBAL-OPTIONS] concate [FILES..]
 ```
 
+## 🔍 eask run
+
+Run the script.
+
+```sh
+$ eask [GLOBAL-OPTIONS] run [FILES..]
+```
+
+Alias: `run-script`
+
 # 🚩 Management
 
 ## 🔍 eask archives
@@ -489,6 +499,14 @@ Install package `auto-complete` for your Emacs configuration:
 
 ```sh
 $ eask -g [COMMAND]
+```
+
+## 🔍 --all, -a
+
+Enable the `all` flag.
+
+```sh
+$ eask -a [COMMAND]
 ```
 
 ## 🔍 --quick, -q
