@@ -27,7 +27,7 @@
          (offset (eask-seq-str-max keywords))
          (fmt (concat "  %-" (eask-2str offset) "s  %s")))
     (dolist (keyword keywords)
-      (eask-msg fmt keyword (cdr (assq keyword eask-scripts))))
+      (eask-msg fmt keyword (cdr (assoc keyword eask-scripts))))
     (eask-msg "")
     (eask-info "(Total of %s available scripts)" (length keywords))))
 
@@ -48,7 +48,7 @@
     (dolist (data (reverse eask-scripts))
       (eask--export-command (cdr data))))
    ((when-let ((script (eask-argv 0)))
-      (if-let* ((data (assq (intern script) eask-scripts))
+      (if-let* ((data (assoc script eask-scripts))
                 (name (car data))
                 (command (cdr data)))
           (eask--export-command command)

@@ -769,7 +769,9 @@ Eask file in the workspace."
 
 (defun eask-scripts (name command &rest args)
   "Add scripts' command."
-  (push (cons (intern name)
+  (when (assoc name eask-scripts)
+    (eask-error "Run-script with the same key name is not allowed: `%s`" name))
+  (push (cons name
               (mapconcat #'identity (append (list command) args) " "))
         eask-scripts))
 
