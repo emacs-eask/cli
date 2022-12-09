@@ -328,38 +328,49 @@ $ eask [GLOBAL-OPTIONS] refresh
 
 # 🚩 Cleaning
 
-## 🔍 eask clean
+## 🔍 eask clean workspace
 
 Delete `.eask` from the current workspace.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] clean
+$ eask [GLOBAL-OPTIONS] clean workspace
 ```
 
 ⛔️ Don't specify the option `--global, -g`, or else it will delete your entire
 `~/.emacs.d`
 
 ```elisp
-$ eask clean -g
+$ eask clean workspace -g
 ```
 
-## 🔍 eask clean-elc
+Alias: `.eask`
+
+## 🔍 eask clean elc
 
 Delete all `.elc` files. This would respect to your `Eask` file.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] clean-elc
+$ eask [GLOBAL-OPTIONS] clean elc
 ```
 
-## 🔍 eask clean-all
+## 🔍 eask clean dist
+
+Delete dist subdirectory.
+
+```sh
+$ eask [GLOBAL-OPTIONS] clean dist
+```
+
+## 🔍 eask clean all
 
 This command is combination of all other clean commands.
 
-* `clean`
-* `clean-elc`
+* `clean workspace`
+* `clean elc`
+* `clean dist`
 
 ```sh
-$ eask [GLOBAL-OPTIONS] clean-all
+$ eask [GLOBAL-OPTIONS] clean all
 ```
 
 # 🚩 Linter

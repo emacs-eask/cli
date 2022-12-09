@@ -1,10 +1,15 @@
-;;; clean/dist.el --- Do all cleaning tasks  -*- lexical-binding: t; -*-
+;;; clean/dist.el --- Delete dist subdirectory  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
-;; Command that cleans .eask directory, and all elc files.
+;; Command that delete dist subdirectory,
 ;;
-;;   $ eask clean dist
+;;   $ eask clean dist [destination]
+;;
+;;
+;;  Positional options:
+;;
+;;    [destination]      destination path/folder
 ;;
 
 ;;; Code:
