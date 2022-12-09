@@ -68,7 +68,7 @@ async function create_eask_file(dir) {
 
 (package-file "${entry_point}")
 
-(scripts "test" "echo \"Error: no test specified\" && exit 1")
+(script "test" "echo \"Error: no test specified\" && exit 1")
 
 (source "gnu")
 
