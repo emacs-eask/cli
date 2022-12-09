@@ -33,7 +33,7 @@ yargs
     type: 'boolean',
   })
 .option('quick', {
-    description: `start eask cleanly without loading the init.el`,
+    description: `start cleanly without loading the configuration files`,
     alias: 'q',
     type: 'boolean',
   })
