@@ -14,6 +14,10 @@
 (package-file "check-dsl.el")                            ; duplicate `package-file` directive
 (package-file "check-dsl.el")
 
+;; duplicate scripts
+(script "test" "echo \"Error: no test specified\" && exit 1")
+(script "test" "echo \"Error: no test specified\" && exit 1")
+
 (source "gnu")                                           ; duplicate archives
 (source "gnu")
 
