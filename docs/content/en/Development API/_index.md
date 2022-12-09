@@ -200,6 +200,26 @@ Return `t` if the `global` option is enabled.
   user-emacs-directory)    ; ./.eask/{emacs-version}/
 ```
 
+## 🔍 Function: eask-all-p ()
+
+Return `t` if the `all` option is enabled.
+
+```elisp
+(when (eask-all-p)
+  ;; Run all tests
+  ...)
+```
+
+## 🔍 Function: eask-quick-p ()
+
+Return `t` if the `quick` option is enabled.
+
+```elisp
+(unless (eask-quick-p)
+  (load user-init-file)
+  ...)
+```
+
 ## 🔍 Function: eask-force-p ()
 
 Return `t` if the `force` option is enabled.
@@ -371,6 +391,11 @@ Package descriptor from the package main file.
 
 Holds a list of files pattern in wildcard specification.
 
+## 🔍 Variable: eask-scripts
+
+Holds a list of available scripts that can be executed by user using the
+`eask run-script` command.
+
 ## 🔍 Variable: eask-depends-on-emacs
 
 Holds information about Emacs minimum version.
@@ -391,41 +416,53 @@ Holds a list of dependencies.
 
 Holds a list of dependencies that are development used.
 
-## 🔍 Function: eask-package (`name` `version` `description`)
+## 🔍 Function: eask-f-package (`name` `version` `description`)
 
 Alias of `package`.
 
-## 🔍 Function: eask-package-file (`file`)
+## 🔍 Function: eask-f-website-url (`url`)
+
+Alias of `website-url`.
+
+## 🔍 Function: eask-f-keywords (&rest `keywords`)
+
+Alias of `keywords`.
+
+## 🔍 Function: eask-f-package-file (`file`)
 
 Alias of `package-file`.
 
-## 🔍 Function: eask-files (`pkg` &rest `args`)
+## 🔍 Function: eask-f-files (`pkg` &rest `args`)
 
 Alias of `files`.
 
-## 🔍 Function: eask-depends-on (`pkg` &rest `args`)
+## 🔍 Function: eask-f-script
 
-Alias of `depends-on`.
+Alias of `script`.
 
-## 🔍 Function: eask-development (&rest `dependencies`)
-
-Alias of `development`.
-
-## 🔍 Function: eask-load-paths (&rest `dirs`)
-
-Alias of `load-paths`.
-
-## 🔍 Function: eask-exec-paths (&rest `dirs`)
-
-Alias of `exec-paths`.
-
-## 🔍 Function: eask-source
+## 🔍 Function: eask-f-source
 
 Alias of `source`.
 
-## 🔍 Function: eask-source-priority
+## 🔍 Function: eask-f-source-priority
 
 Alias of `source-priority`.
+
+## 🔍 Function: eask-f-depends-on (`pkg` &rest `args`)
+
+Alias of `depends-on`.
+
+## 🔍 Function: eask-f-development (&rest `dependencies`)
+
+Alias of `development`.
+
+## 🔍 Function: eask-f-exec-paths (&rest `dirs`)
+
+Alias of `exec-paths`.
+
+## 🔍 Function: eask-f-load-paths (&rest `dirs`)
+
+Alias of `load-paths`.
 
 # 🚩 Logging
 
