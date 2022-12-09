@@ -591,7 +591,11 @@ Eask file in the workspace."
 
 (defun eask-file-try-load (relative-path)
   "Try load eask file in RELATIVE-PATH."
-  (or (eask-file-load (concat relative-path "Easkfile") t)
+  (or (eask-file-load (concat relative-path (format "Easkfile.%s" emacs-version)) t)
+      (eask-file-load (concat relative-path (format "Eask.%s" emacs-version)) t)
+      (eask-file-load (concat relative-path (format "Easkfile.%s" emacs-major-version)) t)
+      (eask-file-load (concat relative-path (format "Eask.%s" emacs-major-version)) t)
+      (eask-file-load (concat relative-path "Easkfile") t)
       (eask-file-load (concat relative-path "Eask") t)))
 
 (defun eask--print-env-info ()
