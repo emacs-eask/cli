@@ -542,6 +542,7 @@ other scripts internally.  See function `eask-call'.")
 (defconst eask-file-keywords
   '("package" "website-url" "keywords"
     "package-file" "files"
+    "scripts"
     "depends-on" "development"
     "source" "source-priority"
     "exec-paths" "load-paths")
@@ -689,6 +690,7 @@ Eask file in the workspace."
 (defvar eask-keywords         nil)
 (defvar eask-package-file     nil)
 (defvar eask-files            nil)
+(defvar eask-scripts          nil)
 (defvar eask-depends-on-emacs nil)
 (defvar eask-depends-on       nil)
 (defvar eask-depends-on-dev   nil)
@@ -754,6 +756,11 @@ Eask file in the workspace."
 (defun eask-files (&rest patterns)
   "Set files patterns."
   (setq eask-files (append eask-files patterns)))
+
+(defun eask-scripts (name command &rest args)
+  "Add scripts' command."
+  (push (cons name (mapconcat #'identity (append (list command) args) " "))
+        eask-scripts))
 
 (defun eask-source (name &optional location)
   "Add archive NAME with LOCATION."
