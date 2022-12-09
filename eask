@@ -28,76 +28,81 @@ yargs
     'Show usage instructions'
   )
   .option('global', {
-    description: 'change default workspace to ~/.emacs.d/',
+    description: `change default workspace to ~/.emacs.d/`,
     alias: 'g',
     type: 'boolean',
   })
+.option('quick', {
+    description: `start eask cleanly without loading the init.el`,
+    alias: 'q',
+    type: 'boolean',
+  })
   .option('force', {
-    description: 'enable force flag',
+    description: `enable force flag`,
     alias: 'f',
     type: 'boolean',
   })
   .option('development', {
-    description: 'turn on development mode',
+    description: `turn on development mode`,
     alias: 'dev',
     type: 'boolean',
   })
   .option('debug', {
-    description: 'turn on debug mode',
+    description: `turn on debug mode`,
     type: 'boolean',
   })
   .option('strict', {
-    description: 'report error instead of warnings',
+    description: `report error instead of warnings`,
     type: 'boolean',
   })
   .option('allow-error', {
-    description: 'continue the executioon even there is error reported',
+    description: `continue the executioon even there is error reported`,
     type: 'boolean',
   })
   .option('insecure', {
-    description: 'allow insecure connection',
+    description: `allow insecure connection`,
     type: 'boolean',
   })
   .option('timestamps', {
-    description: 'log with timestamps',
+    description: `log with timestamps`,
     type: 'boolean',
   })
   .option('log-level', {
-    description: 'log with level',
+    description: `log with level`,
     type: 'boolean',
   })
   .option('log-file', {
-    description: 'generate log files',
+    description: `generate log files`,
     alias: 'lf',
     type: 'boolean',
   })
   .option('elapsed-time', {
-    description: 'show elapsed time between each operation',
+    description: `show elapsed time between each operation`,
     alias: 'et',
     type: 'boolean',
   })
   .option('no-color', {
-    description: 'disable color output',
+    description: `disable color output`,
     type: 'boolean',
   })
   .option('proxy', {
-    description: 'update proxy for HTTP and HTTPS to host',
+    description: `update proxy for HTTP and HTTPS to host`,
     type: 'string',
   })
   .option('http-proxy', {
-    description: 'update proxy for HTTP to host',
+    description: `update proxy for HTTP to host`,
     type: 'string',
   })
   .option('https-proxy', {
-    description: 'update proxy for HTTPS to host',
+    description: `update proxy for HTTPS to host`,
     type: 'string',
   })
   .option('no-proxy', {
-    description: 'set no-proxy to host',
+    description: `set no-proxy to host`,
     type: 'string',
   })
   .option('verbose', {
-    description: 'set verbosity from 0 to 4',
+    description: `set verbosity from 0 to 4`,
     alias: 'v',
     requiresArg: true,
     type: 'number',
