@@ -19,7 +19,7 @@
 
 "use strict";
 
-exports.command = ['compile [names..]', 'build [names..]'];
+exports.command = ['compile [names..]'];
 exports.desc = 'byte compile all Emacs Lisp files in the package';
 exports.builder = {
   names: {
