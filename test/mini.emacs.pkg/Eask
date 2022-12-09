@@ -9,8 +9,8 @@
 
 (files "*.el" "files/*.el")
 
-(scripts "test" "echo \"Have a nice day!~ ;)\"")
-(scripts "info" "eask info")
+(script "test" "echo \"Have a nice day!~ ;)\"")
+(script "info" "eask info")
 
 (source "gnu")
 (source "melpa")
