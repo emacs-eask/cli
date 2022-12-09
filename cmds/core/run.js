@@ -20,7 +20,7 @@
 "use strict";
 
 const fs = require('fs');
-const execSync = require("child_process").execSync;
+const child_process = require("child_process");
 
 exports.command = ['run [names..]', 'run-script [names..]'];
 exports.desc = 'run the script named [names..]';
@@ -48,9 +48,35 @@ exports.handler = async (argv) => {
   let instruction = fs.readFileSync(run, 'utf8');
   let commands = instruction.split('\n').filter(element => element);
 
-  for (const command of commands) {
-    console.log('');
-    console.log('[RUN]: ' + command);
-    execSync(command);
-  }
+  let count = 0;
+  startCommand(commands, count);
 };
+
+/**
+ * Recursive to execute commands in order.
+ *
+ * @param { array } commands - An array of commands to execute.
+ * @param { integer } count - The current executing command's index.
+ */
+function startCommand(commands, count) {
+  if (commands.length <= count)
+    return;
+
+  let command = commands[count];
+
+  console.log('');
+  console.log('[RUN]: ' + command);
+  let splitted = command.split(' ');
+
+  let program = splitted[0];
+  let rest = splitted.slice(1);
+  let proc = child_process.spawn(program, rest, { stdio: 'inherit', shell: true });
+
+  proc.on('close', function (code) {
+    if (code == 0) {
+      startCommand(commands, ++count);  // start next command!
+      return;
+    }
+    throw 'Exit with code: ' + code;
+  });
+}

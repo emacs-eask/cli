@@ -4,12 +4,12 @@
 ;;
 ;; Command use to run scripts,
 ;;
-;;   $ eask run <foo>
+;;   $ eask run [names..]
 ;;
 ;;
 ;;  Initialization options:
 ;;
-;;    <foo>     run the script named <foo>
+;;    [names..]     run the script named <foo>
 ;;
 
 ;;; Code:
@@ -47,14 +47,15 @@
    ((eask-all-p)  ; Run all scripts
     (dolist (data (reverse eask-scripts))
       (eask--export-command (cdr data))))
-   ((when-let ((script (eask-argv 0)))
-      (if-let* ((data (assoc script eask-scripts))
-                (name (car data))
-                (command (cdr data)))
-          (eask--export-command command)
-        (eask-info "✗ (Missing script: \"%s\")" script)
-        (eask-msg "")
-        (eask--print-scripts))))
+   ((when-let ((scripts (eask-args)))
+      (dolist (script scripts)
+        (if-let* ((data (assoc script eask-scripts))
+                  (name (car data))
+                  (command (cdr data)))
+            (eask--export-command command)
+          (eask-info "✗ (Missing script: \"%s\")" script)
+          (eask-msg "")
+          (eask--print-scripts)))))
    (t (eask--print-scripts))))
 
 ;;; run.el ends here
