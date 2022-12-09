@@ -1,4 +1,4 @@
-;;; exec-path.el --- Print the PATH (exec-path) from workspace  -*- lexical-binding: t; -*-
+;;; core/exec-path.el --- Print the PATH (exec-path) from workspace  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -23,4 +23,4 @@
   (mapc #'eask--print-exec-path exec-path)
   (eask-info "(Total of %s exec-path)" (length exec-path)))
 
-;;; exec-path.el ends here
+;;; core/exec-path.el ends here

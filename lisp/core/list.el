@@ -1,4 +1,4 @@
-;;; list.el --- List all installed packages  -*- lexical-binding: t; -*-
+;;; core/list.el --- List all installed packages  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -84,4 +84,4 @@
              (length package-activated-list)
              (eask--sinr package-activated-list "" "s")))
 
-;;; list.el ends here
+;;; core/list.el ends here

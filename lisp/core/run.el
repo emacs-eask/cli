@@ -1,4 +1,4 @@
-;;; run.el --- Run the script  -*- lexical-binding: t; -*-
+;;; core/run.el --- Run the script  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -70,4 +70,4 @@
         t)))
    (t (eask--print-scripts))))
 
-;;; run.el ends here
+;;; core/run.el ends here

@@ -1,4 +1,4 @@
-;;; ert.el --- Run ert tests  -*- lexical-binding: t; -*-
+;;; test/ert.el --- Run ert tests  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -49,4 +49,4 @@
     (eask-info "(No tests found.)")
     (eask-help "test/ert")))
 
-;;; ert.el ends here
+;;; test/ert.el ends here

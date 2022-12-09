@@ -1,4 +1,4 @@
-;;; package.el --- Lint the package using `package-lint'  -*- lexical-binding: t; -*-
+;;; lint/package.el --- Lint the package using `package-lint'  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -54,4 +54,4 @@
         (eask--print-no-matching-files)
       (eask-help "lint/package"))))
 
-;;; package.el ends here
+;;; lint/package.el ends here

@@ -1,4 +1,4 @@
-;;; declare.el --- Run check-declare  -*- lexical-binding: t; -*-
+;;; lint/declare.el --- Run check-declare  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -46,4 +46,4 @@
         (eask--print-no-matching-files)
       (eask-help "lint/declare"))))
 
-;;; declare.el ends here
+;;; lint/declare.el ends here

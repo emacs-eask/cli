@@ -1,4 +1,4 @@
-;;; elsa.el --- Run elsa  -*- lexical-binding: t; -*-
+;;; lint/elsa.el --- Run elsa  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -53,4 +53,4 @@
         (eask--print-no-matching-files)
       (eask-help 'elsa))))
 
-;;; elsa.el ends here
+;;; lint/elsa.el ends here

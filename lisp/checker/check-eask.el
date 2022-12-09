@@ -1,4 +1,4 @@
-;;; check-eask.el --- Run eask checker  -*- lexical-binding: t; -*-
+;;; checker/check-eask.el --- Run eask checker  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -44,4 +44,4 @@
       (mapc #'eask-msg (reverse eask--checker-log))
     (eask-msg "(No issues found)")))
 
-;;; check-eask.el ends here
+;;; checker/check-eask.el ends here

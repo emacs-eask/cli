@@ -1,4 +1,4 @@
-;;; load-path.el --- Print the load-path from workspace  -*- lexical-binding: t; -*-
+;;; core/load-path.el --- Print the load-path from workspace  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -23,4 +23,4 @@
   (mapc #'eask--print-load-path load-path)
   (eask-info "(Total of %s load-path)" (length load-path)))
 
-;;; load-path.el ends here
+;;; core/load-path.el ends here

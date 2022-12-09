@@ -1,4 +1,4 @@
-;;; uninstall.el --- Uninstall packages  -*- lexical-binding: t; -*-
+;;; core/uninstall.el --- Uninstall packages  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -43,4 +43,4 @@
       (eask-info "✗ (No packages have been unintalled)")
       (eask-help 'uninstall))))
 
-;;; uninstall.el ends here
+;;; core/uninstall.el ends here

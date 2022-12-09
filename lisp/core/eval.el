@@ -1,4 +1,4 @@
-;;; eval.el --- Evaluate lisp form with a proper PATH  -*- lexical-binding: t; -*-
+;;; core/eval.el --- Evaluate lisp form with a proper PATH  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -19,4 +19,4 @@
   (let ((form (eask-argv 0)))
     (with-temp-buffer (insert form) (eval-buffer))))
 
-;;; eval.el ends here
+;;; core/eval.el ends here

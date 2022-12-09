@@ -1,4 +1,4 @@
-;;; autoloads.el --- Generate autoload file  -*- lexical-binding: t; -*-
+;;; core/autoloads.el --- Generate autoload file  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -20,4 +20,4 @@
     (package-generate-autoloads name default-directory)
     (eask-info "Write file %s..." autoloads-file)))
 
-;;; autoloads.el ends here
+;;; core/autoloads.el ends here

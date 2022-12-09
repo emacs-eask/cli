@@ -19,9 +19,9 @@
 
 "use strict";
 
-exports.command = ['workspace', '.eask'];
-exports.desc = 'clean up .eask directory';
+exports.command = ['dist', 'distribution'];
+exports.desc = 'delete dist subdirectory';
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'clean/workspace');
+  await UTIL.e_call(argv, 'clean/dist');
 };

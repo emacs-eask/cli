@@ -1,4 +1,4 @@
-;;; outdated.el --- Show all outdated dependencies  -*- lexical-binding: t; -*-
+;;; core/outdated.el --- Show all outdated dependencies  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -31,4 +31,4 @@
                    (eask--sinr pkg-list "is" "are")))
     (eask-info "(No outdated dependencies)")))
 
-;;; outdated.el ends here
+;;; core/outdated.el ends here

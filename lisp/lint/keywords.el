@@ -1,4 +1,4 @@
-;;; keywords.el --- Lint the package's keywords header  -*- lexical-binding: t; -*-
+;;; lint/keywords.el --- Lint the package's keywords header  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -43,4 +43,4 @@
         (eask-report "Missing a standard keyword, consider adding one to the Keywords header!")
         (eask-help "lint/keywords"))))))
 
-;;; keywords.el ends here
+;;; lint/keywords.el ends here

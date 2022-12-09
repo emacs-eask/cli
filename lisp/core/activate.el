@@ -1,4 +1,4 @@
-;;; activate.el --- activate package  -*- lexical-binding: t; -*-
+;;; core/activate.el --- activate package  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -23,4 +23,4 @@
       "succeeded ✓"))
   (eask-call "core/load"))
 
-;;; activate.el ends here
+;;; core/activate.el ends here

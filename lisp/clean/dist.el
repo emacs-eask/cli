@@ -1,10 +1,10 @@
-;;; core/refresh.el --- Download package archives  -*- lexical-binding: t; -*-
+;;; clean/dist.el --- Do all cleaning tasks  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
-;; Command use to download package archives
+;; Command that cleans .eask directory, and all elc files.
 ;;
-;;   $ eask refresh
+;;   $ eask clean dist
 ;;
 
 ;;; Code:
@@ -15,6 +15,6 @@
       nil t)
 
 (eask-start
-  (eask-pkg-init))
+  )
 
-;;; core/refresh.el ends here
+;;; clean/dist.el ends here

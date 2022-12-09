@@ -1,4 +1,4 @@
-;;; create.el --- create a new elisp project  -*- lexical-binding: t; -*-
+;;; core/create.el --- create a new elisp project  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -71,4 +71,4 @@
   (eask-msg "")
   (eask-msg "Visit https://emacs-eask.github.io/ for quickstart guide and full documentation."))
 
-;;; create.el ends here
+;;; core/create.el ends here

@@ -1,4 +1,4 @@
-;;; install.el --- Install packages  -*- lexical-binding: t; -*-
+;;; core/install.el --- Install packages  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -56,4 +56,4 @@
         (eask-info "✗ (No files have been intalled)")
         (eask-help 'install)))))
 
-;;; install.el ends here
+;;; core/install.el ends here

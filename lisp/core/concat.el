@@ -1,4 +1,4 @@
-;;; concat.el --- Byte compile all Emacs Lisp files in the package  -*- lexical-binding: t; -*-
+;;; core/concat.el --- Byte compile all Emacs Lisp files in the package  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -43,4 +43,4 @@
         (write-region (buffer-string) nil target-filename)
         (eask-info "Done. (Wrote file in %s)" target-filename)))))
 
-;;; concat.el ends here
+;;; core/concat.el ends here

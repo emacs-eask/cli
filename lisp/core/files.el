@@ -1,4 +1,4 @@
-;;; files.el --- Print the list of all package files  -*- lexical-binding: t; -*-
+;;; core/files.el --- Print the list of all package files  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -23,4 +23,4 @@
     (mapc #'eask--print-filename files)
     (eask-info "(Total of %s item%s listed)" (length files) (eask--sinr files "" "s"))))
 
-;;; files.el ends here
+;;; core/files.el ends here

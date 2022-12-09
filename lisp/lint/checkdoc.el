@@ -1,4 +1,4 @@
-;;; checkdoc.el --- Run checkdoc  -*- lexical-binding: t; -*-
+;;; lint/checkdoc.el --- Run checkdoc  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -57,4 +57,4 @@
         (eask--print-no-matching-files)
       (eask-help "lint/checkdoc"))))
 
-;;; checkdoc.el ends here
+;;; lint/checkdoc.el ends here

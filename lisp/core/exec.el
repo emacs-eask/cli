@@ -1,4 +1,4 @@
-;;; exec.el --- Execute command with correct load-path set up  -*- lexical-binding: t; -*-
+;;; core/exec.el --- Execute command with correct load-path set up  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -46,4 +46,4 @@
     (eask-info "✗ (No exeuction output)")
     (eask-help 'exec)))
 
-;;; exec.el ends here
+;;; core/exec.el ends here

@@ -1,4 +1,4 @@
-;;; package.el --- Build a package artifact  -*- lexical-binding: t; -*-
+;;; core/package.el --- Build a package artifact  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -85,4 +85,4 @@
 
     (eask-info "(Built in %s)" packaged)))
 
-;;; package.el ends here
+;;; core/package.el ends here

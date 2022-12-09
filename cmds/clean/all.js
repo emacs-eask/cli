@@ -19,7 +19,7 @@
 
 "use strict";
 
-exports.command = ['all'];
+exports.command = ['all', 'everything'];
 exports.desc = 'do all cleaning tasks';
 
 exports.handler = async (argv) => {

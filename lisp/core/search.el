@@ -1,4 +1,4 @@
-;;; search.el --- Search packages  -*- lexical-binding: t; -*-
+;;; core/search.el --- Search packages  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -42,4 +42,4 @@
     (eask-info "(No search operation; missing queries specification)")
     (eask-help 'search)))
 
-;;; search.el ends here
+;;; core/search.el ends here

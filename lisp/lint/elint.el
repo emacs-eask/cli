@@ -1,4 +1,4 @@
-;;; elint.el --- Run elint  -*- lexical-binding: t; -*-
+;;; lint/elint.el --- Run elint  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -44,4 +44,4 @@
         (eask--print-no-matching-files)
       (eask-help 'elint))))
 
-;;; elint.el ends here
+;;; lint/elint.el ends here

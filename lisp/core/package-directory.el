@@ -1,4 +1,4 @@
-;;; package-directory.el --- Print path to package directory  -*- lexical-binding: t; -*-
+;;; core/package-directory.el --- Print path to package directory  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -17,4 +17,4 @@
 (eask-start
   (message "%s" package-user-dir))
 
-;;; package-directory.el ends here
+;;; core/package-directory.el ends here

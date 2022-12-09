@@ -1,4 +1,4 @@
-;;; compile.el --- Byte compile all Emacs Lisp files in the package  -*- lexical-binding: t; -*-
+;;; core/compile.el --- Byte compile all Emacs Lisp files in the package  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -68,4 +68,4 @@
     (eask-info "(No files have been compiled)")
     (eask-help 'compile)))
 
-;;; compile.el ends here
+;;; core/compile.el ends here
