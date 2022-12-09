@@ -79,7 +79,7 @@ Load another eask script.
 Call another eask script.
 
 ```elisp
-(eask-call "core/clean-elc")  ; call command `eask clean-elc`
+(eask-call "clean/elc")  ; call command `eask clean-elc`
 ```
 
 {{< hint info >}}
