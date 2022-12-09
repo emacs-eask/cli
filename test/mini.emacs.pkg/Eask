@@ -9,7 +9,7 @@
 
 (files "*.el" "files/*.el")
 
-(scripts "test" "echo \"Error: no test specified\" && exit 1")
+(scripts "test" "echo \"Have a nice day!~ ;)\"")
 (scripts "info" "eask info")
 
 (source "gnu")
