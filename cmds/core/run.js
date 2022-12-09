@@ -20,7 +20,7 @@
 "use strict";
 
 const fs = require('fs');
-const child_process = require("child_process");
+const execSync = require("child_process").execSync;
 
 exports.command = ['run [names..]', 'run-script [names..]'];
 exports.desc = 'run the script named [names..]';
@@ -49,16 +49,8 @@ exports.handler = async (argv) => {
   let commands = instruction.split('\n').filter(element => element);
 
   for (const command of commands) {
-    console.log('Execute: ' + command);
-    const splitted = command.split(' ');
-
-    let program = splitted[0];
-    let rest = splitted.slice(1);
-    let proc = child_process.spawn(program, rest, { stdio: 'inherit', shell: true });
-
-    proc.on('close', function (code) {
-      if (code == 0) return;
-      throw 'Exit with code: ' + code;
-    });
+    console.log('');
+    console.log('[RUN]: ' + command);
+    execSync(command);
   }
 };
