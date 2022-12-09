@@ -23,7 +23,7 @@
   "Print all available scripts."
   (eask-msg "available via `eask run-script`")
   (eask-msg "")
-  (let* ((keywords (mapcar #'car eask-scripts))
+  (let* ((keywords (mapcar #'car (reverse eask-scripts)))
          (offset (eask-seq-str-max keywords))
          (fmt (concat "  %-" (eask-2str offset) "s  %s")))
     (dolist (keyword keywords)
