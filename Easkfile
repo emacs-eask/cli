@@ -5,6 +5,8 @@
 (website-url "https://github.com/emacs-eask/cli")
 (keywords "emacs" "package" "management" "cli")
 
+(script "test" "echo \"Error: no test specified\" && exit 1")
+
 (files
  "eask"
  "bin"

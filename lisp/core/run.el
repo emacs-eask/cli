@@ -29,7 +29,8 @@
     (dolist (keyword keywords)
       (eask-msg fmt keyword (cdr (assoc keyword eask-scripts))))
     (eask-msg "")
-    (eask-info "(Total of %s available scripts)" (length keywords))))
+    (eask-info "(Total of %s available script%s)" (length keywords)
+               (eask--sinr keywords "" "s"))))
 
 (defun eask--export-command (command)
   "Export COMMAND instruction."
