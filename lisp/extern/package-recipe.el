@@ -1,4 +1,4 @@
-;;; package-recipe.el --- External module `package-recipe'  -*- lexical-binding: t; -*-
+;;; extern/package-recipe.el --- External module `package-recipe'  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -17,4 +17,4 @@
 (cl-defmethod package-build--get-commit-time ((_rcp package-directory-recipe) _rev)
   (let ((now (current-time))) (logior (lsh (car now) 16) (cadr now))))
 
-;;; package-recipe.el ends here
+;;; extern/package-recipe.el ends here

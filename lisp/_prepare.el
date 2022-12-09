@@ -1277,6 +1277,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 ;;
 ;;; Externals
 
+(eask-load "extern/compat")
 (eask-load "extern/ansi")
 (with-eval-after-load 'ansi (eask-load "extern/ansi"))  ; override
 (eask-load "extern/package")

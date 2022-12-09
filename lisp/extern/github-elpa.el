@@ -1,4 +1,4 @@
-;;; github-elpa.el --- External module `github-elpa'  -*- lexical-binding: t; -*-
+;;; extern/github-elpa.el --- External module `github-elpa'  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -30,4 +30,4 @@
       (package-build-archive recipe))
     (package-build-cleanup)))
 
-;;; github-elpa.el ends here
+;;; extern/github-elpa.el ends here
