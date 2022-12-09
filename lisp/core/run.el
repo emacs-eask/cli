@@ -35,8 +35,15 @@
   "Export COMMAND instruction."
   (let ((run (expand-file-name "run" eask-homedir)))
     (ignore-errors (make-directory eask-homedir t))  ; generate dir ~/.eask/
-    (write-region (concat command "\n") nil run t)
-    t))
+    (write-region (concat command "\n") nil run t)))
+
+(defun eask--unmatched-scripts (scripts)
+  "Return a list of scripts that cannot be found in `eask-scripts'."
+  (let (unmatched)
+    (dolist (script scripts)
+      (unless (assoc script eask-scripts)
+        (push script unmatched)))
+    unmatched))
 
 (eask-start
   (ignore-errors (delete-directory eask-homedir t))  ; clean up
@@ -48,14 +55,19 @@
     (dolist (data (reverse eask-scripts))
       (eask--export-command (cdr data))))
    ((when-let ((scripts (eask-args)))
-      (dolist (script scripts)
-        (if-let* ((data (assoc script eask-scripts))
-                  (name (car data))
-                  (command (cdr data)))
-            (eask--export-command command)
-          (eask-info "✗ (Missing script: \"%s\")" script)
-          (eask-msg "")
-          (eask--print-scripts)))))
+      (if-let ((unmatched (eask--unmatched-scripts scripts)))
+          (progn  ; if there are unmatched scripts, don't even try to execute
+            (eask-info "✗ (Missing script%s: `%s`)"
+                       (eask--sinr unmatched "" "s")
+                       (mapconcat #'identity unmatched ", "))
+            (eask-msg "")
+            (eask--print-scripts))
+        (dolist (script scripts)
+          (let* ((data (assoc script eask-scripts))
+                 (name (car data))
+                 (command (cdr data)))
+            (eask--export-command command)))
+        t)))
    (t (eask--print-scripts))))
 
 ;;; run.el ends here
