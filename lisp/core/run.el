@@ -19,7 +19,42 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
+(defun eask--print-scripts ()
+  "Print all available scripts."
+  (eask-msg "available via `eask run-script`")
+  (eask-msg "")
+  (let* ((keywords (mapcar #'car eask-scripts))
+         (offset (eask-seq-str-max keywords))
+         (fmt (concat "  %-" (eask-2str offset) "s  %s")))
+    (dolist (keyword keywords)
+      (eask-msg fmt keyword (cdr (assq keyword eask-scripts))))
+    (eask-msg "")
+    (eask-info "(Total of %s available scripts)" (length keywords))))
+
+(defun eask--export-command (command)
+  "Export COMMAND instruction."
+  (let ((run (expand-file-name "run" eask-homedir)))
+    (ignore-errors (make-directory eask-homedir t))  ; generate dir ~/.eask/
+    (write-region (concat command "\n") nil run t)
+    t))
+
 (eask-start
-  )
+  (ignore-errors (delete-directory eask-homedir t))  ; clean up
+  (cond
+   ((null eask-scripts)
+    (eask-info "✗ (No scripts specified)")
+    (eask-help 'run))
+   ((eask-all-p)  ; Run all scripts
+    (dolist (data (reverse eask-scripts))
+      (eask--export-command (cdr data))))
+   ((when-let ((script (eask-argv 0)))
+      (if-let* ((data (assq (intern script) eask-scripts))
+                (name (car data))
+                (command (cdr data)))
+          (eask--export-command command)
+        (eask-info "✗ (Missing script: \"%s\")" script)
+        (eask-msg "")
+        (eask--print-scripts))))
+   (t (eask--print-scripts))))
 
 ;;; run.el ends here

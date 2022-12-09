@@ -32,6 +32,11 @@ yargs
     alias: 'g',
     type: 'boolean',
   })
+  .option('all', {
+    description: `enable all flag`,
+    alias: 'a',
+    type: 'boolean',
+  })
   .option('force', {
     description: 'enable force flag',
     alias: 'f',

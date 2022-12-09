@@ -76,6 +76,7 @@ function _global_options(argv) {
   let flags = [];
   /* Boolean type */
   flags.push(def_flag(argv.global, '-g'));
+  flags.push(def_flag(argv.all, '-a'));
   flags.push(def_flag(argv.force, '-f'));
   flags.push(def_flag(argv.development, '--dev'));
   flags.push(def_flag(argv.debug, '--debug'));

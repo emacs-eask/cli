@@ -397,6 +397,9 @@ the `eask-start' execution.")
 (defconst eask-has-colors (getenv "EASK_HASCOLORS")
   "Return non-nil if terminal support colors.")
 
+(defconst eask-homedir (getenv "EASK_HOMEDIR")  ; temporary environment from node
+  "Eask temporary storage.")
+
 ;;
 ;;; Flags
 
@@ -412,6 +415,7 @@ the `eask-start' execution.")
 
 ;;; Boolean
 (defun eask-global-p ()        (eask--flag "-g"))               ; -g, --global
+(defun eask-all-p ()           (eask--flag "-a"))               ; -a, --all
 (defun eask-force-p ()         (eask--flag "-f"))               ; -f, --force
 (defun eask-dev-p ()           (eask--flag "--dev"))            ; --dev, --development
 (defun eask-debug-p ()         (eask--flag "--debug"))          ; --debug
@@ -478,7 +482,7 @@ other scripts internally.  See function `eask-call'.")
 
 (defconst eask--option-switches
   (eask--form-options
-   '("-g" "-f" "--dev"
+   '("-g" "-a" "-f" "--dev"
      "--debug" "--strict"
      "--allow-error"
      "--insecure"
@@ -759,7 +763,8 @@ Eask file in the workspace."
 
 (defun eask-scripts (name command &rest args)
   "Add scripts' command."
-  (push (cons name (mapconcat #'identity (append (list command) args) " "))
+  (push (cons (intern name)
+              (mapconcat #'identity (append (list command) args) " "))
         eask-scripts))
 
 (defun eask-source (name &optional location)
