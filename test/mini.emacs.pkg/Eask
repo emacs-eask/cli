@@ -9,6 +9,9 @@
 
 (files "*.el" "files/*.el")
 
+(script "test" "echo \"Have a nice day!~ ;)\"")
+(script "info" "eask info")
+
 (source "gnu")
 (source "melpa")
 (source "jcs-elpa")

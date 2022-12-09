@@ -22,39 +22,61 @@
 const fs = require('fs');
 const child_process = require("child_process");
 
-exports.command = ['exec [args..]'];
-exports.desc = 'execute command with correct environment PATH set up';
-exports.builder = async (yargs) => {
-  yargs.help(false);
-  yargs.version(false);
-  yargs.getOptions().narg = [];
-  //console.log(yargs.getOptions());
+exports.command = ['run [names..]', 'run-script [names..]'];
+exports.desc = 'run the script named [names..]';
+exports.builder = {
+  names: {
+    description: 'specify scripts to run',
+    requiresArg: false,
+    type: 'array',
+  },
 };
 
 exports.handler = async (argv) => {
   // setup environment, so Emacs can receive it
   process.env.EASK_HOMEDIR = global.EASK_HOMEDIR;
 
-  let cmd = process.argv.slice(3);
-
-  await UTIL.e_call(argv, 'core/exec', '--', cmd);
+  await UTIL.e_call(argv, 'core/run', argv.names);
 
   if (!fs.existsSync(global.EASK_HOMEDIR)) {
     return;
   }
 
-  let epf = global.EASK_HOMEDIR + 'exec-path';
-  let lpf = global.EASK_HOMEDIR + 'load-path';
+  let run = global.EASK_HOMEDIR + 'run';
 
-  process.env.PATH = fs.readFileSync(epf, 'utf8');
-  process.env.EMACSLOADPATH = fs.readFileSync(lpf, 'utf8');;
+  // this contain the full command!
+  let instruction = fs.readFileSync(run, 'utf8');
+  let commands = instruction.split('\n').filter(element => element);
 
-  let program = cmd[0];
-  let rest = cmd.slice(1);
+  let count = 0;
+  startCommand(commands, count);
+};
+
+/**
+ * Recursive to execute commands in order.
+ *
+ * @param { array } commands - An array of commands to execute.
+ * @param { integer } count - The current executing command's index.
+ */
+function startCommand(commands, count) {
+  if (commands.length <= count)
+    return;
+
+  let command = commands[count];
+
+  console.log('');
+  console.log('[RUN]: ' + command);
+  let splitted = command.split(' ');
+
+  let program = splitted[0];
+  let rest = splitted.slice(1);
   let proc = child_process.spawn(program, rest, { stdio: 'inherit', shell: true });
 
   proc.on('close', function (code) {
-    if (code == 0) return;
+    if (code == 0) {
+      startCommand(commands, ++count);  // start next command!
+      return;
+    }
     throw 'Exit with code: ' + code;
   });
-};
+}

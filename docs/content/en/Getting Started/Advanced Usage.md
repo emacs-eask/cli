@@ -15,9 +15,8 @@ You can do:
 `eask` provides some hooks which enable you to execute code before and after
 each command. The hooks look like so:
 
-```elisp
-eask-{`before`/`after`}-{`command_name`}-hook
-```
+* `eask-before-COMMAND-hook`
+* `eask-after-COMMAND-hook`
 
 For example, to consider warnings as errors when byte-compiling with the command
 `eask compile`:

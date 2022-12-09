@@ -68,6 +68,8 @@ async function create_eask_file(dir) {
 
 (package-file "${entry_point}")
 
+(script "test" "echo \\\"Error: no test specified\\\" && exit 1")
+
 (source "gnu")
 
 (depends-on "emacs" "${emacs_version}")

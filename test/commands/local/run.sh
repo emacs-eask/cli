@@ -46,6 +46,9 @@ eask compile
 eask activate
 eask recipe
 eask keywords
+eask run
+eask run test
+eask run -all
 
 # Linter
 eask lint package
