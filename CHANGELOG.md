@@ -12,6 +12,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Generate log files in user directory (974a17e3b573520a775f813c72ecbd30a32012bf)
 * Make sure there is no eval error in the root layer (fbd8eb4b91dfbb614b2b59a1a2a7fea9f594313d)
 * Recognize `bsdtar` for windows (#64)
+* Pick Eask-file by Emacs version, allow multiple Eask-files (#68)
 * Add `-q`/`--quick` option for quickstart (#67)
 
 ## 0.7.x
