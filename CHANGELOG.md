@@ -14,6 +14,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Recognize `bsdtar` for windows (#64)
 * Pick Eask-file by Emacs version, allow multiple Eask-files (#68)
 * Add `-q`/`--quick` option for quickstart (#67)
+* Remove alias for `build` subcommand (#70)
 
 ## 0.7.x
 > Released Sep 08, 2022
