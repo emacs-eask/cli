@@ -10,6 +10,7 @@
 (files "*.el" "files/*.el")
 
 (scripts "test" "echo \"Error: no test specified\" && exit 1")
+(scripts "info" "eask info")
 
 (source "gnu")
 (source "melpa")
