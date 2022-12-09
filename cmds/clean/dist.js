@@ -19,9 +19,17 @@
 
 "use strict";
 
-exports.command = ['dist', 'distribution'];
+exports.command = ['dist [destination]', 'distribution [destination]'];
 exports.desc = 'delete dist subdirectory';
+exports.builder = {
+  destination: {
+    description: 'destination path/folder',
+    requiresArg: false,
+    alias: 'dest',
+    type: 'string',
+  },
+};
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'clean/dist');
+  await UTIL.e_call(argv, 'clean/dist', argv.dest);
 };

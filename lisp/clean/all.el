@@ -16,6 +16,7 @@
 
 (eask-start
   (eask-call "clean/workspace")
-  (eask-call "clean/elc"))
+  (eask-call "clean/elc")
+  (eask-call "clean/dist"))
 
 ;;; clean/all.el ends here

@@ -14,18 +14,10 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
-(defun eask--delete-file (filename)
-  "Delete FILENAME from disk."
-  (eask-with-progress
-    (format "Deleting %s... " filename)
-    (eask-with-verbosity 'log
-      (ignore-errors (delete-file filename)))
-    "done ✓"))
-
 (eask-start
   (if-let ((files (eask-package-elc-files)))
       (progn
-        (mapc #'eask--delete-file files)
+        (mapc #'eask-delete-file files)
         (eask-info "✓ (Total of %s .elc file%s deleted)" (length files)
                    (eask--sinr files "" "s")))
     (eask-info "(No .elc file found in workspace)")))
