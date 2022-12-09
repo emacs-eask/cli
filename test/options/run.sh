@@ -28,9 +28,11 @@ echo "Test all options flag"
 cd $(dirname "$0")
 
 # Please have these flags in order, see `eask` file in the project root!
-eask info --g
+eask info -g
 eask info --global
-eask info --f
+eask info -q
+eask info --qucik
+eask info -f
 eask info --force
 eask info --dev
 eask info --development
@@ -47,4 +49,5 @@ eask info --proxy localhost:8080
 eask info --http-proxy localhost:8080
 eask info --https-proxy localhost:8080
 eask info --no-proxy localhost:8080
+eask info -v 4
 eask info --verbose 4

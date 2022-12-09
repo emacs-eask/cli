@@ -491,14 +491,12 @@ Install package `auto-complete` for your Emacs configuration:
 $ eask -g [COMMAND]
 ```
 
-## 🔍 --development, --dev
+## 🔍 --quick, -q
 
-Notify command with development scope enabled.
-
-If we attempt to install development dependencies:
+Start cleanly without loading the configuration files.
 
 ```sh
-$ eask --dev [COMMAND]
+$ eask -q [COMMAND]
 ```
 
 ## 🔍 --force, -f
@@ -509,6 +507,16 @@ Force to uninstall the package `dash` even it's a dependency from another packag
 
 ```sh
 $ eask -f [COMMAND]
+```
+
+## 🔍 --development, --dev
+
+Notify command with development scope enabled.
+
+If we attempt to install development dependencies:
+
+```sh
+$ eask --dev [COMMAND]
 ```
 
 ## 🔍 --debug
