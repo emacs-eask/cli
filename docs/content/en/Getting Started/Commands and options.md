@@ -361,6 +361,8 @@ Delete dist subdirectory.
 $ eask [GLOBAL-OPTIONS] clean dist
 ```
 
+Alias: `distribution`
+
 ## 🔍 eask clean all
 
 This command is combination of all other clean commands.
@@ -372,6 +374,8 @@ This command is combination of all other clean commands.
 ```sh
 $ eask [GLOBAL-OPTIONS] clean all
 ```
+
+Alias: `everything`
 
 # 🚩 Linter
 
