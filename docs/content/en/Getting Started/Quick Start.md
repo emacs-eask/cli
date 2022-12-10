@@ -86,6 +86,8 @@ About to write to /path/to/project/Eask:
 
 (package-file "your-project.el")
 
+(script "test" "echo \"Error: no test specified\" && exit 1")
+
 (source "gnu")
 
 (depends-on "emacs" "26.1")
