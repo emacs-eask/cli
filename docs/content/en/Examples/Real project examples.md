@@ -14,11 +14,12 @@ These are some projects and configurations using Eask:
 ## Packages
 
 * [auto-highlight-symbol](https://github.com/elp-revive/auto-highlight-symbol)
-* [emacs-dashboard](https://github.com/emacs-dashboard/emacs-dashboard)
+* [dashboard](https://github.com/emacs-dashboard/emacs-dashboard)
 * [flycheck-languagetool](https://github.com/emacs-languagetool/flycheck-languagetool)
 * [grammarly](https://github.com/emacs-grammarly/grammarly)
 * [popup-el](https://github.com/auto-complete/popup-el)
 * [line-reminder](https://github.com/emacs-vs/line-reminder)
+* [lsp-mode](https://github.com/emacs-lsp/lsp-mode)
 
 ## ELPA
 

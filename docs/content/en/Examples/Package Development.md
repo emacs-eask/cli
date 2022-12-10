@@ -16,6 +16,8 @@ The syntaxes are similar to the `Cask` file, but different.
 
 (package-file "your-package-file.el")
 
+(script "test" "echo \"Error: no test specified\" && exit 1")
+
 (source "gnu")
 
 (depends-on "emacs" "26.1")

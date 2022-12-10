@@ -16,6 +16,8 @@ The syntaxes are similar to the `Cask` file, but different.
 
 (package-file "init.el")  ; optional
 
+(script "test" "echo \"Error: no test specified\" && exit 1")
+
 (files "early-init.el" "init.el"
        "lisp/*.el"
        "site-lisp/*.el")
