@@ -39,11 +39,7 @@ jobs:
       with:
         version: ${{ matrix.emacs-version }}
 
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '16'
-
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Prepare Eask (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
