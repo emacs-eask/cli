@@ -58,13 +58,13 @@ Specify list of files that are included in this project.
 
 # 🚩 Tests
 
-## 🔍 **scripts** (`name` `command`)
+## 🔍 **script** (`name` `command`)
 
 Add built-in scripts and their preset life cycle event as well as arbitrary
 scripts.
 
 ```elisp
-(scripts "test" "echo This is a test!")
+(script "test" "echo This is a test!")
 ```
 
 # 🚩 Dependencies
