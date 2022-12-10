@@ -17,6 +17,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add command and directive for `run-script` (#69)
 * Remove alias for `build` subcommand (#70)
 * Merge `clean` commands to one subcommand (#71)
+* Fix void function `eask-source` to `eask-f-source` (#75)
 
 ## 0.7.x
 > Released Sep 08, 2022
