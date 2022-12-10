@@ -1,4 +1,4 @@
-;;; package.el --- Build a package artifact  -*- lexical-binding: t; -*-
+;;; core/package.el --- Build a package artifact  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -47,9 +47,7 @@
 
 (defun eask--packaged-file (ext)
   "Find a possible packaged file."
-  (let* ((dist eask-dist-path)
-         (file (expand-file-name (concat (eask-packaged-name) "." ext) dist)))
-    (and (file-exists-p file) file)))
+  (expand-file-name (concat (eask-packaged-name) "." ext) eask-dist-path))
 
 (defun eask-packaged-file ()
   "Return generated package artifact; it could be a tar or el."
@@ -57,9 +55,9 @@
     (eask--packaged-file "el")))
 
 (eask-start
-  (let ((eask-dist-path (or (eask-argv 0) eask-dist-path))
-        (eask-dist-path (expand-file-name eask-dist-path))
-        (packaged))
+  (let* ((eask-dist-path (or (eask-argv 0) eask-dist-path))
+         (eask-dist-path (expand-file-name eask-dist-path))
+         (packaged))
     (ignore-errors (make-directory eask-dist-path t))
 
     (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
@@ -76,7 +74,8 @@
         (package-build--package rcp version)
         "done ✓"))
 
-    (setq packaged (eask-packaged-file))
+    (setq packaged (eask-packaged-file)
+          packaged (when (file-exists-p packaged) packaged))
 
     (when (and eask-is-windows (eask-package-single-p))
       (with-current-buffer (find-file packaged)
@@ -85,4 +84,4 @@
 
     (eask-info "(Built in %s)" packaged)))
 
-;;; package.el ends here
+;;; core/package.el ends here

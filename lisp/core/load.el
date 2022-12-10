@@ -1,4 +1,4 @@
-;;; load.el --- load files  -*- lexical-binding: t; -*-
+;;; core/load.el --- load files  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -19,4 +19,4 @@
       (mapc #'load-file files)
     (eask-info "(Nothing to load.)")))
 
-;;; load.el ends here
+;;; core/load.el ends here

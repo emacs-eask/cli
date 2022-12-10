@@ -1,10 +1,10 @@
-;;; clean.el --- Clean up .eask directory  -*- lexical-binding: t; -*-
+;;; clean/workspace.el --- Clean up .eask directory  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
 ;; Command use to clean up `.eask' in the working directory,
 ;;
-;;   $ eask clean [-g]
+;;   $ eask clean workspace [-g]
 ;;
 
 ;;; Code:
@@ -23,4 +23,4 @@
         (eask-info "(Workspace already cleaned)")
       (eask-info "✓ Done (workspace `%s` is cleaned)" target-dir))))
 
-;;; clean.el ends here
+;;; clean/workspace.el ends here

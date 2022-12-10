@@ -1,4 +1,4 @@
-;;; reinstall.el --- Reinstall packages  -*- lexical-binding: t; -*-
+;;; core/reinstall.el --- Reinstall packages  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -45,4 +45,4 @@
       (eask-info "✗ (No packages have been reintalled)")
       (eask-help 'reinstall))))
 
-;;; reinstall.el ends here
+;;; core/reinstall.el ends here

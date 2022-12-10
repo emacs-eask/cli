@@ -1,4 +1,4 @@
-;;; install.el --- Install packages  -*- lexical-binding: t; -*-
+;;; core/install.el --- Install packages  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -43,6 +43,7 @@
     (eask-install-dependencies)
     (let* ((name (eask-guess-package-name))
            (packaged (eask-packaged-file))
+           (packaged (when (file-exists-p packaged) packaged))
            (target (or packaged eask-package-file)))
       (eask-log "Searching for artifact to install...")
       (if packaged (eask-info "✓ Found artifact in %s" target)
@@ -56,4 +57,4 @@
         (eask-info "✗ (No files have been intalled)")
         (eask-help 'install)))))
 
-;;; install.el ends here
+;;; core/install.el ends here

@@ -19,10 +19,9 @@
 
 "use strict";
 
-exports.command = ['clean <type>'];
-exports.desc = 'delete various files produced during building';
-exports.builder = function (yargs) {
-  return yargs.commandDir('../clean/');
-};
+exports.command = ['all', 'everything'];
+exports.desc = 'do all cleaning tasks';
 
-exports.handler = async (argv) => { };
+exports.handler = async (argv) => {
+  await UTIL.e_call(argv, 'clean/all');
+};

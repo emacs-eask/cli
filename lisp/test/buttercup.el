@@ -1,4 +1,4 @@
-;;; buttercup.el --- Run buttercup tests  -*- lexical-binding: t; -*-
+;;; test/buttercup.el --- Run buttercup tests  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -22,4 +22,4 @@
   (let ((load-path (cons "." load-path)))
     (buttercup-run-discover)))
 
-;;; buttercup.el ends here
+;;; test/buttercup.el ends here

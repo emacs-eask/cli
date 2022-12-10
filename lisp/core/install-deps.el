@@ -1,4 +1,4 @@
-;;; install-deps.el --- Automatically install package dependencies  -*- lexical-binding: t; -*-
+;;; core/install-deps.el --- Automatically install package dependencies  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -23,4 +23,4 @@
     (eask-info "✗ (No dependencies found in your Eask file)")
     (eask-help 'install-deps)))
 
-;;; install-deps.el ends here
+;;; core/install-deps.el ends here

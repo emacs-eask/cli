@@ -1,4 +1,4 @@
-;;; refresh.el --- Download package archives  -*- lexical-binding: t; -*-
+;;; core/refresh.el --- Download package archives  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -17,4 +17,4 @@
 (eask-start
   (eask-pkg-init))
 
-;;; refresh.el ends here
+;;; core/refresh.el ends here

@@ -1,4 +1,4 @@
-;;; upgrade.el --- Upgrade packages  -*- lexical-binding: t; -*-
+;;; core/upgrade.el --- Upgrade packages  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -76,4 +76,4 @@
           (eask-error "Package does not exists `%s`, you need to install before upgrade" name)))
     (eask-package-upgrade-all)))
 
-;;; upgrade.el ends here
+;;; core/upgrade.el ends here

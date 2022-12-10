@@ -1,4 +1,4 @@
-;;; keywords.el --- List all available keywords  -*- lexical-binding: t; -*-
+;;; core/keywords.el --- List all available keywords  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -25,4 +25,4 @@
     (eask-msg "")
     (eask-info "(Total of %s keywords listed)" (length keywords))))
 
-;;; keywords.el ends here
+;;; core/keywords.el ends here

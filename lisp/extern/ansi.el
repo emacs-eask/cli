@@ -1,4 +1,4 @@
-;;; ansi.el --- Turn string into ansi strings  -*- lexical-binding: t; -*-
+;;; extern/ansi.el --- Turn string into ansi strings  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2010-2013 Johan Andersson
 
@@ -210,4 +210,4 @@ FORMAT-STRING and OBJECTS are processed same as `apply'."
 
 (provide 'ansi)
 
-;;; ansi.el ends here
+;;; extern/ansi.el ends here

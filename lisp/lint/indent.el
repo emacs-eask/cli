@@ -1,4 +1,4 @@
-;;; indent.el --- Lint the package using `indent-lint'  -*- lexical-binding: t; -*-
+;;; lint/indent.el --- Lint the package using `indent-lint'  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -52,4 +52,4 @@
         (eask--print-no-matching-files)
       (eask-help "package/indent"))))
 
-;;; indent.el ends here
+;;; lint/indent.el ends here

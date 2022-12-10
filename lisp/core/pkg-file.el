@@ -1,4 +1,4 @@
-;;; pkg-file.el --- Generate -pkg file  -*- lexical-binding: t; -*-
+;;; core/pkg-file.el --- Generate -pkg file  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -45,4 +45,4 @@
     (eask--generate-from-eask-file))
   (eask-info "(Generated pkg-file -> %s)" eask--pkg-filename))
 
-;;; pkg-file.el ends here
+;;; core/pkg-file.el ends here

@@ -1,4 +1,4 @@
-;;; regexps.el --- Lint the package using `relint'  -*- lexical-binding: t; -*-
+;;; lint/regexps.el --- Lint the package using `relint'  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -58,4 +58,4 @@
         (eask--print-no-matching-files)
       (eask-help 'regexps))))
 
-;;; regexps.el ends here
+;;; lint/regexps.el ends here

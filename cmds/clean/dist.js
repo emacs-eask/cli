@@ -19,9 +19,17 @@
 
 "use strict";
 
-exports.command = ['clean-all'];
-exports.desc = 'do all cleaning tasks';
+exports.command = ['dist [destination]', 'distribution [destination]'];
+exports.desc = 'delete dist subdirectory';
+exports.builder = {
+  destination: {
+    description: 'destination path/folder',
+    requiresArg: false,
+    alias: 'dest',
+    type: 'string',
+  },
+};
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/clean-all');
+  await UTIL.e_call(argv, 'clean/dist', argv.dest);
 };

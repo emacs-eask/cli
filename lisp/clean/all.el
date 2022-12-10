@@ -1,10 +1,10 @@
-;;; clean-all.el --- Do all cleaning tasks  -*- lexical-binding: t; -*-
+;;; clean/all.el --- Do all cleaning tasks  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
 ;; Command that cleans .eask directory, and all elc files.
 ;;
-;;   $ eask clean-all
+;;   $ eask clean all
 ;;
 
 ;;; Code:
@@ -15,7 +15,8 @@
       nil t)
 
 (eask-start
-  (eask-call "core/clean-elc")
-  (eask-call "core/clean"))
+  (eask-call "clean/workspace")
+  (eask-call "clean/elc")
+  (eask-call "clean/dist"))
 
-;;; clean-all.el ends here
+;;; clean/all.el ends here

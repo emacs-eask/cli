@@ -1,4 +1,4 @@
-;;; list-all.el --- List all available packages  -*- lexical-binding: t; -*-
+;;; core/list-all.el --- List all available packages  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -28,4 +28,4 @@
   (eask-info "(Total of %s package%s available)" (length package-archive-contents)
              (eask--sinr package-archive-contents "" "s")))
 
-;;; list-all.el ends here
+;;; core/list-all.el ends here

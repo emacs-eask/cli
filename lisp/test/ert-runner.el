@@ -1,4 +1,4 @@
-;;; ert-runner.el --- Run ert tests using ert-runner  -*- lexical-binding: t; -*-
+;;; test/ert-runner.el --- Run ert tests using ert-runner  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -24,4 +24,4 @@
     (eask-package-install 'ert-runner))
   (require 'ert-runner))
 
-;;; ert-runner.el ends here
+;;; test/ert-runner.el ends here

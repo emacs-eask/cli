@@ -1,4 +1,4 @@
-;;; recipe.el --- Suggest a recipe format  -*- lexical-binding: t; -*-
+;;; core/recipe.el --- Suggest a recipe format  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -37,4 +37,4 @@
     (eask-info "(Repository URL is required to form a recipe)")
     (eask-help 'recipe)))
 
-;;; recipe.el ends here
+;;; core/recipe.el ends here

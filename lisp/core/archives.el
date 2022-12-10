@@ -1,4 +1,4 @@
-;;; archives.el --- List out all package archives  -*- lexical-binding: t; -*-
+;;; core/archives.el --- List out all package archives  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -40,4 +40,4 @@
         (eask-info "(Total of %s archives)" (length package-archives)))
     (eask-info "(No archive has been selected)")))
 
-;;; archives.el ends here
+;;; core/archives.el ends here

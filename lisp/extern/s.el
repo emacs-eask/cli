@@ -1,4 +1,4 @@
-;;; s.el --- External module `s'  -*- lexical-binding: t; -*-
+;;; extern/s.el --- External module `s'  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -7,4 +7,4 @@
   (declare (pure t) (side-effect-free t))
   (replace-regexp-in-string (regexp-quote old) new s t t))
 
-;;; s.el ends here
+;;; extern/s.el ends here

@@ -1,4 +1,4 @@
-;;; info.el --- Display information about the current package  -*- lexical-binding: t; -*-
+;;; core/info.el --- Display information about the current package  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -61,4 +61,4 @@
     (eask-info "(Eask file has no package information)")
     (eask-help 'info)))
 
-;;; info.el ends here
+;;; core/info.el ends here

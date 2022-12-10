@@ -61,9 +61,10 @@ eask lint keywords
 eask lint relint
 
 # Clean up
-eask clean
-eask clean-elc
-eask clean-all
+eask clean .eask
+eask clean elc
+eask clean dist
+eask clean all
 
 # Util
 eask locate

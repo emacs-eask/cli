@@ -1,4 +1,4 @@
-;;; package-build.el --- External module `package-build'  -*- lexical-binding: t; -*-
+;;; extern/package-build.el --- External module `package-build'  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -93,4 +93,4 @@ for ALLOW-EMPTY to prevent this error."
       (error "No matching file(s) found in %s: %s" dir specs))
     lst))
 
-;;; package-build.el ends here
+;;; extern/package-build.el ends here

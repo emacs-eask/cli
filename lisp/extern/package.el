@@ -1,4 +1,4 @@
-;;; package.el --- External module `package'  -*- lexical-binding: t; -*-
+;;; extern/package.el --- External module `package'  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -44,4 +44,4 @@ The variable `package-load-list' controls which packages to load."
         (require 'package)
         (package--activate-all)))))
 
-;;; package.el ends here
+;;; extern/package.el ends here

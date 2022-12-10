@@ -1,4 +1,4 @@
-;;; emacs.el --- Execute emacs with the appropriate environment  -*- lexical-binding: t; -*-
+;;; core/emacs.el --- Execute emacs with the appropriate environment  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -34,4 +34,4 @@
 (ignore-errors (make-directory package-user-dir t))
 (eask--silent (eask-setup-paths))
 
-;;; emacs.el ends here
+;;; core/emacs.el ends here

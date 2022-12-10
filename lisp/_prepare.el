@@ -1138,6 +1138,18 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
               (t (eask-log line))))
       (forward-line 1))))
 
+(defun eask-delete-file (filename)
+  "Delete a FILENAME from disk."
+  (let (deleted)
+    (eask-with-progress
+      (format "Deleting %s... " filename)
+      (eask-with-verbosity 'log
+        (setq deleted (file-exists-p filename))
+        (ignore-errors (delete-file filename))
+        (setq deleted (and deleted (not (file-exists-p filename)))))
+      (if deleted "done ✓" "skipped ✗"))
+    deleted))
+
 ;;
 ;;; Help
 
@@ -1265,6 +1277,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 ;;
 ;;; Externals
 
+(eask-load "extern/compat")
 (eask-load "extern/ansi")
 (with-eval-after-load 'ansi (eask-load "extern/ansi"))  ; override
 (eask-load "extern/package")
