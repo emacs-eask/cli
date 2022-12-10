@@ -280,7 +280,7 @@ the `eask-start' execution.")
          (setq added t)
          (eask-with-progress
            (format "Adding required archives (%s)... " (ansi-yellow archive))
-           (eask-source archive)
+           (eask-f-source archive)
            "done ✓")))
      (when added
        (eask-with-progress
