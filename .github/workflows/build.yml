@@ -42,14 +42,10 @@ jobs:
         - win-x64
 
     steps:
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '16'
+    - uses: actions/checkout@v3
 
     - name: Install pkg
       run: npm install -g pkg
-
-    - uses: actions/checkout@v2
 
     - name: Preparing...
       run: npm install
@@ -64,7 +60,7 @@ jobs:
         mv README.md dist
 
     - name: Uploading...
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v3
       with:
         name: eask_${{ env.VERSION }}_${{ matrix.targets }}
         path: dist
