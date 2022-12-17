@@ -18,7 +18,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Remove alias for `build` subcommand (#70)
 * Merge `clean` commands to one subcommand (#71)
 * Fix void function `eask-source` to `eask-f-source` (#75)
-* Fix upccoming breaking changes from `package-build` (#65)
+* Fix upcoming breaking changes from `package-build` (#65)
 
 ## 0.7.x
 > Released Sep 08, 2022
