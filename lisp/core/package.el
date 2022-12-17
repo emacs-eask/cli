@@ -31,13 +31,16 @@
         (append eask-files (list eask-package-file)))
     package-build-default-files-spec))
 
-(defun eask-package-dir-recipe ()
+(defun eask-package-dir-recipe (version)
   "Form a directory recipe."
   (eask-load "extern/package-recipe")
-  (let ((name (eask-guess-package-name))
-        (patterns (eask-package-dir--patterns))
-        (path default-directory))
-    (package-directory-recipe name :name name :files patterns :dir path)))
+  (let* ((name (eask-guess-package-name))
+         (patterns (eask-package-dir--patterns))
+         (path default-directory)
+         (rcp (package-directory-recipe name :name name :files patterns :dir path)))
+    (setf (slot-value rcp 'version) version)
+    (setf (slot-value rcp 'time) (eask-current-time))
+    rcp))
 
 (defun eask-packaged-name ()
   "Find a possible packaged name."
@@ -66,12 +69,12 @@
     (eask-load "extern/package-build")  ; override
 
     (let* ((version (eask-package-version))
-           (rcp (eask-package-dir-recipe))
+           (rcp (eask-package-dir-recipe version))
            (package-build-working-dir default-directory)
            (package-build-archive-dir eask-dist-path))
       (eask-with-progress
         (format "Building artifact %s (%s)... " (eask-package-name) version)
-        (package-build--package rcp version)
+        (package-build--package rcp)
         "done ✓"))
 
     (setq packaged (eask-packaged-file)

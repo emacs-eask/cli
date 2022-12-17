@@ -136,6 +136,11 @@ the `eask-start' execution.")
   (let ((len (if (numberp len-or-list) len-or-list (length len-or-list))))
     (if (= 1 len) form-1 form-2)))
 
+;; This is used to creating the directory recipe!
+(defun eask-current-time ()
+  "Return current time."
+  (let ((now (current-time))) (logior (lsh (car now) 16) (cadr now))))
+
 (defun eask-seq-str-max (sequence)
   "Return max length in list of strings."
   (let ((result 0))
@@ -1044,7 +1049,8 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (defun eask-expand-file-specs (specs)
   "Expand file SPECS."
   (mapcar (lambda (elm) (expand-file-name (car elm) default-directory))
-          (package-build-expand-file-specs default-directory specs nil t)))
+          (ignore-errors  ; The new files spec will trigger error, wrap it
+            (package-build-expand-files-spec nil nil default-directory specs))))
 
 (defun eask-package-files ()
   "Return package files in workspace."
