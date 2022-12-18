@@ -66,6 +66,6 @@
                       (eask-package-el-files))))
       (eask--compile-files files)
     (eask-info "(No files have been compiled)")
-    (eask-help 'compile)))
+    (eask-help "core/compile")))
 
 ;;; core/compile.el ends here

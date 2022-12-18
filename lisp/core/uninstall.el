@@ -41,6 +41,6 @@
           (eask-package-delete name)
           (eask-info "(Deleted %s)" name))
       (eask-info "✗ (No packages have been unintalled)")
-      (eask-help 'uninstall))))
+      (eask-help "core/uninstall"))))
 
 ;;; core/uninstall.el ends here

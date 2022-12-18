@@ -50,6 +50,6 @@
     (eask-info "(No files have been linted)")
     (if (eask-args)
         (eask--print-no-matching-files)
-      (eask-help "package/indent"))))
+      (eask-help "lint/indent"))))
 
 ;;; lint/indent.el ends here

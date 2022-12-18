@@ -35,6 +35,6 @@
         (eask-msg "Recipe: %s" (pp-to-string recipe))
         (eask-msg ""))
     (eask-info "(Repository URL is required to form a recipe)")
-    (eask-help 'recipe)))
+    (eask-help "core/recipe")))
 
 ;;; core/recipe.el ends here
