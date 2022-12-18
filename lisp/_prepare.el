@@ -785,10 +785,19 @@ Eask file in the workspace."
 
 If LOCATION is a URL string, replace the default URL from `eask-source-mapping'
 to it's value.  Optional argument PRIORITY can be use to register to variable
-`package-archive-priorities'."
+`package-archive-priorities'.
+
+If LOCATION is a number, it will be treated like PRIORITY.  When both optional
+arguments LOCATION and PRIORITY are defined in number, then we will respect the
+latter one."
   (when (assoc name package-archives)
     (eask-error "Multiple definition of source `%s'" name))
-  (setq location (or location (cdr (assq (intern name) eask-source-mapping))))
+  (let ((default-location (cdr (assq (intern name) eask-source-mapping))))
+    (cond ((numberp location)
+           (setq priority (or priority location)  ; still respect priority
+                 location default-location))
+          (t
+           (setq location (or location default-location)))))
   (unless location (eask-error "Unknown package archive `%s'" name))
   (when (and location
              (gnutls-available-p)
