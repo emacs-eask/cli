@@ -43,6 +43,6 @@
           (eask-package-reinstall name)
           (eask-info "(Reinstalled %s)" name))
       (eask-info "✗ (No packages have been reintalled)")
-      (eask-help 'reinstall))))
+      (eask-help "core/reinstall"))))
 
 ;;; core/reinstall.el ends here

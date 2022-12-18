@@ -42,6 +42,6 @@
     (eask-info "(No files have been checked (elint))")
     (if (eask-args)
         (eask--print-no-matching-files)
-      (eask-help 'elint))))
+      (eask-help "lint/elint"))))
 
 ;;; lint/elint.el ends here

@@ -1,5 +1,5 @@
     
-💡 You need to specify file(s) you want the indent-lint to run
+💡 You need to specify file(s) you want the elsa to run
    
     [+] (package-file "ENTRY")         ; One argument with a string
     [+] (files "FILE-1" "FILE-2" ...)  ; All arguments are wildcard patterns
