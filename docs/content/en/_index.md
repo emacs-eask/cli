@@ -65,7 +65,7 @@ but the author is not an expert on these tools. Corrections are welcome.
 
 ### Linter
 
-- [ ] [FEAT] Add `elisp-lint` command
+- N/A
 
 ### Testing
 
