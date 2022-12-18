@@ -63,10 +63,6 @@ but the author is not an expert on these tools. Corrections are welcome.
 
 - [ ] [FEAT] Add `add-source` command
 
-### Linter
-
-- N/A
-
 ### Testing
 
 - [ ] [FEAT] Add `ecukes` command
