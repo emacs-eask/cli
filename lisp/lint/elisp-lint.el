@@ -31,8 +31,11 @@
     (eask-msg "`%s` with elisp-lint (%s)" (ansi-green file) eask--elisp-lint-version)
     (eask-with-verbosity 'debug
       (setq success (elisp-lint-file filename)))
-    (when success
-      (eask-msg "No issues found"))))
+    ;; Report result!
+    (cond (success
+           (eask-msg "No issues found"))
+          ((eask-strict-p)
+           (eask-error "Linting failed")))))
 
 (eask-start
   (eask-with-archives "melpa"
