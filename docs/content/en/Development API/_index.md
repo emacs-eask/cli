@@ -436,15 +436,15 @@ Alias of `package-file`.
 
 Alias of `files`.
 
-## 🔍 Function: eask-f-script
+## 🔍 Function: eask-f-script (`name` `command` &rest `args`)
 
 Alias of `script`.
 
-## 🔍 Function: eask-f-source
+## 🔍 Function: eask-f-source (`name` &optional `location`)
 
 Alias of `source`.
 
-## 🔍 Function: eask-f-source-priority
+## 🔍 Function: eask-f-source-priority (`name` &optional `priority`)
 
 Alias of `source-priority`.
 
