@@ -69,15 +69,15 @@ scripts.
 
 # 🚩 Dependencies
 
-## 🔍 **source** (`alias`)
-
-## 🔍 **source** (`name` `url`)
+## 🔍 **source** (`alias-or-name` &optional `url` `priority`)
 
 Add a package archive to install dependencies from.
 
 ```elisp
 (source "gnu")
 (source "gnu" "https://elpa.gnu.org/packages/")
+(source "gnu" "https://elpa.gnu.org/packages/" 10)
+(source "gnu" nil 10)
 ```
 
 Available aliases:
@@ -95,14 +95,6 @@ Available aliases:
 {{< hint ok >}}
 💡 Use **--insecure** to make **https** to **http**, but not recommended
 {{< /hint >}}
-
-## 🔍 **source-priority** (`name` `priority`)
-
-Set archive priority.
-
-```elisp
-(source-priority "gnu" 5)
-```
 
 ## 🔍 **depends-on** (`package-name` `&optional minimum-version`)
 

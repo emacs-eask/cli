@@ -440,13 +440,9 @@ Alias of `files`.
 
 Alias of `script`.
 
-## 🔍 Function: eask-f-source (`name` &optional `location`)
+## 🔍 Function: eask-f-source (`name` &optional `location` `priority`)
 
 Alias of `source`.
-
-## 🔍 Function: eask-f-source-priority (`name` &optional `priority`)
-
-Alias of `source-priority`.
 
 ## 🔍 Function: eask-f-depends-on (`pkg` &rest `args`)
 

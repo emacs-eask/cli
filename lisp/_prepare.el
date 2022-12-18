@@ -553,7 +553,7 @@ other scripts internally.  See function `eask-call'.")
   '("package" "website-url" "keywords"
     "package-file" "files"
     "script"
-    "source" "source-priority"
+    "source"
     "depends-on" "development"
     "exec-paths" "load-paths")
   "List of Eask file keywords.")
@@ -780,8 +780,12 @@ Eask file in the workspace."
               (mapconcat #'identity (append (list command) args) " "))
         eask-scripts))
 
-(defun eask-f-source (name &optional location)
-  "Add archive NAME with LOCATION."
+(defun eask-f-source (name &optional location priority)
+  "Add archive NAME alias.
+
+If LOCATION is a URL string, replace the default URL from `eask-source-mapping'
+to it's value.  Optional argument PRIORITY can be use to register to variable
+`package-archive-priorities'."
   (when (assoc name package-archives)
     (eask-error "Multiple definition of source `%s'" name))
   (setq location (or location (cdr (assq (intern name) eask-source-mapping))))
@@ -790,11 +794,9 @@ Eask file in the workspace."
              (gnutls-available-p)
              (not (eask-network-insecure-p)))
     (setq location (s-replace "https://" "http://" location)))
-  (add-to-list 'package-archives (cons name location) t))
-
-(defun eask-f-source-priority (archive-id &optional priority)
-  "Add PRIORITY for to ARCHIVE-ID."
-  (add-to-list 'package-archive-priorities (cons archive-id priority) t))
+  (add-to-list 'package-archives (cons name location) t)
+  (when priority
+    (add-to-list 'package-archive-priorities (cons name priority) t)))
 
 (defvar eask-depends-on-recipe-p nil
   "Set to t if package depends on recipe.")
