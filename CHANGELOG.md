@@ -19,6 +19,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Merge `clean` commands to one subcommand (#71)
 * Fix void function `eask-source` to `eask-f-source` (#75)
 * Fix upcoming breaking changes from `package-build` (#65)
+* Add priority as the 3rd argument to source alias (#78)
 
 ## 0.7.x
 > Released Sep 08, 2022
