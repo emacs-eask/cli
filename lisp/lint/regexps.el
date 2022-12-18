@@ -56,6 +56,6 @@
     (eask-info "(No files have been linted)")
     (if (eask-args)
         (eask--print-no-matching-files)
-      (eask-help 'regexps))))
+      (eask-help "lint/regexps"))))
 
 ;;; lint/regexps.el ends here

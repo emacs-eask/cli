@@ -678,7 +678,7 @@ Eask file in the workspace."
                      (eask--silent (eask-setup-paths)))
                    (eask--with-hooks ,@body))
                (eask-msg "✗ Loading Eask file... missing!")
-               (eask-help 'init)))))))))
+               (eask-help "core/init")))))))))
 
 ;;
 ;;; Eask file

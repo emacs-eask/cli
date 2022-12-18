@@ -1,13 +1,13 @@
 (package "mini.emacs.pkg"
          "0.0.1"
-         "Minimal Emacs package to simulate development environment; only for testing purposes!")
+         "Minimal test package")
 
 (website-url "https://github.com/emacs-eask/mini.emacs.pkg")
 (keywords "test")
 
 (package-file "mini.emacs.pkg.el")
 
-(files "*.el" "files/*.el")
+(files "files/*.el")
 
 (script "test" "echo \"Have a nice day!~ ;)\"")
 (script "info" "eask info")

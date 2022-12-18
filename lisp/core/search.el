@@ -40,6 +40,6 @@
         (eask-info "(Search result of %s package%s)" (length result)
                    (eask--sinr result "" "s")))
     (eask-info "(No search operation; missing queries specification)")
-    (eask-help 'search)))
+    (eask-help "core/search")))
 
 ;;; core/search.el ends here

@@ -383,7 +383,7 @@ Commands that lint your Emacs package.
 
 ## 🔍 eask lint package
 
-Lint package using [package-lint](https://github.com/purcell/package-lint).
+Run [package-lint](https://github.com/purcell/package-lint).
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint package [FILES..]
@@ -391,7 +391,7 @@ $ eask [GLOBAL-OPTIONS] lint package [FILES..]
 
 ## 🔍 eask lint checkdoc
 
-Run checkdoc.
+Run checkdoc (built-in).
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint checkdoc [FILES..]
@@ -399,15 +399,25 @@ $ eask [GLOBAL-OPTIONS] lint checkdoc [FILES..]
 
 ## 🔍 eask lint elint
 
-Run elint.
+Run elint (built-in).
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint elint [FILES..]
 ```
 
+## 🔍 eask lint elisp-lint
+
+Run [elisp-lint](https://github.com/gonewest818/elisp-lint).
+
+```sh
+$ eask [GLOBAL-OPTIONS] lint elisp-lint [FILES..]
+```
+
+This does respect the `.dir-locals.el` file! 🎉
+
 ## 🔍 eask lint elsa
 
-Run elsa.
+Run [elsa](https://github.com/emacs-elsa/Elsa).
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint lint elsa [FILES..]
@@ -423,7 +433,7 @@ $ eask [GLOBAL-OPTIONS] lint indent [FILES..]
 
 ## 🔍 eask lint keywords
 
-Run keywords checker.
+Run keywords checker (built-in).
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint keywords
@@ -431,17 +441,21 @@ $ eask [GLOBAL-OPTIONS] lint keywords
 
 ## 🔍 eask lint declare
 
+Run check-declare (built-in).
+
 ```sh
 $ eask [GLOBAL-OPTIONS] lint declare [FILES..]
 ```
 
 ## 🔍 eask lint regexps
 
-Alias: `lint relint`
+Run [relint](https://github.com/mattiase/relint).
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint regexps [FILES..]
 ```
+
+Alias: `lint relint`
 
 # 🚩 Testing
 

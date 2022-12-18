@@ -44,6 +44,6 @@
          (eask--export-env)
          (ansi-green "done ✓")))
     (eask-info "✗ (No exeuction output)")
-    (eask-help 'exec)))
+    (eask-help "core/exec")))
 
 ;;; core/exec.el ends here

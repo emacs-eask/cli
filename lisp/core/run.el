@@ -51,7 +51,7 @@
   (cond
    ((null eask-scripts)
     (eask-info "✗ (No scripts specified)")
-    (eask-help 'run))
+    (eask-help "core/run"))
    ((eask-all-p)  ; Run all scripts
     (dolist (data (reverse eask-scripts))
       (eask--export-command (cdr data))))
