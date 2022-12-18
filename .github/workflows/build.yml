@@ -98,6 +98,7 @@ jobs:
         git commit -m "Update binairs ${{ matrix.targets }}.tar"
 
     - name: Push
+      if: github.ref == 'refs/heads/master'
       uses: jcs090218/github-push-action@master
       with:
         repository: ${{ env.REPO_BIN }}
