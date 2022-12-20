@@ -20,6 +20,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Fix void function `eask-source` to `eask-f-source` (#75)
 * Fix upcoming breaking changes from `package-build` (#65)
 * Add support for `elisp-lint` (#79)
+* Adapt `-a`/`--all` option for archives command (#83)
 
 ## 0.7.x
 > Released Sep 08, 2022

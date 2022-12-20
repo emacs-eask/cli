@@ -34,6 +34,7 @@ cd "./test/mini.emacs.pkg/"
 echo "Testing local commands..."
 eask info
 eask archives
+eask archives --all
 eask list --depth=0
 eask concat
 
