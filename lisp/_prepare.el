@@ -134,7 +134,7 @@ the `eask-start' execution.")
 (defun eask--sinr (len-or-list form-1 form-2)
   "If LEN-OR-LIST has length of 1; return FORM-1, else FORM-2."
   (let ((len (if (numberp len-or-list) len-or-list (length len-or-list))))
-    (if (= 1 len) form-1 form-2)))
+    (if (<= len 1) form-1 form-2)))
 
 ;; This is used to creating the directory recipe!
 (defun eask-current-time ()

@@ -82,11 +82,13 @@
          (eask-pkg-init)  ; XXX: You must have this!
          (let ((pkg-list (reverse (mapcar #'car package-archive-contents))))
            (eask--list pkg-list package-archive-contents))
+         (eask-msg "")
          (eask-info "(Total of %s package%s available)" (length package-archive-contents)
                     (eask--sinr package-archive-contents "" "s")))
         (t
          (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
          (eask--list package-activated-list package-alist)
+         (eask-msg "")
          (eask-info "(Total of %s package%s installed)"
                     (length package-activated-list)
                     (eask--sinr package-activated-list "" "s")))))
