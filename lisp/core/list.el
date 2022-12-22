@@ -78,10 +78,17 @@
       (eask-print-pkg name 0 (or depth (eask-depth) 999) pkg-alist))))
 
 (eask-start
-  (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
-  (eask--list package-activated-list package-alist)
-  (eask-info "(Total of %s package%s installed)"
-             (length package-activated-list)
-             (eask--sinr package-activated-list "" "s")))
+  (cond ((eask-all-p)
+         (eask-pkg-init)  ; XXX: You must have this!
+         (let ((pkg-list (reverse (mapcar #'car package-archive-contents))))
+           (eask--list pkg-list package-archive-contents))
+         (eask-info "(Total of %s package%s available)" (length package-archive-contents)
+                    (eask--sinr package-archive-contents "" "s")))
+        (t
+         (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
+         (eask--list package-activated-list package-alist)
+         (eask-info "(Total of %s package%s installed)"
+                    (length package-activated-list)
+                    (eask--sinr package-activated-list "" "s")))))
 
 ;;; core/list.el ends here
