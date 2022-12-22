@@ -296,18 +296,10 @@ $ eask [GLOBAL-OPTIONS] upgrade
 
 ## 🔍 eask list
 
-List out all installed packages.
+List packages.
 
 ```sh
 $ eask [GLOBAL-OPTIONS] list [--depth]
-```
-
-## 🔍 eask list-all
-
-List out all available packages.
-
-```sh
-$ eask [GLOBAL-OPTIONS] list-all [--depth]
 ```
 
 ## 🔍 eask outdated
@@ -515,6 +507,30 @@ Lint an `Eask`-file.
 $ eask [GLOBAL-OPTIONS] check-eask
 ```
 
+# 🚩 Proxy Options
+
+## 🔍 --proxy `<proxy>`
+
+Set Emacs proxy for HTTP and HTTPS:
+
+```sh
+$ eask --proxy "localhost:8888" [COMMAND]
+```
+
+## 🔍 --http-proxy `<proxy>`
+
+Set Emacs proxy for HTTP only.
+
+## 🔍 --https-proxy `<proxy>`
+
+Set Emacs proxy for HTTPS only.
+
+## 🔍 --no-proxy `<pattern>`
+
+Do not use a proxy for any URL matching pattern.
+
+`<pattern>`is an Emacs regular expression.
+
 # 🚩 Global Options
 
 The following options are available on all Eask commands:
@@ -613,28 +629,6 @@ Disable color output.
 ## 🔍 --elapsed-time, --et
 
 Show elapsed time between each operation
-
-## 🔍 --proxy `<proxy>`
-
-Set Emacs proxy for HTTP and HTTPS:
-
-```sh
-$ eask --proxy "localhost:8888" [COMMAND]
-```
-
-## 🔍 --http-proxy `<proxy>`
-
-Set Emacs proxy for HTTP only.
-
-> --https-proxy `<proxy>`
-
-Set Emacs proxy for HTTPS only.
-
-## 🔍 --no-proxy `<pattern>`
-
-Do not use a proxy for any URL matching pattern.
-
-`<pattern>`is an Emacs regular expression.
 
 ## 🔍 --verbose, -v `<integer>`
 
