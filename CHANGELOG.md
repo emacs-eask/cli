@@ -21,6 +21,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Fix upcoming breaking changes from `package-build` (#65)
 * Add support for `elisp-lint` (#79)
 * Adapt `-a`/`--all` option for archives command (#83)
+* Merge command `list-all` to list with `-a`/`--all` option (#84)
 
 ## 0.7.x
 > Released Sep 08, 2022
