@@ -5,6 +5,7 @@
 (require 'ansi-color)
 (require 'package)
 (require 'project)
+(require 'json)
 (require 'nsm)
 (require 'url-vars)
 
@@ -433,6 +434,7 @@ the `eask-start' execution.")
 (defun eask-allow-error-p ()   (eask--flag "--allow-error"))    ; --allow-error
 (defun eask-insecure-p ()      (eask--flag "--insecure"))       ; --insecure
 (defun eask-no-color-p ()      (eask--flag "--no-color"))       ; --no-color
+(defun eask-json-p ()          (eask--flag "--json"))           ; --json
 
 ;;; String (with arguments)
 (defun eask-proxy ()       (eask--flag-value "--proxy"))        ; --proxy
@@ -502,7 +504,8 @@ other scripts internally.  See function `eask-call'.")
   (eask--form-options
    '("--proxy" "--http-proxy" "--https-proxy" "--no-proxy"
      "--verbose" "--silent"
-     "--depth" "--dest"))
+     "--depth" "--dest"
+     "--json"))
   "List of arguments (number/string) type options.")
 
 (defconst eask--command-list
@@ -594,7 +597,7 @@ Eask file in the workspace."
 (defun eask-file-load (location &optional noerror)
   "Load Eask file in the LOCATION."
   (when-let* ((target-eask-file (expand-file-name location user-emacs-directory))
-              (result (eask--alias-env (load target-eask-file noerror t))))
+              (result (eask--alias-env (load target-eask-file 'noerror t))))
     (setq eask-file target-eask-file  ; assign eask file only if success
           eask-file-root (file-name-directory target-eask-file))
     (run-hooks 'eask-file-loaded-hook)
