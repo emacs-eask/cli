@@ -43,6 +43,14 @@
 (eask-start
   (if eask-package-desc (eask--generate-from-pkg-desc)
     (eask--generate-from-eask-file))
-  (eask-info "(Generated pkg-file -> %s)" eask--pkg-filename))
+  (eask-info "%s:" (file-name-nondirectory (directory-file-name eask--pkg-filename)))
+  (eask-msg "")
+  (eask-msg "%s" (with-temp-buffer
+                   (emacs-lisp-mode)
+                   (insert-file-contents eask--pkg-filename)
+                   (pp-buffer)
+                   (eask--silent (indent-region (point-min) (point-max)))
+                   (buffer-string)))
+  (eask-info "(Generated -pkg.el file in %s)" eask--pkg-filename))
 
 ;;; core/pkg-file.el ends here

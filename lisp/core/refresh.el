@@ -15,6 +15,8 @@
       nil t)
 
 (eask-start
-  (eask-pkg-init))
+  (eask-pkg-init)
+  (eask-msg "")
+  (eask-info "(Done)"))
 
 ;;; core/refresh.el ends here

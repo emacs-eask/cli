@@ -34,13 +34,14 @@
 
 (eask-start
   (require 'check-declare)
-  (if-let* ((files (eask-args-or-package-el-files))
-            (len (length files))
-            (s (eask--sinr len "" "s"))
-            (have (eask--sinr len "has" "have")))
+  (if-let ((files (eask-args-or-package-el-files)))
       (progn
         (mapcar #'eask--check-declare-file files)
-        (eask-info "(Total of %s file%s %s checked)" len s have))
+        (eask-msg "")
+        (eask-info "(Total of %s file%s %s checked)" (length files)
+                   (eask--sinr files "" "s")
+                   (eask--sinr files "has" "have")))
+    (eask-msg "")
     (eask-info "(No files have been checked (declare))")
     (if (eask-args)
         (eask--print-no-matching-files)

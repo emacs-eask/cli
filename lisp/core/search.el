@@ -37,8 +37,10 @@
           (setq result (append result (eask--search-packages query))))
         (delete-dups result)
         (eask--list result package-archive-contents)
+        (eask-msg "")
         (eask-info "(Search result of %s package%s)" (length result)
                    (eask--sinr result "" "s")))
+    (eask-msg "")
     (eask-info "(No search operation; missing queries specification)")
     (eask-help "core/search")))
 

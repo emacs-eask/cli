@@ -20,6 +20,7 @@
         (mapc #'eask-delete-file files)
         (eask-info "✓ (Total of %s .elc file%s deleted)" (length files)
                    (eask--sinr files "" "s")))
+    (eask-msg "")
     (eask-info "(No .elc file found in workspace)")))
 
 ;;; clean/elc.el ends here

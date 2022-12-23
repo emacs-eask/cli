@@ -41,7 +41,9 @@
               ((package-installed-p name)))
         (progn
           (eask-package-reinstall name)
+          (eask-msg "")
           (eask-info "(Reinstalled %s)" name))
+      (eask-msg "")
       (eask-info "✗ (No packages have been reintalled)")
       (eask-help "core/reinstall"))))
 

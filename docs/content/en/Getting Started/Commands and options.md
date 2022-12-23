@@ -30,7 +30,12 @@ Eask will generate file like:
          "VERSION"
          "YOUR PACKAGE SUMMARY")
 
+(website-url "https://example.com/project-url/")
+(keywords "KEYWORD1" "KEYWORD2")
+
 (package-file "PACKAGE-FILE")
+
+(script "test" "echo \"Error: no test specified\" && exit 1")
 
 (source "gnu")
 
@@ -484,7 +489,7 @@ $ eask [GLOBAL-OPTIONS] upgrade-eask
 ```
 
 {{< hint warning >}}
-💡 This will only work if you install it from source!
+💡 This will only work if you install it from the source!
 {{< /hint >}}
 
 ## 🔍 eask locate
@@ -504,7 +509,18 @@ Commands to check your Eask-file.
 Lint an `Eask`-file.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] check-eask
+$ eask [GLOBAL-OPTIONS] check-eask [FILES..]
+```
+
+```bash
+# lint all Eask-files in the current directory and subdirectories
+eask check-eask
+# lint specific files
+eask check-eask Eask Eask.27
+# lint all Eask-files in specified directory and subdirectories
+eask check-eask src/
+# print result as JSON
+eask check-eask --json
 ```
 
 # 🚩 Global Options
