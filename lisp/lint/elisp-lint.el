@@ -45,7 +45,10 @@
   (if-let ((files (eask-args-or-package-el-files)))
       (progn
         (mapcar #'eask--elisp-lint-process-file files)
-        (eask-info "(Total of %s files linted)" (length files)))
+        (eask-msg "")
+        (eask-info "(Total of %s file%s linted)" (length files)
+                   (eask--sinr files "" "s")))
+    (eask-msg "")
     (eask-info "(No files have been linted)")
     (if (eask-args)
         (eask--print-no-matching-files)

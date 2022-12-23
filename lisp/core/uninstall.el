@@ -28,6 +28,7 @@
          (deleted (length pkg-installed)) (skipped (- len deleted)))
     (eask-log "Uninstalling %s specified package%s..." len s)
     (mapc #'eask-package-delete names)
+    (eask-msg "")
     (eask-info "(Total of %s package%s deleted, %s skipped)"
                deleted s skipped)))
 
@@ -39,6 +40,7 @@
               ((package-installed-p name)))
         (progn
           (eask-package-delete name)
+          (eask-msg "")
           (eask-info "(Deleted %s)" name))
       (eask-info "✗ (No packages have been unintalled)")
       (eask-help "core/uninstall"))))

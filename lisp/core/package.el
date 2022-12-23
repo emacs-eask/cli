@@ -72,6 +72,7 @@
            (rcp (eask-package-dir-recipe version))
            (package-build-working-dir default-directory)
            (package-build-archive-dir eask-dist-path))
+      (eask-msg "")
       (eask-with-progress
         (format "Building artifact %s (%s)... " (eask-package-name) version)
         (package-build--package rcp)
@@ -85,6 +86,7 @@
         (set-buffer-file-coding-system 'utf-8-unix)
         (save-buffer)))
 
+    (eask-msg "")
     (eask-info "(Built in %s)" packaged)))
 
 ;;; core/package.el ends here

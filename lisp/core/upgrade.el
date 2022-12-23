@@ -61,7 +61,9 @@
   (if-let ((upgrades (eask-package--upgrades)))
       (progn
         (mapcar #'eask-package-upgrade upgrades)
+        (eask-msg "")
         (eask-info "(Done upgrading all packages)"))
+    (eask-msg "")
     (eask-info "(All packages are up to date)")))
 
 (eask-start
