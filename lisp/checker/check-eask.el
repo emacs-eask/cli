@@ -114,12 +114,15 @@
 (let* ((default-directory (if (eask-global-p) user-emacs-directory
                             default-directory))
        (files (or (eask-expand-file-specs (eask-args))
-                  (eask-expand-file-specs '("Eask*" "**/Eask*")))))
+                  (eask-expand-file-specs '("Eask*" "**/Eask*"))))
+       checked-files)
   ;; Linting
   (dolist (file files)
     (eask--save-eask-file-state
       (eask--setup-env
-        (eask--alias-env (load file 'noerror t)))))
+        (eask--alias-env
+          (when (ignore-errors (load file 'noerror t))
+            (push file checked-files))))))
 
   ;; Print result
   (eask-msg "")
@@ -133,7 +136,7 @@
          (mapc #'eask-msg (reverse eask--checker-log)))
         (t
          (eask-info "(Checked %s file%s)"
-                    (length files)
-                    (eask--sinr files "" "s")))))
+                    (length checked-files)
+                    (eask--sinr checked-files "" "s")))))
 
 ;;; checker/check-eask.el ends here
