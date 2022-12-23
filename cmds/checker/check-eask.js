@@ -21,7 +21,20 @@
 
 exports.command = ['check-eask [files..]'];
 exports.desc = 'run eask checker';
+exports.builder = {
+  files: {
+    description: 'specify Eask-files for checker to lint',
+    requiresArg: false,
+    type: 'array',
+  },
+  json: {
+    description: 'Output lint result in JSON format',
+    type: 'boolean',
+  },
+};
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'checker/check-eask');
+  await UTIL.e_call(argv, 'checker/check-eask'
+                    , argv.files
+                    , UTIL.def_flag(argv.json, '--json', argv.json));
 };

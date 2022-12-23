@@ -34,6 +34,7 @@ cd "./test/mini.emacs.pkg/"
 echo "Testing local commands..."
 eask info
 eask archives
+eask archives --all
 eask list --depth=0
 eask concat
 
@@ -51,14 +52,15 @@ eask run test
 eask run -all
 
 # Linter
-eask lint package
 eask lint checkdoc
 eask lint declare
-eask lint elsa
 eask lint elint
+eask lint elisp-lint
+eask lint elsa
 eask lint indent
 eask lint keywords
-eask lint relint
+eask lint package
+eask lint regexps
 
 # Clean up
 eask clean .eask

@@ -48,6 +48,7 @@
          (eask-dist-path (expand-file-name eask-dist-path)))
     (if (file-directory-p eask-dist-path)
         (eask--clean-dist eask-dist-path)
-      (eask-info "Target dist path is missing: %s" eask-dist-path))))
+      (eask-msg "")
+      (eask-info "(No dist folder needs to be cleaned)" eask-dist-path))))
 
 ;;; clean/dist.el ends here

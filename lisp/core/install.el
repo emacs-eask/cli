@@ -31,6 +31,7 @@
          (installed (length pkg-not-installed)) (skipped (- len installed)))
     (eask-log "Installing %s specified package%s..." len s)
     (mapc #'eask-package-install names)
+    (eask-msg "")
     (eask-info "(Total of %s package%s installed, %s skipped)"
                installed s skipped)))
 
@@ -52,9 +53,10 @@
           (progn
             (add-to-list 'load-path (expand-file-name (eask-packaged-name) package-user-dir))
             (package-install-file target)
+            (eask-msg "")
             (eask-info "(Installed in %s)"
                        (file-name-directory (locate-library name))))
         (eask-info "✗ (No files have been intalled)")
-        (eask-help 'install)))))
+        (eask-help "core/install")))))
 
 ;;; core/install.el ends here

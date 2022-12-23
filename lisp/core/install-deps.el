@@ -21,6 +21,6 @@
           (eask-warn "No development dependencies found in your Eask file; but continue to install package dependencies"))
         (eask-install-dependencies))
     (eask-info "✗ (No dependencies found in your Eask file)")
-    (eask-help 'install-deps)))
+    (eask-help "core/install-deps")))
 
 ;;; core/install-deps.el ends here

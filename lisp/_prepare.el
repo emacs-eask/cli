@@ -5,6 +5,7 @@
 (require 'ansi-color)
 (require 'package)
 (require 'project)
+(require 'json)
 (require 'nsm)
 (require 'url-vars)
 
@@ -134,7 +135,7 @@ the `eask-start' execution.")
 (defun eask--sinr (len-or-list form-1 form-2)
   "If LEN-OR-LIST has length of 1; return FORM-1, else FORM-2."
   (let ((len (if (numberp len-or-list) len-or-list (length len-or-list))))
-    (if (= 1 len) form-1 form-2)))
+    (if (<= len 1) form-1 form-2)))
 
 ;; This is used to creating the directory recipe!
 (defun eask-current-time ()
@@ -433,6 +434,7 @@ the `eask-start' execution.")
 (defun eask-allow-error-p ()   (eask--flag "--allow-error"))    ; --allow-error
 (defun eask-insecure-p ()      (eask--flag "--insecure"))       ; --insecure
 (defun eask-no-color-p ()      (eask--flag "--no-color"))       ; --no-color
+(defun eask-json-p ()          (eask--flag "--json"))           ; --json
 
 ;;; String (with arguments)
 (defun eask-proxy ()       (eask--flag-value "--proxy"))        ; --proxy
@@ -502,7 +504,8 @@ other scripts internally.  See function `eask-call'.")
   (eask--form-options
    '("--proxy" "--http-proxy" "--https-proxy" "--no-proxy"
      "--verbose" "--silent"
-     "--depth" "--dest"))
+     "--depth" "--dest"
+     "--json"))
   "List of arguments (number/string) type options.")
 
 (defconst eask--command-list
@@ -594,7 +597,7 @@ Eask file in the workspace."
 (defun eask-file-load (location &optional noerror)
   "Load Eask file in the LOCATION."
   (when-let* ((target-eask-file (expand-file-name location user-emacs-directory))
-              (result (eask--alias-env (load target-eask-file noerror t))))
+              (result (eask--alias-env (load target-eask-file 'noerror t))))
     (setq eask-file target-eask-file  ; assign eask file only if success
           eask-file-root (file-name-directory target-eask-file))
     (run-hooks 'eask-file-loaded-hook)
@@ -642,22 +645,25 @@ Eask file in the workspace."
          (eask--print-env-info)
          (cond
           ((eask-global-p)
-           ;; We accept Eask file in global scope, but it shouldn't be used
-           ;; as a sandbox.
-           (if (eask-file-try-load "./")
-               (eask-msg "✓ Loading config Eask file in %s... done!" eask-file)
-             (eask-msg "✗ Loading config Eask file... missing!"))
-           (message "")
-           (package-activate-all)
-           (eask-with-progress
-             (ansi-green "Loading your configuration... ")
-             (eask-with-verbosity 'debug
-               (unless (eask-quick-p)
-                 (load (locate-user-emacs-file "early-init.el") t)
-                 (load (locate-user-emacs-file "../.emacs") t)
-                 (load (locate-user-emacs-file "init.el") t)))
-             (ansi-green (if (eask-quick-p) "skipped ✗" "done ✓")))
-           (eask--with-hooks ,@body))
+           (let* ((special (eask-special-p))
+                  (inhibit-config (or special (eask-quick-p))))
+             (unless special
+               ;; We accept Eask-file in global scope, but it shouldn't be used
+               ;; for the sandbox.
+               (if (eask-file-try-load "./")
+                   (eask-msg "✓ Loading config Eask file in %s... done!" eask-file)
+                 (eask-msg "✗ Loading config Eask file... missing!")))
+             (message "")
+             (package-activate-all)
+             (eask-with-progress
+               (ansi-green "Loading your configuration... ")
+               (eask-with-verbosity 'debug
+                 (unless inhibit-config
+                   (load (locate-user-emacs-file "early-init.el") t)
+                   (load (locate-user-emacs-file "../.emacs") t)
+                   (load (locate-user-emacs-file "init.el") t)))
+               (ansi-green (if inhibit-config "skipped ✗" "done ✓")))
+             (eask--with-hooks ,@body)))
           (t
            (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
                   (package-user-dir (expand-file-name "elpa" user-emacs-directory))
@@ -665,12 +671,12 @@ Eask file in the workspace."
                   (user-init-file (locate-user-emacs-file "init.el"))
                   (custom-file (locate-user-emacs-file "custom.el"))
                   (special (eask-special-p)))
-             (if (or (eask-file-try-load "../../")
-                     special)
+             (unless special
+               (if (eask-file-try-load "../../")
+                   (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
+                 (eask-msg "✗ Loading Eask file... missing!")))
+             (if (or special eask-file)
                  (progn
-                   (if eask-file
-                       (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
-                     (eask-msg "✗ Loading Eask file... missing!"))
                    (message "")
                    (package-activate-all)
                    (unless special
@@ -678,7 +684,7 @@ Eask file in the workspace."
                      (eask--silent (eask-setup-paths)))
                    (eask--with-hooks ,@body))
                (eask-msg "✗ Loading Eask file... missing!")
-               (eask-help 'init)))))))))
+               (eask-help "core/init")))))))))
 
 ;;
 ;;; Eask file

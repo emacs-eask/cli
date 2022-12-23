@@ -30,7 +30,12 @@ Eask will generate file like:
          "VERSION"
          "YOUR PACKAGE SUMMARY")
 
+(website-url "https://example.com/project-url/")
+(keywords "KEYWORD1" "KEYWORD2")
+
 (package-file "PACKAGE-FILE")
+
+(script "test" "echo \"Error: no test specified\" && exit 1")
 
 (source "gnu")
 
@@ -296,18 +301,10 @@ $ eask [GLOBAL-OPTIONS] upgrade
 
 ## 🔍 eask list
 
-List out all installed packages.
+List packages.
 
 ```sh
 $ eask [GLOBAL-OPTIONS] list [--depth]
-```
-
-## 🔍 eask list-all
-
-List out all available packages.
-
-```sh
-$ eask [GLOBAL-OPTIONS] list-all [--depth]
 ```
 
 ## 🔍 eask outdated
@@ -383,7 +380,7 @@ Commands that lint your Emacs package.
 
 ## 🔍 eask lint package
 
-Lint package using [package-lint](https://github.com/purcell/package-lint).
+Run [package-lint](https://github.com/purcell/package-lint).
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint package [FILES..]
@@ -391,7 +388,7 @@ $ eask [GLOBAL-OPTIONS] lint package [FILES..]
 
 ## 🔍 eask lint checkdoc
 
-Run checkdoc.
+Run checkdoc (built-in).
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint checkdoc [FILES..]
@@ -399,15 +396,25 @@ $ eask [GLOBAL-OPTIONS] lint checkdoc [FILES..]
 
 ## 🔍 eask lint elint
 
-Run elint.
+Run elint (built-in).
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint elint [FILES..]
 ```
 
+## 🔍 eask lint elisp-lint
+
+Run [elisp-lint](https://github.com/gonewest818/elisp-lint).
+
+```sh
+$ eask [GLOBAL-OPTIONS] lint elisp-lint [FILES..]
+```
+
+This does respect the `.dir-locals.el` file! 🎉
+
 ## 🔍 eask lint elsa
 
-Run elsa.
+Run [elsa](https://github.com/emacs-elsa/Elsa).
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint lint elsa [FILES..]
@@ -423,7 +430,7 @@ $ eask [GLOBAL-OPTIONS] lint indent [FILES..]
 
 ## 🔍 eask lint keywords
 
-Run keywords checker.
+Run keywords checker (built-in).
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint keywords
@@ -431,17 +438,21 @@ $ eask [GLOBAL-OPTIONS] lint keywords
 
 ## 🔍 eask lint declare
 
+Run check-declare (built-in).
+
 ```sh
 $ eask [GLOBAL-OPTIONS] lint declare [FILES..]
 ```
 
 ## 🔍 eask lint regexps
 
-Alias: `lint relint`
+Run [relint](https://github.com/mattiase/relint).
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint regexps [FILES..]
 ```
+
+Alias: `lint relint`
 
 # 🚩 Testing
 
@@ -478,7 +489,7 @@ $ eask [GLOBAL-OPTIONS] upgrade-eask
 ```
 
 {{< hint warning >}}
-💡 This will only work if you install it from source!
+💡 This will only work if you install it from the source!
 {{< /hint >}}
 
 ## 🔍 eask locate
@@ -498,8 +509,23 @@ Commands to check your Eask-file.
 Lint an `Eask`-file.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] check-eask
+$ eask [GLOBAL-OPTIONS] check-eask [FILES..]
 ```
+
+Example:
+
+```bash
+# lint all Eask-files in the current directory and subdirectories
+eask check-eask
+# lint specific files
+eask check-eask Eask Eask.27
+# lint all Eask-files in specified directory and subdirectories
+eask check-eask src/
+# print result as JSON
+eask check-eask --json
+```
+
+For more detail, run `eask check-eask --help`.
 
 # 🚩 Global Options
 
@@ -600,28 +626,6 @@ Disable color output.
 
 Show elapsed time between each operation
 
-## 🔍 --proxy `<proxy>`
-
-Set Emacs proxy for HTTP and HTTPS:
-
-```sh
-$ eask --proxy "localhost:8888" [COMMAND]
-```
-
-## 🔍 --http-proxy `<proxy>`
-
-Set Emacs proxy for HTTP only.
-
-> --https-proxy `<proxy>`
-
-Set Emacs proxy for HTTPS only.
-
-## 🔍 --no-proxy `<pattern>`
-
-Do not use a proxy for any URL matching pattern.
-
-`<pattern>`is an Emacs regular expression.
-
 ## 🔍 --verbose, -v `<integer>`
 
 Set verbosity from 0 to 4.
@@ -637,3 +641,27 @@ Show version number.
 ## 🔍 --help
 
 Show help.
+
+# 🚩 Proxy Options
+
+## 🔍 --proxy `<proxy>`
+
+Set Emacs proxy for HTTP and HTTPS:
+
+```sh
+$ eask --proxy "localhost:8888" [COMMAND]
+```
+
+## 🔍 --http-proxy `<proxy>`
+
+Set Emacs proxy for HTTP only.
+
+## 🔍 --https-proxy `<proxy>`
+
+Set Emacs proxy for HTTPS only.
+
+## 🔍 --no-proxy `<pattern>`
+
+Do not use a proxy for any URL matching pattern.
+
+`<pattern>`is an Emacs regular expression.

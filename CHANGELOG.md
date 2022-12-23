@@ -19,6 +19,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Merge `clean` commands to one subcommand (#71)
 * Fix void function `eask-source` to `eask-f-source` (#75)
 * Fix upcoming breaking changes from `package-build` (#65)
+* Add support for `elisp-lint` (#79)
+* Adapt `-a`/`--all` option for archives command (#83)
+* Merge command `list-all` to list with `-a`/`--all` option (#84)
+* Support JSON format with Eask-file linter (#85)
 * Add priority as the 3rd argument to source alias (#78)
 
 ## 0.7.x

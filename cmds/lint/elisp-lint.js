@@ -19,17 +19,16 @@
 
 "use strict";
 
-exports.command = ['list-all'];
-exports.desc = 'list all available packages';
+exports.command = ['elisp-lint [files..]'];
+exports.desc = 'run elisp-lint';
 exports.builder = {
-  depth: {
-    description: 'dependency depth level to print',
-    requiresArg: true,
-    type: 'number',
+  files: {
+    description: 'files you want elisp-lint to run on',
+    requiresArg: false,
+    type: 'array',
   },
 };
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/list-all'
-                    , UTIL.def_flag(argv.depth, '--depth', argv.depth));
+  await UTIL.e_call(argv, 'lint/elisp-lint', argv.files);
 };

@@ -37,7 +37,7 @@ yargs
     alias: 'a',
     type: 'boolean',
   })
-.option('quick', {
+  .option('quick', {
     description: `start cleanly without loading the configuration files`,
     alias: 'q',
     type: 'boolean',
@@ -90,6 +90,13 @@ yargs
     description: `disable color output`,
     type: 'boolean',
   })
+ .option('verbose', {
+    description: `set verbosity from 0 to 4`,
+    alias: 'v',
+    requiresArg: true,
+    type: 'number',
+  })
+  .group(['proxy', 'http-proxy', 'https-proxy', 'no-proxy'], 'Proxy Options:')
   .option('proxy', {
     description: `update proxy for HTTP and HTTPS to host`,
     type: 'string',
@@ -105,12 +112,6 @@ yargs
   .option('no-proxy', {
     description: `set no-proxy to host`,
     type: 'string',
-  })
-  .option('verbose', {
-    description: `set verbosity from 0 to 4`,
-    alias: 'v',
-    requiresArg: true,
-    type: 'number',
   })
   .demandCommand()
   .wrap(yargs.terminalWidth())

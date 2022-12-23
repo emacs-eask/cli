@@ -23,14 +23,14 @@
   "Print all available scripts."
   (eask-msg "available via `eask run-script`")
   (eask-msg "")
-  (let* ((keywords (mapcar #'car (reverse eask-scripts)))
-         (offset (eask-seq-str-max keywords))
+  (let* ((keys (mapcar #'car (reverse eask-scripts)))
+         (offset (eask-seq-str-max keys))
          (fmt (concat "  %-" (eask-2str offset) "s  %s")))
-    (dolist (keyword keywords)
-      (eask-msg fmt keyword (cdr (assoc keyword eask-scripts))))
+    (dolist (key keys)
+      (eask-msg fmt key (cdr (assoc key eask-scripts))))
     (eask-msg "")
-    (eask-info "(Total of %s available script%s)" (length keywords)
-               (eask--sinr keywords "" "s"))))
+    (eask-info "(Total of %s available script%s)" (length keys)
+               (eask--sinr keys "" "s"))))
 
 (defun eask--export-command (command)
   "Export COMMAND instruction."
@@ -51,7 +51,7 @@
   (cond
    ((null eask-scripts)
     (eask-info "✗ (No scripts specified)")
-    (eask-help 'run))
+    (eask-help "core/run"))
    ((eask-all-p)  ; Run all scripts
     (dolist (data (reverse eask-scripts))
       (eask--export-command (cdr data))))

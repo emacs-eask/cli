@@ -46,10 +46,13 @@
                     (eask-package-el-files))))
       (progn
         (mapcar #'eask--indent-lint-file files)
-        (eask-info "(Total of %s files linted)" (length files)))
+        (eask-msg "")
+        (eask-info "(Total of %s file%s linted)" (length files)
+                   (eask--sinr files "" "s")))
+    (eask-msg "")
     (eask-info "(No files have been linted)")
     (if (eask-args)
         (eask--print-no-matching-files)
-      (eask-help "package/indent"))))
+      (eask-help "lint/indent"))))
 
 ;;; lint/indent.el ends here

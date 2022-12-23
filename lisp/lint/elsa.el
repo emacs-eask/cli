@@ -9,7 +9,7 @@
 ;;
 ;;  Initialization options:
 ;;
-;;    [files..]     files you want elint to run on
+;;    [files..]     files you want elsa to run on
 ;;
 
 ;;; Code:
@@ -47,10 +47,13 @@
   (if-let ((files (eask-args-or-package-el-files)))
       (progn
         (mapcar #'eask--elsa-process-file files)
-        (eask-info "(Total of %s files linted)" (length files)))
+        (eask-msg "")
+        (eask-info "(Total of %s file%s linted)" (length files)
+                   (eask--sinr files "" "s")))
+    (eask-msg "")
     (eask-info "(No files have been linted)")
     (if (eask-args)
         (eask--print-no-matching-files)
-      (eask-help 'elsa))))
+      (eask-help "lint/elsa"))))
 
 ;;; lint/elsa.el ends here

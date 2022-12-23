@@ -59,6 +59,6 @@
         (eask--print-deps "dependencies:" eask-depends-on)
         (eask--print-deps "devDependencies:" eask-depends-on-dev))
     (eask-info "(Eask file has no package information)")
-    (eask-help 'info)))
+    (eask-help "core/info")))
 
 ;;; core/info.el ends here

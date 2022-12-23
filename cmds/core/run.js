@@ -64,7 +64,6 @@ function startCommand(commands, count) {
 
   let command = commands[count];
 
-  console.log('');
   console.log('[RUN]: ' + command);
   let splitted = command.split(' ');
 

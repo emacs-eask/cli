@@ -703,7 +703,7 @@ Print buffer and highlight the `errors` and `warnings`.
 Print help manual located under `lisp/help/` directory.
 
 ```elisp
-(eask-help 'search)
+(eask-help "core/search")
 ```
 
 {{< hint info >}}

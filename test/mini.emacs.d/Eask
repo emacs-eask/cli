@@ -1,9 +1,11 @@
 (package "mini.emacs.d"
          "0.0.1"
-         "Minimal Emacs configuration to run `eask`; only for testing purposes!")
+         "Minimal test configuration")
+
+(website-url "https://github.com/emacs-eask/mini.emacs.d")
+(keywords "test")
 
 (depends-on "emacs" "26.1")
-
 (depends-on "csharp-mode")
 
 (setq network-security-level 'low)  ; see https://github.com/jcs090218/setup-emacs-windows/issues/156#issuecomment-932956432

@@ -52,10 +52,13 @@
       (progn
         (setq package-lint-main-file eask-package-file)
         (mapcar #'eask--relint-file files)
-        (eask-info "(Total of %s files linted)" (length files)))
+        (eask-msg "")
+        (eask-info "(Total of %s file%s linted)" (length files)
+                   (eask--sinr files "" "s")))
+    (eask-msg "")
     (eask-info "(No files have been linted)")
     (if (eask-args)
         (eask--print-no-matching-files)
-      (eask-help 'regexps))))
+      (eask-help "lint/regexps"))))
 
 ;;; lint/regexps.el ends here
