@@ -27,5 +27,10 @@ set -e
 # Naviate to the test package
 cd $(dirname "$0")
 
-echo "Testing check-eask command..."
+echo "Testing check-eask command... (Plain text)"
 eask check-eask
+eask check-eask Eask
+
+echo "Testing check-eask command... (JSON format)"
+eask check-eask --json
+eask check-eask Eask --json
