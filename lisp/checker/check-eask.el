@@ -104,18 +104,25 @@
          eask-depends-on-dev)
      ,@body))
 
-(eask-start
-  ;; Preparation
-  (add-hook 'eask-on-error-hook #'eask--write-log)
-  (add-hook 'eask-on-warning-hook #'eask--write-log)
+;;
+;;; Program Entry
+
+;; Preparation
+(add-hook 'eask-on-error-hook #'eask--write-log)
+(add-hook 'eask-on-warning-hook #'eask--write-log)
+
+(let* ((default-directory (if (eask-global-p) user-emacs-directory
+                            default-directory))
+       (files (or (eask-expand-file-specs (eask-args))
+                  (eask-expand-file-specs '("Eask*" "**/Eask*")))))
   ;; Linting
-  (when-let ((files (or (eask-expand-file-specs (eask-args))
-                        (list eask-file))))
-    (dolist (file files)
-      (eask--save-eask-file-state
-        (eask--setup-env
-          (eask--alias-env (load file 'noerror t))))))
+  (dolist (file files)
+    (eask--save-eask-file-state
+      (eask--setup-env
+        (eask--alias-env (load file 'noerror t)))))
+
   ;; Print result
+  (eask-msg "")
   (cond ((and (eask-json-p)  ; JSON format
               (or eask--checker-warnings eask--checker-errors))
          (eask-msg
@@ -125,6 +132,8 @@
         (eask--checker-log  ; Plain text
          (mapc #'eask-msg (reverse eask--checker-log)))
         (t
-         (eask-msg "(No issues found)"))))
+         (eask-info "(Checked %s file%s)"
+                    (length files)
+                    (eask--sinr files "" "s")))))
 
 ;;; checker/check-eask.el ends here

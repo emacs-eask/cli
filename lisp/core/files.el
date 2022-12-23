@@ -21,6 +21,7 @@
 (eask-start
   (let ((files (eask-package-files)))
     (mapc #'eask--print-filename files)
+    (eask-msg "")
     (eask-info "(Total of %s item%s listed)" (length files) (eask--sinr files "" "s"))))
 
 ;;; core/files.el ends here

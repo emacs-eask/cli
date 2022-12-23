@@ -512,9 +512,16 @@ Lint an `Eask`-file.
 $ eask [GLOBAL-OPTIONS] check-eask [FILES..]
 ```
 
-{{< hint info >}}
-💡 Pass in `--json` to print result as JSON.
-{{< /hint >}}
+```bash
+# lint all Eask-files in the current directory and subdirectories
+eask check-eask
+# lint specific files
+eask check-eask Eask Eask.27
+# lint all Eask-files in specified directory and subdirectories
+eask check-eask src/
+# print result as JSON
+eask check-eask --json
+```
 
 # 🚩 Global Options
 

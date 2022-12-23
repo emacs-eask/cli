@@ -41,6 +41,7 @@
       (with-temp-buffer
         (eask-progress-seq "  - Visiting" files "appended! ✓" #'insert-file-contents)
         (write-region (buffer-string) nil target-filename)
+        (eask-msg "")
         (eask-info "Done. (Wrote file in %s)" target-filename)))))
 
 ;;; core/concat.el ends here

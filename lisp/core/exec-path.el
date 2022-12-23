@@ -21,6 +21,7 @@
 (eask-start
   (eask-pkg-init)
   (mapc #'eask--print-exec-path exec-path)
+  (eask-msg "")
   (eask-info "(Total of %s exec-path)" (length exec-path)))
 
 ;;; core/exec-path.el ends here
