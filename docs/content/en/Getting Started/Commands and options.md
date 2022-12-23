@@ -512,6 +512,8 @@ Lint an `Eask`-file.
 $ eask [GLOBAL-OPTIONS] check-eask [FILES..]
 ```
 
+Example:
+
 ```bash
 # lint all Eask-files in the current directory and subdirectories
 eask check-eask
@@ -522,6 +524,8 @@ eask check-eask src/
 # print result as JSON
 eask check-eask --json
 ```
+
+For more detail, run `eask check-eask --help`.
 
 # 🚩 Global Options
 
