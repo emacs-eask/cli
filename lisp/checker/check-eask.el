@@ -71,7 +71,7 @@
                          (`error "Error")
                          (`warn  "Warning")))
          (log (format "%s:%s:%s %s: %s"
-                      (file-name-nondirectory (or load-file-name eask-file))
+                      (or load-file-name eask-file)
                       (if load-file-name (line-number-at-pos) 0)
                       (if load-file-name (current-column) 0)
                       level-string
