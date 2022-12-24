@@ -23,8 +23,9 @@
                             "http[s]://github.com/"
                           "http[s]://gitlab.com/"))
              (repo (replace-regexp-in-string url-regex "" url))
+             (name (eask-guess-package-name))
              (recipe
-              `(,(intern (eask-guess-package-name)) :fetcher ,fetcher)))
+              `(,(intern name) :fetcher ,fetcher)))
         (cond ((memq fetcher '(git hg))
                (nconc recipe `(:url ,url)))
               ((memq fetcher '(gitlab github))
@@ -32,7 +33,9 @@
         (when eask-files
           (nconc recipe `(:files ,(append '(:defaults) eask-files))))
         (eask-msg "")
-        (eask-msg "Recipe: %s" (pp-to-string recipe))
+        (eask-msg "recipes/%s:" name)
+        (eask-msg "")
+        (eask-msg "%s" (pp-to-string recipe))
         (eask-msg ""))
     (eask-msg "")
     (eask-info "(Repository URL is required to form a recipe)")
