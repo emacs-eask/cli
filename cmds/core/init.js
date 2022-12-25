@@ -58,9 +58,22 @@ async function create_eask_file(dir) {
     }
 
     // Ask for new name unitl the filename is available!
-    while (fs.existsSync(new_name)) {
-      await ask(`File name '${path.basename(new_name)}' already taken, try another one: `,
-                (answer) => { new_name = path.join(process.cwd(), answer); });
+    let new_basename = path.basename(new_name);
+    let invalid_name = false;
+    while (fs.existsSync(new_name) || invalid_name) {
+      let prompt;
+      if (invalid_name) {
+        prompt = `[?] File name '${new_basename}' is invalid (should start with 'Eask'), `;
+      } else {
+        prompt = `[?] File name '${new_basename}' already taken, `;
+      }
+
+      await ask(prompt + `try another one: `,
+                (answer) => {
+                  new_name = path.join(process.cwd(), answer);
+                  new_basename = answer;
+                  invalid_name = !answer.startsWith('Eask');
+                });
     }
   }
 
