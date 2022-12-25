@@ -41,18 +41,21 @@ async function create_eask_file(dir) {
 
   let new_name = path.join(process.cwd(), 'Eask');
 
+  // Search for existing Eask-files!
   let files = fs.readdirSync(process.cwd()).filter(fn => fn.match('Eask'));
   let contine_op = false;
 
   if (files.length != 0) {
+    // Print out all existing Eask-files, and ask for continuation!
     console.log('Eask-file is already exists,');
     console.log('');
     for (let index in files) {
-      console.log('  ' + path.join(process.cwd(), files[index]));
+      console.log('   ' + path.join(process.cwd(), files[index]));
     }
     console.log('');
     await ask(`Continue the initialization? (yes) `, (answer) => { contine_op = answer; });
 
+    // Abort if declined!
     if (contine_op != '' && contine_op != 'yes') {
       process.exit(0);
     }
@@ -60,14 +63,19 @@ async function create_eask_file(dir) {
     // Ask for new name unitl the filename is available!
     let new_basename = path.basename(new_name);
     let invalid_name = false;
+
+    // Ask for new name until we found one that meets our requirements!
     while (fs.existsSync(new_name) || invalid_name) {
       let prompt;
+
+      // Handle invalid file name!
       if (invalid_name) {
         prompt = `[?] File name '${new_basename}' is invalid (should start with 'Eask'), `;
       } else {
         prompt = `[?] File name '${new_basename}' already taken, `;
       }
 
+      // Ask for new name!
       await ask(prompt + `try another one: `,
                 (answer) => {
                   new_name = path.join(process.cwd(), answer);
@@ -77,6 +85,7 @@ async function create_eask_file(dir) {
     }
   }
 
+  // Starting writing Eask-file!
   let name, version, description, entry_point, emacs_version, website_url, keywords;
   await ask(`package name: (${basename}) `, (answer) => { name = answer || basename; });
   await ask(`version: (1.0.0) `, (answer) => { version = answer || '1.0.0'; });
