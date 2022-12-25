@@ -23,6 +23,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Adapt `-a`/`--all` option for archives command (#83)
 * Merge command `list-all` to list with `-a`/`--all` option (#84)
 * Support JSON format with Eask-file linter (#85)
+* Handle multiple Eask-files for `init` command (#86)
 
 ## 0.7.x
 > Released Sep 08, 2022
