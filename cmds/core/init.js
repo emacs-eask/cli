@@ -23,8 +23,6 @@ const path = require('path');
 const fs = require('fs');
 const readline = require('readline');
 
-var EASK_FILE;
-
 var instance;  /* `readline` instance */
 
 exports.command = ['init'];
@@ -41,11 +39,29 @@ async function create_eask_file(dir) {
     output: process.stdout
   });
 
-  EASK_FILE = path.join(process.cwd(), '/Eask');
+  let new_name = path.join(process.cwd(), 'Eask');
 
-  if (fs.existsSync(EASK_FILE) || fs.existsSync(EASK_FILE + 'file')) {
-    console.log('Eask-file is already exists');
-    process.exit(0);
+  let files = fs.readdirSync(process.cwd()).filter(fn => fn.match('Eask'));
+  let contine_op = false;
+
+  if (files.length != 0) {
+    console.log('Eask-file is already exists,');
+    console.log('');
+    for (let index in files) {
+      console.log('  ' + path.join(process.cwd(), files[index]));
+    }
+    console.log('');
+    await ask(`Continue the initialization? (yes) `, (answer) => { contine_op = answer; });
+
+    if (contine_op != '' && contine_op != 'yes') {
+      process.exit(0);
+    }
+
+    // Ask for new name unitl the filename is available!
+    while (fs.existsSync(new_name)) {
+      await ask(`File name '${path.basename(new_name)}' already taken, try another one: `,
+                (answer) => { new_name = path.join(process.cwd(), answer); });
+    }
   }
 
   let name, version, description, entry_point, emacs_version, website_url, keywords;
@@ -75,14 +91,14 @@ async function create_eask_file(dir) {
 (depends-on "emacs" "${emacs_version}")
 `;
 
-  await ask(`About to write to ${EASK_FILE}:
+  await ask(`About to write to ${new_name}:
 
 ${content}
 
 Is this OK? (yes) `,
             (answer) => {
               if (answer == '' || answer == 'yes') {
-                fs.writeFile(EASK_FILE, content, (err) => { if (err) console.log(err); });
+                fs.writeFile(new_name, content, (err) => { if (err) console.log(err); });
               }
             });
   instance.close();
