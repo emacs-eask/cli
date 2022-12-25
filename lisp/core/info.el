@@ -24,7 +24,7 @@
     (let* ((names (mapcar #'car dependencies))
            (offset (eask-seq-str-max names)))
       (setq eask--max-offset (max offset eask--max-offset)
-            offset (format "%s" eask--max-offset))
+            offset (eask-2str eask--max-offset))
       (dolist (dep dependencies)
         (let* ((target-version (cdr dep))
                (target-version (if (= (length target-version) 1)

@@ -30,11 +30,11 @@
 (defun eask--print-archive-alist (alist)
   "Print the archvie ALIST."
   (let* ((names (mapcar #'car alist))
-         (eask--length-name (format "%s" (eask-seq-str-max names)))
+         (eask--length-name (eask-2str (eask-seq-str-max names)))
          (urls (mapcar #'cdr alist))
-         (eask--length-url (format "%s" (eask-seq-str-max urls)))
+         (eask--length-url (eask-2str (eask-seq-str-max urls)))
          (priorities (mapcar #'cdr package-archive-priorities))
-         (eask--length-priority (format "%s" (eask-seq-str-max priorities))))
+         (eask--length-priority (eask-2str (eask-seq-str-max priorities))))
     (mapc #'eask--print-archive alist)))
 
 (eask-start

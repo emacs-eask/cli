@@ -25,7 +25,7 @@
   "Filter available packages with QUERY."
   (let ((result))
     (dolist (package (mapcar #'car package-archive-contents))
-      (when (string-match-p query (format "%s" package))
+      (when (string-match-p query (eask-2str package))
         (push package result)))
     result))
 
