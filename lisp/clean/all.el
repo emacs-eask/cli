@@ -15,8 +15,19 @@
       nil t)
 
 (eask-start
-  (eask-call "clean/workspace")
-  (eask-call "clean/elc")
-  (eask-call "clean/dist"))
+  (eask-with-progress
+    "✓ Cleaning workspace...\n"
+    (eask-call "clean/workspace")
+    "done")
+  (eask-msg "")
+  (eask-with-progress
+    "✓ Cleaning byte-compile files...\n"
+    (eask-call "clean/elc")
+    "done")
+  (eask-msg "")
+  (eask-with-progress
+    "✓ Cleaning dist...\n"
+    (eask-call "clean/dist")
+    "done"))
 
 ;;; clean/all.el ends here
