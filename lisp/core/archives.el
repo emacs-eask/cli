@@ -40,14 +40,14 @@
 (eask-start
   (cond
    ((eask-all-p)
-    (eask-info "List all available archives:")
+    (eask-info "Available archives:")
     (eask-msg "")
     (eask--print-archive-alist eask-source-mapping)
     (eask-msg "")
     (eask-info "(Total of %s archive%s available)" (length eask-source-mapping)
                (eask--sinr eask-source-mapping "" "s")))
    (package-archives
-    (eask-info "List archives that are currently using:")
+    (eask-info "In used archives:")
     (eask-msg "")
     (eask--print-archive-alist package-archives)
     (eask-msg "")
