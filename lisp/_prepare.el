@@ -674,17 +674,15 @@ Eask file in the workspace."
              (unless special
                (if (eask-file-try-load "../../")
                    (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
-                 (eask-msg "✗ Loading Eask file... missing!")))
-             (if (or special eask-file)
-                 (progn
-                   (message "")
-                   (package-activate-all)
-                   (unless special
-                     (ignore-errors (make-directory package-user-dir t))
-                     (eask--silent (eask-setup-paths)))
-                   (eask--with-hooks ,@body))
-               (eask-msg "✗ Loading Eask file... missing!")
-               (eask-help "core/init")))))))))
+                 (eask-msg "✗ Loading Eask file... missing!")
+                 (eask-help "core/init")))
+             (when (or special eask-file)
+               (message "")
+               (package-activate-all)
+               (unless special
+                 (ignore-errors (make-directory package-user-dir t))
+                 (eask--silent (eask-setup-paths)))
+               (eask--with-hooks ,@body)))))))))
 
 ;;
 ;;; Eask file
