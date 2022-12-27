@@ -43,7 +43,7 @@ async function create_eask_file(dir) {
 
   // Search for existing Eask-files!
   let files = fs.readdirSync(process.cwd()).filter(fn => fn.match('Eask'));
-  let contine_op = false;
+  let continue_op = false;
 
   if (files.length != 0) {
     // Print out all existing Eask-files, and ask for continuation!
@@ -53,10 +53,10 @@ async function create_eask_file(dir) {
       console.log('   ' + path.join(process.cwd(), files[index]));
     }
     console.log('');
-    await ask(`Continue the initialization? (yes) `, (answer) => { contine_op = answer; });
+    await ask(`Continue the creation? (yes) `, (answer) => { continue_op = answer; });
 
     // Abort if declined!
-    if (contine_op != '' && contine_op != 'yes') {
+    if (continue_op != '' && continue_op != 'yes') {
       process.exit(0);
     }
 
