@@ -70,7 +70,7 @@ async function create_eask_file(dir) {
 
       // Handle invalid file name!
       if (invalid_name) {
-        prompt = `[?] Invalid filename '${new_basename}' (should start with 'Eask'), `;
+        prompt = `[?] Invalid filename '${new_basename}', `;
       } else {
         prompt = `[?] Filename '${new_basename}' already taken, `;
       }
@@ -80,7 +80,7 @@ async function create_eask_file(dir) {
                 (answer) => {
                   new_name = path.join(process.cwd(), answer);
                   new_basename = answer;
-                  invalid_name = !answer.startsWith('Eask');
+                  invalid_name = !check_eask_filename(answer);
                 });
     }
   }
@@ -126,7 +126,7 @@ Is this OK? (yes) `,
   instance.close();
 }
 
-/*
+/**
  * Ask question with callback
  * @param { string } question - question to ask for user input
  * @param { callback } callback - callback with user's answer
@@ -135,6 +135,22 @@ function ask(question, callback) {
   return new Promise((resolve, reject) => {
     instance.question(question, (answer) => { callback(answer); resolve(); });
   });
+}
+
+/**
+ * Return true if NAME is a valid Eask-file filename.
+ * @param { string } name - either a filename or file path.
+ * @return { boolean } - True for valid filename.
+ */
+function check_eask_filename(name) {
+  let base = path.basename(name);
+  console.log(base);
+  let prefix;
+  if (base.startsWith('Easkfile')) prefix = 'Easkfile';
+  else if (base.startsWith('Eask')) prefix = 'Eask';
+  else return false;
+  let suffix = base.replace(prefix, '');
+  return suffix == '' || /^[.][0-9]/.test(suffix);
 }
 
 module.exports.create_eask_file = create_eask_file;
