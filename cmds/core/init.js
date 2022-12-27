@@ -70,9 +70,9 @@ async function create_eask_file(dir) {
 
       // Handle invalid file name!
       if (invalid_name) {
-        prompt = `[?] File name '${new_basename}' is invalid (should start with 'Eask'), `;
+        prompt = `[?] Invalid filename '${new_basename}' (should start with 'Eask'), `;
       } else {
-        prompt = `[?] File name '${new_basename}' already taken, `;
+        prompt = `[?] Filename '${new_basename}' already taken, `;
       }
 
       // Ask for new name!
