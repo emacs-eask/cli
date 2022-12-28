@@ -25,7 +25,7 @@
 (defun eask--replace-string-in-buffer (old new)
   "Replace OLD to NEW in buffer."
   (let ((str (buffer-string)))
-    (setq str (s-replace old new str))
+    (setq str (eask-s-replace old new str))
     (delete-region (point-min) (point-max))
     (insert str)))
 

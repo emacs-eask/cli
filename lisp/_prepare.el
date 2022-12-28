@@ -69,8 +69,8 @@ dash separator. For example, the following:
 will return `lint-checkdoc' with a dash between two subcommands."
   (let* ((script-dir (file-name-directory eask--script))
          (script-file (file-name-sans-extension (file-name-nondirectory eask--script)))
-         (module-name (s-replace eask-lisp-root "" script-dir))
-         (module-name (s-replace "/" "" module-name)))
+         (module-name (eask-s-replace eask-lisp-root "" script-dir))
+         (module-name (eask-s-replace "/" "" module-name)))
     ;; Ignore if it's inside core module
     (if (member module-name '("core" "checker")) script-file
       (concat module-name "-" script-file))))
@@ -147,6 +147,12 @@ the `eask-start' execution.")
   (let ((result 0))
     (mapc (lambda (elm) (setq result (max result (length (eask-2str elm))))) sequence)
     result))
+
+(defun eask-s-replace (old new s)
+  "Replace OLD with NEW in S each time it occurs."
+  (if (fboundp #'string-replace)
+      (string-replace old new s)
+    (replace-regexp-in-string (regexp-quote old) new s t t)))
 
 ;;
 ;;; Archive
@@ -592,7 +598,7 @@ Eask file in the workspace."
 
 (defun eask-root-del (filename)
   "Remove Eask file root path from FILENAME."
-  (when (stringp filename) (s-replace eask-file-root "" filename)))
+  (when (stringp filename) (eask-s-replace eask-file-root "" filename)))
 
 (defun eask-file-load (location &optional noerror)
   "Load Eask file in the LOCATION."
@@ -793,7 +799,7 @@ Eask file in the workspace."
   (when (and location
              (gnutls-available-p)
              (not (eask-network-insecure-p)))
-    (setq location (s-replace "https://" "http://" location)))
+    (setq location (eask-s-replace "https://" "http://" location)))
   (add-to-list 'package-archives (cons name location) t))
 
 (defun eask-f-source-priority (archive-id &optional priority)
@@ -987,8 +993,8 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 
 (defun eask--msg-paint-kwds (string)
   "Paint keywords from STRING."
-  (let* ((string (s-replace "✓" (ansi-green "✓") string))
-         (string (s-replace "✗" (ansi-red "✗") string)))
+  (let* ((string (eask-s-replace "✓" (ansi-green "✓") string))
+         (string (eask-s-replace "✗" (ansi-red "✗") string)))
     string))
 
 (defun eask--format-paint-kwds (msg &rest args)
@@ -1292,7 +1298,6 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (with-eval-after-load 'ansi (eask-load "extern/ansi"))  ; override
 (eask-load "extern/package")
 (eask-load "extern/package-build")
-(eask-load "extern/s")
 
 ;;
 ;;; Requirement
