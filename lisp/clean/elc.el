@@ -21,6 +21,7 @@
         (eask-msg "")
         (eask-info "✓ (Total of %s .elc file%s deleted)" (length files)
                    (eask--sinr files "" "s")))
-    (eask-info "(No .elc file found in workspace)")))
+    (eask-info "(No .elc file found in workspace)")
+    (setq eask-no-cleaning-operation-p t)))
 
 ;;; clean/elc.el ends here
