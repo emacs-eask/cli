@@ -49,6 +49,7 @@
          (eask-dist-path (expand-file-name eask-dist-path)))
     (if (file-directory-p eask-dist-path)
         (eask--clean-dist eask-dist-path)
-      (eask-info "(No dist folder needs to be cleaned)" eask-dist-path))))
+      (eask-info "(No dist folder needs to be cleaned)" eask-dist-path)
+      (setq eask-no-cleaning-operation-p t))))
 
 ;;; clean/dist.el ends here
