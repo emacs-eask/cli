@@ -25,6 +25,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Support JSON format with Eask-file linter (#85)
 * Handle multiple Eask-files for `init` command (#86)
 * Remove dependency `s.el` (962dd5f8d0da1443368ac2d79b0a013c153a804e)
+* Acknowledge cleaning state for `clean all` command (#87)
 
 ## 0.7.x
 > Released Sep 08, 2022
