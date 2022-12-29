@@ -39,7 +39,9 @@
       (eask-msg "")
       (eask-msg "`%s` with keywords-lint" (ansi-green file))
       (if (eask--defined-keywords keywords)
-          (eask-info "(No issues found.)")
+          (progn
+            (eask-msg "")
+            (eask-info "(No issues found.)"))
         (eask-report "Missing a standard keyword, consider adding one to the Keywords header!")
         (eask-help "lint/keywords"))))))
 
