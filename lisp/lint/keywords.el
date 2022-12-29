@@ -21,7 +21,7 @@
   (let ((available-keywords (mapcar #'car finder-known-keywords))
         (result))
     (dolist (keyword keywords)
-      (when (member keyword available-keywords)
+      (when (memq (intern keyword) available-keywords)
         (setq result t)))
     result))
 
