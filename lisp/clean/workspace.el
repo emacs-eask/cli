@@ -24,6 +24,7 @@
         (progn
           (eask-info "(Workspace is already cleaned)")
           (setq eask-no-cleaning-operation-p t))
+      (eask-msg "")
       (eask-info "✓ (Workspace is now cleaned)" target-dir))))
 
 ;;; clean/workspace.el ends here
