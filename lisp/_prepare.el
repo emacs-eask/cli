@@ -654,7 +654,7 @@ This uses function `locate-dominating-file' to look up directory tree."
     files))
 
 (defun eask-file-try-load (start-path)
-  "Try load eask file in START-PATH."
+  "Try load the Eask-file in START-PATH."
   (when-let* ((files (eask--find-files start-path))
               (file (car files)))
     (eask-file-load file)))

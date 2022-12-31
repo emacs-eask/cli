@@ -227,19 +227,26 @@ Find the Eask-file from START-PATH.
 Consider following directory tree:
 
 ```
-- root
-  -project
-    - src
-      - config.el
-    - Eask
-    - Eask.28
-    - Eask.29
+-project
+  - src
+    - config.el
+  - Eask
+  - Eask.28
+  - Eask.29
 ```
 
 The following output is with Emacs 28.1:
 
 ```elisp
-(eask--find-files "/root/project/src/config.el")  ; '(Eask Eask.28)
+(eask--find-files "/project/src/config.el")  ; '(/project/Eask /project/Eask.28)
+```
+
+## 🔍 Function: eask-file-try-load (`start-path`)
+
+Try load the Eask-file in START-PATH.
+
+```elisp
+(eask--find-files "/project/src/")  ; t
 ```
 
 ## 🔍 Function: eask-network-insecure-p ()
