@@ -184,6 +184,71 @@ Path to currently loaded Eask-file.
 
 Directory to currently loaded Eask-file.
 
+## 🔍 Function: eask--match-file (`name`)
+
+Check to see if NAME is our target Eask-file, then return it.
+
+The following output is with Emacs 28.1:
+
+```elisp
+(eask--match-file "Eask")         ; t
+(eask--match-file "Eask.28")      ; t
+(eask--match-file "Eask.28.1")    ; t
+(eask--match-file "Eask.29")      ; nil
+
+(eask--match-file "Easkfile")     ; t
+(eask--match-file "Easkfile.28")  ; t
+(eask--match-file "Easkfile.29")  ; nil
+```
+
+## 🔍 Function: eask--all-files (&optional `dir`)
+
+Return a list of Eask files from DIR.
+
+Consider following directory tree:
+
+```
+- root
+  - Eask
+  - Eask.28
+  - Eask.29
+```
+
+The following output is with Emacs 28.1:
+
+```elisp
+(eask--all-files "/root/")  ; '(Eask Eask.28)
+```
+
+## 🔍 Function: eask--find-files (`start-path`)
+
+Find the Eask-file from START-PATH.
+
+Consider following directory tree:
+
+```
+-project
+  - src
+    - config.el
+  - Eask
+  - Eask.28
+  - Eask.29
+```
+
+The following output is with Emacs 28.1:
+
+```elisp
+(eask--find-files "/project/src/config.el")  ; '(/project/Eask /project/Eask.28)
+```
+
+## 🔍 Function: eask-file-try-load (`start-path`)
+
+Try load the Eask-file in START-PATH.
+
+```elisp
+(eask--find-files "/project/src/")  ; t
+```
+
 ## 🔍 Function: eask-network-insecure-p ()
 
 Return `t` if the current Emacs session allows insecure network connections.

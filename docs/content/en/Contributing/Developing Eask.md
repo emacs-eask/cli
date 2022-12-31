@@ -9,19 +9,19 @@ weight: 20
 
 To make changes to Eask, you should have:
 
-1. [Node.js](https://nodejs.org/en/) the development environment.
+1. [Node.js](https://nodejs.org/en/) for the development environment.
 2. [npm](https://www.npmjs.com/) for the package manager.
-3. [yargs](https://github.com/yargs/yargs) for parsing the command-line.
+3. [yargs](https://github.com/yargs/yargs) for CLI parser.
 4. [Emacs](https://www.gnu.org/software/emacs/), 26.1 or above!
 
 ### 📝 Building
 
 To build the development environment, you would have to install Eask using
 the [source](https://emacs-eask.github.io/Getting-Started/Install-Eask/#-source)
-method. (Not install through NPM) Make sure you have setup the environment
-PATH variable, so you can call `eask` from the terminal.
+method. Make sure you have set up the environment PATH variable, so you can call
+`eask` from the terminal.
 
-After you have step through the installation, try:
+After you have stepped through the installation, try:
 
 ```sh
 $ eask locate
@@ -29,7 +29,7 @@ $ eask locate
 
 It should print out the location of your working Eask workspace. You
 should be able to identify the Eask workspace, even you have multiple
-Eask version installed!
+Eask versions installed!
 
 ### 📈 Testing
 
