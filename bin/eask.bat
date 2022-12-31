@@ -1,6 +1,6 @@
 @echo off
 
-:: Copyright (C) 2022 Jen-Chieh Shen
+:: Copyright (C) 2022-2023 Jen-Chieh Shen
 
 :: This program is free software; you can redistribute it and/or modify
 :: it under the terms of the GNU General Public License as published by
