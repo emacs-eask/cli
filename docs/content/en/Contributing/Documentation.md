@@ -25,16 +25,27 @@ executable; the static site generator.
 
 ### 📐 Setup
 
-To setup the website locally, you need to first navigate to the `docs/` folder.
+To set up the website locally, you need to first install the theme:
 
 ```sh
-$ cd path/to/eask/docs/
+# Clone the repository with submodules...
+git clone https://github.com/emacs-eask/cli --recurse-submodules
+
+# Navgiate to `docs/theme/geekdoc` folder
+cd path/to/cli/docs/theme/geekdoc/
+
+# Build the themes
+npm install && npm run build
 ```
 
 Then run the `hugo` command:
 
 ```sh
-$ hugo server
+# Navigate back to `docs` folder
+cd path/to/cli/docs/
+
+# Run hugo server locally
+hugo server
 ```
 
 And that's it! Now you can open the browser with the URL `localhost:1313`. 🎉
