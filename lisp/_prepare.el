@@ -627,9 +627,10 @@ Eask file in the workspace."
 
 If argument DIR is nil, we use `default-directory' instead."
   (setq dir (or dir default-directory))
-  (let* ((files (append (directory-files dir t "Easkfile[.0-9]*\\'")
-                        (directory-files dir t "Eask[.0-9]*\\'")))
-         (files (cl-remove-if #'file-directory-p files)))
+  (when-let* ((files (append
+                      (ignore-errors (directory-files dir t "Easkfile[.0-9]*\\'"))
+                      (ignore-errors (directory-files dir t "Eask[.0-9]*\\'"))))
+              (files (cl-remove-if #'file-directory-p files)))
     (cl-remove-if-not #'eask--match-file files)))
 
 (defun eask-file-try-load (start-path)
