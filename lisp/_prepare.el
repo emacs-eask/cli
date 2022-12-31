@@ -623,7 +623,7 @@ Eask file in the workspace."
                             eask-full eask-major eask)))))
 
 (defun eask--all-files (&optional dir)
-  "Return a list of Eask files.
+  "Return a list of Eask files from DIR.
 
 If argument DIR is nil, we use `default-directory' instead."
   (setq dir (or dir default-directory))
