@@ -602,6 +602,7 @@ Eask file in the workspace."
 
 (defun eask-file-load (location &optional noerror)
   "Load Eask file in the LOCATION."
+  (jcs-print (expand-file-name location user-emacs-directory))
   (when-let* ((target-eask-file (expand-file-name location user-emacs-directory))
               (result (eask--alias-env (load target-eask-file 'noerror t))))
     (setq eask-file target-eask-file  ; assign eask file only if success
@@ -609,14 +610,46 @@ Eask file in the workspace."
     (run-hooks 'eask-file-loaded-hook)
     result))
 
-(defun eask-file-try-load (relative-path)
-  "Try load eask file in RELATIVE-PATH."
-  (or (eask-file-load (concat relative-path (format "Easkfile.%s" emacs-version)) t)
-      (eask-file-load (concat relative-path (format "Eask.%s" emacs-version)) t)
-      (eask-file-load (concat relative-path (format "Easkfile.%s" emacs-major-version)) t)
-      (eask-file-load (concat relative-path (format "Eask.%s" emacs-major-version)) t)
-      (eask-file-load (concat relative-path "Easkfile") t)
-      (eask-file-load (concat relative-path "Eask") t)))
+(defun eask--match-file (name)
+  "Check to see if NAME is our target Eask-file, then return it."
+  (let ((name (file-name-nondirectory (directory-file-name name)))
+        (easkfile-full  (format "Easkfile.%s" emacs-version))
+        (easkfile-major (format "Easkfile.%s" emacs-major-version))
+        (easkfile       "Easkfile")
+        (eask-full      (format "Eask.%s" emacs-version))
+        (eask-major     (format "Eask.%s" emacs-major-version))
+        (eask           "Eask"))
+    (car (member name (list easkfile-full easkfile-major easkfile
+                            eask-full eask-major eask)))))
+
+(defun eask--all-files (&optional dir)
+  "Return a list of Eask files.
+
+If argument DIR is nil, we use `default-directory' instead."
+  (setq dir (or dir default-directory))
+  (let* ((files (append (directory-files dir t "Easkfile[.0-9]*\\'")
+                        (directory-files dir t "Eask[.0-9]*\\'")))
+         (files (cl-remove-if #'file-directory-p files)))
+    (cl-remove-if-not #'eask--match-file files)))
+
+(defun eask-file-try-load (start-path)
+  "Try load eask file in START-PATH.
+
+This uses function `locate-dominating-file' to look up directory tree."
+  (when-let*
+      (;; XXX: This is redundant, but the simplest way to find the root path!
+       (root (locate-dominating-file start-path #'eask--all-files))
+       (files (eask--all-files root))  ; get all available Eask-files
+       ;; Filter it to restrict to this Emacs version!
+       (files (cl-remove-if-not #'eask--match-file files))
+       ;; Make `Easkfile.29.1' > `Easkfile.29' > `Easkfile' (same with `Eask' file)
+       (files (sort files #'string-greaterp))
+       ;; Make `Easkfile' > `Eask' higher precedent!
+       (files (sort files (lambda (item1 item2)
+                            (and (string-prefix-p "Easkfile" item1)
+                                 (not (string-prefix-p "Easkfile" item2))))))
+       (file (car files)))
+    (eask-file-load file)))
 
 (defun eask--print-env-info ()
   "Display environment information at the very top of the execution."
