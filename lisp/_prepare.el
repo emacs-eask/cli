@@ -602,7 +602,6 @@ Eask file in the workspace."
 
 (defun eask-file-load (location &optional noerror)
   "Load Eask file in the LOCATION."
-  (jcs-print (expand-file-name location user-emacs-directory))
   (when-let* ((target-eask-file (expand-file-name location user-emacs-directory))
               (result (eask--alias-env (load target-eask-file 'noerror t))))
     (setq eask-file target-eask-file  ; assign eask file only if success
@@ -711,7 +710,7 @@ This uses function `locate-dominating-file' to look up directory tree."
                   (custom-file (locate-user-emacs-file "custom.el"))
                   (special (eask-special-p)))
              (unless special
-               (if (eask-file-try-load "../../")
+               (if (eask-file-try-load "./")
                    (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
                  (eask-msg "✗ Loading Eask file... missing!")
                  (eask-help "core/init")))
