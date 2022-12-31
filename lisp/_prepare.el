@@ -612,15 +612,17 @@ Eask file in the workspace."
 
 (defun eask--match-file (name)
   "Check to see if NAME is our target Eask-file, then return it."
-  (let ((name (file-name-nondirectory (directory-file-name name)))
-        (easkfile-full  (format "Easkfile.%s" emacs-version))
-        (easkfile-major (format "Easkfile.%s" emacs-major-version))
-        (easkfile       "Easkfile")
-        (eask-full      (format "Eask.%s" emacs-version))
-        (eask-major     (format "Eask.%s" emacs-major-version))
-        (eask           "Eask"))
-    (car (member name (list easkfile-full easkfile-major easkfile
-                            eask-full eask-major eask)))))
+  (let (;; Ensure path to filename
+        (name             (file-name-nondirectory (directory-file-name name)))
+        ;; `p-' stards for pattern
+        (p-easkfile-full  (format "Easkfile.%s" emacs-version))
+        (p-easkfile-major (format "Easkfile.%s" emacs-major-version))
+        (p-easkfile       "Easkfile")
+        (p-eask-full      (format "Eask.%s" emacs-version))
+        (p-eask-major     (format "Eask.%s" emacs-major-version))
+        (p-eask           "Eask"))
+    (car (member name (list p-easkfile-full p-easkfile-major p-easkfile
+                            p-eask-full p-eask-major p-eask)))))
 
 (defun eask--all-files (&optional dir)
   "Return a list of Eask files from DIR.
