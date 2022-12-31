@@ -10,6 +10,7 @@
 (require 'url-vars)
 
 (require 'cl-lib)
+(require 'files)
 (require 'ls-lisp)
 (require 'pp)
 (require 'rect)

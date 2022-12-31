@@ -27,6 +27,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Remove dependency `s.el` (962dd5f8d0da1443368ac2d79b0a013c153a804e)
 * Acknowledge cleaning state for `clean all` command (#87)
 * Fix keyword lint undetected (#88)
+* Improve Eask-file loader to search file upward (#89)
 
 ## 0.7.x
 > Released Sep 08, 2022
