@@ -61,6 +61,9 @@ eask lint keywords
 eask lint package
 eask lint regexps
 
+# Testing
+eask test activate
+
 # Clean up
 eask clean .eask
 eask clean elc
@@ -71,6 +74,3 @@ eask clean all
 eask locate
 eask upgrade-eask
 eask refresh
-
-# Testing
-eask test activate
