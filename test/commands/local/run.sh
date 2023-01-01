@@ -44,7 +44,6 @@ eask package
 
 # Development
 eask compile
-eask activate
 eask recipe
 eask keywords
 eask run
@@ -61,6 +60,9 @@ eask lint indent
 eask lint keywords
 eask lint package
 eask lint regexps
+
+# Testing
+eask test activate
 
 # Clean up
 eask clean .eask

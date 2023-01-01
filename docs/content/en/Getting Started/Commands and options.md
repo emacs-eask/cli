@@ -225,20 +225,6 @@ Load Emacs Lisp files in order.
 $ eask [GLOBAL-OPTIONS] load [FILES..]
 ```
 
-## 🔍 eask activate
-
-Activate package; use to test the package activation
-
-```sh
-$ eask [GLOBAL-OPTIONS] activate [FILES..]
-```
-
-{{< hint info >}}
-💡 You can pass in **[FILES..]** so you can test your package activation fully!
-
-**[FILES..]** will be loaded after the package is activated.
-{{< /hint >}}
-
 ## 🔍 eask recipe
 
 Suggest a recipe format
@@ -455,6 +441,20 @@ $ eask [GLOBAL-OPTIONS] lint regexps [FILES..]
 Alias: `lint relint`
 
 # 🚩 Testing
+
+## 🔍 eask test activate
+
+Activate package; use to test the package activation
+
+```sh
+$ eask [GLOBAL-OPTIONS] activate [FILES..]
+```
+
+{{< hint info >}}
+💡 You can pass in **[FILES..]** so you can test your package activation fully!
+
+**[FILES..]** will be loaded after the package is activated.
+{{< /hint >}}
 
 ## 🔍 eask test ert
 
