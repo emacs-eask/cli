@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['dist [destination]', 'distribution [destination]'];
-exports.desc = 'delete dist subdirectory';
+exports.desc = 'Delete dist subdirectory';
 exports.builder = {
   destination: {
     description: 'destination path/folder',

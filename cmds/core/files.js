@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['files'];
-exports.desc = 'print the list of all package files';
+exports.desc = 'Print the list of all package files';
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/files');

@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['info'];
-exports.desc = 'display information about the current package';
+exports.desc = 'Display information about the current package';
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/info');

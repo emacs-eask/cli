@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['uninstall [names..]', 'delete [names..]'];
-exports.desc = 'uninstall packages';
+exports.desc = 'Uninstall packages';
 exports.builder = {
   names: {
     description: 'packages to uninstall',

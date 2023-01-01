@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['compile [names..]'];
-exports.desc = 'byte compile all Emacs Lisp files in the package';
+exports.desc = 'Byte compile all Emacs Lisp files in the package';
 exports.builder = {
   names: {
     description: 'specify files to byte-compile',

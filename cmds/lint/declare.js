@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['declare [files..]'];
-exports.desc = 'run check-declare';
+exports.desc = 'Run check-declare';
 exports.builder = {
   files: {
     description: 'files you want check-declare to run on',

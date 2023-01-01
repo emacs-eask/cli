@@ -27,41 +27,41 @@ Eask is a command-line tool that helps you build, lint, and test Emacs Lisp pack
 Usage: eask <command> [options..]
 
 Commands:
-  archives               list out all package archives                                                                                                                [aliases: sources]
-  autoloads              generate autoloads file
-  clean <type>           delete various files produced during building
-  compile [names..]      byte compile all Emacs Lisp files in the package
-  concat [names..]       concatenate all elisp files                                                                                                              [aliases: concatenate]
-  create <name>          create a new elisp project                                                                                                                       [aliases: new]
-  emacs [args..]         execute emacs with the appropriate environment
-  eval [form]            evaluate lisp form with a proper PATH
-  path                   print the PATH (exec-path) from workspace                                                                                                  [aliases: exec-path]
-  exec [args..]          execute command with correct environment PATH set up
-  files                  print the list of all package files
-  info                   display information about the current package
-  init                   create new Eask file in current directory
-  install-deps           automatically install package dependencies                                                                             [aliases: install-dependencies, prepare]
-  install [names..]      install packages
-  keywords               list available keywords that can be used in the header section
-  lint <type>            run linter
-  list                   list packages
-  load-path              print the load-path from workspace
-  load [files..]         load files
-  outdated               show all outdated dependencies
-  package-directory      print path to package directory
+  archives               List out all package archives                                                                                                                [aliases: sources]
+  autoloads              Generate autoloads file
+  clean <type>           Delete various files produced during building
+  compile [names..]      Byte compile all Emacs Lisp files in the package
+  concat [names..]       Concatenate elisp files                                                                                                                  [aliases: concatenate]
+  create <name>          Create a new elisp project                                                                                                                       [aliases: new]
+  emacs [args..]         Execute emacs with the appropriate environment
+  eval [form]            Evaluate lisp form with a proper PATH
+  path                   Print the PATH (exec-path) from workspace                                                                                                  [aliases: exec-path]
+  exec [args..]          Execute command with correct environment PATH set up
+  files                  Print the list of all package files
+  info                   Display information about the current package
+  init                   Create new Eask file in current directory
+  install-deps           Automatically install package dependencies                                                                             [aliases: install-dependencies, prepare]
+  install [names..]      Install packages
+  keywords               List available keywords that can be used in the header section
+  lint <type>            Run linter
+  list                   List packages
+  load-path              Print the load-path from workspace
+  load [files..]         Load elisp files
+  outdated               Show all outdated dependencies
+  package-directory      Print path to package directory
   package [destination]  Build a package artifact, and put it into the given destination
-  pkg-file               generate -pkg file
-  recipe                 suggest a recipe format
-  refresh                download package archives
-  reinstall [names..]    reinstall packages
-  run [names..]          run the script named [names..]                                                                                                            [aliases: run-script]
-  search [queries..]     search packages
-  test <type>            run test
-  uninstall [names..]    uninstall packages                                                                                                                            [aliases: delete]
-  upgrade [names..]      upgrade packages
-  check-eask [files..]   run eask checker
-  locate                 print out Eask installed location
-  upgrade-eask           upgrade Eask itself                                                                                                                     [aliases: upgrade-self]
+  pkg-file               Generate -pkg file
+  recipe                 Suggest a recipe format
+  refresh                Download package archives
+  reinstall [names..]    Reinstall packages
+  run [names..]          Run the script named [names..]                                                                                                            [aliases: run-script]
+  search [queries..]     Search packages
+  test <type>            Run test
+  uninstall [names..]    Uninstall packages                                                                                                                            [aliases: delete]
+  upgrade [names..]      Upgrade packages
+  check-eask [files..]   Run eask checker
+  locate                 Print out Eask installed location
+  upgrade-eask           Upgrade Eask itself                                                                                                                     [aliases: upgrade-self]
 
 Proxy Options:
       --proxy        update proxy for HTTP and HTTPS to host                                                                                                                    [string]
@@ -70,8 +70,8 @@ Proxy Options:
       --no-proxy     set no-proxy to host                                                                                                                                       [string]
 
 Options:
-      --version             Show version number                                                                                                                                [boolean]
-      --help                Show usage instructions                                                                                                                            [boolean]
+      --version             show version number                                                                                                                                [boolean]
+      --help                show usage instructions                                                                                                                            [boolean]
   -g, --global              change default workspace to ~/.emacs.d/                                                                                                            [boolean]
   -a, --all                 enable all flag                                                                                                                                    [boolean]
   -q, --quick               start cleanly without loading the configuration files                                                                                              [boolean]

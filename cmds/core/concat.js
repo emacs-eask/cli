@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['concat [names..]', 'concatenate [names..]'];
-exports.desc = 'concatenate all elisp files';
+exports.desc = 'Concatenate elisp files';
 exports.builder = {
   names: {
     description: 'specify files to concatenate',

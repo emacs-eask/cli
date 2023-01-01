@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['check-eask [files..]'];
-exports.desc = 'run eask checker';
+exports.desc = 'Run eask checker';
 exports.builder = {
   files: {
     description: 'specify Eask-files for checker to lint',

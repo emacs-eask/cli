@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['install [names..]'];
-exports.desc = 'install packages';
+exports.desc = 'Install packages';
 exports.builder = {
   names: {
     description: 'packages to install',

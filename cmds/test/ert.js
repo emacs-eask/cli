@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['ert [files..]'];
-exports.desc = 'run ert tests';
+exports.desc = 'Run ert tests';
 exports.builder = {
   files: {
     description: 'specify files to do ert tests',

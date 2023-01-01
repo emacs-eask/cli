@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['refresh'];
-exports.desc = 'download package archives';
+exports.desc = 'Download package archives';
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/refresh');

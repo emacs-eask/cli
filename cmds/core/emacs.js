@@ -25,7 +25,7 @@ const path = require('path');
 const child_process = require("child_process");
 
 exports.command = ['emacs [args..]'];
-exports.desc = 'execute emacs with the appropriate environment';
+exports.desc = 'Execute emacs with the appropriate environment';
 exports.builder = async (yargs) => {
   yargs.help(false);
   yargs.version(false);

@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['checkdoc [files..]'];
-exports.desc = 'run checkdoc';
+exports.desc = 'Run checkdoc';
 exports.builder = {
   files: {
     description: 'files you want checkdoc to run on',

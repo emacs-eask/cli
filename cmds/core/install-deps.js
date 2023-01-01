@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['install-deps', 'install-dependencies', 'prepare'];
-exports.desc = 'automatically install package dependencies';
+exports.desc = 'Automatically install package dependencies';
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/install-deps');

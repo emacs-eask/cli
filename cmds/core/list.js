@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['list'];
-exports.desc = 'list packages';
+exports.desc = 'List packages';
 exports.builder = {
   depth: {
     description: 'dependency depth level to print',

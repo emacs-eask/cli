@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['package [files..]'];
-exports.desc = 'lint the package using package-lint';
+exports.desc = 'Run package-lint';
 exports.builder = {
   files: {
     description: 'specify files to do package lint',

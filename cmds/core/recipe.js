@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['recipe'];
-exports.desc = 'suggest a recipe format';
+exports.desc = 'Suggest a recipe format';
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/recipe');

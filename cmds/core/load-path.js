@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['load-path'];
-exports.desc = 'print the load-path from workspace';
+exports.desc = 'Print the load-path from workspace';
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/load-path');

@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['indent [files..]'];
-exports.desc = 'lint the package using indent-lint';
+exports.desc = 'Run indent-lint';
 exports.builder = {
   files: {
     description: 'files you want indent-lint to run on',

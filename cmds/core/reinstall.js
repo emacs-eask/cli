@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['reinstall [names..]'];
-exports.desc = 'reinstall packages';
+exports.desc = 'Reinstall packages';
 exports.builder = {
   names: {
     description: 'packages to reinstall',

@@ -23,7 +23,7 @@ const fs = require('fs');
 const child_process = require("child_process");
 
 exports.command = ['run [names..]', 'run-script [names..]'];
-exports.desc = 'run the script named [names..]';
+exports.desc = 'Run the script named [names..]';
 exports.builder = {
   names: {
     description: 'specify scripts to run',

@@ -22,7 +22,7 @@
 const child_process = require("child_process");
 
 exports.command = ['upgrade-eask', 'upgrade-self'];
-exports.desc = 'upgrade Eask itself';
+exports.desc = 'Upgrade Eask itself';
 
 exports.handler = async (argv) => {
   process.chdir(UTIL.plugin_dir());

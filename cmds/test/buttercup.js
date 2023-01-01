@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['buttercup [files..]'];
-exports.desc = 'run buttercup tests';
+exports.desc = 'Run buttercup tests';
 exports.builder = {
   files: {
     description: 'files you want buttercup to run on',

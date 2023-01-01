@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['pkg-file'];
-exports.desc = "generate -pkg file";
+exports.desc = 'Generate -pkg file';
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/pkg-file');

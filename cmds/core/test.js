@@ -20,9 +20,13 @@
 "use strict";
 
 exports.command = ['test <type>'];
-exports.desc = 'run test';
+exports.desc = 'Run test';
 exports.builder = function (yargs) {
-  return yargs.commandDir('../test/');
+  return yargs
+    .usage(`${exports.desc}
+
+Usage: eask test <command> [options..]`)
+    .commandDir('../test/');
 };
 
 exports.handler = async (argv) => { };
