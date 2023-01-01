@@ -833,6 +833,7 @@ This uses function `locate-dominating-file' to look up directory tree."
 
 (defun eask-f-source (name &optional location)
   "Add archive NAME with LOCATION."
+  (when (symbolp name) (setq name (eask-2str name)))  ; ensure to string, accept symbol
   (when (assoc name package-archives)
     (eask-error "Multiple definition of source `%s'" name))
   (setq location (or location (cdr (assq (intern name) eask-source-mapping))))
