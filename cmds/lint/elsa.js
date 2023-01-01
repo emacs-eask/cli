@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['elsa [files..]'];
-exports.desc = 'run elsa';
+exports.desc = 'Run elsa';
 exports.builder = {
   files: {
     description: 'files you want elsa to run on',

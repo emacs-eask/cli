@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['elint [files..]'];
-exports.desc = 'run elint';
+exports.desc = 'Run elint';
 exports.builder = {
   files: {
     description: 'files you want elint to run on',

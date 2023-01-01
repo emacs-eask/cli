@@ -20,9 +20,13 @@
 "use strict";
 
 exports.command = ['lint <type>'];
-exports.desc = 'run linter';
+exports.desc = 'Run linter';
 exports.builder = function (yargs) {
-  return yargs.commandDir('../lint/');
+  return yargs
+    .usage(`${exports.desc}
+
+Usage: eask lint <command> [options..]`)
+    .commandDir('../lint/');
 };
 
 exports.handler = async (argv) => { };

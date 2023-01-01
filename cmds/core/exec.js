@@ -23,7 +23,7 @@ const fs = require('fs');
 const child_process = require("child_process");
 
 exports.command = ['exec [args..]'];
-exports.desc = 'execute command with correct environment PATH set up';
+exports.desc = 'Execute command with correct environment PATH set up';
 exports.builder = async (yargs) => {
   yargs.help(false);
   yargs.version(false);

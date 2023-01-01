@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['activate [files..]'];
-exports.desc = 'activate package; use to test package activation';
+exports.desc = 'Activate package; use to test package activation';
 exports.builder = {
   files: {
     description: 'files to load after package activation',

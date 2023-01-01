@@ -20,9 +20,13 @@
 "use strict";
 
 exports.command = ['clean <type>'];
-exports.desc = 'delete various files produced during building';
+exports.desc = 'Delete various files produced during building';
 exports.builder = function (yargs) {
-  return yargs.commandDir('../clean/');
+  return yargs
+    .usage(`${exports.desc}
+
+Usage: eask clean <command> [options..]`)
+    .commandDir('../clean/');
 };
 
 exports.handler = async (argv) => { };

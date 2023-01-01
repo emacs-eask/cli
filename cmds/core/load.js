@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['load [files..]'];
-exports.desc = 'load files';
+exports.desc = 'Load elisp files';
 exports.builder = {
   files: {
     description: 'files to load',

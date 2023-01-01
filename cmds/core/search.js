@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['search [queries..]'];
-exports.desc = 'search packages';
+exports.desc = 'Search packages';
 exports.builder = {
   query: {
     description: 'queries to search packages',

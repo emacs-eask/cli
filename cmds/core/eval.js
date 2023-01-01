@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['eval [form]'];
-exports.desc = 'evaluate lisp form with a proper PATH';
+exports.desc = 'Evaluate lisp form with a proper PATH';
 exports.builder = {
   form: {
     description: 'lisp form',

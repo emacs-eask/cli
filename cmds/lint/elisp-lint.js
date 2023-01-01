@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['elisp-lint [files..]'];
-exports.desc = 'run elisp-lint';
+exports.desc = 'Run elisp-lint';
 exports.builder = {
   files: {
     description: 'files you want elisp-lint to run on',

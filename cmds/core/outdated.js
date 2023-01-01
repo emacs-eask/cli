@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['outdated'];
-exports.desc = 'show all outdated dependencies';
+exports.desc = 'Show all outdated dependencies';
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/outdated');

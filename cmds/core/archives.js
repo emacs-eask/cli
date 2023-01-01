@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['archives', 'sources'];
-exports.desc = 'list out all package archives';
+exports.desc = 'List out all package archives';
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/archives');

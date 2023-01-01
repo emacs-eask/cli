@@ -26,7 +26,7 @@ const readline = require('readline');
 var instance;  /* `readline` instance */
 
 exports.command = ['init'];
-exports.desc = 'create new Eask file in current directory';
+exports.desc = 'Create new Eask file in current directory';
 
 exports.handler = async ({}) => {
   await create_eask_file();

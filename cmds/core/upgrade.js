@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['upgrade [names..]'];
-exports.desc = 'upgrade packages';
+exports.desc = 'Upgrade packages';
 exports.builder = {
   names: {
     description: 'packages to upgrade',

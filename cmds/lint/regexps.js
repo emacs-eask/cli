@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['regexps [files..]', 'relint [files..]'];
-exports.desc = 'run relint';
+exports.desc = 'Run relint';
 exports.builder = {
   files: {
     description: 'files you want relint to run on',

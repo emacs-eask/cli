@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['path', 'exec-path'];
-exports.desc = 'print the PATH (exec-path) from workspace';
+exports.desc = 'Print the PATH (exec-path) from workspace';
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/exec-path');

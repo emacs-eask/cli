@@ -23,10 +23,8 @@ yargs
     handler() { yargs.showHelp(); }
   })
   .showHelpOnFail(true)
-  .help(
-    'help',
-    'Show usage instructions'
-  )
+  .version('version', 'show version number', '0.7.6')
+  .help('help', 'show usage instructions')
   .option('global', {
     description: `change default workspace to ~/.emacs.d/`,
     alias: 'g',

@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['all', 'everything'];
-exports.desc = 'do all cleaning tasks';
+exports.desc = 'Do all cleaning tasks';
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'clean/all');
