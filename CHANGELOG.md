@@ -28,6 +28,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Acknowledge cleaning state for `clean all` command (#87)
 * Fix keyword lint undetected (#88)
 * Improve Eask-file loader to search file upward (#89)
+* Move command `activate` under test subcommand (#92)
 
 ## 0.7.x
 > Released Sep 08, 2022
