@@ -30,5 +30,5 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/activate', argv.files);
+  await UTIL.e_call(argv, 'test/activate', argv.files);
 };

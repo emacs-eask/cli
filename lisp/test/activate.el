@@ -1,4 +1,4 @@
-;;; core/activate.el --- activate package  -*- lexical-binding: t; -*-
+;;; test/activate.el --- activate package  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -21,6 +21,8 @@
       (format "Activating the package `%s'... " (ansi-green name))
       (require (intern name))
       "succeeded ✓"))
+  ;; XXX: Call `core/load' command to load the files for activation tests!
+  ;; The command will parse the argument itself, so we don't have to worry!
   (eask-call "core/load"))
 
-;;; core/activate.el ends here
+;;; test/activate.el ends here
