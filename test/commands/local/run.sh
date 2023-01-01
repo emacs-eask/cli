@@ -44,7 +44,6 @@ eask package
 
 # Development
 eask compile
-eask activate
 eask recipe
 eask keywords
 eask run
@@ -72,3 +71,6 @@ eask clean all
 eask locate
 eask upgrade-eask
 eask refresh
+
+# Testing
+eask test activate
