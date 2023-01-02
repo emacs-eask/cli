@@ -31,6 +31,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Move command `activate` under test subcommand (#92)
 * Add command to create ELPA project (#94)
 * Add command to clean log files (#97)
+* Add command to clean autoloads file (#98)
 
 ## 0.7.x
 > Released Sep 08, 2022
