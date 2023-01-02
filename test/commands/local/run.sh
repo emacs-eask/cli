@@ -50,6 +50,9 @@ eask run
 eask run test
 eask run -all
 
+# Exection
+eask eval '(progn (message \"Hello World!~\"))'
+
 # Linter
 eask lint checkdoc
 eask lint declare
