@@ -71,6 +71,7 @@ eask test activate
 eask clean .eask
 eask clean elc
 eask clean dist
+eask clean autoloads
 eask clean log-file
 eask clean all
 
