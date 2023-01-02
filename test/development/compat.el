@@ -11,12 +11,14 @@
 ;;; Code:
 
 (require 'finder)
+(require 'thingatpt)
 
 ;;
 ;;; Test functions
 
 (defconst compat-functions
   '(ansi-color-filter-apply
+    thing-at-point--read-from-whole-string
     ls-lisp-format-file-size
     lsh
     package--alist
