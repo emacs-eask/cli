@@ -356,6 +356,14 @@ $ eask [GLOBAL-OPTIONS] clean dist
 
 Alias: `distribution`
 
+## 🔍 eask clean autoloads
+
+Remove generated autoloads file.
+
+```sh
+$ eask [GLOBAL-OPTIONS] clean autoloads
+```
+
 ## 🔍 eask clean log-file
 
 Remove all generated log files.
@@ -371,6 +379,7 @@ This command is the combination of all other clean commands.
 - `clean workspace`
 - `clean elc`
 - `clean dist`
+- `clean autoloads`
 - `clean log-file`
 
 ```sh

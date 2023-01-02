@@ -17,29 +17,29 @@
 (defvar eask-no-cleaning-operation-p nil
   "Set to non-nil if there is no cleaning operation done.")
 
+(defmacro eask--clean-section (title &rest body)
+  ""
+  (declare (indent 1))
+  `(let (eask-no-cleaning-operation-p)
+     (eask-with-progress
+       (format "%s... \n" ,title)
+       (progn ,@body)
+       (if eask-no-cleaning-operation-p "skipped ✗" "done ✓"))))
+
 (eask-start
-  (let (eask-no-cleaning-operation-p)
-    (eask-with-progress
-      "Cleaning workspace... \n"
-      (eask-call "clean/workspace")
-      (if eask-no-cleaning-operation-p "skipped ✗" "done ✓")))
+  (eask--clean-section "Cleaning workspace"
+    (eask-call "clean/workspace"))
   (eask-msg "")
-  (let (eask-no-cleaning-operation-p)
-    (eask-with-progress
-      "Cleaning byte-compile files... \n"
-      (eask-call "clean/elc")
-      (if eask-no-cleaning-operation-p "skipped ✗" "done ✓")))
+  (eask--clean-section "Cleaning byte-compile files"
+    (eask-call "clean/elc"))
   (eask-msg "")
-  (let (eask-no-cleaning-operation-p)
-    (eask-with-progress
-      "Cleaning dist... \n"
-      (eask-call "clean/dist")
-      (if eask-no-cleaning-operation-p "skipped ✗" "done ✓")))
+  (eask--clean-section "Cleaning dist"
+    (eask-call "clean/dist"))
   (eask-msg "")
-  (let (eask-no-cleaning-operation-p)
-    (eask-with-progress
-      "Cleaning log files... \n"
-      (eask-call "clean/log-file")
-      (if eask-no-cleaning-operation-p "skipped ✗" "done ✓"))))
+  (eask--clean-section "Cleaning autoloads file"
+    (eask-call "clean/autoloads"))
+  (eask-msg "")
+  (eask--clean-section "Cleaning log files"
+    (eask-call "clean/log-file")))
 
 ;;; clean/all.el ends here
