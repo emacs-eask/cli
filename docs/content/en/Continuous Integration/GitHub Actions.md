@@ -5,7 +5,7 @@ weight: 100
 
 {{< toc >}}
 
-Here is an example using the GitHub Actions service.
+Here is an example using the [GitHub](https://github.com/) Actions service.
 
 ```yml
 jobs:
