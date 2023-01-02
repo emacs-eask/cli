@@ -32,6 +32,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add command to create ELPA project (#94)
 * Add command to clean log files (#97)
 * Add command to clean autoloads file (#98)
+* Add command to clean pkg-file (#99)
 
 ## 0.7.x
 > Released Sep 08, 2022
