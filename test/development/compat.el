@@ -11,6 +11,7 @@
 ;;; Code:
 
 (require 'finder)
+(require 'thingatpt)
 
 ;;
 ;;; Test functions
