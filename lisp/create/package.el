@@ -1,10 +1,10 @@
-;;; core/create.el --- create a new elisp project  -*- lexical-binding: t; -*-
+;;; create/package.el --- Create a new elisp project  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
 ;; Create a new elisp project,
 ;;
-;;   $ eask create [name]
+;;   $ eask create package [name]
 ;;
 ;;
 ;;  Initialization options:
@@ -57,10 +57,6 @@
         (eask--replace-string-in-buffer "{ VERSION }" (eask-package-version))
         (eask--replace-string-in-buffer "{ EMACS_VERSION }" (eask-depends-emacs-version))
         (eask--replace-string-in-buffer "{ KEYWORDS }" (string-join eask-keywords " "))
-        (save-buffer))
-      (with-current-buffer (find-file (expand-file-name "README.md"))
-        (eask--replace-string-in-buffer eask--template-project-name (eask-package-name))
-        (eask--replace-string-in-buffer "{ SUMMARY }" (eask-package-description))
         (save-buffer)))
     "done ✓")
   (eask-msg "")
@@ -71,4 +67,4 @@
   (eask-msg "")
   (eask-msg "Visit https://emacs-eask.github.io/ for quickstart guide and full documentation."))
 
-;;; core/create.el ends here
+;;; create/package.el ends here

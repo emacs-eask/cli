@@ -19,52 +19,14 @@
 
 "use strict";
 
-const child_process = require('child_process');
-
-const init = require('./init');
-
-exports.command = ['create <name>', 'new <name>'];
+exports.command = ['create <type>'];
 exports.desc = 'Create a new elisp project';
-exports.builder = {
-  name: {
-    description: 'new project name',
-    requiresArg: false,
-    type: 'string',
-  },
+exports.builder = function (yargs) {
+  return yargs
+    .usage(`${exports.desc}
+
+Usage: eask create <command> [options..]`)
+    .commandDir('../create/');
 };
 
-const TEMPLATE_URL = 'https://github.com/emacs-eask/template-elisp';
-
-exports.handler = async (argv) => {
-  const project_name = argv.name;
-
-  let proc = child_process.spawn('git', ['clone', TEMPLATE_URL, project_name],
-                                 { stdio: 'inherit' });
-
-  // You would just need to register the error event, or else it can't print
-  // the help instruction below.
-  proc.on('error', function () { });
-
-  proc.on('close', function (code) {
-    if (code == 0) {
-      console.log('✓ Done cloning the template project');
-      console.log('');
-      process.chdir(project_name);
-      _cloned(argv);
-      return;
-    }
-    // Help instruction here!
-    console.log('✗ Error while cloning template project');
-    console.log('');
-    console.log('  [1] Make sure you have git installed and has the right permission');
-    process.stdout.write(`  [2] Failed because of the target directory isn't empty`);
-  });
-};
-
-
-/* Operations after _cloned */
-async function _cloned(argv) {
-  console.log('Initialize the Eask-file for your project...');
-  await init.create_eask_file();
-  UTIL.e_call(argv, 'core/create');
-}
+exports.handler = async (argv) => { };

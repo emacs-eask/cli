@@ -4,7 +4,7 @@
 ;;
 ;; Command use to activate package
 ;;
-;;   $ eask activate
+;;   $ eask test activate
 ;;
 
 ;;; Code:
