@@ -13,14 +13,6 @@ $ eask [GLOBAL-OPTIONS] [COMMAND] [COMMAND-OPTIONS] [COMMAND-ARGUMENTS]
 
 # 🚩 Core
 
-## 🔍 eask create
-
-Create an elisp project with the default `Eask`-file and CI/CD support.
-
-{{< hint info >}}
-💡 The template project is located in https://github.com/emacs-eask/template-elisp
-{{< /hint >}}
-
 ## 🔍 eask init
 
 Eask will generate file like:
@@ -308,6 +300,24 @@ Download package archives.
 ```sh
 $ eask [GLOBAL-OPTIONS] refresh
 ```
+
+# 🚩 Creating
+
+## 🔍 eask create package
+
+Create a new elisp project with the default `Eask`-file and CI/CD support.
+
+{{< hint info >}}
+💡 The template project is located in https://github.com/emacs-eask/template-elisp
+{{< /hint >}}
+
+## 🔍 eask create elpa
+
+Create a new ELPA using [github-elpa](https://github.com/10sr/github-elpa).
+
+{{< hint info >}}
+💡 The template project is located in https://github.com/emacs-eask/template-elpa
+{{< /hint >}}
 
 # 🚩 Cleaning
 

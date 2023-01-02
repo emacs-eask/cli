@@ -5,7 +5,10 @@
 (website-url "https://github.com/emacs-eask/cli")
 (keywords "emacs" "package" "management" "cli")
 
-(script "test" "echo \"Error: no test specified\" && exit 1")
+(script "test"      "echo \"Error: no test specified\" && exit 1")
+(script "install"   "npm install")
+(script "setup-doc" "cd ./docs/themes/geekdoc/ && npm install && npm run build")
+(script "serve-doc" "cd ./docs/ && hugo server")
 
 (files
  "eask"
