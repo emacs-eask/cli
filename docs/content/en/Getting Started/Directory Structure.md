@@ -5,7 +5,7 @@ weight: 350
 
 {{< toc >}}
 
-Running the **`eask create`** generator from the command-line will create
+Running the **`eask create package`** generator from the command-line will create
 a directory with the following structure:
 
 ```
