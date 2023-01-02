@@ -29,6 +29,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Fix keyword lint undetected (#88)
 * Improve Eask-file loader to search file upward (#89)
 * Move command `activate` under test subcommand (#92)
+* Add command to create ELPA project (#94)
 
 ## 0.7.x
 > Released Sep 08, 2022

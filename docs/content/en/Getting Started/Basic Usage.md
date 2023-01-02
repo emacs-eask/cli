@@ -32,7 +32,7 @@ Commands:
   clean <type>           Delete various files produced during building
   compile [names..]      Byte compile all Emacs Lisp files in the package
   concat [names..]       Concatenate elisp files                                                                                                                  [aliases: concatenate]
-  create <name>          Create a new elisp project                                                                                                                       [aliases: new]
+  create <type>          Create a new elisp project
   emacs [args..]         Execute emacs with the appropriate environment
   eval [form]            Evaluate lisp form with a proper PATH
   path                   Print the PATH (exec-path) from workspace                                                                                                  [aliases: exec-path]

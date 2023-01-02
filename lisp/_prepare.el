@@ -825,6 +825,7 @@ This uses function `locate-dominating-file' to look up directory tree."
 
 (defun eask-f-script (name command &rest args)
   "Add scripts' command."
+  (when (symbolp name) (setq name (eask-2str name)))  ; ensure to string, accept symbol
   (when (assoc name eask-scripts)
     (eask-error "Run-script with the same key name is not allowed: `%s`" name))
   (push (cons name

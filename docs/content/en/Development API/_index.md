@@ -208,10 +208,10 @@ Return a list of Eask files from DIR.
 Consider following directory tree:
 
 ```
-- root
-  - Eask
-  - Eask.28
-  - Eask.29
+. root
+├── Eask
+├── Eask.28
+└── Eask.29
 ```
 
 The following output is with Emacs 28.1:
@@ -227,12 +227,12 @@ Find the Eask-file from START-PATH.
 Consider following directory tree:
 
 ```
--project
-  - src
-    - config.el
-  - Eask
-  - Eask.28
-  - Eask.29
+.project
+├─ src
+│ └── config.el
+├── Eask
+├── Eask.28
+└── Eask.29
 ```
 
 The following output is with Emacs 28.1:
