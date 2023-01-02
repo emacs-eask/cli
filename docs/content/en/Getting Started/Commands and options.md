@@ -356,13 +356,22 @@ $ eask [GLOBAL-OPTIONS] clean dist
 
 Alias: `distribution`
 
+## 🔍 eask clean log-file
+
+Remove all generated log files.
+
+```sh
+$ eask [GLOBAL-OPTIONS] clean log-file
+```
+
 ## 🔍 eask clean all
 
-This command is combination of all other clean commands.
+This command is the combination of all other clean commands.
 
-* `clean workspace`
-* `clean elc`
-* `clean dist`
+- `clean workspace`
+- `clean elc`
+- `clean dist`
+- `clean log-file`
 
 ```sh
 $ eask [GLOBAL-OPTIONS] clean all

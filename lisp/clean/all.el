@@ -34,6 +34,12 @@
     (eask-with-progress
       "Cleaning dist... \n"
       (eask-call "clean/dist")
+      (if eask-no-cleaning-operation-p "skipped ✗" "done ✓")))
+  (eask-msg "")
+  (let (eask-no-cleaning-operation-p)
+    (eask-with-progress
+      "Cleaning log files... \n"
+      (eask-call "clean/log-file")
       (if eask-no-cleaning-operation-p "skipped ✗" "done ✓"))))
 
 ;;; clean/all.el ends here
