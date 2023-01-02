@@ -32,7 +32,7 @@ To set up the website locally, you need to first install the theme:
 git clone https://github.com/emacs-eask/cli --recurse-submodules
 
 # Navgiate to `docs/theme/geekdoc` folder
-cd path/to/cli/docs/theme/geekdoc/
+cd ./docs/theme/geekdoc/
 
 # Build the themes
 npm install && npm run build
@@ -42,7 +42,7 @@ Then run the `hugo` command:
 
 ```sh
 # Navigate back to `docs` folder
-cd path/to/cli/docs/
+cd ./docs/
 
 # Run hugo server locally
 hugo server
