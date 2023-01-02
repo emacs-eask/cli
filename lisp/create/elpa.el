@@ -35,7 +35,7 @@
       ;; --- Start insertion
       (insert "(script \"build\" \"eask exec github-elpa build\")\n")
       (insert "(script \"commit\" \"eask exec github-elpa commit\")\n")
-      (insert "(script \"update\" \"eask exec github-elpa update -a \"./docs/packages\"\")\n")
+      (insert "(script \"update\" \"eask exec github-elpa update -a \\\"./docs/packages\\\"\")\n")
       ;; --- End insertion
       (save-buffer))
     "done ✓")
