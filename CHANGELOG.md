@@ -30,6 +30,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Improve Eask-file loader to search file upward (#89)
 * Move command `activate` under test subcommand (#92)
 * Add command to create ELPA project (#94)
+* Add command to clean log files (#97)
 
 ## 0.7.x
 > Released Sep 08, 2022

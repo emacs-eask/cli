@@ -1,4 +1,4 @@
-;;; clean/log-file.el --- RemoveRemove all generated log files  -*- lexical-binding: t; -*-
+;;; clean/log-file.el --- Remove all generated log files  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
