@@ -39,6 +39,9 @@
   (eask--clean-section "Cleaning autoloads file"
     (eask-call "clean/autoloads"))
   (eask-msg "")
+  (eask--clean-section "Cleaning pkg-file"
+    (eask-call "clean/pkg-file"))
+  (eask-msg "")
   (eask--clean-section "Cleaning log files"
     (eask-call "clean/log-file")))
 

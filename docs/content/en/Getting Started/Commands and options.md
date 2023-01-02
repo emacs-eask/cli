@@ -364,6 +364,14 @@ Remove generated autoloads file.
 $ eask [GLOBAL-OPTIONS] clean autoloads
 ```
 
+## 🔍 eask clean pkg-file
+
+Remove generated pkg-file.
+
+```sh
+$ eask [GLOBAL-OPTIONS] clean pkg-file
+```
+
 ## 🔍 eask clean log-file
 
 Remove all generated log files.
@@ -380,6 +388,7 @@ This command is the combination of all other clean commands.
 - `clean elc`
 - `clean dist`
 - `clean autoloads`
+- `clean pkg-file`
 - `clean log-file`
 
 ```sh
