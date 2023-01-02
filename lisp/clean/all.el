@@ -18,7 +18,7 @@
   "Set to non-nil if there is no cleaning operation done.")
 
 (defmacro eask--clean-section (title &rest body)
-  ""
+  "Print clean up TITLE and execute BODY."
   (declare (indent 1))
   `(let (eask-no-cleaning-operation-p)
      (eask-with-progress
