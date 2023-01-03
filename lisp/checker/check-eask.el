@@ -115,7 +115,8 @@
                             default-directory))
        (files (or (eask-expand-file-specs (eask-args))
                   (eask-expand-file-specs '("Eask*" "**/Eask*"))))
-       checked-files)
+       checked-files
+       content)
   ;; Linting
   (dolist (file files)
     (eask--save-eask-file-state
@@ -128,15 +129,25 @@
   (eask-msg "")
   (cond ((and (eask-json-p)  ; JSON format
               (or eask--checker-warnings eask--checker-errors))
-         (eask-msg
-          (eask--pretty-json (json-encode
-                              `((warnings . ,eask--checker-warnings)
-                                (errors   . ,eask--checker-errors))))))
+         (setq content
+               (eask--pretty-json (json-encode
+                                   `((warnings . ,eask--checker-warnings)
+                                     (errors   . ,eask--checker-errors)))))
+         (eask-msg content))
         (eask--checker-log  ; Plain text
+         (setq content
+               (with-temp-buffer
+                 (dolist (msg (reverse eask--checker-log))
+                   (insert msg "\n"))
+                 (buffer-string)))
          (mapc #'eask-msg (reverse eask--checker-log)))
         (t
          (eask-info "(Checked %s file%s)"
                     (length checked-files)
-                    (eask--sinr checked-files "" "s")))))
+                    (eask--sinr checked-files "" "s"))))
+
+  ;; Output file
+  (when (and content (eask-output-p))
+    (write-region content nil (eask-output-p))))
 
 ;;; checker/check-eask.el ends here

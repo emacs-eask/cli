@@ -444,6 +444,7 @@ the `eask-start' execution.")
 (defun eask-json-p ()          (eask--flag "--json"))           ; --json
 
 ;;; String (with arguments)
+(defun eask-output-p ()    (eask--flag-value "-o"))             ; --o, --output
 (defun eask-proxy ()       (eask--flag-value "--proxy"))        ; --proxy
 (defun eask-http-proxy ()  (eask--flag-value "--http-proxy"))   ; --http-proxy
 (defun eask-https-proxy () (eask--flag-value "--https-proxy"))  ; --https-proxy
@@ -504,15 +505,16 @@ other scripts internally.  See function `eask-call'.")
      "--timestamps" "--log-level"
      "--log-file"
      "--elapsed-time"
-     "--no-color"))
+     "--no-color"
+     "--json"))
   "List of boolean type options.")
 
 (defconst eask--option-args
   (eask--form-options
-   '("--proxy" "--http-proxy" "--https-proxy" "--no-proxy"
+   '("-o"
+     "--proxy" "--http-proxy" "--https-proxy" "--no-proxy"
      "--verbose" "--silent"
-     "--depth" "--dest"
-     "--json"))
+     "--depth" "--dest"))
   "List of arguments (number/string) type options.")
 
 (defconst eask--command-list
