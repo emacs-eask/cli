@@ -27,6 +27,11 @@ exports.builder = {
     requiresArg: false,
     type: 'array',
   },
+  output: {
+    description: 'Output result to a file',
+    alias: 'o',
+    type: 'string',
+  },
   json: {
     description: 'Output lint result in JSON format',
     type: 'boolean',
