@@ -147,7 +147,7 @@
                     (eask--sinr checked-files "" "s"))))
 
   ;; Output file
-  (when (and content (eask-output-p))
-    (write-region content nil (eask-output-p))))
+  (when (and content (eask-output))
+    (write-region content nil (eask-output))))
 
 ;;; checker/check-eask.el ends here

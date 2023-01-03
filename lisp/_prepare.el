@@ -444,7 +444,7 @@ the `eask-start' execution.")
 (defun eask-json-p ()          (eask--flag "--json"))           ; --json
 
 ;;; String (with arguments)
-(defun eask-output-p ()    (eask--flag-value "-o"))             ; --o, --output
+(defun eask-output ()      (eask--flag-value "-o"))             ; --o, --output
 (defun eask-proxy ()       (eask--flag-value "--proxy"))        ; --proxy
 (defun eask-http-proxy ()  (eask--flag-value "--http-proxy"))   ; --http-proxy
 (defun eask-https-proxy () (eask--flag-value "--https-proxy"))  ; --https-proxy
