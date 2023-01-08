@@ -28,20 +28,20 @@
          (readme (expand-file-name (format "%s-readme.txt" name) path))
          (entry (expand-file-name (format "%s-%s.entry" name version) path))
          (packaged (eask-packaged-file))
-         (deleted-count 0)
+         (deleted 0)
          (delete-dir))
-    (when (eask-delete-file readme)   (cl-incf deleted-count))
-    (when (eask-delete-file entry)    (cl-incf deleted-count))
-    (when (eask-delete-file packaged) (cl-incf deleted-count))
-    (when (and (not (zerop deleted-count)) (directory-empty-p path))
+    (when (eask-delete-file readme)   (cl-incf deleted))
+    (when (eask-delete-file entry)    (cl-incf deleted))
+    (when (eask-delete-file packaged) (cl-incf deleted))
+    (when (and (not (zerop deleted)) (directory-empty-p path))
       (eask-with-progress
         (format "The dist folder %s seems to be empty, delete it as well... " path)
         (ignore-errors (delete-directory path))
         "done ✓")
       (setq delete-dir t))
     (eask-msg "")
-    (eask-info "(Total of %s file%s, and %s directory deleted)" deleted-count
-               (eask--sinr deleted-count "" "s")
+    (eask-info "(Total of %s file%s, and %s directory deleted)" deleted
+               (eask--sinr deleted "" "s")
                (if delete-dir "1" "0"))))
 
 (eask-start

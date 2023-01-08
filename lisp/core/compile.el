@@ -33,7 +33,7 @@
   (when (get-buffer eask-compile-log-buffer-name)
     (with-current-buffer eask-compile-log-buffer-name
       (eask-print-log-buffer)
-      (message ""))))
+      (eask-msg ""))))
 
 (defun eask--byte-compile-file (filename)
   "Byte compile FILENAME."
@@ -56,7 +56,9 @@
   (let* ((compiled (cl-remove-if-not #'eask--byte-compile-file files))
          (compiled (length compiled))
          (skipped (- (length files) compiled)))
-    (eask-msg "")
+    ;; XXX: Avoid last newline from the log buffer!
+    (unless (get-buffer eask-compile-log-buffer-name)
+      (eask-msg ""))
     (eask-info "(Total of %s file%s compiled, %s skipped)" compiled
                (eask--sinr compiled "" "s")
                skipped)))
