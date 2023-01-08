@@ -22,26 +22,21 @@
   (declare (indent 1))
   `(let (eask-no-cleaning-operation-p)
      (eask-with-progress
-       (format "%s... \n" ,title)
-       (progn ,@body)
+       (format "%s... " ,title)
+       (eask-with-verbosity 'debug ,@body)
        (if eask-no-cleaning-operation-p "skipped ✗" "done ✓"))))
 
 (eask-start
   (eask--clean-section "Cleaning workspace"
     (eask-call "clean/workspace"))
-  (eask-msg "")
   (eask--clean-section "Cleaning byte-compile files"
     (eask-call "clean/elc"))
-  (eask-msg "")
   (eask--clean-section "Cleaning dist"
     (eask-call "clean/dist"))
-  (eask-msg "")
   (eask--clean-section "Cleaning autoloads file"
     (eask-call "clean/autoloads"))
-  (eask-msg "")
   (eask--clean-section "Cleaning pkg-file"
     (eask-call "clean/pkg-file"))
-  (eask-msg "")
   (eask--clean-section "Cleaning log files"
     (eask-call "clean/log-file")))
 
