@@ -32,7 +32,7 @@
          (eask-dist-path (or (eask-dest) eask-dist-path))
          (eask-dist-path (expand-file-name eask-dist-path))
          (target-file (concat name ".built.el"))
-         (target-filename (or (expand-file-name (eask-output))
+         (target-filename (or (and (eask-output) (expand-file-name (eask-output)))
                               (expand-file-name target-file eask-dist-path))))
     (cond
      ;; Files found, do the action!
