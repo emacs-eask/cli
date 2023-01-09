@@ -39,22 +39,35 @@
   (eask-print-log-buffer "*Package-Lint*"))
 
 (eask-start
+  ;; Preparation
   (eask-with-archives "melpa"
     (eask-package-install 'package-lint))
   (setq eask--package-lint-version (eask-package--version-string 'package-lint))
+
+  ;; Start Linting
   (require 'package-lint)
-  (if-let ((files (eask-args-or-package-el-files)))
-      (progn
-        (eask-pkg-init)
-        (setq package-lint-main-file eask-package-file)
-        (mapcar #'eask--package-lint-file files)
-        (eask-msg "")
-        (eask-info "(Total of %s file%s linted)" (length files)
-                   (eask--sinr files "" "s")))
-    (eask-msg "")
-    (eask-info "(No files have been linted)")
-    (if (eask-args)
-        (eask--print-no-matching-files)
-      (eask-help "lint/package"))))
+  (let* ((patterns (eask-args))
+         (files (if patterns
+                    (eask-expand-file-specs patterns)
+                  (eask-package-el-files))))
+    (cond
+     ;; Files found, do the action!
+     (files
+      (eask-pkg-init)
+      (setq package-lint-main-file eask-package-file)
+      (mapcar #'eask--package-lint-file files)
+      (eask-msg "")
+      (eask-info "(Total of %s file%s linted)" (length files)
+                 (eask--sinr files "" "s")))
+     ;; Pattern defined, but no file found!
+     (patterns
+      (eask-msg "")
+      (eask-info "No files found with wildcard pattern: %s"
+                 (mapconcat #'identity patterns " ")))
+     ;; Default, print help!
+     (t
+      (eask-msg "")
+      (eask-info "(No files have been linted)")
+      (eask-help "lint/package")))))
 
 ;;; lint/package.el ends here

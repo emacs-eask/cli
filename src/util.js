@@ -92,7 +92,6 @@ function _global_options(argv) {
   /* Number type */
   flags.push(def_flag(argv.verbose, '--verbose', argv.verbose));
   /* String type */
-  flags.push(def_flag(argv.output, '-o', argv.output));
   flags.push(def_flag(argv.proxy, '--proxy', argv.proxy));
   flags.push(def_flag(argv['http-proxy'], '--http-proxy', argv['http-proxy']));
   flags.push(def_flag(argv['https-proxy'], '--https-proxy', argv['https-proxy']));

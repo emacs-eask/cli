@@ -104,6 +104,42 @@
          eask-depends-on-dev)
      ,@body))
 
+(defun eask--check-file (files)
+  "Lint list of Eask FILES."
+  (let (checked-files content)
+    ;; Linting
+    (dolist (file files)
+      (eask--save-eask-file-state
+        (eask--setup-env
+          (eask--alias-env
+            (when (ignore-errors (load file 'noerror t))
+              (push file checked-files))))))
+
+    ;; Print result
+    (eask-msg "")
+    (cond ((and (eask-json-p)  ; JSON format
+                (or eask--checker-warnings eask--checker-errors))
+           (setq content
+                 (eask--pretty-json (json-encode
+                                     `((warnings . ,eask--checker-warnings)
+                                       (errors   . ,eask--checker-errors)))))
+           (eask-msg content))
+          (eask--checker-log  ; Plain text
+           (setq content
+                 (with-temp-buffer
+                   (dolist (msg (reverse eask--checker-log))
+                     (insert msg "\n"))
+                   (buffer-string)))
+           (mapc #'eask-msg (reverse eask--checker-log)))
+          (t
+           (eask-info "(Checked %s file%s)"
+                      (length checked-files)
+                      (eask--sinr checked-files "" "s"))))
+
+    ;; Output file
+    (when (and content (eask-output))
+      (write-region content nil (eask-output)))))
+
 ;;
 ;;; Program Entry
 
@@ -113,41 +149,21 @@
 
 (let* ((default-directory (if (eask-global-p) user-emacs-directory
                             default-directory))
-       (files (or (eask-expand-file-specs (eask-args))
-                  (eask-expand-file-specs '("Eask*" "**/Eask*"))))
-       checked-files
-       content)
-  ;; Linting
-  (dolist (file files)
-    (eask--save-eask-file-state
-      (eask--setup-env
-        (eask--alias-env
-          (when (ignore-errors (load file 'noerror t))
-            (push file checked-files))))))
-
-  ;; Print result
-  (eask-msg "")
-  (cond ((and (eask-json-p)  ; JSON format
-              (or eask--checker-warnings eask--checker-errors))
-         (setq content
-               (eask--pretty-json (json-encode
-                                   `((warnings . ,eask--checker-warnings)
-                                     (errors   . ,eask--checker-errors)))))
-         (eask-msg content))
-        (eask--checker-log  ; Plain text
-         (setq content
-               (with-temp-buffer
-                 (dolist (msg (reverse eask--checker-log))
-                   (insert msg "\n"))
-                 (buffer-string)))
-         (mapc #'eask-msg (reverse eask--checker-log)))
-        (t
-         (eask-info "(Checked %s file%s)"
-                    (length checked-files)
-                    (eask--sinr checked-files "" "s"))))
-
-  ;; Output file
-  (when (and content (eask-output))
-    (write-region content nil (eask-output))))
+       (patterns (eask-args))
+       (files (if patterns
+                  (eask-expand-file-specs patterns)
+                (eask-expand-file-specs '("Eask*" "**/Eask*")))))
+  (cond
+   ;; Files found, do the action!
+   (files
+    (eask--check-file files))
+   ;; Pattern defined, but no file found!
+   (patterns
+    (eask-info "No files found with wildcard pattern: %s"
+               (mapconcat #'identity patterns " ")))
+   ;; Default, print help!
+   (t
+    (eask-info "(No Eask-files have been checked)")
+    (eask-help "checker/check-eask"))))
 
 ;;; checker/check-eask.el ends here

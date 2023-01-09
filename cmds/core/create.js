@@ -26,7 +26,8 @@ exports.builder = function (yargs) {
     .usage(`${exports.desc}
 
 Usage: eask create <command> [options..]`)
-    .commandDir('../create/');
+    .commandDir('../create/')
+    .demandCommand();
 };
 
 exports.handler = async (argv) => { };

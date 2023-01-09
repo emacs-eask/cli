@@ -40,13 +40,22 @@
 (advice-add 'message :around #'eask--ert-message)
 
 (eask-start
-  (if-let ((files (eask-expand-file-specs (eask-args))))
-      (progn
-        (eask-pkg-init)
-        (eask-ignore-errors
-          (mapc #'load-file files)
-          (ert-run-tests-batch-and-exit)))
-    (eask-info "(No tests found.)")
-    (eask-help "test/ert")))
+  (let* ((patterns (eask-args))
+         (files (eask-expand-file-specs patterns)))
+    (cond
+     ;; Files found, do the action!
+     (files
+      (eask-pkg-init)
+      (eask-ignore-errors
+        (mapc #'load-file files)
+        (ert-run-tests-batch-and-exit)))
+     ;; Pattern defined, but no file found!
+     (patterns
+      (eask-info "No files found with wildcard pattern: %s"
+                 (mapconcat #'identity patterns " ")))
+     ;; Default, print help!
+     (t
+      (eask-info "(No tests found.)")
+      (eask-help "test/ert")))))
 
 ;;; test/ert.el ends here

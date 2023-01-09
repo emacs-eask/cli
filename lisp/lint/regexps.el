@@ -41,24 +41,39 @@
           (funcall report-func "%s:%s %s: %s"
                    file (line-number-at-pos error-pos)
                    (capitalize (eask-2str severity)) msg)))
+      (unless errors
+        (eask-msg "No issues found"))
       (kill-this-buffer))))
 
 (eask-start
+  ;; Preparation
   (eask-with-archives "gnu"
     (eask-package-install 'relint))
   (setq eask--relint-version (eask-package--version-string 'relint))
+
+  ;; Start Linting
   (require 'relint)
-  (if-let ((files (eask-args-or-package-el-files)))
-      (progn
-        (setq package-lint-main-file eask-package-file)
-        (mapcar #'eask--relint-file files)
-        (eask-msg "")
-        (eask-info "(Total of %s file%s linted)" (length files)
-                   (eask--sinr files "" "s")))
-    (eask-msg "")
-    (eask-info "(No files have been linted)")
-    (if (eask-args)
-        (eask--print-no-matching-files)
-      (eask-help "lint/regexps"))))
+  (let* ((patterns (eask-args))
+         (files (if patterns
+                    (eask-expand-file-specs patterns)
+                  (eask-package-el-files))))
+    (cond
+     ;; Files found, do the action!
+     (files
+      (setq package-lint-main-file eask-package-file)
+      (mapcar #'eask--relint-file files)
+      (eask-msg "")
+      (eask-info "(Total of %s file%s linted)" (length files)
+                 (eask--sinr files "" "s")))
+     ;; Pattern defined, but no file found!
+     (patterns
+      (eask-msg "")
+      (eask-info "No files found with wildcard pattern: %s"
+                 (mapconcat #'identity patterns " ")))
+     ;; Default, print help!
+     (t
+      (eask-msg "")
+      (eask-info "(No files have been linted)")
+      (eask-help "lint/regexps")))))
 
 ;;; lint/regexps.el ends here

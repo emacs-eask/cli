@@ -65,10 +65,21 @@
 
 (eask-start
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
-  (if-let ((files (or (eask-expand-file-specs (eask-args))
-                      (eask-package-el-files))))
-      (eask--compile-files files)
-    (eask-info "(No files have been compiled)")
-    (eask-help "core/compile")))
+  (let* ((patterns (eask-args))
+         (files (if patterns
+                    (eask-expand-file-specs patterns)
+                  (eask-package-el-files))))
+    (cond
+     ;; Files found, do the action!
+     (files
+      (eask--compile-files files))
+     ;; Pattern defined, but no file found!
+     (patterns
+      (eask-info "No files found with wildcard pattern: %s"
+                 (mapconcat #'identity patterns " ")))
+     ;; Default, print help!
+     (t
+      (eask-info "(No files have been compiled)")
+      (eask-help "core/compile")))))
 
 ;;; core/compile.el ends here

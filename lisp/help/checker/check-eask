@@ -1,0 +1,4 @@
+    
+💡 You need to specify file(s) you want to Eask checker to check
+
+    $ eask check-eask FILE-1 FILE-2
