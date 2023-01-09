@@ -444,7 +444,7 @@ the `eask-start' execution.")
 (defun eask-json-p ()          (eask--flag "--json"))           ; --json
 
 ;;; String (with arguments)
-(defun eask-output ()      (eask--flag-value "-o"))             ; --o, --output
+(defun eask-output ()      (eask--flag-value "--output"))       ; --o, --output
 (defun eask-proxy ()       (eask--flag-value "--proxy"))        ; --proxy
 (defun eask-http-proxy ()  (eask--flag-value "--http-proxy"))   ; --http-proxy
 (defun eask-https-proxy () (eask--flag-value "--https-proxy"))  ; --https-proxy
@@ -511,7 +511,7 @@ other scripts internally.  See function `eask-call'.")
 
 (defconst eask--option-args
   (eask--form-options
-   '("-o"
+   '("--output"
      "--proxy" "--http-proxy" "--https-proxy" "--no-proxy"
      "--verbose" "--silent"
      "--depth" "--dest"))
@@ -1128,12 +1128,6 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
     (setq elcs (cl-remove-if-not (lambda (elm) (file-exists-p elm)) elcs))
     elcs))
 
-(defun eask-args-or-package-el-files ()
-  "Return args if specified, else return package files by default."
-  (if (eask-args)
-      (eask-expand-file-specs (eask-args))
-    (eask-package-el-files)))
-
 (defun eask-package-multi-p ()
   "Return t if multi-files package."
   (< 1 (length (eask-package-files))))
@@ -1224,12 +1218,6 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
           (unless (string= (buffer-string) "")
             (eask-msg (ansi-white (buffer-string)))))
       (eask-error "Help manual missig %s" help-file))))
-
-(defun eask--print-no-matching-files ()
-  "Print message for no matching files found."
-  (eask-log "")
-  (eask-log "Cannot find matching files with given pattern %s" (eask-args))
-  (eask-log ""))
 
 ;;
 ;;; Checker

@@ -45,17 +45,26 @@
 
 (eask-start
   (require 'checkdoc)
-  (if-let ((files (eask-args-or-package-el-files)))
-      (progn
-        (mapcar #'eask--checkdoc-file files)
-        (eask-msg "")
-        (eask-info "(Total of %s file%s %s checked)" (length files)
-                   (eask--sinr files "" "s")
-                   (eask--sinr files "has" "have")))
-    (eask-msg "")
-    (eask-info "(No files have been checked (checkdoc))")
-    (if (eask-args)
-        (eask--print-no-matching-files)
-      (eask-help "lint/checkdoc"))))
+  (let* ((patterns (eask-args))
+         (files (if patterns
+                    (eask-expand-file-specs patterns)
+                  (eask-package-el-files))))
+    (cond
+     ;; Files found, do the action!
+     (files
+      (mapcar #'eask--checkdoc-file files)
+      (eask-msg "")
+      (eask-info "(Total of %s file%s %s checked)" (length files)
+                 (eask--sinr files "" "s")
+                 (eask--sinr files "has" "have")))
+     ;; Pattern defined, but no file found!
+     (patterns
+      (eask-info "No files found with wildcard pattern: %s"
+                 (mapconcat #'identity patterns " ")))
+     ;; Default, print help!
+     (t
+      (eask-msg "")
+      (eask-info "(No files have been checked (checkdoc))")
+      (eask-help "lint/checkdoc")))))
 
 ;;; lint/checkdoc.el ends here

@@ -32,11 +32,17 @@ exports.builder = {
     requiresArg: true,
     alias: 'dest',
     type: 'string',
-  }
+  },
+  output: {
+    description: 'Output result to a file',
+    alias: 'o',
+    type: 'string',
+  },
 };
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/concat'
                     , argv.names
-                    , UTIL.def_flag(argv.dest, '--dest', argv.dest));
+                    , UTIL.def_flag(argv.dest, '--dest', argv.dest)
+                    , UTIL.def_flag(argv.output, '--output', argv.output));
 };

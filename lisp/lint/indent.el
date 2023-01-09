@@ -41,18 +41,24 @@
       (eask-log "No mismatch indentation found"))))
 
 (eask-start
-  (if-let ((files (if (eask-args)
-                      (eask-expand-file-specs (eask-args))
-                    (eask-package-el-files))))
-      (progn
-        (mapcar #'eask--indent-lint-file files)
-        (eask-msg "")
-        (eask-info "(Total of %s file%s linted)" (length files)
-                   (eask--sinr files "" "s")))
-    (eask-msg "")
-    (eask-info "(No files have been linted)")
-    (if (eask-args)
-        (eask--print-no-matching-files)
-      (eask-help "lint/indent"))))
+  (let* ((patterns (eask-args))
+         (files (if patterns (eask-expand-file-specs (eask-args))
+                  (eask-package-el-files))))
+    (cond
+     ;; Files found, do the action!
+     (files
+      (mapcar #'eask--indent-lint-file files)
+      (eask-msg "")
+      (eask-info "(Total of %s file%s linted)" (length files)
+                 (eask--sinr files "" "s")))
+     ;; Pattern defined, but no file found!
+     (patterns
+      (eask-info "No files found with wildcard pattern: %s"
+                 (mapconcat #'identity patterns " ")))
+     ;; Default, print help!
+     (t
+      (eask-msg "")
+      (eask-info "(No files have been linted)")
+      (eask-help "lint/indent")))))
 
 ;;; lint/indent.el ends here
