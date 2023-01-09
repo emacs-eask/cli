@@ -41,6 +41,8 @@
           (funcall report-func "%s:%s %s: %s"
                    file (line-number-at-pos error-pos)
                    (capitalize (eask-2str severity)) msg)))
+      (unless errors
+        (eask-msg "No issues found"))
       (kill-this-buffer))))
 
 (eask-start
