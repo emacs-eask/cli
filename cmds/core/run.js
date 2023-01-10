@@ -69,7 +69,27 @@ function startCommand(commands, count) {
 
   let program = splitted[0];
   let rest = splitted.slice(1);
-  let proc = child_process.spawn(program, rest, { stdio: 'inherit', shell: true });
+
+  let proc;
+
+  // XXX: Workaround for https://github.com/vercel/pkg/issues/1356
+  if (IS_PKG) {
+    if (program == 'eask') {
+      rest.unshift(process.argv[1]);
+    }
+
+    rest.forEach((element, index) => {
+      if (element == 'eask') {
+        rest[index] = process.argv[1];
+      }
+    });
+
+    console.log(process.argv);
+
+    proc = child_process.spawn(process.execPath, rest, { stdio: 'inherit', shell: true });
+  } else {
+    proc = child_process.spawn(program, rest, { stdio: 'inherit', shell: true });
+  }
 
   proc.on('close', function (code) {
     if (code == 0) {
