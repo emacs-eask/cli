@@ -19,12 +19,28 @@
 
 "use strict";
 
-const os = require('os');
-const path = require('path');
+import * as os from 'https://deno.land/std@0.170.0/node/os.ts';
+import * as fs from 'https://deno.land/std@0.152.0/node/fs/promises.ts';
+import * as path from 'https://deno.land/std@0.142.0/path/mod.ts';
+import * as process from 'https://deno.land/std@0.104.0/node/process.ts';
 
-global.UTIL = require('./util');
-global.IS_PKG = path.basename(process.execPath).startsWith('eask');
+const __filename = path.fromFileUrl(import.meta.url);
+const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
 
-global.GITHUB_ACTIONS = (process.env.GITHUB_WORKSPACE !== undefined);
+const IS_PKG = path.basename(Deno.execPath()).startsWith('eask');
 
-global.EASK_HOMEDIR = os.homedir().replace(/\\/g, '/') + '/.eask/';
+const GITHUB_ACTIONS = (process.env.GITHUB_WORKSPACE !== undefined);
+
+const EASK_HOMEDIR = os.homedir()?.replace(/\\/g, '/') + '/.eask/';
+
+export {
+    __filename,
+    __dirname,
+    os,
+    fs,
+    path,
+    process,
+    IS_PKG,
+    GITHUB_ACTIONS,
+    EASK_HOMEDIR,
+};
