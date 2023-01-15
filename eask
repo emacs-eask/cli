@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 
-const env = require('./src/env');
-const yargs = require('yargs');
+import { process } from './src/env.ts';
+import yargs from 'https://deno.land/x/yargs@v17.5.1-deno/deno.ts';
+import { hideBin } from 'https://deno.land/x/yargs/deno-types.ts';
+
+const yargsInstance = yargs(hideBin(process.argv));
 
 const usage = `eask is the main command, used to manage your Emacs dependencies
 
@@ -11,13 +14,13 @@ Usage: eask <command> [options..]`;
 
 const epilogue = `For more information, find the manual at https://emacs-eask.github.io/`;
 
-yargs
+yargs(Deno.args)
   .usage(usage)
   .scriptName('')
   .epilogue(epilogue)
-  .commandDir('cmds/core/')
-  .commandDir('cmds/checker/')
-  .commandDir('cmds/util/')
+  //.commandDir('cmds/core/')
+  //.commandDir('cmds/checker/')
+  //.commandDir('cmds/util/')
   .command({
     command: '*',
     handler() { yargs.showHelp(); }
@@ -112,5 +115,5 @@ yargs
     type: 'string',
   })
   .demandCommand()
-  .wrap(yargs.terminalWidth())
-  .argv;
+  .wrap(Deno.consoleSize().columns)
+  .parse();
