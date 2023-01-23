@@ -27,7 +27,7 @@ set -e
 echo "Test commands related to install, and uninstall"
 
 # Naviate to the test package
-cd "./test/fixtures/mini.emacs.pkg/"
+cd "./test/fixtures/mini.emacs.pkg.1/"
 
 echo "Install dependencies"
 eask install-deps
