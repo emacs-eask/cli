@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (C) 2022-2023 Jen-Chieh Shen
+# Copyright (C) 2023 Jen-Chieh Shen
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,15 +19,15 @@
 
 ## Commentary:
 #
-# Test command `exec`
+# Here we test all local (workspace) commands by simulating a Emacs
+# pacakge development environment!
+#
+# Notice, below we clone a random packae (repo) that uses Eask as the
+# dependencies management tool.
 #
 
 set -e
 
-echo "Test command 'exec'..."
-cd $(dirname "$0")
-
-eask install-deps
-eask exec ert-runner -h
-eask exec github-elpa -h
-eask exec echo hello world
+eask link add "./test/fixtures/mini.emacs.pkg.1/"
+eask link list
+eask link delete mini.emacs.pkg.1-0.0.1
