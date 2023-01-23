@@ -21,6 +21,11 @@
 
 (eask-load "link/list")
 
+(defun eask--delete-symlink (path)
+  "Delete symlink PATH."
+  (ignore-errors (delete-file path))
+  (ignore-errors (delete-directory path t)))
+
 (defun eask--delete-link (name)
   "Delete a link by its' NAME."
   (let* ((links (eask--links))
@@ -28,8 +33,7 @@
          (link (expand-file-name name package-user-dir)))
     (if (and source (file-symlink-p link))
         (progn
-          (ignore-errors (delete-file link))
-          (ignore-errors (delete-directory link t))
+          (eask--delete-symlink link)
           (eask-info "✓ Unlinked package %s" link)
           t)
       (eask-info "✗ Package %s not linked" name)
