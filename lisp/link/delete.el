@@ -21,26 +21,35 @@
 
 (eask-load "link/list")
 
-(defun eask--delete-link (link)
-  "Delete a LINK."
+(defun eask--delete-link (name)
+  "Delete a link by its' NAME."
   (let* ((links (eask--links))
-         (link (assoc name links)))
-    (if (and link (f-symlink? (cdr link)))
+         (source (assoc name links))
+         (link (expand-file-name name package-user-dir)))
+    (if (and source (file-symlink-p link))
         (progn
-          (f-delete link)
-          (eask-info "Unlink package %s" (car link)))
-      (eask-info "Package %s not linked" name))))
+          (ignore-errors (delete-file link))
+          (ignore-errors (delete-directory link t))
+          (eask-info "✓ Unlinked package %s" link)
+          t)
+      (eask-info "✗ Package %s not linked" name)
+      nil)))
 
 (eask-start
-  (eask-with-archives "melpa"
-    (eask-package-install 'f))
-  (require 'f)
   (let ((names (eask-args))
-        (links (eask--links)))
-    (cond ((zerop names)
-           (eask-info "No package to unlink, please specify with the package name")
+        (links (eask--links))
+        (deleted 0))
+    (cond ((zerop (length names))
+           (eask-info "✗ No package to unlink, please specify with the package name")
            (eask-help "link/delete"))
           (t
-           (mapc #'eask--delete-link names)))))
+           (dolist (name names)
+             (when (eask--delete-link name)
+               (cl-incf deleted)))
+           (eask-msg "")
+           (eask-info "(Total of %s package%s unlinked, %s skipped)"
+                      deleted
+                      (eask--sinr deleted "" "s")
+                      (- (length names) deleted))))))
 
 ;;; link/delete.el ends here

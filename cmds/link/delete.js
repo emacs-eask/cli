@@ -30,5 +30,5 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'link/delete', argv.files);
+  await UTIL.e_call(argv, 'link/delete', argv.names);
 };

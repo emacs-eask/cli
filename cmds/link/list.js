@@ -23,5 +23,5 @@ exports.command = ['list'];
 exports.desc = 'List all project links';
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'link/list', argv.files);
+  await UTIL.e_call(argv, 'link/list');
 };

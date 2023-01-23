@@ -18,25 +18,26 @@
   "Return a list of all links."
   (mapcar
    (lambda (file)
-     (list (f-filename file) (f-canonical file)))
-   (f-entries package-user-dir 'f-symlink?)))
+     (cons (eask-f-filename file) (file-truename file)))
+   (cl-remove-if-not #'file-symlink-p (directory-files package-user-dir t))))
 
 (defun eask--print-link (link offset)
   "Print information regarding the LINK.
 
 The argument OFFSET is used to align the result."
-  (eask-msg (concat "%-" (eask-2str offset) "s  %s" (car link) (cdr link))))
+  (message (concat "  %-" (eask-2str offset) "s  %s") (car link) (cdr link)))
 
 (eask-start
-  (eask-with-archives "melpa"
-    (eask-package-install 'f))
-  (require 'f)
   (if-let* ((links (eask--links))
-            (offset (eask-seq-str-max (mapc #'car links))))
+            (offset (eask-seq-str-max (mapcar #'car links))))
       (progn
-        (dolist (link links)
-          (eask--print-link link offset))
-        (eask-info "TODO: .."))
-    (eask-info "TODO: ..")))
+        (eask-info "Linked packages:")
+        (eask-msg "")
+        (dolist (link links) (eask--print-link link offset))
+        (eask-msg "")
+        (eask-info "(Total of %s linked package%s)"
+                   (length links)
+                   (eask--sinr links "" "s")))
+    (eask-info "(No linked packages)")))
 
 ;;; link/add.el ends here

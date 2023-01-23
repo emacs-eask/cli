@@ -149,6 +149,10 @@ the `eask-start' execution.")
     (mapc (lambda (elm) (setq result (max result (length (eask-2str elm))))) sequence)
     result))
 
+(defun eask-f-filename (path)
+  "Return the name of PATH."
+  (file-name-nondirectory (directory-file-name path)))
+
 (defun eask-s-replace (old new s)
   "Replace OLD with NEW in S each time it occurs."
   (if (fboundp #'string-replace)
@@ -762,6 +766,23 @@ This uses function `locate-dominating-file' to look up directory tree."
 (defvar eask-depends-on-emacs nil)
 (defvar eask-depends-on       nil)
 (defvar eask-depends-on-dev   nil)
+
+(defmacro eask--save-eask-file-state (&rest body)
+  "Execute BODY without touching the Eask-file global variables."
+  (declare (indent 0) (debug t))
+  `(let (package-archives
+         package-archive-priorities
+         eask-package
+         eask-package-desc
+         eask-website-url
+         eask-keywords
+         eask-package-file
+         eask-files
+         eask-scripts
+         eask-depends-on-emacs
+         eask-depends-on
+         eask-depends-on-dev)
+     ,@body))
 
 (defun eask-package--get (key)
   "Return package info by KEY."
