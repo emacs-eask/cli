@@ -22,9 +22,15 @@
 
 (eask-load "link/list")
 (eask-load "link/delete")
+(eask-load "core/install")
 
-(defvar eask--link-package-name)
-(defvar eask--link-package-version)
+(defun eask--package-desc-reqs (desc)
+  "Return a list of requirements from package DESC."
+  (cl-remove-if (lambda (name) (string= name "emacs"))
+                (mapcar #'car (package-desc-reqs desc))))
+
+(defvar eask--link-package-name    nil "Used to form package name.")
+(defvar eask--link-package-version nil "Used to form package name.")
 
 (defun eask--create-link (name source)
   "Add link with NAME to PATH."
@@ -46,32 +52,35 @@
       (eask-info "✗ This command only accepts maximum of 2 arguments: %s"
                  (mapconcat #'identity names " ")))
      ;; Source path not found!
-     ((not (directory-name-p source))
+     ((not (file-directory-p source))
       (eask-info "✗ Can't create link %s to non-existing path: %s" name source))
      ;; Create the link
      (t
-      (let ((pkg-el   (package--description-file source))
+      (let ((pkg-el   (expand-file-name (package--description-file source) source))
             (pkg-eask (car (eask--all-files source)))
             (pkg-desc))
-        (cond ((file-exists-p pkg-el)
-               (with-temp-buffer
-                 (insert-file-contents pkg-el)
-                 (setq pkg-desc (ignore-errors
-                                  (if pkg-el
-                                      (package--read-pkg-desc 'dir)
-                                    (package-buffer-info))))))
-              ((file-exists-p pkg-eask)
-               (eask--save-load-eask-file pkg-eask
-                   (progn
-                     (setq eask--link-package-name (eask-package-name)
-                           eask--link-package-version (eask-package-version))
-                     (let ((default-directory source))
-                       (eask-call "core/pkg-file")
-                       (eask-call "core/autoloads")))
-                 (eask-info "✗ Error loading Eask-file: %s" pkg-eask)))
-              (t
-               (eask-info "✗ Link source %s doesn't have an Eask or %s-pkg.el file"
-                          source name))))
-      (eask--create-link name source)))))
+        (cond
+         ((ignore-errors (file-exists-p pkg-el))
+          (with-temp-buffer
+            (insert-file-contents pkg-el)
+            (setq pkg-desc (ignore-errors
+                             (if pkg-el
+                                 (package--read-pkg-desc 'dir)
+                               (package-buffer-info)))))
+          (setq eask--link-package-name (package-desc-name pkg-desc)
+                eask--link-package-version (package-version-join
+                                            (package-desc-version pkg-desc)))
+          (eask--install-packages (eask--package-desc-reqs pkg-desc)))
+         ((ignore-errors (file-exists-p pkg-eask))
+          (eask--save-load-eask-file pkg-eask
+              (setq eask--link-package-name (eask-package-name)
+                    eask--link-package-version (eask-package-version))
+            (eask-error "✗ Error loading Eask-file: %s" pkg-eask)))
+         (t
+          (eask-error "✗ Link source %s doesn't have an Eask or %s-pkg.el file"
+                      source name))))
+      (eask--create-link name source)
+      (when (= 1 (length (eask--links)))
+        (eask-help "link/add"))))))
 
 ;;; link/add.el ends here

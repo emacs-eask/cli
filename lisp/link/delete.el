@@ -34,9 +34,9 @@
     (if (and source (file-symlink-p link))
         (progn
           (eask--delete-symlink link)
-          (eask-info "✓ Unlinked package %s" link)
+          (eask-info "✓ Unlinked package `%s`" link)
           t)
-      (eask-info "✗ Package %s not linked" name)
+      (eask-info "✗ Package `%s` not linked" name)
       nil)))
 
 (eask-start
