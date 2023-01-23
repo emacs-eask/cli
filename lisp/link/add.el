@@ -70,12 +70,18 @@
           (setq eask--link-package-name (package-desc-name pkg-desc)
                 eask--link-package-version (package-version-join
                                             (package-desc-version pkg-desc)))
+          ;; XXX: Install dependencies for linked package
           (eask--install-packages (eask--package-desc-reqs pkg-desc)))
          ((ignore-errors (file-exists-p pkg-eask))
-          (eask--save-load-eask-file pkg-eask
-              (setq eask--link-package-name (eask-package-name)
-                    eask--link-package-version (eask-package-version))
-            (eask-error "✗ Error loading Eask-file: %s" pkg-eask)))
+          (let ((deps))
+            (eask--save-load-eask-file pkg-eask
+                (progn
+                  (setq eask--link-package-name (eask-package-name)
+                        eask--link-package-version (eask-package-version))
+                  (setq deps eask-depends-on))
+              (eask-error "✗ Error loading Eask-file: %s" pkg-eask))
+            ;; XXX: Install dependencies for linked package
+            (eask--install-packages (mapcar #'car deps))))
          (t
           (eask-error "✗ Link source %s doesn't have an Eask or %s-pkg.el file"
                       source name))))
