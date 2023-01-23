@@ -28,7 +28,7 @@
 set -e
 
 echo "Copy test configuration"
-./test/mini.emacs.d/scripts/copy_config.sh
+./test/fixtures/mini.emacs.d/scripts/copy_config.sh
 
 echo "Testing global commands..."
 eask archives  -g
