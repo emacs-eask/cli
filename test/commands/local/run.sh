@@ -29,7 +29,7 @@
 set -e
 
 # Naviate to the test package
-cd "./test/mini.emacs.pkg/"
+cd "./test/fixtures/mini.emacs.pkg/"
 
 echo "Testing local commands..."
 eask info

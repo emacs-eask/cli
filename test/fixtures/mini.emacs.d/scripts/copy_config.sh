@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Copyright (C) 2022 Jen-Chieh Shen
 
 # This program is free software; you can redistribute it and/or modify
@@ -21,5 +23,4 @@
 #
 
 echo "Copy test configuration"
-mkdir "$env:USERPROFILE/AppData/Roaming/.emacs.d"
-robocopy /e "./test/mini.emacs.d/" "$env:USERPROFILE/AppData/Roaming/.emacs.d"
+cp -R ./test/fixtures/mini.emacs.d/ ~/.emacs.d
