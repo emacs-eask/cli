@@ -27,41 +27,42 @@ influencing your personal configuration. Eask aims to be:
 
 ###### Documentation
 
-| Description                            | Done | Status                                                                                                                                           |
-|----------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| Description                            | Done | Status                                                                                                                                          |
+|----------------------------------------|------|-------------------------------------------------------------------------------------------------------------------------------------------------|
 | Keep the documentation page up to date | ✔    | [![Docs](https://github.com/emacs-eask/cli/actions/workflows/docs.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/docs.yml) |
 
 ###### Development
 
-| Description                               | Done | Status                                                                                                                                                     |
-|-------------------------------------------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Compile source and check redefined        | ✔    | [![Compile](https://github.com/emacs-eask/cli/actions/workflows/compile.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/compile.yml) |
+| Description                                | Done | Status                                                                                                                                                   |
+|--------------------------------------------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Compile source and check redefined         | ✔    | [![Compile](https://github.com/emacs-eask/cli/actions/workflows/compile.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/compile.yml) |
 | Compatibility check for each Emacs version | ✔    | [![Compat](https://github.com/emacs-eask/cli/actions/workflows/compat.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/compat.yml)    |
-| Build executables                         | ✔    | [![Build](https://github.com/emacs-eask/cli/actions/workflows/build.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/build.yml)       |
+| Build executables                          | ✔    | [![Build](https://github.com/emacs-eask/cli/actions/workflows/build.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/build.yml)       |
 
 ###### Commands
 
-| Description                                 | Done | Status                                                                                                                                                                                |
-|---------------------------------------------|------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Description                                 | Done | Status                                                                                                                                                                              |
+|---------------------------------------------|------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Test commands in global (config) mode       | ✔    | [![Global](https://github.com/emacs-eask/cli/actions/workflows/global.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/global.yml)                               |
 | Test commands in development (package) mode | ✔    | [![Local](https://github.com/emacs-eask/cli/actions/workflows/local.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/local.yml)                                  |
-| Test to install packages                    | ✔    | [![Install](https://github.com/emacs-eask/cli/actions/workflows/install.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/install.yml)                            |
+| Test install packages                       | ✔    | [![Install](https://github.com/emacs-eask/cli/actions/workflows/install.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/install.yml)                            |
+| Test link packages                          | ✔    | [![Link](https://github.com/emacs-eask/cli/actions/workflows/link.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/link.yml)                                     |
 | Test execute commands                       | ✔    | [![Exec](https://github.com/emacs-eask/cli/actions/workflows/exec.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/exec.yml)                                     |
 | Test emacs commands                         | ✔    | [![Emacs](https://github.com/emacs-eask/cli/actions/workflows/emacs.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/emacs.yml)                                  |
-| Test to search packages                     | ✔    | [![Search](https://github.com/emacs-eask/cli/actions/workflows/search.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/search.yml)                               |
-| Test to upgrade and check outdated packages | ✔    | [![Outdated_Upgrade](https://github.com/emacs-eask/cli/actions/workflows/outdated_upgrade.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/outdated_upgrade.yml) |
+| Test search packages                        | ✔    | [![Search](https://github.com/emacs-eask/cli/actions/workflows/search.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/search.yml)                               |
+| Test upgrade and check outdated packages    | ✔    | [![Outdated_Upgrade](https://github.com/emacs-eask/cli/actions/workflows/outdated_upgrade.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/outdated_upgrade.yml) |
 | `Eask`-file checker                         | ✔    | [![Checker](https://github.com/emacs-eask/cli/actions/workflows/checker.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/checker.yml)                            |
 
 ###### Options
 
-| Description          | Done | Status                                                                                                                                                     |
-|----------------------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Description          | Done | Status                                                                                                                                                   |
+|----------------------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Test option switches | ✔    | [![Options](https://github.com/emacs-eask/cli/actions/workflows/options.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/options.yml) |
 
 ###### Test
 
-| Description               | Done | Status                                                                                                                                                                             |
-|---------------------------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Description               | Done | Status                                                                                                                                                                           |
+|---------------------------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Test `ert` command        | ✔    | [![Test ert](https://github.com/emacs-eask/cli/actions/workflows/test_ert.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/test_ert.yml)                      |
 | Test `ert-runner` command | ✔    | [![Test ert-runner](https://github.com/emacs-eask/cli/actions/workflows/test_ert-runner.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/test_ert-runner.yml) |
-| Test `buttercup` command  | ✔   | [![Test buttercup](https://github.com/emacs-eask/cli/actions/workflows/test_buttercup.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/test_buttercup.yml)    |
+| Test `buttercup` command  | ✔    | [![Test buttercup](https://github.com/emacs-eask/cli/actions/workflows/test_buttercup.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/test_buttercup.yml)    |
