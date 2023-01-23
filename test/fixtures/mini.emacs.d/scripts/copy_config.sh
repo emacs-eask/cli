@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (C) 2022-2023 Jen-Chieh Shen
+# Copyright (C) 2022 Jen-Chieh Shen
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,15 +19,8 @@
 
 ## Commentary:
 #
-# Test command `exec`
+# Copy configuration over to ~/.emacs.d/
 #
 
-set -e
-
-echo "Test command 'exec'..."
-cd $(dirname "$0")
-
-eask install-deps
-eask exec ert-runner -h
-eask exec github-elpa -h
-eask exec echo hello world
+echo "Copy test configuration"
+cp -R ./test/fixtures/mini.emacs.d/ ~/.emacs.d

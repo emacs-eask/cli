@@ -87,23 +87,6 @@
              (t             #'eask--write-plain-text))
        level msg))))
 
-(defmacro eask--save-eask-file-state (&rest body)
-  "Execute BODY without touching the Eask-file global variables."
-  (declare (indent 0) (debug t))
-  `(let (package-archives
-         package-archive-priorities
-         eask-package
-         eask-package-desc
-         eask-website-url
-         eask-keywords
-         eask-package-file
-         eask-files
-         eask-scripts
-         eask-depends-on-emacs
-         eask-depends-on
-         eask-depends-on-dev)
-     ,@body))
-
 (defun eask--check-file (files)
   "Lint list of Eask FILES."
   (let (checked-files content)

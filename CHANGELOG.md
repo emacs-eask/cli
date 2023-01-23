@@ -35,6 +35,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add command to clean pkg-file (#99)
 * Add option `-o`/`--output` to output log for Eask checker (#100)
 * Fix line-endings for unix system (#106)
+* Add `link` command (#107)
 
 ## 0.7.x
 > Released Sep 08, 2022

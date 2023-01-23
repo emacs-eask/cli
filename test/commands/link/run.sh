@@ -1,4 +1,6 @@
-# Copyright (C) 2022 Jen-Chieh Shen
+#!/usr/bin/env bash
+
+# Copyright (C) 2023 Jen-Chieh Shen
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,9 +19,15 @@
 
 ## Commentary:
 #
-# Copy configuration over to ~/.emacs.d/
+# Here we test all local (workspace) commands by simulating a Emacs
+# pacakge development environment!
+#
+# Notice, below we clone a random packae (repo) that uses Eask as the
+# dependencies management tool.
 #
 
-echo "Copy test configuration"
-mkdir "$env:USERPROFILE/AppData/Roaming/.emacs.d"
-robocopy /e "./test/mini.emacs.d/" "$env:USERPROFILE/AppData/Roaming/.emacs.d"
+set -e
+
+eask link add "mini.emacs.pkg.1" "./test/fixtures/mini.emacs.pkg.1/"
+eask link list
+eask link delete mini.emacs.pkg.1-0.0.1

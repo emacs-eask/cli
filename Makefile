@@ -48,6 +48,9 @@ command-outdated-upgrade:
 command-search:
 	./test/commands/search/run.sh
 
+command-link:
+	./test/commands/link/run.sh
+
 test-ert:
 	./test/commands/test/ert/run.sh
 

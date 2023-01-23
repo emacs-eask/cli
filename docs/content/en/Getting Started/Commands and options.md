@@ -11,6 +11,24 @@ The general syntax of the **eask** program is:
 $ eask [GLOBAL-OPTIONS] [COMMAND] [COMMAND-OPTIONS] [COMMAND-ARGUMENTS]
 ```
 
+# 🚩 Creating
+
+## 🔍 eask create package
+
+Create a new elisp project with the default `Eask`-file and CI/CD support.
+
+{{< hint info >}}
+💡 The template project is located in https://github.com/emacs-eask/template-elisp
+{{< /hint >}}
+
+## 🔍 eask create elpa
+
+Create a new ELPA using [github-elpa](https://github.com/10sr/github-elpa).
+
+{{< hint info >}}
+💡 The template project is located in https://github.com/emacs-eask/template-elpa
+{{< /hint >}}
+
 # 🚩 Core
 
 ## 🔍 eask init
@@ -301,23 +319,31 @@ Download package archives.
 $ eask [GLOBAL-OPTIONS] refresh
 ```
 
-# 🚩 Creating
+# 🚩 Linking
 
-## 🔍 eask create package
+## 🔍 eask link add <name> <path>
 
-Create a new elisp project with the default `Eask`-file and CI/CD support.
+Link a local package.
 
-{{< hint info >}}
-💡 The template project is located in https://github.com/emacs-eask/template-elisp
-{{< /hint >}}
+```sh
+$ eask [GLOBAL-OPTIONS] link add <name> <path>
+```
 
-## 🔍 eask create elpa
+## 🔍 eask link delete [name..]
 
-Create a new ELPA using [github-elpa](https://github.com/10sr/github-elpa).
+Delete local linked packages.
 
-{{< hint info >}}
-💡 The template project is located in https://github.com/emacs-eask/template-elpa
-{{< /hint >}}
+```sh
+$ eask [GLOBAL-OPTIONS] link delete [names..]
+```
+
+## 🔍 eask link list
+
+List all project links.
+
+```sh
+$ eask [GLOBAL-OPTIONS] link list
+```
 
 # 🚩 Cleaning
 

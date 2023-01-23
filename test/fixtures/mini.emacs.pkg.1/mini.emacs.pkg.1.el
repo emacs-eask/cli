@@ -1,10 +1,10 @@
-;;; mini.emacs.pkg.el --- Minimal test package  -*- lexical-binding: t; -*-
+;;; mini.emacs.pkg.1.el --- Minimal test package  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2022  Shen, Jen-Chieh
+;; Copyright (C) 2022-2023  Shen, Jen-Chieh
 ;; Created date 2022-03-29 01:52:58
 
 ;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>
-;; URL: https://github.com/emacs-eask/mini.emacs.pkg
+;; URL: https://github.com/emacs-eask/mini.emacs.pkg.1
 ;; Version: 0.0.1
 ;; Package-Requires: ((emacs "24.3") (s "1.12.0") (fringe-helper "1.0.1"))
 ;; Keywords: test
@@ -35,5 +35,5 @@
 (require 's)
 (require 'fringe-helper)
 
-(provide 'mini.emacs.pkg)
-;;; mini.emacs.pkg.el ends here
+(provide 'mini.emacs.pkg.1)
+;;; mini.emacs.pkg.1.el ends here

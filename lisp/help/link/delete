@@ -1,0 +1,4 @@
+    
+💡 You need to specify package(s) you want to unlink
+
+    $ eask link delete PKG-1 PKG-2
