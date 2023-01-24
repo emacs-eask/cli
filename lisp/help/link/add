@@ -1,7 +1,12 @@
 
-✓ You have now created the link, make sure your source package contains these files:
+✓ You have now created the link, here are things you might want to consider:
   
-  - [ ] `SOURCE-pkg.el` file              Package descriptor
-  - [ ] (Optional) `SOURCE-autoloads.el`  Package autoloads
-  
-If the source package uses Eask, you can use `eask pkg-file` and `eask autoloads` commands to create these files.
+  - [ ] `SOURCE-pkg.el` file                                  Package descriptor
+  - [ ] (Optional) `SOURCE-autoloads.el`                      Package autoloads
+  - [ ] (Optional) Compile source package with `.elc` files   Use `.elc` may be metter choice
+
+If the source package uses Eask, you can use `eask` commands to accomplish these tasks.
+   
+  * `eask pkg-file`
+  * `eask autoloads`
+  * `eask compile`
