@@ -80,11 +80,11 @@
          ((ignore-errors (file-exists-p pkg-eask))
           (let ((deps))
             (eask--save-load-eask-file pkg-eask
-                                       (progn
-                                         (setq eask--link-package-name (eask-package-name)
-                                               eask--link-package-version (eask-package-version))
-                                         (setq deps eask-depends-on))
-                                       (eask-error "✗ Error loading Eask-file: %s" pkg-eask))
+                (progn
+                  (setq eask--link-package-name (eask-package-name)
+                        eask--link-package-version (eask-package-version))
+                  (setq deps eask-depends-on))
+              (eask-error "✗ Error loading Eask-file: %s" pkg-eask))
             ;; XXX: Install dependencies for linked package
             (eask-install-dependencies)))
          (t
