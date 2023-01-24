@@ -81,7 +81,7 @@
                   (setq deps eask-depends-on))
               (eask-error "✗ Error loading Eask-file: %s" pkg-eask))
             ;; XXX: Install dependencies for linked package
-            (eask--install-packages (mapcar #'car deps))))
+            (eask-install-dependencies)))
          (t
           (eask-error "✗ Link source %s doesn't have an Eask or %s-pkg.el file"
                       source name))))
