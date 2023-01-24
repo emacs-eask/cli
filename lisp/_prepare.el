@@ -784,6 +784,16 @@ This uses function `locate-dominating-file' to look up directory tree."
          eask-depends-on-dev)
      ,@body))
 
+(defmacro eask--save-load-eask-file (file success &rest error)
+  "Load an Eask FILE and execute BODY with"
+  (declare (indent 2) (debug t))
+  `(eask--save-eask-file-state
+     (eask--setup-env
+       (eask--alias-env
+         (if (ignore-errors (load ,file 'noerror t))
+             (progn ,success)
+           ,@error)))))
+
 (defun eask-package--get (key)
   "Return package info by KEY."
   (plist-get eask-package key))

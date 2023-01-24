@@ -17,6 +17,12 @@
 (defvar eask-no-cleaning-operation-p nil
   "Set to non-nil if there is no cleaning operation done.")
 
+(defvar eask--clean-tasks-total 0
+  "Total clean tasks.")
+
+(defvar eask--clean-tasks-cleaned 0
+  "Total cleaned tasks")
+
 (defmacro eask--clean-section (title &rest body)
   "Print clean up TITLE and execute BODY."
   (declare (indent 1))
@@ -24,7 +30,12 @@
      (eask-with-progress
        (format "%s... " ,title)
        (eask-with-verbosity 'debug ,@body)
-       (if eask-no-cleaning-operation-p "skipped ✗" "done ✓"))))
+       (progn
+         (cl-incf eask--clean-tasks-total)
+         (if eask-no-cleaning-operation-p
+             "skipped ✗"
+           (cl-incf eask--clean-tasks-cleaned)
+           "done ✓")))))
 
 (eask-start
   (eask--clean-section "Cleaning workspace"
@@ -38,6 +49,11 @@
   (eask--clean-section "Cleaning pkg-file"
     (eask-call "clean/pkg-file"))
   (eask--clean-section "Cleaning log files"
-    (eask-call "clean/log-file")))
+    (eask-call "clean/log-file"))
+  (eask-msg "")
+  (eask-info "(Total of %s task%s cleaned, %s skipped)"
+             eask--clean-tasks-cleaned
+             (eask--sinr eask--clean-tasks-cleaned "" "s")
+             (- eask--clean-tasks-total eask--clean-tasks-cleaned)))
 
 ;;; clean/all.el ends here

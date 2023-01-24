@@ -92,11 +92,8 @@
   (let (checked-files content)
     ;; Linting
     (dolist (file files)
-      (eask--save-eask-file-state
-        (eask--setup-env
-          (eask--alias-env
-            (when (ignore-errors (load file 'noerror t))
-              (push file checked-files))))))
+      (eask--save-load-eask-file file
+          (push file checked-files)))
 
     ;; Print result
     (eask-msg "")

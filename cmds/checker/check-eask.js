@@ -41,6 +41,6 @@ exports.builder = {
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'checker/check-eask'
                     , argv.files
-                    , UTIL.def_flag(argv.json, '--json', argv.json)
+                    , UTIL.def_flag(argv.json, '--json')
                     , UTIL.def_flag(argv.output, '--output', argv.output));
 };

@@ -22,7 +22,7 @@
 
 (defun eask--uninstall-packages(names)
   "Uninstall packages."
-  (let* ((names (mapcar #'intern names))
+  (let* ((names (mapcar #'eask-intern names))
          (len (length names)) (s (eask--sinr len "" "s"))
          (pkg-installed (cl-remove-if-not #'package-installed-p names))
          (deleted (length pkg-installed)) (skipped (- len deleted)))
