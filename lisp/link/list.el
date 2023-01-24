@@ -31,7 +31,7 @@ The argument OFFSET is used to align the result."
   (if-let* ((links (eask--links))
             (offset (eask-seq-str-max (mapcar #'car links))))
       (progn
-        (eask-info "Linked packages:")
+        (eask-info "Available linked packages:")
         (eask-msg "")
         (dolist (link links) (eask--print-link link offset))
         (eask-msg "")

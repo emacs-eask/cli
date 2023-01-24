@@ -36,7 +36,11 @@
   "Add link with NAME to PATH."
   (let* ((dir-name (format "%s-%s" eask--link-package-name eask--link-package-version))
          (link-path (expand-file-name dir-name package-user-dir)))
-    (eask--delete-symlink link-path)
+    (when (file-exists-p link-path)
+      (eask-with-progress
+        "!! The link already present; override the existing link... "
+        (eask--delete-symlink link-path)
+        "done ✓"))
     (make-symbolic-link source link-path)
     (eask-msg "")
     (eask-info "✓ Created link from %s to %s" source (eask-f-filename link-path))))
@@ -56,7 +60,8 @@
       (eask-info "✗ Can't create link %s to non-existing path: %s" name source))
      ;; Create the link
      (t
-      (let ((pkg-el   (expand-file-name (package--description-file source) source))
+      (let ((links (eask--links))
+            (pkg-el   (expand-file-name (package--description-file source) source))
             (pkg-eask (car (eask--all-files source)))
             (pkg-desc))
         (cond
@@ -75,18 +80,19 @@
          ((ignore-errors (file-exists-p pkg-eask))
           (let ((deps))
             (eask--save-load-eask-file pkg-eask
-                (progn
-                  (setq eask--link-package-name (eask-package-name)
-                        eask--link-package-version (eask-package-version))
-                  (setq deps eask-depends-on))
-              (eask-error "✗ Error loading Eask-file: %s" pkg-eask))
+                                       (progn
+                                         (setq eask--link-package-name (eask-package-name)
+                                               eask--link-package-version (eask-package-version))
+                                         (setq deps eask-depends-on))
+                                       (eask-error "✗ Error loading Eask-file: %s" pkg-eask))
             ;; XXX: Install dependencies for linked package
             (eask-install-dependencies)))
          (t
           (eask-error "✗ Link source %s doesn't have an Eask or %s-pkg.el file"
-                      source name))))
-      (eask--create-link name source)
-      (when (= 1 (length (eask--links)))
-        (eask-help "link/add"))))))
+                      source name)))
+        (eask--create-link name source)
+        (when (and (zerop (length links))         ; if no link previously,
+                   (= 1 (length (eask--links))))  ; and first link created!
+          (eask-help "link/add")))))))
 
 ;;; link/add.el ends here
