@@ -40,9 +40,11 @@
     (if-let* ((name (intern (eask-guess-package-name)))
               ((package-installed-p name)))
         (progn
-          (eask-package-reinstall name)
+          (eask-call "core/uninstall")
           (eask-msg "")
-          (eask-info "(Reinstalled %s)" name))
+          (eask-call "core/install")
+          (eask-msg "")
+          (eask-info "(Package `%s' reinstalled.)" name))
       (eask-msg "")
       (eask-info "✗ (No packages have been reintalled)")
       (eask-help "core/reinstall"))))
