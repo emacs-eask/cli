@@ -41,7 +41,7 @@
         (progn
           (eask-package-delete name)
           (eask-msg "")
-          (eask-info "(Deleted %s)" name))
+          (eask-info "(Package `%s' deleted.)" name))
       (eask-info "✗ (No packages have been unintalled)")
       (eask-help "core/uninstall"))))
 
