@@ -37,6 +37,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Fix line-endings for unix system (#106)
 * Add `link` command (#107)
 * Fix package `xxx` is unavailable issue from Emacs snapshots (#111)
+* Fix install `CRLF` EOL (#112)
 
 ## 0.7.x
 > Released Sep 08, 2022
