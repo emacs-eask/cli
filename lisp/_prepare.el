@@ -610,8 +610,7 @@ Eask file in the workspace."
 (defun eask-file-load (location &optional noerror)
   "Load Eask file in the LOCATION."
   (when-let* ((target-eask-file (expand-file-name location user-emacs-directory))
-              ((file-exists-p target-eask-file))
-              (result (eask--alias-env (load-file target-eask-file))))
+              (result (eask--alias-env (load target-eask-file 'noerror t t))))
     (setq eask-file target-eask-file  ; assign eask file only if success
           eask-file-root (file-name-directory target-eask-file))
     (run-hooks 'eask-file-loaded-hook)
