@@ -66,10 +66,10 @@ jobs:
         path: dist
 
     - name: Zipping dist
-      run: tar -C dist -cvf ${{ matrix.targets }}.tar .
+      run: zip ${{ matrix.targets }}.zip dist
 
     - name: Move zip to HOME
-      run: mv ${{ matrix.targets }}.tar ~/
+      run: mv ${{ matrix.targets }}.zip ~/
 
     - name: Checkout binaries repository
       uses: actions/checkout@v3
@@ -80,10 +80,10 @@ jobs:
 
     - name: Clean up previous binaires
       continue-on-error: true
-      run: rm -rf eask/${{ matrix.targets }}.tar
+      run: rm -rf eask/${{ matrix.targets }}.zip
 
     - name: Move binaires to repository
-      run: mv ~/${{ matrix.targets }}.tar ./
+      run: mv ~/${{ matrix.targets }}.zip ./
 
     - name: Set git config
       run: |
@@ -95,7 +95,7 @@ jobs:
       run: |
         git pull
         git add .
-        git commit -m "Update binairs ${{ matrix.targets }}.tar"
+        git commit -m "Update binairs ${{ matrix.targets }}.zip"
 
     - name: Push
       if: github.ref == 'refs/heads/master'
