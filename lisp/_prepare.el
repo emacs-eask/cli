@@ -194,7 +194,7 @@ the `eask-start' execution.")
 
 (defun eask--update-exec-path ()
   "Add all bin directory to `exec-path'."
-  (dolist (filename (directory-files-recursively package-user-dir "^\\([^.]\\|\\.[^.]\\|\\.\\..\\)"))
+  (dolist (filename (directory-files-recursively package-user-dir directory-files-no-dot-files-regexp nil nil t))
     (when (string-suffix-p "bin/" (file-name-directory filename))
       (add-to-list 'exec-path (file-name-directory filename) t)))
   (delete-dups exec-path))
