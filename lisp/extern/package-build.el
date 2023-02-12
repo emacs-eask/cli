@@ -4,43 +4,6 @@
 
 (require 'package-build nil t)
 
-(defun package-build--create-tar (rcp directory)
-  "Create a tar file containing the package version specified by RCP.
-DIRECTORY is a temporary directory that contains the directory
-that is put in the tarball."
-  (let* ((name (oref rcp name))
-         (version (oref rcp version))
-         (time (oref rcp time))
-         (tar (expand-file-name (concat name "-" version ".tar")
-                                package-build-archive-dir))
-         (dir (concat name "-" version)))
-    ;; XXX: https://github.com/melpa/package-build/pull/34
-    ;;
-    ;; We definitely need to remove these two lines, or else it won't able to
-    ;; build on Windows.
-    ;;
-    (when (and (eq system-type 'windows-nt)
-               (not (string-prefix-p "bsdtar" eask-tar-version-string)))
-      (setq tar (replace-regexp-in-string "^\\([a-z]\\):" "/\\1" tar)))
-    (let ((default-directory directory))
-      (process-file
-       package-build-tar-executable nil
-       (get-buffer-create "*package-build-checkout*") nil
-       "-cf" tar dir
-       ;; Arguments that are need to strip metadata that
-       ;; prevent a reproducable tarball as described at
-       ;; https://reproducible-builds.org/docs/archives.
-       "--sort=name"
-       (format "--mtime=@%d" time)
-       "--owner=0" "--group=0" "--numeric-owner"
-       "--pax-option=exthdr.name=%d/PaxHeaders/%f,delete=atime,delete=ctime"))
-    (when (and package-build-verbose noninteractive)
-      (message "Created %s containing:" (file-name-nondirectory tar))
-      (dolist (line (sort (process-lines package-build-tar-executable
-                                         "--list" "--file" tar)
-                          #'string<))
-        (message "  %s" line)))))
-
 ;;
 ;; NOTE: Following code are brought in cuz it's very useful, but we don't want
 ;; to bring the whole `package-build' package unless it's needed.
