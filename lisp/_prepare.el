@@ -191,9 +191,10 @@ the `eask-start' execution.")
 
 (defun eask--update-exec-path ()
   "Add all bin directory to `exec-path'."
-  (dolist (filename (directory-files-recursively package-user-dir directory-files-no-dot-files-regexp nil nil t))
-    (when (string-suffix-p "bin/" (file-name-directory filename))
-      (add-to-list 'exec-path (file-name-directory filename) t)))
+  (dolist (entry (directory-files package-user-dir t directory-files-no-dot-files-regexp))
+    (when-let* ((bin (expand-file-name "bin" entry))
+                ((file-directory-p bin)))
+      (add-to-list 'exec-path bin t)))
   (delete-dups exec-path))
 
 (defun eask--update-load-path ()

@@ -39,6 +39,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Fix package `xxx` is unavailable issue from Emacs snapshots (#111)
 * Fix install `CRLF` EOL (#112)
 * fix: Also expose `bin` folder for symlink package (#115)
+* Resolve infinite recursion in `exec-path` setup (#118)
 
 ## 0.7.x
 > Released Sep 08, 2022
