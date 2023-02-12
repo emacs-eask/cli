@@ -29,9 +29,6 @@
         (t               'unknown))
   "Return current OS type.")
 
-(defconst eask-tar-version-string (shell-command-to-string "tar --version")
-  "Store the `tar' version string.")
-
 (setq make-backup-files nil)
 
 (setq package-enable-at-startup  nil            ; To avoid initializing twice
