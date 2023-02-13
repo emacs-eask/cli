@@ -22,6 +22,7 @@ influencing your personal configuration. Eask aims to be:
 * [Installation](https://emacs-eask.github.io/Getting-Started/Install-Eask/)
 * [Command-line interface](https://emacs-eask.github.io/Getting-Started/Commands-and-options/)
 * [Examples](https://emacs-eask.github.io/Examples/Real-project-examples/)
+* [FAQ](https://emacs-eask.github.io/FAQ/)
 
 ## 🧪 Testing
 
