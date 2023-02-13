@@ -19,9 +19,16 @@
 
 "use strict";
 
-exports.command = ['path', 'exec-path'];
+exports.command = ['path [patterns..]', 'exec-path [patterns..]'];
 exports.desc = 'Print the PATH (exec-path) from workspace';
+exports.builder = {
+  patterns: {
+    description: 'patterns you want to search (regex)',
+    requiresArg: false,
+    type: 'array',
+  },
+};
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/exec-path');
+  await UTIL.e_call(argv, 'core/exec-path', argv.patterns);
 };

@@ -19,7 +19,9 @@
   (message "%s" filename))
 
 (eask-start
-  (let ((files (eask-package-files)))
+  (let* ((patterns (eask-args))
+         (eask-files (or patterns eask-files))
+         (files (eask-package-files)))
     (mapc #'eask--print-filename files)
     (eask-msg "")
     (eask-info "(Total of %s item%s listed)" (length files) (eask--sinr files "" "s"))))

@@ -19,9 +19,16 @@
 
 "use strict";
 
-exports.command = ['files'];
-exports.desc = 'Print the list of all package files';
+exports.command = ['files [patterns..]'];
+exports.desc = 'Print all package files';
+exports.builder = {
+  patterns: {
+    description: 'patterns you want to search (wildcard)',
+    requiresArg: false,
+    type: 'array',
+  },
+};
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/files');
+  await UTIL.e_call(argv, 'core/files', argv.patterns);
 };
