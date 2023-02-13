@@ -19,9 +19,14 @@
   (message "%s" filename))
 
 (eask-start
-  (let ((files (eask-package-files)))
+  (let* ((patterns (eask-args))
+         (files (if patterns
+                    (eask-expand-file-specs patterns)
+                  (eask-package-files))))
     (mapc #'eask--print-filename files)
-    (eask-msg "")
-    (eask-info "(Total of %s item%s listed)" (length files) (eask--sinr files "" "s"))))
+    (if (zerop (length files))
+        (eask-info "(No package files found)")
+      (eask-msg "")
+      (eask-info "(Total of %s item%s listed)" (length files) (eask--sinr files "" "s")))))
 
 ;;; core/files.el ends here

@@ -184,24 +184,30 @@ Print the `PATH` environment variable of this project.
 Alias: `exec-path`
 
 ```sh
-$ eask [GLOBAL-OPTIONS] path
+$ eask [GLOBAL-OPTIONS] path [PATTERNS..]
 ```
+
+Optionally, you can pass in `[PATTERNS..]` to perform the search.
 
 ## 🔍 eask load-path
 
 Print the load path containing the dependencies of the current project.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] load-path
+$ eask [GLOBAL-OPTIONS] load-path [PATTERNS..]
 ```
+
+Optionally, you can pass in `[PATTERNS..]` to perform the search. 
 
 ## 🔍 eask files
 
 Print the list of all package files.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] files
+$ eask [GLOBAL-OPTIONS] files [PATTERNS..]
 ```
+
+If `[PATTERNS..]` are defined, it will display files that match that pattern.
 
 ## 🔍 eask exec
 

@@ -38,6 +38,12 @@ eask archives --all
 eask list --depth=0
 eask concat
 
+# PATH environment
+eask path
+eask path      bin
+eask load-path
+eask load-path bin
+
 # Preparation
 eask prepare --dev
 eask package
