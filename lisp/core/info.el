@@ -36,7 +36,6 @@
 (eask-start
   (if eask-package
       (progn
-        (eask-msg "")
         (eask-msg "%s (%s) | deps: %s | devDeps: %s"
                   (ansi-green (eask-package-name))
                   (ansi-yellow (eask-package-version))

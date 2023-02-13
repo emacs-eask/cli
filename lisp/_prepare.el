@@ -668,12 +668,14 @@ This uses function `locate-dominating-file' to look up directory tree."
   (eask-msg "")
   (eask-msg "✓ Checking Emacs version %s... done!" emacs-version)
   (eask-with-verbosity 'debug
-    (eask-msg "  ✓ Checking build number %s... done!" emacs-build-number)
-    (eask-msg "  ✓ Checking system configuration %s... done!" system-configuration)
+    (eask-msg "  💡 Invoke from %s" invocation-directory)
+    (eask-msg "  💡 Build No. %s" emacs-build-number)
+    (eask-msg "  💡 System configuration %s" system-configuration)
     (when-let ((emacs-build-time)
                (time (format-time-string "%Y-%m-%d" emacs-build-time)))
-      (eask-msg "  ✓ Checking build time %s... done!" time)))
+      (eask-msg "  💡 Build time %s" time)))
   (eask-msg "✓ Checking system %s... done!" system-type))
+
 
 (defmacro eask--with-hooks (&rest body)
   "Execute BODY with before/after hooks."
@@ -1068,7 +1070,8 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 (defun eask--msg-paint-kwds (string)
   "Paint keywords from STRING."
   (let* ((string (eask-s-replace "✓" (ansi-green "✓") string))
-         (string (eask-s-replace "✗" (ansi-red "✗") string)))
+         (string (eask-s-replace "✗" (ansi-red "✗") string))
+         (string (eask-s-replace "💡" (ansi-yellow "💡") string)))
     string))
 
 (defun eask--format-paint-kwds (msg &rest args)
