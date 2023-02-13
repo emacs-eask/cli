@@ -1,4 +1,4 @@
-;;; core/exec.el --- Execute command with correct load-path set up  -*- lexical-binding: t; -*-
+;;; core/exec.el --- Execute command with correct PATH set up  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -9,7 +9,7 @@
 ;;
 ;;  Initialization options:
 ;;
-;;    [args..]     execute command with correct load-path set up
+;;    [args..]     execute command with correct PATH set up
 ;;
 
 ;;; Code:
