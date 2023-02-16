@@ -54,6 +54,7 @@
     (cond
      ;; Files found, do the action!
      (files
+      (elsa-load-config)
       (mapcar #'eask--elsa-analyse-file files)
       (eask-msg "")
       (eask-info "(Total of %s file%s linted)" (length files)
