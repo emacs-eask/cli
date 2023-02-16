@@ -64,7 +64,7 @@ eask lint checkdoc
 eask lint declare
 eask lint elint
 eask lint elisp-lint
-eask lint elsa
+#eask lint elsa       # XXX: Elsa is not stable, ignore it for now
 eask lint indent
 eask lint keywords
 eask lint package
