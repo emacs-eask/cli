@@ -22,7 +22,7 @@
 (defconst eask--elsa-version nil
   "Elsa version.")
 
-(defun eask--elsa-process-file (filename)
+(defun eask--elsa-analyse-file (filename)
   "Process FILENAME."
   (let* ((filename (expand-file-name filename))
          (file (eask-root-del filename))
@@ -30,7 +30,7 @@
     (eask-msg "")
     (eask-msg "`%s` with elsa (%s)" (ansi-green file) eask--elsa-version)
     (eask-with-verbosity 'debug
-      (setq errors (oref (elsa-process-file filename) errors)))
+      (setq errors (oref (elsa-analyse-file filename) errors)))
     (if errors
         (--each (reverse errors)
           (let ((line (string-trim (concat file ":" (elsa-message-format it)))))
@@ -54,7 +54,7 @@
     (cond
      ;; Files found, do the action!
      (files
-      (mapcar #'eask--elsa-process-file files)
+      (mapcar #'eask--elsa-analyse-file files)
       (eask-msg "")
       (eask-info "(Total of %s file%s linted)" (length files)
                  (eask--sinr files "" "s")))
