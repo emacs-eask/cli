@@ -855,7 +855,7 @@ This uses function `locate-dominating-file' to look up directory tree."
       (eask-warn "Package-file seems to be missing `%s'" file))
     (when-let
         (((and (not eask-package-descriptor)  ; prevent multiple definition error
-               (not eask-package-desc)))       ; check if constructed
+               (not eask-package-desc)))      ; check if constructed
          (pkg-file (eask-pkg-el)))
       (eask-f-package-descriptor pkg-file)
       ;; XXX: Make sure DSL package descriptor is set back to `nil'
