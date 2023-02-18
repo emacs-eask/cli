@@ -47,6 +47,15 @@ of a file (used only for package development).
 (package-file "foo.el")
 ```
 
+## 🔍 **package-descriptor** (`pkg-file`)
+
+Declare all package metadata directly by specifying a package descriptor 
+contained in file with name given by file.
+
+```elisp
+(package-descriptor "foo-pkg.el")
+```
+
 ## 🔍 **files** (`&rest patterns`)
 
 Specify list of files that are included in this project.

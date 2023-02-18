@@ -41,6 +41,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * fix: Also expose `bin` folder for symlink package (#115)
 * Resolve infinite recursion in `exec-path` setup (#118)
 * feat: Add capability to search through path (#119)
+* Support DSL `package-descriptor` (#124)
 
 ## 0.7.x
 > Released Sep 08, 2022
