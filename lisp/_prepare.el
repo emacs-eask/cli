@@ -565,7 +565,7 @@ other scripts internally.  See function `eask-call'.")
 
 (defconst eask-file-keywords
   '("package" "website-url" "keywords"
-    "package-file" "files"
+    "package-file" "package-descriptor" "files"
     "script"
     "source" "source-priority"
     "depends-on" "development"
@@ -577,7 +577,7 @@ other scripts internally.  See function `eask-call'.")
 for function `eask--alias-env'."
   (dolist (keyword eask-file-keywords)
     (let ((keyword-sym (intern keyword))
-          (api (intern (concat "eask-f-" keyword)))      ; existing function
+          (api (intern (concat "eask-f-" keyword)))    ; existing function
           (old (intern (concat "eask--f-" keyword))))  ; variable that holds function pointer
       (funcall func keyword-sym api old))))
 
@@ -756,16 +756,17 @@ This uses function `locate-dominating-file' to look up directory tree."
     (shmelpa      . "https://shmelpa.commandlinesystems.com/packages/"))
   "Mapping of source name and url.")
 
-(defvar eask-package          nil)
-(defvar eask-package-desc     nil)  ; package descriptor
-(defvar eask-website-url      nil)
-(defvar eask-keywords         nil)
-(defvar eask-package-file     nil)
-(defvar eask-files            nil)
-(defvar eask-scripts          nil)
-(defvar eask-depends-on-emacs nil)
-(defvar eask-depends-on       nil)
-(defvar eask-depends-on-dev   nil)
+(defvar eask-package            nil)
+(defvar eask-package-desc       nil)  ; package descriptor
+(defvar eask-package-descriptor nil)
+(defvar eask-website-url        nil)
+(defvar eask-keywords           nil)
+(defvar eask-package-file       nil)
+(defvar eask-files              nil)
+(defvar eask-scripts            nil)
+(defvar eask-depends-on-emacs   nil)
+(defvar eask-depends-on         nil)
+(defvar eask-depends-on-dev     nil)
 
 (defmacro eask--save-eask-file-state (&rest body)
   "Execute BODY without touching the Eask-file global variables."
@@ -777,6 +778,7 @@ This uses function `locate-dominating-file' to look up directory tree."
          eask-website-url
          eask-keywords
          eask-package-file
+         eask-package-descriptor
          eask-files
          eask-scripts
          eask-depends-on-emacs
@@ -823,37 +825,51 @@ This uses function `locate-dominating-file' to look up directory tree."
     (setq eask-website-url url)))
 
 (defun eask-f-keywords (&rest keywords)
-  "Set package keywords."
+  "Set package KEYWORDS."
   (if eask-keywords
       (eask-error "Multiple definition of `keywords'")
     (setq eask-keywords keywords)))
 
 (defun eask-f-package-file (file)
-  "Set package file."
+  "Set package FILE."
   (if eask-package-file
       (eask-error "Multiple definition of `package-file'")
     (setq eask-package-file (expand-file-name file))
-    (let* ((package-file-exists (file-exists-p eask-package-file))
-           (def-point (if (eask-pkg-el) "-pkg.el file" "package-file"))
-           (target-file (cond ((eask-pkg-el) (expand-file-name (eask-pkg-el)))
-                              (package-file-exists eask-package-file))))
-      (unless package-file-exists
-        (eask-warn "Package-file seems to be missing `%s'" file))
-      (when target-file
-        (with-temp-buffer
-          (insert-file-contents target-file)
-          (setq eask-package-desc (ignore-errors
-                                    (if (eask-pkg-el)
-                                        (package--read-pkg-desc 'dir)
-                                      (package-buffer-info)))))
-        (eask-msg (concat
-                   (if eask-package-desc "✓ " "✗ ")
-                   "Try constructing the package-descriptor (%s)... "
-                   (if eask-package-desc "succeeded! " "failed!"))
-                  (file-name-nondirectory target-file))))))
+    (unless (file-exists-p eask-package-file)
+      (eask-warn "Package-file seems to be missing `%s'" file))
+    (when-let (((not eask-package-descriptor))
+               (pkg-file (eask-pkg-el)))
+      (eask-f-package-descriptor pkg-file)
+      ;; XXX: Make sure DSL package descriptor is set back to `nil'
+      (setq eask-package-descriptor nil))))
+
+(defun eask-f-package-descriptor (pkg-file)
+  "Set package PKG-FILE."
+  (cond
+   (eask-package-descriptor
+    (eask-error "Multiple definition of `package-descriptor'"))
+   ((and eask-package-desc (equal (eask-pkg-el) pkg-file)))  ; ignore
+   (t
+    (setq eask-package-descriptor (expand-file-name pkg-file))
+    (cond ((not (file-exists-p eask-package-descriptor))
+           (eask-warn "Pkg-file seems to be missing `%s'" pkg-file))
+          ((not (string-suffix-p "-pkg.el" eask-package-descriptor))
+           (eask-error "Pkg-file must end with `-pkg.el'"))
+          (t
+           (with-temp-buffer
+             (insert-file-contents eask-package-descriptor)
+             (setq eask-package-desc (ignore-errors
+                                       (if pkg-file
+                                           (package--read-pkg-desc 'dir)
+                                         (package-buffer-info)))))
+           (eask-msg (concat
+                      (if eask-package-desc "✓ " "✗ ")
+                      "Try constructing the package-descriptor (%s)... "
+                      (if eask-package-desc "succeeded! " "failed!"))
+                     (file-name-nondirectory eask-package-descriptor)))))))
 
 (defun eask-f-files (&rest patterns)
-  "Set files patterns."
+  "Set files PATTERNS."
   (setq eask-files (append eask-files patterns)))
 
 (defun eask-f-script (name command &rest args)
@@ -1291,7 +1307,11 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
       (eask--check-optional
        eask-website-url url
        "Unmatched website URL '%s'; it should be '%s'"
-       (format "Unmatched website URL '%s'; add ;; URL: %s to %s" eask-website-url eask-website-url def-point)
+       (format "Unmatched website URL '%s'; add %s to %s" eask-website-url
+               (if eask-package-desc
+                   (format ":url \"%s\"" eask-website-url)
+                 (format ";; URL: %s" eask-website-url))
+               def-point)
        (format "Unmatched website URL '%s'; add (website-url \"%s\") to Eask-file" url url)
        (format "URL header is optional, but it's often recommended")))
     (let ((keywords (eask-package-desc-keywords)))
@@ -1302,7 +1322,12 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
             (eask-warn "Unmatched keyword '%s'; add (keywords ... \"%s\") to Eask-file or consider removing it" keyword keyword)))
         (dolist (keyword eask-keywords)
           (unless (member keyword keywords)
-            (eask-warn "Unmatched keyword '%s'; add ;; Keywords ... %s to %s or consider removing it" keyword keyword def-point))))
+            (eask-warn "Unmatched keyword '%s'; add %s to %s or consider removing it"
+                       keyword
+                       (if eask-package-desc
+                           (format ":keywords '(\"%s\")" keyword)
+                         (format ";; Keywords: %s" keyword))
+                       def-point))))
        (t
         (eask-warn "Keywords header is optional, but it's often recommended"))))
     (let* ((dependencies (append eask-depends-on-emacs eask-depends-on))
