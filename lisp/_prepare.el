@@ -832,18 +832,23 @@ This uses function `locate-dominating-file' to look up directory tree."
 
 (defun eask--try-construct-package-desc (file)
   "Try construct the package descriptor from FILE."
-  (with-temp-buffer
-    (insert-file-contents file)
-    (setq eask-package-desc (ignore-errors
-                              (if (string-suffix-p "-pkg.el" file)
-                                  (package--read-pkg-desc 'dir)
-                                (unless (eask-pkg-el)
-                                  (package-buffer-info))))))
-  (eask-msg (concat
-             (if eask-package-desc "✓ " "✗ ")
-             "Try constructing the package-descriptor (%s)... "
-             (if eask-package-desc "succeeded! " "failed!"))
-            (file-name-nondirectory file)))
+  (let (skipped)
+    (with-temp-buffer
+      (insert-file-contents file)
+      (setq eask-package-desc
+            (ignore-errors
+              (cond ((string-suffix-p "-pkg.el" file)  ; if ensure -pkg.el
+                     (package--read-pkg-desc 'dir))
+                    ((eask-pkg-el)                     ; if -pkg.el is presented,
+                     (setq skipped t) nil)             ; skip it
+                    (t (package-buffer-info))))))      ; default read main package file
+    (eask-msg (concat
+               (if eask-package-desc "✓ " "✗ ")
+               "Try constructing the package-descriptor (%s)... "
+               (cond (eask-package-desc "succeeded!")
+                     (skipped "skipped!")
+                     (t "failed!")))
+              (file-name-nondirectory file))))
 
 (defun eask-f-package-file (file)
   "Set package FILE."
