@@ -14,6 +14,9 @@
 (package-file "check-dsl.el")                            ; duplicate `package-file` directive
 (package-file "check-dsl.el")
 
+(package-descriptor "check-pkg.el")                      ; duplicate `package-descriptor` directive
+(package-descriptor "check-pkg.el")
+
 ;; duplicate scripts
 (script "test" "echo \"Error: no test specified\" && exit 1")
 (script "test" "echo \"Error: no test specified\" && exit 1")
