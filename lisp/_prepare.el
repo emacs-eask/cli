@@ -830,12 +830,28 @@ This uses function `locate-dominating-file' to look up directory tree."
       (eask-error "Multiple definition of `keywords'")
     (setq eask-keywords keywords)))
 
+(defun eask--try-construct-package-desc (file)
+  "Try construct the package descriptor from FILE."
+  (with-temp-buffer
+    (insert-file-contents file)
+    (setq eask-package-desc (ignore-errors
+                              (if (string-suffix-p "-pkg.el" file)
+                                  (package--read-pkg-desc 'dir)
+                                (unless (eask-pkg-el)
+                                  (package-buffer-info))))))
+  (eask-msg (concat
+             (if eask-package-desc "✓ " "✗ ")
+             "Try constructing the package-descriptor (%s)... "
+             (if eask-package-desc "succeeded! " "failed!"))
+            (file-name-nondirectory file)))
+
 (defun eask-f-package-file (file)
   "Set package FILE."
   (if eask-package-file
       (eask-error "Multiple definition of `package-file'")
     (setq eask-package-file (expand-file-name file))
-    (unless (file-exists-p eask-package-file)
+    (if (file-exists-p eask-package-file)
+        (eask--try-construct-package-desc eask-package-file)
       (eask-warn "Package-file seems to be missing `%s'" file))
     (when-let (((not eask-package-descriptor))
                (pkg-file (eask-pkg-el)))
@@ -848,25 +864,17 @@ This uses function `locate-dominating-file' to look up directory tree."
   (cond
    (eask-package-descriptor
     (eask-error "Multiple definition of `package-descriptor'"))
-   ((and eask-package-desc (equal (eask-pkg-el) pkg-file)))  ; ignore
+   ((and eask-package-desc                ; check if construct successfully
+         (equal (eask-pkg-el) pkg-file))  ; check filename the same
+    )                                     ; ignore
    (t
     (setq eask-package-descriptor (expand-file-name pkg-file))
-    (cond ((not (file-exists-p eask-package-descriptor))
-           (eask-warn "Pkg-file seems to be missing `%s'" pkg-file))
-          ((not (string-suffix-p "-pkg.el" eask-package-descriptor))
+    (cond ((not (string-suffix-p "-pkg.el" eask-package-descriptor))
            (eask-error "Pkg-file must end with `-pkg.el'"))
+          ((not (file-exists-p eask-package-descriptor))
+           (eask-warn "Pkg-file seems to be missing `%s'" pkg-file))
           (t
-           (with-temp-buffer
-             (insert-file-contents eask-package-descriptor)
-             (setq eask-package-desc (ignore-errors
-                                       (if pkg-file
-                                           (package--read-pkg-desc 'dir)
-                                         (package-buffer-info)))))
-           (eask-msg (concat
-                      (if eask-package-desc "✓ " "✗ ")
-                      "Try constructing the package-descriptor (%s)... "
-                      (if eask-package-desc "succeeded! " "failed!"))
-                     (file-name-nondirectory eask-package-descriptor)))))))
+           (eask--try-construct-package-desc eask-package-descriptor))))))
 
 (defun eask-f-files (&rest patterns)
   "Set files PATTERNS."
@@ -1308,7 +1316,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
        eask-website-url url
        "Unmatched website URL '%s'; it should be '%s'"
        (format "Unmatched website URL '%s'; add %s to %s" eask-website-url
-               (if eask-package-desc
+               (if (string-prefix-p "-pkg.el" def-point)
                    (format ":url \"%s\"" eask-website-url)
                  (format ";; URL: %s" eask-website-url))
                def-point)
@@ -1319,12 +1327,12 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
        ((or keywords eask-keywords)
         (dolist (keyword keywords)
           (unless (member keyword eask-keywords)
-            (eask-warn "Unmatched keyword '%s'; add (keywords ... \"%s\") to Eask-file or consider removing it" keyword keyword)))
+            (eask-warn "Unmatched keyword '%s'; add (keywords \"%s\") to Eask-file or consider removing it" keyword keyword)))
         (dolist (keyword eask-keywords)
           (unless (member keyword keywords)
             (eask-warn "Unmatched keyword '%s'; add %s to %s or consider removing it"
                        keyword
-                       (if eask-package-desc
+                       (if (string-prefix-p "-pkg.el" def-point)
                            (format ":keywords '(\"%s\")" keyword)
                          (format ";; Keywords: %s" keyword))
                        def-point))))
