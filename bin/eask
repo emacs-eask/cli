@@ -17,5 +17,19 @@
 # Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 # Boston, MA 02110-1301, USA.
 
-BASEDIR=$(dirname "$0")
-node "$BASEDIR/../eask" "$@"
+function _get_current_directory()
+{
+  if dirname "$(readlink -f "${0}")" &>/dev/null
+  then
+    CDIR="$(cd "$(dirname "$(readlink -f "${0}")")" && pwd)"
+  elif realpath -e -L "${0}" &>/dev/null
+  then
+    CDIR="$(realpath -e -L "${0}")"
+    CDIR="${CDIR%/eask}"
+  fi
+}
+
+CDIR="$(pwd)"
+_get_current_directory
+
+node "$CDIR/../eask" "$@"
