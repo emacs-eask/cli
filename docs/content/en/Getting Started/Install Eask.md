@@ -61,7 +61,7 @@ Alternatively, you can clone it directly from this repo
 
 ```sh
 # clone the repo
-$ git clone https://github.com/emacs-eask/cli
+$ git clone https://github.com/emacs-eask/cli eask
 
 # change the working directory to eask
 $ cd eask
@@ -77,7 +77,7 @@ Make sure you set up the environment path variable according to your system,
 On Linux/macOS,
 
 ```sh
-export PATH="$HOME/eask/bin:$PATH"
+export PATH="path/to/eask/bin:$PATH"
 ```
 
 On Windows,
