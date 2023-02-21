@@ -42,6 +42,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Resolve infinite recursion in `exec-path` setup (#118)
 * feat: Add capability to search through path (#119)
 * Support DSL `package-descriptor` (#124)
+* Resolve the potential symlink to the bash script (#24, #125, and #126)
 
 ## 0.7.x
 > Released Sep 08, 2022
