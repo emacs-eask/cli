@@ -22,6 +22,22 @@
 const path = require('path');
 const child_process = require("child_process");
 
+/**
+ * Form CLI arguments into a single string.
+ * @param { Array } argv - Argument vector.
+ */
+function cli_args(argv) {
+  let result = '';
+  argv.forEach(function (element) {
+    // XXX: We wrap double quotes if the string contains spaces
+    if (/\s/g.test(element)) {
+      element = '\"' + element + '\"';
+    }
+    result += ' ' + element;
+  });
+  return result;
+}
+
 /*
  * Remove `undefined` item from the array
  * @param { Array } arr - target array
@@ -118,7 +134,7 @@ async function e_call(argv, script, ...args) {
   return new Promise(resolve => {
     let _path = el_script(script);
 
-    let cmd_base = ['-Q', '--script', _path];
+    let cmd_base = ['emacs', '-Q', '--script', _path];
     let cmd_args = args.flat();
     let cmd_global = _global_options(argv).flat();
     let cmd = cmd_base.concat(cmd_args).concat(cmd_global);
@@ -133,7 +149,7 @@ async function e_call(argv, script, ...args) {
       console.log('[DEBUG] emacs ' + cmd.join(' '));
 
     setup_env();
-    let proc = child_process.spawn('emacs', cmd, { stdio: 'inherit' });
+    let proc = child_process.spawn(cli_args(cmd), { stdio: 'inherit', shell: true });
 
     proc.on('close', function (code) {
       if (code == 0) {
@@ -148,6 +164,7 @@ async function e_call(argv, script, ...args) {
 /*
  * Module Exports
  */
+module.exports.cli_args = cli_args;
 module.exports.plugin_dir = plugin_dir;
 module.exports.def_flag = def_flag;
 module.exports.setup_env = setup_env;

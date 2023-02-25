@@ -49,9 +49,7 @@ exports.handler = async (argv) => {
   process.env.PATH = fs.readFileSync(epf, 'utf8');
   process.env.EMACSLOADPATH = fs.readFileSync(lpf, 'utf8');;
 
-  let program = cmd[0];
-  let rest = cmd.slice(1);
-  let proc = child_process.spawn(program, rest, { stdio: 'inherit', shell: true });
+  let proc = child_process.spawn(UTIL.cli_args(cmd), { stdio: 'inherit', shell: true });
 
   proc.on('close', function (code) {
     if (code == 0) return;
