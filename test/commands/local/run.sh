@@ -57,7 +57,7 @@ eask run test
 eask run -all
 
 # Exection
-eask eval '(progn (message \""Hello World!~\""))'
+eask eval "(progn (require 'mini.emacs.pkg.1))"
 
 # Linter
 eask lint checkdoc
