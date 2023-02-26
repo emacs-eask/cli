@@ -43,15 +43,15 @@ exports.handler = async (argv) => {
     return;
   }
 
+  console.log('');
+
   let epf = global.EASK_HOMEDIR + 'exec-path';
   let lpf = global.EASK_HOMEDIR + 'load-path';
 
   process.env.PATH = fs.readFileSync(epf, 'utf8');
   process.env.EMACSLOADPATH = fs.readFileSync(lpf, 'utf8');;
 
-  let program = cmd[0];
-  let rest = cmd.slice(1);
-  let proc = child_process.spawn(program, rest, { stdio: 'inherit', shell: true });
+  let proc = child_process.spawn(UTIL.cli_args(cmd), { stdio: 'inherit', shell: true });
 
   proc.on('close', function (code) {
     if (code == 0) return;

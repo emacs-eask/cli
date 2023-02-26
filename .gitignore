@@ -143,6 +143,9 @@ dist
 # internal test
 _test/
 
+# emacs
+emacs_backtrace.txt
+
 # ignore generated files
 *.elc
 

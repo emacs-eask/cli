@@ -35,12 +35,12 @@ exports.builder = async (yargs) => {
 exports.handler = async (argv) => {
   let _path = UTIL.el_script('core/emacs');
 
-  let default_cmd = ['-Q', '-l', _path];
+  let default_cmd = ['emacs', '-Q', '-l', _path];
   let rest = process.argv.slice(3);
   let cmd = default_cmd.concat(rest);
 
   UTIL.setup_env();
-  let proc = child_process.spawn('emacs', cmd, { stdio: 'inherit' });
+  let proc = child_process.spawn(UTIL.cli_args(cmd), { stdio: 'inherit', shell: true });
 
   proc.on('close', function (code) {
     if (code == 0) return;

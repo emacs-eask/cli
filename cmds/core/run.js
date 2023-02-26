@@ -65,11 +65,7 @@ function startCommand(commands, count) {
   let command = commands[count];
 
   console.log('[RUN]: ' + command);
-  let splitted = command.split(' ');
-
-  let program = splitted[0];
-  let rest = splitted.slice(1);
-  let proc = child_process.spawn(program, rest, { stdio: 'inherit', shell: true });
+  let proc = child_process.spawn(command, { stdio: 'inherit', shell: true });
 
   proc.on('close', function (code) {
     if (code == 0) {
