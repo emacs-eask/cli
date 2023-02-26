@@ -19,6 +19,9 @@
 
 "use strict";
 
+const fs = require('fs');
+const child_process = require("child_process");
+
 exports.command = ['eval [form]'];
 exports.desc = 'Evaluate lisp form with a proper PATH';
 exports.builder = {
@@ -30,5 +33,38 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/eval', '\"' + argv.form.replace(/[\\$'"]/g, "\\$&") + '\"');
+  // setup environment, so Emacs can receive it
+  process.env.EASK_HOMEDIR = global.EASK_HOMEDIR;
+
+  await UTIL.e_call(argv, 'core/eval', argv.form);
+
+  if (!fs.existsSync(global.EASK_HOMEDIR)) {
+    return;
+  }
+
+  console.log('');
+
+  let epf = global.EASK_HOMEDIR + 'exec-path';
+  let lpf = global.EASK_HOMEDIR + 'load-path';
+
+  process.env.PATH = fs.readFileSync(epf, 'utf8');
+  process.env.EMACSLOADPATH = fs.readFileSync(lpf, 'utf8');;
+
+  let expressions = process.argv.slice(3);
+
+  // XXX: Just replace `form` property, this is combined expression
+  argv.form = expressions.join(' ');
+
+  let cmd = ['emacs', '--batch', '--eval', argv.form];
+
+  let proc = child_process.spawn(UTIL.cli_args(cmd), { stdio: 'inherit', shell: true });
+
+  proc.on('close', function (code) {
+    if (code == 0) return;
+    throw 'Exit with code: ' + code;
+  });
 };
+
+function escapeDoubleQuotes(str) {
+  return str.replaceAll('\"', '\\"');
+}

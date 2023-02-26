@@ -28,12 +28,18 @@ const child_process = require("child_process");
  */
 function cli_args(argv) {
   let result = '';
+  let first = true;
   argv.forEach(function (element) {
     // XXX: We wrap double quotes if the string contains spaces
     if (/\s/g.test(element)) {
+      element = element.replaceAll('\"', '\\"');  // escape double quotes
       element = '\"' + element + '\"';
     }
-    result += ' ' + element;
+    if (first)
+      result += element;
+    else
+      result += ' ' + element;
+    first = false;
   });
   return result;
 }
