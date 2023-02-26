@@ -64,7 +64,3 @@ exports.handler = async (argv) => {
     throw 'Exit with code: ' + code;
   });
 };
-
-function escapeDoubleQuotes(str) {
-  return str.replaceAll('\"', '\\"');
-}
