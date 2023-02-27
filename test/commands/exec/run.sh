@@ -31,3 +31,6 @@ eask install-deps
 eask exec ert-runner -h
 eask exec github-elpa -h
 eask exec echo hello world
+
+eask exec buttercup -L .
+eask exec buttercup -L . --pattern 'pattern 1'
