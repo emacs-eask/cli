@@ -38,9 +38,9 @@
          (link-path (expand-file-name dir-name package-user-dir)))
     (when (file-exists-p link-path)
       (eask-with-progress
-        "!! The link already present; override the existing link... "
+        (ansi-yellow "!! The link already present; override the existing link... ")
         (eask--delete-symlink link-path)
-        "done ✓"))
+        (ansi-yellow "done ✓")))
     (make-symbolic-link source link-path)
     (eask-msg "")
     (eask-info "✓ Created link from %s to %s" source (eask-f-filename link-path))))
