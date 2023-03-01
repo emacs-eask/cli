@@ -1,0 +1,7 @@
+
+💡 You need the `-pkg.el` file so the `package.el` can recognize your package.
+   
+Options are,
+   
+  - [ ] Use `eask pkg-file` to create one
+  - [ ] Write your own `-pkg.el` file
