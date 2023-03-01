@@ -386,7 +386,8 @@ the `eask-start' execution.")
 
 (defun eask-package--version-string (pkg)
   "Return PKG's version."
-  (if-let ((version (eask-package--version pkg)))
+  (if-let ((version (or (eask-package--version pkg t)
+                        (eask-package--version pkg nil))))
       (package-version-join version)
     ;; Just in case, but this should never happens!
     "latest"))
