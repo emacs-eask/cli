@@ -158,11 +158,11 @@ async function e_call(argv, script, ...args) {
     let proc = child_process.spawn(cli_args(cmd), { stdio: 'inherit', shell: true });
 
     proc.on('close', function (code) {
-      if (code == 0) {
-        resolve(code);
-        return;
-      }
-      throw 'Exit with code: ' + code;
+      // if (code == 0) {
+      //   resolve(code);
+      //   return;
+      // }
+      throw new Error('Exit with code: ' + code);
     });
   });
 }
