@@ -14,6 +14,14 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
+;;
+;;; Flags
+
+(advice-add #'eask-allow-error-p :override (lambda (&rest _) t))
+
+;;
+;;; Core
+
 (require 'finder)
 
 (defun eask--defined-keywords (keywords)
