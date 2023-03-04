@@ -162,8 +162,6 @@ async function e_call(argv, script, ...args) {
         resolve(code);
         return;
       }
-      console.log('');
-      console.log('Exit with code: ' + code);
       process.exit(code);
     });
   });
