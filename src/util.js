@@ -162,7 +162,9 @@ async function e_call(argv, script, ...args) {
         resolve(code);
         return;
       }
-      throw new Error('Exit with code: ' + code);
+      console.log('');
+      console.log('Exit with code: ' + code);
+      process.exit(code);
     });
   });
 }
