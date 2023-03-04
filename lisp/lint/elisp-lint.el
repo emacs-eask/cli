@@ -19,6 +19,14 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
+;;
+;;; Flags
+
+(advice-add #'eask-allow-error-p :override (lambda (&rest _) t))
+
+;;
+;;; Core
+
 (defconst eask--elisp-lint-version nil
   "`elisp-lint' version.")
 

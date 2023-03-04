@@ -19,10 +19,20 @@
        (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
       nil t)
 
-;; Handle options
+;;
+;;; Flags
+
+(advice-add #'eask-allow-error-p :override (lambda (&rest _) t))
+
+;;
+;;; Handle options
+
 (add-hook 'eask-before-command-hook
           (lambda ()
             (setq package-lint-batch-fail-on-warnings t)))
+
+;;
+;;; Core
 
 (defconst eask--package-lint-version nil
   "`package-lint' version.")
