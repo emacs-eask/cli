@@ -44,6 +44,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Support DSL `package-descriptor` (#124)
 * Resolve the potential symlink to the bash script (#24, #125, and #126)
 * Workaround for arguments that contain whitespaces (#128 and #129)
+* Silent unnecessary Node's stacktrace (#134 and #136)
 
 ## 0.7.x
 > Released Sep 08, 2022
