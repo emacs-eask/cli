@@ -19,9 +19,9 @@
 
 "use strict";
 
-exports.command = ['autoloads'];
-exports.desc = 'Generate autoloads file';
+exports.command = ['pkg-file'];
+exports.desc = 'Generate -pkg file';
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/autoloads');
+  await UTIL.e_call(argv, 'generate/pkg-file');
 };

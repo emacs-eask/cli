@@ -149,26 +149,6 @@ Or compile files that are already specified in your `Eask`-file.
 $ eask compile
 ```
 
-## 🔍 eask autoloads
-
-Generate autoload file.
-
-```sh
-$ eask [GLOBAL-OPTIONS] autoloads
-```
-
-## 🔍 eask pkg-file
-
-Write a package descriptor file to `project-pkg.el` in the project root.
-
-```sh
-$ eask [GLOBAL-OPTIONS] pkg-file
-```
-
-`project` is the project name, as declared in `Eask`-file. See
-[Multi-file Packages (elisp)](https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html#Multi_002dfile-Packages)
-for details.
-
 ## 🔍 eask package-directory
 
 Print path to package directory, where all dependencies are installed.
@@ -324,6 +304,30 @@ Download package archives.
 ```sh
 $ eask [GLOBAL-OPTIONS] refresh
 ```
+
+# 🚩 Generate
+
+Generate files use for development
+
+## 🔍 eask generate autoloads
+
+Generate autoload file.
+
+```sh
+$ eask [GLOBAL-OPTIONS] autoloads
+```
+
+## 🔍 eask generate pkg-file
+
+Write a package descriptor file to `project-pkg.el` in the project root.
+
+```sh
+$ eask [GLOBAL-OPTIONS] pkg-file
+```
+
+`project` is the project name, as declared in `Eask`-file. See
+[Multi-file Packages (elisp)](https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html#Multi_002dfile-Packages)
+for details.
 
 # 🚩 Linking
 
