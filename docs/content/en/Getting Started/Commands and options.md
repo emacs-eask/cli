@@ -314,7 +314,7 @@ Generate files use for development
 Generate autoload file.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] autoloads
+$ eask [GLOBAL-OPTIONS] generate autoloads
 ```
 
 ## 🔍 eask generate pkg-file
@@ -322,7 +322,7 @@ $ eask [GLOBAL-OPTIONS] autoloads
 Write a package descriptor file to `project-pkg.el` in the project root.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] pkg-file
+$ eask [GLOBAL-OPTIONS] generate pkg-file
 ```
 
 `project` is the project name, as declared in `Eask`-file. See
