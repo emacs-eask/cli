@@ -305,7 +305,7 @@ Download package archives.
 $ eask [GLOBAL-OPTIONS] refresh
 ```
 
-# 🚩 Generate
+# 🚩 Generating
 
 Generate files use for development
 
