@@ -33,7 +33,7 @@
                          (list (if (stringp (car elm)) (intern (car elm)) (car elm))
                                (if (= (length (cdr elm)) 1)
                                    (nth 0 (cdr elm))
-                                 "latest")))
+                                 "0")))
                        (append eask-depends-on-emacs eask-depends-on))))
     (setq eask--pkg-filename pkg-file)
     (write-region
