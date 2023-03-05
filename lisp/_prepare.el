@@ -390,7 +390,7 @@ the `eask-start' execution.")
                         (eask-package--version pkg nil))))
       (package-version-join version)
     ;; Just in case, but this should never happens!
-    "latest"))
+    "0"))
 
 (defun eask-package-desc-url ()
   "Return url from package descriptor."
@@ -793,7 +793,8 @@ This uses function `locate-dominating-file' to look up directory tree."
   `(eask--save-eask-file-state
      (eask--setup-env
        (eask--alias-env
-         (if (ignore-errors (load ,file 'noerror t))
+         (if (let ((default-directory (file-name-directory ,file)))
+               (ignore-errors (load ,file 'noerror t)))
              (progn ,success)
            ,@error)))))
 
@@ -947,7 +948,7 @@ This uses function `locate-dominating-file' to look up directory tree."
         recipe)))
    ;; No argument specify
    ((<= (length args) 1)
-    (let* ((minimum-version (or (car args) "latest"))
+    (let* ((minimum-version (or (car args) "0"))
            (recipe (list pkg minimum-version)))
       (if (member recipe eask-depends-on)
           (eask-error "Define dependencies with the same name `%s'" pkg)

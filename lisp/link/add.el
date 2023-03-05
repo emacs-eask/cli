@@ -40,10 +40,10 @@
       (eask-with-progress
         (ansi-yellow "!! The link already present; override the existing link... ")
         (eask--delete-symlink link-path)
-        (ansi-yellow "done ✓")))
+        (ansi-yellow "done !!")))
     (make-symbolic-link source link-path)
     (eask-msg "")
-    (eask-info "✓ Created link from %s to %s" source (eask-f-filename link-path))))
+    (eask-info "✓ Created link from `%s` to `%s`" source (eask-f-filename link-path))))
 
 (eask-start
   (let* ((names (eask-args))
@@ -62,6 +62,7 @@
      (t
       (let ((links (eask--links))
             (pkg-el (expand-file-name (package--description-file name) source))
+            (pkg-eask (car (eask--all-files source)))
             (pkg-desc))
         (cond
          ((ignore-errors (file-exists-p pkg-el))
@@ -80,6 +81,34 @@
           (when (and (zerop (length links))         ; if no link previously,
                      (= 1 (length (eask--links))))  ; and first link created!
             (eask-help "link/add/success")))
+         ((ignore-errors (file-exists-p pkg-eask))
+          (eask--save-load-eask-file pkg-eask
+              (progn
+                (setq eask--link-package-name (eask-package-name)
+                      eask--link-package-version (eask-package-version))
+                ;; Help generates necessary files!
+                (let* ((default-directory source)  ; this to make command work!
+                       (pkg-file       (expand-file-name (concat name "-pkg.el")))
+                       (autoloads-file (expand-file-name (concat name "-autoloads.el")))
+                       (pkg-file-presented       (file-exists-p pkg-file))
+                       (autoloads-file-presented (file-exists-p autoloads-file)))
+                  (eask-msg "")
+                  (eask-with-progress
+                    (format "Generating %s file... " autoloads-file)
+                    (unless autoloads-file-presented
+                      (eask-with-verbosity 'debug (eask-call "core/autoloads")))
+                    (if autoloads-file-presented "already presented ✗" "done ✓"))
+                  (eask-with-progress
+                    (format "Generating %s file... " pkg-file)
+                    (unless pkg-file-presented
+                      (eask-with-verbosity 'debug (eask-call "core/pkg-file")))
+                    (if pkg-file-presented "already presented ✗" "done ✓")))
+                ;; XXX: Install dependencies for linked package
+                (eask-install-dependencies)
+                (when (and (zerop (length links))         ; if no link previously,
+                           (= 1 (length (eask--links))))  ; and first link created!
+                  (eask-help "link/add/success")))
+            (eask-error "✗ Error loading Eask-file: %s" pkg-eask)))
          (t
           (eask-info "✗ (Missing `%s-pkg.el` file in your source folder)" name)
           (eask-help "link/add/error"))))))))
