@@ -80,7 +80,7 @@
           (eask--create-link name source)
           (when (and (zerop (length links))         ; if no link previously,
                      (= 1 (length (eask--links))))  ; and first link created!
-            (eask-help "link/add/success")))
+            (eask-help "link/add/success/pkg")))
          ((ignore-errors (file-exists-p pkg-eask))
           (eask--save-load-eask-file pkg-eask
               (progn
@@ -105,9 +105,10 @@
                     (if pkg-file-presented "already presented ✗" "done ✓")))
                 ;; XXX: Install dependencies for linked package
                 (eask-install-dependencies)
+                (eask--create-link name source)
                 (when (and (zerop (length links))         ; if no link previously,
                            (= 1 (length (eask--links))))  ; and first link created!
-                  (eask-help "link/add/success")))
+                  (eask-help "link/add/success/eask")))
             (eask-error "✗ Error loading Eask-file: %s" pkg-eask)))
          (t
           (eask-info "✗ (Missing `%s-pkg.el` file in your source folder)" name)

@@ -1,0 +1,8 @@
+
+✓ You have now created the link, here are things you might want to consider:
+
+  - [ ] (Optional) Compile source package with `.elc` files   Use `.elc` may be metter choice
+
+If the source package uses Eask, you can use `eask` commands to accomplish these tasks.
+
+  * `eask compile`
