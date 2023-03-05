@@ -37,13 +37,14 @@
   (let* ((dir-name (format "%s-%s" eask--link-package-name eask--link-package-version))
          (link-path (expand-file-name dir-name package-user-dir)))
     (when (file-exists-p link-path)
+      (eask-msg "")
       (eask-with-progress
-        (ansi-yellow "!! The link already present; override the existing link... ")
+        (ansi-yellow "!! The link is already presented; override the existing link... ")
         (eask--delete-symlink link-path)
         (ansi-yellow "done !!")))
     (make-symbolic-link source link-path)
     (eask-msg "")
-    (eask-info "✓ Created link from `%s` to `%s`" source (eask-f-filename link-path))))
+    (eask-info "(Created link from `%s` to `%s`)" source (eask-f-filename link-path))))
 
 (eask-start
   (let* ((names (eask-args))
@@ -66,6 +67,7 @@
             (pkg-desc))
         (cond
          ((ignore-errors (file-exists-p pkg-el))
+          (eask-log "💡 Validating package through %s... done!" pkg-el)
           (with-temp-buffer
             (insert-file-contents pkg-el)
             (setq pkg-desc (ignore-errors
@@ -76,17 +78,20 @@
                 eask--link-package-version (package-version-join
                                             (package-desc-version pkg-desc)))
           ;; XXX: Install dependencies for linked package
+          (eask-msg "")
           (eask--install-packages (eask--package-desc-reqs pkg-desc))
           (eask--create-link name source)
           (when (and (zerop (length links))         ; if no link previously,
                      (= 1 (length (eask--links))))  ; and first link created!
             (eask-help "link/add/success/pkg")))
          ((ignore-errors (file-exists-p pkg-eask))
+          (eask-log "💡 Validating package through %s... done!" pkg-eask)
           (eask--save-load-eask-file pkg-eask
               (progn
                 (setq eask--link-package-name (eask-package-name)
                       eask--link-package-version (eask-package-version))
                 ;; XXX: Install dependencies for linked package
+                (eask-msg "")
                 (eask-install-dependencies)
                 ;; Help generates necessary files!
                 (let* ((default-directory source)  ; this to make command work!
