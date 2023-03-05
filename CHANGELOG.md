@@ -47,6 +47,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Silent unnecessary Node's stacktrace (#134 and #136)
 * Allow linter list through all errors (#134 and #137)
 * Omit `nil` value for conditions in `development` scope (#143 and #144)
+* Move `pkg-file` and `autoloads` commands under `generate` subcommand (#142)
 
 ## 0.7.x
 > Released Sep 08, 2022
