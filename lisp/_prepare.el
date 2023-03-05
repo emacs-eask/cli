@@ -774,6 +774,8 @@ This uses function `locate-dominating-file' to look up directory tree."
   (declare (indent 0) (debug t))
   `(let (package-archives
          package-archive-priorities
+         eask-file
+         eask-file-root
          eask-package
          eask-package-desc
          eask-website-url
@@ -794,7 +796,7 @@ This uses function `locate-dominating-file' to look up directory tree."
      (eask--setup-env
        (eask--alias-env
          (if (let ((default-directory (file-name-directory ,file)))
-               (ignore-errors (load ,file 'noerror t)))
+               (ignore-errors (eask-file-load ,file)))
              (progn ,success)
            ,@error)))))
 

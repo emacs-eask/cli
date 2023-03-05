@@ -86,6 +86,8 @@
               (progn
                 (setq eask--link-package-name (eask-package-name)
                       eask--link-package-version (eask-package-version))
+                ;; XXX: Install dependencies for linked package
+                (eask-install-dependencies)
                 ;; Help generates necessary files!
                 (let* ((default-directory source)  ; this to make command work!
                        (pkg-file       (expand-file-name (concat name "-pkg.el")))
@@ -103,8 +105,6 @@
                     (unless pkg-file-presented
                       (eask-with-verbosity 'debug (eask-call "core/pkg-file")))
                     (if pkg-file-presented "already presented ✗" "done ✓")))
-                ;; XXX: Install dependencies for linked package
-                (eask-install-dependencies)
                 (eask--create-link name source)
                 (when (and (zerop (length links))         ; if no link previously,
                            (= 1 (length (eask--links))))  ; and first link created!
