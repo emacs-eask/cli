@@ -103,12 +103,12 @@
                   (eask-with-progress
                     (format "Generating %s file... " autoloads-file)
                     (unless autoloads-file-presented
-                      (eask-with-verbosity 'debug (eask-call "core/autoloads")))
+                      (eask-with-verbosity 'debug (eask-call "generate/autoloads")))
                     (if autoloads-file-presented "already presented ✗" "done ✓"))
                   (eask-with-progress
                     (format "Generating %s file... " pkg-file)
                     (unless pkg-file-presented
-                      (eask-with-verbosity 'debug (eask-call "core/pkg-file")))
+                      (eask-with-verbosity 'debug (eask-call "generate/pkg-file")))
                     (if pkg-file-presented "already presented ✗" "done ✓")))
                 (eask--create-link name source)
                 (when (and (zerop (length links))         ; if no link previously,

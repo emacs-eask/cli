@@ -6,5 +6,5 @@
 
 If the source package uses Eask, you can use `eask` commands to accomplish these tasks.
    
-  * `eask autoloads`
+  * `eask generate autoloads`
   * `eask compile`
