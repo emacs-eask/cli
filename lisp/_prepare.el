@@ -75,7 +75,7 @@ will return `lint-checkdoc' with a dash between two subcommands."
 
 (defun eask-special-p ()
   "Return t if the command that can be run without Eask-file existence."
-  (member (eask-command) '("keywords")))
+  (member (eask-command) '("init-cask" "keywords")))
 
 (defun eask-checker-p ()
   "Return t if running Eask as the checker."
@@ -454,6 +454,7 @@ the `eask-start' execution.")
 (defun eask-no-proxy ()    (eask--flag-value "--no-proxy"))     ; --no-proxy
 (defun eask-destination () (eask--flag-value "--dest"))         ; --dest, --destination
 (defalias 'eask-dest #'eask-destination)
+(defun eask-from ()        (eask--flag-value "--from"))         ; --from
 
 ;;; Number (with arguments)
 (defun eask-depth () (eask--str2num (eask--flag-value "--depth")))       ; --depth
@@ -517,7 +518,8 @@ other scripts internally.  See function `eask-call'.")
    '("--output"
      "--proxy" "--http-proxy" "--https-proxy" "--no-proxy"
      "--verbose" "--silent"
-     "--depth" "--dest"))
+     "--depth" "--dest"
+     "--from"))
   "List of arguments (number/string) type options.")
 
 (defconst eask--command-list
@@ -604,7 +606,8 @@ Eask file in the workspace."
 
 (defun eask-root-del (filename)
   "Remove Eask file root path from FILENAME."
-  (when (stringp filename) (eask-s-replace eask-file-root "" filename)))
+  (when (stringp filename)
+    (eask-s-replace (or eask-file-root default-directory) "" filename)))
 
 (defun eask-file-load (location &optional noerror)
   "Load Eask file in the LOCATION."

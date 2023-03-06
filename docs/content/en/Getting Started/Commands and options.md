@@ -35,7 +35,7 @@ Often use commands that are uncategorized.
 
 ## 🔍 eask init
 
-Eask will generate file like:
+Eask will generate the file like this:
 
 ```elisp
 (package "PACKAGE-NAME"

@@ -23,14 +23,39 @@ const path = require('path');
 const fs = require('fs');
 const readline = require('readline');
 
-var instance;  /* `readline` instance */
-
-exports.command = ['init'];
-exports.desc = 'Create new Eask file in current directory';
-
-exports.handler = async ({}) => {
-  await create_eask_file();
+exports.command = ['init [files..]'];
+exports.desc = 'Initialize project to use Eask';
+exports.builder = {
+  from: {
+    description: 'build from an existing package',
+    requiresArg: true,
+    type: 'string',
+  },
+  files: {
+    description: 'files to use with `from` flag',
+    requiresArg: false,
+    type: 'array',
+  },
 };
+
+exports.handler = async (argv) => {
+  if (argv.from) {
+    switch (argv.from) {
+    case 'cask':
+      await UTIL.e_call(argv, 'init/cask'
+                        , UTIL.def_flag(argv.from, '--from', argv.from)
+                        , argv.files);
+      break;
+    default:
+      console.log(`Invalid argument, from: ${argv.from}`);
+      break;
+    }
+  } else {
+    await create_eask_file();
+  }
+};
+
+var instance;  /* `readline` instance */
 
 async function create_eask_file(dir) {
   let basename = path.basename(process.cwd());
