@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['generate <type>'];
-exports.desc = 'Generate files use for development';
+exports.desc = 'Generate files that are used for the development';
 exports.builder = function (yargs) {
   return yargs
     .usage(`${exports.desc}

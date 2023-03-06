@@ -31,6 +31,8 @@ Create a new ELPA using [github-elpa](https://github.com/10sr/github-elpa).
 
 # 🚩 Core
 
+Often use commands that are uncategorized.
+
 ## 🔍 eask init
 
 Eask will generate file like:
@@ -307,7 +309,7 @@ $ eask [GLOBAL-OPTIONS] refresh
 
 # 🚩 Generating
 
-Generate files use for development
+Generate files that are used for the development.
 
 ## 🔍 eask generate autoloads
 
@@ -331,9 +333,14 @@ for details.
 
 # 🚩 Linking
 
+Link between this package and a dependency on the local filesystem. A linked 
+dependency avoids the need to download a dependency from a remote archive. The 
+package linked to must either have a `Eask`-file or a `-pkg.el`-file.
+
 ## 🔍 eask link add <name> <path>
 
-Link a local package.
+Links the given *source* directory into the package directory of this project, 
+under the given *package* name.
 
 ```sh
 $ eask [GLOBAL-OPTIONS] link add <name> <path>
@@ -341,7 +348,7 @@ $ eask [GLOBAL-OPTIONS] link add <name> <path>
 
 ## 🔍 eask link delete [name..]
 
-Delete local linked packages.
+Deletes the link for the given packages.
 
 ```sh
 $ eask [GLOBAL-OPTIONS] link delete [names..]
@@ -349,7 +356,7 @@ $ eask [GLOBAL-OPTIONS] link delete [names..]
 
 ## 🔍 eask link list
 
-List all project links.
+List all links.
 
 ```sh
 $ eask [GLOBAL-OPTIONS] link list
