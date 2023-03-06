@@ -26,17 +26,20 @@ exports.builder = {
     description: 'specify files to concatenate',
     requiresArg: false,
     type: 'array',
+    group: TITLE_CMD_OPTION,
   },
   destination: {
     description: 'optional output destination',
     requiresArg: true,
     alias: 'dest',
     type: 'string',
+    group: TITLE_CMD_OPTION,
   },
   output: {
     description: 'Output result to a file',
     alias: 'o',
     type: 'string',
+    group: TITLE_CMD_OPTION,
   },
 };
 

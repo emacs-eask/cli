@@ -26,6 +26,7 @@ exports.builder = {
     description: 'dependency depth level to print',
     requiresArg: true,
     type: 'number',
+    group: TITLE_CMD_OPTION,
   },
 };
 

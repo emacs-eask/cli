@@ -27,6 +27,7 @@ exports.builder = {
     requiresArg: false,
     alias: 'dest',
     type: 'string',
+    group: TITLE_CMD_OPTION,
   },
 };
 

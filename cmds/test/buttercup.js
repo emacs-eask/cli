@@ -26,6 +26,7 @@ exports.builder = {
     description: 'files you want buttercup to run on',
     requiresArg: false,
     type: 'array',
+    group: TITLE_CMD_OPTION,
   },
 };
 

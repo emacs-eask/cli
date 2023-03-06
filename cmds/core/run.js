@@ -29,6 +29,7 @@ exports.builder = {
     description: 'specify scripts to run',
     requiresArg: false,
     type: 'array',
+    group: TITLE_CMD_OPTION,
   },
 };
 

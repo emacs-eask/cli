@@ -26,6 +26,7 @@ exports.builder = {
     description: 'patterns you want to search (wildcard)',
     requiresArg: false,
     type: 'array',
+    group: TITLE_CMD_OPTION,
   },
 };
 

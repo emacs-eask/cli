@@ -26,6 +26,7 @@ exports.builder = {
     description: 'packages to install',
     requiresArg: false,
     type: 'array',
+    group: TITLE_CMD_OPTION,
   },
 };
 

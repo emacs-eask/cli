@@ -29,6 +29,7 @@ exports.builder = {
     description: 'lisp form',
     requiresArg: false,
     type: 'string',
+    group: TITLE_CMD_OPTION,
   },
 };
 

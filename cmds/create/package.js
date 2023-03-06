@@ -30,6 +30,7 @@ exports.builder = {
     description: 'new project name',
     requiresArg: false,
     type: 'string',
+    group: TITLE_CMD_OPTION,
   },
 };
 

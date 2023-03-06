@@ -26,6 +26,7 @@ exports.builder = {
     description: 'specify files to do package lint',
     requiresArg: false,
     type: 'array',
+    group: TITLE_CMD_OPTION,
   },
 };
 
