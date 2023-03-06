@@ -1279,15 +1279,29 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 ;;
 ;;; Help
 
+(defun eask--help-display ()
+  "Display help instruction."
+  (goto-char (point-min))
+  (let ((max-column 0))
+    (while (not (eobp))
+      (forward-line 1)
+      (goto-char (line-beginning-position))
+      (insert "  ")
+      (goto-char (line-end-position))
+      (setq max-column (max (current-column) max-column)))
+    (eask-msg (concat "''" (spaces-string max-column) "''"))
+    (eask-msg (ansi-white (buffer-string)))
+    (eask-msg (concat "''" (spaces-string max-column) "'" "'"))))
+
 (defun eask-help (command)
-  "Show help."
+  "Show COMMAND's help instruction."
   (let* ((command (eask-2str command))  ; convert to string
          (help-file (concat eask-lisp-root "help/" command)))
     (if (file-exists-p help-file)
         (with-temp-buffer
           (insert-file-contents help-file)
           (unless (string= (buffer-string) "")
-            (eask-msg (ansi-white (buffer-string)))))
+            (eask--help-display)))
       (eask-error "Help manual missig %s" help-file))))
 
 ;;
