@@ -52,8 +52,10 @@
   "Script currently executing.")
 
 (defconst eask-lisp-root
-  (ignore-errors
-    (expand-file-name (concat (file-name-directory eask--script) "../")))
+  (concat
+   (or (locate-dominating-file (file-name-directory eask--script) "eask")
+       (locate-dominating-file (file-name-directory eask--script) "eask.exe"))
+   "lisp/")
   "Source lisp directory; should always end with slash.")
 
 (defun eask-command ()
