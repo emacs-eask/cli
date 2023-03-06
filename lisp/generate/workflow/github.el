@@ -9,65 +9,32 @@
 
 ;;; Code:
 
-(load (expand-file-name
-       "../../_prepare.el"
-       (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
-      nil t)
+(let ((dir (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
+  (load (expand-file-name "_prepare.el"
+                          (locate-dominating-file dir "_prepare.el"))
+        nil t))
 
 (eask-start
-  (let* ((url "")
-         (dir ".github/workflows/")
+  (let* ((url "https://raw.githubusercontent.com/emacs-eask/template-generate/master/workflow/github.yml")
+         (dir (expand-file-name ".github/workflows/"))
          (basename (or (car (eask-args)) "test.yml"))
-         (filename (expand-file-name (concat dir basename))))
-    (ignore-errors (make-directory  t))
+         (filename (expand-file-name basename dir)))
+    (ignore-errors (make-directory dir t))
     (if (file-exists-p filename)
         (eask-info "The yaml file already exists `%s`" filename)
-      ;; TODO: Move it to the internet, and download it from there!
-      (with-current-buffer (find-file filename)
-        (insert "name: CI
-
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-  workflow_dispatch:
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
-jobs:
-  test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        emacs-version:
-          - 26.3
-          - 27.2
-          - 28.2
-          - snapshot
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - uses: jcs090218/setup-emacs@master
-      with:
-        version: ${{ matrix.emacs-version }}
-
-    - uses: emacs-eask/setup-eask@master
-      with:
-        version: 'snapshot'
-
-    - name: Run tests
-      run: |
-        eask clean all
-        eask package
-        eask install
-        eask compile")
-        (save-buffer))
+      (eask-with-progress
+        (format "Generating file %s... " filename)
+        (eask-with-verbosity 'debug (url-copy-file url filename))
+        "done ✓")
+      (eask-with-progress
+        (format "Configuring file %s... " filename)
+        (with-current-buffer (find-file filename)
+          (when (search-forward "{ EMACS_VERSION }" nil t)
+            (cond ((version< "28" eask-depends-on-emacs))
+                  ;; TODO: ...
+                  )
+            ))
+        "done ✓")
       (eask-info "✓ Successfully created the yaml file in `%s`" filename))))
 
 ;;; generate/workflow/github.el ends here

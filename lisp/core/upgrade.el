@@ -14,10 +14,10 @@
 
 ;;; Code:
 
-(load (expand-file-name
-       "../_prepare.el"
-       (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
-      nil t)
+(let ((dir (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
+  (load (expand-file-name "_prepare.el"
+                          (locate-dominating-file dir "_prepare.el"))
+        nil t))
 
 (defun eask--package-version-string (pkg-desc)
   "Get package version string with color."
