@@ -1,0 +1,6 @@
+
+💡 Make sure you have a valid Cask-file in your directory
+
+💡 Or specify Cask-file explicitly, like:
+
+    $ eask init --from=cask /path/to/Cask

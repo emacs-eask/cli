@@ -65,7 +65,6 @@
                  (mapconcat #'identity patterns " ")))
      ;; Default, print help!
      (t
-      (eask-msg "")
       (eask-info "(No files have been linted)")
       (eask-help "lint/indent")))))
 

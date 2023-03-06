@@ -22,7 +22,7 @@
          (new-filename (expand-file-name new-file))
          (converted))
     (eask-with-progress
-      (format "Converting file %s to %s... " file new-file)
+      (format "Converting file `%s` to `%s`... " file new-file)
       (eask-with-verbosity 'debug
         (cond ((not (string-prefix-p "Cask" file))
                (eask-debug "✗ Invalid Cask filename, the file should start with `Cask`"))
@@ -43,7 +43,7 @@
   (let* ((patterns (eask-args))
          (files (if patterns
                     (eask-expand-file-specs patterns)
-                  (directory-files default-directory t "/Cask\\'")))
+                  (directory-files default-directory t "Cask")))
          (converted 0))
     (cond
      ;; Files found, do the action!
@@ -56,12 +56,10 @@
                  (eask--sinr converted "" "s")))
      ;; Pattern defined, but no file found!
      (patterns
-      (eask-msg "")
-      (eask-info "No files found with wildcard pattern: %s"
+      (eask-info "(No files found with wildcard pattern: %s)"
                  (mapconcat #'identity patterns " ")))
      ;; Default, print help!
      (t
-      (eask-msg "")
       (eask-info "(No Cask-files have been converted to Eask)")
       (eask-help "init/cask")))))
 

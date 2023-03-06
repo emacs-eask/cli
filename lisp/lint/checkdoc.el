@@ -71,7 +71,6 @@
                  (mapconcat #'identity patterns " ")))
      ;; Default, print help!
      (t
-      (eask-msg "")
       (eask-info "(No files have been checked (checkdoc))")
       (eask-help "lint/checkdoc")))))
 
