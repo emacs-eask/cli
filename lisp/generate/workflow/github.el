@@ -15,7 +15,8 @@
       nil t)
 
 (eask-start
-  (let* ((dir ".github/workflows/")
+  (let* ((url "")
+         (dir ".github/workflows/")
          (basename (or (car (eask-args)) "test.yml"))
          (filename (expand-file-name (concat dir basename))))
     (ignore-errors (make-directory  t))
