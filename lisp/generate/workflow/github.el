@@ -1,4 +1,4 @@
-;;; generate/workflow/github.el --- Generate GitHub Actions workflow `test.yml` file  -*- lexical-binding: t; -*-
+;;; generate/workflow/github.el --- Generate GitHub Actions workflow yaml file  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;

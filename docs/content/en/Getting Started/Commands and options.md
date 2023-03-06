@@ -331,6 +331,14 @@ $ eask [GLOBAL-OPTIONS] generate pkg-file
 [Multi-file Packages (elisp)](https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html#Multi_002dfile-Packages)
 for details.
 
+## 🔍 eask generate workflow github
+
+Generate GitHub Actions workflow yaml file.
+
+```sh
+$ eask [GLOBAL-OPTIONS] generate workflow github
+```
+
 # 🚩 Linking
 
 Link between this package and a dependency on the local filesystem. A linked 
