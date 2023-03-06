@@ -37,9 +37,9 @@ Commands:
   path [patterns..]       Print the PATH (exec-path) from workspace                                                                                                                          [aliases: exec-path]
   exec [args..]           Execute command with correct environment PATH set up
   files [patterns..]      Print all package files
-  generate <type>         Generate files use for development
+  generate <type>         Generate files that are used for the development
   info                    Display information about the current package
-  init                    Create new Eask file in current directory
+  init [files..]          Initialize project to use Eask
   install-deps            Automatically install package dependencies                                                                                                     [aliases: install-dependencies, prepare]
   install [names..]       Install packages
   keywords                List available keywords that can be used in the header section
