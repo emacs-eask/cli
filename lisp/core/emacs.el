@@ -14,7 +14,7 @@
 
 ;;; Code:
 
-(let ((dir (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
+(let ((dir (file-name-directory (nth 1 (member "-l" command-line-args)))))
   (load (expand-file-name "_prepare.el"
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
