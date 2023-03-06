@@ -24,7 +24,7 @@
     (eask-with-progress
       (format "Converting file `%s` to `%s`... " file new-file)
       (eask-with-verbosity 'debug
-        (cond ((not (string-prefix-p "Cask" file))
+        (cond ((not (string-prefix-p "Cask" (file-name-nondirectory file)))
                (eask-debug "✗ Invalid Cask filename, the file should start with `Cask`"))
               ((file-exists-p new-filename)
                (eask-debug "✗ The file `%s` already presented" new-file))
