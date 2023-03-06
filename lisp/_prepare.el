@@ -52,8 +52,15 @@
   "Script currently executing.")
 
 (defconst eask-lisp-root
-  (ignore-errors
-    (expand-file-name (concat (file-name-directory eask--script) "../")))
+  (let* ((script (file-name-directory eask--script))
+         (dir (ignore-errors (expand-file-name (concat script "../"))))
+         (basename (file-name-nondirectory (directory-file-name dir)))
+         (root (expand-file-name "/")))
+    (while (and (not (string= root dir))
+                (not (string= basename "lisp")))
+      (setq dir (expand-file-name (concat dir "../"))
+            basename (file-name-nondirectory (directory-file-name dir))))
+    dir)
   "Source lisp directory; should always end with slash.")
 
 (defun eask-command ()
