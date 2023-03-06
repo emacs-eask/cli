@@ -77,10 +77,10 @@ by the CLI. All Elisp scripts are written in Emacs Lisp and should have a
 similar structure below:
 
 ```elisp
-(load (expand-file-name
-       "../_prepare.el"
-       (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
-      nil t)
+(let ((dir (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
+  (load (expand-file-name "_prepare.el"
+                          (locate-dominating-file dir "_prepare.el"))
+        nil t))
 
 (eask-start
   (message "PWD is %s" default-directory))

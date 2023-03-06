@@ -49,6 +49,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Omit `nil` value for conditions in `development` scope (#143 and #144)
 * Move `pkg-file` and `autoloads` commands under `generate` subcommand (#142)
 * Add option to convert Cask to Eask (#141 and #145)
+* Add command to generate GHA workflow (#141 and #146)
 
 ## 0.7.x
 > Released Sep 08, 2022
