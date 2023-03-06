@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2022-2023 Jen-Chieh Shen
+ * Copyright (C) 2023 Jen-Chieh Shen
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,9 +19,15 @@
 
 "use strict";
 
-exports.command = ['pkg-file'];
-exports.desc = 'Generate -pkg file';
+exports.command = ['generate <type>'];
+exports.desc = 'Generate files that are used for the development';
+exports.builder = function (yargs) {
+  return yargs
+    .usage(`${exports.desc}
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/pkg-file');
+Usage: eask generate <command> [options..]`)
+    .commandDir('../generate/')
+    .demandCommand();
 };
+
+exports.handler = async (argv) => { };

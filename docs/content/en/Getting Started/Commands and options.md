@@ -31,6 +31,8 @@ Create a new ELPA using [github-elpa](https://github.com/10sr/github-elpa).
 
 # 🚩 Core
 
+Often use commands that are uncategorized.
+
 ## 🔍 eask init
 
 Eask will generate file like:
@@ -148,26 +150,6 @@ Or compile files that are already specified in your `Eask`-file.
 ```sh
 $ eask compile
 ```
-
-## 🔍 eask autoloads
-
-Generate autoload file.
-
-```sh
-$ eask [GLOBAL-OPTIONS] autoloads
-```
-
-## 🔍 eask pkg-file
-
-Write a package descriptor file to `project-pkg.el` in the project root.
-
-```sh
-$ eask [GLOBAL-OPTIONS] pkg-file
-```
-
-`project` is the project name, as declared in `Eask`-file. See
-[Multi-file Packages (elisp)](https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html#Multi_002dfile-Packages)
-for details.
 
 ## 🔍 eask package-directory
 
@@ -325,11 +307,40 @@ Download package archives.
 $ eask [GLOBAL-OPTIONS] refresh
 ```
 
+# 🚩 Generating
+
+Generate files that are used for the development.
+
+## 🔍 eask generate autoloads
+
+Generate autoload file.
+
+```sh
+$ eask [GLOBAL-OPTIONS] generate autoloads
+```
+
+## 🔍 eask generate pkg-file
+
+Write a package descriptor file to `project-pkg.el` in the project root.
+
+```sh
+$ eask [GLOBAL-OPTIONS] generate pkg-file
+```
+
+`project` is the project name, as declared in `Eask`-file. See
+[Multi-file Packages (elisp)](https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html#Multi_002dfile-Packages)
+for details.
+
 # 🚩 Linking
+
+Link between this package and a dependency on the local filesystem. A linked 
+dependency avoids the need to download a dependency from a remote archive. The 
+package linked to must either have a `Eask`-file or a `-pkg.el`-file.
 
 ## 🔍 eask link add <name> <path>
 
-Link a local package.
+Links the given *source* directory into the package directory of this project, 
+under the given *package* name.
 
 ```sh
 $ eask [GLOBAL-OPTIONS] link add <name> <path>
@@ -337,7 +348,7 @@ $ eask [GLOBAL-OPTIONS] link add <name> <path>
 
 ## 🔍 eask link delete [name..]
 
-Delete local linked packages.
+Deletes the link for the given packages.
 
 ```sh
 $ eask [GLOBAL-OPTIONS] link delete [names..]
@@ -345,7 +356,7 @@ $ eask [GLOBAL-OPTIONS] link delete [names..]
 
 ## 🔍 eask link list
 
-List all project links.
+List all links.
 
 ```sh
 $ eask [GLOBAL-OPTIONS] link list

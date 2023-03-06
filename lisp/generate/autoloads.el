@@ -1,10 +1,10 @@
-;;; core/autoloads.el --- Generate autoload file  -*- lexical-binding: t; -*-
+;;; generate/autoloads.el --- Generate autoload file  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
 ;; Command use generate autoload file,
 ;;
-;;   $ eask autoloads
+;;   $ eask generate autoloads
 ;;
 
 ;;; Code:
@@ -21,4 +21,4 @@
     (eask-msg "")
     (eask-info "Write file %s..." autoloads-file)))
 
-;;; core/autoloads.el ends here
+;;; generate/autoloads.el ends here

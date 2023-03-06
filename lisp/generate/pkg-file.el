@@ -1,10 +1,10 @@
-;;; core/pkg-file.el --- Generate -pkg file  -*- lexical-binding: t; -*-
+;;; generate/pkg-file.el --- Generate -pkg file  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
 ;; Command use generate -pkg file,
 ;;
-;;   $ eask pkg-file
+;;   $ eask generate pkg-file
 ;;
 
 ;;; Code:
@@ -53,4 +53,4 @@
                    (buffer-string)))
   (eask-info "(Generated -pkg.el file in %s)" eask--pkg-filename))
 
-;;; core/pkg-file.el ends here
+;;; generate/pkg-file.el ends here

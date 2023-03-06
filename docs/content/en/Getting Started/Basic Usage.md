@@ -27,20 +27,20 @@ Eask is a command-line tool that helps you build, lint, and test Emacs Lisp pack
 Usage: eask <command> [options..]
 
 Commands:
-  archives                List out all package archives                                                                                                                                  [aliases: sources]
-  autoloads               Generate autoloads file
+  archives                List out all package archives                                                                                                                                        [aliases: sources]
   clean <type>            Delete various files produced during building
   compile [names..]       Byte compile all Emacs Lisp files in the package
-  concat [names..]        Concatenate elisp files                                                                                                                                    [aliases: concatenate]
+  concat [names..]        Concatenate elisp files                                                                                                                                          [aliases: concatenate]
   create <type>           Create a new elisp project
   emacs [args..]          Execute emacs with the appropriate environment
   eval [form]             Evaluate lisp form with a proper PATH
-  path [patterns..]       Print the PATH (exec-path) from workspace                                                                                                                    [aliases: exec-path]
+  path [patterns..]       Print the PATH (exec-path) from workspace                                                                                                                          [aliases: exec-path]
   exec [args..]           Execute command with correct environment PATH set up
   files [patterns..]      Print all package files
+  generate <type>         Generate files use for development
   info                    Display information about the current package
   init                    Create new Eask file in current directory
-  install-deps            Automatically install package dependencies                                                                                               [aliases: install-dependencies, prepare]
+  install-deps            Automatically install package dependencies                                                                                                     [aliases: install-dependencies, prepare]
   install [names..]       Install packages
   keywords                List available keywords that can be used in the header section
   link <action>           Manage links
@@ -51,43 +51,41 @@ Commands:
   outdated                Show all outdated dependencies
   package-directory       Print path to package directory
   package [destination]   Build a package artifact, and put it into the given destination
-  pkg-file                Generate -pkg file
   recipe                  Suggest a recipe format
   refresh                 Download package archives
   reinstall [names..]     Reinstall packages
-  run [names..]           Run the script named [names..]                                                                                                                              [aliases: run-script]
+  run [names..]           Run the script named [names..]                                                                                                                                    [aliases: run-script]
   search [queries..]      Search packages
   test <type>             Run test
-  uninstall [names..]     Uninstall packages                                                                                                                                              [aliases: delete]
+  uninstall [names..]     Uninstall packages                                                                                                                                                    [aliases: delete]
   upgrade [names..]       Upgrade packages
   check-eask [files..]    Run eask checker
   locate                  Print out Eask installed location
-  upgrade-eask            Upgrade Eask itself                                                                                                                                       [aliases: upgrade-self]
+  upgrade-eask            Upgrade Eask itself                                                                                                                                             [aliases: upgrade-self]
 
 Proxy Options:
-      --proxy        update proxy for HTTP and HTTPS to host                                                                                                                                       [string]
-      --http-proxy   update proxy for HTTP to host                                                                                                                                                 [string]
-      --https-proxy  update proxy for HTTPS to host                                                                                                                                                [string]
-      --no-proxy     set no-proxy to host                                                                                                                                                          [string]
-
+      --proxy        update proxy for HTTP and HTTPS to host                                                                                                                                             [string]
+      --http-proxy   update proxy for HTTP to host                                                                                                                                                       [string]
+      --https-proxy  update proxy for HTTPS to host                                                                                                                                                      [string]
+      --no-proxy     set no-proxy to host                                                                                                                                                                [string]
 Options:
-      --version             show version number                                                                                                                                                   [boolean]
-      --help                show usage instructions                                                                                                                                               [boolean]
-  -g, --global              change default workspace to ~/.emacs.d/                                                                                                                               [boolean]
-  -a, --all                 enable all flag                                                                                                                                                       [boolean]
-  -q, --quick               start cleanly without loading the configuration files                                                                                                                 [boolean]
-  -f, --force               enable force flag                                                                                                                                                     [boolean]
-      --development, --dev  turn on development mode                                                                                                                                              [boolean]
-      --debug               turn on debug mode                                                                                                                                                    [boolean]
-      --strict              report error instead of warnings                                                                                                                                      [boolean]
-      --allow-error         continue the executioon even there is error reported                                                                                                                  [boolean]
-      --insecure            allow insecure connection                                                                                                                                             [boolean]
-      --timestamps          log with timestamps                                                                                                                                                   [boolean]
-      --log-level           log with level                                                                                                                                                        [boolean]
-      --log-file, --lf      generate log files                                                                                                                                                    [boolean]
-      --elapsed-time, --et  show elapsed time between each operation                                                                                                                              [boolean]
-      --no-color            disable color output                                                                                                                                                  [boolean]
-  -v, --verbose             set verbosity from 0 to 4                                                                                                                                              [number]
+      --version             show version number                                                                                                                                                         [boolean]
+      --help                show usage instructions                                                                                                                                                     [boolean]
+  -g, --global              change default workspace to ~/.emacs.d/                                                                                                                                     [boolean]
+  -a, --all                 enable all flag                                                                                                                                                             [boolean]
+  -q, --quick               start cleanly without loading the configuration files                                                                                                                       [boolean]
+  -f, --force               enable force flag                                                                                                                                                           [boolean]
+      --development, --dev  turn on development mode                                                                                                                                                    [boolean]
+      --debug               turn on debug mode                                                                                                                                                          [boolean]
+      --strict              report error instead of warnings                                                                                                                                            [boolean]
+      --allow-error         continue the executioon even there is error reported                                                                                                                        [boolean]
+      --insecure            allow insecure connection                                                                                                                                                   [boolean]
+      --timestamps          log with timestamps                                                                                                                                                         [boolean]
+      --log-level           log with level                                                                                                                                                              [boolean]
+      --log-file, --lf      generate log files                                                                                                                                                          [boolean]
+      --elapsed-time, --et  show elapsed time between each operation                                                                                                                                    [boolean]
+      --no-color            disable color output                                                                                                                                                        [boolean]
+  -v, --verbose             set verbosity from 0 to 4                                                                                                                                                    [number]
 
 For more information, find the manual at https://emacs-eask.github.io/
 ```
