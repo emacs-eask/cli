@@ -26,11 +26,13 @@ exports.builder = {
     description: 'name of the link',
     requiresArg: true,
     type: 'string',
+    group: TITLE_CMD_OPTION,
   },
   path: {
     description: 'location (target package) where you want to link',
     requiresArg: true,
     type: 'string',
+    group: TITLE_CMD_OPTION,
   },
 };
 

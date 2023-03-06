@@ -28,3 +28,6 @@ global.IS_PKG = path.basename(process.execPath).startsWith('eask');
 global.GITHUB_ACTIONS = (process.env.GITHUB_WORKSPACE !== undefined);
 
 global.EASK_HOMEDIR = os.homedir().replace(/\\/g, '/') + '/.eask/';
+
+/* Global Variables */
+global.TITLE_CMD_OPTION = 'Command Options:';

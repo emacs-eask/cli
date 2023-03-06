@@ -30,11 +30,13 @@ exports.builder = {
     description: 'build from an existing package',
     requiresArg: true,
     type: 'string',
+    group: TITLE_CMD_OPTION,
   },
   files: {
     description: 'files to use with `from` flag',
     requiresArg: false,
     type: 'array',
+    group: TITLE_CMD_OPTION,
   },
 };
 
