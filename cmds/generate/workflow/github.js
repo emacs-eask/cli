@@ -23,9 +23,10 @@ exports.command = ['github [file]'];
 exports.desc = 'Generate GitHub Actions workflow yaml file';
 exports.builder = {
   file: {
-    description: 'name of the test file, default is set to test.yml',
+    description: 'name of the test file; the default is `test.yml`',
     requiresArg: false,
     type: 'array',
+    group: TITLE_CMD_OPTION,
   },
 };
 

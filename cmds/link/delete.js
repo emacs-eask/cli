@@ -26,6 +26,7 @@ exports.builder = {
     description: 'name of the link, accept array',
     requiresArg: false,
     type: 'array',
+    group: TITLE_CMD_OPTION,
   },
 };
 

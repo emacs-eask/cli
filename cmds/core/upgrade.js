@@ -26,6 +26,7 @@ exports.builder = {
     description: 'packages to upgrade',
     requiresArg: false,
     type: 'array',
+    group: TITLE_CMD_OPTION,
   },
 };
 

@@ -26,15 +26,18 @@ exports.builder = {
     description: 'specify Eask-files for checker to lint',
     requiresArg: false,
     type: 'array',
+    group: TITLE_CMD_OPTION,
   },
   output: {
     description: 'Output result to a file',
     alias: 'o',
     type: 'string',
+    group: TITLE_CMD_OPTION,
   },
   json: {
     description: 'Output lint result in JSON format',
     type: 'boolean',
+    group: TITLE_CMD_OPTION,
   },
 };
 
