@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        emacs-version: [26.3, 27.2, 28.1, snapshot]
+        emacs-version: [26.3, 27.2, 28.2, snapshot]
 
     steps:
     - uses: actions/checkout@v2
@@ -38,7 +38,7 @@ jobs:
 
 This example is testing your Emacs Lisp package in the below environment;
 
-* Emacs: `27.2` and `snapshot`
+* Emacs: `26.x`, `27.x`, `28.x`, and `snapshot`
 * Eask: `snapshot` (latest)
 
 with these following `actions`,
