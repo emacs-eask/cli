@@ -24,8 +24,6 @@
 
 set -e
 
-$URL=https://github.com/emacs-eask/binaries/raw/master/linux-x64.zip
-
 if [ "$OS" = "Windows_NT" ]; then
   target="win-x64"
 else
@@ -47,7 +45,7 @@ zip=$eask_bin_dir/eask.zip
 
 mkdir -p $eask_bin_dir
 
-curl -fsSL eask_uri -o $zip
+curl -fsSL $eask_uri -o $zip
 
 tar -xf $zip -C $eask_bin_dir
 

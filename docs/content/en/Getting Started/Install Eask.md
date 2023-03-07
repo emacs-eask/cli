@@ -19,6 +19,23 @@ where you don’t have a privileged account.
 Ideally, you should install it somewhere in your `PATH` for easy use. `/usr/local/bin`
 is the most probable location.
 
+### Using Shell
+
+Eask's [webinstall](https://github.com/emacs-eask/cli/tree/master/webinstall) 
+provides convenience scripts to download and install the binary.
+
+#### macOS and Linux
+
+```
+curl -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.sh | sh
+```
+
+#### Windows
+
+```
+curl.exe -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.bat | cmd /Q
+```
+
 ### npm
 
 If you have [npm](https://www.npmjs.com/) installed on your machine, you can
