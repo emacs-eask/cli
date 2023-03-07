@@ -7,7 +7,7 @@
 ;;   $ eask exec [args..]
 ;;
 ;;
-;;  Initialization options:
+;;  Positional arguments:
 ;;
 ;;    [args..]     execute command with correct PATH set up
 ;;

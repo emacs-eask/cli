@@ -7,7 +7,7 @@
 ;;   $ eask lint checkdoc [files..]
 ;;
 ;;
-;;  Initialization options:
+;;  Positional arguments:
 ;;
 ;;    [files..]     files you want checkdoc to run on
 ;;

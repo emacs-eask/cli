@@ -331,12 +331,44 @@ $ eask [GLOBAL-OPTIONS] generate pkg-file
 [Multi-file Packages (elisp)](https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html#Multi_002dfile-Packages)
 for details.
 
+## 🔍 eask generate workflow circle-ci
+
+Generate CircleCI workflow yaml file.
+
+```sh
+$ eask [GLOBAL-OPTIONS] generate workflow circle-ci [--file]
+```
+
+{{< hint info >}}
+💡 This will generate the yaml file under `.circleci/`!
+{{< /hint >}}
+
 ## 🔍 eask generate workflow github
 
 Generate GitHub Actions workflow yaml file.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] generate workflow github
+$ eask [GLOBAL-OPTIONS] generate workflow github [--file]
+```
+
+{{< hint info >}}
+💡 This will generate the yaml file under `.github/workflow/`!
+{{< /hint >}}
+
+## 🔍 eask generate workflow gitlab
+
+Generate GitLab Runner workflow yaml file.
+
+```sh
+$ eask [GLOBAL-OPTIONS] generate workflow gitlab [--file]
+```
+
+## 🔍 eask generate workflow travis-ci
+
+Generate Travis CI workflow yaml file.
+
+```sh
+$ eask [GLOBAL-OPTIONS] generate workflow travis-ci [--file]
 ```
 
 # 🚩 Linking

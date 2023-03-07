@@ -7,7 +7,7 @@
 ;;   $ eask reinstall [names..]
 ;;
 ;;
-;;  Initialization options:
+;;  Positional arguments:
 ;;
 ;;    [names..]     name of the package to reinstall
 ;;

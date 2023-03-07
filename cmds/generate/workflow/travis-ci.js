@@ -19,11 +19,11 @@
 
 "use strict";
 
-exports.command = ['github [file]', 'github-actions [file]', 'gha [file]'];
-exports.desc = 'Generate GitHub Actions workflow yaml file';
+exports.command = ['travis-ci [file]'];
+exports.desc = 'Generate Travis CI workflow yaml file';
 exports.builder = {
   file: {
-    description: 'name of the test file; the default is `test.yml`',
+    description: 'name of the test file; the default is `.travis.yml`',
     requiresArg: false,
     type: 'array',
     group: TITLE_CMD_OPTION,
@@ -31,5 +31,6 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'generate/workflow/github', argv.file);
+  await UTIL.e_call(argv, 'generate/workflow/travis-ci', argv.file);
 };
+

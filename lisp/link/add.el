@@ -7,7 +7,7 @@
 ;;   $ eask link add [name] [path]
 ;;
 ;;
-;;  Initialization options:
+;;  Positional arguments:
 ;;
 ;;    [name]     name of the link
 ;;    [path]     location (target package) where you want to link

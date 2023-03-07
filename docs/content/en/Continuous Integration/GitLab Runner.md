@@ -18,9 +18,9 @@ pages:
   - apt-get update
   - apt-get install emacs -y
   script:
+  - eask package
   - eask install
   - eask compile
-  - eask lint package
   only:
   - main
 ```

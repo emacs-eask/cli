@@ -31,9 +31,9 @@ jobs:
 
     - name: Run tests
       run: |
+        eask package
         eask install
         eask compile
-        eask lint package
 ```
 
 This example is testing your Emacs Lisp package in the below environment;

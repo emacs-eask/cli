@@ -7,7 +7,7 @@
 ;;   $ eask create elpa [name]
 ;;
 ;;
-;;  Initialization options:
+;;  Positional arguments:
 ;;
 ;;    [name]     new ELPA name
 ;;

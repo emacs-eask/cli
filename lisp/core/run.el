@@ -7,7 +7,7 @@
 ;;   $ eask run [names..]
 ;;
 ;;
-;;  Initialization options:
+;;  Positional arguments:
 ;;
 ;;    [names..]     run the script named <foo>
 ;;

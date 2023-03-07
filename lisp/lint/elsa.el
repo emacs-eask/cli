@@ -7,7 +7,7 @@
 ;;   $ eask lint elsa [files..]
 ;;
 ;;
-;;  Initialization options:
+;;  Positional arguments:
 ;;
 ;;    [files..]     files you want elsa to run on
 ;;
