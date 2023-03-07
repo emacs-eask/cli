@@ -7,7 +7,7 @@
 ;;   $ eask compile [names..]
 ;;
 ;;
-;;  Initialization options:
+;;  Positional arguments:
 ;;
 ;;    [names..]     specify files to byte-compile
 ;;

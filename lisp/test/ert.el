@@ -7,7 +7,7 @@
 ;;   $ eask ert [files..]
 ;;
 ;;
-;;  Initialization options:
+;;  Positional arguments:
 ;;
 ;;    [files..]     specify files to run ert tests
 ;;

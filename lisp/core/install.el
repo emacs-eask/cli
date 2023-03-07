@@ -7,7 +7,7 @@
 ;;   $ eask install [names..]
 ;;
 ;;
-;;  Initialization options:
+;;  Positional arguments:
 ;;
 ;;    [names..]     name of the package to install; else we try to install
 ;;                  package from current directory by calling function

@@ -1,10 +1,15 @@
-;;; generate/workflow/github.el --- Generate GitHub Actions workflow yaml file  -*- lexical-binding: t; -*-
+;;; generate/workflow/circle-ci.el --- Generate CircleCI workflow yaml file  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
-;; Command use generate GitHub Actions test yaml file,
+;; Command use generate CircleCI test yaml file,
 ;;
-;;   $ eask generate workflow github
+;;   $ eask generate workflow circle-ci
+;;
+;;
+;;  Positional arguments:
+;;
+;;    [--file]     name of the test file; the default is `config.yml`
 ;;
 
 ;;; Code:
@@ -29,4 +34,4 @@
         "done ✓")
       (eask-info "✓ Successfully created the yaml file in `%s`" filename))))
 
-;;; generate/workflow/github.el ends here
+;;; generate/workflow/circle-ci.el ends here

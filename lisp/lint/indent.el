@@ -7,7 +7,7 @@
 ;;   $ eask lint indent [files..]
 ;;
 ;;
-;;  Initialization options:
+;;  Positional arguments:
 ;;
 ;;    [files..]     files you want indent-lint to run on
 ;;

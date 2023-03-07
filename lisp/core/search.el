@@ -7,7 +7,7 @@
 ;;   $ eask search [queries..]
 ;;
 ;;
-;;  Initialization options:
+;;  Positional arguments:
 ;;
 ;;    [queries..]     query to search packages
 ;;

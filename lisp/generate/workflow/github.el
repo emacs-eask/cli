@@ -6,6 +6,11 @@
 ;;
 ;;   $ eask generate workflow github
 ;;
+;;
+;;  Positional arguments:
+;;
+;;    [--file]     name of the test file; the default is `test.yml`
+;;
 
 ;;; Code:
 

@@ -7,7 +7,7 @@
 ;;   $ eask create package [name]
 ;;
 ;;
-;;  Initialization options:
+;;  Positional arguments:
 ;;
 ;;    [name]     new project name
 ;;

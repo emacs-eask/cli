@@ -6,6 +6,11 @@
 ;;
 ;;   $ eask generate workflow travis-ci
 ;;
+;;
+;;  Positional arguments:
+;;
+;;    [--file]     name of the test file; the default is `.travis.yml`
+;;
 
 ;;; Code:
 
