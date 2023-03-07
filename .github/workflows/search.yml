@@ -51,4 +51,3 @@ jobs:
     - name: Testing...
       run: |
         make command-search
-
