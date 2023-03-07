@@ -13,27 +13,22 @@ This document guides you through the installation of Eask.
 
 Download the appropriate version for your platform from [Eask Releases](https://github.com/emacs-eask/cli/releases).
 Once downloaded, the binary can be run from anywhere. You don’t need to install
-it into a global location. This works well for shared hosts and other systems
+it in a global location. This works well for shared hosts and other systems
 where you don’t have a privileged account.
 
 Ideally, you should install it somewhere in your `PATH` for easy use. `/usr/local/bin`
 is the most probable location.
 
-### Using Shell
+### Using Shell (macOS and Linux)
 
-Eask's [webinstall](https://github.com/emacs-eask/cli/tree/master/webinstall) 
-provides convenience scripts to download and install the binary.
-
-#### macOS and Linux
-
-```
-curl -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.sh | sh
+```sh
+$ curl -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.sh | sh
 ```
 
-#### Windows
+### Using Shell (Windows)
 
-```
-curl.exe -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.bat | cmd /Q
+```sh
+$ curl.exe -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.bat | cmd /Q
 ```
 
 ### npm

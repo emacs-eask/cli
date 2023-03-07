@@ -24,16 +24,18 @@
 
 set -e
 
+if ! command -v unzip >/dev/null; then
+  echo "Error: unzip is required to install Eask." 1>&2
+  exit 1
+fi
+
 if [ "$OS" = "Windows_NT" ]; then
   target="win-x64"
 else
   case $(uname -sm) in
     "Darwin x86_64") target="macos-x64" ;;
     "Darwin arm64") target="macos-arm64" ;;
-    "Linux aarch64")
-      echo "Error: Official Deno builds for Linux aarch64 are not available. (see: https://github.com/denoland/deno/issues/1846 )" 1>&2
-      exit 1
-      ;;
+    "Linux aarch64") target="linux-arm64" ;;
     *) target="linux-x64" ;;
   esac
 fi
@@ -47,7 +49,7 @@ mkdir -p $eask_bin_dir
 
 curl -fsSL $eask_uri -o $zip
 
-tar -xf $zip -C $eask_bin_dir
+unzip -d "$eask_bin_dir" -o "$zip"
 
 rm $zip
 

@@ -26,14 +26,25 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
+    - uses: actions/checkout@v3
+
     - name: Install Eask (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
-      run: curl -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.sh | sh
+      run: |
+        chmod -R 777 ./
+        ./webinstall/install.sh
 
     - name: Install Eask (Windows)
       if: matrix.os == 'windows-latest'
-      run: curl.exe -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.bat | cmd /Q
+      run: ./webinstall/install.bat
 
-    - name: Testing...
+    - name: Testing... (Unix)
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       run: |
          ~/.local/bin/eask --version
+
+    - name: Testing... (Windows)
+      if: matrix.os == 'windows-latest'
+      shell: cmd
+      run: |
+         %USERPROFILE%/.local/bin/eask.exe --version
