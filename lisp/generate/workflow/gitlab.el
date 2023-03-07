@@ -19,8 +19,8 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defun eask--gitlab-insert-emacs-version (version)
-  "Insert GitLab Runner workflow instruction for specific Emacs' VERSION."
+(defun eask--gitlab-insert-jobs (version)
+  "Insert GitLab Runner's jobs instruction for specific Emacs' VERSION."
   (insert "test-" version ":" "\n")
   (insert "  image: silex/emacs:" version "-ci" "\n")
   (insert "  script:" "\n")
@@ -48,11 +48,11 @@
             (search-backward "{ EMACS_VERSION }" nil t)
             (delete-region (point) (line-end-position))
             (when (version<= minimum-version "26.1")
-              (eask--gitlab-insert-emacs-version "26.3"))
+              (eask--gitlab-insert-jobs "26.3"))
             (when (version<= minimum-version "27.1")
-              (eask--gitlab-insert-emacs-version "27.2"))
+              (eask--gitlab-insert-jobs "27.2"))
             (when (version<= minimum-version "28.1")
-              (eask--gitlab-insert-emacs-version "28.2"))
+              (eask--gitlab-insert-jobs "28.2"))
             (when (version<= minimum-version "29.1")
               ;; TODO: snapshot?
               ))
