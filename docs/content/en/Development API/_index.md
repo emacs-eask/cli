@@ -15,10 +15,10 @@ your projects and extensions to Eask.
 Load `lisp/_prepare.el` to start using other Eask API.
 
 ```elisp
-(load (expand-file-name
-       "../_prepare.el"
-       (file-name-directory (nth 1 (member "-scriptload" command-line-args))))
-      nil t)
+(let ((dir (file-name-directory (nth 1 (member "-scriptload" command-line-args)))))
+  (load (expand-file-name "_prepare.el"
+                          (locate-dominating-file dir "_prepare.el"))
+        nil t))
 ```
 
 Each Elisp scripts should have this snippet at the very top of the file.
