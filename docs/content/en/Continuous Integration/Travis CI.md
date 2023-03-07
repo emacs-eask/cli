@@ -25,9 +25,9 @@ install:
   - npm install @emacs-eask/cli -g
 
 script:
+  - eask package
   - eask install
   - eask compile
-  - eask lint package
 ```
 
 This example is testing your Emacs Lisp package in the below environment;

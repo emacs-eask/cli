@@ -14,9 +14,9 @@ default: &default-steps
     - checkout
     - run: apt-get update && apt-get install -y git
     - run: |
+        eask package
         eask install
         eask compile
-        eask lint package
 
 # Enumerated list of Emacs versions
 jobs:
