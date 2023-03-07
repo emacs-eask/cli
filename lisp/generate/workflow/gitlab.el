@@ -20,14 +20,15 @@
         nil t))
 
 (defun eask--gitlab-insert-emacs-version (version)
-  ""
-  (insert "test-" version ":")
-  (insert "  image: silex/emacs:" version "-ci")
-  (insert "  script:")
-  (insert "    - eask clean all")
-  (insert "    - eask package")
-  (insert "    - eask install")
-  (insert "    - eask compile"))
+  "Insert GitLab Runner workflow instruction for specific Emacs' VERSION."
+  (insert "test-" version ":" "\n")
+  (insert "  image: silex/emacs:" version "-ci" "\n")
+  (insert "  script:" "\n")
+  (insert "    - eask clean all" "\n")
+  (insert "    - eask package" "\n")
+  (insert "    - eask install" "\n")
+  (insert "    - eask compile" "\n")
+  (insert "\n"))
 
 (eask-start
   (let* ((url "https://raw.githubusercontent.com/emacs-eask/template-generate/master/workflow/gitlab.yml")

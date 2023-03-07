@@ -5,6 +5,8 @@ weight: 300
 
 {{< toc >}}
 
+[![Linux](https://img.shields.io/badge/-Linux-fcc624?logo=linux&style=flat&logoColor=black)](#)
+
 Example to use [Travis CI](https://www.travis-ci.com/).
 
 ```yml
@@ -38,5 +40,15 @@ script:
 
 This example is testing your Emacs Lisp package in the below environment;
 
-* Emacs: `26.x`, `27.x`, `28.x`, and `snapshot`
-* Eask: `snapshot` (latest)
+| OS             | Emacs                              | Eask   |
+|----------------|------------------------------------|--------|
+| Linux (Ubuntu) | `26.x`, `27.x`, `28.x`, `snapshot` | latest |
+| macOS          | n/a                                | latest |
+| Windows        | n/a                                | latest |
+
+
+{{< hint info >}}
+💡 You can generate workflow file via `eask generate workflow travis-ci`, see 
+[Commands and options](https://emacs-eask.github.io/Getting-Started/Commands-and-options/#-eask-generate-workflow-travis-ci)
+for more information!
+{{< /hint >}}
