@@ -24,6 +24,11 @@
 
 set -e
 
+if ! command -v unzip >/dev/null; then
+  echo "Error: unzip is required to install Eask." 1>&2
+  exit 1
+fi
+
 if [ "$OS" = "Windows_NT" ]; then
   target="win-x64"
 else
@@ -47,7 +52,7 @@ mkdir -p $eask_bin_dir
 
 curl -fsSL $eask_uri -o $zip
 
-tar -xf $zip -C $eask_bin_dir
+unzip -d "$eask_bin_dir" -o "$zip"
 
 rm $zip
 
