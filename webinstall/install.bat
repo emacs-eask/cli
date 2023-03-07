@@ -21,3 +21,21 @@
 ::
 :: TODO(everyone): Keep this script simple and easily auditable.
 ::
+
+set URL=https://github.com/emacs-eask/binaries/raw/master/win-x64.zip
+set EAKS_BIN_DIR=%USERPROFILE%\.local\bin
+set ZIP=%EASK_BIN_DIR%\eask.zip
+
+mkdir %EAKS_BIN_DIR%
+
+curl.exe -fsSL %URL% -o %ZIP%
+
+tar.exe -xf %ZIP% -C %EAKS_BIN_DIR%
+
+del %ZIP%
+
+echo ✓ Eask is installed in %EAKS_BIN_DIR%.
+echo.
+echo Don't forget to add `%EASK_BIN_DIR% to PATH environment variable:
+echo.
+echo     set PATH=%ELDEV_BIN_DIR%;%%PATH%%
