@@ -45,5 +45,6 @@ jobs:
 
     - name: Testing... (Windows)
       if: matrix.os == 'windows-latest'
+      shell: cmd
       run: |
-         "$HOME/.local/bin/eask.exe" --version
+         %USERPROFILE%/.local/bin/eask.exe --version
