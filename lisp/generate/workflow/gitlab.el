@@ -56,6 +56,7 @@
             (when (version<= minimum-version "29.1")
               ;; TODO: snapshot?
               ))
+          (delete-trailing-whitespace)
           (save-buffer))
         "done ✓")
       (eask-info "✓ Successfully created the yaml file in `%s`" filename))))
