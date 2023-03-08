@@ -19,6 +19,16 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
+(defun eask--circle-ci-insert-jobs (version)
+  "Insert Circle CI's jobs instruction for specific Emacs' VERSION."
+  (insert "  test-ubuntu-emacs-" version ":" "\n")
+  (insert "    docker:" "\n")
+  (insert "      - image: silex/emacs:" version "-ci" "\n")
+  (insert "        entrypoint: bash" "\n")
+  (insert "    steps:" "\n")
+  (insert "      - setup" "\n")
+  (insert "      - test" "\n"))
+
 (eask-start
   (let* ((url "https://raw.githubusercontent.com/emacs-eask/template-generate/master/workflow/circle-ci.yml")
          (dir (expand-file-name ".circleci/"))
@@ -31,6 +41,41 @@
       (eask-with-progress
         (format "Generating file %s... " filename)
         (eask-with-verbosity 'debug (url-copy-file url filename))
+        "done ✓")
+      (eask-with-progress
+        (format "Configuring file %s... " filename)
+        (with-current-buffer (find-file filename)
+          ;; Config jobs
+          (when (search-forward "{ EMACS_VERSION }" nil t)
+            (search-backward "{ EMACS_VERSION }" nil t)
+            (delete-region (point) (line-end-position))
+            (when (version<= minimum-version "26.1")
+              (eask--circle-ci-insert-jobs "26"))
+            (when (version<= minimum-version "27.1")
+              (insert "\n")
+              (eask--circle-ci-insert-jobs "27"))
+            (when (version<= minimum-version "28.1")
+              (insert "\n")
+              (eask--circle-ci-insert-jobs "28"))
+            (when (version<= minimum-version "29.1")
+              (insert "\n")
+              (eask--circle-ci-insert-jobs "master")))
+          ;; Config matrix
+          (when (search-forward "{ MATRIX_JOBS }" nil t)
+            (search-backward "{ MATRIX_JOBS }" nil t)
+            (delete-region (point) (line-end-position))
+            (end-of-line)
+            (let ((spaces (spaces-string (current-column))))
+              (delete-region (line-beginning-position) (line-end-position))
+              (when (version<= minimum-version "26.1")
+                (insert spaces "- test-ubuntu-emacs-26" "\n"))
+              (when (version<= minimum-version "27.1")
+                (insert spaces "- test-ubuntu-emacs-27" "\n"))
+              (when (version<= minimum-version "28.1")
+                (insert spaces "- test-ubuntu-emacs-28" "\n"))
+              (when (version<= minimum-version "29.1")
+                (insert spaces "- test-ubuntu-emacs-master"))))
+          (save-buffer))
         "done ✓")
       (eask-info "✓ Successfully created the yaml file in `%s`" filename))))
 

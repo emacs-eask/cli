@@ -19,6 +19,17 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
+(defun eask--gitlab-insert-jobs (version)
+  "Insert GitLab Runner's jobs instruction for specific Emacs' VERSION."
+  (insert "test-" version ":" "\n")
+  (insert "  image: silex/emacs:" version "-ci" "\n")
+  (insert "  script:" "\n")
+  (insert "    - eask clean all" "\n")
+  (insert "    - eask package" "\n")
+  (insert "    - eask install" "\n")
+  (insert "    - eask compile" "\n")
+  (insert "\n"))
+
 (eask-start
   (let* ((url "https://raw.githubusercontent.com/emacs-eask/template-generate/master/workflow/gitlab.yml")
          (basename (or (car (eask-args)) ".gitlab-ci.yml"))
@@ -29,6 +40,24 @@
       (eask-with-progress
         (format "Generating file %s... " filename)
         (eask-with-verbosity 'debug (url-copy-file url filename))
+        "done ✓")
+      (eask-with-progress
+        (format "Configuring file %s... " filename)
+        (with-current-buffer (find-file filename)
+          (when (search-forward "{ EMACS_VERSION }" nil t)
+            (search-backward "{ EMACS_VERSION }" nil t)
+            (delete-region (point) (line-end-position))
+            (when (version<= minimum-version "26.1")
+              (eask--gitlab-insert-jobs "26.3"))
+            (when (version<= minimum-version "27.1")
+              (eask--gitlab-insert-jobs "27.2"))
+            (when (version<= minimum-version "28.1")
+              (eask--gitlab-insert-jobs "28.2"))
+            (when (version<= minimum-version "29.1")
+              ;; TODO: snapshot?
+              ))
+          (delete-trailing-whitespace)
+          (save-buffer))
         "done ✓")
       (eask-info "✓ Successfully created the yaml file in `%s`" filename))))
 

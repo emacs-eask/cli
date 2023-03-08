@@ -9,7 +9,7 @@ Using Eask as your Emacs package management tool.
 
 {{< hint info >}}
 The installation are cross-platform, using [npm](https://www.npmjs.com/).
-For instruction about how to install Eask with other methods, see [install](https://emacs-eask.github.io/Getting-Started/Install-Eask/).
+For instructions about how to install Eask with other methods, see [install](https://emacs-eask.github.io/Getting-Started/Install-Eask/).
 
 It is required to have [Git installed](https://git-scm.com/downloads)
 to run this tutorial.

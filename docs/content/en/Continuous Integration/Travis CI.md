@@ -5,24 +5,32 @@ weight: 300
 
 {{< toc >}}
 
+[![Linux](https://img.shields.io/badge/-Linux-fcc624?logo=linux&style=flat&logoColor=black)](#)
+
 Example to use [Travis CI](https://www.travis-ci.com/).
 
 ```yml
-language: node_js
-node_js:
-  - 16
+language: nix
+
+os:
+  - linux
+  - osx
 
 env:
-  - EVM_EMACS=emacs-27.2-travis-linux-xenial
-  - EVM_EMACS=emacs-git-snapshot-travis-linux-xenial
+  - EMACS_CI=emacs-26-3
+  - EMACS_CI=emacs-27-2
+  - EMACS_CI=emacs-28-2
+  - EMACS_CI=emacs-snapshot
 
 matrix:
   fast_finish: true
   allow_failures:
-    - env: EVM_EMACS=emacs-git-snapshot-travis-linux-xenial
+    - env: EMACS_CI=emacs-snapshot
 
 install:
-  - npm install @emacs-eask/cli -g
+  - bash <(curl https://raw.githubusercontent.com/purcell/nix-emacs-ci/master/travis-install)
+  - curl -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.sh | sh
+  - export PATH="$HOME/.local/bin:$PATH"
 
 script:
   - eask package
@@ -32,5 +40,15 @@ script:
 
 This example is testing your Emacs Lisp package in the below environment;
 
-* Emacs: `27.2` and `snapshot`
-* Eask: `snapshot` (latest)
+| OS             | Emacs                              | Eask   |
+|----------------|------------------------------------|--------|
+| Linux (Ubuntu) | `26.x`, `27.x`, `28.x`, `snapshot` | latest |
+| macOS          | n/a                                | latest |
+| Windows        | n/a                                | latest |
+
+
+{{< hint info >}}
+💡 You can generate workflow file via `eask generate workflow travis-ci`, see 
+[Commands and options](https://emacs-eask.github.io/Getting-Started/Commands-and-options/#-eask-generate-workflow-travis-ci)
+for more information!
+{{< /hint >}}

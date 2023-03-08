@@ -5,6 +5,10 @@ weight: 100
 
 {{< toc >}}
 
+[![Windows](https://img.shields.io/badge/-Windows-lightblue?logo=windows&style=flat&logoColor=blue)](#)
+[![macOS](https://img.shields.io/badge/-macOS-lightgrey?logo=apple&style=flat&logoColor=white)](#)
+[![Linux](https://img.shields.io/badge/-Linux-fcc624?logo=linux&style=flat&logoColor=black)](#)
+
 Here is an example using the [GitHub](https://github.com/) Actions service.
 
 ```yml
@@ -14,7 +18,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        emacs-version: [26.3, 27.2, 28.1, snapshot]
+        emacs-version: [26.3, 27.2, 28.2, snapshot]
 
     steps:
     - uses: actions/checkout@v2
@@ -38,13 +42,22 @@ jobs:
 
 This example is testing your Emacs Lisp package in the below environment;
 
-* Emacs: `27.2` and `snapshot`
-* Eask: `snapshot` (latest)
+| OS             | Emacs                              | Eask   |
+|----------------|------------------------------------|--------|
+| Linux (Ubuntu) | `26.x`, `27.x`, `28.x`, `snapshot` | latest |
+| macOS          | `26.x`, `27.x`, `28.x`, `snapshot` | latest |
+| Windows        | `26.x`, `27.x`, `28.x`, `snapshot` | latest |
 
 with these following `actions`,
 
 * [setup-emacs](https://github.com/jcs090218/setup-emacs) to install Emacs
 * [setup-eask](https://github.com/emacs-eask/setup-eask) to install desired Eask version
+
+{{< hint info >}}
+💡 You can generate workflow file via `eask generate workflow github`, see 
+[Commands and options](https://emacs-eask.github.io/Getting-Started/Commands-and-options/#-eask-generate-workflow-github)
+for more information!
+{{< /hint >}}
 
 ## 💾 Setup Eask locally
 
