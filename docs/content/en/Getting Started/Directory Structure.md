@@ -10,7 +10,6 @@ a directory with the following structure:
 
 ```
 .
-├── .github/workflows/test.yml
 ├── .gitignore
 ├── Makefile
 ├── Eask
@@ -21,12 +20,6 @@ a directory with the following structure:
 ## Directory Structure Explained
 
 The following is a high-level overview of each of the files.
-
-`.github/workflows/test.yml`
-
-GitHub actions workflow file that is read by GitHub Actions. This file has
-setups the basic environment for you to test your elisp project. Like, such
-as installing Emacs, setup Eask, etc.
 
 `.gitignore`
 
@@ -52,5 +45,5 @@ from your repository.
 `{package-file}.el`
 
 This is the main package file; where you should write your elisp code.
-If you attempt to create a multiple-file packages; you would need to
+If you attempt to create a multiple-file package; you would need to
 edit the `Eask`-file accordingly.
