@@ -36,6 +36,6 @@ del %ZIP%
 
 echo ✓ Eask is installed in %EAKS_BIN_DIR%.
 echo.
-echo Don't forget to add `%EASK_BIN_DIR% to PATH environment variable:
+echo Don't forget to add %EASK_BIN_DIR% to PATH environment variable:
 echo.
-echo     set PATH=%ELDEV_BIN_DIR%;%%PATH%%
+echo     set PATH=%EASK_BIN_DIR%;%%PATH%%
