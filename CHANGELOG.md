@@ -5,8 +5,13 @@ All notable changes to this project will be documented in this file.
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 
-## 0.8.x (Unreleased)
+## 0.9.x (Unreleased)
 > Released N/A
+
+* N/A
+
+## 0.8.x
+> Released Mar 08, 2023
 
 * Handle Easkfile existence for command `eask init` (2f5edb3d9437d4ba55d2f014ca1ba1b65075eed8)
 * Generate log files in user directory (974a17e3b573520a775f813c72ecbd30a32012bf)
