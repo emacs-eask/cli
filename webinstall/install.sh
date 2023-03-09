@@ -53,9 +53,10 @@ unzip -d "$eask_bin_dir" -o "$zip"
 
 rm $zip
 
+echo
 echo "✓ Eask is installed in ${eask_bin_dir}."
 echo
 echo "Don't forget to add ${eask_bin_dir} to PATH environment variable:"
 echo
 echo "    export PATH=\"${eask_bin_dir}:\$PATH\""
-
+echo
