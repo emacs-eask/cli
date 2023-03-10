@@ -19,17 +19,25 @@
 
 "use strict";
 
-exports.command = ['github [file]', 'github-actions [file]', 'gha [file]'];
-exports.desc = 'Generate GitHub Actions workflow yaml file';
+exports.command = ['license <name>'];
+exports.desc = 'Generate LICENSE file';
 exports.builder = {
-  file: {
-    description: 'name of the test file; the default is `test.yml`',
-    requiresArg: false,
+  name: {
+    description: 'Name of the license',
+    requiresArg: true,
+    type: 'string',
+    group: TITLE_CMD_OPTION,
+  },
+  output: {
+    description: 'Output result to a file; the default is `LICENSE`',
+    alias: 'o',
     type: 'string',
     group: TITLE_CMD_OPTION,
   },
 };
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'generate/workflow/github', argv.file);
+  await UTIL.e_call(argv, 'generate/license'
+                    , argv.name
+                    , UTIL.def_flag(argv.output, '--output', argv.output));
 };

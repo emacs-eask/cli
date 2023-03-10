@@ -25,7 +25,7 @@ exports.builder = {
   file: {
     description: 'name of the test file; the default is `.travis.yml`',
     requiresArg: false,
-    type: 'array',
+    type: 'string',
     group: TITLE_CMD_OPTION,
   },
 };

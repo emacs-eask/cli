@@ -331,6 +331,17 @@ $ eask [GLOBAL-OPTIONS] generate pkg-file
 [Multi-file Packages (elisp)](https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html#Multi_002dfile-Packages)
 for details.
 
+## 🔍 eask generate license
+
+Generate LICENSE file.
+
+```sh
+$ eask [GLOBAL-OPTIONS] generate license <name>
+```
+
+`name` is the type of the license, see https://api.github.com/licenses for all
+the choices.
+
 ## 🔍 eask generate workflow circle-ci
 
 Generate CircleCI workflow yaml file.

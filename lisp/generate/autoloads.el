@@ -19,6 +19,6 @@
          (autoloads-file (expand-file-name (concat name "-autoloads.el"))))
     (package-generate-autoloads name default-directory)
     (eask-msg "")
-    (eask-info "Write file %s..." autoloads-file)))
+    (eask-info "(Generated -autoloads.el file in %s)" autoloads-file)))
 
 ;;; generate/autoloads.el ends here

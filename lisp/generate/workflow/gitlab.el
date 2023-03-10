@@ -4,12 +4,12 @@
 ;;
 ;; Command use generate GitLab Runner test yaml file,
 ;;
-;;   $ eask generate workflow gitlab
+;;   $ eask generate workflow gitlab  [file]
 ;;
 ;;
 ;;  Positional arguments:
 ;;
-;;    [--file]     name of the test file; the default is `.gitlab-ci.yml`
+;;    [file]     name of the test file; the default is `.gitlab-ci.yml`
 ;;
 
 ;;; Code:
@@ -38,11 +38,11 @@
     (if (file-exists-p filename)
         (eask-info "The yaml file already exists `%s`" filename)
       (eask-with-progress
-        (format "Generating file %s... " filename)
+        (format "[1/2] Generating workflow file in %s... " filename)
         (eask-with-verbosity 'debug (url-copy-file url filename))
         "done ✓")
       (eask-with-progress
-        (format "Configuring file %s... " filename)
+        (format "[2/2] Configuring workflow file in %s... " filename)
         (with-current-buffer (find-file filename)
           (when (search-forward "{ EMACS_VERSION }" nil t)
             (search-backward "{ EMACS_VERSION }" nil t)
