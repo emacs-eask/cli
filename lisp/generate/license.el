@@ -47,7 +47,7 @@
   (let* ((name (car (eask-args)))  ; type of the license
          (basename (or (eask-output) "LICENSE"))
          (filename (expand-file-name basename)))
-    (while (not (license-templates-keys))
+    (while (not (license-templates-request-completed-p))
       (sleep-for 1))
     (eask-msg "")
     (cond ((file-exists-p filename)
@@ -57,7 +57,7 @@
            (eask--print-license-menu))
           (t
            (eask-with-progress
-             "Generating license file... "
+             (format "Generating license %s file... " filename)
              (with-current-buffer (find-file filename)
                (license-templates-insert name)
                (save-buffer))
