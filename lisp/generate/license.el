@@ -56,7 +56,7 @@
            (eask--print-license-menu))
           (t
            (eask-with-progress
-             (format "Generating license %s file... " filename)
+             (format "Generating license file in %s... " filename)
              (with-current-buffer (find-file filename)
                (license-templates-insert name)
                (save-buffer))
