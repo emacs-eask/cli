@@ -47,6 +47,7 @@
   (let* ((name (car (eask-args)))  ; type of the license
          (basename (or (eask-output) "LICENSE"))
          (filename (expand-file-name basename)))
+    (license-templates-keys)  ; trigger request
     (while (not (license-templates-request-completed-p))
       (sleep-for 1))
     (eask-msg "")
