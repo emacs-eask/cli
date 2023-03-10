@@ -8,7 +8,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 0.9.x (Unreleased)
 > Released N/A
 
-* N/A
+* Add command to generate LICENSE file (#155)
 
 ## 0.8.x
 > Released Mar 08, 2023
