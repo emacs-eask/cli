@@ -48,8 +48,6 @@
          (basename (or (eask-output) "LICENSE"))
          (filename (expand-file-name basename)))
     (license-templates-keys)  ; trigger request
-    (while (not (license-templates-request-completed-p))
-      (sleep-for 1))
     (eask-msg "")
     (cond ((file-exists-p filename)
            (eask-info "The license file already exists `%s`" filename))
