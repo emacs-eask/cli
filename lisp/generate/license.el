@@ -37,7 +37,7 @@
                (eask--sinr names "" "s"))))
 
 (eask-start
-  (eask-with-archives "jcs-elpa"
+  (eask-with-archives "melpa"
     (eask-package-install 'license-templates))
   (require 'license-templates)
   (let* ((name (car (eask-args)))  ; type of the license
