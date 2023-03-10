@@ -4,12 +4,12 @@
 ;;
 ;; Command use generate Travis CI test yaml file,
 ;;
-;;   $ eask generate workflow travis-ci
+;;   $ eask generate workflow travis-ci [file]
 ;;
 ;;
 ;;  Positional arguments:
 ;;
-;;    [--file]     name of the test file; the default is `.travis.yml`
+;;    [file]     name of the test file; the default is `.travis.yml`
 ;;
 
 ;;; Code:

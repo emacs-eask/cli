@@ -4,12 +4,12 @@
 ;;
 ;; Command use generate CircleCI test yaml file,
 ;;
-;;   $ eask generate workflow circle-ci
+;;   $ eask generate workflow circle-ci [file]
 ;;
 ;;
 ;;  Positional arguments:
 ;;
-;;    [--file]     name of the test file; the default is `config.yml`
+;;    [file]     name of the test file; the default is `config.yml`
 ;;
 
 ;;; Code:

@@ -4,12 +4,12 @@
 ;;
 ;; Command use generate GitLab Runner test yaml file,
 ;;
-;;   $ eask generate workflow gitlab
+;;   $ eask generate workflow gitlab  [file]
 ;;
 ;;
 ;;  Positional arguments:
 ;;
-;;    [--file]     name of the test file; the default is `.gitlab-ci.yml`
+;;    [file]     name of the test file; the default is `.gitlab-ci.yml`
 ;;
 
 ;;; Code:

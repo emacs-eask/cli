@@ -4,12 +4,12 @@
 ;;
 ;; Command use generate GitHub Actions test yaml file,
 ;;
-;;   $ eask generate workflow github
+;;   $ eask generate workflow github [file]
 ;;
 ;;
 ;;  Positional arguments:
 ;;
-;;    [--file]     name of the test file; the default is `test.yml`
+;;    [file]     name of the test file; the default is `test.yml`
 ;;
 
 ;;; Code:
