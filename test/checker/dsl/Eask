@@ -14,8 +14,8 @@
 (author "name")                                          ; duplicate `author`
 (author "name")
 
-(author "GPLv3")                                         ; duplicate `license`
-(author "GPLv3")
+(license "GPLv3")                                        ; duplicate `license`
+(license "GPLv3")
 
 (package-file "check-dsl.el")                            ; duplicate `package-file` directive
 (package-file "check-dsl.el")
