@@ -67,6 +67,7 @@ eask lint elisp-lint
 #eask lint elsa       # XXX: Elsa is not stable, ignore it for now
 eask lint indent
 eask lint keywords
+eask lint license
 eask lint package
 eask lint regexps
 
