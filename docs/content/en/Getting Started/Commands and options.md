@@ -553,6 +553,14 @@ Run keywords checker (built-in).
 $ eask [GLOBAL-OPTIONS] lint keywords
 ```
 
+## 🔍 eask lint license
+
+Run license check.
+
+```sh
+$ eask [GLOBAL-OPTIONS] lint license
+```
+
 ## 🔍 eask lint declare
 
 Run check-declare (built-in).

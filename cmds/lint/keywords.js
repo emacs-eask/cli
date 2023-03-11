@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['keywords'];
-exports.desc = `Lint the package's keywords header`;
+exports.desc = `Run keywords checker (built-in)`;
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'lint/keywords');

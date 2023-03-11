@@ -10,6 +10,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 * Add command to generate LICENSE file (#155)
 * Add new DSLs `author` and `license` (#156)
+* Add license linter (#157)
 
 ## 0.8.x
 > Released Mar 08, 2023

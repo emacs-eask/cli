@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['license'];
-exports.desc = `Lint the package's license`;
+exports.desc = `Run license check`;
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'lint/license');
