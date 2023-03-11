@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2022-2023 Jen-Chieh Shen
+ * Copyright (C) 2023 Jen-Chieh Shen
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,9 +19,9 @@
 
 "use strict";
 
-exports.command = ['keywords'];
-exports.desc = `Run keywords checker (built-in)`;
+exports.command = ['license'];
+exports.desc = `Run license check`;
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'lint/keywords');
+  await UTIL.e_call(argv, 'lint/license');
 };
