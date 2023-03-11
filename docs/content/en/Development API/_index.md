@@ -493,6 +493,14 @@ Alias of `website-url`.
 
 Alias of `keywords`.
 
+## 🔍 Function: eask-f-author (`name` &optional `email`)
+
+Alias of `author`.
+
+## 🔍 Function: eask-f-license (`name`)
+
+Alias of `license`.
+
 ## 🔍 Function: eask-f-package-file (`file`)
 
 Alias of `package-file`.

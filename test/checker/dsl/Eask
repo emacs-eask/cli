@@ -11,6 +11,12 @@
 (keywords "dsl")                                         ; duplicate keywords
 (keywords "dsl")
 
+(author "name")                                          ; duplicate `author`
+(author "name")
+
+(author "GPLv3")                                         ; duplicate `license`
+(author "GPLv3")
+
 (package-file "check-dsl.el")                            ; duplicate `package-file` directive
 (package-file "check-dsl.el")
 
