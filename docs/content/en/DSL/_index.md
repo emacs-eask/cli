@@ -36,6 +36,22 @@ Declare package keywords.
 (keywords "tool" "utility" "emacs")
 ```
 
+## 🔍 **author** (`name` &optional `email`)
+
+Declare package's author.
+
+```elisp
+(author "USER NAME" "user.name@example.com")
+```
+
+## 🔍 **license** (`name`)
+
+Declare package's author.
+
+```elisp
+(license "GPLv3")
+```
+
 # 🚩 Package contents
 
 ## 🔍 **package-file** (`file` `version` `description`)

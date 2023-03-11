@@ -575,6 +575,7 @@ other scripts internally.  See function `eask-call'.")
 
 (defconst eask-file-keywords
   '("package" "website-url" "keywords"
+    "author" "license"
     "package-file" "package-descriptor" "files"
     "script"
     "source" "source-priority"
@@ -772,6 +773,8 @@ This uses function `locate-dominating-file' to look up directory tree."
 (defvar eask-package-descriptor nil)
 (defvar eask-website-url        nil)
 (defvar eask-keywords           nil)
+(defvar eask-authors            nil)
+(defvar eask-licenses           nil)
 (defvar eask-package-file       nil)
 (defvar eask-files              nil)
 (defvar eask-scripts            nil)
@@ -790,6 +793,8 @@ This uses function `locate-dominating-file' to look up directory tree."
          eask-package-desc
          eask-website-url
          eask-keywords
+         eask-authors
+         eask-licenses
          eask-package-file
          eask-package-descriptor
          eask-files
@@ -843,6 +848,21 @@ This uses function `locate-dominating-file' to look up directory tree."
   (if eask-keywords
       (eask-error "Multiple definition of `keywords'")
     (setq eask-keywords keywords)))
+
+(defun eask-f-author (name &optional email)
+  "Set package author's NAME and EMAIL."
+  (if (member name (mapcar #'car eask-authors))
+      (eask-warn "Warning regarding duplicate author name, %s" name)
+    (when (and email
+               (not (string-match-p "@" email)))
+      (eask-warn "Email seems to be invalid, %s" email))
+    (push (cons name email) eask-authors)))
+
+(defun eask-f-license (name)
+  "Set package license NAME."
+  (if (member name eask-licenses)
+      (eask-warn "Warning regarding duplicate license name, %s" name)
+    (push name eask-licenses)))
 
 (defun eask--try-construct-package-desc (file)
   "Try construct the package descriptor from FILE."

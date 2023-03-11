@@ -9,6 +9,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 > Released N/A
 
 * Add command to generate LICENSE file (#155)
+* Add new DSLs `author` and `license` (#156)
 
 ## 0.8.x
 > Released Mar 08, 2023
