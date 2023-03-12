@@ -719,11 +719,13 @@ This uses function `locate-dominating-file' to look up directory tree."
          (eask--print-env-info)
          (cond
           ((eask-special-p)  ; Commands without Eask-file needed
-           (let ((homedir (concat eask-homedir "../")))
-             (eask--setup-home homedir
-               (ignore-errors (delete-directory user-emacs-directory t))  ; make sure it's clean
-               (ignore-errors (make-directory package-user-dir t))
-               (eask--with-hooks ,@body))))
+           (eask--setup-home (concat eask-homedir "../")  ; /home/user/
+             ;; make sure it's clean
+             ;;
+             ;; this will point to /home/user/.eask
+             (ignore-errors (delete-directory (concat user-emacs-directory "../") t))
+             (ignore-errors (make-directory package-user-dir t))
+             (eask--with-hooks ,@body)))
           ((eask-global-p)
            (let ((inhibit-config (eask-quick-p)))
              ;; We accept Eask-file in global scope, but it shouldn't be used
