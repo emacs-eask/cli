@@ -75,6 +75,9 @@ function def_flag(arg, name, val = undefined) {
  * Setup the environment variables so Emacs could receive them.
  */
 function setup_env() {
+  /* Home Directory */
+  process.env.EASK_HOMEDIR = EASK_HOMEDIR;
+
   if (GITHUB_ACTIONS) {
     /* XXX: isTTY flag will always be undefined in GitHub Actions; we will have
      * explicitly set environment variables.

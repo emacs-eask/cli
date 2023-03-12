@@ -32,21 +32,18 @@ exports.builder = async (yargs) => {
 };
 
 exports.handler = async (argv) => {
-  // setup environment, so Emacs can receive it
-  process.env.EASK_HOMEDIR = global.EASK_HOMEDIR;
-
   let cmd = process.argv.slice(3);
 
   await UTIL.e_call(argv, 'core/exec', '--', cmd);
 
-  if (!fs.existsSync(global.EASK_HOMEDIR)) {
+  if (!fs.existsSync(EASK_HOMEDIR)) {
     return;
   }
 
   console.log('');
 
-  let epf = global.EASK_HOMEDIR + 'exec-path';
-  let lpf = global.EASK_HOMEDIR + 'load-path';
+  let epf = EASK_HOMEDIR + 'exec-path';
+  let lpf = EASK_HOMEDIR + 'load-path';
 
   process.env.PATH = fs.readFileSync(epf, 'utf8');
   process.env.EMACSLOADPATH = fs.readFileSync(lpf, 'utf8');;

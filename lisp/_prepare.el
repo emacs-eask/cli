@@ -67,22 +67,24 @@
   "What's the current command?
 
 If the command is with subcommand, it will return command with concatenate with
-dash separator. For example, the following:
+slash separator. For example, the following:
 
    $ eask lint checkdoc [FILES..]
 
-will return `lint-checkdoc' with a dash between two subcommands."
+will return `lint/checkdoc' with a dash between two subcommands."
   (let* ((script-dir (file-name-directory eask--script))
          (script-file (file-name-sans-extension (file-name-nondirectory eask--script)))
          (module-name (eask-s-replace eask-lisp-root "" script-dir))
-         (module-name (eask-s-replace "/" "" module-name)))
-    ;; Ignore if it's inside core module
-    (if (member module-name '("core" "checker")) script-file
-      (concat module-name "-" script-file))))
+         (module-names (split-string module-name "/" t)))
+    ;; Make certain commands the root command; e.g. `core', `checker', etc.
+    (if (member (nth 0 module-names) '("core" "checker")) script-file
+      (mapconcat #'identity (append module-names
+                                    (list script-file))
+                 "/"))))
 
 (defun eask-special-p ()
   "Return t if the command that can be run without Eask-file existence."
-  (member (eask-command) '("init-cask" "keywords")))
+  (member (eask-command) '("init/cask" "keywords" "generate/license")))
 
 (defun eask-checker-p ()
   "Return t if running Eask as the checker."
@@ -692,12 +694,23 @@ This uses function `locate-dominating-file' to look up directory tree."
 (defmacro eask--with-hooks (&rest body)
   "Execute BODY with before/after hooks."
   (declare (indent 0) (debug t))
-  `(progn
+  `(let* ((command (eask-command))
+          (before  (concat "eask-before-" command "-hook"))
+          (after   (concat "eask-after-" command "-hook")))
      (run-hooks 'eask-before-command-hook)
-     (run-hooks (intern (concat "eask-before-" (eask-command) "-hook")))
+     (run-hooks (intern before))
      ,@body
-     (run-hooks (intern (concat "eask-after-" (eask-command) "-hook")))
+     (run-hooks (intern after))
      (run-hooks 'eask-after-command-hook)))
+
+(defmacro eask--setup-home (dir &rest body)
+  "Set up config directory in DIR, then execute BODY."
+  (declare (indent 1) (debug t))
+  `(let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/") ,dir))
+          (package-user-dir (expand-file-name "elpa" user-emacs-directory))
+          (user-init-file (locate-user-emacs-file "init.el"))
+          (custom-file (locate-user-emacs-file "custom.el")))
+     ,@body))
 
 (defmacro eask-start (&rest body)
   "Execute BODY with workspace setup."
@@ -709,15 +722,18 @@ This uses function `locate-dominating-file' to look up directory tree."
          (eask--handle-global-options)
          (eask--print-env-info)
          (cond
+          ((eask-special-p)  ; Commands without Eask-file needed
+           (ignore-errors (delete-directory eask-homedir t))  ; clean up
+           (eask--setup-home (concat eask-homedir "../")  ; `/home/user/', escape `.eask'
+             (ignore-errors (make-directory package-user-dir t))
+             (eask--with-hooks ,@body)))
           ((eask-global-p)
-           (let* ((special (eask-special-p))
-                  (inhibit-config (or special (eask-quick-p))))
-             (unless special
-               ;; We accept Eask-file in global scope, but it shouldn't be used
-               ;; for the sandbox.
-               (if (eask-file-try-load "./")
-                   (eask-msg "✓ Loading config Eask file in %s... done!" eask-file)
-                 (eask-msg "✗ Loading config Eask file... missing!")))
+           (let ((inhibit-config (eask-quick-p)))
+             ;; We accept Eask-file in global scope, but it shouldn't be used
+             ;; for the sandbox.
+             (if (eask-file-try-load "./")
+                 (eask-msg "✓ Loading config Eask file in %s... done!" eask-file)
+               (eask-msg "✗ Loading config Eask file... missing!"))
              (message "")
              (package-activate-all)
              (eask-with-progress
@@ -730,24 +746,18 @@ This uses function `locate-dominating-file' to look up directory tree."
                (ansi-green (if inhibit-config "skipped ✗" "done ✓")))
              (eask--with-hooks ,@body)))
           (t
-           (let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/")))
-                  (package-user-dir (expand-file-name "elpa" user-emacs-directory))
-                  (eask--first-init-p (not (file-directory-p user-emacs-directory)))
-                  (user-init-file (locate-user-emacs-file "init.el"))
-                  (custom-file (locate-user-emacs-file "custom.el"))
-                  (special (eask-special-p)))
-             (unless special
+           (eask--setup-home nil  ; `nil' is the `default-directory'
+             (let ((eask--first-init-p (not (file-directory-p user-emacs-directory))))
                (if (eask-file-try-load "./")
                    (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
                  (eask-msg "✗ Loading Eask file... missing!")
-                 (eask-help "core/init")))
-             (when (or special eask-file)
-               (message "")
-               (package-activate-all)
-               (unless special
+                 (eask-help "core/init"))
+               (when eask-file
+                 (message "")
+                 (package-activate-all)
                  (ignore-errors (make-directory package-user-dir t))
-                 (eask--silent (eask-setup-paths)))
-               (eask--with-hooks ,@body)))))))))
+                 (eask--silent (eask-setup-paths))
+                 (eask--with-hooks ,@body))))))))))
 
 ;;
 ;;; Eask file

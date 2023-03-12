@@ -32,7 +32,29 @@ This is also equivalent to option `--strict`:
 $ eask compile [FILES..] --strict
 ```
 
-Or hooks run on every command:
+Or hooks that run on every command:
 
 * `eask-before-command-hook`
 * `eask-after-command-hook`
+
+```elisp
+(add-hook 'eask-before-command-hook
+           (lambda ()
+             (message "%s" (eask-command))))  ; print the current command
+```
+
+For subcommands that contain spaces, will concatenate with `/`:
+
+```sh
+$ eask lint checkdoc     # lint/checkdoc
+$ eask generate license  # generate/license
+```
+
+therefore,
+
+```elisp
+(add-hook 'eask-before-lint/checkdoc-hook
+           (lambda ()
+             ;; do stuff before checkdoc linting...
+             ))
+```

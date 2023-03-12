@@ -34,16 +34,13 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  // setup environment, so Emacs can receive it
-  process.env.EASK_HOMEDIR = global.EASK_HOMEDIR;
-
   await UTIL.e_call(argv, 'core/run', argv.names);
 
-  if (!fs.existsSync(global.EASK_HOMEDIR)) {
+  if (!fs.existsSync(EASK_HOMEDIR)) {
     return;
   }
 
-  let run = global.EASK_HOMEDIR + 'run';
+  let run = EASK_HOMEDIR + 'run';
 
   // this contain the full command!
   let instruction = fs.readFileSync(run, 'utf8');
