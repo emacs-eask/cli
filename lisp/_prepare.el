@@ -71,18 +71,18 @@ dash separator. For example, the following:
 
    $ eask lint checkdoc [FILES..]
 
-will return `lint-checkdoc' with a dash between two subcommands."
+will return `lint/checkdoc' with a dash between two subcommands."
   (let* ((script-dir (file-name-directory eask--script))
          (script-file (file-name-sans-extension (file-name-nondirectory eask--script)))
          (module-name (eask-s-replace eask-lisp-root "" script-dir))
          (module-name (eask-s-replace "/" "" module-name)))
     ;; Ignore if it's inside core module
     (if (member module-name '("core" "checker")) script-file
-      (concat module-name "-" script-file))))
+      (concat module-name "/" script-file))))
 
 (defun eask-special-p ()
   "Return t if the command that can be run without Eask-file existence."
-  (member (eask-command) '("init-cask" "keywords" "generate-license")))
+  (member (eask-command) '("init/cask" "keywords" "generate/license")))
 
 (defun eask-checker-p ()
   "Return t if running Eask as the checker."
@@ -719,11 +719,8 @@ This uses function `locate-dominating-file' to look up directory tree."
          (eask--print-env-info)
          (cond
           ((eask-special-p)  ; Commands without Eask-file needed
-           (eask--setup-home (concat eask-homedir "../")  ; `/home/user/'
-             ;; make sure it's clean
-             ;;
-             ;; this will point to `/home/user/.eask'
-             (ignore-errors (delete-directory (concat user-emacs-directory "../") t))
+           (ignore-errors (delete-directory eask-homedir t))  ; clean up
+           (eask--setup-home (concat eask-homedir "../")  ; `/home/user/', escape `.eask'
              (ignore-errors (make-directory package-user-dir t))
              (eask--with-hooks ,@body)))
           ((eask-global-p)
