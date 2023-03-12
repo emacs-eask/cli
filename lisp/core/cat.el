@@ -1,19 +1,19 @@
-;;; core/cat.el --- Byte compile all Emacs Lisp files in the package  -*- lexical-binding: t; -*-
+;;; core/cat.el --- View filename(s)  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
-;; Byte compile all Emacs Lisp files in the package
+;; Command use to view filename(s)
 ;;
-;;   $ eask cat [names..]
+;;   $ eask cat <patterns>
 ;;
 ;;
 ;;  Positional arguments:
 ;;
-;;    [filenames..]     filename(s) to view
+;;    <patterns>     filename(s) to view
 ;;
 ;;  Optional arguments:
 ;;
-;;    [number]
+;;    [number]       view with line numbers
 ;;
 
 ;;; Code:
@@ -41,13 +41,15 @@
           (let* ((max-line (save-excursion (line-number-at-pos (point-max))))
                  (max-line (eask-2str max-line))
                  (offset (eask-2str (length max-line)))
-                 (line 1))
+                 (line-no 1))
             (while (not (eobp))
-              (message (concat "%" offset "s  %s")
-                       (if (eask-number-p) line "")
-                       (e2ansi-string-to-ansi (buffer-substring (line-beginning-position) (line-end-position))))
+              (let* ((line (buffer-substring (line-beginning-position) (line-end-position)))
+                     (line (e2ansi-string-to-ansi line)))
+                (if (eask-number-p)
+                    (message (concat "%" offset "s  %s") line-no line)
+                  (message "%s" line)))
               (forward-line 1)
-              (cl-incf line)))))
+              (cl-incf line-no)))))
     (eask-info "(No files match wildcard: %s)" patterns)))
 
 ;;; core/cat.el ends here

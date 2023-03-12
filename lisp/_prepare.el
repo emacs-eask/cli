@@ -84,7 +84,7 @@ will return `lint/checkdoc' with a dash between two subcommands."
 
 (defun eask-special-p ()
   "Return t if the command that can be run without Eask-file existence."
-  (member (eask-command) '("init/cask" "keywords" "generate/license")))
+  (member (eask-command) '("init/cask" "cat" "keywords" "generate/license")))
 
 (defun eask-checker-p ()
   "Return t if running Eask as the checker."
