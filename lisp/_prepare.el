@@ -67,7 +67,7 @@
   "What's the current command?
 
 If the command is with subcommand, it will return command with concatenate with
-dash separator. For example, the following:
+slash separator. For example, the following:
 
    $ eask lint checkdoc [FILES..]
 
@@ -75,10 +75,12 @@ will return `lint/checkdoc' with a dash between two subcommands."
   (let* ((script-dir (file-name-directory eask--script))
          (script-file (file-name-sans-extension (file-name-nondirectory eask--script)))
          (module-name (eask-s-replace eask-lisp-root "" script-dir))
-         (module-name (eask-s-replace "/" "" module-name)))
-    ;; Ignore if it's inside core module
-    (if (member module-name '("core" "checker")) script-file
-      (concat module-name "/" script-file))))
+         (module-names (split-string module-name "/" t)))
+    ;; Make certain commands the root command; e.g. `core', `checker', etc.
+    (if (member (nth 0 module-names) '("core" "checker")) script-file
+      (mapconcat #'identity (append module-names
+                                    (list script-file))
+                 "/"))))
 
 (defun eask-special-p ()
   "Return t if the command that can be run without Eask-file existence."
@@ -692,11 +694,13 @@ This uses function `locate-dominating-file' to look up directory tree."
 (defmacro eask--with-hooks (&rest body)
   "Execute BODY with before/after hooks."
   (declare (indent 0) (debug t))
-  `(progn
+  `(let* ((command (eask-command))
+          (before  (concat "eask-before-" command "-hook"))
+          (after   (concat "eask-after-" command "-hook")))
      (run-hooks 'eask-before-command-hook)
-     (run-hooks (intern (concat "eask-before-" (eask-command) "-hook")))
+     (run-hooks (intern before))
      ,@body
-     (run-hooks (intern (concat "eask-after-" (eask-command) "-hook")))
+     (run-hooks (intern after))
      (run-hooks 'eask-after-command-hook)))
 
 (defmacro eask--setup-home (dir &rest body)
