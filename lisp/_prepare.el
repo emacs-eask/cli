@@ -721,7 +721,7 @@ This uses function `locate-dominating-file' to look up directory tree."
           ((eask-special-p)  ; Commands without Eask-file needed
            (let ((homedir (concat eask-homedir "../")))
              (eask--setup-home homedir
-               (ignore-errors (delete-directory homedir t))  ; make sure it's clean
+               (ignore-errors (delete-directory user-emacs-directory t))  ; make sure it's clean
                (ignore-errors (make-directory package-user-dir t))
                (eask--with-hooks ,@body))))
           ((eask-global-p)
