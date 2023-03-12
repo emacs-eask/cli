@@ -36,8 +36,8 @@ eask info
 eask archives
 eask archives --all
 eask list --depth=0
-eask cat package.json
-eask cat package.json --number
+eask cat package.json --insecure
+eask cat package.json --number --insecure
 eask concat
 
 # PATH environment

@@ -4,16 +4,16 @@
 ;;
 ;; Command use to view filename(s)
 ;;
-;;   $ eask cat <patterns>
+;;   $ eask cat <patterns..>
 ;;
 ;;
 ;;  Positional arguments:
 ;;
-;;    <patterns>     filename(s) to view
+;;    <patterns..>     filename(s) to view
 ;;
 ;;  Optional arguments:
 ;;
-;;    [number]       view with line numbers
+;;    --number, -n       view with line numbers
 ;;
 
 ;;; Code:

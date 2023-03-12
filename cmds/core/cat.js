@@ -19,7 +19,7 @@
 
 "use strict";
 
-exports.command = ['cat <patterns>', 'type <patterns>'];
+exports.command = ['cat <patterns..>', 'type <patterns..>'];
 exports.desc = 'View filename(s)';
 exports.builder = {
   patterns: {
