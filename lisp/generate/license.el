@@ -37,8 +37,11 @@
                (eask--sinr names "" "s"))))
 
 (eask-start
+  ;; Preparation
   (eask-with-archives "melpa"
     (eask-package-install 'license-templates))
+
+  ;; Start the task
   (require 'license-templates)
   (let* ((name (car (eask-args)))  ; type of the license
          (basename (or (eask-output) "LICENSE"))

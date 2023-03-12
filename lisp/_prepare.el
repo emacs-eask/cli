@@ -454,6 +454,7 @@ the `eask-start' execution.")
 (defun eask-insecure-p ()      (eask--flag "--insecure"))       ; --insecure
 (defun eask-no-color-p ()      (eask--flag "--no-color"))       ; --no-color
 (defun eask-json-p ()          (eask--flag "--json"))           ; --json
+(defun eask-number-p ()        (eask--flag "--number"))         ; --number
 
 ;;; String (with arguments)
 (defun eask-output ()      (eask--flag-value "--output"))       ; --o, --output
@@ -519,7 +520,8 @@ other scripts internally.  See function `eask-call'.")
      "--log-file"
      "--elapsed-time"
      "--no-color"
-     "--json"))
+     "--json"
+     "--number"))
   "List of boolean type options.")
 
 (defconst eask--option-args
@@ -527,8 +529,7 @@ other scripts internally.  See function `eask-call'.")
    '("--output"
      "--proxy" "--http-proxy" "--https-proxy" "--no-proxy"
      "--verbose" "--silent"
-     "--depth" "--dest"
-     "--from"))
+     "--depth" "--dest" "--from"))
   "List of arguments (number/string) type options.")
 
 (defconst eask--command-list

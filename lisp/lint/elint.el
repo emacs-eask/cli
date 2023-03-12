@@ -59,7 +59,7 @@
      ;; Default, print help!
      (t
       (eask-msg "")
-      (eask-info "(No files have been checked (elint))")
+      (eask-info "(No files have been linted)")
       (eask-help "lint/elint")))))
 
 ;;; lint/elint.el ends here

@@ -52,7 +52,7 @@
                  (mapconcat #'identity patterns " ")))
      ;; Default, print help!
      (t
-      (eask-info "(No files have been checked (declare))")
+      (eask-info "(No files have been linted)")
       (eask-help "lint/declare")))))
 
 ;;; lint/declare.el ends here

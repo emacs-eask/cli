@@ -28,6 +28,7 @@ Usage: eask <command> [options..]
 
 Commands:
   archives                List out all package archives                                                                                                                                        [aliases: sources]
+  cat <patterns>          View filename(s)                                                                                                                                                        [aliases: type]
   clean <type>            Delete various files produced during building
   compile [names..]       Byte compile all Emacs Lisp files in the package
   concat [names..]        Concatenate elisp files                                                                                                                                          [aliases: concatenate]
@@ -68,6 +69,7 @@ Proxy Options:
       --http-proxy   update proxy for HTTP to host                                                                                                                                                       [string]
       --https-proxy  update proxy for HTTPS to host                                                                                                                                                      [string]
       --no-proxy     set no-proxy to host                                                                                                                                                                [string]
+
 Options:
       --version             show version number                                                                                                                                                         [boolean]
       --help                show usage instructions                                                                                                                                                     [boolean]
