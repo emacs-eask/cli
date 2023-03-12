@@ -439,22 +439,22 @@ the `eask-start' execution.")
   (nth 1 (eask--flag flag)))
 
 ;;; Boolean
-(defun eask-global-p ()        (eask--flag "-g"))               ; -g, --global
-(defun eask-all-p ()           (eask--flag "-a"))               ; -a, --all
-(defun eask-quick-p ()         (eask--flag "-q"))               ; -q, --quick
-(defun eask-force-p ()         (eask--flag "-f"))               ; -f, --force
-(defun eask-dev-p ()           (eask--flag "--dev"))            ; --dev, --development
-(defun eask-debug-p ()         (eask--flag "--debug"))          ; --debug
-(defun eask-strict-p ()        (eask--flag "--strict"))         ; --strict
-(defun eask-timestamps-p ()    (eask--flag "--timestamps"))     ; --timestamps
-(defun eask-log-level-p ()     (eask--flag "--log-level"))      ; --log-level
-(defun eask-log-file-p ()      (eask--flag "--log-file"))       ; --log-file, --lf
-(defun eask-elapsed-time-p ()  (eask--flag "--elapsed-time"))   ; --elapsed-time, --et
-(defun eask-allow-error-p ()   (eask--flag "--allow-error"))    ; --allow-error
-(defun eask-insecure-p ()      (eask--flag "--insecure"))       ; --insecure
-(defun eask-no-color-p ()      (eask--flag "--no-color"))       ; --no-color
-(defun eask-json-p ()          (eask--flag "--json"))           ; --json
-(defun eask-number-p ()        (eask--flag "--number"))         ; --number
+(defun eask-global-p ()       (eask--flag "-g"))               ; -g, --global
+(defun eask-all-p ()          (eask--flag "-a"))               ; -a, --all
+(defun eask-quick-p ()        (eask--flag "-q"))               ; -q, --quick
+(defun eask-force-p ()        (eask--flag "-f"))               ; -f, --force
+(defun eask-dev-p ()          (eask--flag "--dev"))            ; --dev, --development
+(defun eask-debug-p ()        (eask--flag "--debug"))          ; --debug
+(defun eask-strict-p ()       (eask--flag "--strict"))         ; --strict
+(defun eask-timestamps-p ()   (eask--flag "--timestamps"))     ; --timestamps
+(defun eask-log-level-p ()    (eask--flag "--log-level"))      ; --log-level
+(defun eask-log-file-p ()     (eask--flag "--log-file"))       ; --log-file, --lf
+(defun eask-elapsed-time-p () (eask--flag "--elapsed-time"))   ; --elapsed-time, --et
+(defun eask-allow-error-p ()  (eask--flag "--allow-error"))    ; --allow-error
+(defun eask-insecure-p ()     (eask--flag "--insecure"))       ; --insecure
+(defun eask-no-color-p ()     (eask--flag "--no-color"))       ; --no-color
+(defun eask-json-p ()         (eask--flag "--json"))           ; --json
+(defun eask-number-p ()       (eask--flag "--number"))         ; -n, --number
 
 ;;; String (with arguments)
 (defun eask-output ()      (eask--flag-value "--output"))       ; --o, --output
