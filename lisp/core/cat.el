@@ -51,6 +51,7 @@
                   (message "%s" line)))
               (forward-line 1)
               (cl-incf line-no)))))
-    (eask-info "(No files match wildcard: %s)" patterns)))
+    (eask-info "(No files match wildcard: %s)"
+               (mapconcat #'identity patterns " "))))
 
 ;;; core/cat.el ends here
