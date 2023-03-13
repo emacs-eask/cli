@@ -45,7 +45,7 @@
                  (line-no 1))
             (while (not (eobp))
               (let* ((line (buffer-substring (line-beginning-position) (line-end-position)))
-                     (line (e2ansi-string-to-ansi line)))
+                     (line (if ansi-inhibit-ansi line (e2ansi-string-to-ansi line))))
                 (if (eask-number-p)
                     (message (concat "%" offset "s  %s") line-no line)
                   (message "%s" line)))
