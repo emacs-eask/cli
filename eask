@@ -25,91 +25,98 @@ yargs
   .showHelpOnFail(true)
   .version('version', 'show version number', '0.8.0')
   .help('help', 'show usage instructions')
-  .option('global', {
-    description: `change default workspace to ~/.emacs.d/`,
-    alias: 'g',
-    type: 'boolean',
+  .options({
+    'global': {
+      description: `change default workspace to ~/.emacs.d/`,
+      alias: 'g',
+      type: 'boolean',
+    },
+    'all': {
+      description: `enable all flag`,
+      alias: 'a',
+      type: 'boolean',
+    },
+    'quick': {
+      description: `start cleanly without loading the configuration files`,
+      alias: 'q',
+      type: 'boolean',
+    },
+    'force': {
+      description: `enable force flag`,
+      alias: 'f',
+      type: 'boolean',
+    },
+    'development': {
+      description: `turn on development mode`,
+      alias: 'dev',
+      type: 'boolean',
+    },
+    'debug': {
+      description: `turn on debug mode`,
+      type: 'boolean',
+    },
+    'strict': {
+      description: `report error instead of warnings`,
+      type: 'boolean',
+    },
+    'allow-error': {
+      description: `continue the executioon even there is error reported`,
+      type: 'boolean',
+    },
+    'insecure': {
+      description: `allow insecure connection`,
+      type: 'boolean',
+    },
+    'timestamps': {
+      description: `log with timestamps`,
+      type: 'boolean',
+    },
+    'log-level': {
+      description: `log with level`,
+      type: 'boolean',
+    },
+    'log-file': {
+      description: `generate log files`,
+      alias: 'lf',
+      type: 'boolean',
+    },
+    'elapsed-time': {
+      description: `show elapsed time between each operation`,
+      alias: 'et',
+      type: 'boolean',
+    },
+    'no-color': {
+      description: `disable color output`,
+      type: 'boolean',
+    },
+    'verbose': {
+      description: `set verbosity from 0 to 4`,
+      alias: 'v',
+      requiresArg: true,
+      type: 'number',
+    },
   })
-  .option('all', {
-    description: `enable all flag`,
-    alias: 'a',
-    type: 'boolean',
-  })
-  .option('quick', {
-    description: `start cleanly without loading the configuration files`,
-    alias: 'q',
-    type: 'boolean',
-  })
-  .option('force', {
-    description: `enable force flag`,
-    alias: 'f',
-    type: 'boolean',
-  })
-  .option('development', {
-    description: `turn on development mode`,
-    alias: 'dev',
-    type: 'boolean',
-  })
-  .option('debug', {
-    description: `turn on debug mode`,
-    type: 'boolean',
-  })
-  .option('strict', {
-    description: `report error instead of warnings`,
-    type: 'boolean',
-  })
-  .option('allow-error', {
-    description: `continue the executioon even there is error reported`,
-    type: 'boolean',
-  })
-  .option('insecure', {
-    description: `allow insecure connection`,
-    type: 'boolean',
-  })
-  .option('timestamps', {
-    description: `log with timestamps`,
-    type: 'boolean',
-  })
-  .option('log-level', {
-    description: `log with level`,
-    type: 'boolean',
-  })
-  .option('log-file', {
-    description: `generate log files`,
-    alias: 'lf',
-    type: 'boolean',
-  })
-  .option('elapsed-time', {
-    description: `show elapsed time between each operation`,
-    alias: 'et',
-    type: 'boolean',
-  })
-  .option('no-color', {
-    description: `disable color output`,
-    type: 'boolean',
-  })
- .option('verbose', {
-    description: `set verbosity from 0 to 4`,
-    alias: 'v',
-    requiresArg: true,
-    type: 'number',
-  })
-  .group(['proxy', 'http-proxy', 'https-proxy', 'no-proxy'], 'Proxy Options:')
-  .option('proxy', {
-    description: `update proxy for HTTP and HTTPS to host`,
-    type: 'string',
-  })
-  .option('http-proxy', {
-    description: `update proxy for HTTP to host`,
-    type: 'string',
-  })
-  .option('https-proxy', {
-    description: `update proxy for HTTPS to host`,
-    type: 'string',
-  })
-  .option('no-proxy', {
-    description: `set no-proxy to host`,
-    type: 'string',
+  .options({
+    'proxy': {
+      description: `update proxy for HTTP and HTTPS to host`,
+      type: 'string',
+      group: TITLE_PROXY_OPTION,
+    },
+    'http-proxy': {
+      description: `update proxy for HTTP to host`,
+      type: 'string',
+      group: TITLE_PROXY_OPTION,
+    },
+    'https-proxy': {
+      description: `update proxy for HTTPS to host`,
+      type: 'string',
+      group: TITLE_PROXY_OPTION,
+    },
+    'no-proxy': {
+      description: `set no-proxy to host`,
+      type: 'string',
+      group: TITLE_PROXY_OPTION,
+    },
   })
   .demandCommand()
   .wrap(yargs.terminalWidth())
