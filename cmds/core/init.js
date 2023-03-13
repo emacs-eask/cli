@@ -25,20 +25,20 @@ const readline = require('readline');
 
 exports.command = ['init [files..]'];
 exports.desc = 'Initialize project to use Eask';
-exports.builder = {
-  from: {
-    description: 'build from an existing package',
-    requiresArg: true,
-    type: 'string',
-    group: TITLE_CMD_OPTION,
-  },
-  files: {
-    description: 'files to use with `from` flag',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[files..]', {
+      description: 'files to use with `--from` flag',
+      type: 'array',
+    })
+  .options({
+    'from': {
+      description: 'build from an existing package',
+      requiresArg: true,
+      type: 'string',
+      group: TITLE_CMD_OPTION,
+    },
+  });
 
 exports.handler = async (argv) => {
   if (argv.from) {

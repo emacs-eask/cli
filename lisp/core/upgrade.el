@@ -7,7 +7,7 @@
 ;;   $ eask upgrade [names..]
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    [names..]     package to upgrade; else we upgrade all packages
 ;;

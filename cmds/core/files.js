@@ -21,14 +21,12 @@
 
 exports.command = ['files [patterns..]'];
 exports.desc = 'Print all package files';
-exports.builder = {
-  patterns: {
-    description: 'patterns you want to search (wildcard)',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[patterns..]', {
+      description: 'patterns you want to search (wildcard)',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/files', argv.patterns);

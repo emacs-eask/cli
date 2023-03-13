@@ -21,14 +21,12 @@
 
 exports.command = ['path [patterns..]', 'exec-path [patterns..]'];
 exports.desc = 'Print the PATH (exec-path) from workspace';
-exports.builder = {
-  patterns: {
-    description: 'patterns you want to search (regex)',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[patterns..]', {
+      description: 'patterns you want to search (regex)',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/exec-path', argv.patterns);

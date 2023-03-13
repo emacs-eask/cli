@@ -21,14 +21,12 @@
 
 exports.command = ['travis-ci [file]'];
 exports.desc = 'Generate Travis CI workflow yaml file';
-exports.builder = {
-  file: {
-    description: 'name of the test file; the default is `.travis.yml`',
-    requiresArg: false,
-    type: 'string',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[file]', {
+      description: 'name of the test file; the default is `.travis.yml`',
+      type: 'string',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'generate/workflow/travis-ci', argv.file);

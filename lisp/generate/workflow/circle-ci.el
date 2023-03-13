@@ -7,7 +7,7 @@
 ;;   $ eask generate workflow circle-ci [file]
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    [file]     name of the test file; the default is `config.yml`
 ;;

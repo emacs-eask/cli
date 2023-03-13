@@ -7,7 +7,7 @@
 ;;   $ eask uninstall [names..]
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    [names..]     name of the package to uninstall; else we uninstall pacakge
 ;;                  from current workspace

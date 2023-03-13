@@ -21,14 +21,12 @@
 
 exports.command = ['declare [files..]'];
 exports.desc = 'Run check-declare';
-exports.builder = {
-  files: {
-    description: 'files you want check-declare to run on',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[files..]', {
+      description: 'files you want check-declare to run on',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'lint/declare', argv.files);

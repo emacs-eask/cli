@@ -7,7 +7,7 @@
 ;;   $ eask generate workflow github [file]
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    [file]     name of the test file; the default is `test.yml`
 ;;

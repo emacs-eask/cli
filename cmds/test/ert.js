@@ -21,14 +21,12 @@
 
 exports.command = ['ert [files..]'];
 exports.desc = 'Run ert tests';
-exports.builder = {
-  files: {
-    description: 'specify files to do ert tests',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[files..]', {
+      description: 'specify files to do ert tests',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'test/ert', argv.files);

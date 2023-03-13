@@ -21,14 +21,12 @@
 
 exports.command = ['regexps [files..]', 'relint [files..]'];
 exports.desc = 'Run relint';
-exports.builder = {
-  files: {
-    description: 'files you want relint to run on',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[files..]', {
+      description: 'files you want relint to run on',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'lint/regexps', argv.files);

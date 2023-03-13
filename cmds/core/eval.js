@@ -24,14 +24,12 @@ const child_process = require("child_process");
 
 exports.command = ['eval [form]'];
 exports.desc = 'Evaluate lisp form with a proper PATH';
-exports.builder = {
-  form: {
-    description: 'lisp form',
-    requiresArg: false,
-    type: 'string',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[form]', {
+      description: 'lisp form',
+      type: 'string',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/eval', argv.form);
@@ -44,6 +42,10 @@ exports.handler = async (argv) => {
 
   let epf = EASK_HOMEDIR + 'exec-path';
   let lpf = EASK_HOMEDIR + 'load-path';
+
+  if (!fs.existsSync(epf) || !fs.existsSync(lpf)) {
+    return;
+  }
 
   process.env.PATH = fs.readFileSync(epf, 'utf8');
   process.env.EMACSLOADPATH = fs.readFileSync(lpf, 'utf8');;
@@ -59,6 +61,6 @@ exports.handler = async (argv) => {
 
   proc.on('close', function (code) {
     if (code == 0) return;
-    throw 'Exit with code: ' + code;
+    process.exit(code);
   });
 };

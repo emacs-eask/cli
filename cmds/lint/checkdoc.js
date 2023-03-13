@@ -21,15 +21,14 @@
 
 exports.command = ['checkdoc [files..]'];
 exports.desc = 'Run checkdoc';
-exports.builder = {
-  files: {
-    description: 'files you want checkdoc to run on',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[files..]', {
+      description: 'files you want checkdoc to run on',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
+  console.log(argv.files);
   await UTIL.e_call(argv, 'lint/checkdoc', argv.files);
 };

@@ -7,7 +7,7 @@
 ;;   $ eask exec [args..]
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    [args..]     execute command with correct PATH set up
 ;;
@@ -19,30 +19,29 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
+(defconst eask--exec-path-file (expand-file-name "exec-path" eask-homedir)
+  "Target file to export the `exec-path' variable.")
+
+(defconst eask--load-path-file (expand-file-name "load-path" eask-homedir)
+  "Target file to export the `load-path' variable.")
+
 (defun eask--export-env ()
   "Export environments."
-  (let ((epf (expand-file-name "exec-path" eask-homedir))
-        (lpf (expand-file-name "load-path" eask-homedir)))
-    (ignore-errors (make-directory eask-homedir t))  ; generate dir ~/.eask/
-    (write-region (getenv "PATH") nil epf)
-    (write-region (getenv "EMACSLOADPATH") nil lpf)))
+  (ignore-errors (delete-file eask--exec-path-file))
+  (ignore-errors (delete-file eask--load-path-file))
+  (ignore-errors (make-directory eask-homedir t))  ; generate dir `~/.eask/'
+  (write-region (getenv "PATH") nil eask--exec-path-file)
+  (write-region (getenv "EMACSLOADPATH") nil eask--load-path-file))
 
 (eask-start
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   ;; XXX This is the hack by adding all `bin' folders from local elpa.
   (eask-setup-paths)
-  (ignore-errors (delete-directory eask-homedir t))  ; clean up
-  (if-let ((name (eask-argv 1)))
-      (or
-       ;; 1) For Elisp executable (github-elpa)
-       (let ((program (executable-find name)))
-         (setq commander-args (cddr argv))  ; by pass `--' as well
-         (ignore-errors (load program nil t)))
-       ;; 2) Export environments, and return back to node for subcommand execution
-       (eask-with-progress
-         (ansi-green "Exporting environment variables... ")
-         (eask--export-env)
-         (ansi-green "done ✓")))
+  (if (eask-argv 1)
+      (eask-with-progress
+        (ansi-green "Exporting environment variables... ")
+        (eask--export-env)
+        (ansi-green "done ✓"))
     (eask-info "✗ (No exeuction output)")
     (eask-help "core/exec")))
 

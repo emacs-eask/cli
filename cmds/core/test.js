@@ -21,13 +21,15 @@
 
 exports.command = ['test <type>'];
 exports.desc = 'Run test';
-exports.builder = function (yargs) {
-  return yargs
-    .usage(`${exports.desc}
+exports.builder = yargs => yargs
+  .usage(`${exports.desc}
 
-Usage: eask test <command> [options..]`)
-    .commandDir('../test/')
-    .demandCommand();
-};
+Usage: eask test <type> [options..]`)
+  .commandDir('../test/')
+  .demandCommand()
+  .positional(
+    '<type>', {
+      description: 'type of the test framework',
+    });
 
 exports.handler = async (argv) => { };

@@ -1,4 +1,4 @@
 
 💡 You would need to specify the program name in order to make execution!
    
-    $ eask exec [program] [options..]
+    $ eask exec <program> [options..]

@@ -21,13 +21,15 @@
 
 exports.command = ['generate <type>'];
 exports.desc = 'Generate files that are used for the development';
-exports.builder = function (yargs) {
-  return yargs
-    .usage(`${exports.desc}
+exports.builder = yargs => yargs
+  .usage(`${exports.desc}
 
-Usage: eask generate <command> [options..]`)
-    .commandDir('../generate/')
-    .demandCommand();
-};
+Usage: eask generate <type> [options..]`)
+  .commandDir('../generate/')
+  .demandCommand()
+  .positional(
+    '<type>', {
+      description: 'type of the file',
+    });
 
 exports.handler = async (argv) => { };

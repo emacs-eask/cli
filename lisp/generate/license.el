@@ -7,7 +7,7 @@
 ;;   $ eask generate license <name>
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    <name>       Name of the license
 ;;

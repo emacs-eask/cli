@@ -21,14 +21,12 @@
 
 exports.command = ['load [files..]'];
 exports.desc = 'Load elisp files';
-exports.builder = {
-  files: {
-    description: 'files to load',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[files..]', {
+      description: 'files to load',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/load', argv.files);

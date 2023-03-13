@@ -24,14 +24,12 @@ const child_process = require("child_process");
 
 exports.command = ['run [names..]', 'run-script [names..]'];
 exports.desc = 'Run the script named [names..]';
-exports.builder = {
-  names: {
-    description: 'specify scripts to run',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[names..]', {
+      description: 'specify scripts to run',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/run', argv.names);
@@ -41,6 +39,10 @@ exports.handler = async (argv) => {
   }
 
   let run = EASK_HOMEDIR + 'run';
+
+  if (!fs.existsSync(run)) {
+    return;
+  }
 
   // this contain the full command!
   let instruction = fs.readFileSync(run, 'utf8');
@@ -70,6 +72,6 @@ function startCommand(commands, count) {
       startCommand(commands, ++count);  // start next command!
       return;
     }
-    throw 'Exit with code: ' + code;
+    process.exit(code);
   });
 }

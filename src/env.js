@@ -31,3 +31,4 @@ global.EASK_HOMEDIR = os.homedir().replace(/\\/g, '/') + '/.eask/';
 
 /* Global Variables */
 global.TITLE_CMD_OPTION = 'Command Options:';
+global.TITLE_PROXY_OPTION = 'Proxy Options:';

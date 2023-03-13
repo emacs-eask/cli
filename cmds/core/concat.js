@@ -21,27 +21,27 @@
 
 exports.command = ['concat [names..]', 'concatenate [names..]'];
 exports.desc = 'Concatenate elisp files';
-exports.builder = {
-  names: {
-    description: 'specify files to concatenate',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-  destination: {
-    description: 'optional output destination',
-    requiresArg: true,
-    alias: 'dest',
-    type: 'string',
-    group: TITLE_CMD_OPTION,
-  },
-  output: {
-    description: 'Output result to a file',
-    alias: 'o',
-    type: 'string',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[names..]', {
+      description: 'specify files to concatenate',
+      type: 'array',
+    })
+  .options({
+    'destination': {
+      description: 'optional output destination',
+      requiresArg: true,
+      alias: 'dest',
+      type: 'string',
+      group: TITLE_CMD_OPTION,
+    },
+    'output': {
+      description: 'Output result to a file',
+      alias: 'o',
+      type: 'string',
+      group: TITLE_CMD_OPTION,
+    },
+  });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/concat'

@@ -21,14 +21,12 @@
 
 exports.command = ['github [file]', 'github-actions [file]', 'gha [file]'];
 exports.desc = 'Generate GitHub Actions workflow yaml file';
-exports.builder = {
-  file: {
-    description: 'name of the test file; the default is `test.yml`',
-    requiresArg: false,
-    type: 'string',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[file]', {
+      description: 'name of the test file; the default is `test.yml`',
+      type: 'string',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'generate/workflow/github', argv.file);

@@ -4,13 +4,13 @@
 ;;
 ;; Commmand use to link a local package
 ;;
-;;   $ eask link add [name] [path]
+;;   $ eask link add <name> <path>
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
-;;    [name]     name of the link
-;;    [path]     location (target package) where you want to link
+;;    <name>     name of the link
+;;    <path>     location (target package) where you want to link
 ;;
 
 ;;; Code:

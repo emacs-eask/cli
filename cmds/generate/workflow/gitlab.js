@@ -21,14 +21,12 @@
 
 exports.command = ['gitlab [file]', 'gitlab-runner [file]'];
 exports.desc = 'Generate GitLab Runner workflow yaml file';
-exports.builder = {
-  file: {
-    description: 'name of the test file; the default is `.gitlab-ci.yml`',
-    requiresArg: false,
-    type: 'string',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[file]', {
+      description: 'name of the test file; the default is `.gitlab-ci.yml`',
+      type: 'string',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'generate/workflow/gitlab', argv.file);

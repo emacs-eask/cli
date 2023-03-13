@@ -7,7 +7,7 @@
 ;;   $ eask cat <patterns..>
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    <patterns..>     filename(s) to view
 ;;
@@ -27,6 +27,7 @@
   ;; Preparation
   (eask-with-archives "melpa"
     (eask-package-install 'e2ansi))
+  (package-activate-all)
   (eask-msg "")
 
   ;; Start the task
@@ -44,12 +45,13 @@
                  (line-no 1))
             (while (not (eobp))
               (let* ((line (buffer-substring (line-beginning-position) (line-end-position)))
-                     (line (e2ansi-string-to-ansi line)))
+                     (line (if ansi-inhibit-ansi line (e2ansi-string-to-ansi line))))
                 (if (eask-number-p)
                     (message (concat "%" offset "s  %s") line-no line)
                   (message "%s" line)))
               (forward-line 1)
               (cl-incf line-no)))))
-    (eask-info "(No files match wildcard: %s)" patterns)))
+    (eask-info "(No files match wildcard: %s)"
+               (mapconcat #'identity patterns " "))))
 
 ;;; core/cat.el ends here

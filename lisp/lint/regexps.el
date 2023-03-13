@@ -7,7 +7,7 @@
 ;;   $ eask lint regexps [files..]
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    [files..]     files you want relint to run on
 ;;
@@ -76,7 +76,7 @@
      ;; Pattern defined, but no file found!
      (patterns
       (eask-msg "")
-      (eask-info "No files found with wildcard pattern: %s"
+      (eask-info "(No files match wildcard: %s)"
                  (mapconcat #'identity patterns " ")))
      ;; Default, print help!
      (t

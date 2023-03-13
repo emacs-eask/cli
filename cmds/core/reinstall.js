@@ -21,14 +21,12 @@
 
 exports.command = ['reinstall [names..]'];
 exports.desc = 'Reinstall packages';
-exports.builder = {
-  names: {
-    description: 'packages to reinstall',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[names..]', {
+      description: 'packages to reinstall',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/reinstall', argv.names);

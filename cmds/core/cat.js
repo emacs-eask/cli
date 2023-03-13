@@ -21,21 +21,21 @@
 
 exports.command = ['cat <patterns..>', 'type <patterns..>'];
 exports.desc = 'View filename(s)';
-exports.builder = {
-  patterns: {
-    description: 'patterns you want to search (wildcard)',
-    requiresArg: true,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-  number: {
-    description: 'show with line numbers',
-    requiresArg: false,
-    alias: 'n',
-    type: 'boolean',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '<patterns..>', {
+      description: 'patterns you want to search (wildcard)',
+      type: 'array',
+    })
+  .options({
+    'number': {
+      description: 'show with line numbers',
+      requiresArg: false,
+      alias: 'n',
+      type: 'boolean',
+      group: TITLE_CMD_OPTION,
+    },
+  });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/cat'

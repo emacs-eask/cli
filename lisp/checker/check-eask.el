@@ -7,11 +7,11 @@
 ;;   $ eask check-eask [FILES..]
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    [files..]     specify Eask-files for checker to lint
 ;;
-;; Optional arguments:
+;;  Optional arguments:
 ;;
 ;;    --json        Output lint result in JSON format
 ;;
@@ -142,7 +142,7 @@
     (eask--check-file files))
    ;; Pattern defined, but no file found!
    (patterns
-    (eask-info "No files found with wildcard pattern: %s"
+    (eask-info "(No files match wildcard: %s)"
                (mapconcat #'identity patterns " ")))
    ;; Default, print help!
    (t

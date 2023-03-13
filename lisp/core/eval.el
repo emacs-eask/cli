@@ -19,7 +19,6 @@
 (eask-start
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (eask-setup-paths)
-  (ignore-errors (delete-directory eask-homedir t))  ; clean up
 
   (if-let ((name (eask-argv 0)))
       (eask-with-progress
