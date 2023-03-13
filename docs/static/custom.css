@@ -1,0 +1,14 @@
+.container {
+  padding: 0.6rem;
+}
+
+.gdoc-brand {
+  font-size: 2rem;
+  font-family: cursive;
+}
+
+.gdoc-brand__img {
+  margin-right: 0.8rem;
+  width: 3.5rem;
+  height: 3.5rem;
+}
