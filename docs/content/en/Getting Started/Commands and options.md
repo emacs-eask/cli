@@ -239,9 +239,17 @@ List available keywords that can be used in the header section.
 $ eask [GLOBAL-OPTIONS] keywords
 ```
 
+## 🔍 eask cat
+
+View filename(s).
+
+```sh
+$ eask [GLOBAL-OPTIONS] cat [PATTERNS..]
+```
+
 ## 🔍 eask concate
 
-Concatenate all Emacs Lisp files into one big file.
+Concatenate all Emacs Lisp files into one file.
 
 ```sh
 $ eask [GLOBAL-OPTIONS] concate [FILES..]

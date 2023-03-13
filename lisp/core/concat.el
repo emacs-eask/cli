@@ -2,7 +2,7 @@
 
 ;;; Commentary:
 ;;
-;; Byte compile all Emacs Lisp files in the package
+;; Byte concatenate all Emacs Lisp files into one file
 ;;
 ;;   $ eask concat [names..]
 ;;

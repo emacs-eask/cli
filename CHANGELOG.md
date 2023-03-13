@@ -12,6 +12,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add new DSLs `author` and `license` (#156)
 * Add license linter (#157)
 * Allow few commands' execution without any Eask-file (#159)
+* Add command `cat` (#160)
 
 ## 0.8.x
 > Released Mar 08, 2023
