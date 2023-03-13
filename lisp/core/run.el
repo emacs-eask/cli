@@ -19,6 +19,9 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
+(defconst eask--run-file (expand-file-name "run" eask-homedir)
+  "Target file to export the `run' scripts.")
+
 (defun eask--print-scripts ()
   "Print all available scripts."
   (eask-msg "available via `eask run-script`")
@@ -34,10 +37,8 @@
 
 (defun eask--export-command (command)
   "Export COMMAND instruction."
-  (let ((run (expand-file-name "run" eask-homedir)))
-    (ignore-errors (delete-file run))
-    (ignore-errors (make-directory eask-homedir t))  ; generate dir `~/.eask/'
-    (write-region (concat command "\n") nil run t)))
+  (ignore-errors (make-directory eask-homedir t))  ; generate dir `~/.eask/'
+  (write-region (concat command "\n") nil eask--run-file t))
 
 (defun eask--unmatched-scripts (scripts)
   "Return a list of scripts that cannot be found in `eask-scripts'."
@@ -48,6 +49,10 @@
     unmatched))
 
 (eask-start
+  ;; Preparation
+  (ignore-errors (delete-file eask--run-file))
+
+  ;; Start the task
   (cond
    ((null eask-scripts)
     (eask-info "✗ (No scripts specified)")
