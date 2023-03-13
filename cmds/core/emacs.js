@@ -44,6 +44,6 @@ exports.handler = async (argv) => {
 
   proc.on('close', function (code) {
     if (code == 0) return;
-    throw 'Exit with code: ' + code;
+    process.exit(code);
   });
 };

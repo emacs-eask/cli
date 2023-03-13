@@ -74,6 +74,6 @@ function startCommand(commands, count) {
       startCommand(commands, ++count);  // start next command!
       return;
     }
-    throw 'Exit with code: ' + code;
+    process.exit(code);
   });
 }
