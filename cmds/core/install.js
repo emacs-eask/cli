@@ -21,14 +21,12 @@
 
 exports.command = ['install [names..]'];
 exports.desc = 'Install packages';
-exports.builder = {
-  names: {
-    description: 'packages to install',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[names..]', {
+      description: 'packages to install',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/install', argv.names);

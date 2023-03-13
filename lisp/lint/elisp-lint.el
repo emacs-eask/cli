@@ -7,7 +7,7 @@
 ;;   $ eask lint elisp-lint [files..]
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    [files..]     files you want elisp-lint to run on
 ;;

@@ -21,20 +21,20 @@
 
 exports.command = ['search [queries..]'];
 exports.desc = 'Search packages';
-exports.builder = {
-  query: {
-    description: 'queries to search packages',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-  depth: {
-    description: 'dependency depth level to print',
-    requiresArg: true,
-    type: 'number',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[queries..]', {
+      description: 'queries to search packages',
+      type: 'array',
+    })
+  .options({
+    'depth': {
+      description: 'dependency depth level to print',
+      requiresArg: true,
+      type: 'number',
+      group: TITLE_CMD_OPTION,
+    },
+  });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/search', argv.queries

@@ -25,14 +25,12 @@ const init = require('../core/init');
 
 exports.command = ['elpa <name>'];
 exports.desc = 'Create a new ELPA using github-elpa';
-exports.builder = {
-  name: {
-    description: 'new ELPA name',
-    requiresArg: false,
-    type: 'string',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '<name>', {
+      description: 'new ELPA name',
+      type: 'string',
+    });
 
 const TEMPLATE_URL = 'https://github.com/emacs-eask/template-elpa';
 

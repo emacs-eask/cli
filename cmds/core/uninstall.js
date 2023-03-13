@@ -21,14 +21,12 @@
 
 exports.command = ['uninstall [names..]', 'delete [names..]'];
 exports.desc = 'Uninstall packages';
-exports.builder = {
-  names: {
-    description: 'packages to uninstall',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[names..]', {
+      description: 'packages to uninstall',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/uninstall', argv.names);

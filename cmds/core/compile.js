@@ -21,14 +21,12 @@
 
 exports.command = ['compile [names..]'];
 exports.desc = 'Byte compile all Emacs Lisp files in the package';
-exports.builder = {
-  names: {
-    description: 'specify files to byte-compile',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[names..]', {
+      description: 'specify files to byte-compile',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/compile', argv.names);

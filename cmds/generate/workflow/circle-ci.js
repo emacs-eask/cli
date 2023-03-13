@@ -21,14 +21,12 @@
 
 exports.command = ['circle-ci [file]'];
 exports.desc = 'Generate CircleCI workflow yaml file';
-exports.builder = {
-  file: {
-    description: 'name of the test file; the default is `config.yml`',
-    requiresArg: false,
-    type: 'string',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[file]', {
+      description: 'name of the test file; the default is `config.yml`',
+      type: 'string',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'generate/workflow/circle-ci', argv.file);

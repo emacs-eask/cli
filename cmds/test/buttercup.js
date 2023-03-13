@@ -21,14 +21,12 @@
 
 exports.command = ['buttercup [files..]'];
 exports.desc = 'Run buttercup tests';
-exports.builder = {
-  files: {
-    description: 'files you want buttercup to run on',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[files..]', {
+      description: 'files you want buttercup to run on',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'test/buttercup', argv.files);

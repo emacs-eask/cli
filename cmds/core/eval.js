@@ -24,14 +24,12 @@ const child_process = require("child_process");
 
 exports.command = ['eval [form]'];
 exports.desc = 'Evaluate lisp form with a proper PATH';
-exports.builder = {
-  form: {
-    description: 'lisp form',
-    requiresArg: false,
-    type: 'string',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[form]', {
+      description: 'lisp form',
+      type: 'string',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/eval', argv.form);

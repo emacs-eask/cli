@@ -7,7 +7,7 @@
 ;;   $ eask lint package [files..]
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    [files..]     specify files to do package lint
 ;;

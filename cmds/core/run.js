@@ -24,14 +24,12 @@ const child_process = require("child_process");
 
 exports.command = ['run [names..]', 'run-script [names..]'];
 exports.desc = 'Run the script named [names..]';
-exports.builder = {
-  names: {
-    description: 'specify scripts to run',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[names..]', {
+      description: 'specify scripts to run',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/run', argv.names);

@@ -7,7 +7,7 @@
 ;;   $ eask lint elint [files..]
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    [files..]     files you want elint to run on
 ;;

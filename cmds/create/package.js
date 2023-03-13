@@ -25,14 +25,12 @@ const init = require('../core/init');
 
 exports.command = ['package <name>', 'pkg <name>'];
 exports.desc = 'Create a new package';
-exports.builder = {
-  name: {
-    description: 'new project name',
-    requiresArg: false,
-    type: 'string',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '<name>', {
+      description: 'new project name',
+      type: 'string',
+    });
 
 const TEMPLATE_URL = 'https://github.com/emacs-eask/template-elisp';
 

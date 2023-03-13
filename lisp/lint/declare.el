@@ -7,7 +7,7 @@
 ;;   $ eask lint declare [files..]
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    [files..]     files you want check-declare to run on
 ;;

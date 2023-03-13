@@ -21,15 +21,12 @@
 
 exports.command = ['package [destination]'];
 exports.desc = 'Build a package artifact, and put it into the given destination';
-exports.builder = {
-  destination: {
-    description: 'destination path/folder',
-    requiresArg: false,
-    alias: 'dest',
-    type: 'string',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[destination]', {
+      description: 'destination path/folder',
+      type: 'string',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/package', argv.dest);

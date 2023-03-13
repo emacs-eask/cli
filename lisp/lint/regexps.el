@@ -7,7 +7,7 @@
 ;;   $ eask lint regexps [files..]
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    [files..]     files you want relint to run on
 ;;

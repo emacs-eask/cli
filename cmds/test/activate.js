@@ -21,14 +21,12 @@
 
 exports.command = ['activate [files..]'];
 exports.desc = 'Activate package; use to test package activation';
-exports.builder = {
-  files: {
-    description: 'files to load after package activation',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[files..]', {
+      description: 'files to load after package activation',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'test/activate', argv.files);

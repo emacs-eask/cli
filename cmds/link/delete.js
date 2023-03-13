@@ -21,14 +21,12 @@
 
 exports.command = ['delete [names..]'];
 exports.desc = 'Delete local linked packages';
-exports.builder = {
-  names: {
-    description: 'name of the link, accept array',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[names..]', {
+      description: 'name of the link, accept array',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'link/delete', argv.names);

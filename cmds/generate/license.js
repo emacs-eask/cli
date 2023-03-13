@@ -21,20 +21,20 @@
 
 exports.command = ['license <name>'];
 exports.desc = 'Generate LICENSE file';
-exports.builder = {
-  name: {
-    description: 'Name of the license',
-    requiresArg: true,
-    type: 'string',
-    group: TITLE_CMD_OPTION,
-  },
-  output: {
-    description: 'Output result to a file; the default is `LICENSE`',
-    alias: 'o',
-    type: 'string',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '<name>', {
+      description: 'name of the license',
+      type: 'string',
+    })
+  .options({
+    'output': {
+      description: 'output result to a file; the default is `LICENSE`',
+      alias: 'o',
+      type: 'string',
+      group: TITLE_CMD_OPTION,
+    },
+  });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'generate/license'

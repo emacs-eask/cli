@@ -21,14 +21,12 @@
 
 exports.command = ['package [files..]'];
 exports.desc = 'Run package-lint';
-exports.builder = {
-  files: {
-    description: 'specify files to do package lint',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[files..]', {
+      description: 'specify files to do package lint',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'lint/package', argv.files);

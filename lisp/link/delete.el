@@ -7,7 +7,7 @@
 ;;   $ eask link delete [names..]
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    [names..]     name of the link, accept array
 ;;

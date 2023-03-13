@@ -51,7 +51,7 @@
         (ert-run-tests-batch-and-exit)))
      ;; Pattern defined, but no file found!
      (patterns
-      (eask-info "No files found with wildcard pattern: %s"
+      (eask-info "(No files match wildcard: %s)"
                  (mapconcat #'identity patterns " ")))
      ;; Default, print help!
      (t

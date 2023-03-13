@@ -21,25 +21,25 @@
 
 exports.command = ['check-eask [files..]'];
 exports.desc = 'Run eask checker';
-exports.builder = {
-  files: {
-    description: 'specify Eask-files for checker to lint',
-    requiresArg: false,
-    type: 'array',
-    group: TITLE_CMD_OPTION,
-  },
-  output: {
-    description: 'Output result to a file',
-    alias: 'o',
-    type: 'string',
-    group: TITLE_CMD_OPTION,
-  },
-  json: {
-    description: 'Output lint result in JSON format',
-    type: 'boolean',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[files..]', {
+      description: 'specify Eask-files for checker to lint',
+      type: 'array',
+    })
+  .options({
+    'output': {
+      description: 'Output result to a file',
+      alias: 'o',
+      type: 'string',
+      group: TITLE_CMD_OPTION,
+    },
+    'json': {
+      description: 'Output lint result in JSON format',
+      type: 'boolean',
+      group: TITLE_CMD_OPTION,
+    },
+  });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'checker/check-eask'

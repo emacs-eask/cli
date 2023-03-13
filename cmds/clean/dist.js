@@ -21,15 +21,12 @@
 
 exports.command = ['dist [destination]', 'distribution [destination]'];
 exports.desc = 'Delete dist subdirectory';
-exports.builder = {
-  destination: {
-    description: 'destination path/folder',
-    requiresArg: false,
-    alias: 'dest',
-    type: 'string',
-    group: TITLE_CMD_OPTION,
-  },
-};
+exports.builder = yargs => yargs
+  .positional(
+    '[destination]', {
+      description: 'destination path/folder to clean up',
+      type: 'string',
+    });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'clean/dist', argv.dest);
