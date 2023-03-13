@@ -724,7 +724,6 @@ This uses function `locate-dominating-file' to look up directory tree."
          (eask--print-env-info)
          (cond
           ((eask-special-p)  ; Commands without Eask-file needed
-           (ignore-errors (delete-directory eask-homedir t))  ; clean up
            (eask--setup-home (concat eask-homedir "../")  ; `/home/user/', escape `.eask'
              (ignore-errors (make-directory package-user-dir t))
              (eask--with-hooks ,@body)))

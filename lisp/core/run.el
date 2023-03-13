@@ -35,7 +35,8 @@
 (defun eask--export-command (command)
   "Export COMMAND instruction."
   (let ((run (expand-file-name "run" eask-homedir)))
-    (ignore-errors (make-directory eask-homedir t))  ; generate dir ~/.eask/
+    (ignore-errors (delete-file run))
+    (ignore-errors (make-directory eask-homedir t))  ; generate dir `~/.eask/'
     (write-region (concat command "\n") nil run t)))
 
 (defun eask--unmatched-scripts (scripts)
@@ -47,7 +48,6 @@
     unmatched))
 
 (eask-start
-  (ignore-errors (delete-directory eask-homedir t))  ; clean up
   (cond
    ((null eask-scripts)
     (eask-info "✗ (No scripts specified)")
