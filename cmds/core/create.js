@@ -21,13 +21,15 @@
 
 exports.command = ['create <type>'];
 exports.desc = 'Create a new elisp project';
-exports.builder = function (yargs) {
-  return yargs
-    .usage(`${exports.desc}
+exports.builder = yargs => yargs
+  .usage(`${exports.desc}
 
-Usage: eask create <command> [options..]`)
-    .commandDir('../create/')
-    .demandCommand();
-};
+Usage: eask create <type> [options..]`)
+  .commandDir('../create/')
+  .demandCommand()
+  .positional(
+    '<type>', {
+      description: 'type of the creation',
+    });
 
 exports.handler = async (argv) => { };

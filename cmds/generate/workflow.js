@@ -19,15 +19,17 @@
 
 "use strict";
 
-exports.command = ['workflow'];
+exports.command = ['workflow <type>'];
 exports.desc = 'Generate yaml files for CI/CD';
-exports.builder = function (yargs) {
-  return yargs
-    .usage(`${exports.desc}
+exports.builder = yargs => yargs
+  .usage(`${exports.desc}
 
-Usage: eask generate workflow <command> [options..]`)
-    .commandDir('./workflow/')
-    .demandCommand();
-};
+Usage: eask generate workflow <type> [options..]`)
+  .commandDir('./workflow/')
+  .demandCommand()
+  .positional(
+    '<type>', {
+      description: 'type of the workflow',
+    });
 
 exports.handler = async (argv) => { };
