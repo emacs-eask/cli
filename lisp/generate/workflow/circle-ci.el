@@ -77,6 +77,7 @@
                 (insert spaces "- test-ubuntu-emacs-master"))))
           (save-buffer))
         "done ✓")
+      (eask-msg "")
       (eask-info "✓ Successfully created the yaml file in `%s`" filename))))
 
 ;;; generate/workflow/circle-ci.el ends here

@@ -49,6 +49,7 @@
                 (insert spaces "- EMACS_CI=emacs-snapshot"))))
           (save-buffer))
         "done ✓")
+      (eask-msg "")
       (eask-info "✓ Successfully created the yaml file in `%s`" filename))))
 
 ;;; generate/workflow/travis-ci.el ends here

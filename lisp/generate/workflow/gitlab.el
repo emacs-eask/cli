@@ -59,6 +59,7 @@
           (delete-trailing-whitespace)
           (save-buffer))
         "done ✓")
+      (eask-msg "")
       (eask-info "✓ Successfully created the yaml file in `%s`" filename))))
 
 ;;; generate/workflow/gitlab.el ends here
