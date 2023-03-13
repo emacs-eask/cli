@@ -42,6 +42,10 @@ exports.handler = async (argv) => {
 
   let run = EASK_HOMEDIR + 'run';
 
+  if (!fs.existsSync(run)) {
+    return;
+  }
+
   // this contain the full command!
   let instruction = fs.readFileSync(run, 'utf8');
   let commands = instruction.split('\n').filter(element => element);

@@ -27,6 +27,7 @@
   ;; Preparation
   (eask-with-archives "melpa"
     (eask-package-install 'e2ansi))
+  (package-activate-all)
   (eask-msg "")
 
   ;; Start the task
