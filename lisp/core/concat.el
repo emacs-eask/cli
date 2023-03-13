@@ -7,7 +7,7 @@
 ;;   $ eask concat [names..]
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    [names..]         specify files to concatenate
 ;;

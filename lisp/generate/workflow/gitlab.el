@@ -7,7 +7,7 @@
 ;;   $ eask generate workflow gitlab  [file]
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    [file]     name of the test file; the default is `.gitlab-ci.yml`
 ;;

@@ -7,7 +7,7 @@
 ;;   $ eask cat <patterns..>
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    <patterns..>     filename(s) to view
 ;;

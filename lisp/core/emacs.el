@@ -7,7 +7,7 @@
 ;;   $ eask emacs [args..]
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    [args..]     arguments feed into Emacs executable
 ;;

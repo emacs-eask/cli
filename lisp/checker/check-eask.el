@@ -7,11 +7,11 @@
 ;;   $ eask check-eask [FILES..]
 ;;
 ;;
-;;  Positional arguments:
+;;  Positionals:
 ;;
 ;;    [files..]     specify Eask-files for checker to lint
 ;;
-;; Optional arguments:
+;;  Optional arguments:
 ;;
 ;;    --json        Output lint result in JSON format
 ;;
