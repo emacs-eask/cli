@@ -2,9 +2,15 @@
   padding: 0.6rem;
 }
 
+.gdoc-header {
+  background: #44879A;
+  border-bottom: 0rem solid #8B8B8B;
+  box-shadow: 0 0 1rem #8B8B8B;
+}
+
 .gdoc-brand {
   font-size: 2rem;
-  font-family: cursive;
+  font-family: serif;
 }
 
 .gdoc-brand__img {
