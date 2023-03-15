@@ -570,6 +570,11 @@ other scripts internally.  See function `eask-call'.")
   (member arg eask--command-list))
 
 (defun eask-argv (index) "Return argument value by INDEX." (elt eask-argv index))
+(defun eask-argv-out ()
+  ""
+  (mapcar (lambda (arg)
+            (eask-s-replace "--eask" "" arg))
+          eask-argv))
 
 (defun eask-args ()
   "Get all arguments except options."

@@ -32,7 +32,9 @@
   "Print `*Compile-Log*' buffer."
   (when (get-buffer eask-compile-log-buffer-name)
     (with-current-buffer eask-compile-log-buffer-name
-      (eask-print-log-buffer)
+      (if (and (eask-clean-p) (eask-strict-p))
+          (eask-error (buffer-string))  ; Exit with error code!
+        (eask-print-log-buffer))
       (eask-msg ""))))
 
 (defun eask--byte-compile-file-external-contetnt (filename cmd)
@@ -43,7 +45,13 @@ The CMD is the command to start a new Emacs session."
     (insert (shell-command-to-string cmd))
     (goto-char (point-min))
     (search-forward filename nil t)
-    (delete-region (point-min) (line-end-position 1))
+    (re-search-forward "[ \t\r\n]" nil t)
+    (let ((line (string-trim (thing-at-point 'line))))
+      (if (and (string-prefix-p "Compiling " line)
+               (or (string-match-p "... skipped" line)
+                   (string-match-p "... done" line)))
+          (delete-region (point-min) (line-end-position 1))
+        (delete-region (point-min) (point))))
     (when (search-forward "(Total of " nil t)
       (goto-char (point-max))
       (delete-region (line-beginning-position -1) (point-max)))
@@ -52,14 +60,16 @@ The CMD is the command to start a new Emacs session."
 (defun eask--byte-compile-file-external (filename)
   "Byte compile FILENAME with clean environment by opening a new Emacs session."
   (let* ((cmd (split-string eask-invocation "\n" t))
+         (cmd (format "\"%s\""(mapconcat #'identity cmd "\" \"")))
          (args (eask-args))
          (argv (cl-remove-if
                 (lambda (arg)
-                  (or (string-suffix-p "--clean" arg)  ; prevent infinite call
-                      (member arg args)))              ; remove repeated arguments
-                eask-argv))
-         (cmd (append cmd `("compile" ,filename) argv))
-         (cmd (format "\"%s\""(mapconcat #'identity cmd "\" \"")))
+                  (or (string= "--clean" arg)  ; prevent infinite call
+                      (member arg args)))      ; remove repeated arguments
+                (eask-argv-out)))
+         (args (append `(,(eask-command) ,(concat "\"" filename "\"")) argv))
+         (args (mapconcat #'identity args " "))
+         (cmd (concat cmd " " args))
          (content (eask--byte-compile-file-external-contetnt filename cmd)))
     (if (string-empty-p content)
         t  ; no error, good!
