@@ -13,6 +13,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add license linter (#157)
 * Allow few commands' execution without any Eask-file (#159)
 * Add command `cat` (#160)
+* Improve messages while processing package transaction (#164)
 
 ## 0.8.x
 > Released Mar 08, 2023
