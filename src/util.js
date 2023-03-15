@@ -77,7 +77,7 @@ function def_flag(arg, name, val = undefined) {
  */
 function _invocation() {
   if (IS_PKG)
-    return execPath;
+    return process.execPath;
   // The is consist of `node` (executable) + `eask` (script)
   return process.argv[0] + '\n' + process.argv[1];
 }
