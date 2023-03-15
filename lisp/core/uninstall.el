@@ -27,7 +27,8 @@
          (pkg-installed (cl-remove-if-not #'package-installed-p names))
          (deleted (length pkg-installed)) (skipped (- len deleted)))
     (eask-log "Uninstalling %s specified package%s..." len s)
-    (mapc #'eask-package-delete names)
+    (eask-msg "")
+    (eask--package-mapc #'eask-package-delete names)
     (eask-msg "")
     (eask-info "(Total of %s package%s deleted, %s skipped)"
                deleted s skipped)))
@@ -42,7 +43,7 @@
           (eask-package-delete name)
           (eask-msg "")
           (eask-info "(Package `%s' deleted.)" name))
-      (eask-info "✗ (No packages have been unintalled)")
+      (eask-info "✗ (No packages have been uninstalled)")
       (eask-help "core/uninstall"))))
 
 ;;; core/uninstall.el ends here

@@ -28,7 +28,9 @@
          (pkg-not-installed (cl-remove-if #'package-installed-p names))
          (installed (length pkg-not-installed)) (skipped (- len installed)))
     (eask-log "Reinstalling %s specified package%s..." len s)
-    (mapc #'eask-package-reinstall names)
+    (eask-msg "")
+    (eask--package-mapc #'eask-package-reinstall names)
+    (eask-msg "")
     (eask-info "(Total of %s package%s reinstalled, %s skipped)"
                installed s skipped)))
 

@@ -16,6 +16,7 @@
 
 (eask-start
   (eask-pkg-init)
+  (eask-msg "")
   (let ((name (eask-guess-package-name)))
     (eask-with-progress
       (format "Activating the package `%s'... " (ansi-green name))
