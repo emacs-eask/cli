@@ -569,9 +569,14 @@ other scripts internally.  See function `eask-call'.")
   "Return non-nil if ARG is known internal command."
   (member arg eask--command-list))
 
-(defun eask-argv (index) "Return argument value by INDEX." (elt eask-argv index))
+(defun eask-argv (index)
+  "Return argument value by INDEX."
+  (elt eask-argv index))
+
 (defun eask-argv-out ()
-  ""
+  "Convert all internal arguments to external arguments.
+
+Simply remove `--eask' for each option, like `--eask--strict' to `--strict'."
   (mapcar (lambda (arg)
             (eask-s-replace "--eask" "" arg))
           eask-argv))
