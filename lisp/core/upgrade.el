@@ -27,7 +27,7 @@
 (defun eask-package-upgrade (pkg-desc)
   "Upgrade package using PKG-DESC."
   (let* ((name (package-desc-name pkg-desc))
-         (pkg-string (ansi-green name))
+         (pkg-string (ansi-green (eask-2str name)))
          (version-new (eask--package-version-string pkg-desc))
          (old-pkg-desc (eask-package-desc name t))
          (version-old (eask--package-version-string old-pkg-desc)))
