@@ -217,7 +217,9 @@ the `eask-start' execution.")
   (append eask-depends-on (and (eask-dev-p) eask-depends-on-dev)))
 
 (defun eask--package-mapc (func deps)
-  "Like function `mapc' but for process package transaction specifically."
+  "Like function `mapc' but for process package transaction specifically.
+
+For arguments FUNC and DEPS, see function `mapc' for more information."
   (let* ((eask--package-prefix)  ; remain untouch
          (len (length deps))
          (len-str (eask-2str len))
