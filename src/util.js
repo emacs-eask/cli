@@ -72,10 +72,22 @@ function def_flag(arg, name, val = undefined) {
 }
 
 /**
+ * Return the invocation program.
+ * @return This would either be a path or paths with newline.
+ */
+function _invocation() {
+  if (IS_PKG)
+    return execPath;
+  // The is consist of `node` (executable) + `eask` (script)
+  return process.argv[0] + '\n' + process.argv[1];
+}
+
+/**
  * Setup the environment variables so Emacs could receive them.
  */
 function setup_env() {
   /* Home Directory */
+  process.env.EASK_INVOCATION = _invocation();
   process.env.EASK_HOMEDIR = EASK_HOMEDIR;
 
   if (GITHUB_ACTIONS) {

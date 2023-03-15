@@ -15,6 +15,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add command `cat` (#160)
 * Improve messages while processing package transaction (#164)
 * Improve messages while task cleaning all (#165)
+* Add `clean` option for clean compile environment (#166)
 
 ## 0.8.x
 > Released Mar 08, 2023
