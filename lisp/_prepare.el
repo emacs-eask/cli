@@ -217,15 +217,15 @@ the `eask-start' execution.")
   (append eask-depends-on (and (eask-dev-p) eask-depends-on-dev)))
 
 (defun eask--package-mapc (func deps)
-  "Like function `mapc' but form process package transaction specifically."
-  (let* ((eask--package-prefix)  ; remain
+  "Like function `mapc' but for process package transaction specifically."
+  (let* ((eask--package-prefix)  ; remain untouch
          (len (length deps))
          (len-str (eask-2str len))
          (fmt (concat "[%" (eask-2str (length len-str)) "d/" len-str "] "))
          (count 0))
     (dolist (pkg deps)
       (cl-incf count)
-      (setq eask--package-prefix (format fmt process))
+      (setq eask--package-prefix (format fmt count))
       (funcall func pkg))))
 
 (defun eask--install-deps (dependencies msg)
@@ -237,7 +237,9 @@ the `eask-start' execution.")
          (pkg-installed (cl-remove-if #'package-installed-p names))
          (installed (length pkg-installed)) (skipped (- len installed)))
     (eask-log "Installing %s %s dependenc%s..." len msg ies)
+    (eask-msg "")
     (eask--package-mapc #'eask-package-install names)
+    (eask-msg "")
     (eask-info "(Total of %s dependenc%s installed, %s skipped)"
                installed ies skipped)))
 
@@ -256,6 +258,7 @@ the `eask-start' execution.")
   (when eask-depends-on
     (eask--install-deps eask-depends-on "package"))
   (when (and eask-depends-on-dev (eask-dev-p))
+    (eask-msg "")
     (eask--install-deps eask-depends-on-dev "development")))
 
 (defun eask-setup-paths ()
@@ -376,11 +379,11 @@ the `eask-start' execution.")
   (eask--pkg-process pkg
     (cond
      ((not (package-installed-p pkg))
-      (eask-msg "  - Skipping %s (%s)... not installed ✗" name version))
+      (eask-msg "  - %sSkipping %s (%s)... not installed ✗" eask--package-prefix name version))
      (t
       (eask--pkg-process pkg
         (eask-with-progress
-          (format "  - Uninstalling %s (%s)... " name version)
+          (format "  - %sUninstalling %s (%s)... " eask--package-prefix name version)
           (eask-with-verbosity 'debug
             (package-delete (eask-package-desc pkg t) (eask-force-p)))
           "done ✓"))))))
@@ -391,12 +394,12 @@ the `eask-start' execution.")
   (eask--pkg-process pkg
     (cond
      ((not (package-installed-p pkg))
-      (eask-msg "  - Skipping %s (%s)... not installed ✗" name version))
+      (eask-msg "  - %sSkipping %s (%s)... not installed ✗" eask--package-prefix name version))
      (t
       (eask-pkg-init)
       (eask--pkg-process pkg
         (eask-with-progress
-          (format "  - Reinstalling %s (%s)... " name version)
+          (format "  - %sReinstalling %s (%s)... " eask--package-prefix name version)
           (eask-with-verbosity 'debug
             (package-delete (eask-package-desc pkg t) t)
             (eask-ignore-errors (package-install pkg)))

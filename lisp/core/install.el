@@ -30,7 +30,8 @@
          (pkg-not-installed (cl-remove-if #'package-installed-p names))
          (installed (length pkg-not-installed)) (skipped (- len installed)))
     (eask-log "Installing %s specified package%s..." len s)
-    (mapc #'eask-package-install names)
+    (eask-msg "")
+    (eask--package-mapc #'eask-package-install names)
     (eask-msg "")
     (eask-info "(Total of %s package%s installed, %s skipped)"
                installed s skipped)))
