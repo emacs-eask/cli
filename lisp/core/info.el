@@ -39,8 +39,8 @@
         (eask-msg "%s (%s) | deps: %s | devDeps: %s"
                   (ansi-green (eask-package-name))
                   (ansi-yellow (eask-package-version))
-                  (ansi-cyan (length eask-depends-on))
-                  (ansi-cyan (length eask-depends-on-dev)))
+                  (ansi-cyan (eask-2str (length eask-depends-on)))
+                  (ansi-cyan (eask-2str (length eask-depends-on-dev))))
         (eask-msg (eask-package-description))
         (when-let ((url (or (eask-package-desc-url) eask-website-url)))
           (eask-msg (ansi-cyan url)))

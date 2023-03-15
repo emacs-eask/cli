@@ -279,7 +279,7 @@ the `eask-start' execution.")
   (let* (;; Ensure symbol
          (pkg (if (stringp pkg) (intern pkg) pkg))
          ;; Wrap package name with color
-         (pkg-string (ansi-green pkg))
+         (pkg-string (ansi-green (eask-2str pkg)))
          ;; Wrap version number with color
          (pkg-version (ansi-yellow (eask-package--version-string pkg))))
     (list pkg pkg-string pkg-version)))

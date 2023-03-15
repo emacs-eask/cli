@@ -1,4 +1,4 @@
-;;; extern/ansi.el --- Turn string into ansi strings  -*- lexical-binding: t; -*-
+;;; ansi.el --- Turn string into ansi strings  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2010-2013 Johan Andersson
 
@@ -63,6 +63,17 @@ This variable affects `with-ansi', `with-ansi-princ'."
     (white   . 37))
   "List of text colors.")
 
+(defconst ansi-bright-colors
+  '((bright-black   . 90)
+    (bright-red     . 91)
+    (bright-green   . 92)
+    (bright-yellow  . 93)
+    (bright-blue    . 94)
+    (bright-magenta . 95)
+    (bright-cyan    . 96)
+    (bright-white   . 97))
+  "List of text colors.")
+
 (defconst ansi-on-colors
   '((on-black   . 40)
     (on-red     . 41)
@@ -72,6 +83,17 @@ This variable affects `with-ansi', `with-ansi-princ'."
     (on-magenta . 45)
     (on-cyan    . 46)
     (on-white   . 47))
+  "List of colors to draw text on.")
+
+(defconst ansi-on-bright-colors
+  '((on-bright-black   . 100)
+    (on-bright-red     . 101)
+    (on-bright-green   . 102)
+    (on-bright-yellow  . 103)
+    (on-bright-blue    . 104)
+    (on-bright-magenta . 105)
+    (on-bright-cyan    . 106)
+    (on-bright-white   . 107))
   "List of colors to draw text on.")
 
 (defconst ansi-styles
@@ -87,11 +109,15 @@ This variable affects `with-ansi', `with-ansi-princ'."
   "List of styles.")
 
 (defvar ansi-csis
-  '((up       . "A")
-    (down     . "B")
-    (forward  . "C")
-    (backward . "D"))
-  "...")
+  '((up            . "A")
+    (down          . "B")
+    (forward       . "C")
+    (backward      . "D")
+    (next-line     . "E")
+    (previous-line . "F")
+    (column        . "G")
+    (kill          . "K"))
+  "CSI (Control Sequence Introducer) sequences")
 
 (defconst ansi-reset 0 "Ansi code for reset.")
 
@@ -105,8 +131,20 @@ This variable affects `with-ansi', `with-ansi-princ'."
   "Return code for EFFECT."
   (or
    (cdr (assoc effect ansi-colors))
+   (cdr (assoc effect ansi-bright-colors))
    (cdr (assoc effect ansi-on-colors))
+   (cdr (assoc effect ansi-on-bright-colors))
    (cdr (assoc effect ansi-styles))))
+
+(defun ansi--is-alias (effect)
+  "Return non-nil if EFFECT is available in DSL."
+  (or
+   (car (assoc effect ansi-colors))
+   (car (assoc effect ansi-bright-colors))
+   (car (assoc effect ansi-on-colors))
+   (car (assoc effect ansi-on-bright-colors))
+   (car (assoc effect ansi-styles))
+   (car (assoc effect ansi-csis))))
 
 (defun ansi--char (effect)
   "Return char for EFFECT."
@@ -117,49 +155,43 @@ This variable affects `with-ansi', `with-ansi-princ'."
   (let ((fn-name (intern (format "ansi-%s" (symbol-name effect)))))
     `(defun ,fn-name (format-string &rest objects)
        ,(format "Add '%s' ansi effect to text." effect)
-       (apply 'ansi-apply (cons ',effect (cons format-string objects))))))
+       (apply 'ansi-apply ',effect format-string objects))))
+
+(cl-eval-when (compile eval load)
+  (defun ansi--substitute (body)
+    (if (listp body)
+        (if (ansi--is-alias (car body))
+            `(,(intern (format "ansi-%s" (symbol-name (car body))))
+              ,@(mapcar (lambda (x) (ansi--substitute x)) (cdr body)))
+          (mapcar (lambda (x) (ansi--substitute x)) body))
+      body)))
 
 (defmacro with-ansi (&rest body)
   "Shortcut names (without ansi- prefix) can be used in this BODY."
-  (if ansi-inhibit-ansi
-      `(ansi--concat ,@body)
-    `(cl-macrolet
-         ,(mapcar
-           (lambda (alias)
-             (let ((fn (intern (format "ansi-%s" (symbol-name alias)))))
-               `(,alias (string &rest objects)
-                        ,(list 'backquote (list fn ',string ',@objects)))))
-           (append
-             (mapcar 'car ansi-colors)
-             (mapcar 'car ansi-on-colors)
-             (mapcar 'car ansi-styles)
-             (mapcar 'car ansi-csis)))
-       ,(cons 'ansi--concat body))))
+  `(ansi--concat ,@(ansi--substitute (mapcar #'macroexpand-all body))))
 
 (defmacro with-ansi-princ (&rest body)
   "Shortcut names (without ansi- prefix) can be used in this BODY and princ."
-  (if ansi-inhibit-ansi
-      `(princ (ansi--concat ,@body))
-    `(princ (with-ansi ,@body))))
+  `(princ (with-ansi ,@body)))
 
 (defun ansi-apply (effect-or-code format-string &rest objects)
   "Apply EFFECT-OR-CODE to text.
 FORMAT-STRING and OBJECTS are processed same as `apply'."
-  (let* ((format-string (if (stringp format-string) format-string
-                          (format "%s" format-string)))
-         (code (if (numberp effect-or-code)
-                   effect-or-code
-                 (ansi--code effect-or-code)))
-         (text (apply 'format format-string objects)))
-    (if ansi-inhibit-ansi text
+  (let ((code (if (numberp effect-or-code)
+                  effect-or-code
+                (ansi--code effect-or-code)))
+        (text (apply 'format format-string objects)))
+    (if ansi-inhibit-ansi
+        text
       (format "\e[%dm%s\e[%sm" code text ansi-reset))))
 
 (defun ansi-csi-apply (effect-or-char &optional reps)
   "Apply EFFECT-OR-CHAR REPS (1 default) number of times."
-  (let ((char (if (symbolp effect-or-char)
-                  (ansi--char effect-or-char)
-                effect-or-char)))
-    (format "\u001b[%d%s" (or reps 1) char)))
+  (if ansi-inhibit-ansi ""
+    (let ((char (if (symbolp effect-or-char)
+                    (ansi--char effect-or-char)
+                  effect-or-char)))
+      (format "\u001b[%d%s" (or reps 1) char))))
 
 (defun ansi-up (&optional n)
   "Move N steps (1 step default) up."
@@ -177,6 +209,27 @@ FORMAT-STRING and OBJECTS are processed same as `apply'."
   "Move N steps (1 step default) backward."
   (ansi-csi-apply 'backward n))
 
+(defun ansi-next-line (&optional n)
+  "Moves cursor to beginning of the line N (default 1) lines down."
+  (ansi-csi-apply 'next-line n))
+
+(defun ansi-previous-line (&optional n)
+  "Moves cursor to beginning of the line N (default 1) lines up."
+  (ansi-csi-apply 'previous-line n))
+
+(defun ansi-column (&optional n)
+  "Moves the cursor to column N (default 1)"
+  (ansi-csi-apply 'column n))
+
+(defun ansi-kill (&optional n)
+  "Erase part of the line.
+
+If N is 0 (or missing), clear from cursor to the end of the line.
+
+If N is 1, clear from cursor to beginning of the line.
+
+If N is 2, clear entire line. Cursor position does not change."
+  (ansi-csi-apply 'kill n))
 
 
 
@@ -189,6 +242,15 @@ FORMAT-STRING and OBJECTS are processed same as `apply'."
 (ansi--define cyan)
 (ansi--define white)
 
+(ansi--define bright-black)
+(ansi--define bright-red)
+(ansi--define bright-green)
+(ansi--define bright-yellow)
+(ansi--define bright-blue)
+(ansi--define bright-magenta)
+(ansi--define bright-cyan)
+(ansi--define bright-white)
+
 (ansi--define on-black)
 (ansi--define on-red)
 (ansi--define on-green)
@@ -197,6 +259,15 @@ FORMAT-STRING and OBJECTS are processed same as `apply'."
 (ansi--define on-magenta)
 (ansi--define on-cyan)
 (ansi--define on-white)
+
+(ansi--define on-bright-black)
+(ansi--define on-bright-red)
+(ansi--define on-bright-green)
+(ansi--define on-bright-yellow)
+(ansi--define on-bright-blue)
+(ansi--define on-bright-magenta)
+(ansi--define on-bright-cyan)
+(ansi--define on-bright-white)
 
 (ansi--define bold)
 (ansi--define dark)
@@ -210,4 +281,4 @@ FORMAT-STRING and OBJECTS are processed same as `apply'."
 
 (provide 'ansi)
 
-;;; extern/ansi.el ends here
+;;; ansi.el ends here
