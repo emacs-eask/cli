@@ -446,8 +446,11 @@ For arguments FUNC and DEPS, see function `mapc' for more information."
 (defconst eask-has-colors (getenv "EASK_HASCOLORS")
   "Return non-nil if terminal support colors.")
 
-(defconst eask-homedir (getenv "EASK_HOMEDIR")  ; temporary environment from node
+(defconst eask-homedir (getenv "EASK_HOMEDIR")
   "Eask temporary storage.")
+
+(defconst eask-invocation (getenv "EASK_INVOCATION")
+  "Eask invocation program.")
 
 ;;
 ;;; Flags
@@ -477,6 +480,7 @@ For arguments FUNC and DEPS, see function `mapc' for more information."
 (defun eask-allow-error-p ()  (eask--flag "--allow-error"))    ; --allow-error
 (defun eask-insecure-p ()     (eask--flag "--insecure"))       ; --insecure
 (defun eask-no-color-p ()     (eask--flag "--no-color"))       ; --no-color
+(defun eask-clean-p ()        (eask--flag "--clean"))          ; -c, --clean
 (defun eask-json-p ()         (eask--flag "--json"))           ; --json
 (defun eask-number-p ()       (eask--flag "--number"))         ; -n, --number
 
@@ -544,6 +548,7 @@ other scripts internally.  See function `eask-call'.")
      "--log-file"
      "--elapsed-time"
      "--no-color"
+     "--clean"
      "--json"
      "--number"))
   "List of boolean type options.")

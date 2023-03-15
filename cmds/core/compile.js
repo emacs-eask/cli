@@ -26,8 +26,18 @@ exports.builder = yargs => yargs
     '[names..]', {
       description: 'specify files to byte-compile',
       type: 'array',
-    });
+    })
+  .options({
+    'clean': {
+      description: 'clean byte-compile files individually',
+      alias: 'c',
+      type: 'boolean',
+      group: TITLE_CMD_OPTION,
+    },
+  });
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/compile', argv.names);
+  await UTIL.e_call(argv, 'core/compile'
+                    , argv.names
+                    , UTIL.def_flag(argv.clean, '--clean'));
 };

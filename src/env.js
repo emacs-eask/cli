@@ -25,10 +25,12 @@ const path = require('path');
 global.UTIL = require('./util');
 global.IS_PKG = path.basename(process.execPath).startsWith('eask');
 
-global.GITHUB_ACTIONS = (process.env.GITHUB_WORKSPACE !== undefined);
-
+/* Environment PATH */
 global.EASK_HOMEDIR = os.homedir().replace(/\\/g, '/') + '/.eask/';
 
-/* Global Variables */
+/* Titles */
 global.TITLE_CMD_OPTION = 'Command Options:';
 global.TITLE_PROXY_OPTION = 'Proxy Options:';
+
+/* CI */
+global.GITHUB_ACTIONS = (process.env.GITHUB_WORKSPACE !== undefined);

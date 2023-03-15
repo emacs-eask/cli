@@ -22,7 +22,7 @@
 ;; Handle options
 (add-hook 'eask-before-command-hook
           (lambda ()
-            (when (eask-strict-p) (setq byte-compile-error-on-warn t))
+            (when (eask-strict-p)      (setq byte-compile-error-on-warn t))
             (when (= eask-verbosity 4) (setq byte-compile-verbose t))))
 
 (defconst eask-compile-log-buffer-name "*Compile-Log*"
@@ -35,6 +35,37 @@
       (eask-print-log-buffer)
       (eask-msg ""))))
 
+(defun eask--byte-compile-file-external-contetnt (filename cmd)
+  "Extract result after executing byte-compile the FILENAME.
+
+The CMD is the command to start a new Emacs session."
+  (with-temp-buffer
+    (insert (shell-command-to-string cmd))
+    (goto-char (point-min))
+    (search-forward filename nil t)
+    (delete-region (point-min) (line-end-position 1))
+    (when (search-forward "(Total of " nil t)
+      (goto-char (point-max))
+      (delete-region (line-beginning-position -1) (point-max)))
+    (string-trim (buffer-string))))
+
+(defun eask--byte-compile-file-external (filename)
+  "Byte compile FILENAME with clean environment by opening a new Emacs session."
+  (let* ((cmd (split-string eask-invocation "\n" t))
+         (args (eask-args))
+         (argv (cl-remove-if
+                (lambda (arg)
+                  (or (string-suffix-p "--clean" arg)  ; prevent infinite call
+                      (member arg args)))              ; remove repeated arguments
+                eask-argv))
+         (cmd (append cmd `("compile" ,filename) argv))
+         (cmd (format "\"%s\""(mapconcat #'identity cmd "\" \"")))
+         (content (eask--byte-compile-file-external-contetnt filename cmd)))
+    (if (string-empty-p content)
+        t  ; no error, good!
+      (with-current-buffer (get-buffer-create eask-compile-log-buffer-name)
+        (insert content)))))
+
 (defun eask--byte-compile-file (filename)
   "Byte compile FILENAME."
   ;; *Compile-Log* does not kill itself. Make sure it's clean before we do
@@ -45,7 +76,9 @@
     (eask-with-progress
       (unless byte-compile-verbose (format "Compiling %s... " filename))
       (eask-with-verbosity 'debug
-        (setq result (byte-compile-file filename)
+        (setq result (if (eask-clean-p)
+                         (eask--byte-compile-file-external filename)
+                       (byte-compile-file filename))
               result (eq result t)))
       (if result "done ✓" "skipped ✗"))
     (eask--print-compile-log)
