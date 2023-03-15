@@ -47,7 +47,7 @@
               (let* ((line (buffer-substring (line-beginning-position) (line-end-position)))
                      (line (if ansi-inhibit-ansi line (e2ansi-string-to-ansi line))))
                 (if (eask-number-p)
-                    (message (concat "%" offset "s  %s") line-no line)
+                    (message (concat "%" offset "d  %s") line-no line)
                   (message "%s" line)))
               (forward-line 1)
               (cl-incf line-no)))))

@@ -216,6 +216,18 @@ the `eask-start' execution.")
   "Return list of dependencies."
   (append eask-depends-on (and (eask-dev-p) eask-depends-on-dev)))
 
+(defun eask--package-mapc (func deps)
+  "Like function `mapc' but form process package transaction specifically."
+  (let* ((eask--package-prefix)  ; remain
+         (len (length deps))
+         (len-str (eask-2str len))
+         (fmt (concat "[%" (eask-2str (length len-str)) "d/" len-str "] "))
+         (count 0))
+    (dolist (pkg deps)
+      (cl-incf count)
+      (setq eask--package-prefix (format fmt process))
+      (funcall func pkg))))
+
 (defun eask--install-deps (dependencies msg)
   "Install DEPENDENCIES."
   (let* ((names (mapcar #'car dependencies))
@@ -225,7 +237,7 @@ the `eask-start' execution.")
          (pkg-installed (cl-remove-if #'package-installed-p names))
          (installed (length pkg-installed)) (skipped (- len installed)))
     (eask-log "Installing %s %s dependenc%s..." len msg ies)
-    (mapc #'eask-package-install names)
+    (eask--package-mapc #'eask-package-install names)
     (eask-info "(Total of %s dependenc%s installed, %s skipped)"
                installed ies skipped)))
 
@@ -317,13 +329,18 @@ the `eask-start' execution.")
   "Return non-nil if package is installable."
   (assq (if (stringp pkg) (intern pkg) pkg) package-archive-contents))
 
+(defvar eask--package-prefix ""
+  "The prefix to display before each package action.")
+
 (defun eask-package-install (pkg)
   "Install the package."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (eask--pkg-process pkg
     (cond
      ((package-installed-p pkg)
-      (eask-msg "  - Skipping %s (%s)... already installed ✗" name version))
+      (eask-msg "  - %sSkipping %s (%s)... already installed ✗"
+                eask--package-prefix
+                name version))
      ((progn
         (eask-pkg-init)
         (unless (eask-package-installable-p pkg)
@@ -333,14 +350,16 @@ the `eask-start' execution.")
                   (req-emacs (package-version-join (nth 0 (cdr req-emacs))))
                   ((version< emacs-version req-emacs)))
         (if (eask-strict-p)
-            (eask-error "  - Skipping %s (%s)... it requires Emacs %s and above ✗"
+            (eask-error "  - %sSkipping %s (%s)... it requires Emacs %s and above ✗"
+                        eask--package-prefix
                         pkg (eask-package--version-string pkg) emacs-version)
-          (eask-msg "  - Skipping %s (%s)... it requires Emacs %s and above ✗"
+          (eask-msg "  - %sSkipping %s (%s)... it requires Emacs %s and above ✗"
+                    eask--package-prefix
                     name version (ansi-yellow emacs-version)))))
      (t
       (eask--pkg-process pkg
         (eask-with-progress
-          (format "  - Installing %s (%s)... " name version)
+          (format "  - %sInstalling %s (%s)... " eask--package-prefix name version)
           (eask-with-verbosity 'debug
             ;; XXX Without ignore-errors guard, it will trigger error
             ;;
@@ -1459,7 +1478,6 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
 
 (eask-load "extern/compat")
 (eask-load "extern/ansi")
-(with-eval-after-load 'ansi (eask-load "extern/ansi"))  ; override
 (eask-load "extern/package")
 (eask-load "extern/package-build")
 
