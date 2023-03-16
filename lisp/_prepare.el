@@ -772,11 +772,18 @@ This uses function `locate-dominating-file' to look up directory tree."
          (cond
           ((or (eask-global-p) (eask-special-p))  ; Commands without Eask-file needed
            (eask--setup-home (concat eask-homedir "../")  ; `/home/user/', escape `.eask'
-             (ignore-errors (make-directory package-user-dir t))
-             (eask--with-hooks ,@body)))
+             (let ((eask--first-init-p (not (file-directory-p user-emacs-directory))))
+               ;; We accept Eask-file in `global' scope, but it shouldn't be used
+               ;; for the sandbox.
+               (if (eask-file-try-load "./")
+                   (eask-msg "✓ Loading global Eask file in %s... done!" eask-file)
+                 (eask-msg "✗ Loading global Eask file... missing!"))
+               (message "")
+               (ignore-errors (make-directory package-user-dir t))
+               (eask--with-hooks ,@body))))
           ((eask-config-p)
            (let ((inhibit-config (eask-quick-p)))
-             ;; We accept Eask-file in global scope, but it shouldn't be used
+             ;; We accept Eask-file in `config' scope, but it shouldn't be used
              ;; for the sandbox.
              (if (eask-file-try-load "./")
                  (eask-msg "✓ Loading config Eask file in %s... done!" eask-file)

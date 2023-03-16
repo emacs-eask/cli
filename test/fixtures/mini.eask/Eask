@@ -5,6 +5,9 @@
 (website-url "https://github.com/emacs-eask/mini.eask")
 (keywords "test")
 
+(source 'gnu)
+(source 'melpa)
+
 (depends-on "emacs" "26.1")
 (depends-on "yaml-mode")
 
