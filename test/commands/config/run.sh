@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (C) 2023 Jen-Chieh Shen
+# Copyright (C) 2022-2023 Jen-Chieh Shen
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
 
 ## Commentary:
 #
-# Here we test all global (~/.emacs.d/) that the Emacser can be use daily!
+# Here we test all config (~/.emacs.d/) that the Emacser can be use daily!
 #
 # Notice, to make config commands work; we need a minimum configuration
 # (mini.emacs.d), and place it under to the default Emacs directory!
@@ -31,10 +31,10 @@ echo "Copy test configuration"
 ./test/fixtures/mini.emacs.d/scripts/copy_config.sh
 
 echo "Testing config commands..."
-eask archives  -g
+eask archives  -c
 
-eask install   -g spinner ivy beacon company fuzzy
-eask uninstall -g ivy fuzzy
+eask install   -c spinner ivy beacon company fuzzy
+eask uninstall -c ivy fuzzy
 
-eask list      -g --depth=0
-eask outdated  -g
+eask list      -c --depth=0
+eask outdated  -c

@@ -614,8 +614,9 @@ Simply remove `--eask' for each option, like `--eask--strict' to `--strict'."
            ;; but the relative paths file spec will be lost...
            ;;
            ;; So commands like `load' would NOT work!
-           (default-directory (if (eask-config-p) user-emacs-directory
-                                default-directory))
+           (default-directory (cond ((eask-global-p) eask-homedir)
+                                    ((eask-config-p) user-emacs-directory)
+                                    (t default-directory)))
            (alist))
        (dolist (cmd eask--command-list)
          (push (cons cmd '(lambda (&rest _))) alist))

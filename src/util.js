@@ -148,6 +148,20 @@ function el_script(name) {
 }
 
 /**
+ * Get the working environment name.
+ * @param { JSON } argv - Argument vector.
+ * @return Return a string represent the current working environment.
+ */
+function _environment_name (argv) {
+  if (argv.global)
+    return 'global';
+  else if (argv.config)
+    return 'configuration';
+  else
+    return 'development';
+}
+
+/**
  * Call emacs process
  * @param { string } script - name of the script from `../lisp`
  * @param { string } args - the rest of the arguments
@@ -162,7 +176,14 @@ async function e_call(argv, script, ...args) {
     let cmd = cmd_base.concat(cmd_args).concat(cmd_global);
     cmd = _remove_undefined(cmd);
 
-    let env_status = (argv.global) ? 'global' : 'development';
+    let env_status = _environment_name(argv);
+    if (argv.global)
+      env_status = 'global';
+    else if (argv.config)
+      env_status = 'configuration';
+    else
+      env_status = 'development';
+
     console.log(`Running Eask in the ${env_status} environment`);
     console.log('Press Ctrl+C to cancel.');
     console.log('');
