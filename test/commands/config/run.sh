@@ -30,7 +30,7 @@ set -e
 echo "Copy test configuration"
 ./test/fixtures/mini.emacs.d/scripts/copy_config.sh
 
-echo "Testing config commands..."
+echo "Testing config (~/.emacs.d/) commands..."
 eask archives  -c
 
 eask install   -c spinner ivy beacon company fuzzy

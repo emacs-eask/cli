@@ -109,7 +109,7 @@ $ eask info
 You should be able to see the following information:
 
 ```
-Running Eask in the development environment
+Running Eask in the development (./) environment
 Press Ctrl+C to cancel.
 
 Executing script inside Emacs...

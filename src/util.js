@@ -154,11 +154,11 @@ function el_script(name) {
  */
 function _environment_name (argv) {
   if (argv.global)
-    return 'global';
+    return 'global (~/.eask/)';
   else if (argv.config)
-    return 'configuration';
+    return 'configuration (~/.emacs.d/)';
   else
-    return 'development';
+    return 'development (./)';
 }
 
 /**
@@ -177,13 +177,6 @@ async function e_call(argv, script, ...args) {
     cmd = _remove_undefined(cmd);
 
     let env_status = _environment_name(argv);
-    if (argv.global)
-      env_status = 'global';
-    else if (argv.config)
-      env_status = 'configuration';
-    else
-      env_status = 'development';
-
     console.log(`Running Eask in the ${env_status} environment`);
     console.log('Press Ctrl+C to cancel.');
     console.log('');
