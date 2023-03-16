@@ -26,6 +26,9 @@ error:
 command-global:
 	./test/commands/global/run.sh
 
+command-config:
+	./test/commands/config/run.sh
+
 command-local:
 	./test/commands/local/run.sh
 

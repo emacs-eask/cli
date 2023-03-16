@@ -17,10 +17,14 @@
 (require 'subr-x)
 
 ;; Determine the underlying operating system
-(defconst eask-is-windows (memq system-type '(cygwin windows-nt ms-dos))   "Windows")
-(defconst eask-is-mac     (eq system-type 'darwin)                         "macOS")
-(defconst eask-is-linux   (eq system-type 'gnu/linux)                      "Linux")
-(defconst eask-is-bsd     (or eask-is-mac (eq system-type 'berkeley-unix)) "BSD")
+(defconst eask-is-windows (memq system-type '(cygwin windows-nt ms-dos))
+  "The system is Windows.")
+(defconst eask-is-mac     (eq system-type 'darwin)
+  "The system is macOS.")
+(defconst eask-is-linux   (eq system-type 'gnu/linux)
+  "The system is GNU Linux.")
+(defconst eask-is-bsd     (or eask-is-mac (eq system-type 'berkeley-unix))
+  "The system is BSD.")
 
 (defconst eask-system-type
   (cond (eask-is-windows 'dos)
@@ -282,7 +286,7 @@ For arguments FUNC and DEPS, see function `mapc' for more information."
             ;; XXX we need to initialize once in global scope since most Emacs
             ;; configuration would likely to set `package-archives' variable
             ;; themselves.
-            (and (eask-global-p) (not eask--package-initialized)))
+            (and (eask-config-p) (not eask--package-initialized)))
     (setq eask--package-initialized t)
     (eask-with-progress
       (ansi-green "Loading package information... ")
@@ -467,6 +471,9 @@ For arguments FUNC and DEPS, see function `mapc' for more information."
 
 ;;; Boolean
 (defun eask-global-p ()       (eask--flag "-g"))               ; -g, --global
+(defun eask-config-p ()       (eask--flag "-c"))               ; -c, --config
+(defun eask-local-p ()        (and (not (eask-global-p))
+                                   (not (eask-config-p))))     ; local project space
 (defun eask-all-p ()          (eask--flag "-a"))               ; -a, --all
 (defun eask-quick-p ()        (eask--flag "-q"))               ; -q, --quick
 (defun eask-force-p ()        (eask--flag "-f"))               ; -f, --force
@@ -540,7 +547,7 @@ other scripts internally.  See function `eask-call'.")
 
 (defconst eask--option-switches
   (eask--form-options
-   '("-g" "-a" "-q" "-f" "--dev"
+   '("-g" "-c" "-a" "-q" "-f" "--dev"
      "--debug" "--strict"
      "--allow-error"
      "--insecure"
@@ -607,8 +614,9 @@ Simply remove `--eask' for each option, like `--eask--strict' to `--strict'."
            ;; but the relative paths file spec will be lost...
            ;;
            ;; So commands like `load' would NOT work!
-           (default-directory (if (eask-global-p) user-emacs-directory
-                                default-directory))
+           (default-directory (cond ((eask-global-p) eask-homedir)
+                                    ((eask-config-p) user-emacs-directory)
+                                    (t default-directory)))
            (alist))
        (dolist (cmd eask--command-list)
          (push (cons cmd '(lambda (&rest _))) alist))
@@ -762,13 +770,20 @@ This uses function `locate-dominating-file' to look up directory tree."
          (eask--handle-global-options)
          (eask--print-env-info)
          (cond
-          ((eask-special-p)  ; Commands without Eask-file needed
+          ((or (eask-global-p) (eask-special-p))  ; Commands without Eask-file needed
            (eask--setup-home (concat eask-homedir "../")  ; `/home/user/', escape `.eask'
-             (ignore-errors (make-directory package-user-dir t))
-             (eask--with-hooks ,@body)))
-          ((eask-global-p)
+             (let ((eask--first-init-p (not (file-directory-p user-emacs-directory))))
+               ;; We accept Eask-file in `global' scope, but it shouldn't be used
+               ;; for the sandbox.
+               (if (eask-file-try-load "./")
+                   (eask-msg "✓ Loading global Eask file in %s... done!" eask-file)
+                 (eask-msg "✗ Loading global Eask file... missing!"))
+               (message "")
+               (ignore-errors (make-directory package-user-dir t))
+               (eask--with-hooks ,@body))))
+          ((eask-config-p)
            (let ((inhibit-config (eask-quick-p)))
-             ;; We accept Eask-file in global scope, but it shouldn't be used
+             ;; We accept Eask-file in `config' scope, but it shouldn't be used
              ;; for the sandbox.
              (if (eask-file-try-load "./")
                  (eask-msg "✓ Loading config Eask file in %s... done!" eask-file)

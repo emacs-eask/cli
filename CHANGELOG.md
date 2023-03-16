@@ -16,6 +16,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Improve messages while processing package transaction (#164)
 * Improve messages while task cleaning all (#165)
 * Add `clean` option for clean compile environment (#166)
+* Split up `config` and `global` space into two different environments (#167)
 
 ## 0.8.x
 > Released Mar 08, 2023

@@ -680,13 +680,23 @@ The following options are available on all Eask commands:
 
 ## 🔍 --global, -g
 
-Use `~/.emacs.d/` instead of package development environment. This is used
-for Emacs configuration.
+This will use `~/.eask/` instead of the package development environment.
 
-Install package `auto-complete` for your Emacs configuration:
+This is used for other tasks. e.g., `cat`, etc.
 
 ```sh
 $ eask -g [COMMAND]
+```
+
+## 🔍 --config, -c
+
+This will use `~/.emacs.d/` instead of the package development environment.
+
+This is used for doing stuff for your **Emacs configuration**. e.g., package
+management, etc.
+
+```sh
+$ eask -c [COMMAND]
 ```
 
 ## 🔍 --all, -a

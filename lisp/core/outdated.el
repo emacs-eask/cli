@@ -22,7 +22,7 @@
   (if-let* ((upgrades (eask-package--upgrades))
             (pkg-list (mapcar #'package-desc-name upgrades)))
       (progn
-        (unless (eask-global-p)
+        (when (eask-local-p)
           ;; Remove current developing packages
           (setq pkg-list (remove (intern (eask-guess-package-name)) pkg-list)))
         (eask--list pkg-list package-alist 0)
