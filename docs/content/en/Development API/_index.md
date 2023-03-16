@@ -287,7 +287,7 @@ This uses the current workspace, and this is the default.
 ```
 
 {{< hint info >}}
-💡 This function returns `nil` only when `(eask-global-p)` and `(eask-config-p)`
+💡 This function returns `t` only when `(eask-global-p)` and `(eask-config-p)`
 are false!
 {{< /hint >}}
 

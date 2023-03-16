@@ -73,7 +73,7 @@ Proxy Options:
 Options:
       --version             show version number                                                                                                                                                         [boolean]
       --help                show usage instructions                                                                                                                                                     [boolean]
-  -g, --global              change default workspace to ~/.eask/EMACS_VERSION/                                                                                                                          [boolean]
+  -g, --global              change default workspace to ~/.eask/                                                                                                                                        [boolean]
   -c, --config              change default workspace to ~/.emacs.d/                                                                                                                                     [boolean]
   -a, --all                 enable all flag                                                                                                                                                             [boolean]
   -q, --quick               start cleanly without loading the configuration files                                                                                                                       [boolean]
