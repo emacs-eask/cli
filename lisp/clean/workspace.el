@@ -15,8 +15,10 @@
         nil t))
 
 (eask-start
-  (let ((target-dir (if (eask-global-p) user-emacs-directory
-                      (file-name-directory (directory-file-name user-emacs-directory)))))
+  (let ((target-dir
+         (cond ((eask-global-p) eask-homedir)
+               ((eask-config-p) user-emacs-directory)
+               (t (file-name-directory (directory-file-name user-emacs-directory))))))
     (unless eask--first-init-p
       (eask-msg "Deleting %s..." target-dir))
     (ignore-errors (delete-directory target-dir t))

@@ -27,8 +27,13 @@ yargs
   .help('help', 'show usage instructions')
   .options({
     'global': {
-      description: `change default workspace to ~/.emacs.d/`,
+      description: `change default workspace to ~/.eask/EMACS_VERSION/`,
       alias: 'g',
+      type: 'boolean',
+    },
+    'config': {
+      description: `change default workspace to ~/.emacs.d/`,
+      alias: 'c',
       type: 'boolean',
     },
     'all': {

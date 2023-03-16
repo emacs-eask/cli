@@ -130,8 +130,9 @@
 (add-hook 'eask-on-error-hook #'eask--write-log)
 (add-hook 'eask-on-warning-hook #'eask--write-log)
 
-(let* ((default-directory (if (eask-global-p) user-emacs-directory
-                            default-directory))
+(let* ((default-directory (cond ((eask-global-p) eask-homedir)
+                                ((eask-config-p) user-emacs-directory)
+                                (t default-directory)))
        (patterns (eask-args))
        (files (if patterns
                   (eask-expand-file-specs patterns)

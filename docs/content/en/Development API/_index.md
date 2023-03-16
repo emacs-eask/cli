@@ -95,8 +95,7 @@ Define scope if Emacs version is below specific version.
 ```elisp
 (eask-defvc< 28
   ;; This is missing before Emacs 28; define it
-  (defvar package-native-compile nil)
-  )
+  (defvar package-native-compile nil))
 ```
 
 {{< hint info >}}
@@ -260,10 +259,37 @@ Return `t` if the current Emacs session allows insecure network connections.
 Return `t` if the `global` option is enabled.
 
 ```elisp
-(if (eask-global-p)
-    user-emacs-directory   ; ~/.emacs.d
-  user-emacs-directory)    ; ./.eask/{emacs-version}/
+(when (eask-global-p)
+  user-emacs-directory)   ; ~/.eask/
 ```
+
+## 🔍 Function: eask-config-p ()
+
+Return `t` if the `config` option is enabled.
+
+```elisp
+(when (eask-config-p)
+  user-emacs-directory)   ; ~/.emacs.d
+```
+
+{{< hint info >}}
+💡 If both options `--config` and `--global` are on, the global space is chosen
+over the config space.
+{{< /hint >}}
+
+## 🔍 Function: eask-local-p ()
+
+This uses the current workspace, and this is the default.
+
+```elisp
+(when (eask-local-p)
+  user-emacs-directory)   ; ./.eask/{emacs-version}/
+```
+
+{{< hint info >}}
+💡 This function returns `nil` only when `(eask-global-p)` and `(eask-config-p)`
+are false!
+{{< /hint >}}
 
 ## 🔍 Function: eask-all-p ()
 
