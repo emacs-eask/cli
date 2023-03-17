@@ -21,7 +21,17 @@
 
 exports.command = ['install-deps', 'install-dependencies', 'prepare'];
 exports.desc = 'Automatically install package dependencies';
+exports.builder = yargs => yargs
+  .options({
+    'development': {
+      description: 'install include development dependencies',
+      alias: 'dev',
+      type: 'boolean',
+      group: TITLE_CMD_OPTION,
+    },
+  });
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/install-deps');
+  await UTIL.e_call(argv, 'core/install-deps'
+                    , UTIL.def_flag(argv.development, '--dev'));
 };

@@ -25,6 +25,7 @@ yargs
   .showHelpOnFail(true)
   .version('version', 'show version number', '0.8.0')
   .help('help', 'show usage instructions')
+  .showHidden('show-hidden', 'Show hidden commands and options')
   .options({
     'global': {
       description: `change default workspace to ~/.eask/`,
@@ -51,11 +52,6 @@ yargs
       alias: 'f',
       type: 'boolean',
     },
-    'development': {
-      description: `turn on development mode`,
-      alias: 'dev',
-      type: 'boolean',
-    },
     'debug': {
       description: `turn on debug mode`,
       type: 'boolean',
@@ -75,24 +71,29 @@ yargs
     'timestamps': {
       description: `log with timestamps`,
       type: 'boolean',
+      hidden: true,
     },
     'log-level': {
       description: `log with level`,
       type: 'boolean',
+      hidden: true,
     },
     'log-file': {
       description: `generate log files`,
       alias: 'lf',
       type: 'boolean',
+      hidden: true,
     },
     'elapsed-time': {
       description: `show elapsed time between each operation`,
       alias: 'et',
       type: 'boolean',
+      hidden: true,
     },
     'no-color': {
       description: `disable color output`,
       type: 'boolean',
+      hidden: true,
     },
     'verbose': {
       description: `set verbosity from 0 to 4`,
