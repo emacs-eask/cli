@@ -14,8 +14,13 @@ Once you have installed [Eask](), make sure it is in your `PATH`. You can test
 that Eask has been installed correctly via the help command:
 
 ```
-$ eask help
+$ eask --help
 ```
+
+{{< hint ok >}}
+💡 Optionally, you can use `--show-hidden` to show all available commands and
+options!
+{{< /hint >}}
 
 The output you see in your console should be similar to the following:
 
