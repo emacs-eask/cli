@@ -117,7 +117,6 @@ function _global_options(argv) {
   flags.push(def_flag(argv.all, '-a'));
   flags.push(def_flag(argv.quick, '-q'));
   flags.push(def_flag(argv.force, '-f'));
-  flags.push(def_flag(argv.development, '--dev'));
   flags.push(def_flag(argv.debug, '--debug'));
   flags.push(def_flag(argv.strict, '--strict'));
   flags.push(def_flag(argv['allow-error'], '--allow-error'));
@@ -197,6 +196,15 @@ async function e_call(argv, script, ...args) {
   });
 }
 
+/**
+ * Hide command unless options `--show-hidden` is specified.
+ * @param { string | boolean } description - to display when comand is showed,
+ * @return Return a string to show command, else we return false.
+ */
+function hide_cmd(description) {
+  return (process.argv.includes('--show-hidden')) ? description : false;
+}
+
 /*
  * Module Exports
  */
@@ -206,3 +214,5 @@ module.exports.def_flag = def_flag;
 module.exports.setup_env = setup_env;
 module.exports.el_script = el_script;
 module.exports.e_call = e_call;
+
+module.exports.hide_cmd = hide_cmd;

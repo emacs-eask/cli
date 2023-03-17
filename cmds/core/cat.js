@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['cat <patterns..>', 'type <patterns..>'];
-exports.desc = 'View filename(s)';
+exports.desc = UTIL.hide_cmd('View filename(s)');
 exports.builder = yargs => yargs
   .positional(
     '<patterns..>', {

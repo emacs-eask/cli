@@ -28,10 +28,8 @@ Usage: eask <command> [options..]
 
 Commands:
   archives                List out all package archives                                                                                                                                        [aliases: sources]
-  cat <patterns..>        View filename(s)                                                                                                                                                        [aliases: type]
   clean <type>            Delete various files produced during building
   compile [names..]       Byte compile all Emacs Lisp files in the package
-  concat [names..]        Concatenate elisp files                                                                                                                                          [aliases: concatenate]
   create <type>           Create a new elisp project
   emacs [args..]          Execute emacs with the appropriate environment
   eval [form]             Evaluate lisp form with a proper PATH
@@ -71,24 +69,19 @@ Proxy Options:
       --no-proxy     set no-proxy to host                                                                                                                                                                [string]
 
 Options:
-      --version             show version number                                                                                                                                                         [boolean]
-      --help                show usage instructions                                                                                                                                                     [boolean]
-  -g, --global              change default workspace to ~/.eask/                                                                                                                                        [boolean]
-  -c, --config              change default workspace to ~/.emacs.d/                                                                                                                                     [boolean]
-  -a, --all                 enable all flag                                                                                                                                                             [boolean]
-  -q, --quick               start cleanly without loading the configuration files                                                                                                                       [boolean]
-  -f, --force               enable force flag                                                                                                                                                           [boolean]
-      --development, --dev  turn on development mode                                                                                                                                                    [boolean]
-      --debug               turn on debug mode                                                                                                                                                          [boolean]
-      --strict              report error instead of warnings                                                                                                                                            [boolean]
-      --allow-error         continue the executioon even there is error reported                                                                                                                        [boolean]
-      --insecure            allow insecure connection                                                                                                                                                   [boolean]
-      --timestamps          log with timestamps                                                                                                                                                         [boolean]
-      --log-level           log with level                                                                                                                                                              [boolean]
-      --log-file, --lf      generate log files                                                                                                                                                          [boolean]
-      --elapsed-time, --et  show elapsed time between each operation                                                                                                                                    [boolean]
-      --no-color            disable color output                                                                                                                                                        [boolean]
-  -v, --verbose             set verbosity from 0 to 4                                                                                                                                                    [number]
+      --version      show version number                                                                                                                                                                [boolean]
+      --help         show usage instructions                                                                                                                                                            [boolean]
+      --show-hidden  Show hidden commands and options                                                                                                                                                   [boolean]
+  -g, --global       change default workspace to ~/.eask/                                                                                                                                               [boolean]
+  -c, --config       change default workspace to ~/.emacs.d/                                                                                                                                            [boolean]
+  -a, --all          enable all flag                                                                                                                                                                    [boolean]
+  -q, --quick        start cleanly without loading the configuration files                                                                                                                              [boolean]
+  -f, --force        enable force flag                                                                                                                                                                  [boolean]
+      --debug        turn on debug mode                                                                                                                                                                 [boolean]
+      --strict       report error instead of warnings                                                                                                                                                   [boolean]
+      --allow-error  continue the executioon even there is error reported                                                                                                                               [boolean]
+      --insecure     allow insecure connection                                                                                                                                                          [boolean]
+  -v, --verbose      set verbosity from 0 to 4                                                                                                                                                           [number]
 
 For more information, find the manual at https://emacs-eask.github.io/
 ```

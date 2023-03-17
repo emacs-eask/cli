@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['concat [names..]', 'concatenate [names..]'];
-exports.desc = 'Concatenate elisp files';
+exports.desc = UTIL.hide_cmd('Concatenate elisp files');
 exports.builder = yargs => yargs
   .positional(
     '[names..]', {
