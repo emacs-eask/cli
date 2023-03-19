@@ -55,10 +55,12 @@
            (eask--print-license-menu))
           (t
            (eask-with-progress
-             (format "Generating license file in %s... " filename)
+             (format "  - [1/1] Generating license file in %s... " filename)
              (with-current-buffer (find-file filename)
                (license-templates-insert name)
                (save-buffer))
-             "done ✓")))))
+             "done ✓")
+           (eask-msg "")
+           (eask-info "(See created file in `%s`)" filename)))))
 
 ;;; generate/license.el ends here

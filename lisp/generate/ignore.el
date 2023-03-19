@@ -47,15 +47,19 @@
     (eask-msg "")
     (cond ((file-exists-p filename)
            (eask-info "(The ignore file already exists `%s`)" filename))
-          ((not (member name (gitignore-templates-names)))
+          ((not (member name (eask-with-verbosity 'debug
+                               (gitignore-templates-names))))
            (eask-info "(Invalid ignore type: `%s`)" name)
            (eask--print-ignore-menu))
           (t
            (eask-with-progress
-             (format "Generating ignore file in %s... " filename)
-             (with-current-buffer (find-file filename)
-               (gitignore-templates-insert name)
-               (save-buffer))
-             "done ✓")))))
+             (format "  - [1/1] Generating ignore file in %s... " filename)
+             (eask-with-verbosity 'debug
+               (with-current-buffer (find-file filename)
+                 (gitignore-templates-insert name)
+                 (save-buffer)))
+             "done ✓")
+           (eask-msg "")
+           (eask-info "(See created file in `%s`)" filename)))))
 
 ;;; generate/ignore.el ends here
