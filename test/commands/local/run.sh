@@ -62,6 +62,12 @@ eask run -all
 # Exection
 eask eval "(progn (require 'mini.emacs.pkg.1))"
 
+# Generation
+eask generate autoloads
+eask generate pkg-file
+eask generate license gpl-3.0
+eask generate ignore elisp
+
 # Linter
 eask lint checkdoc
 eask lint declare

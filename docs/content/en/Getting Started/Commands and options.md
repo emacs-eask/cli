@@ -323,11 +323,19 @@ Generate files that are used for the development.
 
 Generate autoload file.
 
+Write a package autoloads to `project-autoloads.el` in the project root.
+
 ```sh
 $ eask [GLOBAL-OPTIONS] generate autoloads
 ```
 
+`project` is the project name, as declared in `Eask`-file. See
+[Multi-file Packages (elisp)](https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html#Multi_002dfile-Packages)
+for details.
+
 ## 🔍 eask generate pkg-file
+
+Generate pkg file.
 
 Write a package descriptor file to `project-pkg.el` in the project root.
 
@@ -350,33 +358,53 @@ $ eask [GLOBAL-OPTIONS] generate license <name>
 `name` is the type of the license, see https://api.github.com/licenses for all
 the choices.
 
+{{< hint info >}}
+💡 This command uses the package [license-templates](https://github.com/jcs-elpa/license-templates)
+to generate ignore file.
+{{< /hint >}}
+
+## 🔍 eask generate ignore
+
+Generate ignore file.
+
+```sh
+$ eask [GLOBAL-OPTIONS] generate ignore <name>
+```
+
+{{< hint info >}}
+💡 This command uses the package [gitignore-templates](https://github.com/xuchunyang/gitignore-templates.el)
+to generate ignore file.
+{{< /hint >}}
+
 ## 🔍 eask generate workflow circle-ci
 
 Generate CircleCI workflow yaml file.
+
+The default filename is `config.yml`.
 
 ```sh
 $ eask [GLOBAL-OPTIONS] generate workflow circle-ci [--file]
 ```
 
-{{< hint info >}}
-💡 This will generate the yaml file under `.circleci/`!
-{{< /hint >}}
+This will generate the yaml file under `.circleci/`!
 
 ## 🔍 eask generate workflow github
 
 Generate GitHub Actions workflow yaml file.
 
+The default filename is `test.yml`.
+
 ```sh
 $ eask [GLOBAL-OPTIONS] generate workflow github [--file]
 ```
 
-{{< hint info >}}
-💡 This will generate the yaml file under `.github/workflow/`!
-{{< /hint >}}
+This will generate the yaml file under `.github/workflow/`!
 
 ## 🔍 eask generate workflow gitlab
 
 Generate GitLab Runner workflow yaml file.
+
+The default filename is `.gitlab-ci.yml`.
 
 ```sh
 $ eask [GLOBAL-OPTIONS] generate workflow gitlab [--file]
@@ -385,6 +413,8 @@ $ eask [GLOBAL-OPTIONS] generate workflow gitlab [--file]
 ## 🔍 eask generate workflow travis-ci
 
 Generate Travis CI workflow yaml file.
+
+The default filename is `.travis.yml`.
 
 ```sh
 $ eask [GLOBAL-OPTIONS] generate workflow travis-ci [--file]
@@ -723,16 +753,6 @@ Force to uninstall the package `dash` even it's a dependency from another packag
 
 ```sh
 $ eask -f [COMMAND]
-```
-
-## 🔍 --development, --dev
-
-Notify command with development scope enabled.
-
-If we attempt to install development dependencies:
-
-```sh
-$ eask --dev [COMMAND]
 ```
 
 ## 🔍 --debug

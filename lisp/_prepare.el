@@ -88,7 +88,8 @@ will return `lint/checkdoc' with a dash between two subcommands."
 
 (defun eask-special-p ()
   "Return t if the command that can be run without Eask-file existence."
-  (member (eask-command) '("init/cask" "cat" "keywords" "generate/license")))
+  (member (eask-command) '("init/cask" "cat" "keywords"
+                           "generate/ignore" "generate/license")))
 
 (defun eask-checker-p ()
   "Return t if running Eask as the checker."
@@ -779,6 +780,7 @@ This uses function `locate-dominating-file' to look up directory tree."
                    (eask-msg "✓ Loading global Eask file in %s... done!" eask-file)
                  (eask-msg "✗ Loading global Eask file... missing!"))
                (message "")
+               (package-activate-all)
                (ignore-errors (make-directory package-user-dir t))
                (eask--with-hooks ,@body))))
           ((eask-config-p)

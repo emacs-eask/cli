@@ -18,6 +18,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add `clean` option for clean compile environment (#166)
 * Split up `config` and `global` space into two different environments (#167)
 * Add use of `--show-hidden` option (#168)
+* Add command to generate `ignore` file (#169)
 
 ## 0.8.x
 > Released Mar 08, 2023
