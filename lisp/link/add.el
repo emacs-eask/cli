@@ -101,12 +101,12 @@
                        (autoloads-file-presented (file-exists-p autoloads-file)))
                   (eask-msg "")
                   (eask-with-progress
-                    (format "[1/2] Generating %s file... " autoloads-file)
+                    (format "  - [1/2] Generating %s file... " autoloads-file)
                     (unless autoloads-file-presented
                       (eask-with-verbosity 'debug (eask-call "generate/autoloads")))
                     (if autoloads-file-presented "already presented ✗" "done ✓"))
                   (eask-with-progress
-                    (format "[2/2] Generating %s file... " pkg-file)
+                    (format "  - [2/2] Generating %s file... " pkg-file)
                     (unless pkg-file-presented
                       (eask-with-verbosity 'debug (eask-call "generate/pkg-file")))
                     (if pkg-file-presented "already presented ✗" "done ✓")))
