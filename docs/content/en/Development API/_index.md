@@ -39,9 +39,25 @@ Command entry point. Each command file should contain this macro somewhere in th
 
 Points to `lisp` directory from the project root.
 
+```elisp
+(message "%s" eask-lisp-root)  ; path/to/eask/cli/lisp/
+```
+
 ## 🔍 Function: eask-command ()
 
 Return the current command in string.
+
+Suppose the command is:
+
+```sh
+$ eask init
+```
+
+then,
+
+```elisp
+(message "%s" (eask-command))  ; init
+```
 
 ## 🔍 Function: eask-special-p ()
 
