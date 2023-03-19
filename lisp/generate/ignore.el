@@ -41,7 +41,7 @@
 
   ;; Start the task
   (require 'gitignore-templates)
-  (let* ((name (car (eask-args)))  ; type of the license
+  (let* ((name (car (eask-args)))  ; type of the ignore
          (basename (or (eask-output) ".gitignore"))
          (filename (expand-file-name basename)))
     (eask-msg "")

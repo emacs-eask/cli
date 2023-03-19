@@ -24,7 +24,7 @@ exports.desc = 'Generate ignore file using .gitignore templates';
 exports.builder = yargs => yargs
   .positional(
     '<name>', {
-      description: 'name of the license',
+      description: 'name of the ignore template',
       type: 'string',
     })
   .options({
