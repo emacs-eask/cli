@@ -350,6 +350,20 @@ $ eask [GLOBAL-OPTIONS] generate license <name>
 `name` is the type of the license, see https://api.github.com/licenses for all
 the choices.
 
+This command uses the package [license-templates](https://github.com/jcs-elpa/license-templates)
+to generate ignore file. See their webpage for more information.
+
+## 🔍 eask generate ignore
+
+Generate ignore file.
+
+```sh
+$ eask [GLOBAL-OPTIONS] generate ignore <name>
+```
+
+This command uses the package [gitignore-templates](https://github.com/xuchunyang/gitignore-templates.el)
+to generate ignore file. See their webpage for more information.
+
 ## 🔍 eask generate workflow circle-ci
 
 Generate CircleCI workflow yaml file.

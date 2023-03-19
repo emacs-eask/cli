@@ -49,9 +49,9 @@
     (license-templates-keys)  ; trigger request
     (eask-msg "")
     (cond ((file-exists-p filename)
-           (eask-info "The license file already exists `%s`" filename))
+           (eask-info "(The license file already exists `%s`)" filename))
           ((not (member name (license-templates-keys)))
-           (eask-info "Invalid license type: `%s`" name)
+           (eask-info "(Invalid license type: `%s`)" name)
            (eask--print-license-menu))
           (t
            (eask-with-progress
