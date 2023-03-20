@@ -243,9 +243,16 @@ $ eask [GLOBAL-OPTIONS] keywords
 
 View filename(s).
 
+The positional argument `[PATTERNS..]` is an array of wildcard patterns.
+
 ```sh
 $ eask [GLOBAL-OPTIONS] cat [PATTERNS..]
 ```
+
+{{< hint info >}}
+💡 This command uses the package [e2ansi](https://github.com/Lindydancer/e2ansi)
+to accomplish the syntax highlighting.
+{{< /hint >}}
 
 ## 🔍 eask concate
 
