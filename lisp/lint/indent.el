@@ -52,6 +52,8 @@
   (let* ((patterns (eask-args))
          (files (if patterns (eask-expand-file-specs (eask-args))
                   (eask-package-el-files))))
+    (eask-install-dependencies)
+    (ignore-errors (mapc #'load (eask-package-el-files)))
     (cond
      ;; Files found, do the action!
      (files
