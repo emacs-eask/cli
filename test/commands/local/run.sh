@@ -65,7 +65,7 @@ eask eval "(progn (require 'mini.emacs.pkg.1))"
 # Generation
 eask generate autoloads
 eask generate pkg-file
-eask generate license gpl-3.0
+#eask generate license gpl-3.0  # XXX: Avoid API rate limit exceeded error
 eask generate ignore elisp
 
 # Linter
@@ -73,7 +73,7 @@ eask lint checkdoc
 eask lint declare
 eask lint elint
 eask lint elisp-lint
-#eask lint elsa       # XXX: Elsa is not stable, ignore it for now
+#eask lint elsa                 # XXX: Elsa is not stable, ignore it for now
 eask lint indent
 eask lint keywords
 eask lint license
