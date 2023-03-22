@@ -24,7 +24,7 @@
   (let* ((filename (expand-file-name filename))
          (file (eask-root-del filename))
          (errors))
-    (eask-msg "")
+    (eask-lint-first-newline)
     (eask-msg "`%s` with check-declare" (ansi-green file))
     (setq errors (check-declare-file filename))
     (if errors

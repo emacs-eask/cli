@@ -46,7 +46,7 @@
   (let* ((filename (expand-file-name filename))
          (file (eask-root-del filename))
          (eask--checkdoc-errors))
-    (eask-msg "")
+    (eask-lint-first-newline)
     (eask-msg "`%s` with checkdoc (%s)" (ansi-green file) checkdoc-version)
     (checkdoc-file filename)
     (unless eask--checkdoc-errors (eask-msg "No issues found"))))

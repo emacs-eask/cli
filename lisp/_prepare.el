@@ -1511,6 +1511,18 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 or above (debug)."
   :type 'string)
 
 ;;
+;;; Linter
+
+(defvar eask-lint-first-file-p nil
+  "Set the flag to `t' after the first file is linted.")
+
+(defun eask-lint-first-newline ()
+  "Built-in linters will create extra newline, prevent that!"
+  (when eask-lint-first-file-p
+    (eask-msg "")
+    (setq eask-lint-first-file-p t)))
+
+;;
 ;;; Externals
 
 (eask-load "extern/compat")

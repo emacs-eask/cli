@@ -44,7 +44,7 @@
       (eask-report "Keywords header seems to be missing in the `%s' file" file)
       (eask-help "lint/keywords-header"))
      (t
-      (eask-msg "")
+      (eask-lint-first-newline)
       (eask-msg "`%s` with keywords-lint" (ansi-green file))
       (if (eask--defined-keywords keywords)
           (progn

@@ -32,7 +32,7 @@
   (let* ((filename (expand-file-name filename))
          (file (eask-root-del filename))
          (noninteractive))
-    (eask-msg "")
+    (eask-lint-first-newline)
     (eask-msg "`%s` with elint" (ansi-green file))
     (eask-with-verbosity 'debug (elint-file filename))
     (eask-print-log-buffer (elint-get-log-buffer))
