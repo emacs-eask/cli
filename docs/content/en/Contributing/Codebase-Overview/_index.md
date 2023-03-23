@@ -29,7 +29,7 @@ Let's look at the file `cmds/core/archives.js`:
 
 ```js
 exports.command = ['archives', 'sources'];  // alias to sources
-exports.desc = 'list out all package archives';
+exports.desc = 'List out all package archives';
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/archives');
@@ -54,12 +54,15 @@ yargs
     'help',
     'Show usage instructions.'
   )
-  .option('global', {
-    description: 'change default workspace to ~/.emacs.d/',
-    alias: 'g',
-    type: 'boolean',
+  .options({
+    'global': {
+      description: `change default workspace to ~/.eask/`,
+      alias: 'g',
+      type: 'boolean',
+    },
   })
-..
+
+...
 ```
 
 For **local** options, please use `exports.builder` and specify under its

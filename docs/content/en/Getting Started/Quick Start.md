@@ -57,7 +57,7 @@ It should create a folder named `project-name` in your current working directory
 
 ## Step 4: Create `Eask`-file
 
-Skip this step if you chose to create project with **`eask create`**!
+Skip this step if you chose to create the project with **`eask create`**!
 
 Otherwise, to create Eask-file in the existing project:
 
@@ -65,7 +65,7 @@ Otherwise, to create Eask-file in the existing project:
 $ eask init
 ```
 
-You will be asked with some questions about the package you are going to create:
+You will be asked some questions about the package you are going to create:
 
 ```
 package name: (your-project)
@@ -98,7 +98,7 @@ Is this OK? (yes) yes ⏎
 
 You should be able to see an `Eask` file in your project folder. 🎉🎊
 
-## Step 5: Start the pacakge development
+## Step 5: Start the package development
 
 To check your package information, run:
 
@@ -118,9 +118,11 @@ Executing script inside Emacs...
 ✓ Checking system windows-nt... done!
 ✓ Loading Eask file in /path/to/project/Eask... done!
 
-
 your-package (1.0.0) | deps: 0 | devDeps: 0
-your package description
+Your project description!
+https://example.com/project-url/
+
+keywords: tools, example
 
 entry: your-package-file.el
 kind: single
@@ -147,7 +149,7 @@ You can manage package archives by using the `source` directive in your **Eask**
 
 ## Step 7: Add some dependencies
 
-You can add dependenices by using `depends-on` directive in your **Eask**-file.
+You can add dependencies by using `depends-on` directive in your **Eask**-file.
 
 ```elisp
 ...
@@ -157,14 +159,14 @@ You can add dependenices by using `depends-on` directive in your **Eask**-file.
 ```
 
 {{< hint danger >}}
-💡 Make sure the dependency you add are available in the package archives!
+💡 Make sure the dependencies you add are available in the package archives!
 
 Or else you would get an error **`package-name-' is unavailable**!
 {{< /hint >}}
 
 ## Step 8: Install dependencies
 
-Now we can install dependencies we have specified in the **Eask**-file:
+Now we can install the dependencies we have specified in the **Eask**-file:
 
 ```elisp
 $ eask install-deps
@@ -186,11 +188,12 @@ Loading package information... done
 Installing 2 package dependencies...
   - Installing f (20220405.1534)... done
   - Installing ht (20210119.741)... done
+
 (Total of 2 dependencies installed, 0 skipped)
 ```
 
 ## See Also
 
-* [Commands and options](https://emacs-eask.github.io/Getting-Started/Commands-and-options/)
-* [Domain Specific Language](https://emacs-eask.github.io/DSL/)
-* [Basic Usage](https://emacs-eask.github.io/Getting-Started/Basic-Usage/)
+- [Commands and options](https://emacs-eask.github.io/Getting-Started/Commands-and-options/)
+- [Domain Specific Language](https://emacs-eask.github.io/DSL/)
+- [Basic Usage](https://emacs-eask.github.io/Getting-Started/Basic-Usage/)

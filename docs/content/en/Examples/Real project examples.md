@@ -7,11 +7,11 @@ These are some projects and configurations using Eask:
 
 {{< toc >}}
 
-## Configuration
+## 🧾 Configuration
 
 * [jcs-emacs](https://github.com/jcs-emacs/jcs-emacs)
 
-## Packages
+## 📦 Packages
 
 * [auto-highlight-symbol](https://github.com/elp-revive/auto-highlight-symbol)
 * [dashboard](https://github.com/emacs-dashboard/emacs-dashboard)
@@ -21,6 +21,6 @@ These are some projects and configurations using Eask:
 * [line-reminder](https://github.com/emacs-vs/line-reminder)
 * [lsp-mode](https://github.com/emacs-lsp/lsp-mode)
 
-## ELPA
+## 📂 ELPA
 
 * [jcs-elpa](https://github.com/jcs-emacs/jcs-elpa)
