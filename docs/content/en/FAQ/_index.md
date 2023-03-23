@@ -7,6 +7,23 @@ Here is a list of general frequently asked questions.
 
 {{< toc >}}
 
+## ❓ Do you need Node.JS to use Eask?
+
+The answer is **NO**.
+
+Eask builds native executable on every release, see our [release page](https://github.com/emacs-eask/cli/releases)
+to download it! However, Node.JS is requied if you are going to develop Eask!
+
+*P.S. You can download the latest executable (snapshot) in our
+[emacs-eask/binaries](https://github.com/emacs-eask/binaries) repository!*
+
+## ❓ Who should use this tool?
+
+Here are our suggestions; if you plan to work on an OS-specific package (never
+going to other platforms), go for other tools. On the other hand, Eask aims to
+provide the best consistency between each OS. Alternatively, if you want to
+learn a tool that works everywhere, Eask is one of the best choices.
+
 ## ❓ Why Node.JS?
 
 Node has better support on all kinds of terminal applications (compare to just
@@ -18,10 +35,7 @@ Cask does not seem to support Windows (no WSL) after version `0.8.6`. In the
 early versions, they have used Python, but due to the Python supports on Windows
 are just not as good as Node.JS.
 
-## ❓ Who should use this tool?
-
-People who like to use Emacs on Windows (no WSL), and would like to keep their
-Emacs configuration/packages consistent on every operating system!
+See [issue #140](https://github.com/emacs-eask/cli/issues/140) for more information!
 
 ## ❓ Why yargs?
 
@@ -90,5 +104,5 @@ Loading package information... done ✓
 You may have `bug-reference-prog-mode` enabled. It is not yet compatible with Eask and
 should be disabled when running any of Eask’s commands.
 
-See [this issue](https://github.com/emacs-eask/cli/issues/39#issuecomment-1150770740) for
-more information.
+See [this issue](https://github.com/emacs-eask/cli/issues/39#issuecomment-1150770740)
+for more information.
