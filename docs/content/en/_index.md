@@ -81,7 +81,7 @@ list.
 |---------------------------|----------------------------------|--------------|-----------------|----------|
 | Elisp configuration       | yes, DSL is optional             | no, DSL only | yes, pure elisp | no       |
 | Handel `archives` failure | yes, see [emacs-eask/archives][] | no           | no              | no       |
-| `create` project, etc     | yes                              | no           | no              | yes      |
+| `create` project, etc     | yes                              | no           | no              | no       |
 | `link` local dependencies | yes                              | yes          | yes             | no       |
 | `exec` program            | yes                              | yes          | no              | no       |
 | `eval` expressions        | yes                              | yes          | yes             | no       |
