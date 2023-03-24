@@ -2,27 +2,37 @@
 title: Introduction
 ---
 
-Eask is a command-line tool that helps you build, lint, and test Emacs Lisp
-packages. It creates a clean environment to sandbox your elisp code without
-influencing your personal configuration. Eask aims to be:
+Eask was built to use as a package development tool in your Elisp packages. But
+now, Eask supports various types of Emacs Lisp tasks. It can be used in three
+major ways:
 
-* **Consistent** enough to sandbox across all systems
-* **General** enough to have Emacsers often use commands (byte-compile, checkdoc, etc)
-* **Robust** enough to provide useful results even in the presence of user's errors
-* **Dependency-free** so that the tool can be run on any platform
+1. Dev tool for Elisp packages
+2. Dependency management for your configuration
+3. Run elisp programs for all other purposes
+
+So what are the major differences between Eask and other build tools like
+[Cask][], [makem.sh][], and [Eldev][], other than the things above?
+
+Good question! Eask is more than a build tool now, it can be used for various
+purposes! But here are Eask aims to be:
+
+- **Consistent** enough to sandbox across all systems
+- **General** enough to have Emacsers frequently used commands (`byte-compile`, `checkdoc`, etc)
+- **Robust** enough to provide useful results even in the presence of user errors
+- **Dependency-free** so that the tool can be run on any platform
+
+*P.S. See [Why Eask?](https://emacs-eask.github.io/#-why-eask) for more detailed
+information.*
 
 ## ❓ Why Eask?
 
 `Eask` has the same philosophy as Cask, see their site [Why Cask?](https://cask.readthedocs.io/en/latest/guide/introduction.html#introduction-why-cask)
 to understand why you should use Eask (or Cask).
 
-Many tools like
-[Cask](https://github.com/cask/cask),
-[makem.sh](https://github.com/alphapapa/makem.sh),
-or [Eldev](https://doublep.github.io/eldev/)
-don't **"really"** support Windows. `Cask` has dropped support for Legacy Windows,
-`makem.sh` runs on bash, `Eldev` does support Windows, but the author doesn't use
-it on Windows (not having full tests, see their
+Many tools like [Cask][], [makem.sh][], or [Eldev][] don't **"really"** support
+Windows. `Cask` has dropped support for Legacy Windows, `makem.sh` runs on bash,
+`Eldev` does support Windows, but the author doesn't use it on Windows (not
+having full tests, see their
 [CI workflows](https://github.com/doublep/eldev/actions/workflows/test.yml)).
 `Eask` aims to adapt all platforms, including `Linux`, `macOS`, and `Windows`.
 It focuses on the cross-platform capability and the consistency between each
@@ -35,18 +45,60 @@ learn a tool that works everywhere, Eask is one of the best choices.
 
 ## ⚖️ Comparisons
 
-The table were compiled by reading these projects’ documentation and source code,
+The table was compiled by reading these projects’ documentation and source code,
 but the author is not an expert on these tools. Corrections are welcome.
 
-|          | Behind technology                 | Cross-Platform                                                   | Emacs Version | Size                |
-|----------|-----------------------------------|------------------------------------------------------------------|---------------|---------------------|
-| Eask     | Node or Native Executables        | ✔ Good, and it can be compiled to native executables             | 26.1+         | 3,000+ lines        |
-| Cask     | Bash, Batch, and Python (Windows) | ❌ Good on Linux and macOS, but it's particularly bad on Windows | 24.5+         | 3,000+ lines        |
-| Eldev    | Bash, Batch, and Powershel, etc   | ✔ Good, but qutie slow on Windows                                | 24.4+         | 4,000+ lines        |
-| makem.sh | Shellscript                       | ❌ Doesn't work on Windows by default                            | 26.1+         | 1 file, 1200+ lines |
+### 🔍 Project Wise
+
+The table shows what technology has been chosen by their author and how the
+project is being constructed. Furthermore, what technical decisions have they
+made? Drop support? Project's layout? Etc.
+
+|                | Eask                        | Cask                        | Eldev          | makem.sh                    |
+|----------------|-----------------------------|-----------------------------|----------------|-----------------------------|
+| bin folder     | node, execuatble, bash, bat | bash, bat                   | bash, bat, ps1 | bash                        |
+| Cross-Platform | yes                         | no, doesn't support Windows | yes            | no, doesn't support Windows |
+| Emacs version  | 26.1+                       | 24.5+                       | 24.4+          | 26.1+                       |
+| Size           | 7,000+ lines                | 3,000+ lines                | 8,000+ lines   | 1,200+ lines                |
+| Executable     | yes                         | no                          | no             | no                          |
+| Pure Elisp     | no, JavaScript              | yes                         | yes            | yes                         |
+| CLI Parser     | yargs                       | commander                   | built-in       | built-in                    |
 
 {{< hint info >}}
 💡 **makem.sh** has a good comparisons document as well, visit their [site](https://github.com/alphapapa/makem.sh#comparisons)
+{{< /hint >}}
+
+### 🔍 Feature Wise
+
+This is the feature comparison between each tool. Every tool has its advantages;
+choose the right tool that works for you!
+
+If the features are not listed below, either it is forgotten or simply
+considered too essential, so every tool has it; hence we don't add them to the
+list.
+
+|                           | Eask                             | Cask         | Eldev           | makem.sh |
+|---------------------------|----------------------------------|--------------|-----------------|----------|
+| Elisp configuration       | yes, DSL is optional             | no, DSL only | yes, pure elisp | no       |
+| Handel `archives` failure | yes, see [emacs-eask/archives][] | no           | no              | no       |
+| `create` project, etc     | yes                              | no           | no              | yes      |
+| `link` local dependencies | yes                              | yes          | yes             | no       |
+| `exec` program            | yes                              | yes          | no              | no       |
+| `eval` expressions        | yes                              | yes          | yes             | no       |
+| `emacs` execution         | yes                              | yes          | no              | no       |
+| Built-in `linters`        | yes                              | no           | yes             | no       |
+| Built-in `tests`          | yes                              | no           | yes             | no       |
+| Run script                | yes                              | no           | no              | no       |
+| Self-defined commands     | no, replaced with run script     | no           | yes             | no       |
+| Subcommand                | yes                              | no           | no              | no       |
+| `local` packages          | yes                              | yes          | yes             | yes      |
+| `global` packages         | yes, via `-g`                    | no           | no              | no       |
+| `config` packages         | yes, via `-c`                    | no           | no              | no       |
+
+{{< hint info >}}
+💡 For **local**, **global**, and **config** packages, see
+[Knowing your elpa directory](https://emacs-eask.github.io/Getting-Started/Basic-Usage/#knowing-your-elpa-directory)
+for more information!
 {{< /hint >}}
 
 ## 📰 News
@@ -83,7 +135,12 @@ but the author is not an expert on these tools. Corrections are welcome.
 
 The design of Eask was greatly influenced by the following projects:
 
-* [cask](https://github.com/cask/cask) - Project management tool for Emacs
-* [makem.sh](https://github.com/alphapapa/makem.sh) - Makefile-like script for building and testing Emacs Lisp packages
+* [Cask][] - Project management tool for Emacs
+* [makem.sh][] - Makefile-like script for building and testing Emacs Lisp packages
 * [epm](https://github.com/xuchunyang/epm) - Emacs Package Manager
-* [eldev](https://github.com/doublep/eldev) - Elisp Development Tool
+* [Eldev][] - Elisp Development Tool
+
+[emacs-eask/archives]: https://github.com/emacs-eask/archives
+[Cask]: https://github.com/cask/cask
+[makem.sh]: https://github.com/alphapapa/makem.sh
+[Eldev]: https://github.com/doublep/eldev

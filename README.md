@@ -1,28 +1,42 @@
 <a href="#"><img align="right" src="./docs/static/logo.png" width="20%"></a>
 
 # Eask
-> Command-line tool for building and testing Emacs Lisp packages
+> CLI for building, runing, testing, and managing your Emacs Lisp dependencies
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-green.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Emacs Version](https://img.shields.io/badge/Emacs-26.1+-7F5AB6.svg?logo=gnu%20emacs&logoColor=white)](https://www.gnu.org/software/emacs/download.html)
 [![Release](https://img.shields.io/github/release/emacs-eask/cli.svg?logo=github)](https://github.com/emacs-eask/cli/releases/latest)
 
-Eask is a command-line tool that helps you build, lint, and test Emacs Lisp
-packages. It creates a clean environment to sandbox your elisp code without
-influencing your personal configuration. Eask aims to be:
+Eask was built to use as a package development tool in your Elisp packages. But
+now, Eask supports various types of Emacs Lisp tasks. It can be used in three
+major ways:
 
-* **Consistent** enough to sandbox across all systems
-* **General** enough to have Emacsers often used commands (byte-compile, checkdoc, etc)
-* **Robust** enough to provide useful results even in the presence of user errors
-* **Dependency-free** so that the tool can be run on any platform
+1. Dev tool for Elisp packages
+2. Dependency management for your configuration
+3. Run elisp programs for all other purposes
+
+So what are the major differences between Eask and other build tools like
+[Cask][], [makem.sh][], and [Eldev][], other than the things above?
+
+Good question! Eask is more than a build tool now, it can be used for various
+purposes! But here are Eask aims to be:
+
+- **Consistent** enough to sandbox across all systems
+- **General** enough to have Emacsers frequently used commands (`byte-compile`, `checkdoc`, etc)
+- **Robust** enough to provide useful results even in the presence of user errors
+- **Dependency-free** so that the tool can be run on any platform
+
+*P.S. See [Why Eask?](https://emacs-eask.github.io/#-why-eask) for more detailed
+information.*
 
 ## 🔗 Links
+> 💡 `node` is not required to use Eask!
 
-* [Documentation](https://emacs-eask.github.io/)
-* [Installation](https://emacs-eask.github.io/Getting-Started/Install-Eask/)
-* [Command-line interface](https://emacs-eask.github.io/Getting-Started/Commands-and-options/)
-* [Examples](https://emacs-eask.github.io/Examples/Real-project-examples/)
-* [FAQ](https://emacs-eask.github.io/FAQ/)
+- [Documentation](https://emacs-eask.github.io/)
+- [Installation](https://emacs-eask.github.io/Getting-Started/Install-Eask/)
+- [Command-line interface](https://emacs-eask.github.io/Getting-Started/Commands-and-options/)
+- [Examples](https://emacs-eask.github.io/Examples/Real-project-examples/)
+- [FAQ](https://emacs-eask.github.io/FAQ/)
 
 ## 🧪 Testing
 
@@ -74,3 +88,7 @@ influencing your personal configuration. Eask aims to be:
 | Description | Done | Status                                                                                                                                                            |
 |-------------|------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Webinstall  | ✔    | [![Webinstall](https://github.com/emacs-eask/cli/actions/workflows/webinstall.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/webinstall.yml) |
+
+[Cask]: https://github.com/cask/cask
+[makem.sh]: https://github.com/alphapapa/makem.sh
+[Eldev]: https://github.com/doublep/eldev
