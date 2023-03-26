@@ -7,6 +7,8 @@ Here is a list of general frequently asked questions.
 
 {{< toc >}}
 
+# 🔍 About Eask
+
 ## ❓ Do you need Node.JS to use Eask?
 
 The answer is **NO**.
@@ -14,15 +16,20 @@ The answer is **NO**.
 Eask builds native executable on every release, see our [release page](https://github.com/emacs-eask/cli/releases)
 to download it! However, Node.JS is requied if you are going to develop Eask!
 
-*P.S. You can download the latest executable (snapshot) in our
-[emacs-eask/binaries](https://github.com/emacs-eask/binaries) repository!*
-
 ## ❓ Who should use this tool?
 
 Here are our suggestions; if you plan to work on an OS-specific package (never
 going to other platforms), go for other tools. On the other hand, Eask aims to
 provide the best consistency between each OS. Alternatively, if you want to
 learn a tool that works everywhere, Eask is one of the best choices.
+
+## ❓ Where can I download the Eask snapshot?
+
+You can download the latest executable (snapshot) in our
+[emacs-eask/binaries](https://github.com/emacs-eask/binaries)
+repository!
+
+# 🔍 Technology Choice
 
 ## ❓ Why Node.JS?
 
@@ -44,7 +51,7 @@ has been used in many tools. It's cross-platform! And most importantly, this is
 one of the tools that work well on Linux, macOS, and Windows.
 
 There is also the major difference compared with Eask and other alternatives.
-[Cask](), [makem.sh](), or [Eldev]() rely more on `batch` and `bash`. We chose a
+[Cask][], [makem.sh][], or [Eldev][] rely more on `batch` and `bash`. We chose a
 different route and would like to hand over heavy tasks to a high-level
 programming language, **`JavaScript`**. The development simply became easier,
 since we don't need to care about different types of shells anymore!
@@ -52,6 +59,8 @@ since we don't need to care about different types of shells anymore!
 The drawback is the NodeJS runtime, but we can simply pack the entire CLI
 program into an executable! That way we would not need to install `Node` and
 `npm` before using eask!
+
+# 🔍 Usage
 
 ## ❓ Why am I getting the error package target `tar`/`el` not found while installing?
 
@@ -106,3 +115,8 @@ should be disabled when running any of Eask’s commands.
 
 See [this issue](https://github.com/emacs-eask/cli/issues/39#issuecomment-1150770740)
 for more information.
+
+[emacs-eask/archives]: https://github.com/emacs-eask/archives
+[Cask]: https://github.com/cask/cask
+[makem.sh]: https://github.com/alphapapa/makem.sh
+[Eldev]: https://github.com/doublep/eldev
