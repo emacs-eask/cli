@@ -175,11 +175,11 @@ async function e_call(argv, script, ...args) {
     let cmd = cmd_base.concat(cmd_args).concat(cmd_global);
     cmd = _remove_undefined(cmd);
 
-    let env_status = _environment_name(argv);
-    console.log(`Running Eask in the ${env_status} environment`);
-    console.log('Press Ctrl+C to cancel.');
-    console.log('');
     if (4 <= argv.verbose) {  // `debug` scope
+      let env_status = _environment_name(argv);
+      console.log(`Running Eask in the ${env_status} environment`);
+      console.log('Press Ctrl+C to cancel.');
+      console.log('');
       console.log('Executing script inside Emacs...');
       console.log('');
     }

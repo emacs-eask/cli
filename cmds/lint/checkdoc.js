@@ -29,6 +29,5 @@ exports.builder = yargs => yargs
     });
 
 exports.handler = async (argv) => {
-  console.log(argv.files);
   await UTIL.e_call(argv, 'lint/checkdoc', argv.files);
 };
