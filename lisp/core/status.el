@@ -49,6 +49,9 @@
   (eask--print-title "Environment:")
   (eask--print-info `("Emacs directory" . ,user-emacs-directory))
   (eask--print-info `("ELPA directory" . ,package-user-dir))
+  (eask--print-info `("early-init.el" . ,early-init-file))
+  (eask--print-info `("init.el" . ,user-init-file))
+  (eask--print-info `("custom.el" . ,custom-file))
 
   (eask--print-title "Eask-file:")
   (eask--print-info `("Eask file" . ,(or eask-file "missing")))
@@ -56,6 +59,6 @@
 
   (eask-msg "")
   ;; XXX: Please increment the number everytime a new information is added!
-  (eask-info "(Total of %s states listed)" 10))
+  (eask-info "(Total of %s states listed)" (+ 6 5 2)))
 
 ;;; core/status.el ends here

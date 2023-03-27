@@ -743,6 +743,7 @@ This uses function `locate-dominating-file' to look up directory tree."
   (declare (indent 1) (debug t))
   `(let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/") ,dir))
           (package-user-dir (expand-file-name "elpa" user-emacs-directory))
+          (early-init-file (locate-user-emacs-file "early-init.el"))
           (user-init-file (locate-user-emacs-file "init.el"))
           (custom-file (locate-user-emacs-file "custom.el")))
      ,@body))
