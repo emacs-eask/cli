@@ -66,6 +66,14 @@ Show information about the project or configuration.
 $ eask [GLOBAL-OPTIONS] info
 ```
 
+## 🔍 eask status
+
+Display the state of the workspace.
+
+```sh
+$ eask [GLOBAL-OPTIONS] status
+```
+
 ## 🔍 eask install-deps
 
 To install all dependencies.

@@ -33,6 +33,7 @@ cd "./test/fixtures/mini.emacs.pkg.1/"
 
 echo "Testing local commands..."
 eask info
+eask status
 eask archives
 eask archives --all
 eask list --depth=0

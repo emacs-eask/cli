@@ -179,9 +179,14 @@ async function e_call(argv, script, ...args) {
     console.log(`Running Eask in the ${env_status} environment`);
     console.log('Press Ctrl+C to cancel.');
     console.log('');
-    console.log('Executing script inside Emacs...');
-    if (argv.verbose == 4)
-      console.log('[DEBUG] emacs ' + cmd.join(' '));
+    if (4 <= argv.verbose) {  // `debug` scope
+      console.log('Executing script inside Emacs...');
+      console.log('');
+    }
+    if (5 <= argv.verbose) {  // `all` scope
+      console.log('[EXEC] emacs ' + cmd.join(' '));
+      console.log('');
+    }
 
     setup_env();
     let proc = child_process.spawn(cli_args(cmd), { stdio: 'inherit', shell: true });

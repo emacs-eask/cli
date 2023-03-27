@@ -23,7 +23,6 @@
 ;;; Below is copied from `eask-start' macro
 
 (eask--handle-global-options)
-(eask--print-env-info)
 
 (setq user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/"))
       package-user-dir (expand-file-name "elpa" user-emacs-directory)
