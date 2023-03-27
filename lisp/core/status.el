@@ -14,26 +14,48 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
+(defun eask--environment-name ()
+  "Get the working environment name."
+  (cond ((eask-global-p) "global (~/.eask/)")
+        ((eask-config-p) "configuration (~/.emacs.d/)")
+        (t               "development (./)")))
+
+(defun eask--print-title (title)
+  "Print section TITLE."
+  (eask-msg "")
+  (eask-msg (ansi-underscore title))
+  (eask-msg ""))
+
+(defun eask--print-info (pair)
+  "Print environment info PAIR."
+  (let ((title   (eask-2str (car pair)))
+        (content (eask-2str (cdr pair))))
+    (eask-msg "   %-22s %s" title (ansi-bright-black content))))
+
 (eask-start
-  (eask-msg "✓ Emacs version %s" emacs-version)
-  (eask-with-verbosity 'debug
-    (eask-msg "  💡 Invoke from %s" invocation-directory)
-    (eask-msg "  💡 Build No. %s" emacs-build-number)
-    (eask-msg "  💡 System configuration %s" system-configuration)
-    (when-let ((emacs-build-time)
-               (time (format-time-string "%Y-%m-%d" emacs-build-time)))
-      (eask-msg "  💡 Build time %s" time)))
-  (eask-msg "✓ System type %s" system-type)
-  (eask-msg "✓ Emacs directory %s" user-emacs-directory)
-  (eask-with-verbosity 'debug
-    (eask-msg "  💡 ELPA directory %s" package-user-dir))
-  (if eask-file
-      (eask-msg "✓ Eask file in %s" eask-file)
-    (eask-msg "✗ Eask file... missing!"))
+  (eask-msg "In the %s environment" (eask--environment-name))
+  (eask-msg "Your emacs home is point to %s" user-emacs-directory)
+
+  (eask--print-title "System:")
+  (eask--print-info `("Emacs version" . ,emacs-version))
+  (eask--print-info `("Invocation" . ,invocation-directory))
+  (eask--print-info `("Build No." . ,emacs-build-number))
+  (eask--print-info `("System configuration" . ,system-configuration))
+  (when-let ((emacs-build-time)
+             (time (format-time-string "%Y-%m-%d" emacs-build-time)))
+    (eask--print-info `("Build time" . ,time)))
+  (eask--print-info `("System type" . ,system-type))
+
+  (eask--print-title "Environment:")
+  (eask--print-info `("Emacs directory" . ,user-emacs-directory))
+  (eask--print-info `("ELPA directory" . ,package-user-dir))
+
+  (eask--print-title "Eask-file:")
+  (eask--print-info `("Eask file" . ,(or eask-file "missing")))
+  (eask--print-info `("Eask-file Count" . ,(length (eask--find-files default-directory))))
 
   (eask-msg "")
-  (eask-info "(Total of %s states listed)" (if (eask--reach-verbosity-p 'debug)
-                                               9
-                                             4)))
+  ;; XXX: Please increment the number everytime a new information is added!
+  (eask-info "(Total of %s states listed)" 10))
 
 ;;; core/status.el ends here
