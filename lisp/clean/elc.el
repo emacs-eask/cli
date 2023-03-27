@@ -19,7 +19,7 @@
       (progn
         (mapc #'eask-delete-file files)
         (eask-msg "")
-        (eask-info "✓ (Total of %s .elc file%s deleted)" (length files)
+        (eask-info "(Total of %s .elc file%s deleted)" (length files)
                    (eask--sinr files "" "s")))
     (eask-info "(No .elc file found in workspace)")
     (setq eask-no-cleaning-operation-p t)))

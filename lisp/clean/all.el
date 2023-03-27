@@ -17,6 +17,9 @@
 (defvar eask-no-cleaning-operation-p nil
   "Set to non-nil if there is no cleaning operation done.")
 
+(defconst eask--clean-tasks-total 6
+  "Count cleaning task.")
+
 (defvar eask--clean-tasks-count 0
   "Count cleaning task.")
 
@@ -29,7 +32,7 @@
   `(let (eask-no-cleaning-operation-p)
      (cl-incf eask--clean-tasks-count)
      (eask-with-progress
-       (concat "  - [" (eask-2str eask--clean-tasks-count) "/6] "
+       (concat (format "  - [%s/%s] " eask--clean-tasks-count eask--clean-tasks-total)
                (format "%s... " ,title))
        (eask-with-verbosity 'debug ,@body)
        (if eask-no-cleaning-operation-p
@@ -38,6 +41,8 @@
          "done ✓"))))
 
 (eask-start
+  (eask-msg "Applying %s cleaning tasks..." eask--clean-tasks-total)
+  (eask-msg "")
   (eask--clean-section (format "Cleaning %s" (ansi-green "workspace"))
     (eask-call "clean/workspace"))
   (eask--clean-section (format "Cleaning %s files" (ansi-green "byte-compile (.elc)"))
