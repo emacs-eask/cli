@@ -109,15 +109,6 @@ $ eask info
 You should be able to see the following information:
 
 ```
-Running Eask in the development (./) environment
-Press Ctrl+C to cancel.
-
-Executing script inside Emacs...
-
-✓ Checking Emacs version 29.0.50... done!
-✓ Checking system windows-nt... done!
-✓ Loading Eask file in /path/to/project/Eask... done!
-
 your-package (1.0.0) | deps: 0 | devDeps: 0
 Your project description!
 https://example.com/project-url/
@@ -175,15 +166,6 @@ $ eask install-deps
 You should see Eask executed correctly with the similar output below:
 
 ```
-Running Eask in the development environment
-Press Ctrl+C to cancel.
-
-Executing script inside Emacs...
-
-✓ Checking Emacs version 29.0.50... done!
-✓ Checking system windows-nt... done!
-✓ Loading Eask file in /path/to/project/Eask... done!
-
 Loading package information... done
 Installing 2 package dependencies...
   - Installing f (20220405.1534)... done
