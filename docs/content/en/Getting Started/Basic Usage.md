@@ -60,6 +60,7 @@ Commands:
   reinstall [names..]     Reinstall packages
   run [names..]           Run the script named [names..]                                                                                                                                    [aliases: run-script]
   search [queries..]      Search packages
+  status                  Display the state of the workspace
   test <type>             Run test
   uninstall [names..]     Uninstall packages                                                                                                                                                    [aliases: delete]
   upgrade [names..]       Upgrade packages
@@ -86,7 +87,7 @@ Options:
       --strict       report error instead of warnings                                                                                                                                                   [boolean]
       --allow-error  continue the executioon even there is error reported                                                                                                                               [boolean]
       --insecure     allow insecure connection                                                                                                                                                          [boolean]
-  -v, --verbose      set verbosity from 0 to 4                                                                                                                                                           [number]
+  -v, --verbose      set verbosity from 0 to 5                                                                                                                                                           [number]
 
 For more information, find the manual at https://emacs-eask.github.io/
 ```

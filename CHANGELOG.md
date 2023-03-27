@@ -19,6 +19,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Split up `config` and `global` space into two different environments (#167)
 * Add use of `--show-hidden` option (#168)
 * Add command to generate `ignore` file (#169)
+* Use standard output (#170)
 
 ## 0.8.x
 > Released Mar 08, 2023

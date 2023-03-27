@@ -96,7 +96,7 @@ yargs
       hidden: true,
     },
     'verbose': {
-      description: `set verbosity from 0 to 4`,
+      description: `set verbosity from 0 to 5`,
       alias: 'v',
       requiresArg: true,
       type: 'number',
