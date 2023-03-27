@@ -15,7 +15,7 @@
         nil t))
 
 (eask-start
-  (eask-msg "✓ Checking Emacs version %s... done!" emacs-version)
+  (eask-msg "✓ Emacs version %s" emacs-version)
   (eask-with-verbosity 'debug
     (eask-msg "  💡 Invoke from %s" invocation-directory)
     (eask-msg "  💡 Build No. %s" emacs-build-number)
@@ -23,9 +23,17 @@
     (when-let ((emacs-build-time)
                (time (format-time-string "%Y-%m-%d" emacs-build-time)))
       (eask-msg "  💡 Build time %s" time)))
-  (eask-msg "✓ Checking system %s... done!" system-type)
+  (eask-msg "✓ System type %s" system-type)
+  (eask-msg "✓ Emacs directory %s" user-emacs-directory)
+  (eask-with-verbosity 'debug
+    (eask-msg "  💡 ELPA directory %s" package-user-dir))
   (if eask-file
-      (eask-msg "✓ Eask file in %s... done!" eask-file)
-    (eask-msg "✗ Eask file... missing!")))
+      (eask-msg "✓ Eask file in %s" eask-file)
+    (eask-msg "✗ Eask file... missing!"))
+
+  (eask-msg "")
+  (eask-info "(Total of %s states listed)" (if (eask--reach-verbosity-p 'debug)
+                                               9
+                                             4)))
 
 ;;; core/status.el ends here
