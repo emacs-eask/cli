@@ -91,15 +91,6 @@ list.
 | Run script                | yes                              | no           | no              | no       |
 | Self-defined commands     | no, replaced with run script     | no           | yes             | no       |
 | Subcommand                | yes                              | no           | no              | no       |
-| `local` packages          | yes                              | yes          | yes             | yes      |
-| `global` packages         | yes, via `-g`                    | no           | no              | no       |
-| `config` packages         | yes, via `-c`                    | no           | no              | no       |
-
-{{< hint info >}}
-💡 For **local**, **global**, and **config** packages, see
-[Knowing your elpa directory](https://emacs-eask.github.io/Getting-Started/Basic-Usage/#knowing-your-elpa-directory)
-for more information!
-{{< /hint >}}
 
 ## 📰 News
 
