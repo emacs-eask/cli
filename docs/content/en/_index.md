@@ -80,7 +80,7 @@ list.
 |                           | Eask                             | Cask         | Eldev           | makem.sh |
 |---------------------------|----------------------------------|--------------|-----------------|----------|
 | Elisp configuration       | yes, DSL is optional             | no, DSL only | yes, pure elisp | no       |
-| Handel `archives` failure | yes, see [emacs-eask/archives][] | no           | no              | no       |
+| Handle `archives` failure | yes, see [emacs-eask/archives][] | no           | no              | no       |
 | `create` project, etc     | yes                              | no           | no              | no       |
 | `link` local dependencies | yes                              | yes          | yes             | no       |
 | `exec` program            | yes                              | yes          | no              | no       |
