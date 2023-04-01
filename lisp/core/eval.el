@@ -25,7 +25,7 @@
         (ansi-green "Exporting environment variables... ")
         (eask--export-env)
         (ansi-green "done ✓"))
-    (eask-info "✗ (No expression found)")
+    (eask-info "(No expression found)")
     (eask-help "core/eval")))
 
 ;;; core/eval.el ends here

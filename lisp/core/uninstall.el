@@ -43,7 +43,7 @@
           (eask-package-delete name)
           (eask-msg "")
           (eask-info "(Package `%s' deleted.)" name))
-      (eask-info "✗ (No packages have been uninstalled)")
+      (eask-info "(No packages have been uninstalled)")
       (eask-help "core/uninstall"))))
 
 ;;; core/uninstall.el ends here

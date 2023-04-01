@@ -1177,6 +1177,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 (debug), 5 (all)."
   (eask-with-verbosity symbol
     (let* ((string (apply #'eask--format prefix msg args))
            (output (eask--ansi symbol string))
+           (output (eask--msg-displayable-kwds output))  ; Don't color, but replace it!
            (func (cl-case symbol
                    ((or error warn) symbol)
                    (t #'message))))
@@ -1197,10 +1198,25 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 (debug), 5 (all)."
          (string (eask-s-replace "💡" (ansi-yellow "💡") string)))
     string))
 
+(defun eask--msg-char-displayable (char replacement string)
+  "Ensure CHAR is displayable in STRING; if not, we fallback to REPLACEMENT
+character."
+  (if (char-displayable-p (string-to-char char))
+      string
+    (eask-s-replace char replacement string)))
+
+(defun eask--msg-displayable-kwds (string)
+  "Make sure all keywords is displayable in STRING."
+  (let* ((string (eask--msg-char-displayable "✓" "v" string))
+         (string (eask--msg-char-displayable "✗" "X" string))
+         (string (eask--msg-char-displayable "💡" "?!" string)))
+    string))
+
 (defun eask--format-paint-kwds (msg &rest args)
   "Paint keywords after format MSG and ARGS."
   (let* ((string (apply #'format msg args))
-         (string (eask--msg-paint-kwds string)))
+         (string (eask--msg-paint-kwds string))
+         (string (eask--msg-displayable-kwds string)))
     string))
 
 (defun eask-msg (msg &rest args)

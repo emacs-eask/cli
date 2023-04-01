@@ -20,7 +20,7 @@
         (when (and (eask-dev-p) (not eask-depends-on-dev))
           (eask-warn "No development dependencies found in your Eask file; but continue to install package dependencies"))
         (eask-install-dependencies))
-    (eask-info "✗ (No dependencies found in your Eask file)")
+    (eask-info "(No dependencies found in your Eask file)")
     (eask-help "core/install-deps")))
 
 ;;; core/install-deps.el ends here

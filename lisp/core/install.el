@@ -95,7 +95,7 @@
             (eask-msg "")
             (eask-info "(Installed in %s)"
                        (file-name-directory (locate-library name))))
-        (eask-info "✗ (No files have been intalled)")
+        (eask-info "(No files have been intalled)")
         (eask-help "core/install")))))
 
 ;;; core/install.el ends here
