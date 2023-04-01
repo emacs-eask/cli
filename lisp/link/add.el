@@ -52,13 +52,13 @@
          (path (nth 1 names))
          (source (expand-file-name path)))
     (cond
-     ;; Wrong arguments number.
+     ;; Wrong number of arguments.
      ((<= 3 (length names))
-      (eask-info "✗ This command only accepts maximum of 2 arguments: %s"
+      (eask-info "(This command only accepts maximum of 2 arguments: %s)"
                  (mapconcat #'identity names " ")))
      ;; Source path not found!
      ((not (file-directory-p source))
-      (eask-info "✗ Can't create link %s to non-existing path: %s" name source))
+      (eask-info "(Can't create link %s to non-existing path: %s)" name source))
      ;; Create the link
      (t
       (let ((links (eask--links))
@@ -116,7 +116,7 @@
                   (eask-help "link/add/success/eask")))
             (eask-error "✗ Error loading Eask-file: %s" pkg-eask)))
          (t
-          (eask-info "✗ (Missing `%s-pkg.el` file in your source folder)" name)
+          (eask-info "(Missing `%s-pkg.el` file in your source folder)" name)
           (eask-help "link/add/error"))))))))
 
 ;;; link/add.el ends here

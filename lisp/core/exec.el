@@ -42,7 +42,7 @@
         (ansi-green "Exporting environment variables... ")
         (eask--export-env)
         (ansi-green "done ✓"))
-    (eask-info "✗ (No exeuction output)")
+    (eask-info "(No exeuction output)")
     (eask-help "core/exec")))
 
 ;;; core/exec.el ends here

@@ -55,7 +55,7 @@
   ;; Start the task
   (cond
    ((null eask-scripts)
-    (eask-info "✗ (No scripts specified)")
+    (eask-info "(No scripts specified)")
     (eask-help "core/run"))
    ((eask-all-p)  ; Run all scripts
     (dolist (data (reverse eask-scripts))
@@ -63,7 +63,7 @@
    ((when-let ((scripts (eask-args)))
       (if-let ((unmatched (eask--unmatched-scripts scripts)))
           (progn  ; if there are unmatched scripts, don't even try to execute
-            (eask-info "✗ (Missing script%s: `%s`)"
+            (eask-info "(Missing script%s: `%s`)"
                        (eask--sinr unmatched "" "s")
                        (mapconcat #'identity unmatched ", "))
             (eask-msg "")

@@ -92,7 +92,7 @@
          (scanned))
     (cond
      ((null files)
-      (eask-info "✗ No license found"))
+      (eask-info "(No license found)"))
      (t
       (when (<= 2 (length files))
         (eask-warn "!! Multi-licensing detected !!"))
