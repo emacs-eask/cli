@@ -23,7 +23,7 @@ yargs
     handler() { yargs.showHelp(); }
   })
   .showHelpOnFail(true)
-  .version('version', 'show version number', '0.8.0')
+  .version('version', 'show version number', '0.8.1')
   .help('help', 'show usage instructions')
   .showHidden('show-hidden', 'Show hidden commands and options')
   .options({
