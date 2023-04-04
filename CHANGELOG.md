@@ -21,6 +21,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add command to generate `ignore` file (#169)
 * Use standard output (#170)
 * Fix non-displayable character, use ascii instead (#172)
+* Use environment PATH to specify Emacs version to use (#173)
 
 ## 0.8.x
 > Released Mar 08, 2023
