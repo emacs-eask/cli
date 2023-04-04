@@ -15,7 +15,7 @@ Note that installed dependencies are scoped on the version of Emacs. So when
 switching between versions you will have to install the dependencies for each:
 
 ```sh
-$ EMACS="emacs26.5" eask install
+$ EMACS="emacs26.3" eask install
 ```
 
 There are, unfortunately, circumstances under which Emacs itself resets the
