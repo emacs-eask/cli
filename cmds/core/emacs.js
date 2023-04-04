@@ -35,7 +35,7 @@ exports.builder = async (yargs) => {
 exports.handler = async (argv) => {
   let _path = UTIL.el_script('core/emacs');
 
-  let default_cmd = ['emacs', '-Q', '-l', _path];
+  let default_cmd = [EASK_EMACS, '-Q', '-l', _path];
   let rest = process.argv.slice(3);
   let cmd = default_cmd.concat(rest);
 
