@@ -30,7 +30,6 @@ exports.builder = yargs => yargs
   .options({
     'clean': {
       description: 'clean byte-compile files individually',
-      alias: 'c',
       type: 'boolean',
       group: TITLE_CMD_OPTION,
     },
