@@ -85,8 +85,8 @@
            (packaged (when (file-exists-p packaged) packaged))
            (target (or packaged eask-package-file)))
       (eask-log "Searching for artifact to install...")
-      (if packaged (eask-info "✓ Found artifact in %s" target)
-        (eask-info "? Missing artifact, install directly from %s" target))
+      (if packaged (eask-info "💡 Found artifact in %s" target)
+        (eask-info "💡 Missing artifact, install directly from %s" target))
       (if target
           (progn
             (add-to-list 'load-path (expand-file-name (eask-packaged-name) package-user-dir))
