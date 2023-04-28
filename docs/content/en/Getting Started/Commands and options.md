@@ -17,6 +17,10 @@ $ eask [GLOBAL-OPTIONS] [COMMAND] [COMMAND-OPTIONS] [COMMAND-ARGUMENTS]
 
 Create a new elisp project with the default `Eask`-file and CI/CD support.
 
+```sh
+$ eask [GLOBAL-OPTIONS] create package <name>
+```
+
 {{< hint info >}}
 💡 The template project is located in https://github.com/emacs-eask/template-elisp
 {{< /hint >}}
@@ -24,6 +28,10 @@ Create a new elisp project with the default `Eask`-file and CI/CD support.
 ## 🔍 eask create elpa
 
 Create a new ELPA using [github-elpa](https://github.com/10sr/github-elpa).
+
+```sh
+$ eask [GLOBAL-OPTIONS] create elpa <name>
+```
 
 {{< hint info >}}
 💡 The template project is located in https://github.com/emacs-eask/template-elpa
@@ -34,6 +42,12 @@ Create a new ELPA using [github-elpa](https://github.com/10sr/github-elpa).
 Often use commands that are uncategorized.
 
 ## 🔍 eask init
+
+Initialize the current directory to start using Eask.
+
+```sh
+$ eask [GLOBAL-OPTIONS] init
+```
 
 Eask will generate the file like this:
 

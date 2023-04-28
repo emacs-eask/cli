@@ -210,6 +210,16 @@ function hide_cmd(description) {
   return (process.argv.includes('--show-hidden')) ? description : false;
 }
 
+/**
+ * Get the command count, not including options.
+ * @return Return a size of the command array.
+ */
+function cmd_count() {
+  let args = process.argv.slice(2);
+  args = args.filter(elm => { return !elm.startsWith('-'); });
+  return args.length;
+}
+
 /*
  * Module Exports
  */
@@ -221,3 +231,4 @@ module.exports.el_script = el_script;
 module.exports.e_call = e_call;
 
 module.exports.hide_cmd = hide_cmd;
+module.exports.cmd_count = cmd_count;

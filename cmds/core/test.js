@@ -21,15 +21,20 @@
 
 exports.command = ['test <type>'];
 exports.desc = 'Run test';
-exports.builder = yargs => yargs
-  .usage(`${exports.desc}
+exports.builder = function (yargs) {
+  yargs.usage(`${exports.desc}
 
 Usage: eask test <type> [options..]`)
-  .commandDir('../test/')
-  .demandCommand()
-  .positional(
-    '<type>', {
-      description: 'type of the test framework',
-    });
+    .commandDir('../test/')
+    .demandCommand();
+
+  /* XXX: Configure only in the menu. */
+  if (UTIL.cmd_count() == 1) {
+    yargs.positional(
+      '<type>', {
+        description: 'type of the test framework',
+      });
+  }
+}
 
 exports.handler = async (argv) => { };
