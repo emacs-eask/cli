@@ -22,6 +22,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Use standard output (#170)
 * Fix non-displayable character, use ascii instead (#172)
 * Use environment PATH to specify Emacs version to use (#173)
+* Fix showing positional arguments in subcommand's help menu (#174)
 
 ## 0.8.x
 > Released Mar 08, 2023
