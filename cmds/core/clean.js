@@ -21,15 +21,20 @@
 
 exports.command = ['clean <type>'];
 exports.desc = 'Delete various files produced during building';
-exports.builder = yargs => yargs
-  .usage(`${exports.desc}
+exports.builder = function (yargs) {
+  yargs.usage(`${exports.desc}
 
 Usage: eask clean <type> [options..]`)
-  .commandDir('../clean/')
-  .demandCommand()
-  .positional(
-    '<type>', {
-      description: 'type of the cleaning task',
-    });
+    .commandDir('../clean/')
+    .demandCommand();
+
+  /* XXX: Configure only in the menu. */
+  if (UTIL.cmd_count() == 1) {
+    yargs.positional(
+      '<type>', {
+        description: 'type of the cleaning task',
+      });
+  }
+}
 
 exports.handler = async (argv) => { };

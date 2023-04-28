@@ -21,15 +21,20 @@
 
 exports.command = ['lint <type>'];
 exports.desc = 'Run linter';
-exports.builder = yargs => yargs
-  .usage(`${exports.desc}
+exports.builder = function (yargs) {
+  yargs.usage(`${exports.desc}
 
 Usage: eask lint <type> [options..]`)
-  .commandDir('../lint/')
-  .demandCommand()
-  .positional(
-    '<type>', {
-      description: 'type of the linter',
-    });
+    .commandDir('../lint/')
+    .demandCommand();
+
+  /* XXX: Configure only in the menu. */
+  if (UTIL.cmd_count() == 1) {
+    yargs.positional(
+      '<type>', {
+        description: 'type of the linter',
+      });
+  }
+}
 
 exports.handler = async (argv) => { };

@@ -21,15 +21,20 @@
 
 exports.command = ['workflow <type>'];
 exports.desc = 'Generate yaml files for CI/CD';
-exports.builder = yargs => yargs
-  .usage(`${exports.desc}
+exports.builder = function (yargs) {
+  yargs.usage(`${exports.desc}
 
 Usage: eask generate workflow <type> [options..]`)
-  .commandDir('./workflow/')
-  .demandCommand()
-  .positional(
-    '<type>', {
-      description: 'type of the workflow',
-    });
+    .commandDir('./workflow/')
+    .demandCommand();
+
+  /* XXX: Configure only in the menu. */
+  if (UTIL.cmd_count() == 2) {
+    yargs.positional(
+      '<type>', {
+        description: 'type of the workflow',
+      });
+  }
+}
 
 exports.handler = async (argv) => { };

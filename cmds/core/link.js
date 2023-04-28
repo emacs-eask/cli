@@ -21,15 +21,20 @@
 
 exports.command = ['link <action>'];
 exports.desc = 'Manage links';
-exports.builder = yargs => yargs
-  .usage(`${exports.desc}
+exports.builder = function (yargs) {
+  yargs.usage(`${exports.desc}
 
 Usage: eask link <action> [options..]`)
-  .commandDir('../link/')
-  .demandCommand()
-  .positional(
-    '<action>', {
-      description: 'type of link action',
-    });
+    .commandDir('../link/')
+    .demandCommand();
+
+  /* XXX: Configure only in the menu. */
+  if (UTIL.cmd_count() == 1) {
+    yargs.positional(
+      '<action>', {
+        description: 'type of link action',
+      });
+  }
+}
 
 exports.handler = async (argv) => { };

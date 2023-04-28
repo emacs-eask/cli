@@ -21,15 +21,20 @@
 
 exports.command = ['generate <type>'];
 exports.desc = 'Generate files that are used for the development';
-exports.builder = yargs => yargs
-  .usage(`${exports.desc}
+exports.builder = function (yargs) {
+  yargs.usage(`${exports.desc}
 
 Usage: eask generate <type> [options..]`)
-  .commandDir('../generate/')
-  .demandCommand()
-  .positional(
-    '<type>', {
-      description: 'type of the file',
-    });
+    .commandDir('../generate/')
+    .demandCommand();
+
+  /* XXX: Configure only in the menu. */
+  if (UTIL.cmd_count() == 1) {
+    yargs.positional(
+      '<type>', {
+        description: 'type of the file',
+      });
+  }
+}
 
 exports.handler = async (argv) => { };
