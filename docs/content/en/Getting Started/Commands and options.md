@@ -43,6 +43,12 @@ Often use commands that are uncategorized.
 
 ## 🔍 eask init
 
+Initialize the current directory to start using Eask.
+
+```sh
+$ eask [GLOBAL-OPTIONS] init
+```
+
 Eask will generate the file like this:
 
 ```elisp
