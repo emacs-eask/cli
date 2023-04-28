@@ -215,8 +215,7 @@ function hide_cmd(description) {
  * @return Return a size of the command array.
  */
 function cmd_count() {
-  let slice = (IS_PKG) ? 1 : 2;
-  let args = process.argv.slice(slice);
+  let args = process.argv.slice(2);
   args = args.filter(elm => { return !elm.startsWith('-'); });
   return args.length;
 }
