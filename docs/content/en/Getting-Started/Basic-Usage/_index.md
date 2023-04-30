@@ -150,7 +150,7 @@ Here is a list of known nested subcommands:
 
 Eask creates an isolated environment, so it won't create any side effects after
 playing, testing, and running your elisp packages. But it's important to know
-what elpa directory (you can think this as your `.emacs.d`) the current Eask
+what elpa directory (you can think of this as your `.emacs.d`) the current Eask
 session is pointing to, so you can release the full potential of this tool!
 
 Here is how Eask works behind the scene in different scenarios:
@@ -163,11 +163,14 @@ Here is how Eask works behind the scene in different scenarios:
 
 You might think of why these rules are created.
 
-It's easy to understand **config** and **local** since many other build tools
-use **local** to create an isolated environment. **config** is an additional
-feature since many people prefer managing their packages with an external tool.
+It's easy to understand **config** and **local** scopes since many other build
+tools use the **local** scope to create an isolated environment. The **config**
+scope is an additional feature for people who prefer managing their packages
+with an external tool and not by built-in `package.el` or config base
+`straight.el`, so you can save up startup time to check if packages are
+installed for your Emacs to operate.
 
-So what is **global**? Why it's needed?
+So what is the **global** scope in terms of Eask? Why it's needed?
 
 Eask is more than a build tool now. Several commands don't require their
 dependencies as package dependencies. For example, the `cat` command:
@@ -183,7 +186,20 @@ dependency (it could be, but let's assume we don't want it).
 
 How do we use this command without side effects to your project or personal
 emacs configuration? The global scope is introduced for this problem. Now we
-can add any useful commands without worrying the isolated environment got messed
+can add any useful commands without worrying your environment got messed
 up.
 
+Here is the flowchart describes Eask's lifecycle:
+
+<p align="center">
+<img src="images/scopes.png" />
+</p>
+
+By default, Eask uses your current directory as your workspace since most of
+the time you would just want to operate jobs for your elisp packages.
+
+
+<!-- 
+   - Links 
+   -->
 [e2ansi]: https://github.com/Lindydancer/e2ansi

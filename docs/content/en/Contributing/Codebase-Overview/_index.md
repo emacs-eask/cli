@@ -103,11 +103,13 @@ There are **three** places you need to look into it:
 `eask` is the node entry, and the main yargs definition! `cmds` and `lisp`
 folders are command files that correspond to each other.
 
-### ♻️ Execution Order for Eask
+### ♻️ Execution Order inside Eask-file
 
 Eask is executed this way:
 
-![](flowchart/execution_order.png)
+<p align="center">
+<img src="images/execution_order.png" width="80%" />
+</p>
 
 * **Eask environment** builds sandbox and reads Eask file information
 * **Emacs configuration** is only being executed when `-g` option is enabled
