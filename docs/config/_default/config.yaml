@@ -47,3 +47,9 @@ outputs:
     - HTML
   term:
     - HTML
+
+security:
+  exec:
+    allow:
+      - "^asciidoctor$"
+      
