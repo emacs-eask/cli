@@ -27,7 +27,7 @@ Out of the box, Eask supports **50+ commands** to help you throughout the develo
 
 ### Successor to Cask
 
-<img src="/images/cask-large.png" width="65%" />
+<img src="/images/cask-large.png" width="60%" />
 
 Eask is very similar to Cask!
 
@@ -37,7 +37,7 @@ Eask has **all the commands** from Cask and even more!
 
 ### Out-of-the-box
 
-<img src="/images/lint.png" width="95%" />
+<img src="/images/lint.png" width="85%" />
 
 Come with 10+ built-in linters and test runners, so you don't have to worry about how to use it!
 
@@ -45,7 +45,7 @@ Come with 10+ built-in linters and test runners, so you don't have to worry abou
 
 ### Eask-file is an elisp file
 
-<img src="/images/eask-elisp.png" />
+<img src="/images/eask-elisp.png" width="90%" />
 
 Eask is treated as an elisp file.
 
