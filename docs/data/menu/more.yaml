@@ -2,7 +2,7 @@
 more:
   - name: News
     external: true
-    ref: "https://emacs-eask.github.io/#-news"
+    ref: "https://emacs-eask.github.io/Getting-Started/Introduction/#-news"
     icon: gdoc_notification
   - name: Releases
     ref: "https://github.com/emacs-eask/cli/releases"
