@@ -1,9 +1,9 @@
 ---
-title: GNU General Public License
+title: GNU通用公共授權條款
 weight: 1000
 ---
 
-Licensed under GPLv3. See below for details.
+在 GPLv3 下獲得許可。詳情見下文。
 
 ```
                     GNU GENERAL PUBLIC LICENSE
