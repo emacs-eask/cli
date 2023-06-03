@@ -2,4 +2,9 @@
 en:
   languageName: "English"
   contentDir: "content/en"
-  weight: 10
+  weight: 100
+
+zh-TW:
+  languageName: "繁體中文"
+  contentDir: "content/zh-TW"
+  weight: 90

@@ -1,38 +1,35 @@
 ---
-title: 🔧 Advanced Usage
+title: 🔧 進階用法
 weight: 400
 ---
 
-`Eask` is just a regular Emacs Lisp file and should be read from Emacs itself!
-You can do:
+`Eask` 只是一個普通的 Emacs Lisp 文件，應該從 Emacs 本身讀取！ 你可以做：
 
 ```elisp
-; Regular Eask file content...
+; 常規 Eask 文件內容...
 
-(setq byte-compile-error-on-warn t)  ; Signal error if warning occurred
+(setq byte-compile-error-on-warn t)  ; 出現警告時信號錯誤
 ```
 
-`eask` provides some hooks which enable you to execute code before and after
-each command. The hooks look like so:
+`eask` 提供了一些 hooks，使您能夠在每個命令之前和之後執行代碼。 hook 看起來像這樣：
 
 - `eask-before-COMMAND-hook`
 - `eask-after-COMMAND-hook`
 
-For example, to consider warnings as errors when byte-compiling with the command
-`eask compile`:
+例如，在使用命令 `eask compile` 進行字節編譯時將警告視為錯誤：
 
 ```elisp
 (add-hook 'eask-before-compile-hook
           (lambda () (setq byte-compile-error-on-warn t)))
 ```
 
-This is also equivalent to option `--strict`:
+這也等同於選項 `--strict`：
 
 ```sh
 $ eask compile [FILES..] --strict
 ```
 
-Or hooks that run on every command:
+或者在每個命令上運行的 hooks：
 
 - `eask-before-command-hook`
 - `eask-after-command-hook`
@@ -43,18 +40,18 @@ Or hooks that run on every command:
              (message "%s" (eask-command))))  ; print the current command
 ```
 
-For subcommands that contain spaces, will concatenate with `/`:
+對於包含空格的子命令，將與`/`連接：
 
 ```sh
 $ eask lint checkdoc     # lint/checkdoc
 $ eask generate license  # generate/license
 ```
 
-therefore,
+所以，
 
 ```elisp
 (add-hook 'eask-before-lint/checkdoc-hook
            (lambda ()
-             ;; do stuff before checkdoc linting...
+             ;; 在 checkdoc linting 之前做一些事情...
              ))
 ```

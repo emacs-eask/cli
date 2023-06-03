@@ -25,6 +25,9 @@ params:
   geekdocSearch: true
   geekdocSearchShowParent: true
 
+  geekdocLegalNotice: "/tos"
+  geekdocPrivacyPolicy: "/tos"
+
 markup:
   goldmark:
     renderer:

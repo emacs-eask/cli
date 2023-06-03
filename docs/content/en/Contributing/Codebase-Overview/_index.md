@@ -39,11 +39,11 @@ exports.handler = async (argv) => {
 This is a standard yargs command file, which contains all the information we
 need to pass it to the Emacs session.
 
-* **exports.command** is the argument pattern, but it also accepts alias (array)
-* **exports.desc** is the command description
-* **exports.handler** is an asynchronous function that handles command execution
-* **UTIL** is a global variable that points to the `src/util.js` module.
-* **`'core/archives'`** is the elisp file under **lisp** folder (without `.el` extension).
+- **exports.command** is the argument pattern, but it also accepts alias (array)
+- **exports.desc** is the command description
+- **exports.handler** is an asynchronous function that handles command execution
+- **UTIL** is a global variable that points to the `src/util.js` module.
+- **`'core/archives'`** is the elisp file under **lisp** folder (without `.el` extension).
 
 `eask` is a JavaScript file that holds all our global options.
 
@@ -111,8 +111,8 @@ Eask is executed this way:
 <img src="images/execution_order.png" width="80%" />
 </p>
 
-* **Eask environment** builds sandbox and reads Eask file information
-* **Emacs configuration** is only being executed when `-g` option is enabled
-* **before hooks** are hooks run before command task
-* **command execution** is the primary command task
-* **after hooks** are hooks run after command task
+- **Eask environment** builds sandbox and reads Eask file information
+- **Emacs configuration** is only being executed when `-g` option is enabled
+- **before hooks** are hooks run before command task
+- **command execution** is the primary command task
+- **after hooks** are hooks run after command task

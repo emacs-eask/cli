@@ -1,28 +1,27 @@
 ---
-title: Domain Specific Language
+title: 领域特定语言
 weight: 200
 ---
 
-This document provides a reference on the [DSL](https://en.wikipedia.org/wiki/Domain-specific_language).
+本文檔是關於 [DSL] (https://en.wikipedia.org/wiki/Domain-specific_language)。
 
 {{< toc >}}
 
-# 🚩 Package metadata
+# 🚩 包元資料
 
 ## 🔍 **package** (`name` `version` `description`)
 
-Declare a package with the given name, version, and description:
+使用給定的名稱、版本和描述聲明一個包：
 
 ```elisp
 (package "ert-runner" "0.7.0" "Opinionated Ert testing workflow")
 ```
 
-All arguments are strings. The version must be a version understood by Emacs'
-built-in `version-to-list`.
+所有參數都是字符串。 該版本必須是 Emacs 內置的 `version-to-list` 可以理解的版本。
 
 ## 🔍 **website-url** (`url`)
 
-Declare the package website.
+聲明包網站。
 
 ```elisp
 (website-url "https://github.com/owner/repo.git")
@@ -30,7 +29,7 @@ Declare the package website.
 
 ## 🔍 **keywords** (`&rest keywords`)
 
-Declare package keywords.
+聲明包關鍵字。
 
 ```elisp
 (keywords "tool" "utility" "emacs")
@@ -38,15 +37,15 @@ Declare package keywords.
 
 ## 🔍 **author** (`name` &optional `email`)
 
-Declare package's author.
+聲明包的作者。
 
 ```elisp
-(author "USER NAME" "user.name@example.com")
+(author "使用者名稱" "user.name@example.com")
 ```
 
 ## 🔍 **license** (`name`)
 
-Declare package's author.
+聲明包的作者。
 
 ```elisp
 (license "GPLv3")
@@ -56,8 +55,7 @@ Declare package's author.
 
 ## 🔍 **package-file** (`file` `version` `description`)
 
-Define this package and its runtime dependencies from the package headers 
-of a file (used only for package development).
+從文件的包頭定義此包及其運行時依賴項（僅用於包開發）。
 
 ```elisp
 (package-file "foo.el")
@@ -65,8 +63,7 @@ of a file (used only for package development).
 
 ## 🔍 **package-descriptor** (`pkg-file`)
 
-Declare all package metadata directly by specifying a package descriptor 
-contained in file with name given by file.
+通過指定文件中包含的包描述符直接聲明所有包元數據，名稱由文件給出。
 
 ```elisp
 (package-descriptor "foo-pkg.el")
@@ -74,38 +71,37 @@ contained in file with name given by file.
 
 ## 🔍 **files** (`&rest patterns`)
 
-Specify list of files that are included in this project.
+指定包含在此項目中的文件列表。
 
 ```elisp
 (files "foo.el")
 (files "*.el" "core/*.el")
 ```
 
-# 🚩 Tests
+# 🚩 測試
 
 ## 🔍 **script** (`name` `command` &rest `args`)
 
-Add built-in scripts and their preset life cycle event as well as arbitrary
-scripts.
+添加內置腳本及其預設的生命週期事件以及任意腳本。
 
 ```elisp
 (script "test" "echo This is a test!")
 ```
 
-# 🚩 Dependencies
+# 🚩 依賴
 
 ## 🔍 **source** (`alias`)
 
 ## 🔍 **source** (`name` `url`)
 
-Add a package archive to install dependencies from.
+添加包存檔以從中安裝依賴項。
 
 ```elisp
 (source "gnu")
 (source "gnu" "https://elpa.gnu.org/packages/")
 ```
 
-Available aliases:
+可用別名：
 
 * `gnu` ([https://elpa.gnu.org/packages/](https://elpa.gnu.org/packages/))
 * `nongnu` ([https://elpa.nongnu.org/nongnu/](https://elpa.nongnu.org/nongnu/))
@@ -118,12 +114,12 @@ Available aliases:
 * `shmelpa` ([https://shmelpa.commandlinesystems.com/packages/](https://shmelpa.commandlinesystems.com/packages/))
 
 {{< hint ok >}}
-💡 Use **--insecure** to make **https** to **http**, but not recommended
+💡 使用**--insecure**讓**https**轉**http**，但不推薦!
 {{< /hint >}}
 
 ## 🔍 **source-priority** (`name` `priority`)
 
-Set archive priority.
+設置 archive 優先級。
 
 ```elisp
 (source-priority "gnu" 5)
@@ -133,9 +129,9 @@ Set archive priority.
 
 ## 🔍 **depends-on** (`package-name` `&rest recipe`)
 
-Specify a dependency of this package.
+指定此包的依賴項。
 
-Specify dependencies that are listed in **archives**:
+指定 **archives** 中列出的依賴項：
 
 ```elisp
 (depends-on "emacs" "26.1")
@@ -143,7 +139,7 @@ Specify dependencies that are listed in **archives**:
 (depends-on "company")
 ```
 
-Specify dependencies in **recipe** format:
+以 **recipe** 格式指定依賴項：
 
 ```elisp
 (depends-on "auto-rename-tag" 
@@ -157,12 +153,12 @@ Specify dependencies in **recipe** format:
 ```
 
 {{< hint ok >}}
-💡 Install dependencies with command **eask install-deps**!
+💡 使用命令 **eask install-deps** 安裝依賴項！
 {{< /hint >}}
 
 ## 🔍 **development** (`&rest body`)
 
-Scope all `depends-on` expressions in body to development.
+將正文中所有 `depends-on` 表達式的範圍限定為開發依賴。
 
 ```elisp
 (development
@@ -171,12 +167,12 @@ Scope all `depends-on` expressions in body to development.
 ```
 
 {{< hint ok >}}
-💡 You would need to specify the **--dev** option for development dependencies!
+💡 您需要為開發依賴項指定 **--dev** 選項！
 {{< /hint >}}
 
 ## 🔍 **load-paths** (`&rest paths`)
 
-Specify paths to add to `load-path`.
+指定要添加到 `load-path` 的路徑。
 
 ```elisp
 (load-paths "/lisp/")
@@ -184,7 +180,7 @@ Specify paths to add to `load-path`.
 
 ## 🔍 **exec-paths** (`&rest paths`)
 
-Specify paths to add to `exec-path`.
+指定要添加到 `exec-path` 的路徑。
 
 ```elisp
 (load-paths "/bin/")

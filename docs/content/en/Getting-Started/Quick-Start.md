@@ -50,7 +50,7 @@ $ cd /path/to/project/dir/
 To create one:
 
 ```sh
-$ eask create project-name
+$ eask create package project-name
 ```
 
 It should create a folder named `project-name` in your current working directory.

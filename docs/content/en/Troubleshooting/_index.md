@@ -9,20 +9,19 @@ This document helps you troubleshoot Eask.
 
 ## 🚩 Possible Error Variables
 
-Some potential variables can cause faulty Eask, please check
+Some potential variables can cause faulty Eask, please check:
 
-* Emacs is installed and set up with `PATH`
-* Eask is installed correctly
-* Node version should be `14.x` or above
+- Emacs is installed and set up with `PATH`
+- Eask is installed correctly
+- Node version should be `14.x` or above
 
 ## ⛔️ Error when running an Eask command
 
-If you run an Eask command and get an error, there are a few things you can try
-yourself:
+If you run an Eask command and get an error, there are a few things you can try:
 
-* Make sure that you have the latest Eask version. You can determine the current
+- Make sure that you have the latest Eask version. You can determine the current
 Eask version with `eask --version`.
-* Upgrade Eask with `eask upgrade-eask` or `npm install -g @emacs-eask/cli@latest`
+- Upgrade Eask with `eask upgrade-eask` or `npm install -g @emacs-eask/cli@latest`
 if you chose to install from `npm`.
 
 {{< hint warning >}}

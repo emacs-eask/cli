@@ -1,55 +1,55 @@
 ---
-title: 🚩 Commands and options
+title: 🚩 命令和選項
 weight: 300
 ---
 
 {{< toc >}}
 
-The general syntax of the **eask** program is:
+**eask** 程序的一般語法是：
 
 ```sh
 $ eask [GLOBAL-OPTIONS] [COMMAND] [COMMAND-OPTIONS] [COMMAND-ARGUMENTS]
 ```
 
-# 🚩 Creating
+# 🚩 創建
 
 ## 🔍 eask create package
 
-Create a new elisp project with the default `Eask`-file and CI/CD support.
+使用默認的“Eask”文件和 CI/CD 支持創建一個新的 elisp 項目。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] create package <name>
 ```
 
 {{< hint info >}}
-💡 The template project is located in https://github.com/emacs-eask/template-elisp
+💡 模板項目位於 https://github.com/emacs-eask/template-elisp。
 {{< /hint >}}
 
 ## 🔍 eask create elpa
 
-Create a new ELPA using [github-elpa](https://github.com/10sr/github-elpa).
+使用 [github-elpa](https://github.com/10sr/github-elpa) 創建一個新的 ELPA。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] create elpa <name>
 ```
 
 {{< hint info >}}
-💡 The template project is located in https://github.com/emacs-eask/template-elpa
+💡 模板項目位於 https://github.com/emacs-eask/template-elpa。
 {{< /hint >}}
 
-# 🚩 Core
+# 🚩 核心
 
-Often use commands that are uncategorized.
+經常使用未分類的命令。
 
 ## 🔍 eask init
 
-Initialize the current directory to start using Eask.
+初始化當前目錄以開始使用 Eask。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] init
 ```
 
-Eask will generate the file like this:
+Eask 將生成這樣的文件：
 
 ```elisp
 (package "PACKAGE-NAME"
@@ -69,12 +69,12 @@ Eask will generate the file like this:
 ```
 
 {{< hint ok >}}
-💡 See section [Examples](https://emacs-eask.github.io/examples) for more information!
+💡 有關更多信息，請參閱 [示例](https://emacs-eask.github.io/examples) 部分！
 {{< /hint >}}
 
 ## 🔍 eask info
 
-Show information about the project or configuration.
+顯示有關項目或配置的信息。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] info
@@ -82,7 +82,7 @@ $ eask [GLOBAL-OPTIONS] info
 
 ## 🔍 eask status
 
-Display the state of the workspace.
+顯示工作區的狀態。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] status
@@ -90,33 +90,33 @@ $ eask [GLOBAL-OPTIONS] status
 
 ## 🔍 eask install-deps
 
-To install all dependencies.
+安裝所有依賴項。
 
-Alias: `install-dependencies`, `prepare`
+別名: `install-dependencies`, `prepare`
 
 ```sh
 $ eask [GLOBAL-OPTIONS] install-deps [--dev]
 ```
 
 {{< hint ok >}}
-💡 Specify option [--dev] to install dependencies from the development scope.
+💡 指定選項 [--dev] 從開發範圍安裝依賴項。
 {{< /hint >}}
 
 ## 🔍 eask install
 
-To install packages.
+安裝軟件包。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] install [PACKAGES..]
 ```
 
-Install packages by specifying arguments:
+通過指定參數安裝包：
 
 ```sh
 $ eask install auto-complete helm magit
 ```
 
-Or else, it will install the package from the current development:
+否則，它將安裝當前開發的包：
 
 ```sh
 $ eask install
@@ -124,19 +124,19 @@ $ eask install
 
 ## 🔍 eask uninstall
 
-To uninstall/delete packages.
+卸載/刪除包。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] uninstall [PACKAGES..]
 ```
 
-Uninstall packages by specifying arguments:
+通過指定參數卸載軟件包：
 
 ```sh
 $ eask uninstall dash f s
 ```
 
-Or else, it will uninstall the package from the current development:
+否則，它將從當前開發中卸載包：
 
 ```sh
 $ eask uninstall
@@ -144,30 +144,29 @@ $ eask uninstall
 
 ## 🔍 eask package
 
-Build the package artifact.
+構建包工件。
 
 ```sh
 $ eask package [DESTINATION]
 ```
 
-If [DESTINATION] is not specified, it will export to the `/dist` folder
-by default.
+如果未指定 [DESTINATION]，則默認導出到 `/dist` 文件夾。
 
 ## 🔍 eask compile
 
-Byte-compile files.
+字節編譯文件。
 
 ```sh
 $ eask compile [FILES..]
 ```
 
-Compile files by specifying arguments:
+通過指定參數編譯文件：
 
 ```sh
 $ eask compile file-1.el file-2.el
 ```
 
-Or compile files that are already specified in your `Eask`-file.
+或者編譯已經在你的 `Eask` 文件中指定的文件。
 
 ```sh
 $ eask compile
@@ -175,7 +174,7 @@ $ eask compile
 
 ## 🔍 eask package-directory
 
-Print path to package directory, where all dependencies are installed.
+打印包目錄的路徑，其中安裝了所有依賴項。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] package-directory
@@ -183,39 +182,39 @@ $ eask [GLOBAL-OPTIONS] package-directory
 
 ## 🔍 eask path
 
-Print the `PATH` environment variable of this project.
+打印此項目的 `PATH` 環境變量。
 
-Alias: `exec-path`
+別名: `exec-path`
 
 ```sh
 $ eask [GLOBAL-OPTIONS] path [PATTERNS..]
 ```
 
-Optionally, you can pass in `[PATTERNS..]` to perform the search.
+或者，您可以傳入 `[PATTERNS..]` 來執行搜索。
 
 ## 🔍 eask load-path
 
-Print the load path containing the dependencies of the current project.
+打印包含當前項目依賴項的加載路徑。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] load-path [PATTERNS..]
 ```
 
-Optionally, you can pass in `[PATTERNS..]` to perform the search. 
+或者，您可以傳入 `[PATTERNS..]` 來執行搜索。
 
 ## 🔍 eask files
 
-Print the list of all package files.
+打印所有包文件的列表。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] files [PATTERNS..]
 ```
 
-If `[PATTERNS..]` are defined, it will display files that match that pattern.
+如果定義了 `[PATTERNS..]` ，它將顯示與該模式匹配的文件。
 
 ## 🔍 eask exec
 
-Execute the system command with the given arguments.
+使用給定的參數執行系統命令。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] exec [COMMAND] [ARGUMENTS ...]
@@ -223,7 +222,7 @@ $ eask [GLOBAL-OPTIONS] exec [COMMAND] [ARGUMENTS ...]
 
 ## 🔍 eask emacs
 
-Execute emacs with the appropriate environment.
+在合適的環境下執行emacs。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] emacs [ARGUMENTS ...]
@@ -231,7 +230,7 @@ $ eask [GLOBAL-OPTIONS] emacs [ARGUMENTS ...]
 
 ## 🔍 eask eval
 
-Evaluate `FORM` as a lisp form.
+將 `FORM` 評估為 lisp 形式。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] eval [FORM]
@@ -239,7 +238,7 @@ $ eask [GLOBAL-OPTIONS] eval [FORM]
 
 ## 🔍 eask load
 
-Load Emacs Lisp files in order.
+按順序加載 Emacs Lisp 文件。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] load [FILES..]
@@ -247,7 +246,7 @@ $ eask [GLOBAL-OPTIONS] load [FILES..]
 
 ## 🔍 eask recipe
 
-Suggest a recipe format.
+建議 recipe 格式。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] recipe [FILES..]
@@ -255,7 +254,7 @@ $ eask [GLOBAL-OPTIONS] recipe [FILES..]
 
 ## 🔍 eask keywords
 
-List available keywords that can be used in the header section.
+列出可在標題部分中使用的可用關鍵字。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] keywords
@@ -263,22 +262,21 @@ $ eask [GLOBAL-OPTIONS] keywords
 
 ## 🔍 eask cat
 
-View filename(s).
+查看文件名。
 
-The positional argument `[PATTERNS..]` is an array of wildcard patterns.
+位置參數 `[PATTERNS..]` 是一個通配符模式數組。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] cat [PATTERNS..]
 ```
 
 {{< hint info >}}
-💡 This command uses the package [e2ansi](https://github.com/Lindydancer/e2ansi)
-to accomplish the syntax highlighting.
+💡 此命令使用包 [e2ansi](https://github.com/Lindydancer/e2ansi) 來完成語法高亮。
 {{< /hint >}}
 
 ## 🔍 eask concate
 
-Concatenate all Emacs Lisp files into one file.
+將所有 Emacs Lisp 文件連接成一個文件。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] concate [FILES..]
@@ -286,19 +284,19 @@ $ eask [GLOBAL-OPTIONS] concate [FILES..]
 
 ## 🔍 eask run
 
-Run the script.
+運行腳本。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] run [FILES..]
 ```
 
-Alias: `run-script`
+別名: `run-script`
 
-# 🚩 Management
+# 🚩 管理
 
 ## 🔍 eask archives
 
-List out all package archives.
+列出所有包檔案。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] archives
@@ -306,7 +304,7 @@ $ eask [GLOBAL-OPTIONS] archives
 
 ## 🔍 eask search
 
-Search packages from archives.
+從檔案中搜索包。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] search [QUEIRES..]
@@ -314,7 +312,7 @@ $ eask [GLOBAL-OPTIONS] search [QUEIRES..]
 
 ## 🔍 eask upgrade
 
-Upgrade all packages.
+升級所有軟件包。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] upgrade
@@ -322,7 +320,7 @@ $ eask [GLOBAL-OPTIONS] upgrade
 
 ## 🔍 eask list
 
-List packages.
+列出包。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] list [--depth]
@@ -330,7 +328,7 @@ $ eask [GLOBAL-OPTIONS] list [--depth]
 
 ## 🔍 eask outdated
 
-List out all outdated packages.
+列出所有過時的包。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] outdated [--depth]
@@ -338,102 +336,97 @@ $ eask [GLOBAL-OPTIONS] outdated [--depth]
 
 ## 🔍 eask refresh
 
-Download package archives.
+刷新包 archives。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] refresh
 ```
 
-# 🚩 Generating
+# 🚩 生成
 
-Generate files that are used for the development.
+生成用於開發的文件。
 
 ## 🔍 eask generate autoloads
 
-Generate autoload file.
+生成 autoload 文件。
 
-Write a package autoloads to `project-autoloads.el` in the project root.
+將包自動加載到項目根目錄中的 `project-autoloads.el`。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] generate autoloads
 ```
 
-`project` is the project name, as declared in `Eask`-file. See
-[Multi-file Packages (elisp)](https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html#Multi_002dfile-Packages)
-for details.
+`project` 是在 `Eask` 文件中聲明的項目名稱。 有關詳細信息，請參閱
+[多文件包 (elisp)](https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html#Multi_002dfile-Packages)。
 
 ## 🔍 eask generate pkg-file
 
-Generate pkg file.
+生成 pkg 文件。
 
-Write a package descriptor file to `project-pkg.el` in the project root.
+將包描述符文件寫入項目根目錄中的 `project-pkg.el`。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] generate pkg-file
 ```
 
-`project` is the project name, as declared in `Eask`-file. See
-[Multi-file Packages (elisp)](https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html#Multi_002dfile-Packages)
-for details.
+`project` 是在 `Eask` 文件中聲明的項目名稱。 有關詳細信息，請參閱
+[多文件包 (elisp)](https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html#Multi_002dfile-Packages)。
 
 ## 🔍 eask generate license
 
-Generate LICENSE file.
+生成 LICENSE 文件。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] generate license <name>
 ```
 
-`name` is the type of the license, see https://api.github.com/licenses for all
-the choices.
+name` 是許可證的類型，請參閱 https://api.github.com/licenses 了解所有選擇。
 
 {{< hint info >}}
-💡 This command uses the package [license-templates](https://github.com/jcs-elpa/license-templates)
-to generate ignore file.
+💡 此命令使用包 [license-templates](https://github.com/jcs-elpa/license-templates) 生成忽略文件。
 {{< /hint >}}
 
 ## 🔍 eask generate ignore
 
-Generate ignore file.
+生成忽略文件。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] generate ignore <name>
 ```
 
 {{< hint info >}}
-💡 This command uses the package [gitignore-templates](https://github.com/xuchunyang/gitignore-templates.el)
-to generate ignore file.
+💡 此命令使用包 [gitignore-templates](https://github.com/xuchunyang/gitignore-templates.el) 生成忽略文件。
 {{< /hint >}}
 
 ## 🔍 eask generate workflow circle-ci
 
-Generate CircleCI workflow yaml file.
+生成 CircleCI 工作流 yaml 文件。
 
-The default filename is `config.yml`.
+默認文件名為 `config.yml`。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] generate workflow circle-ci [--file]
 ```
 
-This will generate the yaml file under `.circleci/`!
+這將在 `.circleci/` 下生成 yaml 文件！
 
 ## 🔍 eask generate workflow github
 
-Generate GitHub Actions workflow yaml file.
+生成 GitHub Actions 工作流 yaml 文件。
 
-The default filename is `test.yml`.
+默認文件名為 `test.yml`。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] generate workflow github [--file]
 ```
 
-This will generate the yaml file under `.github/workflow/`!
+這將在 `.github/workflow/` 下生成 yaml 文件！
 
 ## 🔍 eask generate workflow gitlab
 
-Generate GitLab Runner workflow yaml file.
+生成 GitLab Runner 工作流程 yaml 文件。
 
-The default filename is `.gitlab-ci.yml`.
+默認文件名為 `.gitlab-ci.yml`。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] generate workflow gitlab [--file]
@@ -441,24 +434,22 @@ $ eask [GLOBAL-OPTIONS] generate workflow gitlab [--file]
 
 ## 🔍 eask generate workflow travis-ci
 
-Generate Travis CI workflow yaml file.
+生成 Travis CI 工作流 yaml 文件。
 
-The default filename is `.travis.yml`.
+默認文件名為 `.travis.yml`。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] generate workflow travis-ci [--file]
 ```
 
-# 🚩 Linking
+# 🚩 連結
 
-Link between this package and a dependency on the local filesystem. A linked 
-dependency avoids the need to download a dependency from a remote archive. The 
-package linked to must either have a `Eask`-file or a `-pkg.el`-file.
+此包與本地文件系統的依賴關係之間的鏈接。 鏈接的依賴項避免了從遠程存檔下載依賴項的需要。
+鏈接到的包必須有一個 `Eask` 文件或一個 `-pkg.el` 文件。
 
 ## 🔍 eask link add <name> <path>
 
-Links the given *source* directory into the package directory of this project,
-under the given *package* name.
+將給定的 *source* 目錄鏈接到此項目的包目錄，在給定的 *package* 名稱下。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] link add <name> <path>
@@ -466,7 +457,7 @@ $ eask [GLOBAL-OPTIONS] link add <name> <path>
 
 ## 🔍 eask link delete [name..]
 
-Deletes the link for the given packages.
+刪除給定包的鏈接。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] link delete [names..]
@@ -474,33 +465,34 @@ $ eask [GLOBAL-OPTIONS] link delete [names..]
 
 ## 🔍 eask link list
 
-List all links.
+列出所有鏈接。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] link list
 ```
 
-# 🚩 Cleaning
+# 🚩 清理
 
 ## 🔍 eask clean workspace
 
-Delete `.eask` from the current workspace.
+從當前工作區中刪除 `.eask` 。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] clean workspace
 ```
 
-⛔️ Don't specify the option `--config, -c`, or else it will delete your entire `~/.emacs.d`.
+⛔️ 不要指定選項 `--config, -c`，否則它會刪除你的整個 `~/.emacs.d`。
+
 
 ```elisp
 $ eask clean workspace -g
 ```
 
-Alias: `.eask`
+別名: `.eask`
 
 ## 🔍 eask clean elc
 
-Delete all `.elc` files. This would respect to your `Eask` file.
+刪除所有 `.elc` 文件。 這將尊重您的 `Eask` 文件。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] clean elc
@@ -508,17 +500,17 @@ $ eask [GLOBAL-OPTIONS] clean elc
 
 ## 🔍 eask clean dist
 
-Delete dist subdirectory.
+刪除 dist 子目錄。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] clean dist
 ```
 
-Alias: `distribution`
+別名: `distribution`
 
 ## 🔍 eask clean autoloads
 
-Remove generated autoloads file.
+刪除生成的 autoload 文件。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] clean autoloads
@@ -526,7 +518,7 @@ $ eask [GLOBAL-OPTIONS] clean autoloads
 
 ## 🔍 eask clean pkg-file
 
-Remove generated pkg-file.
+刪除生成的 pkg 文件。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] clean pkg-file
@@ -534,7 +526,7 @@ $ eask [GLOBAL-OPTIONS] clean pkg-file
 
 ## 🔍 eask clean log-file
 
-Remove all generated log files.
+刪除所有生成的日誌文件。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] clean log-file
@@ -542,7 +534,7 @@ $ eask [GLOBAL-OPTIONS] clean log-file
 
 ## 🔍 eask clean all
 
-This command is the combination of all other clean commands.
+此命令是所有其他清理命令的組合。
 
 - `clean workspace`
 - `clean elc`
@@ -555,15 +547,15 @@ This command is the combination of all other clean commands.
 $ eask [GLOBAL-OPTIONS] clean all
 ```
 
-Alias: `everything`
+別名: `everything`
 
-# 🚩 Linter
+# 🚩 检查器
 
-Commands that lint your Emacs package.
+對 Emacs 包進行 lint 的命令。
 
 ## 🔍 eask lint package
 
-Run [package-lint](https://github.com/purcell/package-lint).
+運行 [package-lint](https://github.com/purcell/package-lint).
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint package [FILES..]
@@ -571,7 +563,7 @@ $ eask [GLOBAL-OPTIONS] lint package [FILES..]
 
 ## 🔍 eask lint checkdoc
 
-Run checkdoc (built-in).
+運行 checkdoc (自帶).
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint checkdoc [FILES..]
@@ -579,7 +571,7 @@ $ eask [GLOBAL-OPTIONS] lint checkdoc [FILES..]
 
 ## 🔍 eask lint elint
 
-Run elint (built-in).
+運行 elint (自帶).
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint elint [FILES..]
@@ -587,17 +579,17 @@ $ eask [GLOBAL-OPTIONS] lint elint [FILES..]
 
 ## 🔍 eask lint elisp-lint
 
-Run [elisp-lint](https://github.com/gonewest818/elisp-lint).
+運行 [elisp-lint](https://github.com/gonewest818/elisp-lint).
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint elisp-lint [FILES..]
 ```
 
-This does respect the `.dir-locals.el` file! 🎉
+這確實尊重 .dir-locals.el 文件！ 🎉
 
 ## 🔍 eask lint elsa
 
-Run [elsa](https://github.com/emacs-elsa/Elsa).
+運行 [elsa](https://github.com/emacs-elsa/Elsa).
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint lint elsa [FILES..]
@@ -605,7 +597,7 @@ $ eask [GLOBAL-OPTIONS] lint lint elsa [FILES..]
 
 ## 🔍 eask lint indent
 
-Run indent-lint.
+運行 indent-lint.
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint indent [FILES..]
@@ -613,7 +605,7 @@ $ eask [GLOBAL-OPTIONS] lint indent [FILES..]
 
 ## 🔍 eask lint keywords
 
-Run keywords checker (built-in).
+運行 keywords checker (自帶).
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint keywords
@@ -621,7 +613,7 @@ $ eask [GLOBAL-OPTIONS] lint keywords
 
 ## 🔍 eask lint license
 
-Run license check.
+運行 license check.
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint license
@@ -629,7 +621,7 @@ $ eask [GLOBAL-OPTIONS] lint license
 
 ## 🔍 eask lint declare
 
-Run check-declare (built-in).
+運行 check-declare (自帶).
 
 ```sh
 $ eask [GLOBAL-OPTIONS] lint declare [FILES..]
@@ -643,22 +635,22 @@ Run [relint](https://github.com/mattiase/relint).
 $ eask [GLOBAL-OPTIONS] lint regexps [FILES..]
 ```
 
-Alias: `lint relint`
+別名: `lint relint`
 
-# 🚩 Testing
+# 🚩 測試框架
 
 ## 🔍 eask test activate
 
-Activate package; use to test the package activation
+激活包； 用於測試包激活
 
 ```sh
 $ eask [GLOBAL-OPTIONS] activate [FILES..]
 ```
 
 {{< hint info >}}
-💡 You can pass in **[FILES..]** so you can test your package activation fully!
+💡 您可以傳入 **[FILES..]** 以便您可以全面測試您的包激活！
 
-**[FILES..]** will be loaded after the package is activated.
+**[FILES..]** 將在包激活後加載。
 {{< /hint >}}
 
 ## 🔍 eask test ert
@@ -679,27 +671,27 @@ $ eask [GLOBAL-OPTIONS] test ert-runner
 $ eask [GLOBAL-OPTIONS] test buttercup
 ```
 
-# 🚩 Utilities
+# 🚩 實用工具
 
-Other helper commands.
+其他輔助命令。
 
 ## 🔍 eask upgrade-eask
 
-Upgrade Eask to the latest version.
+將 Eask 升級到最新版本。
 
-Alias: `upgrade-self`
+別名: `upgrade-self`
 
 ```sh
 $ eask [GLOBAL-OPTIONS] upgrade-eask
 ```
 
 {{< hint warning >}}
-💡 This will only work if you install it from the source!
+💡 這只有在您從源代碼安裝時才有效！
 {{< /hint >}}
 
 ## 🔍 eask locate
 
-Show Eask installed location.
+顯示 Eask 安裝位置。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] locate
@@ -707,17 +699,17 @@ $ eask [GLOBAL-OPTIONS] locate
 
 # 🚩 Checker
 
-Commands to check your Eask-file.
+檢查您的 Eask 文件的命令。
 
 ## 🔍 eask check-eask
 
-Lint an `Eask`-file.
+檢查 `Eask` 文件。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] check-eask [FILES..]
 ```
 
-Example:
+例子:
 
 ```bash
 # lint all Eask-files in the current directory and subdirectories
@@ -730,17 +722,17 @@ eask check-eask src/
 eask check-eask --json
 ```
 
-For more detail, run `eask check-eask --help`.
+有關更多詳細信息，請運行 `eask check-eask --help`。
 
-# 🚩 Global Options
+# 🚩 全域選項
 
-The following options are available on all Eask commands:
+以下選項適用於所有 Eask 命令：
 
 ## 🔍 --global, -g
 
-This will use `~/.eask/` instead of the package development environment.
+這將使用 ~/.eask/ 而不是包開發環境。
 
-This is used for other tasks. e.g., `cat`, etc.
+這用於其他任務。 例如，`cat` 等。
 
 ```sh
 $ eask -g [COMMAND]
@@ -748,10 +740,9 @@ $ eask -g [COMMAND]
 
 ## 🔍 --config, -c
 
-This will use `~/.emacs.d/` instead of the package development environment.
+這將使用 `~/.emacs.d/` 而不是包開發環境。
 
-This is used for doing stuff for your **Emacs configuration**. e.g., package
-management, etc.
+這用於為您的**Emacs 配置**做一些事情。 例如，包管理等。
 
 ```sh
 $ eask -c [COMMAND]
@@ -759,7 +750,7 @@ $ eask -c [COMMAND]
 
 ## 🔍 --all, -a
 
-Enable the `all` flag.
+啟用 `all` 標誌。
 
 ```sh
 $ eask -a [COMMAND]
@@ -767,7 +758,7 @@ $ eask -a [COMMAND]
 
 ## 🔍 --quick, -q
 
-Start cleanly without loading the configuration files.
+乾淨地啟動而不加載配置文件。
 
 ```sh
 $ eask -q [COMMAND]
@@ -775,9 +766,9 @@ $ eask -q [COMMAND]
 
 ## 🔍 --force, -f
 
-Force command's execution.
+強制執行命令。
 
-Force to uninstall the package `dash` even it's a dependency from another packages.
+強制卸載包 `dash` ，即使它是另一個包的依賴項
 
 ```sh
 $ eask -f [COMMAND]
@@ -785,9 +776,9 @@ $ eask -f [COMMAND]
 
 ## 🔍 --debug
 
-Enable debug information.
+啟用調試信息。
 
-This is equivalent to:
+這相當於：
 
 ```elisp
 (setq debug-on-error t)
@@ -805,35 +796,35 @@ For instance, in **eask compile**:
 
 ## 🔍 --allow-error
 
-Continue the execution without killing the Emacs.
+在不終止 Emacs 的情況下繼續執行。
 
 ## 🔍 --insecure
 
-Connect archives with HTTP instead of HTTPS.
+使用 HTTP 而不是 HTTPS 連接存檔。
 
 ## 🔍 --timestamps
 
-Enable/Disable timestamps.
+啟用/禁用時間戳。
 
 ## 🔍 --log-level
 
-Enable/Disable log header.
+啟用/禁用日誌標頭。
 
 ## 🔍 --log-file, --lf
 
-Weather to generate log files.
+是否生成日誌文件。
 
 ## 🔍 --no-color
 
-Disable color output.
+禁用顏色輸出。
 
 ## 🔍 --elapsed-time, --et
 
-Show elapsed time between each operation.
+顯示每個操作之間經過的時間。
 
 ## 🔍 --verbose, -v `<integer>`
 
-Set verbosity from 0 to 5.
+將詳細程度從 0 設置為 5。
 
 ```sh
 $ eask --verbose 4 [COMMAND]
@@ -841,17 +832,17 @@ $ eask --verbose 4 [COMMAND]
 
 ## 🔍 --version
 
-Show version number.
+顯示版本號。
 
 ## 🔍 --help
 
-Show help.
+顯示幫助。
 
-# 🚩 Proxy Options
+# 🚩 代理選項
 
 ## 🔍 --proxy `<proxy>`
 
-Set Emacs proxy for HTTP and HTTPS:
+為 HTTP 和 HTTPS 設置 Emacs 代理：
 
 ```sh
 $ eask --proxy "localhost:8888" [COMMAND]
@@ -859,14 +850,14 @@ $ eask --proxy "localhost:8888" [COMMAND]
 
 ## 🔍 --http-proxy `<proxy>`
 
-Set Emacs proxy for HTTP only.
+僅為 HTTP 設置 Emacs 代理。
 
 ## 🔍 --https-proxy `<proxy>`
 
-Set Emacs proxy for HTTPS only.
+僅為 HTTPS 設置 Emacs 代理。
 
 ## 🔍 --no-proxy `<pattern>`
 
-Do not use a proxy for any URL matching pattern.
+不要對任何 URL 匹配模式使用代理。
 
-`<pattern>`is an Emacs regular expression.
+`<pattern>` 是 Emacs 正則表達式。

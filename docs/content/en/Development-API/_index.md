@@ -385,6 +385,10 @@ These flags can't co-exist in the same command.
 
 ## 🔍 Function: eask-log-file-p ()
 
+Return `t`/`nil` if the `log-file` option is enabled/disabled.
+
+These flags can't co-exist in the same command.
+
 ```elisp
 (when (eask-log-file-p)
   (message "Let's create a log file!"))
@@ -474,9 +478,9 @@ It holds package's `NAME`, `VERSION`, and `DESCRIPTION` in a plist.
 
 Three functions that are extended from this variable:
 
-* `(eask-package-name)`
-* `(eask-package-version)`
-* `(eask-package-description)`
+- `(eask-package-name)`
+- `(eask-package-version)`
+- `(eask-package-description)`
 
 ## 🔍 Variable: eask-package-file
 
@@ -513,7 +517,7 @@ Holds information about Emacs minimum version.
 
 Function will return Emacs version in string.
 
-* `(eask-depends-emacs-version)` - return `"26.1"`
+- `(eask-depends-emacs-version)` - return `"26.1"`
 
 ## 🔍 Variable: eask-depends-on
 
@@ -746,7 +750,7 @@ Report error/warning depends on strict flag.
 (eask-report "This can be warning or error")
 ```
 
-See option [--strict](https://emacs-eask.github.io/Getting-Started/Commands-and-options/#---strict)
+See option [--strict](https://emacs-eask.github.io/Getting-Started/Commands-and-options/#---strict).
 
 # 🚩 File
 
