@@ -1,5 +1,5 @@
 ---
-title: GNU通用公共授權條款
+title: GNU 通用公共授權條款
 weight: 1000
 ---
 

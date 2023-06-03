@@ -2,7 +2,6 @@
 baseURL: https://emacs-eask.github.io/
 title: Emacs Eask
 theme: geekdoc
-license: 'MIT'
 
 pygmentsUseClasses: true
 pygmentsCodeFences: true
@@ -27,6 +26,10 @@ params:
 
   geekdocLegalNotice: "/tos"
   geekdocPrivacyPolicy: "/tos"
+
+  geekdocContentLicense:
+    name: CC BY-SA 4.0
+    link: https://creativecommons.org/licenses/by-sa/4.0/
 
 markup:
   goldmark:
