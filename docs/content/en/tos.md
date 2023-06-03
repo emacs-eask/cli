@@ -44,4 +44,3 @@ This web page does not use any cookies.
 
 
 [GDPR]: https://gdpr-info.eu/art-6-gdpr/
-[GDPR]: https://gdpr-info.eu/art-6-gdpr/

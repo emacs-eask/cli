@@ -39,4 +39,3 @@ Email: jcs090219@gmail.com
 
 
 [GDPR]: https://gdpr-info.eu/art-6-gdpr/
-[GDPR]: https://gdpr-info.eu/art-6-gdpr/
