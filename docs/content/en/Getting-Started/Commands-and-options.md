@@ -368,6 +368,8 @@ Generate pkg file.
 
 Write a package descriptor file to `project-pkg.el` in the project root.
 
+Alias: `pkg`, `pkg-el`
+
 ```sh
 $ eask [GLOBAL-OPTIONS] generate pkg-file
 ```

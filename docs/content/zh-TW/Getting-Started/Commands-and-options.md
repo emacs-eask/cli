@@ -365,6 +365,8 @@ $ eask [GLOBAL-OPTIONS] generate autoloads
 
 將包描述符文件寫入項目根目錄中的 `project-pkg.el`。
 
+別名: `pkg`, `pkg-el`
+
 ```sh
 $ eask [GLOBAL-OPTIONS] generate pkg-file
 ```

@@ -19,7 +19,7 @@
 
 "use strict";
 
-exports.command = ['pkg-file'];
+exports.command = ['pkg-file', 'pkg', 'pkg-el'];
 exports.desc = 'Generate pkg file';
 
 exports.handler = async (argv) => {
