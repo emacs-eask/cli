@@ -23,6 +23,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Fix non-displayable character, use ascii instead (#172)
 * Use environment PATH to specify Emacs version to use (#173)
 * Fix showing positional arguments in subcommand's help menu (#174)
+* Add aliases for `pkg-file` command (0d35d762a12bd399657c2fdcb60541dcc0c8b5e0)
 
 ## 0.8.x
 > Released Mar 08, 2023
