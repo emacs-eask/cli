@@ -1301,7 +1301,7 @@ character."
 
 (defun eask-package-multi-p ()
   "Return t if multi-files package."
-  (or package-build-build-function
+  (or (bound-and-true-p package-build-build-function)
       (< 1 (length (eask-package-files)))))
 
 (defun eask-package-single-p ()
