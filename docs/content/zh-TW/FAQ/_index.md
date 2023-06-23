@@ -103,6 +103,33 @@ Loading package information... done ✓
 參見[問題 #39](https://github.com/emacs-eask/cli/issues/39#issuecomment-1150770740)
 了解更多信息。
 
+## ❓ 為什麼我會以狀態 2 退出 tar？
+
+如果您收到此示例錯誤消息:
+
+```
+Created your-package-0.1.0.tar containing:
+tar exited with status 2
+Error: Process completed with exit code 1.
+```
+
+使用 BSD tar 時您可能會收到此錯誤。解決方法是使用 GNU tar 代替。
+
+```
+(setq package-build-tar-executable "/path/to/gnu/tar")
+```
+
+在 Windows 中，默認是使用 BSD tar。如果安裝了 Git，則可以使用 Git 中的 tar
+可執行文件；它使用 GNU tar。
+
+將以下代碼片段添加到您的 Eask 文件中：
+
+```
+;; 在Windows中使用 GNU tar
+(when (memq system-type '(cygwin windows-nt ms-dos))
+  (setq package-build-tar-executable "C:/Program Files/Git/usr/bin/tar.exe"))
+```
+
 
 [emacs-eask/archives]: https://github.com/emacs-eask/archives
 [Cask]: https://github.com/cask/cask

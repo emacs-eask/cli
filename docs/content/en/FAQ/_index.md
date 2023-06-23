@@ -102,7 +102,7 @@ like this:
 
 ## ❓ Why am I getting git errors with status 2?
 
-If you get this sample error message
+If you get this sample error message:
 
 ```
 Loading package information... done ✓
@@ -115,6 +115,34 @@ should be disabled when running any of Eask’s commands.
 
 See [this issue](https://github.com/emacs-eask/cli/issues/39#issuecomment-1150770740)
 for more information.
+
+## ❓ Why am I getting tar exited with status 2?
+
+If you get this sample error message:
+
+```
+Created your-package-0.1.0.tar containing:
+tar exited with status 2
+Error: Process completed with exit code 1.
+```
+
+You might get this error while using the BSD tar. The workaround is to use
+GNU tar instead.
+
+```
+(setq package-build-tar-executable "/path/to/gnu/tar")
+```
+
+In Windows, BSD tar is used by default. If you have Git installed, you can use
+the tar executable from Git; it uses GNU tar.
+
+Add the following code snippet to your Eask-file:
+
+```
+;; Use GNU tar in Windows
+(when (memq system-type '(cygwin windows-nt ms-dos))
+  (setq package-build-tar-executable "C:/Program Files/Git/usr/bin/tar.exe"))
+```
 
 
 [emacs-eask/archives]: https://github.com/emacs-eask/archives
