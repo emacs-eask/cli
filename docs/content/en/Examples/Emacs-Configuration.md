@@ -40,5 +40,5 @@ The syntaxes are similar to the `Cask` file, but different.
 ```
 
 {{< hint info >}}
-💡 You would need to use **-g** or **--global** option to manage your configuration's packages!
+💡 You would need to use **-c** or **--config** option to manage your configuration's packages!
 {{< /hint >}}
