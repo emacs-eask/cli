@@ -155,11 +155,11 @@ session is pointing to, so you can release the full potential of this tool!
 
 Here is how Eask works behind the scene in different scenarios:
 
-| Name   | Description                                                        | Options            | Path         |
-|--------|--------------------------------------------------------------------|--------------------|--------------|
-| local  | The default behavior, use Eask as package dev tool                 | n/a                | `./.eask`    |
-| config | Use Eask as your package manager, it can be use as a test tool too | `-c` or `--config` | `~/.emacs.d` |
-| global | Use Eask as a general tool, it's unrelated to other scopes         | `-g` or `--global` | `~/.eask`    |
+| Name   | Description                                                          | Options            | Path         |
+|--------|----------------------------------------------------------------------|--------------------|--------------|
+| local  | The default behavior, use Eask as package dev tool                   | n/a                | `./.eask`    |
+| config | Use Eask as your package manager (It can be used as a test tool too) | `-c` or `--config` | `~/.emacs.d` |
+| global | Use Eask as a general tool, it's unrelated to other scopes           | `-g` or `--global` | `~/.eask`    |
 
 You might think of why these rules are created.
 
