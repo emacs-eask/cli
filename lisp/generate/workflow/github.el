@@ -48,6 +48,8 @@
               (when (version<= minimum-version "28.1")
                 (insert spaces "- 28.2" "\n"))
               (when (version<= minimum-version "29.1")
+                (insert spaces "- 29.1" "\n"))
+              (when (version<= minimum-version "30.1")
                 (insert spaces "- snapshot"))))
           (save-buffer))
         "done ✓")

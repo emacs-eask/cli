@@ -46,6 +46,8 @@
               (when (version<= minimum-version "28.1")
                 (insert spaces "- EMACS_CI=emacs-28-2" "\n"))
               (when (version<= minimum-version "29.1")
+                (insert spaces "- EMACS_CI=emacs-29-1" "\n"))
+              (when (version<= minimum-version "30.1")
                 (insert spaces "- EMACS_CI=emacs-snapshot"))))
           (save-buffer))
         "done ✓")

@@ -74,6 +74,8 @@
               (when (version<= minimum-version "28.1")
                 (insert spaces "- test-ubuntu-emacs-28" "\n"))
               (when (version<= minimum-version "29.1")
+                (insert spaces "- test-ubuntu-emacs-29" "\n"))
+              (when (version<= minimum-version "30.1")
                 (insert spaces "- test-ubuntu-emacs-master"))))
           (save-buffer))
         "done ✓")

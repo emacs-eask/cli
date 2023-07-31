@@ -54,6 +54,8 @@
             (when (version<= minimum-version "28.1")
               (eask--gitlab-insert-jobs "28.2"))
             (when (version<= minimum-version "29.1")
+              (eask--gitlab-insert-jobs "29.1"))
+            (when (version<= minimum-version "30.1")
               ;; TODO: snapshot?
               ))
           (delete-trailing-whitespace)
