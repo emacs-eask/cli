@@ -29,7 +29,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         emacs-version:
-          - 28.2
+          - 29.1
 
     steps:
     - uses: jcs090218/setup-emacs@master
