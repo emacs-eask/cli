@@ -41,7 +41,9 @@
       package-archive-priorities nil)
 
 (defun eask--load--adv (fnc &rest args)
-  "Prevent `_prepare.el' loading twice."
+  "Prevent `_prepare.el' loading twice.
+
+Arguments FNC and ARGS are used for advice `:around'."
   (unless (string= (nth 0 args) (eask-script "_prepare")) (apply fnc args)))
 (advice-add 'load :around #'eask--load--adv)
 
@@ -65,13 +67,13 @@
       (setq dir (expand-file-name (concat dir "../"))
             basename (file-name-nondirectory (directory-file-name dir))))
     dir)
-  "Source lisp directory; should always end with slash.")
+  "Source `lisp' directory; should always end with slash.")
 
 (defun eask-command ()
   "What's the current command?
 
 If the command is with subcommand, it will return command with concatenate with
-slash separator. For example, the following:
+slash separator.  For example, the following:
 
    $ eask lint checkdoc [FILES..]
 
@@ -96,7 +98,7 @@ will return `lint/checkdoc' with a dash between two subcommands."
   (member (eask-command) '("check-eask")))
 
 (defun eask-script (script)
-  "Return full script filename."
+  "Return full SCRIPT filename."
   (concat eask-lisp-root script ".el"))
 
 (defvar eask-loading-file-p nil
@@ -104,11 +106,11 @@ will return `lint/checkdoc' with a dash between two subcommands."
 the `eask-start' execution.")
 
 (defun eask-load (script)
-  "Load another eask script; so we can reuse functions across all scripts."
+  "Load another eask SCRIPT; so we can reuse functions across all scripts."
   (let ((eask-loading-file-p t)) (eask-call script)))
 
 (defun eask-call (script)
-  "Call another eask script."
+  "Call another eask SCRIPT."
   (if-let* ((script-file (eask-script script))
             ((file-exists-p script-file)))
       (load script-file nil t)
@@ -118,7 +120,9 @@ the `eask-start' execution.")
 ;;; Util
 
 (defmacro eask-defvc< (version &rest body)
-  "Define scope if Emacs version is below VERSION."
+  "Define scope if Emacs version is below VERSION.
+
+Argument BODY are forms for execution."
   (declare (indent 1) (debug t))
   `(when (< emacs-major-version ,version) ,@body))
 
@@ -155,7 +159,7 @@ the `eask-start' execution.")
   (let ((now (current-time))) (logior (lsh (car now) 16) (cadr now))))
 
 (defun eask-seq-str-max (sequence)
-  "Return max length in list of strings."
+  "Return max length in SEQUENCE of strings."
   (let ((result 0))
     (mapc (lambda (elm) (setq result (max result (length (eask-2str elm))))) sequence)
     result))
@@ -204,7 +208,7 @@ the `eask-start' execution.")
 ;;; Package
 
 (defun eask--update-exec-path ()
-  "Add all bin directory to `exec-path'."
+  "Add all bin directory to the variable `exec-path'."
   (dolist (entry (directory-files package-user-dir t directory-files-no-dot-files-regexp))
     (when-let* ((bin (expand-file-name "bin" entry))
                 ((file-directory-p bin)))
@@ -212,7 +216,7 @@ the `eask-start' execution.")
   (delete-dups exec-path))
 
 (defun eask--update-load-path ()
-  "Add all load-path for all .el files."
+  "Add all .el files to the variable `load-path'."
   (dolist (filename (eask-package-el-files))
     (add-to-list 'load-path (file-name-directory filename) t))
   (delete-dups load-path))
@@ -236,7 +240,10 @@ For arguments FUNC and DEPS, see function `mapc' for more information."
       (funcall func pkg))))
 
 (defun eask--install-deps (dependencies msg)
-  "Install DEPENDENCIES."
+  "Install DEPENDENCIES.
+
+Argument MSG are extra information to display in the header; mainly define the
+scope of the dependencies (it's either `production' or `development')."
   (let* ((names (mapcar #'car dependencies))
          (names (mapcar #'eask-intern names))
          (len (length dependencies))
@@ -269,7 +276,7 @@ For arguments FUNC and DEPS, see function `mapc' for more information."
     (eask--install-deps eask-depends-on-dev "development")))
 
 (defun eask-setup-paths ()
-  "Setup both `exec-path' and `load-path'."
+  "Setup both variables `exec-path' and `load-path'."
   (eask-with-progress
     (ansi-green "Updating environment variables... ")
     (eask-with-verbosity 'debug
@@ -282,7 +289,9 @@ For arguments FUNC and DEPS, see function `mapc' for more information."
   "Flag for package initialization in global scope.")
 
 (defun eask-pkg-init (&optional force)
-  "Package initialization."
+  "Package initialization.
+
+If the argument FORCE is non-nil, force initialize packages in this session."
   (when (or (not package--initialized) (not package-archive-contents) force
             ;; XXX we need to initialize once in global scope since most Emacs
             ;; configuration would likely to set `package-archives' variable
@@ -297,9 +306,11 @@ For arguments FUNC and DEPS, see function `mapc' for more information."
       (ansi-green "done ✓"))))
 
 (defun eask--pkg-transaction-vars (pkg)
-  "Return 1 symbol and 2 strings."
+  "Return 1 symbol and 2 strings.
+
+Argument PKG is the name of the package."
   (let* (;; Ensure symbol
-         (pkg (if (stringp pkg) (intern pkg) pkg))
+         (pkg (eask-intern pkg))
          ;; Wrap package name with color
          (pkg-string (ansi-green (eask-2str pkg)))
          ;; Wrap version number with color
@@ -316,7 +327,9 @@ For arguments FUNC and DEPS, see function `mapc' for more information."
      ,@body))
 
 (defmacro eask-with-archives (archives &rest body)
-  "Scope that temporary makes ARCHIVES available."
+  "Scope that temporary make ARCHIVES available.
+
+Argument BODY are forms for execution."
   (declare (indent 1) (debug t))
   `(let ((package-archives package-archives)
          (archives (eask-listify ,archives))
@@ -336,14 +349,14 @@ For arguments FUNC and DEPS, see function `mapc' for more information."
      ,@body))
 
 (defun eask-package-installable-p (pkg)
-  "Return non-nil if package is installable."
-  (assq (if (stringp pkg) (intern pkg) pkg) package-archive-contents))
+  "Return non-nil if package (PKG) is installable."
+  (assq (eask-intern pkg) package-archive-contents))
 
 (defvar eask--package-prefix ""
   "The prefix to display before each package action.")
 
 (defun eask-package-install (pkg)
-  "Install the package."
+  "Install the package (PKG)."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (eask--pkg-process pkg
     (cond
@@ -381,7 +394,7 @@ For arguments FUNC and DEPS, see function `mapc' for more information."
           "done ✓"))))))
 
 (defun eask-package-delete (pkg)
-  "Delete the package."
+  "Delete the package (PKG)."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (eask--pkg-process pkg
     (cond
@@ -396,7 +409,7 @@ For arguments FUNC and DEPS, see function `mapc' for more information."
           "done ✓"))))))
 
 (defun eask-package-reinstall (pkg)
-  "Reinstall the package."
+  "Reinstall the package (PKG)."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (eask--pkg-process pkg
     (cond
@@ -413,12 +426,19 @@ For arguments FUNC and DEPS, see function `mapc' for more information."
           "done ✓"))))))
 
 (defun eask-package-desc (name &optional current)
-  "Build package description by PKG-NAME."
+  "Build package description by its NAME.
+
+The argument NAME must be the package's name.  If the argument CURRENT is
+non-nil, we retrieve version number from the variable `package-alist';
+otherwise, we retrieve it from the variable `package-archive-contents'."
   (cadr (assq name (if current package-alist
                      (or package-archive-contents package-alist)))))
 
 (defun eask-package--version (name &optional current)
-  "Return PKG's version."
+  "Return package's version.
+
+For arguments NAME and CURRENT, please see function `eask-package-desc' for
+full detials."
   (when-let ((desc (eask-package-desc name current)))
     (package-desc-version desc)))
 
@@ -460,7 +480,9 @@ For arguments FUNC and DEPS, see function `mapc' for more information."
 ;;
 ;;; Flags
 
-(defun eask--str2num (str) (ignore-errors (string-to-number str)))
+(defun eask--str2num (str)
+  "Convert string (STR) to number."
+  (ignore-errors (string-to-number str)))
 
 (defun eask--flag (flag)
   "Return non-nil if FLAG exists.."
@@ -471,40 +493,97 @@ For arguments FUNC and DEPS, see function `mapc' for more information."
   (nth 1 (eask--flag flag)))
 
 ;;; Boolean
-(defun eask-global-p ()       (eask--flag "-g"))               ; -g, --global
-(defun eask-config-p ()       (eask--flag "-c"))               ; -c, --config
-(defun eask-local-p ()        (and (not (eask-global-p))
-                                   (not (eask-config-p))))     ; local project space
-(defun eask-all-p ()          (eask--flag "-a"))               ; -a, --all
-(defun eask-quick-p ()        (eask--flag "-q"))               ; -q, --quick
-(defun eask-force-p ()        (eask--flag "-f"))               ; -f, --force
-(defun eask-dev-p ()          (eask--flag "--dev"))            ; --dev, --development
-(defun eask-debug-p ()        (eask--flag "--debug"))          ; --debug
-(defun eask-strict-p ()       (eask--flag "--strict"))         ; --strict
-(defun eask-timestamps-p ()   (eask--flag "--timestamps"))     ; --timestamps
-(defun eask-log-level-p ()    (eask--flag "--log-level"))      ; --log-level
-(defun eask-log-file-p ()     (eask--flag "--log-file"))       ; --log-file, --lf
-(defun eask-elapsed-time-p () (eask--flag "--elapsed-time"))   ; --elapsed-time, --et
-(defun eask-allow-error-p ()  (eask--flag "--allow-error"))    ; --allow-error
-(defun eask-insecure-p ()     (eask--flag "--insecure"))       ; --insecure
-(defun eask-no-color-p ()     (eask--flag "--no-color"))       ; --no-color
-(defun eask-clean-p ()        (eask--flag "--clean"))          ; -c, --clean
-(defun eask-json-p ()         (eask--flag "--json"))           ; --json
-(defun eask-number-p ()       (eask--flag "--number"))         ; -n, --number
+(defun eask-global-p ()
+  "Non-nil when in global space (`-g', `--global')."
+  (eask--flag "-g"))
+(defun eask-config-p ()
+  "Non-nil when in config space (`-c', `--config')."
+  (eask--flag "-c"))
+(defun eask-local-p ()
+  "Non-nil when in local space (default)."
+  (and (not (eask-global-p))
+       (not (eask-config-p))))
+(defun eask-all-p ()
+  "Non-nil when flag is on (`-a', `--all')."
+  (eask--flag "-a"))
+(defun eask-quick-p ()
+  "Non-nil when flag is on (`-q', `--quick')."
+  (eask--flag "-q"))
+(defun eask-force-p ()
+  "Non-nil when flag is on (`-f', `--force')."
+  (eask--flag "-f"))
+(defun eask-dev-p ()
+  "Non-nil when flag is on (`--dev', `--development')."
+  (eask--flag "--dev"))
+(defun eask-debug-p ()
+  "Non-nil when flag is on (`--debug')."
+  (eask--flag "--debug"))
+(defun eask-strict-p ()
+  "Non-nil when flag is on (`--strict')."
+  (eask--flag "--strict"))
+(defun eask-timestamps-p ()
+  "Non-nil when flag is on (`--timestamps')."
+  (eask--flag "--timestamps"))
+(defun eask-log-level-p ()
+  "Non-nil when flag is on (`--log-level')."
+  (eask--flag "--log-level"))
+(defun eask-log-file-p ()
+  "Non-nil when flag is on (`--log-file', `--lf')."
+  (eask--flag "--log-file"))
+(defun eask-elapsed-time-p ()
+  "Non-nil when flag is on (`--elapsed-time', `--et')."
+  (eask--flag "--elapsed-time"))
+(defun eask-allow-error-p ()
+  "Non-nil when flag is on (`--allow-error')."
+  (eask--flag "--allow-error"))
+(defun eask-insecure-p ()
+  "Non-nil when flag is on (`--insecure')."
+  (eask--flag "--insecure"))
+(defun eask-no-color-p ()
+  "Non-nil when flag is on (`--no-color')."
+  (eask--flag "--no-color"))
+(defun eask-clean-p ()
+  "Non-nil when flag is on (`-c', `--clean')."
+  (eask--flag "--clean"))
+(defun eask-json-p ()
+  "Non-nil when flag is on (`--json')."
+  (eask--flag "--json"))
+(defun eask-number-p ()
+  "Non-nil when flag is on (`-n', `--number')."
+  (eask--flag "--number"))
 
 ;;; String (with arguments)
-(defun eask-output ()      (eask--flag-value "--output"))       ; --o, --output
-(defun eask-proxy ()       (eask--flag-value "--proxy"))        ; --proxy
-(defun eask-http-proxy ()  (eask--flag-value "--http-proxy"))   ; --http-proxy
-(defun eask-https-proxy () (eask--flag-value "--https-proxy"))  ; --https-proxy
-(defun eask-no-proxy ()    (eask--flag-value "--no-proxy"))     ; --no-proxy
-(defun eask-destination () (eask--flag-value "--dest"))         ; --dest, --destination
-(defalias 'eask-dest #'eask-destination)
-(defun eask-from ()        (eask--flag-value "--from"))         ; --from
+(defun eask-output ()
+  "Non-nil when flag has value (`--o', `--output')."
+  (eask--flag-value "--output"))
+(defun eask-proxy ()
+  "Non-nil when flag has value (`--proxy')."
+  (eask--flag-value "--proxy"))        ; --proxy
+(defun eask-http-proxy ()
+  "Non-nil when flag has value (`--http-proxy')."
+  (eask--flag-value "--http-proxy"))
+(defun eask-https-proxy ()
+  "Non-nil when flag has value (`--https-proxy')."
+  (eask--flag-value "--https-proxy"))
+(defun eask-no-proxy ()
+  "Non-nil when flag has value (`--no-proxy')."
+  (eask--flag-value "--no-proxy"))
+(defun eask-destination ()
+  "Non-nil when flag has value (`--dest', `--destination')."
+  (eask--flag-value "--dest"))
+(defalias 'eask-dest #'eask-destination
+  "Shorthand for function `eask-destination'.")
+(defun eask-from ()
+  "Non-nil when flag has value (`--from')."
+  (eask--flag-value "--from"))
 
 ;;; Number (with arguments)
-(defun eask-depth () (eask--str2num (eask--flag-value "--depth")))       ; --depth
-(defun eask-verbose () (eask--str2num (eask--flag-value "--verbose")))   ; -v, --verbose
+(defun eask-depth ()
+  "Non-nil when flag has value (`--depth')."
+  (eask--str2num (eask--flag-value "--depth")))
+(defun eask-verbose ()
+  "Non-nil when flag has value (`-v', `--verbose')."
+  (eask--str2num (eask--flag-value "--verbose")))
 
 (defun eask--handle-global-options ()
   "Handle global options."
@@ -528,7 +607,9 @@ For arguments FUNC and DEPS, see function `mapc' for more information."
 ;;; Proxy
 
 (defun eask--add-proxy (protocal host)
-  "Add proxy."
+  "Add proxy.
+
+Argument PROTOCAL and HOST are used to construct scheme."
   (when host (push (cons protocal (eask-proxy)) url-proxy-services)))
 
 ;;
@@ -601,7 +682,7 @@ Simply remove `--eask' for each option, like `--eask--strict' to `--strict'."
     (reverse args)))
 
 (defmacro eask--batch-mode (&rest body)
-  "Initialize for batch-mode"
+  "Execute forms BODY in batch-mode."
   (declare (indent 0) (debug t))
   `(let ((argv (eask-args))
          load-file-name buffer-file-name)
@@ -632,11 +713,15 @@ Simply remove `--eask' for each option, like `--eask--strict' to `--strict'."
     "source" "source-priority"
     "depends-on" "development"
     "exec-paths" "load-paths")
-  "List of Eask file keywords.")
+  "List of Eask file's DSL keywords.")
 
 (defun eask--loop-file-keywords (func)
-  "Loop through Eask file keywords for environment replacement.  Internal used
-for function `eask--alias-env'."
+  "Loop through Eask file keywords for environment replacement.
+
+Argument FUNC is a function we execute while this function will provide the new
+and old function name.
+
+Internal used for function `eask--alias-env'."
   (dolist (keyword eask-file-keywords)
     (let ((keyword-sym (intern keyword))
           (api (intern (concat "eask-f-" keyword)))    ; existing function
@@ -645,16 +730,18 @@ for function `eask--alias-env'."
 
 (defmacro eask--alias-env (&rest body)
   "Replace all Eask file functions temporary; this is only used when loading
-Eask file in the workspace."
+Eask file in the workspace.
+
+Argument BODY are forms for execution."
   (declare (indent 0) (debug t))
   `(let (result)
-     ;; XXX magic here is we replace all keyword functions with `eask-xxx'...
+     ;; XXX: Magic here is we replace all keyword functions with `eask-xxx'...
      (eask--loop-file-keywords
       (lambda (keyword api old)
         (defalias old (symbol-function keyword))
         (defalias keyword (symbol-function api))))
      (setq result (progn ,@body))
-     ;; XXX after loading Eask file, we revert those functions back to normal!
+     ;; XXX: after loading Eask file, we revert those functions back to normal!
      (eask--loop-file-keywords
       (lambda (keyword api old)
         (defalias keyword (symbol-function old))))
@@ -671,7 +758,7 @@ Eask file in the workspace."
 (defun eask-file-load (location &optional noerror)
   "Load Eask file in the LOCATION."
   (when-let* ((target-eask-file (expand-file-name location user-emacs-directory))
-              (result (eask--alias-env (load target-eask-file 'noerror t t))))
+              (result (eask--alias-env (load target-eask-file noerror t t))))
     (setq eask-file target-eask-file  ; assign eask file only if success
           eask-file-root (file-name-directory target-eask-file))
     (run-hooks 'eask-file-loaded-hook)
@@ -866,7 +953,7 @@ This uses function `locate-dominating-file' to look up directory tree."
      (eask--setup-env
        (eask--alias-env
          (if (let ((default-directory (file-name-directory ,file)))
-               (ignore-errors (eask-file-load ,file)))
+               (ignore-errors (eask-file-load ,file 'noerror)))
              (progn ,success)
            ,@error)))))
 
