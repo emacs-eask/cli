@@ -21,7 +21,7 @@
         nil t))
 
 (defun eask--uninstall-packages(names)
-  "Uninstall packages."
+  "Uninstall packages by its NAMES."
   (let* ((names (mapcar #'eask-intern names))
          (len (length names)) (s (eask--sinr len "" "s"))
          (pkg-installed (cl-remove-if-not #'package-installed-p names))

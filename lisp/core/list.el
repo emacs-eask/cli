@@ -28,7 +28,10 @@
   (concat " %-" (number-to-string offset) "s "))
 
 (defun eask--align (depth &optional rest)
-  "Format string to align starting from the version number."
+  "Format string to align starting from the version number.
+
+Argument DEPTH is used to calculate the indentation.  REST is a list of string
+for string concatenation."
   (let ((prefix (if (= depth 0) "[+]" "[+]")))
     (concat (spaces-string (* depth 2))  ; indent for depth
             " " prefix
@@ -38,7 +41,11 @@
             rest)))
 
 (defun eask-print-pkg (name depth max-depth pkg-alist)
-  "Print NAME package information."
+  "Print NAME package information.
+
+Argument DEPTH is the current dependency nested level.  MAX-DEPTH is the
+limitation, so we don't go beyond this deepness.  PKG-ALIST is the archive
+contents."
   (when-let*
       ((pkg (assq name pkg-alist))
        (desc (cadr pkg))
@@ -56,19 +63,27 @@
         (eask-print-pkg (car req) (1+ depth) max-depth pkg-alist)))))
 
 (defun eask--version-list (pkg-alist)
-  "Return list of versions."
+  "Return a list of versions.
+
+PKG-ALIST is the archive contents."
   (mapcar (lambda (elm)
             (package-version-join (package-desc-version (cadr elm))))
           pkg-alist))
 
 (defun eask--archive-list (pkg-alist)
-  "Return list of archives."
+  "Return list of archives.
+
+PKG-ALIST is the archive contents."
   (mapcar (lambda (elm)
             (or (package-desc-archive (cadr elm)) ""))
           pkg-alist))
 
 (defun eask--list (list pkg-alist &optional depth)
-  "List packages."
+  "List packages.
+
+Argument LIST is the list of packages we want to list.  PKG-ALIST is the archive
+contents we want to retrieve package's metadate from.  Optional argument DEPTH
+is the deepness of the dependency nested level we want to go."
   (let* ((eask--list-pkg-name-offset (eask-seq-str-max list))
          (version-list (eask--version-list pkg-alist))
          (eask--list-pkg-version-offset (eask-seq-str-max version-list))

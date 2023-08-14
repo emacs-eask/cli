@@ -24,7 +24,7 @@
 (eask-load "core/package")  ; load dist path
 
 (defun eask--install-packages (names)
-  "Install packages."
+  "Install packages with their NAMES."
   (let* ((names (mapcar #'eask-intern names))
          (len (length names)) (s (eask--sinr len "" "s"))
          (pkg-not-installed (cl-remove-if #'package-installed-p names))
@@ -40,6 +40,9 @@
 ;;
 ;; XXX: remove this after we drop 28.x
 (defun eask--package-install-file (file)
+  "Old compatible version of function `package-install-file'.
+
+For argument FILE, please see function `package-install-file' for the details."
   ;; Workaround: `package-install-file' fails when FILE is .el and contains CRLF EOLs:
   ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=48137
   (if (not (string-match "\\.el\\'" file))

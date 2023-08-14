@@ -17,7 +17,7 @@
 (defvar eask--max-offset 0)
 
 (defun eask--print-deps (title dependencies)
-  "Print dependencies."
+  "Print DEPENDENCIES with TITLE identifier."
   (when dependencies
     (eask-msg "")
     (eask-msg title)

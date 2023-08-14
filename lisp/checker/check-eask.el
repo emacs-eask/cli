@@ -43,7 +43,10 @@
         (lambda (elm) (string-prefix-p " *load*-" (buffer-name elm))) (buffer-list))))
 
 (defun eask--write-json-format (level msg)
-  "Prepare log for JSON format."
+  "Prepare log for JSON format.
+
+For arguments LEVEL and MSG, please see function `eask--write-log' for more
+information."
   (let* ((thing (thing-at-point 'sexp))
          (bounds (bounds-of-thing-at-point 'sexp))
          (filename (or load-file-name eask-file))
@@ -69,7 +72,10 @@
             (`warn  eask--checker-warnings)))))
 
 (defun eask--write-plain-text (level msg)
-  "Prepare log for plain text format."
+  "Prepare log for plain text format.
+
+For arguments LEVEL and MSG, please see function `eask--write-log' for more
+information."
   (let* ((level-string (cl-case level
                          (`error "Error")
                          (`warn  "Warning")))
@@ -82,7 +88,9 @@
     (push (ansi-color-filter-apply log) eask--checker-log)))
 
 (defun eask--write-log (level msg)
-  "Write the log."
+  "Write the log.
+
+Argument LEVEL and MSG are data from the debug log signal."
   (unless (string= " *temp*" (buffer-name))  ; avoid error from `package-file' directive
     (with-current-buffer (or (eask--load-buffer) (buffer-name))
       (funcall

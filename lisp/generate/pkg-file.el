@@ -30,7 +30,7 @@
          (version (eask-package-version))
          (description (eask-package-description))
          (reqs (mapcar (lambda (elm)
-                         (list (if (stringp (car elm)) (intern (car elm)) (car elm))
+                         (list (eask-intern (car elm))
                                (if (= (length (cdr elm)) 1)
                                    (nth 0 (cdr elm))
                                  "0")))

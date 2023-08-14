@@ -32,7 +32,9 @@
     package-build-default-files-spec))
 
 (defun eask-package-dir-recipe (version)
-  "Form a directory recipe."
+  "Form a directory recipe.
+
+Argument VERSION is a string represent the version number of this package."
   (eask-load "extern/package-recipe")
   (let* ((name (eask-guess-package-name))
          (patterns (eask-package-dir--patterns))
@@ -49,7 +51,7 @@
     (concat name "-" version)))
 
 (defun eask--packaged-file (ext)
-  "Find a possible packaged file."
+  "Find a possible packaged file with extension (EXT)."
   (expand-file-name (concat (eask-packaged-name) "." ext) eask-dist-path))
 
 (defun eask-packaged-file ()

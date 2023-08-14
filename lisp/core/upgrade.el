@@ -20,7 +20,7 @@
         nil t))
 
 (defun eask--package-version-string (pkg-desc)
-  "Get package version string with color."
+  "Get package version string with color from PKG-DESC."
   (let ((version (package-desc-version pkg-desc)))
     (ansi-yellow (package-version-join version))))
 

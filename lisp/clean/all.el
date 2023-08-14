@@ -24,7 +24,7 @@
   "Count cleaning task.")
 
 (defvar eask--clean-tasks-cleaned 0
-  "Total cleaned tasks")
+  "Total cleaned tasks.")
 
 (defmacro eask--clean-section (title &rest body)
   "Print clean up TITLE and execute BODY."

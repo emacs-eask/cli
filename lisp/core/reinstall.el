@@ -22,7 +22,7 @@
 (eask-load "core/package")  ; load dist path
 
 (defun eask--reinstall-packages (names)
-  "Install packages."
+  "Install packages by its NAMES."
   (let* ((names (mapcar #'eask-intern names))
          (len (length names)) (s (eask--sinr len "" "s"))
          (pkg-not-installed (cl-remove-if #'package-installed-p names))
