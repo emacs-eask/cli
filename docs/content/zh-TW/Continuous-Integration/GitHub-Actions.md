@@ -18,10 +18,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        emacs-version: [26.3, 27.2, 28.2, snapshot]
+        emacs-version: [26.3, 27.2, 28.2, 29.1, snapshot]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     # 安裝 Emacs
     - uses: jcs090218/setup-emacs@master
@@ -42,11 +42,11 @@ jobs:
 
 此示例在以下環境中測試您的 Emacs Lisp 包；
 
-| OS             | Emacs                              | Eask   |
-|----------------|------------------------------------|--------|
-| Linux (Ubuntu) | `26.x`, `27.x`, `28.x`, `snapshot` | latest |
-| macOS          | `26.x`, `27.x`, `28.x`, `snapshot` | latest |
-| Windows        | `26.x`, `27.x`, `28.x`, `snapshot` | latest |
+| OS             | Emacs                                      | Eask   |
+|----------------|--------------------------------------------|--------|
+| Linux (Ubuntu) | `26.x`, `27.x`, `28.x`, `29.x`, `snapshot` | latest |
+| macOS          | `26.x`, `27.x`, `28.x`, `29.x`, `snapshot` | latest |
+| Windows        | `26.x`, `27.x`, `28.x`, `29.x`, `snapshot` | latest |
 
 通過以下`操作`，
 
@@ -65,7 +65,7 @@ jobs:
 中的腳本在本地安裝 Eask。
 
 ```yml
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: 準備 Eask (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'

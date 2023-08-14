@@ -18,10 +18,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        emacs-version: [26.3, 27.2, 28.2, snapshot]
+        emacs-version: [26.3, 27.2, 28.2, 29.1, snapshot]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     # Install Emacs
     - uses: jcs090218/setup-emacs@master
@@ -42,11 +42,11 @@ jobs:
 
 This example is testing your Emacs Lisp package in the below environment;
 
-| OS             | Emacs                              | Eask   |
-|----------------|------------------------------------|--------|
-| Linux (Ubuntu) | `26.x`, `27.x`, `28.x`, `snapshot` | latest |
-| macOS          | `26.x`, `27.x`, `28.x`, `snapshot` | latest |
-| Windows        | `26.x`, `27.x`, `28.x`, `snapshot` | latest |
+| OS             | Emacs                                      | Eask   |
+|----------------|--------------------------------------------|--------|
+| Linux (Ubuntu) | `26.x`, `27.x`, `28.x`, `29.x`, `snapshot` | latest |
+| macOS          | `26.x`, `27.x`, `28.x`, `29.x`, `snapshot` | latest |
+| Windows        | `26.x`, `27.x`, `28.x`, `29.x`, `snapshot` | latest |
 
 with these following `actions`,
 
@@ -65,7 +65,7 @@ You can install Eask locally using scripts from `.github/scripts/setup-eask` (Un
 or `.github/scripts/setup-eask.ps1` (Windows).
 
 ```yml
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Prepare Eask (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
