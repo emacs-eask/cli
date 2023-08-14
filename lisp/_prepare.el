@@ -114,7 +114,7 @@ the `eask-start' execution.")
   (if-let* ((script-file (eask-script script))
             ((file-exists-p script-file)))
       (load script-file nil t)
-    (eask-error "Scripting missing %s..." script-file)))
+    (eask-error "Script missing %s" script-file)))
 
 ;;
 ;;; Util
@@ -756,7 +756,10 @@ Argument BODY are forms for execution."
     (eask-s-replace (or eask-file-root default-directory) "" filename)))
 
 (defun eask-file-load (location &optional noerror)
-  "Load Eask file in the LOCATION."
+  "Load Eask file in the LOCATION.
+
+Argument NOERROR is passed through function `load'; therefore, please see the
+function `load' for more detials."
   (when-let* ((target-eask-file (expand-file-name location user-emacs-directory))
               (result (eask--alias-env (load target-eask-file noerror t t))))
     (setq eask-file target-eask-file  ; assign eask file only if success
@@ -947,13 +950,13 @@ This uses function `locate-dominating-file' to look up directory tree."
      ,@body))
 
 (defmacro eask--save-load-eask-file (file success &rest error)
-  "Load an Eask FILE and execute BODY with"
+  "Load an Eask FILE and execute forms SUCCESS or ERROR."
   (declare (indent 2) (debug t))
   `(eask--save-eask-file-state
      (eask--setup-env
        (eask--alias-env
          (if (let ((default-directory (file-name-directory ,file)))
-               (ignore-errors (eask-file-load ,file 'noerror)))
+               (ignore-errors (eask-file-load ,file)))
              (progn ,success)
            ,@error)))))
 
@@ -961,16 +964,25 @@ This uses function `locate-dominating-file' to look up directory tree."
   "Return package info by KEY."
   (plist-get eask-package key))
 
-(defun eask-package-name ()        (eask-package--get :name))
-(defun eask-package-version ()     (eask-package--get :version))
-(defun eask-package-description () (eask-package--get :description))
+(defun eask-package-name ()
+  "Return current package's name."
+  (eask-package--get :name))
+(defun eask-package-version ()
+  "Return current package's version number."
+  (eask-package--get :version))
+(defun eask-package-description ()
+  "Return current package's description."
+  (eask-package--get :description))
 
 (defun eask-depends-emacs-version ()
   "Get Eask-file Emacs version string."
   (nth 0 (cdar eask-depends-on-emacs)))
 
 (defun eask-f-package (name version description)
-  "Set the package information."
+  "Set the package information.
+
+Argument NAME is the name of the package.  VERSION is the string contains valid
+version number.  DESCRIPTION is the package description."
   (if eask-package
       (eask-error "Multiple definition of `package'")
     (setq eask-package `(:name ,name :version ,version :description ,description))
@@ -1064,7 +1076,12 @@ This uses function `locate-dominating-file' to look up directory tree."
   (setq eask-files (append eask-files patterns)))
 
 (defun eask-f-script (name command &rest args)
-  "Add scripts' command."
+  "Add a script command.
+
+Argument NAME is the command id, and cannot be repeated.  Argument COMMAND is
+a string contain shell commands.  The rest arguments ARGS is a list of string
+contains extra shell commands, and it will eventually be concatenate with the
+argument COMMAND."
   (when (symbolp name) (setq name (eask-2str name)))  ; ensure to string, accept symbol
   (when (assoc name eask-scripts)
     (eask-error "Run-script with the same key name is not allowed: `%s`" name))
@@ -1109,7 +1126,11 @@ This uses function `locate-dominating-file' to look up directory tree."
 (add-hook 'eask-file-loaded-hook #'eask--setup-dependencies)
 
 (defun eask-f-depends-on (pkg &rest args)
-  "Specify a dependency of this package."
+  "Specify a dependency (PKG) of this package.
+
+Argument PKG is the name of that dependency.  ARGS can either be a string
+contains the version number or a list contains recipe information (for local
+ELPA)."
   (cond
    ((string= pkg "emacs")
     (if eask-depends-on-emacs
@@ -1152,52 +1173,12 @@ This uses function `locate-dominating-file' to look up directory tree."
     (setq eask-depends-on (remove pkg eask-depends-on))))
 
 (defun eask-f-exec-paths (&rest dirs)
-  "Add all DIRS to exec-path."
+  "Add all DIRS to the variable `exec-path'."
   (dolist (dir dirs) (add-to-list 'exec-path (expand-file-name dir) t)))
 
 (defun eask-f-load-paths (&rest dirs)
-  "Add all DIRS to load-path."
+  "Add all DIRS to to the variable `load-path'."
   (dolist (dir dirs) (add-to-list 'load-path (expand-file-name dir) t)))
-
-;;
-;;; Error Handling
-
-(defvar eask--ignore-error-p nil
-  "Don't trigger error when this is non-nil.")
-
-(defmacro eask-ignore-errors (&rest body)
-  "Execute BODY but ignore all errors."
-  (declare (indent 0) (debug t))
-  `(let ((eask--ignore-error-p t)) ,@body))
-
-(defun eask--exit (&rest _) "Send exit code." (kill-emacs 1))
-
-(defun eask--trigger-error ()
-  "Trigger error event."
-  (when (and (not eask--ignore-error-p)
-             (not (eask-checker-p)))  ; ignore when checking Eask-file
-    (if (eask-allow-error-p)  ; Trigger error at the right time
-        (add-hook 'eask-after-command-hook #'eask--exit)
-      (eask--exit))))
-
-(defun eask--error (fnc &rest args)
-  "On error."
-  (let ((msg (eask--ansi 'error (apply #'format-message args))))
-    (eask--unsilent (eask-msg "%s" msg))
-    (run-hook-with-args 'eask-on-error-hook 'error msg)
-    (eask--trigger-error))
-  (when debug-on-error (apply fnc args)))
-
-(advice-add 'error :around #'eask--error)
-
-(defun eask--warn (fnc &rest args)
-  "On warn."
-  (let ((msg (eask--ansi 'warn (apply #'format-message args))))
-    (eask--unsilent (eask-msg "%s" msg))
-    (run-hook-with-args 'eask-on-warning-hook 'warn msg))
-  (eask--silent (apply fnc args)))
-
-(advice-add 'warn :around #'eask--warn)
 
 ;;
 ;;; Verbosity
@@ -1242,25 +1223,35 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 (debug), 5 (all)."
   (>= eask-verbosity (eask--verb2lvl symbol)))
 
 (defmacro eask-with-verbosity (symbol &rest body)
-  "If LEVEL is above `eask-verbosity'; hide all messages in BODY."
+  "Define verbosity scope.
+
+Execute forms BODY limit by the verbosity level (SYMBOL)."
   (declare (indent 1) (debug t))
   `(if (eask--reach-verbosity-p ,symbol) (progn ,@body)
      (eask--silent ,@body)))
 
-(defun eask-debug (msg &rest args) (apply #'eask--msg 'debug "[DEBUG]"   msg args))
-(defun eask-log   (msg &rest args) (apply #'eask--msg 'log   "[LOG]"     msg args))
-(defun eask-info  (msg &rest args) (apply #'eask--msg 'info  "[INFO]"    msg args))
-(defun eask-warn  (msg &rest args) (apply #'eask--msg 'warn  "[WARNING]" msg args))
-(defun eask-error (msg &rest args) (apply #'eask--msg 'error "[ERROR]"   msg args))
-
 (defun eask--ansi (symbol string)
-  "Paint STRING with color defined by log level."
+  "Paint STRING with color defined by log level (SYMBOL)."
   (if-let ((ansi-function (cdr (assq symbol eask-level-color))))
       (funcall ansi-function string)
     string))
 
+(defun eask--format (prefix fmt &rest args)
+  "Format Eask messages.
+
+Argument PREFIX is a string identify the type of this messages.  Arguments FMT
+and ARGS are used to pass through function `format'."
+  (apply #'format
+         (concat (when eask-timestamps (format-time-string "%Y-%m-%d %H:%M:%S "))
+                 (when eask-log-level (concat prefix " "))
+                 fmt)
+         args))
+
 (defun eask--msg (symbol prefix msg &rest args)
-  "If LEVEL is at or below `eask-verbosity', log message."
+  "If level (SYMBOL) is at or below `eask-verbosity'; then, log the message.
+
+For arguments PREFIX, MSG and ARGS, please see funtion `eask--format' for the
+detials."
   (eask-with-verbosity symbol
     (let* ((string (apply #'eask--format prefix msg args))
            (output (eask--ansi symbol string))
@@ -1270,13 +1261,21 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 (debug), 5 (all)."
                    (t #'message))))
       (funcall func "%s" output))))
 
-(defun eask--format (prefix fmt &rest args)
-  "Format Eask messages."
-  (apply #'format
-         (concat (when eask-timestamps (format-time-string "%Y-%m-%d %H:%M:%S "))
-                 (when eask-log-level (concat prefix " "))
-                 fmt)
-         args))
+(defun eask-debug (msg &rest args)
+  "Send debug message; see function `eask--msg' for arguments MSG and ARGS."
+  (apply #'eask--msg 'debug "[DEBUG]" msg args))
+(defun eask-log (msg &rest args)
+  "Send log message; see function `eask--msg' for arguments MSG and ARGS."
+  (apply #'eask--msg 'log   "[LOG]" msg args))
+(defun eask-info (msg &rest args)
+  "Send info message; see function `eask--msg' for arguments MSG and ARGS."
+  (apply #'eask--msg 'info  "[INFO]" msg args))
+(defun eask-warn (msg &rest args)
+  "Send warn message; see function `eask--msg' for arguments MSG and ARGS."
+  (apply #'eask--msg 'warn  "[WARNING]" msg args))
+(defun eask-error (msg &rest args)
+  "Send error message; see function `eask--msg' for arguments MSG and ARGS."
+  (apply #'eask--msg 'error "[ERROR]" msg args))
 
 (defun eask--msg-paint-kwds (string)
   "Paint keywords from STRING."
@@ -1307,17 +1306,69 @@ character."
     string))
 
 (defun eask-msg (msg &rest args)
-  "Like function `message' but replace unicodes with color."
+  "Like function `message' but replace unicodes with color.
+
+For arguments MSG and ARGS, please see function `eask--format-paint-kwds' for
+the detials."
   (message (apply #'eask--format-paint-kwds msg args)))
 
 (defun eask-write (msg &rest args)
-  "Like function `eask-msg' but without newline at the end."
+  "Like function `eask-msg' but without newline at the end.
+
+For arguments MSG and ARGS, please see function `eask--format-paint-kwds' for
+the detials."
   (unless inhibit-message
     (princ (apply #'eask--format-paint-kwds msg args) 'external-debugging-output)))
 
 (defun eask-report (&rest args)
-  "Report error/warning depends on strict flag."
+  "Report error/warning depends on strict flag.
+
+Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
   (apply (if (eask-strict-p) #'eask-error #'eask-warn) args))
+
+;;
+;;; Error Handling
+
+(defvar eask--ignore-error-p nil
+  "Don't trigger error when this is non-nil.")
+
+(defmacro eask-ignore-errors (&rest body)
+  "Execute BODY but ignore all errors."
+  (declare (indent 0) (debug t))
+  `(let ((eask--ignore-error-p t)) ,@body))
+
+(defun eask--exit (&rest _) "Send exit code." (kill-emacs 1))
+
+(defun eask--trigger-error ()
+  "Trigger error event."
+  (when (and (not eask--ignore-error-p)
+             (not (eask-checker-p)))  ; ignore when checking Eask-file
+    (if (eask-allow-error-p)  ; Trigger error at the right time
+        (add-hook 'eask-after-command-hook #'eask--exit)
+      (eask--exit))))
+
+(defun eask--error (fnc &rest args)
+  "On error.
+
+Arguments FNC and ARGS are used for advice `:around'."
+  (let ((msg (eask--ansi 'error (apply #'format-message args))))
+    (eask--unsilent (eask-msg "%s" msg))
+    (run-hook-with-args 'eask-on-error-hook 'error msg)
+    (eask--trigger-error))
+  (when debug-on-error (apply fnc args)))
+
+(advice-add 'error :around #'eask--error)
+
+(defun eask--warn (fnc &rest args)
+  "On warn.
+
+Arguments FNC and ARGS are used for advice `:around'."
+  (let ((msg (eask--ansi 'warn (apply #'format-message args))))
+    (eask--unsilent (eask-msg "%s" msg))
+    (run-hook-with-args 'eask-on-warning-hook 'warn msg))
+  (eask--silent (apply fnc args)))
+
+(advice-add 'warn :around #'eask--warn)
 
 ;;
 ;;; Log
@@ -1414,7 +1465,7 @@ character."
   :type 'number)
 
 (defmacro eask-with-progress (msg-start body msg-end)
-  "Progress BODY wrapper with prefix and suffix messages."
+  "Progress BODY wrapper with prefix (MSG-START) and suffix (MSG-END) messages."
   (declare (indent 0) (debug t))
   `(if eask-elapsed-time
        (let ((now (current-time)))
@@ -1428,7 +1479,11 @@ character."
      (ignore-errors (eask-msg ,msg-end))))
 
 (defun eask-progress-seq (prefix sequence suffix func)
-  "Progress SEQUENCE with messages."
+  "Shorthand to progress SEQUENCE of task.
+
+Arguments PREFIX and SUFFIX are strings to print before and after each progress.
+Argument FUNC are execution for eash progress; this is generally the actual
+task work."
   (let* ((total (length sequence)) (count 0)
          (offset (eask-2str (length (eask-2str total)))))
     (mapc
@@ -1442,7 +1497,9 @@ character."
      sequence)))
 
 (defun eask-print-log-buffer (&optional buffer-or-name)
-  "Loop through each line and print each line with corresponds log level."
+  "Loop through each line and print each line with corresponds log level.
+
+You can pass BUFFER-OR-NAME to replace current buffer."
   (with-current-buffer (or buffer-or-name (current-buffer))
     (goto-char (point-min))
     (while (not (eobp))
@@ -1503,11 +1560,16 @@ character."
   (unless eask-package (eask-error "Missing metadata package; make sure you have create Eask-file with $ eask init!")))
 
 (defun eask--check-strings (fmt f p &rest args)
-  "Test strings (F and P); then print FMT if not equal."
+  "Test strings (F and P); then print FMT and ARGS if not equal."
   (unless (string= f p) (apply #'eask-warn (append (list fmt f p) args))))
 
 (defun eask--check-optional (f p msg1 msg2 msg3 msg4)
-  "Conditional way to check optional headers, URL and KEYWORDS ."
+  "Conditional way to check optional headers, URL and KEYWORDS.
+
+For arguments F and P, please see function `eask--check-strings' for more
+information.
+
+Arguments MSG1, MSG2, MSG3 and MSG4 are conditional messages."
   (cond ((and f p) (eask--check-strings msg1 f p))
         (f (eask-warn msg2))
         (p (eask-warn msg3))
@@ -1575,7 +1637,10 @@ character."
 (add-hook 'eask-file-loaded-hook #'eask--checker-metadata)
 
 (defun eask--checker-string (name var)
-  "Run checker for VAR."
+  "Run checker for package's metadata.
+
+Argument NAME represent the name of that package's metadata.  VAR is the actual
+variable we use to test validation."
   (unless (stringp var)
     (eask-error "%s must be a string" name))
   (when (string-empty-p var)
@@ -1612,7 +1677,7 @@ character."
 ;;; Linter
 
 (defvar eask-lint-first-file-p nil
-  "Set the flag to `t' after the first file is linted.")
+  "Set the flag to t after the first file is linted.")
 
 (defun eask-lint-first-newline ()
   "Built-in linters will create extra newline, prevent that!"
