@@ -2,7 +2,7 @@
 
 ;;; Commentary:
 ;;
-;; Evaluate lisp form with a proper PATH,
+;; Evaluate Lisp form with a proper PATH,
 ;;
 ;;   $ eask eval [form]
 ;;

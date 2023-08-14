@@ -20,10 +20,10 @@
         nil t))
 
 (defconst eask--exec-path-file (expand-file-name "exec-path" eask-homedir)
-  "Target file to export the `exec-path' variable.")
+  "Target file to export the variable `exec-path'.")
 
 (defconst eask--load-path-file (expand-file-name "load-path" eask-homedir)
-  "Target file to export the `load-path' variable.")
+  "Target file to export the variable `load-path'.")
 
 (defun eask--export-env ()
   "Export environments."

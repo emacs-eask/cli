@@ -41,7 +41,7 @@
   (write-region (concat command "\n") nil eask--run-file t))
 
 (defun eask--unmatched-scripts (scripts)
-  "Return a list of scripts that cannot be found in `eask-scripts'."
+  "Return a list of SCRIPTS that cannot be found in `eask-scripts'."
   (let (unmatched)
     (dolist (script scripts)
       (unless (assoc script eask-scripts)

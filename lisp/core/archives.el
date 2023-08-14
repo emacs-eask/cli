@@ -19,7 +19,7 @@
 (defvar eask--length-priority)
 
 (defun eask--print-archive (archive)
-  "Print the archive."
+  "Print the ARCHIVE."
   (let* ((name (car archive))
          (url (cdr archive))
          (priority (assoc name package-archive-priorities))

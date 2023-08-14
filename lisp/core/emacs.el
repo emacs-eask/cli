@@ -2,7 +2,7 @@
 
 ;;; Commentary:
 ;;
-;; Execute emacs with the appropriate environment
+;; Execute Emacs with the appropriate environment
 ;;
 ;;   $ eask emacs [args..]
 ;;
