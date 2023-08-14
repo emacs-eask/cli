@@ -30,7 +30,10 @@
 (defvar eask--checkdoc-errors nil "Error flag.")
 
 (defun eask--checkdoc-print-error (text start end &optional unfixable)
-  "Print error for checkdoc."
+  "Print error for checkdoc.
+
+Arguments TEXT, START, END and UNFIXABLE are required for this function to
+be assigned to variable `checkdoc-create-error-function'."
   (setq eask--checkdoc-errors t)
   (let ((msg (concat (checkdoc-buffer-label) ":"
                      (int-to-string (count-lines (point-min) (or start (point-min))))

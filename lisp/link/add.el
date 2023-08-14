@@ -33,7 +33,7 @@
 (defvar eask--link-package-version nil "Used to form package name.")
 
 (defun eask--create-link (name source)
-  "Add link with NAME to PATH."
+  "Add link with NAME to SOURCE path."
   (let* ((dir-name (format "%s-%s" eask--link-package-name eask--link-package-version))
          (link-path (expand-file-name dir-name package-user-dir)))
     (when (file-exists-p link-path)
