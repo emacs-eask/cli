@@ -22,3 +22,12 @@
 .gdoc-footer {
   background: #44879A;
 }
+
+/* Icons */
+
+.gdoc_dicord {
+  background: url('./icons/discord-mark-white.svg');
+  background-repeat: no-repeat;
+  margin-top: 5px;
+  background-size: 90%;
+}

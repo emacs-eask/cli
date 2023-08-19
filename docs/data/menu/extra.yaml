@@ -4,3 +4,7 @@ header:
     ref: https://github.com/emacs-eask/cli
     icon: gdoc_github
     external: true
+  - name: Discord
+    ref: https://discord.com/invite/E9zzjWGfFD
+    icon: gdoc_dicord
+    external: true
