@@ -32,8 +32,8 @@
 (defvar eask--link-package-name    nil "Used to form package name.")
 (defvar eask--link-package-version nil "Used to form package name.")
 
-(defun eask--create-link (name source)
-  "Add link with NAME to SOURCE path."
+(defun eask--create-link (source)
+  "Add link with SOURCE path."
   (let* ((dir-name (format "%s-%s" eask--link-package-name eask--link-package-version))
          (link-path (expand-file-name dir-name package-user-dir)))
     (when (file-exists-p link-path)
@@ -80,7 +80,7 @@
           ;; XXX: Install dependencies for linked package
           (eask-msg "")
           (eask--install-packages (eask--package-desc-reqs pkg-desc))
-          (eask--create-link name source)
+          (eask--create-link source)
           (when (and (zerop (length links))         ; if no link previously,
                      (= 1 (length (eask--links))))  ; and first link created!
             (eask-help "link/add/success/pkg")))
@@ -110,7 +110,7 @@
                     (unless pkg-file-presented
                       (eask-with-verbosity 'debug (eask-call "generate/pkg-file")))
                     (if pkg-file-presented "already presented ✗" "done ✓")))
-                (eask--create-link name source)
+                (eask--create-link source)
                 (when (and (zerop (length links))         ; if no link previously,
                            (= 1 (length (eask--links))))  ; and first link created!
                   (eask-help "link/add/success/eask")))

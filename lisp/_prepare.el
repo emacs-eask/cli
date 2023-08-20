@@ -156,7 +156,7 @@ Argument BODY are forms for execution."
 ;; This is used to creating the directory recipe!
 (defun eask-current-time ()
   "Return current time."
-  (let ((now (current-time))) (logior (lsh (car now) 16) (cadr now))))
+  (let ((now (current-time))) (logior (ash (car now) 16) (cadr now))))
 
 (defun eask-seq-str-max (sequence)
   "Return max length in SEQUENCE of strings."
@@ -180,8 +180,7 @@ Argument BODY are forms for execution."
 (defun eask--download-archives ()
   "If archives download failed; download it manually."
   (dolist (archive package-archives)
-    (let* ((location (cdr archive))
-           (name (car archive))
+    (let* ((name (car archive))
            (file "archive-contents")
            (dir (expand-file-name (concat "archives/" name) package-user-dir))
            (local-file (expand-file-name file dir))
@@ -743,7 +742,7 @@ Argument BODY are forms for execution."
      (setq result (progn ,@body))
      ;; XXX: after loading Eask file, we revert those functions back to normal!
      (eask--loop-file-keywords
-      (lambda (keyword api old)
+      (lambda (keyword _api old)
         (defalias keyword (symbol-function old))))
      result))
 
@@ -1187,15 +1186,18 @@ ELPA)."
   "Log level for all messages; 4 means trace most anything, 0 means nothing.
 
 Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 (debug), 5 (all)."
-  :type 'integer)
+  :type 'integer
+  :group 'eask)
 
 (defcustom eask-timestamps nil
   "Log messages with timestamps."
-  :type 'boolean)
+  :type 'boolean
+  :group 'eask)
 
 (defcustom eask-log-level nil
   "Log messages with level."
-  :type 'boolean)
+  :type 'boolean
+  :group 'eask)
 
 (defcustom eask-level-color
   '((all   . ansi-magenta)
@@ -1205,7 +1207,8 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 (debug), 5 (all)."
     (warn  . ansi-yellow)
     (error . ansi-red))
   "Alist of each log level's color, in (SYMBOL . ANSI-FUNCTION)."
-  :type 'alist)
+  :type 'alist
+  :group 'eask)
 
 (defun eask--verb2lvl (symbol)
   "Convert verbosity SYMBOL to level."
@@ -1378,7 +1381,8 @@ Arguments FNC and ARGS are used for advice `:around'."
 
 (defcustom eask-log-file nil
   "Weather to generate log files."
-  :type 'boolean)
+  :type 'boolean
+  :group 'eask)
 
 (defmacro eask--log-write-buffer (buffer file)
   "Write BUFFER to FILE."
@@ -1458,11 +1462,13 @@ Arguments FNC and ARGS are used for advice `:around'."
 
 (defcustom eask-elapsed-time nil
   "Log with elapsed time."
-  :type 'boolean)
+  :type 'boolean
+  :group 'eask)
 
 (defcustom eask-minimum-reported-time 0.1
   "Minimal load time that will be reported."
-  :type 'number)
+  :type 'number
+  :group 'eask)
 
 (defmacro eask-with-progress (msg-start body msg-end)
   "Progress BODY wrapper with prefix (MSG-START) and suffix (MSG-END) messages."
@@ -1651,27 +1657,33 @@ variable we use to test validation."
 
 (defcustom eask-file-loaded-hook nil
   "Hook runs after Easkfile is loaded."
-  :type 'hook)
+  :type 'hook
+  :group 'eask)
 
 (defcustom eask-before-command-hook nil
   "Hook runs before command is executed."
-  :type 'hook)
+  :type 'hook
+  :group 'eask)
 
 (defcustom eask-after-command-hook nil
   "Hook runs after command is executed."
-  :type 'hook)
+  :type 'hook
+  :group 'eask)
 
 (defcustom eask-on-error-hook nil
   "Hook runs when error is triggered."
-  :type 'hook)
+  :type 'hook
+  :group 'eask)
 
 (defcustom eask-on-warning-hook nil
   "Hook runs when warning is triggered."
-  :type 'hook)
+  :type 'hook
+  :group 'eask)
 
 (defcustom eask-dist-path "dist"
   "Name of default target directory for building packages."
-  :type 'string)
+  :type 'string
+  :group 'eask)
 
 ;;
 ;;; Linter

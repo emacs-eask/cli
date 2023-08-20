@@ -40,9 +40,10 @@
         "done ✓")
       (setq delete-dir t))
     (eask-msg "")
-    (eask-info "(Total of %s file%s, and %s directory deleted)" deleted
+    (eask-info "(Total of %s file%s and %s directory deleted, %s skipped)" deleted
                (eask--sinr deleted "" "s")
-               (if delete-dir "1" "0"))))
+               (if delete-dir "1" "0")
+               (- 3 deleted))))
 
 (eask-start
   (let* ((eask-dist-path (or (eask-argv 0) eask-dist-path))

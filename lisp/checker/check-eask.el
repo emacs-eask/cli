@@ -47,8 +47,7 @@
 
 For arguments LEVEL and MSG, please see function `eask--write-log' for more
 information."
-  (let* ((thing (thing-at-point 'sexp))
-         (bounds (bounds-of-thing-at-point 'sexp))
+  (let* ((bounds (bounds-of-thing-at-point 'sexp))
          (filename (or load-file-name eask-file))
          (start (car bounds))
          (end (cdr bounds))

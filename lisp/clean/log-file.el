@@ -32,8 +32,10 @@
         "done ✓")
       (setq delete-dir t))
     (eask-msg "")
-    (eask-info "(Total of %s log file%s deleted, %s skipped)" deleted
+    (eask-info "(Total of %s log file%s and %s directory deleted, %s skipped)"
+               deleted
                (eask--sinr deleted "" "s")
+               (if delete-dir "1" "0")
                (- (length log-files) deleted))))
 
 (eask-start

@@ -60,7 +60,7 @@
   "Upgrade for archive packages."
   (if-let ((upgrades (eask-package--upgrades)))
       (progn
-        (mapcar #'eask-package-upgrade upgrades)
+        (mapc #'eask-package-upgrade upgrades)
         (eask-msg "")
         (eask-info "(Done upgrading all packages)"))
     (eask-msg "")
