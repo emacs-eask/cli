@@ -29,7 +29,7 @@
 
 (defvar eask--checkdoc-errors nil "Error flag.")
 
-(defun eask--checkdoc-print-error (text start end &optional unfixable)
+(defun eask--checkdoc-print-error (text start _end &optional _unfixable)
   "Print error for checkdoc.
 
 Arguments TEXT, START, END and UNFIXABLE are required for this function to
