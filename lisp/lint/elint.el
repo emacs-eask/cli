@@ -20,6 +20,11 @@
         nil t))
 
 ;;
+;;; Externals
+
+(declare-function elint-get-log-buffer "ext:elsa.el")
+
+;;
 ;;; Flags
 
 (advice-add #'eask-allow-error-p :override (lambda (&rest _) t))

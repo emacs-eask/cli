@@ -20,6 +20,13 @@
         nil t))
 
 ;;
+;;; Externals
+(defvar checkdoc-version)
+(defvar checkdoc-create-error-function)
+
+(declare-function checkdoc-buffer-label "ext:checkdoc.el")
+
+;;
 ;;; Flags
 
 (advice-add #'eask-allow-error-p :override (lambda (&rest _) t))

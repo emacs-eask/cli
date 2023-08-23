@@ -19,6 +19,14 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
+;;
+;;; Externals
+
+(defvar check-declare-warning-buffer)
+
+;;
+;;; Core
+
 (defun eask--check-declare-file (filename)
   "Run check-declare on FILENAME."
   (let* ((filename (expand-file-name filename))

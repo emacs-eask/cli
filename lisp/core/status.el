@@ -14,6 +14,15 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
+;;
+;;; Externals
+
+(declare-function ansi-bright-black "ext:ansi.el")
+(declare-function ansi-underscore "ext:ansi.el")
+
+;;
+;;; Core
+
 (defun eask--environment-name ()
   "Get the working environment name."
   (cond ((eask-global-p) "global (~/.eask/)")

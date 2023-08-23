@@ -19,6 +19,14 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
+;;
+;;; Externals
+
+(declare-function package-directory-recipe "ext:package-recipe.el")
+
+;;
+;;; Core
+
 (defun eask-package-dir--patterns ()
   "Return patterns for directory recipe."
   (if eask-files

@@ -16,7 +16,7 @@
 
 ;; Copied from `keg.el'
 (defun eask--keg-file-read (path)
-  "Return sexp from Keg file search from `deafult-directory'.
+  "Return sexp from Keg file (PATH) search from `deafult-directory'.
 If no found the Keg file, returns nil."
   (let (sources devs packages lint-disables scripts)
     (when path

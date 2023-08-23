@@ -20,6 +20,14 @@
         nil t))
 
 ;;
+;;; Externals
+
+(defvar elsa-global-state)
+
+(declare-function elsa-message-format "ext:elsa.el")
+(declare-function elsa-analyse-file "ext:elsa.el")
+
+;;
 ;;; Flags
 
 (advice-add #'eask-allow-error-p :override (lambda (&rest _) t))

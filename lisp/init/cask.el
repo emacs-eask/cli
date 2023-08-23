@@ -14,11 +14,16 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-
 ;;
 ;;; Externals
 
 (defvar -flatten)
+
+(declare-function ansi-green "ext:ansi.el")
+(declare-function ansi-yellow "ext:ansi.el")
+(declare-function ansi-white "ext:ansi.el")
+
+(declare-function cask--read "ext:cask.el")
 
 ;;
 ;;; Core

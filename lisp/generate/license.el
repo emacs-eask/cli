@@ -23,6 +23,14 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
+;;
+;;; Externals
+
+(defvar license-templates--data)
+
+;;
+;;; Core
+
 (defun eask--print-license-menu ()
   "Print all available license."
   (eask-msg "available via `eask generate license`")

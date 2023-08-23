@@ -16,6 +16,25 @@
 (require 'rect)
 (require 'subr-x)
 
+;;
+;;; Externals
+
+(defvar ansi-inhibit-ansi)
+(defvar github-elpa-archive-dir)
+(defvar github-elpa-recipes-dir)
+(defvar package-build-default-files-spec)
+
+(declare-function package-build-expand-files-spec "ext:package-build.el")
+(declare-function github-elpa-build "ext:github-elpa.el")
+(declare-function ansi-red "ext:ansi.el")
+(declare-function ansi-blue "ext:ansi.el")
+(declare-function ansi-green "ext:ansi.el")
+(declare-function ansi-yellow "ext:ansi.el")
+(declare-function ansi-white "ext:ansi.el")
+
+;;
+;;; Environments
+
 ;; Determine the underlying operating system
 (defconst eask-is-windows (memq system-type '(cygwin windows-nt ms-dos))
   "The system is Windows.")
@@ -46,6 +65,15 @@
 Arguments FNC and ARGS are used for advice `:around'."
   (unless (string= (nth 0 args) (eask-script "_prepare")) (apply fnc args)))
 (advice-add 'load :around #'eask--load--adv)
+
+(defconst eask-has-colors (getenv "EASK_HASCOLORS")
+  "Return non-nil if terminal support colors.")
+
+(defconst eask-homedir (getenv "EASK_HOMEDIR")
+  "Eask temporary storage.")
+
+(defconst eask-invocation (getenv "EASK_INVOCATION")
+  "Eask invocation program.")
 
 ;;
 ;;; Execution
@@ -465,18 +493,6 @@ full detials."
   "Return package description file if exists."
   (let ((pkg-el (package--description-file default-directory)))
     (when (file-readable-p pkg-el) pkg-el)))
-
-;;
-;;; Environments
-
-(defconst eask-has-colors (getenv "EASK_HASCOLORS")
-  "Return non-nil if terminal support colors.")
-
-(defconst eask-homedir (getenv "EASK_HOMEDIR")
-  "Eask temporary storage.")
-
-(defconst eask-invocation (getenv "EASK_INVOCATION")
-  "Eask invocation program.")
 
 ;;
 ;;; Flags
