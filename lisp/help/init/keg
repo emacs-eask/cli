@@ -1,0 +1,6 @@
+
+💡 Make sure you have a valid Keg-file in your directory
+
+💡 Or specify Keg-file explicitly, like:
+
+    $ eask init --from=keg /path/to/Keg

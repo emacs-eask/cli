@@ -48,6 +48,11 @@ exports.handler = async (argv) => {
                         , UTIL.def_flag(argv.from, '--from', argv.from)
                         , argv.files);
       break;
+    case 'keg':
+      await UTIL.e_call(argv, 'init/keg'
+                        , UTIL.def_flag(argv.from, '--from', argv.from)
+                        , argv.files);
+      break;
     default:
       console.log(`Invalid argument, from: ${argv.from}`);
       break;
