@@ -21,6 +21,7 @@
 
 ;;
 ;;; Externals
+
 (defvar checkdoc-version)
 (defvar checkdoc-create-error-function)
 

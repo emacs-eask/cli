@@ -28,6 +28,8 @@
 
 (defvar license-templates--data)
 
+(declare-function license-templates-keys "ext:license-templates.el")
+
 ;;
 ;;; Core
 

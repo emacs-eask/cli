@@ -26,6 +26,7 @@
 
 (declare-function elsa-message-format "ext:elsa.el")
 (declare-function elsa-analyse-file "ext:elsa.el")
+(declare-function --each "ext:dash.el")
 
 ;;
 ;;; Flags

@@ -20,6 +20,11 @@
         nil t))
 
 ;;
+;;; Externals
+
+(declare-function package-lint-current-buffer "ext:package-lint.el")
+
+;;
 ;;; Flags
 
 (advice-add #'eask-allow-error-p :override (lambda (&rest _) t))

@@ -23,6 +23,14 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
+;;
+;;; Externals
+
+(declare-function gitignore-templates-names "ext:license-templates.el")
+
+;;
+;;; Core
+
 (defun eask--print-ignore-menu ()
   "Print all available ignore."
   (eask-msg "available via `eask generate ignore`")

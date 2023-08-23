@@ -17,11 +17,11 @@
 ;;
 ;;; Externals
 
-(defvar -flatten)
-
 (declare-function ansi-green "ext:ansi.el")
 (declare-function ansi-yellow "ext:ansi.el")
 (declare-function ansi-white "ext:ansi.el")
+
+(declare-function -flatten "ext:dash.el")
 
 (declare-function cask--read "ext:cask.el")
 
