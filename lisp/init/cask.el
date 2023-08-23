@@ -14,12 +14,65 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
+(defvar eask--cask-contents nil
+  "Store Cask-file contents.")
+
+(defun eask--cask-filter-contents (name &optional contents)
+  "Filter directives by NAME.
+
+Optional argument CONTENTS is used for nested directives.  e.g. development."
+  (cl-remove-if-not (lambda (prop)
+                      (eq (car prop) name))
+                    (or contents eask--cask-contents)))
+
+(defun eask--cask-package-name ()
+  "Return package name from Cask-file."
+  (nth 0 (alist-get 'package eask--cask-contents)))
+
+(defun eask--cask-package-version ()
+  "Return package version from Cask-file."
+  (nth 1 (alist-get 'package eask--cask-contents)))
+
+(defun eask--cask-package-description ()
+  "Return package description from Cask-file."
+  (nth 2 (alist-get 'package eask--cask-contents)))
+
+(defun eask--cask-package-file ()
+  "Return package file from Cask-file."
+  (car (alist-get 'package-file eask--cask-contents)))
+
+(defun eask--cask-sources ()
+  "Return sources from Cask-file."
+  (eask--cask-filter-contents 'source))
+
+(defun eask--cask-reqs ()
+  "Return dependencies from Cask-file."
+  (eask--cask-filter-contents 'depends-on))
+
+(defun eask--cask-reqs-dev ()
+  "Return development dependencies file from Cask-file."
+  (let ((dev-scopes (eask--cask-filter-contents 'development))
+        (deps))
+    (dolist (dev-scope dev-scopes)
+      (setq deps (append deps (eask--cask-filter-contents 'depends-on (cdr dev-scope)))))
+    deps))
+
+(defun eask--cask-emacs-version ()
+  "Return Emacs version from Cask-file."
+  (let ((reqs (eask--cask-reqs)))
+    (cl-some (lambda (req)
+               (message "? %s %s" (equal (cadr req) 'emacs) (cadr req))
+               (when (string= (cadr req) "emacs")
+                 (caddr req)))
+             reqs)))
+
 (defun eask--convert-cask (filename)
   "Convert Cask FILENAME to Eask."
   (let* ((filename (expand-file-name filename))
          (file (file-name-nondirectory (eask-root-del filename)))
          (new-file (eask-s-replace "Cask" "Eask" file))
          (new-filename (expand-file-name new-file))
+         (eask--cask-contents (cask--read filename))  ; Read it!
          (converted))
     (eask-with-progress
       (format "Converting file `%s` to `%s`... " file new-file)
@@ -30,18 +83,82 @@
                (eask-debug "✗ The file `%s` already presented" new-file))
               (t
                (with-current-buffer (find-file new-filename)
-                 (insert-file-contents file)
                  (goto-char (point-min))
-                 (while (re-search-forward "(source " nil t)
-                   (forward-word 1)
-                   (forward-word -1)  ; make sure infront of the word
-                   (insert "'"))      ; make it symbol
+
+                 (eask--unsilent (eask-msg "\n"))
+
+                 (let* ((project-name
+                         (or (eask--cask-package-name)
+                             (file-name-nondirectory (directory-file-name default-directory))))
+                        (package-name
+                         (or (eask--cask-package-name)
+                             (read-string (format "package name: (%s) " project-name) nil nil project-name)))
+                        (version (or (eask--cask-package-version)
+                                     (read-string "version: (1.0.0) " nil nil "1.0.0")))
+                        (description (or (eask--cask-package-description)
+                                         (read-string "description: ")))
+                        (guess-entry-point (format "%s.el" project-name))
+                        (entry-point
+                         (or (eask--cask-package-file)
+                             (read-string (format "entry point: (%s) " guess-entry-point)
+                                          nil nil guess-entry-point)))
+                        (emacs-version
+                         (or (eask--cask-emacs-version)
+                             (read-string "emacs version: (26.1) " nil nil "26.1")))
+                        (website (read-string "website: "))
+                        (keywords (read-string "keywords: "))
+                        (keywords (split-string keywords "[, ]"))
+                        (keywords (string-join keywords "\" \""))
+                        (content (format
+                                  "(package \"%s\"
+         \"%s\"
+         \"%s\")
+
+(website-url \"%s\")
+(keywords \"%s\")
+
+(package-file \"%s\")
+
+(script \"test\" \"echo \\\"Error: no test specified\\\" && exit 1\")
+"
+                                  package-name version description website keywords
+                                  entry-point)))
+                   (insert content)
+
+                   (insert "\n")
+
+                   (dolist (source (eask--cask-sources))
+                     (insert "(source '" (eask-2str (cadr source)) ")\n"))
+
+                   (insert "\n")
+
+                   (when-let ((pkgs (eask--cask-reqs)))
+                     (dolist (pkg pkgs)
+                       (let ((val (mapconcat #'eask-2str (cdr pkg) "\" \"")))
+                         (insert "(depends-on \"" val "\")\n"))))
+
+                   (insert "\n")
+
+                   (when-let ((pkgs (eask--cask-reqs-dev)))
+                     (insert "(development\n")
+                     (dolist (pkg pkgs)
+                       (let ((val (mapconcat #'eask-2str (cdr pkg) "\" \"")))
+                         (insert " (depends-on \"" val "\")\n")))
+                     (insert " )\n")))
+
                  (save-buffer))
                (setq converted t))))
       (if converted "done ✓" "skipped ✗"))
     converted))
 
 (eask-start
+  ;; Preparation
+  (eask-with-archives `("jcs-elpa" "melpa")
+    (eask-package-install 'package-build)
+    (eask-package-install 'cask))
+
+  ;; Start Converting
+  (require 'cask)
   (let* ((patterns (eask-args))
          (files (if patterns
                     (eask-expand-file-specs patterns)

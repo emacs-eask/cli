@@ -848,16 +848,17 @@ This uses function `locate-dominating-file' to look up directory tree."
        (eask--setup-env
          (eask--handle-global-options)
          (cond
-          ((or (eask-global-p) (eask-special-p))  ; Commands without Eask-file needed
+          ((or (eask-global-p) (eask-special-p))  ; Commands without Eask-file needed!
            (eask--setup-home (concat eask-homedir "../")  ; `/home/user/', escape `.eask'
              (let ((eask--first-init-p (not (file-directory-p user-emacs-directory))))
                ;; We accept Eask-file in `global' scope, but it shouldn't be used
                ;; for the sandbox.
                (eask-with-verbosity 'debug
-                 (if (eask-file-try-load "./")
-                     (eask-msg "✓ Loading global Eask file in %s... done!" eask-file)
-                   (eask-msg "✗ Loading global Eask file... missing!"))
-                 (message ""))
+                 (eask-ignore-errors  ; Again, without Eask-file needed!
+                   (if (eask-file-try-load "./")
+                       (eask-msg "✓ Loading global Eask file in %s... done!" eask-file)
+                     (eask-msg "✗ Loading global Eask file... missing!")))
+                 (eask-msg ""))
                (package-activate-all)
                (ignore-errors (make-directory package-user-dir t))
                (eask--with-hooks ,@body))))
@@ -869,7 +870,7 @@ This uses function `locate-dominating-file' to look up directory tree."
                (if (eask-file-try-load "./")
                    (eask-msg "✓ Loading config Eask file in %s... done!" eask-file)
                  (eask-msg "✗ Loading config Eask file... missing!"))
-               (message ""))
+               (eask-msg ""))
              (package-activate-all)
              (eask-with-progress
                (ansi-green "Loading your configuration... ")
@@ -1337,10 +1338,23 @@ Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
 (defvar eask--ignore-error-p nil
   "Don't trigger error when this is non-nil.")
 
+(defvar eask-inhibit-error-message nil
+  "Non-nil to stop the error message.")
+
 (defmacro eask-ignore-errors (&rest body)
-  "Execute BODY but ignore all errors."
+  "Execute BODY without killing the process."
   (declare (indent 0) (debug t))
   `(let ((eask--ignore-error-p t)) ,@body))
+
+(defmacro eask--silent-error (&rest body)
+  "Execute BODY and inhibit all error messages."
+  (declare (indent 0) (debug t))
+  `(let ((eask-inhibit-error-message t)) ,@body))
+
+(defmacro eask-ignore-errors-silent (&rest body)
+  "Execute BODY by completely ignore errors."
+  (declare (indent 0) (debug t))
+  `(eask-ignore-errors (eask--silent-error ,@body)))
 
 (defun eask--exit (&rest _) "Send exit code." (kill-emacs 1))
 
@@ -1357,7 +1371,7 @@ Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
 
 Arguments FNC and ARGS are used for advice `:around'."
   (let ((msg (eask--ansi 'error (apply #'format-message args))))
-    (unless eask--ignore-error-p
+    (unless eask-inhibit-error-message
       (eask--unsilent (eask-msg "%s" msg)))
     (run-hook-with-args 'eask-on-error-hook 'error msg)
     (eask--trigger-error))
@@ -1370,7 +1384,7 @@ Arguments FNC and ARGS are used for advice `:around'."
 
 Arguments FNC and ARGS are used for advice `:around'."
   (let ((msg (eask--ansi 'warn (apply #'format-message args))))
-    (unless eask--ignore-error-p
+    (unless eask-inhibit-error-message
       (eask--unsilent (eask-msg "%s" msg)))
     (run-hook-with-args 'eask-on-warning-hook 'warn msg))
   (eask--silent (apply fnc args)))

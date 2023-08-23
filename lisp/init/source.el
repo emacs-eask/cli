@@ -22,7 +22,7 @@
          (new-filename (expand-file-name new-file))
          (pkg-desc (with-temp-buffer
                      (insert-file-contents filename)
-                     (eask-ignore-errors (package-buffer-info))))  ; Read it!
+                     (eask-ignore-errors-silent (package-buffer-info))))  ; Read it!
          (converted))
     (eask-with-progress
       (format "Converting file `%s` to `%s`... " file new-file)
