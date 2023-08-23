@@ -68,8 +68,26 @@ Eask 將生成這樣的文件：
 (depends-on "emacs" "26.1")
 ```
 
+如果您已有 [Cask][] 項目，您可以將 Cask 文件轉換為 Eask 文件：
+
+```
+$ eask init --from cask /path/to/Cask
+```
+
+如果您已有 [Keg][] 項目，您可以將 Keg 文件轉換為 Eask 文件：
+
+```
+$ eask init --from keg /path/to/Keg
+```
+
+**[推薦]** 如果您已有 elisp 項目，您可以將 `.el` 文件轉換為 Eask 文件：
+
+```
+$ eask init --from source /path/to/source.el
+```
+
 {{< hint ok >}}
-💡 有關更多信息，請參閱 [示例](https://emacs-eask.github.io/examples) 部分！
+💡 有關更多 Eask 文件示例，請參閱[示例](https://emacs-esk.github.io/examples)部分！
 {{< /hint >}}
 
 ## 🔍 eask info

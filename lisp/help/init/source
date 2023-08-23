@@ -1,0 +1,6 @@
+
+💡 Make sure you have a valid elisp file in your directory
+
+💡 Or specify elisp file explicitly, like:
+
+    $ eask init --from=source /path/to/source.el
