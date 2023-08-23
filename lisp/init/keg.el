@@ -79,11 +79,9 @@ If no found the Keg file, returns nil."
 
                  (when-let ((scripts (alist-get 'scripts contents)))
                    (dolist (script scripts)
-                     ;;(eask--unsilent (message "? %s" (cadr script)))
                      (let* ((cmds (cadr script))
                             (_ (pop cmds))
                             (cmds (mapconcat #'identity cmds " ")))
-                       (eask--unsilent (message "? %s" cmds))
                        (insert "(script \"" (eask-2str (car script))
                                "\" " (prin1-to-string cmds) ")\n"))))
                  (insert "\n")
