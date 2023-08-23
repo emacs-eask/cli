@@ -455,7 +455,7 @@ $ eask [command] --no-proxy "localhost:4000"
   (setq byte-compile-verbose t))
 ```
 
-# 🚩 `Eask`-file
+# 🚩 `Eask` 文件
 
 這些函數是 `Eask`-file DSL 的實際實現； 和將單詞 `eask-` 作為函數前綴。
 
