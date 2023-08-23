@@ -44,12 +44,9 @@ exports.handler = async (argv) => {
   if (argv.from) {
     switch (argv.from) {
     case 'cask':
-      await UTIL.e_call(argv, 'init/cask'
-                        , UTIL.def_flag(argv.from, '--from', argv.from)
-                        , argv.files);
-      break;
     case 'keg':
-      await UTIL.e_call(argv, 'init/keg'
+    case 'source':
+      await UTIL.e_call(argv, 'init/' + argv.from
                         , UTIL.def_flag(argv.from, '--from', argv.from)
                         , argv.files);
       break;

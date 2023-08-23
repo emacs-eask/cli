@@ -91,6 +91,7 @@ will return `lint/checkdoc' with a dash between two subcommands."
 (defun eask-special-p ()
   "Return t if the command that can be run without Eask-file existence."
   (member (eask-command) '("init/cask" "init/keg"
+                           "init/source"
                            "cat" "keywords"
                            "generate/ignore" "generate/license")))
 
@@ -1356,7 +1357,8 @@ Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
 
 Arguments FNC and ARGS are used for advice `:around'."
   (let ((msg (eask--ansi 'error (apply #'format-message args))))
-    (eask--unsilent (eask-msg "%s" msg))
+    (unless eask--ignore-error-p
+      (eask--unsilent (eask-msg "%s" msg)))
     (run-hook-with-args 'eask-on-error-hook 'error msg)
     (eask--trigger-error))
   (when debug-on-error (apply fnc args)))
@@ -1368,7 +1370,8 @@ Arguments FNC and ARGS are used for advice `:around'."
 
 Arguments FNC and ARGS are used for advice `:around'."
   (let ((msg (eask--ansi 'warn (apply #'format-message args))))
-    (eask--unsilent (eask-msg "%s" msg))
+    (unless eask--ignore-error-p
+      (eask--unsilent (eask-msg "%s" msg)))
     (run-hook-with-args 'eask-on-warning-hook 'warn msg))
   (eask--silent (apply fnc args)))
 
