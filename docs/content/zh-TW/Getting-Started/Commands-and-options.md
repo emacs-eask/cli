@@ -68,10 +68,6 @@ Eask 將生成這樣的文件：
 (depends-on "emacs" "26.1")
 ```
 
-{{< hint ok >}}
-💡 有關更多 Eask 文件示例，請參閱[示例](https://emacs-esk.github.io/examples) 部分！
-{{< /hint >}}
-
 如果您已有 [Cask][] 項目，您可以將 Cask 文件轉換為 Eask 文件：
 
 ```
@@ -89,6 +85,10 @@ $ eask init --from keg /path/to/Keg
 ```
 $ eask init --from source /path/to/source.el
 ```
+
+{{< hint ok >}}
+💡 有關更多 Eask 文件示例，請參閱[示例](https://emacs-esk.github.io/examples)部分！
+{{< /hint >}}
 
 ## 🔍 eask info
 

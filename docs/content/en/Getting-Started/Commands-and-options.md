@@ -68,11 +68,6 @@ Eask will generate the file like this:
 (depends-on "emacs" "26.1")
 ```
 
-{{< hint ok >}}
-💡 See section [Examples](https://emacs-eask.github.io/examples) for more
-Eask-file examples!
-{{< /hint >}}
-
 If you already have a [Cask][] project, you can convert Cask-file to Eask-file:
 
 ```
@@ -91,6 +86,11 @@ $ eask init --from keg /path/to/Keg
 ```
 $ eask init --from source /path/to/source.el
 ```
+
+{{< hint ok >}}
+💡 See section [Examples](https://emacs-eask.github.io/examples) for more
+Eask-file examples!
+{{< /hint >}}
 
 ## 🔍 eask info
 
