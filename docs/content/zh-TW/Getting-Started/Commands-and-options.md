@@ -881,3 +881,7 @@ $ eask --proxy "localhost:8888" [COMMAND]
 不要對任何 URL 匹配模式使用代理。
 
 `<pattern>` 是 Emacs 正則表達式。
+
+
+[Cask]: https://github.com/cask/cask
+[Keg]: https://github.com/conao3/keg.el
