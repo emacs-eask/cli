@@ -1,4 +1,4 @@
-;;; init/source.el --- Initialize Eask from Source  -*- lexical-binding: t; -*-
+;;; init/source.el --- Initialize Eask from elisp source  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -35,8 +35,6 @@
                (when pkg-desc
                  (with-current-buffer (find-file new-filename)
                    (goto-char (point-min))
-
-
 
                    (let* ((eask-package-desc pkg-desc)
                           (package-name (package-desc-name pkg-desc))
