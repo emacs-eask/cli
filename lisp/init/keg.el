@@ -61,13 +61,55 @@ If no found the Keg file, returns nil."
                (with-current-buffer (find-file new-filename)
                  (goto-char (point-min))
 
-                 (dolist (source (alist-get 'sources contents))
-                   (insert "(source '" (eask-2str source) ")\n"))
-                 (insert "\n")
+                 (let* ((project-name (file-name-nondirectory (directory-file-name default-directory)))
+                        (package-name (read-string (format "\npackage name: (%s) " project-name) nil nil project-name))
+                        (version (read-string "version: (1.0.0) " nil nil "1.0.0"))
+                        (description (read-string "description: "))
+                        (guess-entry-point (format "%s.el" project-name))
+                        (entry-point (read-string (format "entry point: (%s) " guess-entry-point)
+                                                  nil nil guess-entry-point))
+                        (emacs-version (read-string "emacs version: (26.1) " nil nil "26.1"))
+                        (website (read-string "website: "))
+                        (keywords (read-string "keywords: "))
+                        (keywords (split-string keywords "[, ]"))
+                        (keywords (string-join keywords "\" \""))
+                        (content (format
+                                  "(package \"%s\"
+         \"%s\"
+         \"%s\")
+
+(website-url \"%s\")
+(keywords \"%s\")
+
+(package-file \"%s\")
+
+(script \"test\" \"echo \\\"Error: no test specified\\\" && exit 1\")
+"
+                                  package-name version description website keywords
+                                  entry-point)))
+                   (insert content)
+
+                   (when-let ((scripts (alist-get 'scripts contents)))
+                     (dolist (script scripts)
+                       (let* ((cmds (cadr script))
+                              (_ (pop cmds))
+                              (cmds (mapconcat #'identity cmds " ")))
+                         (insert "(script \"" (eask-2str (car script))
+                                 "\" " (prin1-to-string cmds) ")\n"))))
+
+                   (insert "\n")
+
+                   (dolist (source (alist-get 'sources contents))
+                     (insert "(source '" (eask-2str source) ")\n"))
+
+                   (insert "\n")
+
+                   (insert (format "(depends-on \"emacs\" \"%s\")\n" emacs-version)))
 
                  (when-let ((pkgs (alist-get 'packages contents)))
                    (dolist (pkg pkgs)
                      (insert "(depends-on \"" (eask-2str (car pkg)) "\")\n")))
+
                  (insert "\n")
 
                  (when-let ((devs (alist-get 'devs contents)))
@@ -75,16 +117,6 @@ If no found the Keg file, returns nil."
                    (dolist (dev devs)
                      (insert " (depends-on \"" (eask-2str dev) "\")\n"))
                    (insert " )\n"))
-                 (insert "\n")
-
-                 (when-let ((scripts (alist-get 'scripts contents)))
-                   (dolist (script scripts)
-                     (let* ((cmds (cadr script))
-                            (_ (pop cmds))
-                            (cmds (mapconcat #'identity cmds " ")))
-                       (insert "(script \"" (eask-2str (car script))
-                               "\" " (prin1-to-string cmds) ")\n"))))
-                 (insert "\n")
 
                  (save-buffer))
                (setq converted t))))
