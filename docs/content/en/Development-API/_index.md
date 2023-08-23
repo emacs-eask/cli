@@ -752,6 +752,59 @@ Report error/warning depends on strict flag.
 
 See option [--strict](https://emacs-eask.github.io/Getting-Started/Commands-and-options/#---strict).
 
+# 🚩 Error Handling
+
+## 🔍 Variable: eask--ignore-error-p
+
+Non-nil to prevent Emacs from being killed.
+
+```elisp
+(let ((eask--ignore-error-p t))
+  (error "Emacs can't die! :P"))
+```
+
+## 🔍 Variable: eask-inhibit-error-message
+
+Non-nil to stop error/warning message.
+
+```elisp
+(let ((eask-inhibit-error-message t))
+  (error "This won't display at all!"))
+```
+
+## 🔍 Macro: eask-ignore-errors (&rest `body`)
+
+Prevent Emacs from being killed.
+
+```elisp
+(eask-ignore-errors
+  (error "Emacs can't die! :P"))
+```
+
+## 🔍 Macro: eask--silent-error (&rest `body`)
+
+Inhibit display error/warning messages.
+
+```elisp
+(eask--silent-error
+  (error "This won't display at all!"))
+```
+
+## 🔍 Macro: eask-ignore-errors-silent (&rest `body`)
+
+Prevent Emacs from being killed and inhibit display error/warning messages.
+
+```elisp
+(eask-ignore-errors-silent
+  (error "Nothing happens!"))
+```
+
+## 🔍 Function: eask--exit ()
+
+Send exit code.
+
+This will kill Emacs process.
+
 # 🚩 File
 
 ## 🔍 Function: eask-guess-package-name ()

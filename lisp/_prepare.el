@@ -1339,7 +1339,7 @@ Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
   "Don't trigger error when this is non-nil.")
 
 (defvar eask-inhibit-error-message nil
-  "Non-nil to stop the error message.")
+  "Non-nil to stop error/warning message.")
 
 (defmacro eask-ignore-errors (&rest body)
   "Execute BODY without killing the process."

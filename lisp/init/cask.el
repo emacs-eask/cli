@@ -14,6 +14,15 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
+
+;;
+;;; Externals
+
+(defvar -flatten)
+
+;;
+;;; Core
+
 (defvar eask--cask-contents nil
   "Store Cask-file contents.")
 
@@ -40,6 +49,14 @@ Optional argument CONTENTS is used for nested directives.  e.g. development."
 (defun eask--cask-package-file ()
   "Return package file from Cask-file."
   (car (alist-get 'package-file eask--cask-contents)))
+
+(defun eask--cask-files ()
+  "Return files from Cask-file."
+  (alist-get 'files eask--cask-contents))
+
+(defun eask--cask-package-descriptor ()
+  "Return package descriptor from Cask-file."
+  (car (alist-get 'package-descriptor eask--cask-contents)))
 
 (defun eask--cask-sources ()
   "Return sources from Cask-file."
@@ -85,6 +102,7 @@ Optional argument CONTENTS is used for nested directives.  e.g. development."
                (with-current-buffer (find-file new-filename)
                  (goto-char (point-min))
 
+                 ;; XXX: Newline to look nicer!
                  (eask--unsilent (eask-msg "\n"))
 
                  (let* ((project-name
@@ -118,12 +136,26 @@ Optional argument CONTENTS is used for nested directives.  e.g. development."
 (keywords \"%s\")
 
 (package-file \"%s\")
-
-(script \"test\" \"echo \\\"Error: no test specified\\\" && exit 1\")
 "
                                   package-name version description website keywords
                                   entry-point)))
                    (insert content)
+
+                   (when-let* ((files (eask--cask-files))
+                               (files (if (stringp files) files (-flatten files))))
+                     (insert "(files")
+                     (dolist (file files)
+                       (insert "\n \"" file "\""))
+                     (insert ")\n"))
+
+                   (insert "\n")
+
+                   (when-let ((pkg-desc (eask--cask-package-descriptor)))
+                     (insert "(package-descriptor \"" (eask-2str pkg-desc) "\")\n"))
+
+                   (insert "\n")
+
+                   (insert "(script \"test\" \"echo \\\"Error: no test specified\\\" && exit 1\")")
 
                    (insert "\n")
 

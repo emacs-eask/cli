@@ -9,7 +9,7 @@ weight: 700
 
 # 🚩 入口點
 
-## 🔍 Snippet: _prepare.el
+## 🔍 代碼段: _prepare.el
 
 加載 `lisp/_prepare.el` 以開始使用其他 Eask API。
 
@@ -22,7 +22,7 @@ weight: 700
 
 每個 Elisp 腳本都應該在文件的最頂部有這個片段。
 
-## 🔍 Macro: eask-start (&rest `body`)
+## 🔍 巨集: eask-start (&rest `body`)
 
 命令入口點。 每個命令文件都應在文件的某處包含此宏。
 
@@ -34,7 +34,7 @@ weight: 700
 
 # 🚩 核心
 
-## 🔍 Variable: eask-lisp-root
+## 🔍 變數: eask-lisp-root
 
 從項目根目錄指向 `lisp` 目錄。
 
@@ -42,7 +42,7 @@ weight: 700
 (message "%s" eask-lisp-root)  ; path/to/eask/cli/lisp/
 ```
 
-## 🔍 Function: eask-command ()
+## 🔍 函式: eask-command ()
 
 返回字符串中的當前命令。
 
@@ -58,20 +58,20 @@ $ eask init
 (message "%s" (eask-command))  ; init
 ```
 
-## 🔍 Function: eask-special-p ()
+## 🔍 函式: eask-special-p ()
 
 如果在沒有 Eask 文件存在的情況下可以運行的命令，則返回 `t`。
 
 這允許一些命令仍然可以在不定義用戶的情況下執行目錄。 當您想在沒有的情況下進行正常操作時，這會很方便
 觸摸用戶目錄。
 
-## 🔍 Function: eask-checker-p ()
+## 🔍 函式: eask-checker-p ()
 
 如果運行 Eask 作為檢查器，則返回 `t`。
 
 如果沒有這個標誌，一旦發生錯誤，進程就會終止。此標誌允許您在不報告錯誤的情況下運行所有操作。
 
-## 🔍 Function: eask-script (`script`)
+## 🔍 函式: eask-script (`script`)
 
 返回完整的腳本文件名。
 
@@ -79,7 +79,7 @@ $ eask init
 (eask-script "extern/pacakge")  ; {project-root}/lisp/extern/package.el
 ```
 
-## 🔍 Function: eask-load (`script`)
+## 🔍 函式: eask-load (`script`)
 
 加載另一個 eask 腳本。
 
@@ -87,7 +87,7 @@ $ eask init
 (eask-load "extern/ansi")  ; load {project-root}/lisp/extern/ansi.el file
 ```
 
-## 🔍 Function: eask-call (`script`)
+## 🔍 函式: eask-call (`script`)
 
 調用另一個 eask 腳本。
 
@@ -99,7 +99,7 @@ $ eask init
 💡 這個很少用！
 {{< /hint >}}
 
-## 🔍 Macro: eask-defvc< (`version` &rest `body`)
+## 🔍 巨集: eask-defvc< (`version` &rest `body`)
 
 如果 Emacs 版本低於特定版本，則定義範圍。
 
@@ -115,7 +115,7 @@ $ eask init
 💡 這用於 Emacs 兼容性！
 {{< /hint >}}
 
-## 🔍 Macro: eask--silent (&rest `body`)
+## 🔍 巨集: eask--silent (&rest `body`)
 
 將來自範圍內標準輸出的所有消息靜音。
 
@@ -123,7 +123,7 @@ $ eask init
 (eask--unsilent (message "你聽不到我! :("))
 ```
 
-## 🔍 Macro: eask--unsilent (&rest `body`)
+## 🔍 巨集: eask--unsilent (&rest `body`)
 
 取消靜音來自範圍內標準輸出的所有消息。
 
@@ -131,13 +131,13 @@ $ eask init
 (eask--unsilent (message "你聽的到我! :)"))
 ```
 
-## 🔍 Function: eask-dependencies ()
+## 🔍 函式: eask-dependencies ()
 
 返回依賴項列表。
 
 元素應該是 `(NAME . VERSION)` 或 `(NAME . RECIPE-FORMAT)`。
 
-## 🔍 Function: eask-pkg-init (&optional `force`)
+## 🔍 函式: eask-pkg-init (&optional `force`)
 
 初始化包以供使用。
 
@@ -152,7 +152,7 @@ $ eask init
 💡 這通常在 **eask-start** 之後調用！
 {{< /hint >}}
 
-## 🔍 Macro: eask-with-archives (`archives` &rest `body`)
+## 🔍 巨集: eask-with-archives (`archives` &rest `body`)
 
 臨時使存檔可用的範圍。
 
@@ -167,17 +167,17 @@ $ eask init
 💡 當您需要某些檔案中的某些包時，這很方便。
 {{< /hint >}}
 
-## 🔍 Function: eask-package-desc (`name` &optional `current`)
+## 🔍 函式: eask-package-desc (`name` &optional `current`)
 
 為包構建包描述符。
 
 `CURRENT` 表示已安裝的包； 否則它將返回任何可用的來自選定包檔案的包。
 
-## 🔍 Function: eask-argv (`index`)
+## 🔍 函式: eask-argv (`index`)
 
 通过索引返回一个命令行参数。
 
-## 🔍 Function: eask-args ()
+## 🔍 函式: eask-args ()
 
 返回從命令行參數中提取的列表。
 
@@ -187,15 +187,15 @@ $ eask info --verbose 4 foo bar
 
 它會忽略 `--verbose` 和 `4`，只返回 `foo` 和 `bar`。
 
-## 🔍 Variable: eask-file
+## 🔍 變數: eask-file
 
 當前加載的 Eask 文件的路徑。
 
-## 🔍 Variable: eask-file-root
+## 🔍 變數: eask-file-root
 
 當前加載的 Eask 文件的目錄。
 
-## 🔍 Function: eask--match-file (`name`)
+## 🔍 函式: eask--match-file (`name`)
 
 檢查 NAME 是否是我們的目標 Eask 文件，然後返回它。
 
@@ -212,7 +212,7 @@ $ eask info --verbose 4 foo bar
 (eask--match-file "Easkfile.29")  ; nil
 ```
 
-## 🔍 Function: eask--all-files (&optional `dir`)
+## 🔍 函式: eask--all-files (&optional `dir`)
 
 從 DIR 返回 Eask 文件列表。
 
@@ -231,7 +231,7 @@ $ eask info --verbose 4 foo bar
 (eask--all-files "/root/")  ; '(Eask Eask.28)
 ```
 
-## 🔍 Function: eask--find-files (`start-path`)
+## 🔍 函式: eask--find-files (`start-path`)
 
 從 START-PATH 找到 Eask 文件。
 
@@ -252,7 +252,7 @@ $ eask info --verbose 4 foo bar
 (eask--find-files "/project/src/config.el")  ; '(/project/Eask /project/Eask.28)
 ```
 
-## 🔍 Function: eask-file-try-load (`start-path`)
+## 🔍 函式: eask-file-try-load (`start-path`)
 
 嘗試在 START-PATH 中加載 Eask 文件。
 
@@ -260,13 +260,13 @@ $ eask info --verbose 4 foo bar
 (eask--find-files "/project/src/")  ; t
 ```
 
-## 🔍 Function: eask-network-insecure-p ()
+## 🔍 函式: eask-network-insecure-p ()
 
 如果當前 Emacs 會話允許不安全的網絡連接，則返回 `t`。
 
-# 🚩 Flags
+# 🚩 旗標
 
-## 🔍 Function: eask-global-p ()
+## 🔍 函式: eask-global-p ()
 
 如果啟用了 `global` 選項，則返回 `t`。
 
@@ -275,7 +275,7 @@ $ eask info --verbose 4 foo bar
   user-emacs-directory)   ; ~/.eask/
 ```
 
-## 🔍 Function: eask-config-p ()
+## 🔍 函式: eask-config-p ()
 
 如果啟用了 `config` 選項，則返回 `t`。
 
@@ -288,7 +288,7 @@ $ eask info --verbose 4 foo bar
 💡 如果選項 `--config` 和 `--global` 都打開，則選擇全局空間。
 {{< /hint >}}
 
-## 🔍 Function: eask-local-p ()
+## 🔍 函式: eask-local-p ()
 
 這使用當前工作區，這是默認設置。
 
@@ -301,7 +301,7 @@ $ eask info --verbose 4 foo bar
 💡 此函數僅在 `(eask-global-p)` 和 `(eask-config-p)` 是 false 時返回 `t`！
 {{< /hint >}}
 
-## 🔍 Function: eask-all-p ()
+## 🔍 函式: eask-all-p ()
 
 如果啟用了 `all` 選項，則返回 `t`。
 
@@ -311,7 +311,7 @@ $ eask info --verbose 4 foo bar
   ...)
 ```
 
-## 🔍 Function: eask-quick-p ()
+## 🔍 函式: eask-quick-p ()
 
 如果啟用了 `quick` 選項，則返回 `t`。
 
@@ -321,7 +321,7 @@ $ eask info --verbose 4 foo bar
   ...)
 ```
 
-## 🔍 Function: eask-force-p ()
+## 🔍 函式: eask-force-p ()
 
 如果啟用了 `force` 選項，則返回 `t`。
 
@@ -329,7 +329,7 @@ $ eask info --verbose 4 foo bar
 (package-delete .. (eask-force-p))
 ```
 
-## 🔍 Function: eask-dev-p ()
+## 🔍 函式: eask-dev-p ()
 
 如果啟用了 `development` 選項，則返回 `t`。
 
@@ -338,7 +338,7 @@ $ eask info --verbose 4 foo bar
   (package-install 'ert-runner))  ; 安裝開發依賴
 ```
 
-## 🔍 Function: eask-debug-p ()
+## 🔍 函式: eask-debug-p ()
 
 如果啟用了 `debug` 選項，則返回 `t`。
 
@@ -347,7 +347,7 @@ $ eask info --verbose 4 foo bar
   (error "在調試模式下執行..."))
 ```
 
-## 🔍 Function: eask-strict-p ()
+## 🔍 函式: eask-strict-p ()
 
 如果啟用了 `strict` 選項，則返回 `t`。
 
@@ -355,7 +355,7 @@ $ eask info --verbose 4 foo bar
 (setq byte-compile-error-on-warn (eask-strict-p))
 ```
 
-## 🔍 Function: eask-timestamps-p ()
+## 🔍 函式: eask-timestamps-p ()
 
 如果啟用/禁用 `timestamps` 選項，則返回 `t` / `nil`。
 
@@ -366,7 +366,7 @@ $ eask info --verbose 4 foo bar
   (message "打印帶有時間戳的日誌！"))
 ```
 
-## 🔍 Function: eask-log-level-p ()
+## 🔍 函式: eask-log-level-p ()
 
 如果啟用/禁用 `log-level` 選項，則返回 `t` / `nil`。
 
@@ -377,7 +377,7 @@ $ eask info --verbose 4 foo bar
   (message "打印帶有級別前綴的日誌！"))
 ```
 
-## 🔍 Function: eask-log-file-p ()
+## 🔍 函式: eask-log-file-p ()
 
 如果啟用/禁用 `log-file` 選項，則返回 `t` / `nil`。
 
@@ -388,7 +388,7 @@ $ eask info --verbose 4 foo bar
   (message "讓我們創建一個日誌文件！"))
 ```
 
-## 🔍 Function: eask-no-color-p ()
+## 🔍 函式: eask-no-color-p ()
 
 如果啟用了 `color` 選項，則返回 `t`。
 
@@ -397,7 +397,7 @@ $ eask info --verbose 4 foo bar
   (message "此字符串沒有 ANSI 代碼！"))
 ```
 
-## 🔍 Function: eask-allow-error-p ()
+## 🔍 函式: eask-allow-error-p ()
 
 如果啟用了 `allow-error` 選項，則返回 `t`。
 
@@ -406,7 +406,7 @@ $ eask info --verbose 4 foo bar
   (error "停在這裡。"))
 ```
 
-## 🔍 Function: eask-insecure-p ()
+## 🔍 函式: eask-insecure-p ()
 
 如果啟用了 `insecure` 選項，則返回 `t`。
 
@@ -416,10 +416,10 @@ $ eask info --verbose 4 foo bar
   )
 ```
 
-## 🔍 Function: eask-proxy ()
-## 🔍 Function: eask-http-proxy ()
-## 🔍 Function: eask-https-proxy ()
-## 🔍 Function: eask-no-proxy ()
+## 🔍 函式: eask-proxy ()
+## 🔍 函式: eask-http-proxy ()
+## 🔍 函式: eask-https-proxy ()
+## 🔍 函式: eask-no-proxy ()
 
 返回一個 **string** 表示 `hostname` + `port number`。
 
@@ -430,7 +430,7 @@ $ eask [command] --https-proxy "localhost:3000"
 $ eask [command] --no-proxy "localhost:4000"
 ```
 
-## 🔍 Function: eask-destination ()
+## 🔍 函式: eask-destination ()
 
 返回一個 **string** 表示目的地（輸出路徑）。
 
@@ -438,7 +438,7 @@ $ eask [command] --no-proxy "localhost:4000"
 (write-file (or (eask-destination) "./dist"))  ; 將文件寫入目標
 ```
 
-## 🔍 Function: eask-depth ()
+## 🔍 函式: eask-depth ()
 
 返回一個**整數**表示當前打印層級的深度。
 
@@ -446,7 +446,7 @@ $ eask [command] --no-proxy "localhost:4000"
 (setq print-level (eask-depth))
 ```
 
-## 🔍 Function: eask-verbose ()
+## 🔍 函式: eask-verbose ()
 
 返回一個 **整數** 表示冗長級別。
 
@@ -461,7 +461,7 @@ $ eask [command] --no-proxy "localhost:4000"
 
 有關詳細信息，請參閱 [DSL](https://emacs-eask.github.io/DSL/) 部分。
 
-## 🔍 Variable: eask-package
+## 🔍 變數: eask-package
 
 它在 plist 中保存包的 `NAME`、`VERSION` 和 `DESCRIPTION`。
 
@@ -475,11 +475,11 @@ $ eask [command] --no-proxy "localhost:4000"
 - `(eask-package-version)`
 - `(eask-package-description)`
 
-## 🔍 Variable: eask-package-file
+## 🔍 變數: eask-package-file
 
 指向打包主文件。
 
-## 🔍 Variable: eask-package-desc
+## 🔍 變數: eask-package-desc
 
 來自包主文件的包描述符。
 
@@ -491,15 +491,15 @@ $ eask [command] --no-proxy "localhost:4000"
 ⚠ 如果不能正確構造包描述符，這可以是 **nil**！
 {{< /hint >}}
 
-## 🔍 Variable: eask-files
+## 🔍 變數: eask-files
 
 持有通配符規範中的文件模式列表。
 
-## 🔍 Variable: eask-scripts
+## 🔍 變數: eask-scripts
 
 包含可用腳本的列表，用戶可以使用 `eask run-script` 命令。
 
-## 🔍 Variable: eask-depends-on-emacs
+## 🔍 變數: eask-depends-on-emacs
 
 保存有關 Emacs 最低版本的信息。
 
@@ -511,71 +511,71 @@ $ eask [command] --no-proxy "localhost:4000"
 
 - `(eask-depends-emacs-version)` - 返回 `"26.1"`
 
-## 🔍 Variable: eask-depends-on
+## 🔍 變數: eask-depends-on
 
 持有依賴項列表。
 
-## 🔍 Variable: eask-depends-on-dev
+## 🔍 變數: eask-depends-on-dev
 
 持有開發使用的依賴項列表。
 
-## 🔍 Function: eask-f-package (`name` `version` `description`)
+## 🔍 函式: eask-f-package (`name` `version` `description`)
 
 別名 `package`.
 
-## 🔍 Function: eask-f-website-url (`url`)
+## 🔍 函式: eask-f-website-url (`url`)
 
 別名 `website-url`.
 
-## 🔍 Function: eask-f-keywords (&rest `keywords`)
+## 🔍 函式: eask-f-keywords (&rest `keywords`)
 
 別名 `keywords`.
 
-## 🔍 Function: eask-f-author (`name` &optional `email`)
+## 🔍 函式: eask-f-author (`name` &optional `email`)
 
 別名 `author`.
 
-## 🔍 Function: eask-f-license (`name`)
+## 🔍 函式: eask-f-license (`name`)
 
 別名 `license`.
 
-## 🔍 Function: eask-f-package-file (`file`)
+## 🔍 函式: eask-f-package-file (`file`)
 
 別名 `package-file`.
 
-## 🔍 Function: eask-f-files (`pkg` &rest `args`)
+## 🔍 函式: eask-f-files (`pkg` &rest `args`)
 
 別名 `files`.
 
-## 🔍 Function: eask-f-script (`name` `command` &rest `args`)
+## 🔍 函式: eask-f-script (`name` `command` &rest `args`)
 
 別名 `script`.
 
-## 🔍 Function: eask-f-source (`name` &optional `location`)
+## 🔍 函式: eask-f-source (`name` &optional `location`)
 
 別名 `source`.
 
-## 🔍 Function: eask-f-source-priority (`name` &optional `priority`)
+## 🔍 函式: eask-f-source-priority (`name` &optional `priority`)
 
 別名 `source-priority`.
 
-## 🔍 Function: eask-f-depends-on (`pkg` &rest `args`)
+## 🔍 函式: eask-f-depends-on (`pkg` &rest `args`)
 
 別名 `depends-on`.
 
-## 🔍 Function: eask-f-development (&rest `dependencies`)
+## 🔍 函式: eask-f-development (&rest `dependencies`)
 
 別名 `development`.
 
-## 🔍 Function: eask-f-exec-paths (&rest `dirs`)
+## 🔍 函式: eask-f-exec-paths (&rest `dirs`)
 
 別名 `exec-paths`.
 
-## 🔍 Function: eask-f-load-paths (&rest `dirs`)
+## 🔍 函式: eask-f-load-paths (&rest `dirs`)
 
 別名 `load-paths`.
 
-# 🚩 Logging
+# 🚩 信息紀錄
 
 具有時間戳和日誌級別的記錄器實用程序。
 
@@ -591,7 +591,7 @@ $ eask [command] --no-proxy "localhost:4000"
 
 The default level is `log`.
 
-## 🔍 Variable: eask-verbosity
+## 🔍 變數: eask-verbosity
 
 詳細級別表示為整數。
 
@@ -599,7 +599,7 @@ The default level is `log`.
 (setq eask-verbosity 4)  ; 你可以設置從 0 到 4
 ```
 
-## 🔍 Variable: eask-timestamps
+## 🔍 變數: eask-timestamps
 
 記錄帶有時間戳的消息。
 
@@ -613,7 +613,7 @@ Output:
 2022-04-14 13:44:46 這是一條帶有時間戳的消息
 ```
 
-## 🔍 Variable: eask-log-level
+## 🔍 變數: eask-log-level
 
 記錄消息級別。 （默認值：`nil`）
 
@@ -627,7 +627,7 @@ Output:
 [DEBUG] 這是一條具有日誌級別的 DEBUG 消息
 ```
 
-## 🔍 Variable: eask-log-file
+## 🔍 變數: eask-log-file
 
 天氣生成日誌文件。 （默認值：`nil`）
 
@@ -641,7 +641,7 @@ Output:
 $ cat /.log/messages.log
 ```
 
-## 🔍 Variable: eask-level-color
+## 🔍 變數: eask-level-color
 
 定義每個日誌級別顏色。
 
@@ -654,7 +654,7 @@ $ cat /.log/messages.log
         (error . ansi-red)))
 ```
 
-## 🔍 Macro: eask-with-verbosity (`symbol` &rest `body`)
+## 🔍 巨集: eask-with-verbosity (`symbol` &rest `body`)
 
 使用詳細級別定義執行。
 
@@ -667,7 +667,7 @@ $ cat /.log/messages.log
 除非冗長，否則此宏範圍內的所有內容都將被靜音。 僅當您指定 `--verbose 4` 時才會打印
 全局選項。
 
-## 🔍 Function: eask-debug (`msg` &rest `args`)
+## 🔍 函式: eask-debug (`msg` &rest `args`)
 
 ```elisp
 (eask-debug "這是調試信息")
@@ -677,7 +677,7 @@ $ cat /.log/messages.log
 2022-04-14 17:31:54 [DEBUG] 這是調試信息
 ```
 
-## 🔍 Function: eask-log (`msg` &rest `args`)
+## 🔍 函式: eask-log (`msg` &rest `args`)
 
 ```elisp
 (eask-log "這是日誌消息")
@@ -687,7 +687,7 @@ $ cat /.log/messages.log
 2022-04-14 17:31:54 [LOG] 這是日誌消息
 ```
 
-## 🔍 Function: eask-info (`msg` &rest `args`)
+## 🔍 函式: eask-info (`msg` &rest `args`)
 
 ```elisp
 (eask-info "這是信息消息")
@@ -697,7 +697,7 @@ $ cat /.log/messages.log
 2022-04-14 17:31:54 [INFO] 這是信息消息
 ```
 
-## 🔍 Function: eask-warn (`msg` &rest `args`)
+## 🔍 函式: eask-warn (`msg` &rest `args`)
 
 ```elisp
 (eask-warn "這是警告消息")
@@ -707,7 +707,7 @@ $ cat /.log/messages.log
 2022-04-14 17:31:54 [WARNING] 這是警告消息
 ```
 
-## 🔍 Function: eask-error (`msg` &rest `args`)
+## 🔍 函式: eask-error (`msg` &rest `args`)
 
 ```elisp
 (eask-error "這是錯誤信息")
@@ -717,7 +717,7 @@ $ cat /.log/messages.log
 2022-04-14 17:31:54 [ERROR] 這是錯誤信息
 ```
 
-## 🔍 Function: eask-msg (`msg` &rest `args`)
+## 🔍 函式: eask-msg (`msg` &rest `args`)
 
 類似於 `message` 函數，但會用顏色替換 unicode。
 
@@ -725,7 +725,7 @@ $ cat /.log/messages.log
 (eask-msg "用換行符打印此消息！")
 ```
 
-## 🔍 Function: eask-write (`msg` &rest `args`)
+## 🔍 函式: eask-write (`msg` &rest `args`)
 
 類似於 eask-msg 函數，但末尾沒有換行符。
 
@@ -733,7 +733,7 @@ $ cat /.log/messages.log
 (eask-write "不帶換行符打印此消息...")
 ```
 
-## 🔍 Function: eask-report (&rest `args`)
+## 🔍 函式: eask-report (&rest `args`)
 
 報告錯誤/警告取決於嚴格標誌。
 
@@ -743,33 +743,86 @@ $ cat /.log/messages.log
 
 見選項 [--strict](https://emacs-eask.github.io/Getting-Started/Commands-and-options/#---strict).
 
-# 🚩 File
+# 🚩 錯誤處理
 
-## 🔍 Function: eask-guess-package-name ()
+## 🔍 變數: eask--ignore-error-p
+
+非 `nil` 是為了防止 Emacs 被殺死。
+
+```elisp
+(let ((eask--ignore-error-p t))
+  (error "Emacs can't die! :P"))
+```
+
+## 🔍 變數: eask-inhibit-error-message
+
+非 `nil` 停止錯誤/警告消息。
+
+```elisp
+(let ((eask-inhibit-error-message t))
+  (error "This won't display at all!"))
+```
+
+## 🔍 巨集: eask-ignore-errors (&rest `body`)
+
+防止 Emacs 被殺死。
+
+```elisp
+(eask-ignore-errors
+  (error "Emacs can't die! :P"))
+```
+
+## 🔍 巨集: eask--silent-error (&rest `body`)
+
+禁止顯示錯誤/警告消息。
+
+```elisp
+(eask--silent-error
+  (error "This won't display at all!"))
+```
+
+## 🔍 巨集: eask-ignore-errors-silent (&rest `body`)
+
+防止 Emacs 被殺死並禁止顯示錯誤/警告消息。
+
+```elisp
+(eask-ignore-errors-silent
+  (error "Nothing happens!"))
+```
+
+## 🔍 函式: eask--exit ()
+
+Send exit code.
+
+This will kill Emacs process.
+
+# 🚩 文件
+
+## 🔍 函式: eask-guess-package-name ()
 
 返回可能的包名稱。
 
-## 🔍 Function: eask-package-files ()
+## 🔍 函式: eask-package-files ()
 
 返回包文件列表。
 
-## 🔍 Function: eask-package-el-files ()
+## 🔍 函式: eask-package-el-files ()
 
 返回擴展名為 `.el` 的包文件列表。
 
-## 🔍 Function: eask-package-elc-files ()
+## 🔍 函式: eask-package-elc-files ()
 
 返回擴展名為 `.elc` 的包文件列表。
 
-## 🔍 Function: eask-package-multi-p ()
+## 🔍 函式: eask-package-multi-p ()
 
 如果是單個文件包，則返回 `nil`。
 
-## 🔍 Function: eask-package-single-p ()
+## 🔍 函式: eask-package-single-p ()
 
 如果是單個文件包，則返回 `t`。
 
-## 🔍 Function: eask-unpacked-size ()
+## 🔍 函式: eask-unpacked-size ()
 
 返回當前包的大小。
 
@@ -777,9 +830,9 @@ $ cat /.log/messages.log
 ⚠️ 這將返回一個字符串而不是字節。
 {{< /hint >}}
 
-# 🚩 Progress
+# 🚩 進度
 
-## 🔍 Macro: eask-with-progress (`msg-start` `body` `msg-end`)
+## 🔍 巨集: eask-with-progress (`msg-start` `body` `msg-end`)
 
 使用響應消息輸出創建執行。
 
@@ -798,7 +851,7 @@ $ cat /.log/messages.log
 檔案下載中... 完成 ✓
 ```
 
-## 🔍 Function: eask-print-log-buffer (&optional `buffer-or-name`)
+## 🔍 函式: eask-print-log-buffer (&optional `buffer-or-name`)
 
 打印緩衝區並突出顯示“錯誤和“警告”。
 
@@ -810,9 +863,9 @@ $ cat /.log/messages.log
 💡 這對於創建 buffer 來顯示 **errors** 和 **warnings** 的 linters 會很方便。
 {{< /hint >}}
 
-# 🚩 Help
+# 🚩 幫助
 
-## 🔍 Function: eask-help (`command`)
+## 🔍 函式: eask-help (`command`)
 
 打印位於 `lisp/help/` 目錄下的幫助手冊。
 
