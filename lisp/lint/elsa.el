@@ -22,6 +22,8 @@
 ;;
 ;;; Externals
 
+(require 'dash)
+
 (defvar elsa-global-state)
 
 (declare-function elsa-message-format "ext:elsa.el")
