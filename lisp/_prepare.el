@@ -928,7 +928,11 @@ This uses function `locate-dominating-file' to look up directory tree."
     (melpa        . "https://melpa.org/packages/")
     (melpa-stable . "https://stable.melpa.org/packages/")
     (org          . "https://orgmode.org/elpa/")
-    (shmelpa      . "https://shmelpa.commandlinesystems.com/packages/"))
+    (shmelpa      . "https://shmelpa.commandlinesystems.com/packages/")
+    (ublt         . "https://elpa.ubolonton.org/packages/")
+    ;; Devel
+    (gnu-devel    . "https://elpa.gnu.org/devel/")
+    (nongnu-devel . "https://elpa.nongnu.org/nongnu-devel/"))
   "Mapping of source name and url.")
 
 (defvar eask-package            nil)

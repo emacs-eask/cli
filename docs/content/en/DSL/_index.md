@@ -107,18 +107,24 @@ Add a package archive to install dependencies from.
 
 Available aliases:
 
-* `gnu` ([https://elpa.gnu.org/packages/](https://elpa.gnu.org/packages/))
-* `nongnu` ([https://elpa.nongnu.org/nongnu/](https://elpa.nongnu.org/nongnu/))
-* `celpa` ([https://celpa.conao3.com/](https://celpa.conao3.com/))
-* `jcs-elpa` ([https://jcs-emacs.github.io/jcs-elpa/packages/](https://jcs-emacs.github.io/jcs-elpa/packages/))
-* `marmalade` ([https://marmalade-repo.org/packages/](https://marmalade-repo.org/packages/))
-* `melpa` ([https://melpa.org/packages/](https://melpa.org/packages/))
-* `melpa-stable` ([https://stable.melpa.org/packages/](https://stable.melpa.org/packages/))
-* `org` ([https://orgmode.org/elpa/](https://orgmode.org/elpa/))
-* `shmelpa` ([https://shmelpa.commandlinesystems.com/packages/](https://shmelpa.commandlinesystems.com/packages/))
+- `gnu` ([https://elpa.gnu.org/packages/](https://elpa.gnu.org/packages/))
+- `nongnu` ([https://elpa.nongnu.org/nongnu/](https://elpa.nongnu.org/nongnu/))
+- `celpa` ([https://celpa.conao3.com/](https://celpa.conao3.com/))
+- `jcs-elpa` ([https://jcs-emacs.github.io/jcs-elpa/packages/](https://jcs-emacs.github.io/jcs-elpa/packages/))
+- `marmalade` ([https://marmalade-repo.org/packages/](https://marmalade-repo.org/packages/))
+- `melpa` ([https://melpa.org/packages/](https://melpa.org/packages/))
+- `melpa-stable` ([https://stable.melpa.org/packages/](https://stable.melpa.org/packages/))
+- `org` ([https://orgmode.org/elpa/](https://orgmode.org/elpa/))
+- `shmelpa` ([https://shmelpa.commandlinesystems.com/packages/](https://shmelpa.commandlinesystems.com/packages/))
+- `ublt` ([https://elpa.ubolonton.org/packages/](https://elpa.ubolonton.org/packages/))
+
+Available `devel` aliases:
+
+- `gnu-devel` ([https://elpa.gnu.org/devel/](https://elpa.gnu.org/devel/))
+- `nongnu-devel` ([https://elpa.nongnu.org/nongnu-devel/](https://elpa.nongnu.org/nongnu-devel/))
 
 {{< hint ok >}}
-💡 Use **--insecure** to make **https** to **http**, but not recommended
+💡 Use **--insecure** to make **https** to **http**, but not recommended!
 {{< /hint >}}
 
 ## 🔍 **source-priority** (`name` `priority`)
