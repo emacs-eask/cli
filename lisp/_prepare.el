@@ -207,30 +207,70 @@ Argument BODY are forms for execution."
 ;;
 ;;; Archive
 
+(defun eask--locate-archive-contents (archive)
+  "Locate ARCHIVE's contents file."
+  (let* ((name (cond ((consp archive) (car archive))
+                     (t archive)))
+         (file "archive-contents")
+         (dir (expand-file-name (concat "archives/" name) package-user-dir)))
+    (expand-file-name file dir)))
+
+(defun eask--package-download-one-archive (fnc &rest args)
+  "Execution around function `package-download-one-archive'.
+
+Arguments FNC and ARGS are used for advice `:around'."
+  (cl-incf eask--action-index)
+  (let* ((archive (nth 0 args))
+         (name (car archive))
+         (url (cdr archive))
+         (fmt (eask--action-format (length package-archives)))
+         (download-p))
+    (eask--unsilent
+      (when (= 1 eask--action-index) (eask-msg ""))
+      (eask-with-progress
+        (format "  - %sDownloading %s (%s)... "
+                (format fmt eask--action-index)
+                (ansi-green (eask-2str name))
+                (ansi-yellow (eask-2str url)))
+        (eask-with-verbosity 'debug
+          (apply fnc args)
+          (setq download-p t))
+        (cond (download-p "done ✓")
+              (t          "failed ✗"))))))
+(advice-add 'package--download-one-archive :around #'eask--package-download-one-archive)
+
 (defun eask--download-archives ()
   "If archives download failed; download it manually."
   (dolist (archive package-archives)
+    (cl-incf eask--action-index)
     (let* ((name (car archive))
-           (file "archive-contents")
-           (dir (expand-file-name (concat "archives/" name) package-user-dir))
-           (local-file (expand-file-name file dir))
-           (url (format
-                 "https://raw.githubusercontent.com/emacs-eask/archives/master/%s/%s" name file))
+           (local-file (eask--locate-archive-contents archive))
+           (dir (file-name-directory local-file))      ; ~/.emacs.d/elpa/archives/{name}
+           (file (file-name-nondirectory local-file))  ; archive-contents
+           (url (format "https://raw.githubusercontent.com/emacs-eask/archives/master/%s/" name))
+           (url-file (concat url file))
            (download-p)
-           (local-archive-p (string= name "local")))  ; exclude local elpa
+           (local-archive-p (string= name "local"))  ; exclude local elpa
+           (fmt (eask--action-format (length package-archives))))
       (unless (file-exists-p local-file)
-        (eask-with-progress
-          (format "Downloading archive `%s' manually... " (ansi-yellow name))
-          (unless local-archive-p
-            (if (url-file-exists-p url)
-                (progn
-                  (ignore-errors (make-directory dir t))
-                  (url-copy-file url local-file t)
-                  (setq download-p t))
-              (eask-debug "No archive-contents found in `%s'" (ansi-yellow name))))
-          (cond (download-p      "done ✓")
-                (local-archive-p "skipped ✗")
-                (t               "failed ✗"))))
+        (eask--unsilent
+          (when (= 1 eask--action-index) (eask-msg ""))
+          (eask-with-progress
+            (format "  - %sDownloading %s (%s) manually... "
+                    (format fmt eask--action-index)
+                    (ansi-green name)
+                    (ansi-yellow url))
+            (eask-with-verbosity 'debug
+              (unless local-archive-p
+                (if (url-file-exists-p url-file)
+                    (progn
+                      (ignore-errors (make-directory dir t))
+                      (url-copy-file url-file local-file t)
+                      (setq download-p t))
+                  (eask-debug "No archive-contents found in `%s'" (ansi-yellow name)))))
+            (cond (download-p      "done ✓")
+                  (local-archive-p "skipped ✗")
+                  (t               "failed ✗")))))
       (when download-p (eask-pkg-init t)))))
 
 ;;
@@ -254,18 +294,22 @@ Argument BODY are forms for execution."
   "Return list of dependencies."
   (append eask-depends-on (and (eask-dev-p) eask-depends-on-dev)))
 
+(defun eask--action-format (len)
+  "Construct action format by LEN."
+  (setq len (eask-2str len))
+  (concat "[%" (eask-2str (length len)) "d/" len "] "))
+
 (defun eask--package-mapc (func deps)
   "Like function `mapc' but for process package transaction specifically.
 
 For arguments FUNC and DEPS, see function `mapc' for more information."
-  (let* ((eask--package-prefix)  ; remain untouch
+  (let* ((eask--action-prefix)  ; remain untouch
          (len (length deps))
-         (len-str (eask-2str len))
-         (fmt (concat "[%" (eask-2str (length len-str)) "d/" len-str "] "))
+         (fmt (eask--action-format len))
          (count 0))
     (dolist (pkg deps)
       (cl-incf count)
-      (setq eask--package-prefix (format fmt count))
+      (setq eask--action-prefix (format fmt count))
       (funcall func pkg))))
 
 (defun eask--install-deps (dependencies msg)
@@ -330,8 +374,9 @@ If the argument FORCE is non-nil, force initialize packages in this session."
     (eask-with-progress
       (ansi-green "Loading package information... ")
       (eask-with-verbosity 'debug
-        (package-initialize t) (package-refresh-contents)
-        (eask--download-archives))
+        (package-initialize t)
+        (let ((eask--action-index 0)) (package-refresh-contents))
+        (let ((eask--action-index 0)) (eask--download-archives)))
       (ansi-green "done ✓"))))
 
 (defun eask--pkg-transaction-vars (pkg)
@@ -381,8 +426,11 @@ Argument BODY are forms for execution."
   "Return non-nil if package (PKG) is installable."
   (assq (eask-intern pkg) package-archive-contents))
 
-(defvar eask--package-prefix ""
+(defvar eask--action-prefix ""
   "The prefix to display before each package action.")
+
+(defvar eask--action-index 0
+  "The index ID for each task.")
 
 (defun eask-package-install (pkg)
   "Install the package (PKG)."
@@ -391,7 +439,7 @@ Argument BODY are forms for execution."
     (cond
      ((package-installed-p pkg)
       (eask-msg "  - %sSkipping %s (%s)... already installed ✗"
-                eask--package-prefix
+                eask--action-prefix
                 name version))
      ((progn
         (eask-pkg-init)
@@ -403,15 +451,15 @@ Argument BODY are forms for execution."
                   ((version< emacs-version req-emacs)))
         (if (eask-strict-p)
             (eask-error "  - %sSkipping %s (%s)... it requires Emacs %s and above ✗"
-                        eask--package-prefix
+                        eask--action-prefix
                         pkg (eask-package--version-string pkg) emacs-version)
           (eask-msg "  - %sSkipping %s (%s)... it requires Emacs %s and above ✗"
-                    eask--package-prefix
+                    eask--action-prefix
                     name version (ansi-yellow emacs-version)))))
      (t
       (eask--pkg-process pkg
         (eask-with-progress
-          (format "  - %sInstalling %s (%s)... " eask--package-prefix name version)
+          (format "  - %sInstalling %s (%s)... " eask--action-prefix name version)
           (eask-with-verbosity 'debug
             ;; XXX Without ignore-errors guard, it will trigger error
             ;;
@@ -428,11 +476,11 @@ Argument BODY are forms for execution."
   (eask--pkg-process pkg
     (cond
      ((not (package-installed-p pkg))
-      (eask-msg "  - %sSkipping %s (%s)... not installed ✗" eask--package-prefix name version))
+      (eask-msg "  - %sSkipping %s (%s)... not installed ✗" eask--action-prefix name version))
      (t
       (eask--pkg-process pkg
         (eask-with-progress
-          (format "  - %sUninstalling %s (%s)... " eask--package-prefix name version)
+          (format "  - %sUninstalling %s (%s)... " eask--action-prefix name version)
           (eask-with-verbosity 'debug
             (package-delete (eask-package-desc pkg t) (eask-force-p)))
           "done ✓"))))))
@@ -443,12 +491,12 @@ Argument BODY are forms for execution."
   (eask--pkg-process pkg
     (cond
      ((not (package-installed-p pkg))
-      (eask-msg "  - %sSkipping %s (%s)... not installed ✗" eask--package-prefix name version))
+      (eask-msg "  - %sSkipping %s (%s)... not installed ✗" eask--action-prefix name version))
      (t
       (eask-pkg-init)
       (eask--pkg-process pkg
         (eask-with-progress
-          (format "  - %sReinstalling %s (%s)... " eask--package-prefix name version)
+          (format "  - %sReinstalling %s (%s)... " eask--action-prefix name version)
           (eask-with-verbosity 'debug
             (package-delete (eask-package-desc pkg t) t)
             (eask-ignore-errors (package-install pkg)))

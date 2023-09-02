@@ -17,6 +17,6 @@
 (eask-start
   (eask-pkg-init)
   (eask-msg "")
-  (eask-info "(Done)"))
+  (eask-info "(Done refresh package archives)"))
 
 ;;; core/refresh.el ends here
