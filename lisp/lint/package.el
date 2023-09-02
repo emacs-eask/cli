@@ -68,7 +68,6 @@
     (cond
      ;; Files found, do the action!
      (files
-      (eask-pkg-init)
       (setq package-lint-main-file eask-package-file)
       (mapcar #'eask--package-lint-file files)
       (eask-msg "")
