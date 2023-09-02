@@ -267,7 +267,7 @@ Arguments FNC and ARGS are used for advice `:around'."
                       (ignore-errors (make-directory dir t))
                       (url-copy-file url-file local-file t)
                       (setq download-p t))
-                  (eask-debug "No archive-contents found in `%s'" (ansi-yellow name)))))
+                  (eask-debug "No archive-contents found in `%s'" (ansi-green name)))))
             (cond (download-p      "done ✓")
                   (local-archive-p "skipped ✗")
                   (t               "failed ✗")))))
