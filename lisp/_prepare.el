@@ -194,15 +194,22 @@ Argument BODY are forms for execution."
     (mapc (lambda (elm) (setq result (max result (length (eask-2str elm))))) sequence)
     result))
 
-(defun eask-f-filename (path)
-  "Return the name of PATH."
-  (file-name-nondirectory (directory-file-name path)))
-
 (defun eask-s-replace (old new s)
   "Replace OLD with NEW in S each time it occurs."
   (if (fboundp #'string-replace)
       (string-replace old new s)
     (replace-regexp-in-string (regexp-quote old) new s t t)))
+
+(defun eask-f-filename (path)
+  "Return the name of PATH."
+  (file-name-nondirectory (directory-file-name path)))
+
+(defun eask-directory-empty-p (dir)
+  "Return t if DIR names an existing directory containing no other files.
+
+The function `directory-empty-p' only exists 28.1 or above; copied it."
+  (and (file-directory-p dir)
+       (null (directory-files dir nil directory-files-no-dot-files-regexp t 1))))
 
 ;;
 ;;; Progress

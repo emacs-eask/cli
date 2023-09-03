@@ -33,7 +33,7 @@
     (when (eask-delete-file readme)   (cl-incf deleted))
     (when (eask-delete-file entry)    (cl-incf deleted))
     (when (eask-delete-file packaged) (cl-incf deleted))
-    (when (and (not (zerop deleted)) (directory-empty-p path))
+    (when (and (not (zerop deleted)) (eask-directory-empty-p path))
       (eask-with-progress
         (format "The dist folder %s seems to be empty, delete it as well... " path)
         (ignore-errors (delete-directory path))
