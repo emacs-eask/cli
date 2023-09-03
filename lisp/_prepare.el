@@ -208,10 +208,12 @@ Argument BODY are forms for execution."
   "Return t if DIR names an existing directory containing no other files.
 
 The function `directory-empty-p' only exists 28.1 or above; copied it."
-  (and (file-directory-p dir)
-       ;; XXX: Do not pass in the 5th argument COUNT; it doesn't compatbile to
-       ;; 27.2 or lower!
-       (null (directory-files dir nil directory-files-no-dot-files-regexp t))))
+  (if (fboundp #'directory-empty-p)
+      (directory-empty-p dir)
+    (and (file-directory-p dir)
+         ;; XXX: Do not pass in the 5th argument COUNT; it doesn't compatbile to
+         ;; 27.2 or lower!
+         (null (directory-files dir nil directory-files-no-dot-files-regexp t)))))
 
 ;;
 ;;; Progress
