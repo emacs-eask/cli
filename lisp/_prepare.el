@@ -237,7 +237,6 @@ Arguments FNC and ARGS are used for advice `:around'."
           (setq download-p t))
         (cond (download-p "done ✓")
               (t          "failed ✗"))))))
-(advice-add 'package--download-one-archive :around #'eask--package-download-one-archive)
 
 (defun eask--download-archives ()
   "If archives download failed; download it manually."
