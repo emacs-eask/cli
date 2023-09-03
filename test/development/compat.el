@@ -26,7 +26,6 @@
     package-activate-all
     package-generate-description-file
     locate-dominating-file
-    directory-empty-p
     url-file-exists-p
     prin1-to-string)
   "List of function to check Emacs compatibility.")
