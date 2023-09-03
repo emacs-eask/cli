@@ -68,7 +68,7 @@
     (cond
      ;; Files found, do the action!
      (files
-      (eask-pkg-init)
+      (eask-pkg-init)  ; XXX: Avoid not installable error!
       (setq package-lint-main-file eask-package-file)
       (mapcar #'eask--package-lint-file files)
       (eask-msg "")
