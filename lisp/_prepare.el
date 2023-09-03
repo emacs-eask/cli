@@ -205,6 +205,90 @@ Argument BODY are forms for execution."
     (replace-regexp-in-string (regexp-quote old) new s t t)))
 
 ;;
+;;; Progress
+
+(defcustom eask-elapsed-time nil
+  "Log with elapsed time."
+  :type 'boolean
+  :group 'eask)
+
+(defcustom eask-minimum-reported-time 0.1
+  "Minimal load time that will be reported."
+  :type 'number
+  :group 'eask)
+
+(defmacro eask-with-progress (msg-start body msg-end)
+  "Progress BODY wrapper with prefix (MSG-START) and suffix (MSG-END) messages."
+  (declare (indent 0) (debug t))
+  `(if eask-elapsed-time
+       (let ((now (current-time)))
+         (ignore-errors (eask-write ,msg-start)) ,body
+         (let ((elapsed (float-time (time-subtract (current-time) now))))
+           (if (< elapsed eask-minimum-reported-time)
+               (ignore-errors (eask-msg ,msg-end))
+             (ignore-errors (eask-write ,msg-end))
+             (eask-msg (ansi-white (format " (%.3fs)" elapsed))))))
+     (ignore-errors (eask-write ,msg-start)) ,body
+     (ignore-errors (eask-msg ,msg-end))))
+
+(defun eask-progress-seq (prefix sequence suffix func)
+  "Shorthand to progress SEQUENCE of task.
+
+Arguments PREFIX and SUFFIX are strings to print before and after each progress.
+Argument FUNC are execution for eash progress; this is generally the actual
+task work."
+  (let* ((total (length sequence)) (count 0)
+         (offset (eask-2str (length (eask-2str total)))))
+    (mapc
+     (lambda (item)
+       (cl-incf count)
+       (eask-with-progress
+         (format (concat "%s [%" offset "d/%d] %s... ") prefix count total
+                 (ansi-green item))
+         (when func (funcall func item))
+         suffix))
+     sequence)))
+
+(defun eask-print-log-buffer (&optional buffer-or-name)
+  "Loop through each line and print each line with corresponds log level.
+
+You can pass BUFFER-OR-NAME to replace current buffer."
+  (with-current-buffer (or buffer-or-name (current-buffer))
+    (goto-char (point-min))
+    (while (not (eobp))
+      (let ((line (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
+        (cond ((string-match-p "[: ][Ee]rror: " line) (eask-error line))
+              ((string-match-p "[: ][Ww]arning: " line) (eask-warn line))
+              (t (eask-log line))))
+      (forward-line 1))))
+
+(defun eask-delete-file (filename)
+  "Delete a FILENAME from disk."
+  (let (deleted)
+    (eask-with-progress
+      (format "Deleting %s... " filename)
+      (eask-with-verbosity 'log
+        (setq deleted (file-exists-p filename))
+        (ignore-errors (delete-file filename))
+        (setq deleted (and deleted (not (file-exists-p filename)))))
+      (if deleted "done ✓" "skipped ✗"))
+    deleted))
+
+;;
+;;; Action
+
+(defvar eask--action-prefix ""
+  "The prefix to display before each package action.")
+
+(defvar eask--action-index 0
+  "The index ID for each task.")
+
+(defun eask--action-format (len)
+  "Construct action format by LEN."
+  (setq len (eask-2str len))
+  (concat "[%" (eask-2str (length len)) "d/" len "] "))
+
+;;
 ;;; Archive
 
 (defun eask--locate-archive-contents (archive)
@@ -226,17 +310,17 @@ Arguments FNC and ARGS are used for advice `:around'."
          (fmt (eask--action-format (length package-archives)))
          (download-p))
     (eask-with-verbosity-override 'log
-      (when (= 1 eask--action-index) (eask-msg ""))
-      (eask-with-progress
-        (format "  - %sDownloading %s (%s)... "
-                (format fmt eask--action-index)
-                (ansi-green (eask-2str name))
-                (ansi-yellow (eask-2str url)))
-        (eask-with-verbosity 'debug
-          (apply fnc args)
-          (setq download-p t))
-        (cond (download-p "done ✓")
-              (t          "failed ✗"))))))
+                                  (when (= 1 eask--action-index) (eask-msg ""))
+                                  (eask-with-progress
+                                    (format "  - %sDownloading %s (%s)... "
+                                            (format fmt eask--action-index)
+                                            (ansi-green (eask-2str name))
+                                            (ansi-yellow (eask-2str url)))
+                                    (eask-with-verbosity 'debug
+                                      (apply fnc args)
+                                      (setq download-p t))
+                                    (cond (download-p "done ✓")
+                                          (t          "failed ✗"))))))
 
 (defun eask--download-archives ()
   "If archives download failed; download it manually."
@@ -253,23 +337,23 @@ Arguments FNC and ARGS are used for advice `:around'."
            (fmt (eask--action-format (length package-archives))))
       (unless (file-exists-p local-file)
         (eask-with-verbosity-override 'log
-          (when (= 1 eask--action-index) (eask-msg ""))
-          (eask-with-progress
-            (format "  - %sDownloading %s (%s) manually... "
-                    (format fmt eask--action-index)
-                    (ansi-green name)
-                    (ansi-yellow url))
-            (eask-with-verbosity 'debug
-              (unless local-archive-p
-                (if (url-file-exists-p url-file)
-                    (progn
-                      (ignore-errors (make-directory dir t))
-                      (url-copy-file url-file local-file t)
-                      (setq download-p t))
-                  (eask-debug "No archive-contents found in `%s'" (ansi-green name)))))
-            (cond (download-p      "done ✓")
-                  (local-archive-p "skipped ✗")
-                  (t               "failed ✗")))))
+                                      (when (= 1 eask--action-index) (eask-msg ""))
+                                      (eask-with-progress
+                                        (format "  - %sDownloading %s (%s) manually... "
+                                                (format fmt eask--action-index)
+                                                (ansi-green name)
+                                                (ansi-yellow url))
+                                        (eask-with-verbosity 'debug
+                                          (unless local-archive-p
+                                            (if (url-file-exists-p url-file)
+                                                (progn
+                                                  (ignore-errors (make-directory dir t))
+                                                  (url-copy-file url-file local-file t)
+                                                  (setq download-p t))
+                                              (eask-debug "No archive-contents found in `%s'" (ansi-green name)))))
+                                        (cond (download-p      "done ✓")
+                                              (local-archive-p "skipped ✗")
+                                              (t               "failed ✗")))))
       (when download-p (eask-pkg-init t)))))
 
 ;;
@@ -292,11 +376,6 @@ Arguments FNC and ARGS are used for advice `:around'."
 (defun eask-dependencies ()
   "Return list of dependencies."
   (append eask-depends-on (and (eask-dev-p) eask-depends-on-dev)))
-
-(defun eask--action-format (len)
-  "Construct action format by LEN."
-  (setq len (eask-2str len))
-  (concat "[%" (eask-2str (length len)) "d/" len "] "))
 
 (defun eask--package-mapc (func deps)
   "Like function `mapc' but for process package transaction specifically.
@@ -424,12 +503,6 @@ Argument BODY are forms for execution."
 (defun eask-package-installable-p (pkg)
   "Return non-nil if package (PKG) is installable."
   (assq (eask-intern pkg) package-archive-contents))
-
-(defvar eask--action-prefix ""
-  "The prefix to display before each package action.")
-
-(defvar eask--action-index 0
-  "The index ID for each task.")
 
 (defun eask-package-install (pkg)
   "Install the package (PKG)."
@@ -1549,76 +1622,6 @@ Arguments FNC and ARGS are used for advice `:around'."
     (dolist (filename (eask-package-files))
       (cl-incf size (file-attribute-size (file-attributes filename))))
     (string-trim (ls-lisp-format-file-size size t))))
-
-;;
-;;; Progress
-
-(defcustom eask-elapsed-time nil
-  "Log with elapsed time."
-  :type 'boolean
-  :group 'eask)
-
-(defcustom eask-minimum-reported-time 0.1
-  "Minimal load time that will be reported."
-  :type 'number
-  :group 'eask)
-
-(defmacro eask-with-progress (msg-start body msg-end)
-  "Progress BODY wrapper with prefix (MSG-START) and suffix (MSG-END) messages."
-  (declare (indent 0) (debug t))
-  `(if eask-elapsed-time
-       (let ((now (current-time)))
-         (ignore-errors (eask-write ,msg-start)) ,body
-         (let ((elapsed (float-time (time-subtract (current-time) now))))
-           (if (< elapsed eask-minimum-reported-time)
-               (ignore-errors (eask-msg ,msg-end))
-             (ignore-errors (eask-write ,msg-end))
-             (eask-msg (ansi-white (format " (%.3fs)" elapsed))))))
-     (ignore-errors (eask-write ,msg-start)) ,body
-     (ignore-errors (eask-msg ,msg-end))))
-
-(defun eask-progress-seq (prefix sequence suffix func)
-  "Shorthand to progress SEQUENCE of task.
-
-Arguments PREFIX and SUFFIX are strings to print before and after each progress.
-Argument FUNC are execution for eash progress; this is generally the actual
-task work."
-  (let* ((total (length sequence)) (count 0)
-         (offset (eask-2str (length (eask-2str total)))))
-    (mapc
-     (lambda (item)
-       (cl-incf count)
-       (eask-with-progress
-         (format (concat "%s [%" offset "d/%d] %s... ") prefix count total
-                 (ansi-green item))
-         (when func (funcall func item))
-         suffix))
-     sequence)))
-
-(defun eask-print-log-buffer (&optional buffer-or-name)
-  "Loop through each line and print each line with corresponds log level.
-
-You can pass BUFFER-OR-NAME to replace current buffer."
-  (with-current-buffer (or buffer-or-name (current-buffer))
-    (goto-char (point-min))
-    (while (not (eobp))
-      (let ((line (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
-        (cond ((string-match-p "[: ][Ee]rror: " line) (eask-error line))
-              ((string-match-p "[: ][Ww]arning: " line) (eask-warn line))
-              (t (eask-log line))))
-      (forward-line 1))))
-
-(defun eask-delete-file (filename)
-  "Delete a FILENAME from disk."
-  (let (deleted)
-    (eask-with-progress
-      (format "Deleting %s... " filename)
-      (eask-with-verbosity 'log
-        (setq deleted (file-exists-p filename))
-        (ignore-errors (delete-file filename))
-        (setq deleted (and deleted (not (file-exists-p filename)))))
-      (if deleted "done ✓" "skipped ✗"))
-    deleted))
 
 ;;
 ;;; Help
