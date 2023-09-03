@@ -209,7 +209,9 @@ Argument BODY are forms for execution."
 
 The function `directory-empty-p' only exists 28.1 or above; copied it."
   (and (file-directory-p dir)
-       (null (directory-files dir nil directory-files-no-dot-files-regexp t 1))))
+       ;; XXX: Do not pass in the 5th argument COUNT; it doesn't compatbile to
+       ;; 27.2 or lower!
+       (null (directory-files dir nil directory-files-no-dot-files-regexp t))))
 
 ;;
 ;;; Progress
