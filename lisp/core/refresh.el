@@ -15,8 +15,9 @@
         nil t))
 
 (eask-start
+  (advice-add 'package--download-one-archive :around #'eask--package-download-one-archive)
   (eask-pkg-init)
   (eask-msg "")
-  (eask-info "(Done)"))
+  (eask-info "(Done refresh package archives)"))
 
 ;;; core/refresh.el ends here

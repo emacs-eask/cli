@@ -26,6 +26,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add aliases for `pkg-file` command (0d35d762a12bd399657c2fdcb60541dcc0c8b5e0)
 * Add option to init from `Keg`-file (#182)
 * Add option to init from elisp source file (#183)
+* Print archives progress (#184)
 
 ## 0.8.x
 > Released Mar 08, 2023
