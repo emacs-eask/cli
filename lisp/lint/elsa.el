@@ -22,7 +22,7 @@
 ;;
 ;;; Externals
 
-(require 'dash)
+(require 'dash nil t)
 
 (defvar elsa-global-state)
 
@@ -49,7 +49,7 @@
     (eask-msg "")
     (eask-msg "`%s` with elsa (%s)" (ansi-green file) eask--elsa-version)
     (eask-with-verbosity 'debug
-      (setq errors (oref (elsa-analyse-file filename elsa-global-state) errors)))
+      (setq errors (oref (elsa-analyse-file filename elsa-global-state) 'errors)))
     (if errors
         (--each (reverse errors)
           (let ((line (string-trim (concat file ":" (elsa-message-format it)))))
