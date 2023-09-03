@@ -15,6 +15,9 @@
         nil t))
 
 (eask-start
+  ;; XXX: You must refresh content before you install the package,
+  ;; see https://github.com/ericdallo/jet.el/issues/1
+  (eask-pkg-init)
   (if (eask-dependencies)
       (progn
         (when (and (eask-dev-p) (not eask-depends-on-dev))

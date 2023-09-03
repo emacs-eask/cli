@@ -664,7 +664,7 @@ Define each log level color.
 
 ## 🔍 Macro: eask-with-verbosity (`symbol` &rest `body`)
 
-Define executions with the verbosity level.
+Define verbosity scope.
 
 ```elisp
 (eask-with-verbosity 'debug
@@ -675,6 +675,23 @@ Define executions with the verbosity level.
 Everything in the scope of this macro will be muted unless the verbosity
 reaches. It will only be printed when you have specified `--verbose 4`
 global option.
+
+## 🔍 Macro: eask-with-verbosity-override (`symbol` &rest `body`)
+
+Define override verbosity scope.
+
+```elisp
+(eask-with-verbosity 'debug
+  (eask-with-verbosity-override 'log
+    ;; TODO: execution here..
+    )
+  (eask-with-verbosity-override 'info
+    ;; TODO: execution here..
+    ))
+```
+
+Like macro `eask-with-verbosity`; but force display messages if it wasn't able
+to display.
 
 ## 🔍 Function: eask-debug (`msg` &rest `args`)
 

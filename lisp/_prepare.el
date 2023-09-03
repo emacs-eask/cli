@@ -225,7 +225,7 @@ Arguments FNC and ARGS are used for advice `:around'."
          (url (cdr archive))
          (fmt (eask--action-format (length package-archives)))
          (download-p))
-    (eask--unsilent
+    (eask-with-verbosity-override 'log
       (when (= 1 eask--action-index) (eask-msg ""))
       (eask-with-progress
         (format "  - %sDownloading %s (%s)... "
@@ -253,7 +253,7 @@ Arguments FNC and ARGS are used for advice `:around'."
            (local-archive-p (string= name "local"))  ; exclude local elpa
            (fmt (eask--action-format (length package-archives))))
       (unless (file-exists-p local-file)
-        (eask--unsilent
+        (eask-with-verbosity-override 'log
           (when (= 1 eask--action-index) (eask-msg ""))
           (eask-with-progress
             (format "  - %sDownloading %s (%s) manually... "
@@ -1302,6 +1302,14 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 (debug), 5 (all)."
 Execute forms BODY limit by the verbosity level (SYMBOL)."
   (declare (indent 1) (debug t))
   `(if (eask--reach-verbosity-p ,symbol) (progn ,@body)
+     (eask--silent ,@body)))
+
+(defmacro eask-with-verbosity-override (symbol &rest body)
+  "Define override verbosity scope.
+
+Execute forms BODY limit by the verbosity level (SYMBOL)."
+  (declare (indent 1) (debug t))
+  `(if (eask--reach-verbosity-p ,symbol) (eask--unsilent ,@body)
      (eask--silent ,@body)))
 
 (defun eask--ansi (symbol string)

@@ -656,7 +656,7 @@ $ cat /.log/messages.log
 
 ## 🔍 巨集: eask-with-verbosity (`symbol` &rest `body`)
 
-使用詳細級別定義執行。
+定義消息範圍。
 
 ```elisp
 (eask-with-verbosity 'debug
@@ -666,6 +666,22 @@ $ cat /.log/messages.log
 
 除非冗長，否則此宏範圍內的所有內容都將被靜音。 僅當您指定 `--verbose 4` 時才會打印
 全局選項。
+
+## 🔍 巨集: eask-with-verbosity-override (`symbol` &rest `body`)
+
+定義覆蓋消息範圍。
+
+```elisp
+(eask-with-verbosity 'debug
+  (eask-with-verbosity-override 'log
+    ;; TODO: 在這裡執行..
+    )
+  (eask-with-verbosity-override 'info
+    ;; TODO: 在這裡執行..
+    ))
+```
+
+就像宏 `eask-with-verbosity` 一樣；但如果無法顯示則強制顯示消息。
 
 ## 🔍 函式: eask-debug (`msg` &rest `args`)
 
