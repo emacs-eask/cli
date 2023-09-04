@@ -64,6 +64,7 @@ Commands:
   check-eask [files..]    Run eask checker
   locate                  Print out Eask installed location
   upgrade-eask            Upgrade Eask itself                                                                                                                                             [aliases: upgrade-self]
+
 Proxy Options:
       --proxy        update proxy for HTTP and HTTPS to host                                                                                                                                             [string]
       --http-proxy   update proxy for HTTP to host                                                                                                                                                       [string]
