@@ -5,6 +5,7 @@ on:
     branches:
       - master
     paths:
+      - 'eask'
       - '**.yml'
       - lisp/**
       - cmds/**
