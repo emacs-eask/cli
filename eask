@@ -11,6 +11,8 @@ Usage: eask <command> [options..]`;
 
 const epilogue = `For more information, find the manual at https://emacs-eask.github.io/`;
 
+const version = `0.8.2`;
+
 yargs
   .usage(usage)
   .scriptName('')
@@ -23,7 +25,7 @@ yargs
     handler() { yargs.showHelp(); }
   })
   .showHelpOnFail(true)
-  .version('version', 'show version number', '0.8.2')
+  .version('version', 'output version information and exit', version)
   .help('help', 'show usage instructions')
   .showHidden('show-hidden', 'Show hidden commands and options')
   .options({
