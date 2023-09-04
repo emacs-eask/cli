@@ -13,6 +13,8 @@ const epilogue = `For more information, find the manual at https://emacs-eask.gi
 
 const version = `0.8.2`;
 
+// Test trigger CI
+
 yargs
   .usage(usage)
   .scriptName('')
