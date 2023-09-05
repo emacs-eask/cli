@@ -43,7 +43,7 @@ jobs:
         - win-x64
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Install pkg
       run: npm install -g pkg
@@ -76,7 +76,7 @@ jobs:
       run: mv ${{ matrix.targets }}.zip ~/
 
     - name: Checkout binaries repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: ${{ env.REPO_BIN }}
         persist-credentials: false
