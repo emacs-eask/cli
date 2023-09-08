@@ -14,11 +14,6 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defun eask--keg-no-reqs (contents)
-  "Return non-nil if no dependencies from Keg-file's CONTENTS."
-  (and (not (alist-get 'packages contents))
-       (not (alist-get 'devs contents))))
-
 ;; Copied from `keg.el'
 (defun eask--keg-file-read (path)
   "Return sexp from Keg file (PATH) search from `deafult-directory'.
@@ -108,8 +103,8 @@ If no found the Keg file, returns nil."
                        (insert "(source '" (eask-2str source) ")\n")))
 
                    (insert "\n")
-                   (insert (format "(depends-on \"emacs\" \"%s\")\n" emacs-version)))
-                 (when (eask--keg-no-reqs contents)
+                   (insert "(depends-on \"emacs\" \"" emacs-version "\")"))
+                 (unless (alist-get 'packages contents)
                    (insert "\n"))  ; Make sure end line exists!
 
                  (when-let ((pkgs (alist-get 'packages contents)))
