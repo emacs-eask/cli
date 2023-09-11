@@ -16,8 +16,11 @@
 
 (eask-start
   (let* ((name (eask-guess-package-name))
-         (autoloads-file (expand-file-name (concat name "-autoloads.el"))))
-    (package-generate-autoloads name default-directory)
+         (pkg-dir (or eask-package-file
+                      default-directory))
+         (pkg-dir (file-name-directory eask-package-file))
+         (autoloads-file (expand-file-name (concat name "-autoloads.el") pkg-dir)))
+    (package-generate-autoloads name pkg-dir)
     (eask-msg "")
     (eask-info "(Generated -autoloads.el file in %s)" autoloads-file)))
 
