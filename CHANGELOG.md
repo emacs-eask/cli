@@ -27,6 +27,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add option to init from `Keg`-file (#182)
 * Add option to init from elisp source file (#183)
 * Print archives progress (#184)
+* Respect package file path in `autoload` command (44c042445bba0dd071d9112e58549437b7ebd58d)
 
 ## 0.8.x
 > Released Mar 08, 2023
