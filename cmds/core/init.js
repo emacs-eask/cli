@@ -119,10 +119,18 @@ async function create_eask_file(dir) {
   await ask(`package name: (${basename}) `, (answer) => { name = answer || basename; });
   await ask(`version: (1.0.0) `, (answer) => { version = answer || '1.0.0'; });
   await ask(`description: `, (answer) => { description = answer; });
-  await ask(`entry point: (${basename}.el) `, (answer) => { entry_point = answer || `${basename}.el`; });
+  await ask(`entry point: (${guess_entry_point(basename)}) `, (answer) => { entry_point = answer || `${basename}.el`; });
   await ask(`emacs version: (26.1) `, (answer) => { emacs_version = answer || '26.1'; });
   await ask(`website: `, (answer) => { website_url = answer; });
   await ask(`keywords: `, (answer) => { keywords = answer; });
+
+  name          = remove_double_quotes(name);
+  version       = remove_double_quotes(version);
+  description   = remove_double_quotes(description);
+  entry_point   = remove_double_quotes(entry_point);
+  emacs_version = remove_double_quotes(emacs_version);
+  website_url   = remove_double_quotes(website_url);
+  keywords      = remove_double_quotes(keywords);
 
   keywords = keywords.split(/[, ]+/).join('" "');
 
@@ -182,4 +190,28 @@ function check_eask_filename(name) {
   return suffix == '' || /^[.][0-9]/.test(suffix);
 }
 
+/**
+ * Return the guess entry point by its basname.
+ * @param { String } basename - The directory name.
+ * @return Guessed entry point filename.
+ */
+function guess_entry_point(basename) {
+  if (basename.endsWith(".el")) {
+    return basename;
+  }
+  return basename + ".el";
+}
+
+/**
+ * Remove all double quotes from string.
+ * @param { String } str - String to remove all double quotes.
+ * @return String has been removed all double quotes.
+ */
+function remove_double_quotes(str) {
+  return str.replaceAll('\"', '');
+}
+
+/*
+ * Module Exports
+ */
 module.exports.create_eask_file = create_eask_file;

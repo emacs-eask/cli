@@ -23,6 +23,15 @@ const path = require('path');
 const child_process = require("child_process");
 
 /**
+ * Return string escaped double quotes.
+ * @param { String } str - String to escape string.
+ * @return Escaped string.
+ */
+function escape_str(str) {
+  return str.replaceAll('\"', '\\"');
+}
+
+/**
  * Form CLI arguments into a single string.
  * @param { Array } argv - Argument vector.
  */
@@ -32,7 +41,7 @@ function cli_args(argv) {
   argv.forEach(function (element) {
     // XXX: We wrap double quotes if the string contains spaces
     if (/\s/g.test(element)) {
-      element = element.replaceAll('\"', '\\"');  // escape double quotes
+      element = escape_str(element);
       element = '\"' + element + '\"';
     }
     if (first)
@@ -220,9 +229,11 @@ function cmd_count() {
   return args.length;
 }
 
+
 /*
  * Module Exports
  */
+module.exports.escape_str = escape_str;
 module.exports.cli_args = cli_args;
 module.exports.plugin_dir = plugin_dir;
 module.exports.def_flag = def_flag;
