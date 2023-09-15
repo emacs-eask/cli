@@ -36,6 +36,12 @@
       (insert "(script \"build\" \"eask exec github-elpa build\")\n")
       (insert "(script \"commit\" \"eask exec github-elpa commit\")\n")
       (insert "(script \"update\" \"eask exec github-elpa update -a \\\"./docs/packages\\\"\")\n")
+      (search-forward "(source ")
+      (forward-line 1)
+      (insert "(source \"melpa\")\n")
+      (search-forward "(depends-on ")
+      (forward-line 1)
+      (insert "(depends-on \"github-elpa\")\n")
       ;; --- End insertion
       (save-buffer))
     "done ✓")
