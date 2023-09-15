@@ -65,7 +65,8 @@ function startCommand(commands, count) {
   let command = commands[count];
 
   console.log('[RUN]: ' + command);
-  let proc = child_process.spawn(command, { stdio: 'inherit', shell: true });
+
+  let proc = spawn(command, { stdio: 'inherit', shell: true });
 
   proc.on('close', function (code) {
     if (code == 0) {
@@ -74,4 +75,36 @@ function startCommand(commands, count) {
     }
     process.exit(code);
   });
+}
+
+/**
+ * Spawn process to avoid `MODULE_NOT_FOUND` not found error,
+ * see https://github.com/vercel/pkg/issues/1356.
+ *
+ * @param { String } command - Command string.
+ * @param { JSON } options - Process options.
+ * @return Process object.
+ */
+function spawn(command, options) {
+  if (IS_PKG && command.includes('eask ')) {
+    let cmds = command.split(' ');
+    cmds = replaceEaskExec(cmds);
+    return child_process.spawn(process.execPath, cmds, options);
+  }
+  return child_process.spawn(command, options);
+}
+
+/**
+ * Replace all possible eask/cli executable to snapshot executable.
+ * @param { Array } cmds - Command array.
+ * @return Return updated command array.
+ */
+function replaceEaskExec(cmds) {
+  if (!IS_PKG) return;
+  for (let index = 0; index < cmds.length; ++index) {
+    if (cmds[index] == "eask") {
+      cmds[index] = process.argv[1];  // XXX: This is `/snapshot/cli/eask`
+    }
+  }
+  return cmds;
 }
