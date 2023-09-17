@@ -6,7 +6,7 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-green.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Emacs Version](https://img.shields.io/badge/Emacs-26.1+-7F5AB6.svg?logo=gnu%20emacs&logoColor=white)](https://www.gnu.org/software/emacs/download.html)
 [![Release](https://img.shields.io/github/release/emacs-eask/cli.svg?logo=github)](https://github.com/emacs-eask/cli/releases/latest)
-[![](https://discordapp.com/api/guilds/1131434607213023262/widget.png?style=shield)](https://discord.gg/E9zzjWGfFD)
+[![](https://img.shields.io/discord/1131434607213023262?label=Discord&logo=discord&logoColor=white&color=7289DA)](https://discord.gg/E9zzjWGfFD)
 
 Eask was built to use as a package development tool in your Elisp packages. But
 now, Eask supports various types of Emacs Lisp tasks. It can be used in three
