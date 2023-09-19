@@ -64,6 +64,10 @@ exports.handler = async (argv) => {
   });
 };
 
+/**
+ * Convert path so docker can recognize!
+ * @param { String } path - Path to convert.
+ */
 function convert_path(path) {
   return UTIL.slash(path).replaceAll(':', '');
 }
