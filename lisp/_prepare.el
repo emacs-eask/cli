@@ -75,6 +75,9 @@ Arguments FNC and ARGS are used for advice `:around'."
 (defconst eask-invocation (getenv "EASK_INVOCATION")
   "Eask invocation program.")
 
+(defconst eask-is-pkg (getenv "EASK_IS_PKG")
+  "Eask is pkg.")
+
 ;;
 ;;; Execution
 

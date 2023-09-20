@@ -38,11 +38,12 @@
 (defun eask--export-command (command)
   "Export COMMAND instruction."
   (ignore-errors (make-directory eask-homedir t))  ; generate dir `~/.eask/'
-  ;; XXX: Due to `MODULE_NOT_FOUND` not found error from vcpkg,
-  ;; see https://github.com/vercel/pkg/issues/1356.
-  ;;
-  ;; We must split up all commands!
-  (setq command (eask-s-replace " && " "\n" command))
+  (when eask-is-pkg
+    ;; XXX: Due to `MODULE_NOT_FOUND` not found error from vcpkg,
+    ;; see https://github.com/vercel/pkg/issues/1356.
+    ;;
+    ;; We must split up all commands!
+    (setq command (eask-s-replace " && " "\n" command)))
   (write-region (concat command "\n") nil eask--run-file t))
 
 (defun eask--unmatched-scripts (scripts)

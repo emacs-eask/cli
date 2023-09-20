@@ -100,7 +100,6 @@ function spawn(command, options) {
  * @return Return updated command array.
  */
 function replaceEaskExec(cmds) {
-  if (!IS_PKG) return;
   for (let index = 0; index < cmds.length; ++index) {
     if (cmds[index] == "eask") {
       cmds[index] = process.argv[1];  // XXX: This is `/snapshot/cli/eask`
