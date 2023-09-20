@@ -233,30 +233,6 @@ $ eask [GLOBAL-OPTIONS] files [PATTERNS..]
 
 If `[PATTERNS..]` are defined, it will display files that match that pattern.
 
-## 🔍 eask exec
-
-Execute the system command with the given arguments.
-
-```sh
-$ eask [GLOBAL-OPTIONS] exec [COMMAND] [ARGUMENTS ...]
-```
-
-## 🔍 eask emacs
-
-Execute emacs with the appropriate environment.
-
-```sh
-$ eask [GLOBAL-OPTIONS] emacs [ARGUMENTS ...]
-```
-
-## 🔍 eask eval
-
-Evaluate `FORM` as a lisp form.
-
-```sh
-$ eask [GLOBAL-OPTIONS] eval [FORM]
-```
-
 ## 🔍 eask load
 
 Load Emacs Lisp files in order.
@@ -313,6 +289,50 @@ $ eask [GLOBAL-OPTIONS] run [FILES..]
 ```
 
 Alias: `run-script`
+
+# 🚩 Execution
+
+
+## 🔍 eask exec
+
+Execute the system command with the given arguments.
+
+```sh
+$ eask [GLOBAL-OPTIONS] exec [COMMAND] [ARGUMENTS ...]
+```
+
+## 🔍 eask emacs
+
+Execute emacs with the appropriate environment.
+
+```sh
+$ eask [GLOBAL-OPTIONS] emacs [ARGUMENTS ...]
+```
+
+## 🔍 eask eval
+
+Evaluate `FORM` as a lisp form.
+
+```sh
+$ eask [GLOBAL-OPTIONS] eval [FORM]
+```
+
+## 🔍 eask docker
+
+Launch specified Emacs version in a Docker container.
+
+```sh
+$ eask [GLOBAL-OPTIONS] docker <VERSION> [ARGUMENTS ...]
+```
+
+For example:
+
+```sh
+$ eask docker 26.1 info
+```
+
+This is the same as jumping right into Emacs 26.1 (in docker) and executing
+`eask info`.
 
 # 🚩 Management
 
