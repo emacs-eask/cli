@@ -43,7 +43,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Install Docker
-      uses: docker-practice/setup-docker@master
+      uses: docker-practice/action-setup-docker@master
       if: matrix.os == 'macos-latest'
 
     - name: Prepare Eask (Unix)
