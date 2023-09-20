@@ -32,41 +32,42 @@ Eask is a command-line tool that helps you build, lint, and test Emacs Lisp pack
 Usage: eask <command> [options..]
 
 Commands:
-  archives                List out all package archives                                                                                                                                        [aliases: sources]
-  clean <type>            Delete various files produced during building
-  compile [names..]       Byte compile all Emacs Lisp files in the package
-  create <type>           Create a new elisp project
-  emacs [args..]          Execute emacs with the appropriate environment
-  eval [form]             Evaluate lisp form with a proper PATH
-  path [patterns..]       Print the PATH (exec-path) from workspace                                                                                                                          [aliases: exec-path]
-  exec [args..]           Execute command with correct environment PATH set up
-  files [patterns..]      Print all package files
-  generate <type>         Generate files that are used for the development
-  info                    Display information about the current package
-  init [files..]          Initialize project to use Eask
-  install-deps            Automatically install package dependencies                                                                                                     [aliases: install-dependencies, prepare]
-  install [names..]       Install packages
-  keywords                List available keywords that can be used in the header section
-  link <action>           Manage links
-  lint <type>             Run linter
-  list                    List packages
-  load-path [patterns..]  Print the load-path from workspace
-  load [files..]          Load elisp files
-  outdated                Show all outdated dependencies
-  package-directory       Print path to package directory
-  package [destination]   Build a package artifact, and put it into the given destination
-  recipe                  Suggest a recipe format
-  refresh                 Download package archives
-  reinstall [names..]     Reinstall packages
-  run [names..]           Run the script named [names..]                                                                                                                                    [aliases: run-script]
-  search [queries..]      Search packages
-  status                  Display the state of the workspace
-  test <type>             Run test
-  uninstall [names..]     Uninstall packages                                                                                                                                                    [aliases: delete]
-  upgrade [names..]       Upgrade packages
-  check-eask [files..]    Run eask checker
-  locate                  Print out Eask installed location
-  upgrade-eask            Upgrade Eask itself                                                                                                                                             [aliases: upgrade-self]
+  archives                   List out all package archives                                                                                                                                     [aliases: sources]
+  clean <type>               Delete various files produced during building
+  compile [names..]          Byte compile all Emacs Lisp files in the package
+  create <type>              Create a new elisp project
+  docker <version> [args..]  Launch specified Emacs version in a Docker container
+  emacs [args..]             Execute emacs with the appropriate environment
+  eval [form]                Evaluate lisp form with a proper PATH
+  path [patterns..]          Print the PATH (exec-path) from workspace                                                                                                                       [aliases: exec-path]
+  exec [args..]              Execute command with correct environment PATH set up
+  files [patterns..]         Print all package files
+  generate <type>            Generate files that are used for the development
+  info                       Display information about the current package
+  init [files..]             Initialize project to use Eask
+  install-deps               Automatically install package dependencies                                                                                                  [aliases: install-dependencies, prepare]
+  install [names..]          Install packages
+  keywords                   List available keywords that can be used in the header section
+  link <action>              Manage links
+  lint <type>                Run linter
+  list                       List packages
+  load-path [patterns..]     Print the load-path from workspace
+  load [files..]             Load elisp files
+  outdated                   Show all outdated dependencies
+  package-directory          Print path to package directory
+  package [destination]      Build a package artifact, and put it into the given destination
+  recipe                     Suggest a recipe format
+  refresh                    Download package archives
+  reinstall [names..]        Reinstall packages
+  run [names..]              Run the script named [names..]                                                                                                                                 [aliases: run-script]
+  search [queries..]         Search packages
+  status                     Display the state of the workspace
+  test <type>                Run test
+  uninstall [names..]        Uninstall packages                                                                                                                                                 [aliases: delete]
+  upgrade [names..]          Upgrade packages
+  check-eask [files..]       Run eask checker
+  locate                     Print out Eask installed location
+  upgrade-eask               Upgrade Eask itself                                                                                                                                          [aliases: upgrade-self]
 
 Proxy Options:
       --proxy        update proxy for HTTP and HTTPS to host                                                                                                                                             [string]
