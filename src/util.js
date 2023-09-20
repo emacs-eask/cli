@@ -120,6 +120,7 @@ function setup_env() {
   /* Home Directory */
   process.env.EASK_INVOCATION = _invocation();
   process.env.EASK_HOMEDIR = EASK_HOMEDIR;
+  if (IS_PKG) process.env.EASK_IS_PKG = IS_PKG;
 
   if (GITHUB_ACTIONS) {
     /* XXX: isTTY flag will always be undefined in GitHub Actions; we will have
