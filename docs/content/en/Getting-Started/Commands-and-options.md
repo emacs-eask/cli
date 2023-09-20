@@ -233,14 +233,6 @@ $ eask [GLOBAL-OPTIONS] files [PATTERNS..]
 
 If `[PATTERNS..]` are defined, it will display files that match that pattern.
 
-## 🔍 eask load
-
-Load Emacs Lisp files in order.
-
-```sh
-$ eask [GLOBAL-OPTIONS] load [FILES..]
-```
-
 ## 🔍 eask recipe
 
 Suggest a recipe format.
@@ -292,6 +284,17 @@ Alias: `run-script`
 
 # 🚩 Execution
 
+Commands allow you execute on top of Eask core.
+
+Basically, this allow you to do anything you want!
+
+## 🔍 eask load
+
+Load Emacs Lisp files in order.
+
+```sh
+$ eask [GLOBAL-OPTIONS] load [FILES..]
+```
 
 ## 🔍 eask exec
 
@@ -335,6 +338,8 @@ This is the same as jumping right into Emacs 26.1 (in docker) and executing
 `eask info`.
 
 # 🚩 Management
+
+Commands that help you manage your package's dependencies.
 
 ## 🔍 eask archives
 

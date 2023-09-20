@@ -230,14 +230,6 @@ $ eask [GLOBAL-OPTIONS] files [PATTERNS..]
 
 如果定義了 `[PATTERNS..]` ，它將顯示與該模式匹配的文件。
 
-## 🔍 eask load
-
-按順序加載 Emacs Lisp 文件。
-
-```sh
-$ eask [GLOBAL-OPTIONS] load [FILES..]
-```
-
 ## 🔍 eask recipe
 
 建議 recipe 格式。
@@ -288,6 +280,18 @@ $ eask [GLOBAL-OPTIONS] run [FILES..]
 
 # 🚩 執行
 
+指令允許執行在 Eask 核心之上。
+
+基本上，這可以讓你做任何你想做的事！
+
+## 🔍 eask load
+
+按順序加載 Emacs Lisp 文件。
+
+```sh
+$ eask [GLOBAL-OPTIONS] load [FILES..]
+```
+
 ## 🔍 eask exec
 
 使用給定的參數執行系統命令。
@@ -329,6 +333,8 @@ $ eask docker 26.1 info
 這與直接跳入 Emacs 26.1（在 docker 中）並執行 `eask info` 相同。
 
 # 🚩 管理
+
+指令能幫助你管理套件依賴.
 
 ## 🔍 eask archives
 
