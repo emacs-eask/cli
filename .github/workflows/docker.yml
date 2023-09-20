@@ -45,7 +45,7 @@ jobs:
     - name: Prepare Docker
       if: matrix.os == 'windows-latest'
       run: |
-        "C:/Program Files/Docker/Docker/DockerCli.exe" -SwitchLinuxEngine
+        & 'C:\Program Files\Docker\Docker\DockerCli.exe' -SwitchLinuxEngine
 
     - name: Prepare Eask (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
