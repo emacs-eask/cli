@@ -41,7 +41,7 @@ exports.handler = async (argv) => {
   }
 
   let project_dir = convert_path(process.cwd());
-  if (!project_dir.startsWith('/')) {
+  if (!project_dir.startsWith('/')) {  // XXX: Ensure compatible to Unix path!
     project_dir = '/' + project_dir;
   }
   let container_dir = '/' + path.basename(project_dir);
@@ -51,9 +51,15 @@ exports.handler = async (argv) => {
   let default_cmd = ['docker', 'run', '--rm',
                      '-v', container_arg,
                      '-w', container_dir,
-                     'silex/emacs:' + argv.version + '-ci-eask',
-                     'eask'];
+                     'silex/emacs:' + argv.version + '-ci-eask',];
   let rest = process.argv.slice(4);
+
+  // If no argument; we enter the container directly!
+  if (rest.length == 0)
+    default_cmd.splice(2, 0, '-it');
+  else
+    default_cmd.push('eask');
+
   let cmd = default_cmd.concat(rest);
 
   let proc = child_process.spawn(UTIL.cli_args(cmd), { stdio: 'inherit', shell: true });
