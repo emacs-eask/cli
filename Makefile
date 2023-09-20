@@ -36,6 +36,9 @@ command-check-eask:
 	./test/checker/dsl/run.sh
 	./test/checker/metadata/run.sh
 
+command-docker:
+	./test/commands/docker/run.sh
+
 command-exec:
 	./test/commands/exec/run.sh
 

@@ -23,6 +23,27 @@ const path = require('path');
 const child_process = require("child_process");
 
 /**
+ * Check to see if a program is installed and exists on the path.
+ * @param { String } command - Program name.
+ * @return Return path or null if not found.
+ */
+function which(command) {
+  return require('which').sync(command, { nothrow: true });
+}
+
+/**
+ * Convert Windows backslash paths to slash paths: `foo\\bar` -> `foo/bar`
+ * @see https://github.com/sindresorhus/slash
+ */
+function slash(path) {
+  const isExtendedLengthPath = path.startsWith('\\\\?\\');
+  if (isExtendedLengthPath) {
+    return path;
+  }
+  return path.replace(/\\/g, '/');
+}
+
+/**
  * Return string escaped double quotes.
  * @param { String } str - String to escape string.
  * @return Escaped string.
@@ -33,6 +54,7 @@ function escape_str(str) {
 
 /**
  * Form CLI arguments into a single string.
+ * @see https://github.com/emacs-eask/cli/issues/128
  * @param { Array } argv - Argument vector.
  */
 function cli_args(argv) {
@@ -175,6 +197,11 @@ function _environment_name (argv) {
  * @param { string } args - the rest of the arguments
  */
 async function e_call(argv, script, ...args) {
+  if (!which(EASK_EMACS)) {
+    console.log("Emacs is not installed (cannot find `" + EASK_EMACS + "' executable)");
+    return;
+  }
+
   return new Promise(resolve => {
     let _path = el_script(script);
 
@@ -233,6 +260,9 @@ function cmd_count() {
 /*
  * Module Exports
  */
+module.exports.which = which;
+module.exports.slash = slash;
+
 module.exports.escape_str = escape_str;
 module.exports.cli_args = cli_args;
 module.exports.plugin_dir = plugin_dir;

@@ -230,30 +230,6 @@ $ eask [GLOBAL-OPTIONS] files [PATTERNS..]
 
 如果定義了 `[PATTERNS..]` ，它將顯示與該模式匹配的文件。
 
-## 🔍 eask exec
-
-使用給定的參數執行系統命令。
-
-```sh
-$ eask [GLOBAL-OPTIONS] exec [COMMAND] [ARGUMENTS ...]
-```
-
-## 🔍 eask emacs
-
-在合適的環境下執行emacs。
-
-```sh
-$ eask [GLOBAL-OPTIONS] emacs [ARGUMENTS ...]
-```
-
-## 🔍 eask eval
-
-將 `FORM` 評估為 lisp 形式。
-
-```sh
-$ eask [GLOBAL-OPTIONS] eval [FORM]
-```
-
 ## 🔍 eask load
 
 按順序加載 Emacs Lisp 文件。
@@ -309,6 +285,48 @@ $ eask [GLOBAL-OPTIONS] run [FILES..]
 ```
 
 別名: `run-script`
+
+# 🚩 執行
+
+## 🔍 eask exec
+
+使用給定的參數執行系統命令。
+
+```sh
+$ eask [GLOBAL-OPTIONS] exec [COMMAND] [ARGUMENTS ...]
+```
+
+## 🔍 eask emacs
+
+在合適的環境下執行emacs。
+
+```sh
+$ eask [GLOBAL-OPTIONS] emacs [ARGUMENTS ...]
+```
+
+## 🔍 eask eval
+
+將 `FORM` 評估為 lisp 形式。
+
+```sh
+$ eask [GLOBAL-OPTIONS] eval [FORM]
+```
+
+## 🔍 eask docker
+
+在 Docker 容器中啟動指定的 Emacs 版本
+
+```sh
+$ eask [GLOBAL-OPTIONS] docker <VERSION> [ARGUMENTS ...]
+```
+
+例如：
+
+```sh
+$ eask docker 26.1 info
+```
+
+這與直接跳入 Emacs 26.1（在 docker 中）並執行 `eask info` 相同。
 
 # 🚩 管理
 
