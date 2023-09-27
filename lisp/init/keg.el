@@ -48,17 +48,16 @@ If no found the Keg file, returns nil."
          (file (file-name-nondirectory (eask-root-del filename)))
          (new-file (eask-s-replace "Keg" "Eask" file))
          (new-filename (expand-file-name new-file))
-         (contents (eask--keg-file-read filename))  ; Read it!
+         (contents (ignore-errors (eask--keg-file-read filename)))  ; Read it!
          (converted))
     (eask-with-progress
       (format "Converting file `%s` to `%s`... " file new-file)
       (eask-with-verbosity 'debug
         (cond ((not (string-prefix-p "Keg" file))
                (eask-debug "✗ Invalid Keg filename, the file should start with `Keg`"))
-              ((file-exists-p new-filename)
-               (eask-debug "✗ The file `%s` already presented" new-file))
               (t
                (with-current-buffer (find-file new-filename)
+                 (erase-buffer)
                  (goto-char (point-min))
 
                  (let* ((project-name (file-name-nondirectory (directory-file-name default-directory)))

@@ -108,17 +108,16 @@ Optional argument CONTENTS is used for nested directives.  e.g. development."
          (file (file-name-nondirectory (eask-root-del filename)))
          (new-file (eask-s-replace "Cask" "Eask" file))
          (new-filename (expand-file-name new-file))
-         (eask--cask-contents (cask--read filename))  ; Read it!
+         (eask--cask-contents (ignore-errors (cask--read filename)))  ; Read it!
          (converted))
     (eask-with-progress
       (format "Converting file `%s` to `%s`... " file new-file)
       (eask-with-verbosity 'debug
         (cond ((not (string-prefix-p "Cask" file))
                (eask-debug "✗ Invalid Cask filename, the file should start with `Cask`"))
-              ((file-exists-p new-filename)
-               (eask-debug "✗ The file `%s` already presented" new-file))
               (t
                (with-current-buffer (find-file new-filename)
+                 (erase-buffer)
                  (goto-char (point-min))
 
                  ;; XXX: Newline to look nicer!
@@ -164,7 +163,9 @@ Optional argument CONTENTS is used for nested directives.  e.g. development."
                                (files (if (stringp files) files (-flatten files))))
                      (insert "(files")
                      (dolist (file files)
-                       (insert "\n \"" file "\""))
+                       (if (stringp file)
+                           (insert "\n \"" file "\"")
+                         (insert "\n " (eask-2str file))))
                      (insert ")\n"))
 
                    (when-let ((pkg-desc (eask--cask-package-descriptor)))
