@@ -29,11 +29,10 @@
       (eask-with-verbosity 'debug
         (cond ((not (string-suffix-p ".el" file))
                (eask-debug "✗ Invalid elisp filename, the file should end with `.el`"))
-              ((file-exists-p new-filename)
-               (eask-debug "✗ The file `%s` already presented" new-file))
               (t
                (when pkg-desc
                  (with-current-buffer (find-file new-filename)
+                   (erase-buffer)
                    (goto-char (point-min))
 
                    (let* ((eask-package-desc pkg-desc)
@@ -73,7 +72,7 @@
                    (save-buffer))
                  (setq converted t)))))
       (if converted "done ✓" "skipped ✗"))
-    converted))
+    (when converted new-filename)))
 
 (eask-start
   (let* ((patterns (eask-args))
@@ -83,16 +82,19 @@
          (files (cl-remove-if-not (lambda (file)
                                     (string-suffix-p ".el" (file-name-nondirectory file)))
                                   files))
-         (converted 0))
+         (converted-files))
     (cond
      ;; Files found, do the action!
      (files
       (dolist (file files)
-        (when (eask--convert-source file)
-          (cl-incf converted)))
+        (when-let ((new-filename (eask--convert-source file)))
+          (push new-filename converted-files)))
+      ;; Automatically rename file into Eask file when only one file is converted!
+      (when (= (length converted-files) 1)
+        (rename-file (car converted-files) "Eask" t))
       (eask-msg "")
-      (eask-info "(Total of %s elisp file%s converted)" converted
-                 (eask--sinr converted "" "s")))
+      (eask-info "(Total of %s elisp file%s converted)" (length converted-files)
+                 (eask--sinr converted-files "" "s")))
      ;; Pattern defined, but no file found!
      (patterns
       (eask-info "(No files match wildcard: %s)"
