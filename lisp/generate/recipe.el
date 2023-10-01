@@ -33,6 +33,9 @@
              (recipe-string (pp-to-string recipe)))
         (when (or (eask-yes-p)
                   (yes-or-no-p (format "%s\nIs this OK? " recipe-string)))
+          ;; XXX: Just to fake the user input!
+          (when (eask-yes-p)
+            (eask-msg (format "%s\nIs this OK? (yes or no) yes" recipe-string)))
           (ignore-errors (make-directory eask-recipe-path t))
           (with-current-buffer (find-file recipe-file)
             (erase-buffer)
