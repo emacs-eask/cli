@@ -31,6 +31,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * fix(vcpkg): Use workaround for `MODULE_NOT_FOUND` error (#187)
 * Add docker command (#188)
 * Enter docker directly when no arguments (#191)
+* Add command to generate recipe (#192)
 
 ## 0.8.x
 > Released Mar 08, 2023
