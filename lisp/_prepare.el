@@ -688,6 +688,9 @@ full detials."
 (defun eask-strict-p ()
   "Non-nil when flag is on (`--strict')."
   (eask--flag "--strict"))
+(defun eask-yes-p ()
+  "Non-nil when flag is on (`--yes')."
+  (eask--flag "--yes"))
 (defun eask-timestamps-p ()
   "Non-nil when flag is on (`--timestamps')."
   (eask--flag "--timestamps"))
@@ -798,6 +801,7 @@ other scripts internally.  See function `eask-call'.")
   (eask--form-options
    '("-g" "-c" "-a" "-q" "-f" "--dev"
      "--debug" "--strict"
+     "--yes"
      "--allow-error"
      "--insecure"
      "--timestamps" "--log-level"

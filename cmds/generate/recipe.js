@@ -27,8 +27,18 @@ exports.builder = yargs => yargs
       description: 'destination path/folder',
       alias: 'dest',
       type: 'string',
-    });
+    })
+  .options({
+    'yes': {
+      description: 'assume the answer to all prompts is yes',
+      alias: 'y',
+      type: 'boolean',
+      group: TITLE_CMD_OPTION,
+    },
+  });
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'generate/recipe', argv.dest);
+  await UTIL.e_call(argv, 'generate/recipe'
+                    , argv.dest
+                    , UTIL.def_flag(argv.yes, '--yes'));
 };
