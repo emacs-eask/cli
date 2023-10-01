@@ -23,8 +23,9 @@ exports.command = ['package [destination]'];
 exports.desc = 'Build a package artifact, and put it into the given destination';
 exports.builder = yargs => yargs
   .positional(
-    '[destination]', {
+    'destination', {
       description: 'destination path/folder',
+      alias: 'dest',
       type: 'string',
     });
 

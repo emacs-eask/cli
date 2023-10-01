@@ -170,7 +170,7 @@ Build the package artifact.
 $ eask package [DESTINATION]
 ```
 
-If [DESTINATION] is not specified, it will export to the `/dist` folder
+If [DESTINATION] is not specified, it will generate to the `/dist` folder
 by default.
 
 ## 🔍 eask compile
@@ -422,6 +422,17 @@ $ eask [GLOBAL-OPTIONS] generate pkg-file
 `project` is the project name, as declared in `Eask`-file. See
 [Multi-file Packages (elisp)](https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html#Multi_002dfile-Packages)
 for details.
+
+## 🔍 eask generate recipe
+
+Generate recipe file.
+
+```sh
+$ eask [GLOBAL-OPTIONS] generate recipe [DESTINATION]
+```
+
+If [DESTINATION] is not specified, it will generate to the `/recipes` folder
+by default.
 
 ## 🔍 eask generate license
 

@@ -1811,6 +1811,11 @@ variable we use to test validation."
   :type 'string
   :group 'eask)
 
+(defcustom eask-recipe-path "recipes"
+  "Name of default target directory for placing recipes."
+  :type 'string
+  :group 'eask)
+
 ;;
 ;;; Linter
 
