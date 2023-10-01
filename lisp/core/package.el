@@ -68,7 +68,7 @@ Argument VERSION is a string represent the version number of this package."
     (eask--packaged-file "el")))
 
 (eask-start
-  (let* ((eask-dist-path (or (eask-argv 0) eask-dist-path))
+  (let* ((eask-dist-path (or (eask-args 0) eask-dist-path))
          (eask-dist-path (expand-file-name eask-dist-path))
          (packaged))
     (ignore-errors (make-directory eask-dist-path t))

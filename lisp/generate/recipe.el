@@ -27,7 +27,7 @@
 (eask-start
   (if-let ((recipe (eask--recipe-string))
            (name (eask-guess-package-name)))
-      (let* ((eask-recipe-path (or (eask-argv 0) eask-recipe-path))
+      (let* ((eask-recipe-path (or (eask-args 0) eask-recipe-path))
              (eask-recipe-path (expand-file-name eask-recipe-path))
              (recipe-file (expand-file-name name eask-recipe-path))
              (recipe-string (pp-to-string recipe)))
