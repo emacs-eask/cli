@@ -840,9 +840,9 @@ $ eask -f [COMMAND]
 
 ## 🔍 --strict
 
-Trigger error instead of warnings.
+觸發錯誤代替警告。
 
-For instance, in **eask compile**:
+例如，在 **eask compile** 中：
 
 ```elisp
 (setq byte-compile-error-on-warn t)

@@ -688,9 +688,6 @@ full detials."
 (defun eask-strict-p ()
   "Non-nil when flag is on (`--strict')."
   (eask--flag "--strict"))
-(defun eask-yes-p ()
-  "Non-nil when flag is on (`--yes')."
-  (eask--flag "--yes"))
 (defun eask-timestamps-p ()
   "Non-nil when flag is on (`--timestamps')."
   (eask--flag "--timestamps"))
@@ -721,6 +718,9 @@ full detials."
 (defun eask-number-p ()
   "Non-nil when flag is on (`-n', `--number')."
   (eask--flag "--number"))
+(defun eask-yes-p ()
+  "Non-nil when flag is on (`--yes')."
+  (eask--flag "--yes"))
 
 ;;; String (with arguments)
 (defun eask-output ()
