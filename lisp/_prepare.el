@@ -842,7 +842,9 @@ Simply remove `--eask' for each option, like `--eask--strict' to `--strict'."
           eask-argv))
 
 (defun eask-args (&optional index)
-  "Get all arguments except options."
+  "Get all arguments except options
+
+If the optional argument INDEX is non-nil, return the element."
   (let ((argv (cl-remove-if (lambda (arg) (member arg eask--option-switches)) eask-argv))
         (args) (skip-next))
     (dolist (arg argv)
