@@ -416,6 +416,16 @@ $ eask [GLOBAL-OPTIONS] generate pkg-file
 `project` 是在 `Eask` 文件中聲明的項目名稱。 有關詳細信息，請參閱
 [多文件包 (elisp)](https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html#Multi_002dfile-Packages)。
 
+## 🔍 eask generate recipe
+
+生成 recipe 文件。
+
+```sh
+$ eask [GLOBAL-OPTIONS] generate recipe [DESTINATION]
+```
+
+如果未指定 [DESTINATION]，則默認導出到 `/recipes` 文件夾。
+
 ## 🔍 eask generate license
 
 生成 LICENSE 文件。
@@ -830,9 +840,9 @@ $ eask -f [COMMAND]
 
 ## 🔍 --strict
 
-Trigger error instead of warnings.
+觸發錯誤代替警告。
 
-For instance, in **eask compile**:
+例如，在 **eask compile** 中：
 
 ```elisp
 (setq byte-compile-error-on-warn t)

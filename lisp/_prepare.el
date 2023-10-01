@@ -718,6 +718,9 @@ full detials."
 (defun eask-number-p ()
   "Non-nil when flag is on (`-n', `--number')."
   (eask--flag "--number"))
+(defun eask-yes-p ()
+  "Non-nil when flag is on (`--yes')."
+  (eask--flag "--yes"))
 
 ;;; String (with arguments)
 (defun eask-output ()
@@ -806,7 +809,8 @@ other scripts internally.  See function `eask-call'.")
      "--no-color"
      "--clean"
      "--json"
-     "--number"))
+     "--number"
+     "--yes"))
   "List of boolean type options.")
 
 (defconst eask--option-args
@@ -837,8 +841,10 @@ Simply remove `--eask' for each option, like `--eask--strict' to `--strict'."
             (eask-s-replace "--eask" "" arg))
           eask-argv))
 
-(defun eask-args ()
-  "Get all arguments except options."
+(defun eask-args (&optional index)
+  "Get all arguments except options
+
+If the optional argument INDEX is non-nil, return the element."
   (let ((argv (cl-remove-if (lambda (arg) (member arg eask--option-switches)) eask-argv))
         (args) (skip-next))
     (dolist (arg argv)
@@ -846,7 +852,8 @@ Simply remove `--eask' for each option, like `--eask--strict' to `--strict'."
         (if (member arg eask--option-args)
             (setq skip-next t)
           (push arg args))))
-    (reverse args)))
+    (setq args (reverse args))
+    (if index (nth 0 args) args)))
 
 (defmacro eask--batch-mode (&rest body)
   "Execute forms BODY in batch-mode."
@@ -1808,6 +1815,11 @@ variable we use to test validation."
 
 (defcustom eask-dist-path "dist"
   "Name of default target directory for building packages."
+  :type 'string
+  :group 'eask)
+
+(defcustom eask-recipe-path "recipes"
+  "Name of default target directory for placing recipes."
   :type 'string
   :group 'eask)
 

@@ -14,29 +14,34 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
+(defun eask--recipe-string ()
+  "Return the recipe format in string."
+  (when-let ((url (eask-package-desc-url)))
+    (let* ((fetcher (cond ((string-match-p "github.com" url) 'github)
+                          ((string-match-p "gitlab.com" url) 'gitlab)
+                          (t 'git)))
+           (url-regex (if (eq fetcher 'github)
+                          "http[s]://github.com/"
+                        "http[s]://gitlab.com/"))
+           (repo (replace-regexp-in-string url-regex "" url))
+           (name (eask-guess-package-name))
+           (recipe `(,(intern name) :fetcher ,fetcher)))
+      (cond ((memq fetcher '(git hg))
+             (nconc recipe `(:url ,url)))
+            ((memq fetcher '(gitlab github))
+             (nconc recipe `(:repo ,repo))))
+      (when eask-files
+        (nconc recipe `(:files ,(append '(:defaults) eask-files))))
+      recipe)))
+
 (eask-start
-  (if-let ((url (eask-package-desc-url)))
-      (let* ((fetcher (cond ((string-match-p "github.com" url) 'github)
-                            ((string-match-p "gitlab.com" url) 'gitlab)
-                            (t 'git)))
-             (url-regex (if (eq fetcher 'github)
-                            "http[s]://github.com/"
-                          "http[s]://gitlab.com/"))
-             (repo (replace-regexp-in-string url-regex "" url))
-             (name (eask-guess-package-name))
-             (recipe
-              `(,(intern name) :fetcher ,fetcher)))
-        (cond ((memq fetcher '(git hg))
-               (nconc recipe `(:url ,url)))
-              ((memq fetcher '(gitlab github))
-               (nconc recipe `(:repo ,repo))))
-        (when eask-files
-          (nconc recipe `(:files ,(append '(:defaults) eask-files))))
+  (if-let ((recipe (eask--recipe-string))
+           (name (eask-guess-package-name)))
+      (progn
         (eask-msg "")
         (eask-msg "recipes/%s:" name)
         (eask-msg "")
-        (eask-msg "%s" (pp-to-string recipe))
-        (eask-msg ""))
+        (eask-msg "%s" (pp-to-string recipe)))
     (eask-msg "")
     (eask-info "(Repository URL is required to form a recipe)")
     (eask-help "core/recipe")))

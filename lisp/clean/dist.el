@@ -46,7 +46,7 @@
                (- 3 deleted))))
 
 (eask-start
-  (let* ((eask-dist-path (or (eask-argv 0) eask-dist-path))
+  (let* ((eask-dist-path (or (eask-args 0) eask-dist-path))
          (eask-dist-path (expand-file-name eask-dist-path)))
     (if (file-directory-p eask-dist-path)
         (eask--clean-dist eask-dist-path)
