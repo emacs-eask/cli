@@ -801,7 +801,6 @@ other scripts internally.  See function `eask-call'.")
   (eask--form-options
    '("-g" "-c" "-a" "-q" "-f" "--dev"
      "--debug" "--strict"
-     "--yes"
      "--allow-error"
      "--insecure"
      "--timestamps" "--log-level"
@@ -810,7 +809,8 @@ other scripts internally.  See function `eask-call'.")
      "--no-color"
      "--clean"
      "--json"
-     "--number"))
+     "--number"
+     "--yes"))
   "List of boolean type options.")
 
 (defconst eask--option-args
