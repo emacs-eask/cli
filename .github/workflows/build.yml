@@ -34,7 +34,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        targets:
+        target:
         - linux-arm64
         - linux-x64
         - macos-arm64
@@ -52,7 +52,7 @@ jobs:
       run: npm install
 
     - name: Building...
-      run: npm run-script pkg-${{ matrix.targets }}
+      run: npm run-script pkg-${{ matrix.target }}
 
     - name: Prepare content...
       run: |
@@ -63,17 +63,17 @@ jobs:
     - name: Uploading...
       uses: actions/upload-artifact@v3
       with:
-        name: eask_${{ env.VERSION }}_${{ matrix.targets }}
+        name: eask_${{ env.VERSION }}_${{ matrix.target }}
         path: dist
 
     - name: Zipping dist
       working-directory: dist
       run: |
-        zip -r ${{ matrix.targets }}.zip .
-        mv ${{ matrix.targets }}.zip ../
+        zip -r ${{ matrix.target }}.zip .
+        mv ${{ matrix.target }}.zip ../
 
     - name: Move zip to HOME
-      run: mv ${{ matrix.targets }}.zip ~/
+      run: mv ${{ matrix.target }}.zip ~/
 
     - name: Checkout binaries repository
       uses: actions/checkout@v4
@@ -84,10 +84,10 @@ jobs:
 
     - name: Clean up previous binaires
       continue-on-error: true
-      run: rm -rf eask/${{ matrix.targets }}.zip
+      run: rm -rf eask/${{ matrix.target }}.zip
 
     - name: Move binaires to repository
-      run: mv ~/${{ matrix.targets }}.zip ./
+      run: mv ~/${{ matrix.target }}.zip ./
 
     - name: Set git config
       run: |
@@ -99,7 +99,7 @@ jobs:
       run: |
         git pull
         git add .
-        git commit -m "Update binairs ${{ matrix.targets }}.zip"
+        git commit -m "Update binairs ${{ matrix.target }}.zip"
 
     - name: Push
       if: github.ref == 'refs/heads/master'
