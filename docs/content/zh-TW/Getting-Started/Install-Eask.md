@@ -38,7 +38,13 @@ $ npm install -g @emacs-eask/cli
 
 ### Homebrew (macOS or Linux)
 
-WIP
+[Homebrew](https://brew.sh/) 是一個適用於 macOS 和 Linux 的免費開源套件管理器。
+這將安裝 Eask CLI 的擴充版本：
+
+```sh
+$ brew tap https://github.com/emacs-eask/packaging
+$ brew install eask-cli
+```
 
 ### MacPorts (macOS)
 
@@ -49,7 +55,7 @@ WIP
 如果您的計算機上安裝了 [Chocolatey](https://chocolatey.org/)，則可以使用以下一行代碼安裝 Eask：
 
 ```sh
-$ chcoc install eask
+$ choco install eask-cli
 ```
 
 ### Scoop (Windows)

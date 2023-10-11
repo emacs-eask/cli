@@ -42,7 +42,13 @@ $ npm install -g @emacs-eask/cli
 
 ### Homebrew (macOS or Linux)
 
-WIP
+[Homebrew](https://brew.sh/) is a free and open source package manager for
+macOS and Linux. This will install the extended edition of Eask CLI:
+
+```sh
+$ brew tap https://github.com/emacs-eask/packaging
+$ brew install eask-cli
+```
 
 ### MacPorts (macOS)
 
@@ -54,7 +60,7 @@ If you have [Chocolatey](https://chocolatey.org/) installed on your machine, you
 install Eask with the following one-liner:
 
 ```sh
-$ chcoc install eask
+$ choco install eask-cli
 ```
 
 ### Scoop (Windows)
