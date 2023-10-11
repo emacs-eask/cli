@@ -50,7 +50,12 @@ $ brew install eask-cli
 
 ### 🧪 MacPorts (macOS)
 
-WIP
+[MacPorts](https://www.macports.org/) 是一款適用於 macOS 的免費開源套件管理器。
+這將安裝 Eask 的擴充版本：
+
+```sh
+$ sudo port install eask-cli
+```
 
 ### 🧪 Chocolatey (Windows)
 

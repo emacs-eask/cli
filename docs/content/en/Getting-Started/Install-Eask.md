@@ -54,7 +54,12 @@ $ brew install eask-cli
 
 ### 🧪 MacPorts (macOS)
 
-WIP
+[MacPorts](https://www.macports.org/) is a free and open source package manager for macOS.
+This will install the extended edition of Eask:
+
+```sh
+$ sudo port install eask-cli
+```
 
 ### 🧪 Chocolatey (Windows)
 
