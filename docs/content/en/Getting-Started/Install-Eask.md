@@ -9,7 +9,9 @@ This document guides you through the installation of Eask.
 
 ## 💾 Quick Install
 
-### Binary (Cross-platform)
+Install Eask on macOS, Linux, Windows, BSD, and on any machine that can run the [Node.js][].
+
+### 🧪 Binary (Cross-platform)
 
 Download the appropriate version for your platform from [Eask Releases](https://github.com/emacs-eask/cli/releases).
 Once downloaded, the binary can be run from anywhere. You don’t need to install
@@ -19,19 +21,19 @@ where you don’t have a privileged account.
 Ideally, you should install it somewhere in your `PATH` for easy use. `/usr/local/bin`
 is the most probable location.
 
-### Using Shell (macOS and Linux)
+### 🧪 Using Shell (macOS and Linux)
 
 ```sh
 $ curl -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.sh | sh
 ```
 
-### Using Shell (Windows)
+### 🧪 Using Shell (Windows)
 
 ```sh
 $ curl.exe -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.bat | cmd /Q
 ```
 
-### npm
+### 🧪 npm
 
 If you have [npm](https://www.npmjs.com/) installed on your machine, you can
 install Eask with the following one-liner:
@@ -40,7 +42,7 @@ install Eask with the following one-liner:
 $ npm install -g @emacs-eask/cli
 ```
 
-### Homebrew (macOS or Linux)
+### 🧪 Homebrew (macOS or Linux)
 
 [Homebrew](https://brew.sh/) is a free and open source package manager for
 macOS and Linux. This will install the extended edition of Eask CLI:
@@ -50,11 +52,11 @@ $ brew tap https://github.com/emacs-eask/packaging
 $ brew install eask-cli
 ```
 
-### MacPorts (macOS)
+### 🧪 MacPorts (macOS)
 
 WIP
 
-### Chocolatey (Windows)
+### 🧪 Chocolatey (Windows)
 
 If you have [Chocolatey](https://chocolatey.org/) installed on your machine, you can
 install Eask with the following one-liner:
@@ -63,7 +65,7 @@ install Eask with the following one-liner:
 $ choco install eask-cli
 ```
 
-### Scoop (Windows)
+### 🧪 Scoop (Windows)
 
 WIP
 
@@ -71,9 +73,9 @@ WIP
 
 ### 🚩 Prerequisite Tools
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/en/)
-* [npm](https://www.npmjs.com/)
+* [Git][]
+* [Node.js][]
+* [npm][]
 
 Alternatively, you can clone it directly from this repo
 
@@ -106,3 +108,8 @@ set PATH=%PATH%;c:/path/to/eask/bin
 
 Once you have set it up correctly, try `eask --version` then you should see 
 the current eask's version number! 🎉 🎊
+
+
+[Git]: https://git-scm.com/
+[Node.js]: https://nodejs.org/en/
+[npm]: https://www.npmjs.com/
