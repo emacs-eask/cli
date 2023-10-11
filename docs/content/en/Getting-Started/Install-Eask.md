@@ -48,7 +48,7 @@ $ npm install -g @emacs-eask/cli
 macOS and Linux. This will install the extended edition of Eask CLI:
 
 ```sh
-$ brew tap https://github.com/emacs-eask/packaging
+$ brew tap emacs-eask/cli https://github.com/emacs-eask/packaging
 $ brew install eask-cli
 ```
 

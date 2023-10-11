@@ -44,7 +44,7 @@ $ npm install -g @emacs-eask/cli
 這將安裝 Eask CLI 的擴充版本：
 
 ```sh
-$ brew tap https://github.com/emacs-eask/packaging
+$ brew tap emacs-eask/cli https://github.com/emacs-eask/packaging
 $ brew install eask-cli
 ```
 
