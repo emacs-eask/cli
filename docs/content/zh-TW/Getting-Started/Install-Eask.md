@@ -67,7 +67,13 @@ $ choco install eask-cli
 
 ### 🧪 Scoop (Windows)
 
-WIP
+[Scoop](https://scoop.sh/) 是一個適用於 Windows 的免費開源套件管理器。
+這將安裝 Eask 的擴充版本：
+
+```sh
+$ scoop bucket add emacs-eask/cli https://github.com/emacs-eask/packaging
+$ scoop install eask-cli
+```
 
 ## 💾 Source
 

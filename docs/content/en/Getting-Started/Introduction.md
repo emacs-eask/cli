@@ -110,10 +110,7 @@ list.
 
 ### 🔍 Development
 
-- [ ] [DEV] Publish package to [homebrew]()
-- [ ] [DEV] Publish package to [Chocolatety]()
-- [ ] [DEV] Publish package to [Scoop]()
-- [ ] [DEV] Publish package to [MacPorts]()
+- [ ] [DEV] Publish package to [winget]()
 
 ### 🔍 Core commands
 
@@ -131,6 +128,7 @@ The design of Eask was greatly influenced by the following projects:
 * [makem.sh][] - Makefile-like script for building and testing Emacs Lisp packages
 * [epm](https://github.com/xuchunyang/epm) - Emacs Package Manager
 * [Eldev][] - Elisp Development Tool
+
 
 [emacs-eask/archives]: https://github.com/emacs-eask/archives
 [Cask]: https://github.com/cask/cask

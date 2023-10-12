@@ -72,7 +72,13 @@ $ choco install eask-cli
 
 ### 🧪 Scoop (Windows)
 
-WIP
+[Scoop](https://scoop.sh/) is a free and open source package manager for Windows.
+This will install the extended edition of Eask:
+
+```sh
+$ scoop bucket add emacs-eask/cli https://github.com/emacs-eask/packaging
+$ scoop install eask-cli
+```
 
 ## 💾 Source
 
