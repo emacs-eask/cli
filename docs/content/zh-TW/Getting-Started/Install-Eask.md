@@ -43,7 +43,7 @@ $ npm install -g @emacs-eask/cli
 ### 📦 Homebrew (macOS 或 Linux)
 
 [Homebrew](https://brew.sh/) 是一個適用於 macOS 和 Linux 的免費開源套件管理器。
-這將安裝 Eask CLI 的擴充版本：
+這將安裝 Eask CLI：
 
 ```sh
 $ brew tap emacs-eask/cli https://github.com/emacs-eask/packaging
@@ -53,10 +53,19 @@ $ brew install eask-cli
 ### 📦 MacPorts (macOS)
 
 [MacPorts](https://www.macports.org/) 是一款適用於 macOS 的免費開源套件管理器。
-這將安裝 Eask 的擴充版本：
+這將安裝 Eask CLI：
 
 ```sh
 $ sudo port install eask-cli
+```
+
+### 📦 Snap (Linux)
+
+[Snap](https://snapcraft.io/) 是一款適用於 Linux 的免費開源套件管理器。
+snap 套件適用於大多數發行版，安裝簡單且會自動更新。
+
+```sh
+$ sudo snap install eask-cli
 ```
 
 ### 📦 Chocolatey (Windows)
@@ -70,7 +79,7 @@ $ choco install eask-cli
 ### 📦 Scoop (Windows)
 
 [Scoop](https://scoop.sh/) 是一個適用於 Windows 的免費開源套件管理器。
-這將安裝 Eask 的擴充版本：
+這將安裝 Eask CLI：
 
 ```sh
 $ scoop bucket add emacs-eask/cli https://github.com/emacs-eask/packaging

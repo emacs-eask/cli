@@ -47,7 +47,7 @@ $ npm install -g @emacs-eask/cli
 ### 📦 Homebrew (macOS or Linux)
 
 [Homebrew](https://brew.sh/) is a free and open source package manager for
-macOS and Linux. This will install the extended edition of Eask CLI:
+macOS and Linux. This will install the Eask CLI:
 
 ```sh
 $ brew tap emacs-eask/cli https://github.com/emacs-eask/packaging
@@ -57,10 +57,20 @@ $ brew install eask-cli
 ### 📦 MacPorts (macOS)
 
 [MacPorts](https://www.macports.org/) is a free and open source package manager for macOS.
-This will install the extended edition of Eask:
+This will install the Eask CLI:
 
 ```sh
 $ sudo port install eask-cli
+```
+
+### 📦 Snap (Linux)
+
+[Snap](https://snapcraft.io/) is a free and open source package manager for Linux.
+Available for most distributions, snap packages are simple to install and are
+automatically updated.
+
+```sh
+$ sudo snap install eask-cli
 ```
 
 ### 📦 Chocolatey (Windows)
@@ -75,7 +85,7 @@ $ choco install eask-cli
 ### 📦 Scoop (Windows)
 
 [Scoop](https://scoop.sh/) is a free and open source package manager for Windows.
-This will install the extended edition of Eask:
+This will install the Eask CLI:
 
 ```sh
 $ scoop bucket add emacs-eask/cli https://github.com/emacs-eask/packaging
