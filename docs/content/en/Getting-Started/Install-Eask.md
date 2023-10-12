@@ -5,9 +5,9 @@ weight: 200
 
 This document guides you through the installation of Eask.
 
-{{< toc >}}
-
 Install Eask on macOS, Linux, Windows, BSD, and on any machine that can run the [Node.js][].
+
+{{< toc >}}
 
 ## 💾 Prebuilt binaries
 

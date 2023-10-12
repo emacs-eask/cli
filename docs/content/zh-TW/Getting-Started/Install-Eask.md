@@ -5,9 +5,9 @@ weight: 200
 
 本文檔將指導您完成 Eask 的安裝。
 
-{{< toc >}}
-
 安裝 Eask在 macOS、Linux、Windows、BSD 以及任何可以執行 [Node.js][]。
+
+{{< toc >}}
 
 ## 💾 預建置檔案
 
