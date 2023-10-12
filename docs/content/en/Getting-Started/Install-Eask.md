@@ -80,6 +80,10 @@ $ scoop bucket add emacs-eask/cli https://github.com/emacs-eask/packaging
 $ scoop install eask-cli
 ```
 
+### 🧪 Winget (Windows)
+
+WIP
+
 ## 💾 Source
 
 ### 🚩 Prerequisite Tools
