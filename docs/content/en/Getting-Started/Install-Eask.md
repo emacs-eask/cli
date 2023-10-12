@@ -7,11 +7,9 @@ This document guides you through the installation of Eask.
 
 {{< toc >}}
 
-## 💾 Quick Install
-
 Install Eask on macOS, Linux, Windows, BSD, and on any machine that can run the [Node.js][].
 
-### 🧪 Binary (Cross-platform)
+## 💾 Prebuilt binaries
 
 Download the appropriate version for your platform from [Eask Releases](https://github.com/emacs-eask/cli/releases).
 Once downloaded, the binary can be run from anywhere. You don’t need to install
@@ -21,19 +19,23 @@ where you don’t have a privileged account.
 Ideally, you should install it somewhere in your `PATH` for easy use. `/usr/local/bin`
 is the most probable location.
 
-### 🧪 Using Shell (macOS and Linux)
+## 💾 Using Shell
+
+On macOS or Linux:
 
 ```sh
 $ curl -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.sh | sh
 ```
 
-### 🧪 Using Shell (Windows)
+On Windows:
 
 ```sh
 $ curl.exe -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.bat | cmd /Q
 ```
 
-### 🧪 npm
+## 💾 Package managers
+
+### 📦 npm (Cross-platform)
 
 If you have [npm](https://www.npmjs.com/) installed on your machine, you can
 install Eask with the following one-liner:
@@ -42,7 +44,7 @@ install Eask with the following one-liner:
 $ npm install -g @emacs-eask/cli
 ```
 
-### 🧪 Homebrew (macOS or Linux)
+### 📦 Homebrew (macOS or Linux)
 
 [Homebrew](https://brew.sh/) is a free and open source package manager for
 macOS and Linux. This will install the extended edition of Eask CLI:
@@ -52,7 +54,7 @@ $ brew tap emacs-eask/cli https://github.com/emacs-eask/packaging
 $ brew install eask-cli
 ```
 
-### 🧪 MacPorts (macOS)
+### 📦 MacPorts (macOS)
 
 [MacPorts](https://www.macports.org/) is a free and open source package manager for macOS.
 This will install the extended edition of Eask:
@@ -61,7 +63,7 @@ This will install the extended edition of Eask:
 $ sudo port install eask-cli
 ```
 
-### 🧪 Chocolatey (Windows)
+### 📦 Chocolatey (Windows)
 
 If you have [Chocolatey](https://chocolatey.org/) installed on your machine, you can
 install Eask with the following one-liner:
@@ -70,7 +72,7 @@ install Eask with the following one-liner:
 $ choco install eask-cli
 ```
 
-### 🧪 Scoop (Windows)
+### 📦 Scoop (Windows)
 
 [Scoop](https://scoop.sh/) is a free and open source package manager for Windows.
 This will install the extended edition of Eask:
@@ -80,11 +82,11 @@ $ scoop bucket add emacs-eask/cli https://github.com/emacs-eask/packaging
 $ scoop install eask-cli
 ```
 
-### 🧪 Winget (Windows)
+### 📦 Winget (Windows)
 
 WIP
 
-## 💾 Source
+## 💾 Build from source
 
 ### 🚩 Prerequisite Tools
 
@@ -96,10 +98,10 @@ Alternatively, you can clone it directly from this repo
 
 ```sh
 # clone the repo
-$ git clone https://github.com/emacs-eask/cli eask
+$ git clone https://github.com/emacs-eask/cli eask-cli
 
-# change the working directory to eask
-$ cd eask
+# change the working directory to eask-cli
+$ cd eask-cli
 
 # install the requirements
 $ npm install
