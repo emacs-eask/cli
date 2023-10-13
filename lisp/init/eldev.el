@@ -22,9 +22,6 @@
 
 (defun eask--convert-eldev (filename)
   "Convert Eldev FILENAME to Eask."
-  (message "? %s" (mapcar #'car package-archives))
-  (let ((names (mapcar #'car package-archives)))
-    (message "%s" (mapcar #'eask--eldev-map-elpa names)))
   (let* ((filename (expand-file-name filename))
          (file (file-name-nondirectory (eask-root-del filename)))
          (new-file (eask-s-replace "Eldev" "Eask" file))
