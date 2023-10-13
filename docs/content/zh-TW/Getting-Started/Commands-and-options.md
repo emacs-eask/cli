@@ -274,16 +274,6 @@ $ eask [GLOBAL-OPTIONS] cat [PATTERNS..]
 $ eask [GLOBAL-OPTIONS] concate [FILES..]
 ```
 
-## 🔍 eask run
-
-運行腳本。
-
-```sh
-$ eask [GLOBAL-OPTIONS] run [FILES..]
-```
-
-別名: `run-script`
-
 # 🚩 執行
 
 指令允許執行在 Eask 核心之上。
@@ -321,6 +311,26 @@ $ eask [GLOBAL-OPTIONS] emacs [ARGUMENTS ...]
 ```sh
 $ eask [GLOBAL-OPTIONS] eval [FORM]
 ```
+
+## 🔍 eask run
+
+運行腳本。
+
+```sh
+$ eask [GLOBAL-OPTIONS] run [NAMES..]
+```
+
+別名: `run-script`
+
+## 🔍 eask command
+
+運行指令。
+
+```sh
+$ eask [GLOBAL-OPTIONS] command [NAMES..]
+```
+
+別名: `cmd`
 
 ## 🔍 eask docker
 

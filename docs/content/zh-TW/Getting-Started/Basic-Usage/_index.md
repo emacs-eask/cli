@@ -31,6 +31,7 @@ Usage: eask <command> [options..]
 Commands:
   archives                   List out all package archives                                                                                                                                     [aliases: sources]
   clean <type>               Delete various files produced during building
+  command [names..]          Run custom command                                                                                                                                                    [aliases: cmd]
   compile [names..]          Byte compile all Emacs Lisp files in the package
   create <type>              Create a new elisp project
   docker <version> [args..]  Launch specified Emacs version in a Docker container
