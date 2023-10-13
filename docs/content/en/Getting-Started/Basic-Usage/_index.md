@@ -34,7 +34,7 @@ Usage: eask <command> [options..]
 Commands:
   archives                   List out all package archives                                                                                                                                     [aliases: sources]
   clean <type>               Delete various files produced during building
-  command [names..]          Run custom command                                                                                                                                                    [aliases: cmd]
+  command [names..]          Run elisp commands named [names..]                                                                                                                                    [aliases: cmd]
   compile [names..]          Byte compile all Emacs Lisp files in the package
   create <type>              Create a new elisp project
   docker <version> [args..]  Launch specified Emacs version in a Docker container
@@ -60,7 +60,7 @@ Commands:
   recipe                     Suggest a recipe format
   refresh                    Download package archives
   reinstall [names..]        Reinstall packages
-  run [names..]              Run the script named [names..]                                                                                                                                 [aliases: run-script]
+  run [names..]              Run script nameds [names..]                                                                                                                                    [aliases: run-script]
   search [queries..]         Search packages
   status                     Display the state of the workspace
   test <type>                Run test

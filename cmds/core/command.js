@@ -20,7 +20,7 @@
 "use strict";
 
 exports.command = ['command [names..]', 'cmd [names..]'];
-exports.desc = 'Run custom command';
+exports.desc = 'Run elisp commands named [names..]';
 exports.builder = yargs => yargs
   .positional(
     '[names..]', {
