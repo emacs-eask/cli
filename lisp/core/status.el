@@ -25,7 +25,7 @@
 
 (defun eask--environment-name ()
   "Get the working environment name."
-  (cond ((eask-global-p) "global (~/.eask/)")
+  (cond ((eask-global-p) "global (~/)")
         ((eask-config-p) (format "configuration (%s)" user-emacs-directory))
         (t               "development (./)")))
 

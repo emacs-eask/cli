@@ -185,7 +185,7 @@ function el_script(name) {
  */
 function _environment_name (argv) {
   if (argv.global)
-    return 'global (~/.eask/)';
+    return 'global (~/)';
   else if (argv.config)
     return 'configuration (~/.emacs.d/)';
   else

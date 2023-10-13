@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Copyright (C) 2023 Jen-Chieh Shen
 
 # This program is free software; you can redistribute it and/or modify
@@ -17,9 +19,12 @@
 
 ## Commentary:
 #
-# Copy configuration over to ~/.emacs.d/
+# Copy global .eask over to ~/.eask/
 #
 
+echo "Copy test .eask"
+cp -R ./test/fixtures/home/_eask/ ~/.eask
+cp -R ./test/fixtures/home/Eask ~/Eask
+
 echo "Copy test configuration"
-mkdir "$env:USERPROFILE/AppData/Roaming/.eask"
-robocopy /e "./test/fixtures/mini.eask/" "$env:USERPROFILE/AppData/Roaming/.eask"
+cp -R ./test/fixtures/home/.emacs.d/ ~/.emacs.d

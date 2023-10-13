@@ -1028,7 +1028,7 @@ This uses function `locate-dominating-file' to look up directory tree."
                ;; for the sandbox.
                (eask-with-verbosity 'debug
                  (eask-ignore-errors  ; Again, without Eask-file needed!
-                   (if (eask-file-try-load "../")
+                   (if (eask-file-try-load "./")
                        (eask-msg "✓ Loading global Eask file in %s... done!" eask-file)
                      (eask-msg "✗ Loading global Eask file... missing!")))
                  (eask-msg ""))

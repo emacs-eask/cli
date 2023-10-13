@@ -1,6 +1,6 @@
-(package "mini.eask"
+(package "home"
          "0.0.1"
-         "Minimal test .eask")
+         "Minimal test for global config")
 
 (website-url "https://github.com/emacs-eask/mini.eask")
 (keywords "test")

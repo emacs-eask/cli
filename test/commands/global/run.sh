@@ -28,9 +28,9 @@
 set -e
 
 echo "Copy test configuration"
-./test/fixtures/mini.eask/scripts/copy_eask.sh
+./test/fixtures/home/scripts/setup.sh
 
-echo "Testing global (~/.eask/) commands..."
+echo "Testing global (~/) commands..."
 eask archives  -g
 
 eask install   -g spinner ivy beacon company fuzzy
