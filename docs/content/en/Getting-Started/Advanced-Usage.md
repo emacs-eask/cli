@@ -3,6 +3,8 @@ title: 🔧 Advanced Usage
 weight: 400
 ---
 
+{{< toc >}}
+
 `Eask` is just a regular Emacs Lisp file and should be read from Emacs itself!
 You can do:
 
@@ -11,6 +13,8 @@ You can do:
 
 (setq byte-compile-error-on-warn t)  ; Signal error if warning occurred
 ```
+
+# 🪝 Hooks
 
 `eask` provides some hooks which enable you to execute code before and after
 each command. The hooks look like so:
@@ -57,4 +61,14 @@ therefore,
            (lambda ()
              ;; do stuff before checkdoc linting...
              ))
+```
+
+# 📇 Adding your own command
+
+You can add your own command through our command interface:
+
+```elisp
+(eask-defcommand my-test-command
+  "A test command that prints out useless message."
+  (message "This is a test command!"))
 ```
