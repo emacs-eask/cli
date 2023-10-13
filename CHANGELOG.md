@@ -33,6 +33,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Enter docker directly when no arguments (#191)
 * Add command to generate recipe (#192)
 * Add option to init from `Eldev`-file (#193)
+* Add command `commnad` for custom commands (#195)
 
 ## 0.8.x
 > Released Mar 08, 2023

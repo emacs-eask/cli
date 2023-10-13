@@ -278,16 +278,6 @@ Concatenate all Emacs Lisp files into one file.
 $ eask [GLOBAL-OPTIONS] concate [FILES..]
 ```
 
-## 🔍 eask run
-
-Run the script.
-
-```sh
-$ eask [GLOBAL-OPTIONS] run [FILES..]
-```
-
-Alias: `run-script`
-
 # 🚩 Execution
 
 Commands allow you execute on top of Eask core.
@@ -325,6 +315,26 @@ Evaluate `FORM` as a lisp form.
 ```sh
 $ eask [GLOBAL-OPTIONS] eval [FORM]
 ```
+
+## 🔍 eask run
+
+Run the script.
+
+```sh
+$ eask [GLOBAL-OPTIONS] run [NAMES..]
+```
+
+Alias: `run-script`
+
+## 🔍 eask command
+
+Run the command.
+
+```sh
+$ eask [GLOBAL-OPTIONS] command [NAMES..]
+```
+
+Alias: `cmd`
 
 ## 🔍 eask docker
 

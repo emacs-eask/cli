@@ -2,6 +2,15 @@
 ;;; Commentary: Prepare to setup Eask environment for sandboxing
 ;;; Code:
 
+;;
+;;; Requirement
+
+(when (version< emacs-version "26.1")
+  (error "Eask requires Emacs 26.1 and above!"))
+
+;;
+;;; Includes
+
 (require 'ansi-color)
 (require 'package)
 (require 'project)
@@ -1844,9 +1853,17 @@ variable we use to test validation."
 (eask-load "extern/package-build")
 
 ;;
-;;; Requirement
+;;; API
 
-(when (version< emacs-version "26.1")
-  (eask-error "Eask requires Emacs 26.1 and above!"))
+(defvar eask-commands nil
+  "List of defined commands.")
+
+(defmacro eask-defcommand (name &rest body)
+  "Define an Eask command."
+  (declare (doc-string 2) (indent 1))
+  (or name (error "Cannot define '%s' as a command" name))
+  (push name eask-commands)
+  (setq eask-commands (delete-dups eask-commands))
+  `(defun ,name nil ,@body))
 
 ;;; _prepare.el ends here

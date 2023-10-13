@@ -1,0 +1,6 @@
+
+💡 Make sure you have specify a (eask-defcommand ..) function inside your Eask file!
+
+    [+] (eask-defcommand my-command
+    [+]   "This is a test command."
+    [+]   (message "My test commnad!"))
