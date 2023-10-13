@@ -44,6 +44,7 @@ exports.handler = async (argv) => {
   if (argv.from) {
     switch (argv.from) {
     case 'cask':
+    case 'eldev':
     case 'keg':
     case 'source':
       await UTIL.e_call(argv, 'init/' + argv.from

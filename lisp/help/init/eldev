@@ -1,0 +1,6 @@
+
+💡 Make sure you have a valid Eldev-file in your directory
+
+💡 Or specify Eldev-file explicitly, like:
+
+    $ eask init --from=eldev /path/to/Eldev
