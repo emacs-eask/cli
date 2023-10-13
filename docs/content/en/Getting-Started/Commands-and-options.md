@@ -68,23 +68,29 @@ Eask will generate the file like this:
 (depends-on "emacs" "26.1")
 ```
 
+**[RECOMMENDED]** If you already have an elisp project, you can convert the
+`.el` file to Eask-file:
+
+```
+$ eask init --from source /path/to/source.el
+```
+
 If you already have a [Cask][] project, you can convert Cask-file to Eask-file:
 
 ```
 $ eask init --from cask /path/to/Cask
 ```
 
+If you already have a [Eldev][] project, you can convert Eldev-file to Eask-file:
+
+```
+$ eask init --from eldev /path/to/Eldev
+```
+
 If you already have a [Keg][] project, you can convert Keg-file to Eask-file:
 
 ```
 $ eask init --from keg /path/to/Keg
-```
-
-**[RECOMMENDED]** If you already have an elisp project, you can convert the
-`.el` file to Eask-file:
-
-```
-$ eask init --from source /path/to/source.el
 ```
 
 {{< hint ok >}}
@@ -931,4 +937,5 @@ Do not use a proxy for any URL matching pattern.
 
 
 [Cask]: https://github.com/cask/cask
+[Eldev]: https://emacs-eldev.github.io/eldev/
 [Keg]: https://github.com/conao3/keg.el
