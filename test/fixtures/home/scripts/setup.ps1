@@ -1,4 +1,4 @@
-# Copyright (C) 2022-2023 Jen-Chieh Shen
+# Copyright (C) 2023 Jen-Chieh Shen
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,5 +21,10 @@
 #
 
 echo "Copy test configuration"
+mkdir "$env:USERPROFILE/AppData/Roaming/.eask"
+robocopy /e "./test/fixtures/home/_eask/" "$env:USERPROFILE/AppData/Roaming/.eask"
+robocopy /e "./test/fixtures/home/Eask" "$env:USERPROFILE/AppData/Roaming/Eask"
+
+echo "Copy test configuration"
 mkdir "$env:USERPROFILE/AppData/Roaming/.emacs.d"
-robocopy /e "./test/fixtures/mini.emacs.d/" "$env:USERPROFILE/AppData/Roaming/.emacs.d"
+robocopy /e "./test/fixtures/home/.emacs.d/" "$env:USERPROFILE/AppData/Roaming/.emacs.d"
