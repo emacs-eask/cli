@@ -4,12 +4,12 @@
 ;;
 ;; Command use to run custom command
 ;;
-;;   $ eask command <patterns..>
+;;   $ eask command [names..]
 ;;
 ;;
 ;;  Positionals:
 ;;
-;;    <name>     name of the function command
+;;    [names..]     name of the function command
 ;;
 
 ;;; Code:
