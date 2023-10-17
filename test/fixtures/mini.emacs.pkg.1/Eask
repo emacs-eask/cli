@@ -12,6 +12,9 @@
 (script "test" "echo \"Have a nice day!~ ;)\"")
 (script "info" "eask info")
 
+(eask-defcommand mini-test-1 "Command 1." (message "mini test 1"))
+(eask-defcommand mini-test-2 "Command 2." (message "mini test 2"))
+
 (source "gnu")
 (source "melpa")
 (source "jcs-elpa")

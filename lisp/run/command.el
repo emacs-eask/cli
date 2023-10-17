@@ -1,10 +1,10 @@
-;;; core/command.el --- Run custom command  -*- lexical-binding: t; -*-
+;;; run/command.el --- Run custom command  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
 ;; Command use to run custom command
 ;;
-;;   $ eask command [names..]
+;;   $ eask run command [names..]
 ;;
 ;;
 ;;  Positionals:
@@ -25,7 +25,7 @@
 
 (defun eask--print-commands ()
   "Print all available commands."
-  (eask-msg "available via `eask command`")
+  (eask-msg "available via `eask run command`")
   (eask-msg "")
   (let* ((keys (reverse eask-commands))
          (offset (eask-seq-str-max keys))
@@ -52,7 +52,7 @@
 (eask-start
   (cond ((null eask-commands)
          (eask-info "(No command specified)")
-         (eask-help "core/command"))
+         (eask-help "run/command"))
         ((eask-all-p)
          (dolist (name (reverse eask-commands))
            (eask--execute-command name)))
@@ -69,4 +69,4 @@
              t)))
         (t (eask--print-commands))))
 
-;;; core/command.el ends here
+;;; run/command.el ends here

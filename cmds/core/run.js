@@ -19,91 +19,22 @@
 
 "use strict";
 
-const fs = require('fs');
-const child_process = require("child_process");
+exports.command = ['run <type>'];
+exports.desc = 'Run custom tasks';
+exports.builder = function (yargs) {
+  yargs.usage(`${exports.desc}
 
-exports.command = ['run [names..]', 'run-script [names..]'];
-exports.desc = 'Run script nameds [names..]';
-exports.builder = yargs => yargs
-  .positional(
-    '[names..]', {
-      description: 'specify scripts to run',
-      type: 'array',
-    });
+Usage: eask run <type> [options..]`)
+    .commandDir('../run/')
+    .demandCommand();
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/run', argv.names);
-
-  if (!fs.existsSync(EASK_HOMEDIR)) {
-    return;
+  /* XXX: Configure only in the menu. */
+  if (UTIL.cmd_count() == 1) {
+    yargs.positional(
+      '<type>', {
+        description: 'type of the execution',
+      });
   }
-
-  let run = EASK_HOMEDIR + 'run';
-
-  if (!fs.existsSync(run)) {
-    return;
-  }
-
-  // this contain the full command!
-  let instruction = fs.readFileSync(run, 'utf8');
-  let commands = instruction.split('\n').filter(element => element);
-
-  let count = 0;
-  startCommand(commands, count);
-};
-
-/**
- * Recursive to execute commands in order.
- *
- * @param { array } commands - An array of commands to execute.
- * @param { integer } count - The current executing command's index.
- */
-function startCommand(commands, count) {
-  if (commands.length <= count)
-    return;
-
-  let command = commands[count];
-
-  console.log('[RUN]: ' + command);
-
-  let proc = spawn(command, { stdio: 'inherit', shell: true });
-
-  proc.on('close', function (code) {
-    if (code == 0) {
-      startCommand(commands, ++count);  // start next command!
-      return;
-    }
-    process.exit(code);
-  });
 }
 
-/**
- * Spawn process to avoid `MODULE_NOT_FOUND` not found error,
- * see https://github.com/vercel/pkg/issues/1356.
- *
- * @param { String } command - Command string.
- * @param { JSON } options - Process options.
- * @return Process object.
- */
-function spawn(command, options) {
-  if (IS_PKG && command.includes('eask ')) {
-    let cmds = command.split(' ');
-    cmds = replaceEaskExec(cmds);
-    return child_process.spawn(process.execPath, cmds, options);
-  }
-  return child_process.spawn(command, options);
-}
-
-/**
- * Replace all possible eask/cli executable to snapshot executable.
- * @param { Array } cmds - Command array.
- * @return Return updated command array.
- */
-function replaceEaskExec(cmds) {
-  for (let index = 0; index < cmds.length; ++index) {
-    if (cmds[index] == "eask") {
-      cmds[index] = process.argv[1];  // XXX: This is `/snapshot/cli/eask`
-    }
-  }
-  return cmds;
-}
+exports.handler = async (argv) => { };

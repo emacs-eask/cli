@@ -316,22 +316,20 @@ Evaluate `FORM` as a lisp form.
 $ eask [GLOBAL-OPTIONS] eval [FORM]
 ```
 
-## 🔍 eask run
+## 🔍 eask run script
 
 Run the script.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] run [NAMES..]
+$ eask [GLOBAL-OPTIONS] run script [NAMES..]
 ```
 
-Alias: `run-script`
-
-## 🔍 eask command
+## 🔍 eask run command
 
 Run the command.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] command [NAMES..]
+$ eask [GLOBAL-OPTIONS] run command [NAMES..]
 ```
 
 Alias: `cmd`

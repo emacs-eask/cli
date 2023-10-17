@@ -56,9 +56,12 @@ eask compile
 eask compile --clean
 eask recipe
 eask keywords
-eask run
-eask run test
-eask run -all
+eask run script
+eask run script test
+eask run script -all
+eask run command
+eask run command test
+eask run command -all
 
 # Exection
 eask eval "(progn (require 'mini.emacs.pkg.1))"
