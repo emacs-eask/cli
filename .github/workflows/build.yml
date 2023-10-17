@@ -60,6 +60,10 @@ jobs:
         mv COPYING dist
         mv README.md dist
 
+    - name: Chmod 777
+      run: |
+        chmod -R 777 dist
+
     - name: Uploading...
       uses: actions/upload-artifact@v3
       with:
