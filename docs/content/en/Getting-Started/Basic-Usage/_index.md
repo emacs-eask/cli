@@ -34,7 +34,6 @@ Usage: eask <command> [options..]
 Commands:
   archives                   List out all package archives                                                                                                                                     [aliases: sources]
   clean <type>               Delete various files produced during building
-  command [names..]          Run elisp commands named [names..]                                                                                                                                    [aliases: cmd]
   compile [names..]          Byte compile all Emacs Lisp files in the package
   create <type>              Create a new elisp project
   docker <version> [args..]  Launch specified Emacs version in a Docker container
@@ -60,7 +59,7 @@ Commands:
   recipe                     Suggest a recipe format
   refresh                    Download package archives
   reinstall [names..]        Reinstall packages
-  run [names..]              Run script nameds [names..]                                                                                                                                    [aliases: run-script]
+  run <type>                 Run custom tasks
   search [queries..]         Search packages
   status                     Display the state of the workspace
   test <type>                Run test
@@ -146,6 +145,7 @@ Here is a list of known nested subcommands:
 - eask generate workflow
 - eask link
 - eask lint
+- eask run
 - eask test
 
 ## 📌 Knowing your `elpa` directory

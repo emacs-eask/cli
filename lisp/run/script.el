@@ -1,10 +1,10 @@
-;;; core/run.el --- Run the script  -*- lexical-binding: t; -*-
+;;; run/script.el --- Run the script  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
 ;; Command use to run scripts,
 ;;
-;;   $ eask run [names..]
+;;   $ eask run script [names..]
 ;;
 ;;
 ;;  Positionals:
@@ -24,7 +24,7 @@
 
 (defun eask--print-scripts ()
   "Print all available scripts."
-  (eask-msg "available via `eask run-script`")
+  (eask-msg "available via `eask run script`")
   (eask-msg "")
   (let* ((keys (mapcar #'car (reverse eask-scripts)))
          (offset (eask-seq-str-max keys))
@@ -62,7 +62,7 @@
   (cond
    ((null eask-scripts)
     (eask-info "(No scripts specified)")
-    (eask-help "core/run"))
+    (eask-help "run/script"))
    ((eask-all-p)  ; Run all scripts
     (dolist (data (reverse eask-scripts))
       (eask--export-command (cdr data))))
@@ -82,4 +82,4 @@
         t)))
    (t (eask--print-scripts))))
 
-;;; core/run.el ends here
+;;; run/script.el ends here

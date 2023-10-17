@@ -312,22 +312,20 @@ $ eask [GLOBAL-OPTIONS] emacs [ARGUMENTS ...]
 $ eask [GLOBAL-OPTIONS] eval [FORM]
 ```
 
-## 🔍 eask run
+## 🔍 eask run script
 
 運行腳本。
 
 ```sh
-$ eask [GLOBAL-OPTIONS] run [NAMES..]
+$ eask [GLOBAL-OPTIONS] run script [NAMES..]
 ```
 
-別名: `run-script`
-
-## 🔍 eask command
+## 🔍 eask run command
 
 運行指令。
 
 ```sh
-$ eask [GLOBAL-OPTIONS] command [NAMES..]
+$ eask [GLOBAL-OPTIONS] run command [NAMES..]
 ```
 
 別名: `cmd`

@@ -29,6 +29,6 @@ exports.builder = yargs => yargs
     });
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/command'
+  await UTIL.e_call(argv, 'run/command'
                     , argv.names);
 };
