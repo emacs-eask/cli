@@ -63,6 +63,23 @@ This will install the Eask CLI:
 $ sudo port install eask-cli
 ```
 
+### 📦 Debian (Linux)
+
+Derivatives of the [Debian][] distribution of Linux
+include [elementary OS][], [KDE neon][], [Linux Lite][], [Linux Mint][],
+[MX Linux][], [Pop!_OS][], [Ubuntu][], [Zorin OS][], and others.
+
+```sh
+$ sudo curl -SsL -o /etc/apt/trusted.gpg.d/easksource.gpg https://raw.githubusercontent.com/emacs-eask/packaging/master/debian/KEY.gpg
+$ sudo curl -SsL -o /etc/apt/sources.list.d/easksource.list https://raw.githubusercontent.com/emacs-eask/packaging/master/debian/easksource.list
+$ sudo apt update --allow-insecure-repositories
+$ sudo apt install eask-cli --allow-unauthenticated
+```
+
+You can also download Debian packages from the 
+[packaging](https://github.com/emacs-eask/packaging/tree/master/debian)
+repo.
+
 ### 📦 Snap (Linux)
 
 [Snap](https://snapcraft.io/) is a free and open source package manager for Linux.
@@ -140,3 +157,13 @@ the current eask's version number! 🎉 🎊
 [Git]: https://git-scm.com/
 [Node.js]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/
+
+[Debian]: https://www.debian.org/
+[elementary OS]: https://elementary.io/
+[KDE neon]: https://neon.kde.org/
+[Linux Lite]: https://www.linuxliteos.com/
+[Linux Mint]: https://linuxmint.com/
+[MX Linux]: https://mxlinux.org/
+[Pop!_OS]: https://pop.system76.com/
+[Ubuntu]: https://ubuntu.com/
+[Zorin OS]: https://zorin.com/os/

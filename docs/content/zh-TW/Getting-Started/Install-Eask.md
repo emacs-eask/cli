@@ -59,6 +59,23 @@ $ brew install eask-cli
 $ sudo port install eask-cli
 ```
 
+### 📦 Debian (Linux)
+
+Linux [Debian][] 發行版的衍生版本包括 [elementary OS][]、[KDE neon][]、
+[Linux Lite][]、[Linux Mint][]、[MX Linux][]、[Pop!_OS][]、[Ubuntu][]、
+[Zorin OS][] 等。
+
+```sh
+$ sudo curl -SsL -o /etc/apt/trusted.gpg.d/easksource.gpg https://raw.githubusercontent.com/emacs-eask/packaging/master/debian/KEY.gpg
+$ sudo curl -SsL -o /etc/apt/sources.list.d/easksource.list https://raw.githubusercontent.com/emacs-eask/packaging/master/debian/easksource.list
+$ sudo apt update --allow-insecure-repositories
+$ sudo apt install eask-cli --allow-unauthenticated
+```
+
+您也可以直接從
+[packaging](https://github.com/emacs-eask/packaging/tree/master/debian)
+代碼庫下載 Debian 軟體包。
+
 ### 📦 Snap (Linux)
 
 [Snap](https://snapcraft.io/) 是一款適用於 Linux 的免費開源套件管理器。
@@ -132,3 +149,13 @@ set PATH=%PATH%;c:/path/to/eask/bin
 [Git]: https://git-scm.com/
 [Node.js]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/
+
+[Debian]: https://www.debian.org/
+[elementary OS]: https://elementary.io/
+[KDE neon]: https://neon.kde.org/
+[Linux Lite]: https://www.linuxliteos.com/
+[Linux Mint]: https://linuxmint.com/
+[MX Linux]: https://mxlinux.org/
+[Pop!_OS]: https://pop.system76.com/
+[Ubuntu]: https://ubuntu.com/
+[Zorin OS]: https://zorin.com/os/
