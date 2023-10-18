@@ -65,9 +65,9 @@ $ sudo port install eask-cli
 
 ### 📦 Debian (Linux)
 
-Derivatives of the [Debian][] distribution of Linux
-include [elementary OS][], [KDE neon][], [Linux Lite][], [Linux Mint][],
-[MX Linux][], [Pop!_OS][], [Ubuntu][], [Zorin OS][], and others.
+Derivatives of the [Debian][] distribution of Linux include [elementary OS][],
+[KDE neon][], [Linux Lite][], [Linux Mint][], [MX Linux][], [Pop!_OS][],
+[Ubuntu][], [Zorin OS][], and others.
 
 ```sh
 $ sudo curl -SsL -o /etc/apt/trusted.gpg.d/easksource.gpg https://raw.githubusercontent.com/emacs-eask/packaging/master/debian/KEY.gpg
@@ -76,7 +76,7 @@ $ sudo apt update --allow-insecure-repositories
 $ sudo apt install eask-cli --allow-unauthenticated
 ```
 
-You can also download Debian packages from the 
+You can also download Debian packages from the
 [packaging](https://github.com/emacs-eask/packaging/tree/master/debian)
 repo.
 
