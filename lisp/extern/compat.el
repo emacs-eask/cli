@@ -44,4 +44,11 @@
               (push (concat dir "/" file) files)))))
       (nconc result (nreverse files)))))
 
+(eask-defvc< 28
+  (defun always (&rest _arguments)
+    "Ignore ARGUMENTS, do nothing, and return t.
+This function accepts any number of arguments in ARGUMENTS.
+Also see `ignore'."
+    t))
+
 ;;; extern/compat.el ends here

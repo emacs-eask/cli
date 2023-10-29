@@ -19,11 +19,21 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-;; Handle options
+;;
+;;; Flags
+
+(advice-add #'eask-allow-error-p :override #'always)
+
+;;
+;;; Handle options
+
 (add-hook 'eask-before-command-hook
           (lambda ()
             (when (eask-strict-p)      (setq byte-compile-error-on-warn t))
             (when (= eask-verbosity 4) (setq byte-compile-verbose t))))
+
+;;
+;;; Core
 
 (defconst eask-compile-log-buffer-name "*Compile-Log*"
   "Byte-compile log buffer name.")

@@ -30,7 +30,7 @@
 ;;
 ;;; Flags
 
-(advice-add #'eask-allow-error-p :override (lambda (&rest _) t))
+(advice-add #'eask-allow-error-p :override #'always)
 
 ;;
 ;;; Core
