@@ -35,6 +35,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add option to init from `Eldev`-file (#193)
 * Add command `commnad` for custom commands (#195)
 * Merge the two commands `run` and `command` (#196)
+* Add `melpazoid` command (#202)
 
 ## 0.8.x
 > Released Mar 08, 2023
