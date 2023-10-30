@@ -21,7 +21,7 @@
 
 (defun eask--command-desc (name)
   "Return command's description by its command's NAME."
-  (car (split-string (documentation name) "\n")))
+  (car (split-string (or (documentation name) "") "\n")))
 
 (defun eask--print-commands ()
   "Print all available commands."
