@@ -735,11 +735,15 @@ $ eask [GLOBAL-OPTIONS] activate [FILES..]
 
 ## 🔍 eask test ert
 
+Run [ert][] tests.
+
 ```sh
 $ eask [GLOBAL-OPTIONS] test ert [FILES..]
 ```
 
 ## 🔍 eask test ert-runner
+
+Run [ert][] test using [ert-runner][].
 
 ```sh
 $ eask [GLOBAL-OPTIONS] test ert-runner
@@ -747,15 +751,23 @@ $ eask [GLOBAL-OPTIONS] test ert-runner
 
 ## 🔍 eask test buttercup
 
+Run [buttercup][] tests.
+
 ```sh
 $ eask [GLOBAL-OPTIONS] test buttercup
 ```
 
 ## 🔍 eask test melpazoid
 
+Run [melpazoid][] tests.
+
 ```sh
-$ eask [GLOBAL-OPTIONS] test melpazoid
+$ eask [GLOBAL-OPTIONS] test melpazoid [DIRECTORIES..]
 ```
+
+{{< hint info >}}
+💡 If **[DIRECTORIES..]** is not passed in; it will use the current workspace instead.
+{{< /hint >}}
 
 # 🚩 Utilities
 
@@ -953,3 +965,8 @@ Do not use a proxy for any URL matching pattern.
 [Cask]: https://github.com/cask/cask
 [Eldev]: https://emacs-eldev.github.io/eldev/
 [Keg]: https://github.com/conao3/keg.el
+
+[ert]: https://www.gnu.org/software/emacs/manual/html_node/ert/
+[ert-runner]: https://github.com/rejeep/ert-runner.el
+[buttercup]: https://github.com/jorgenschaefer/emacs-buttercup
+[melpazoid]: https://github.com/riscy/melpazoid

@@ -34,6 +34,17 @@
     (eask-package-install 'package-lint)
     (eask-package-install 'pkg-info))
   ;; Start test
-  (eask-import eask-melpazoid-el-url))
+  (let* ((dirs (or (eask-args) `(,default-directory))))
+    (cond
+     ;; Files found, do the action!
+     (dirs
+      (dolist (dir dirs)
+        (let ((default-directory (expand-file-name dir)))
+          (eask-info "[+] %s" default-directory)
+          (eask-import eask-melpazoid-el-url))))
+     ;; Default, print help!
+     (t
+      (eask-info "(No tests found.)")
+      (eask-help "test/melpazoid")))))
 
 ;;; test/melpazoid.el ends here

@@ -140,7 +140,8 @@ will return `lint/checkdoc' with a dash between two subcommands."
   (member (eask-command) '("init/cask" "init/eldev" "init/keg"
                            "init/source"
                            "cat" "keywords"
-                           "generate/ignore" "generate/license")))
+                           "generate/ignore" "generate/license"
+                           "test/melpazoid")))
 
 (defun eask-checker-p ()
   "Return t if running Eask as the checker."

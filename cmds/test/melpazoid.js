@@ -17,9 +17,15 @@
 
 "use strict";
 
-exports.command = ['melpazoid [files..]'];
+exports.command = ['melpazoid [directories..]'];
 exports.desc = 'Run melpazoid tests';
+exports.builder = yargs => yargs
+  .positional(
+    '[directories..]', {
+      description: 'specify directories to do melpazoid tests',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'test/melpazoid');
+  await UTIL.e_call(argv, 'test/melpazoid', argv.directories);
 };
