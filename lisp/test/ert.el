@@ -2,7 +2,7 @@
 
 ;;; Commentary:
 ;;
-;; Command to run ert tests using ert-runner,
+;; Command to run ert tests,
 ;;
 ;;   $ eask ert [files..]
 ;;

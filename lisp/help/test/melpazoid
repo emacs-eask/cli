@@ -1,0 +1,4 @@
+
+💡 You need to specify the directory(ies) you want the melpazoid to run:
+
+    $ eask test melpazoid DIR-1 DIR2

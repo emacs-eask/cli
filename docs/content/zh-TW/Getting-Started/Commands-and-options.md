@@ -723,11 +723,15 @@ $ eask [GLOBAL-OPTIONS] activate [FILES..]
 
 ## 🔍 eask test ert
 
+運行 [ert][] 測試。
+
 ```sh
 $ eask [GLOBAL-OPTIONS] test ert [FILES..]
 ```
 
 ## 🔍 eask test ert-runner
+
+使用 [ert-runner][] 運行 [ert][] 測試。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] test ert-runner
@@ -735,9 +739,23 @@ $ eask [GLOBAL-OPTIONS] test ert-runner
 
 ## 🔍 eask test buttercup
 
+運行 [buttercup][] 測試。
+
 ```sh
 $ eask [GLOBAL-OPTIONS] test buttercup
 ```
+
+## 🔍 eask test melpazoid
+
+運行 [melpazoid][] 測試。
+
+```sh
+$ eask [GLOBAL-OPTIONS] test melpazoid [DIRECTORIES..]
+```
+
+{{< hint info >}}
+💡 如果未傳入 **[DIRECTORIES..]**，它將使用目前工作空間。
+{{< /hint >}}
 
 # 🚩 實用工具
 
@@ -934,3 +952,8 @@ $ eask --proxy "localhost:8888" [COMMAND]
 [Cask]: https://github.com/cask/cask
 [Eldev]: https://emacs-eldev.github.io/eldev/
 [Keg]: https://github.com/conao3/keg.el
+
+[ert]: https://www.gnu.org/software/emacs/manual/html_node/ert/
+[ert-runner]: https://github.com/rejeep/ert-runner.el
+[buttercup]: https://github.com/jorgenschaefer/emacs-buttercup
+[melpazoid]: https://github.com/riscy/melpazoid

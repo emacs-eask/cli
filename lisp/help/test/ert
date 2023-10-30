@@ -1,4 +1,4 @@
-    
-💡 You need to specify file(s) you want the ert to run
-   
-    $ eask ert FILE-1 FILE-2
+
+💡 You need to specify the file(s) you want the ert to run:
+
+    $ eask test ert FILE-1 FILE-2

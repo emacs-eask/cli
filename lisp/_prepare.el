@@ -87,6 +87,13 @@ Arguments FNC and ARGS are used for advice `:around'."
 (defconst eask-is-pkg (getenv "EASK_IS_PKG")
   "Eask is pkg.")
 
+(defcustom eask-import-timeout 10
+  "Number of seconds before timing out elisp importation attempts.
+If nil, never time out."
+  :type '(choice (number :tag "Number of seconds")
+                 (const  :tag "Never time out" nil))
+  :group 'eask)
+
 ;;
 ;;; Execution
 
@@ -133,7 +140,8 @@ will return `lint/checkdoc' with a dash between two subcommands."
   (member (eask-command) '("init/cask" "init/eldev" "init/keg"
                            "init/source"
                            "cat" "keywords"
-                           "generate/ignore" "generate/license")))
+                           "generate/ignore" "generate/license"
+                           "test/melpazoid")))
 
 (defun eask-checker-p ()
   "Return t if running Eask as the checker."
@@ -157,6 +165,15 @@ the `eask-start' execution.")
             ((file-exists-p script-file)))
       (load script-file nil t)
     (eask-error "Script missing %s" script-file)))
+
+(defun eask-import (url)
+  "Load and eval the script from a URL."
+  (with-current-buffer (url-retrieve-synchronously url t nil eask-import-timeout)
+    (goto-char (point-min))
+    (re-search-forward "^$" nil 'move)
+    (forward-char)
+    (delete-region (point-min) (point))
+    (eval-buffer)))
 
 ;;
 ;;; Util

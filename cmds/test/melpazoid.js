@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2022-2023 the Eask authors.
+ * Copyright (C) 2023 the Eask authors.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,9 +17,15 @@
 
 "use strict";
 
-exports.command = ['archives', 'sources'];
-exports.desc = 'List out all package archives';
+exports.command = ['melpazoid [directories..]'];
+exports.desc = 'Run melpazoid tests';
+exports.builder = yargs => yargs
+  .positional(
+    '[directories..]', {
+      description: 'specify directories to do melpazoid tests',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/archives');
+  await UTIL.e_call(argv, 'test/melpazoid', argv.directories);
 };
