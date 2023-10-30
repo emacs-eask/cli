@@ -99,8 +99,18 @@ Call another eask script.
 ```
 
 {{< hint info >}}
-💡 This is rarely used!
+💡 We don't often call this since we don't wish to execute another command directly!
 {{< /hint >}}
+
+## 🔍 Function: eask-import (`url`)
+
+Load and evaluate the script from a url.
+
+```elisp
+(eask-import "https://raw.githubusercontent.com/emacsmirror/emacswiki.org/master/yes-no.el")
+
+;; The script will be available after the call!
+```
 
 ## 🔍 Macro: eask-defvc< (`version` &rest `body`)
 

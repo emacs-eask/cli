@@ -87,6 +87,7 @@ eask lint regexps
 
 # Testing
 eask test activate
+eask test melpazoid
 
 # Clean up
 eask clean .eask

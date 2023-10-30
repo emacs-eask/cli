@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2022-2023 Jen-Chieh Shen
+ * Copyright (C) 2023 Jen-Chieh Shen
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,16 +17,9 @@
 
 "use strict";
 
-exports.command = ['package [destination]'];
-exports.desc = 'Build a package artifact, and put it into the given destination';
-exports.builder = yargs => yargs
-  .positional(
-    'destination', {
-      description: 'destination path/folder',
-      alias: 'dest',
-      type: 'string',
-    });
+exports.command = ['melpazoid [files..]'];
+exports.desc = 'Run melpazoid tests';
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/package', argv.dest);
+  await UTIL.e_call(argv, 'test/melpazoid');
 };

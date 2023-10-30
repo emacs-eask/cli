@@ -96,8 +96,18 @@ $ eask init
 ```
 
 {{< hint info >}}
-💡 這個很少用！
+💡 我們不經常呼叫它，因為我們不希望直接執行另一個命令！
 {{< /hint >}}
+
+## 🔍 Function: eask-import (`url`)
+
+從 url 載入並評估腳本。
+
+```elisp
+(eask-import "https://raw.githubusercontent.com/emacsmirror/emacswiki.org/master/yes-no.el")
+
+;; 該腳本將在導入後即可使用！
+```
 
 ## 🔍 巨集: eask-defvc< (`version` &rest `body`)
 

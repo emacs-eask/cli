@@ -739,6 +739,12 @@ $ eask [GLOBAL-OPTIONS] test ert-runner
 $ eask [GLOBAL-OPTIONS] test buttercup
 ```
 
+## 🔍 eask test melpazoid
+
+```sh
+$ eask [GLOBAL-OPTIONS] test melpazoid
+```
+
 # 🚩 實用工具
 
 其他輔助命令。
