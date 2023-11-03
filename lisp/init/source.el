@@ -40,6 +40,7 @@
                           (version (package-desc-version pkg-desc))
                           (version (package-version-join version))
                           (description (package-desc-summary pkg-desc))
+                          (description (prin1-to-string description))
                           (website (eask-package-desc-url))
                           (keywords (eask-package-desc-keywords))
                           (keywords (string-join keywords "\" \""))
@@ -47,7 +48,7 @@
                           (content (format
                                     "(package \"%s\"
          \"%s\"
-         \"%s\")
+         %s)
 
 (website-url \"%s\")
 (keywords \"%s\")
