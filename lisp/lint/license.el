@@ -45,8 +45,16 @@
     ;; See https://api.github.com/licenses
     (cond
      ((eask--string-match-all
+       '("Licensed under the Academic Free License version 3.0"))
+      '("afl-3.0" "Academic Free License v3.0" "AFL-3.0"))
+     ((eask--string-match-all
        '("You should have received a copy of the GNU Affero General Public License"))
       '("agpl-3.0" "GNU Affero General Public License v3.0" "AGPL-3.0"))
+     ((eask--string-match-all
+       '("Everyone is permitted to copy and distribute verbatim copies"
+         "but changing it is not allowed."
+         "artistic"))
+      '("artistic-2.0" "Artistic License 2.0" "Artistic-2.0"))
      ((eask--string-match-all
        '("Licensed under the Apache License, Version 2.0"))
       '("apache-2.0" "Apache License 2.0" "Apache-2.0"))
@@ -61,7 +69,8 @@
      ((eask--string-match-all
        '("Permission is hereby granted, free of charge, to any person or organization"))
       '("bsl-1.0" "Boost Software License 1.0" "BSL-1.0"))
-     ((eask--string-match-all '("CC0 1.0"))
+     ((eask--string-match-all
+       '("The laws of most jurisdictions throughout the world automatically confer exclusive Copyright"))
       '("cc0-1.0" "Creative Commons Zero v1.0 Universal" "CC0-1.0"))
      ((eask--string-match-all
        '("Eclipse Public License - v 2.0"
@@ -81,9 +90,16 @@
      ((eask--string-match-all
        '("Permission to use, copy, modify, and/or distribute this"))
       '("isc" " Internet Systems Consortium" "ISC"))
-     ((eask--string-match-all '("Lesser GPL"
-                                "Version 2.1"))
+     ((eask--string-match-all
+       '("Lesser"
+         "GNU"
+         "version 2"))
       '("lgpl-2.1" "GNU Lesser General Public License v2.1" "LGPL-2.1"))
+     ((eask--string-match-all
+       '("This license governs use of the accompanying software."
+         "If you use the software, you accept this license."
+         "If you do not accept the license, do not use the software."))
+      '("ms-pl" "Microsoft Public License" "MS-PL"))
      ((eask--string-match-all
        '("Permission is hereby granted, free of charge, to any person"))
       '("mit" "MIT License" "MIT"))
@@ -91,8 +107,20 @@
        '("http://mozilla.org/MPL/2.0/"))
       '("mpl-2.0" "Mozilla Public License 2.0" "MPL-2.0"))
      ((eask--string-match-all
+       '("Licensed under the Open Software License version 3.0"))
+      '("osl-3.0" "Open Software License 3.0" "OSL-3.0"))
+     ((eask--string-match-all
        '("This is free and unencumbered software released into"))
       '("unlicense" "The Unlicense" "Unlicense"))
+     ((eask--string-match-all
+       '("Everyone is permitted to copy and distribute verbatim copies"))
+      '("wtfpl-1" "Do What the Fuck You Want To Public License (Version 1)" "WTFPL-1"))
+     ((eask--string-match-all
+       '("Everyone is permitted to copy and distribute verbatim or modified"))
+      '("wtfpl-2" "Do What the Fuck You Want To Public License (Version 2)" "WTFPL-2"))
+     ((eask--string-match-all
+       '("Permission is granted to anyone to use this software for any purpose,"))
+      '("zlib" "zlib License" "Zlib"))
      (t
       '("unknown" "Unknown license" "unknown")))))
 
