@@ -22,7 +22,7 @@
 
 (defun eask--source-from-mapping (name url)
   "Return t if NAME and URL matched our database."
-  (string= (eask-source-url name url) url))
+  (string= (eask-source-url name) url))
 
 (defun eask--source-add (name url exists)
   "Add an archive source by NAME.
@@ -32,8 +32,9 @@ If argument URL is nil; ignore the insertion.
 Arguments EXISTS is used to print the information."
   (let* ((style-sym (string-match "([ \t\n\r]*source[ \t\n\r]*[']+" (buffer-string)))
          (name-str (if style-sym (concat "'" name)
-                     (concat "\"" name "\""))))
-    (if (and url (not (eask--source-from-mapping name url)))
+                     (concat "\"" name "\"")))
+         (built-in (eask--source-from-mapping name url)))
+    (if (and url (not built-in))
         (insert "(source " name-str " \"" url "\")\n")
       (insert "(source " name-str ")\n"))
     (eask-info "(New source `%s' added and points to `%s')" name (or url (cdr exists)))))
@@ -50,11 +51,13 @@ The argument EXISTS is use to search for correct position to insert new source."
      (exists
       (if (re-search-forward (concat "([ \t\n\r]*source[ \t\n\r]*['\"]+" name)  nil t)
           (let ((start (point))
-                (built-in (string= url (eask-source-url name url))))
+                (built-in (eask--source-from-mapping name url)))
             (when (string= "\"" (string (char-after)))
               (cl-incf start))
-            (re-search-forward "[ \t\r\n\"]*" nil t)  ; Forward to non-space characters!
+            (re-search-forward "[ \t\r\n\")]*" nil t)  ; Forward to non-space characters!
             (forward-char -1)
+            (when (string= "\n" (string (char-after)))
+              (forward-char -1))
             (pcase (string (char-after))
               (")"
                (unless built-in
