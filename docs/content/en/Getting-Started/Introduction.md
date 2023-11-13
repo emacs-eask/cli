@@ -118,7 +118,7 @@ list.
 
 ### 🔍 Eask-file commands
 
-- [x] [FEAT] Add `source add` command
+- N/A
 
 ## 📂 Underlying Projects
 
