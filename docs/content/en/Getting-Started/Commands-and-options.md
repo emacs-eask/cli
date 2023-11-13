@@ -278,6 +278,14 @@ Concatenate all Emacs Lisp files into one file.
 $ eask [GLOBAL-OPTIONS] concate [FILES..]
 ```
 
+## 🔍 eask bump
+
+Bump version for your project and/or Eask-file.
+
+```sh
+$ eask [GLOBAL-OPTIONS] bump [LEVELS..]
+```
+
 # 🚩 Execution
 
 Commands allow you execute on top of Eask core.
