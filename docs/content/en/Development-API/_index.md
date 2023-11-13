@@ -834,10 +834,6 @@ This will kill Emacs process.
 
 # 🚩 File
 
-## 🔍 Function: eask-guess-package-name ()
-
-Return the possible package name.
-
 ## 🔍 Function: eask-package-files ()
 
 Return a list of package files.
@@ -912,3 +908,13 @@ Print help manual located under `lisp/help/` directory.
 {{< hint info >}}
 💡 This is used when a command fails, and would like to give users some tips!
 {{< /hint >}}
+
+# 🚩 Utilities
+
+## 🔍 Function: eask-guess-package-name ()
+
+Return the possible package name.
+
+## 🔍 Function: eask-guess-entry-point ()
+
+Return the possible package's entry point.

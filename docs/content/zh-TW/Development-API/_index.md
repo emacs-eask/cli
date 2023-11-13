@@ -824,10 +824,6 @@ This will kill Emacs process.
 
 # 🚩 文件
 
-## 🔍 函式: eask-guess-package-name ()
-
-返回可能的包名稱。
-
 ## 🔍 函式: eask-package-files ()
 
 返回包文件列表。
@@ -902,3 +898,13 @@ This will kill Emacs process.
 {{< hint info >}}
 💡 這是在命令失敗時使用的，想給用戶一些提示！
 {{< /hint >}}
+
+# 🚩 實用工具
+
+## 🔍 函式: eask-guess-package-name ()
+
+返回可能的包名稱。
+
+## 🔍 Function: eask-guess-entry-point ()
+
+返回可能的包的入口點。

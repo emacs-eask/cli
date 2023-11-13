@@ -1,0 +1,8 @@
+
+💡 You need to specify version level(s) in order to make this command work:
+
+    $ eask bump major
+
+💡 The `bump` command accepts multiple values:
+
+    $ eask bump major

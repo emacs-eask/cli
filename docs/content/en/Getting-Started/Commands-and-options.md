@@ -255,6 +255,18 @@ List available keywords that can be used in the header section.
 $ eask [GLOBAL-OPTIONS] keywords
 ```
 
+## 🔍 eask bump
+
+Bump version for your project and/or Eask-file.
+
+```sh
+$ eask [GLOBAL-OPTIONS] bump [LEVELS..]
+```
+
+{{< hint info >}}
+💡 Argument **[LEVELS..]** accepts **major**, **minor** and/or **patch**!
+{{< /hint >}}
+
 ## 🔍 eask cat
 
 View filename(s).
