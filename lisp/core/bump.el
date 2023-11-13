@@ -94,7 +94,6 @@
                      (forward-thing 'sexp)
                      (forward-thing 'sexp)
                      (forward-sexp -1)
-                     (message "pt: %s" (point))
                      (delete-region (1+ (point)) (save-excursion
                                                    (forward-thing 'sexp)
                                                    (1- (point))))
