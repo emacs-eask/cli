@@ -247,13 +247,14 @@ function cmd_count() {
 }
 
 /**
- * Hide command unless options `--show-hidden` is specified.
- * @param { string | boolean } description - to display when comand is showed,
+ * Hide command unless the option `--show-hidden` is specified.
+ * @param { string | boolean } description - to display when comand is showed.
+ * @param { integer } level - used to compare with command count.
  * @return Return a string to show command, else we return false.
  */
-function hide_cmd(description) {
+function hide_cmd(description, level = 1) {
   if ((process.argv.includes('--show-hidden'))
-      || 1 <= cmd_count())  // When display in submenu!
+      || level <= cmd_count())  // When display in submenu!
     return description;
   return false;
 }
