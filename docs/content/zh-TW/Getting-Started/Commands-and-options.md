@@ -830,7 +830,7 @@ $ eask [GLOBAL-OPTIONS] upgrade-eask
 $ eask [GLOBAL-OPTIONS] locate
 ```
 
-# 🚩 Checker
+# 🚩 檢查器
 
 檢查您的 Eask 文件的命令。
 

@@ -199,6 +199,14 @@ Argument BODY are forms for execution."
   "Convert OBJ to string."
   (format "%s" obj))
 
+(defun eask-2url (url)
+  "Convert secure/insecure URL."
+  (if (and url
+           (gnutls-available-p)
+           (eask-network-insecure-p))
+      (eask-s-replace "https://" "http://" url)
+    url))
+
 (defun eask-listify (obj)
   "Turn OBJ to list."
   (if (listp obj) obj (list obj)))
@@ -241,6 +249,12 @@ The function `directory-empty-p' only exists 28.1 or above; copied it."
          ;; XXX: Do not pass in the 5th argument COUNT; it doesn't compatbile to
          ;; 27.2 or lower!
          (null (directory-files dir nil directory-files-no-dot-files-regexp t)))))
+
+(defun eask-guess-package-name ()
+  "Return the possible package name."
+  (or (eask-package-name)
+      (ignore-errors (file-name-nondirectory
+                      (file-name-sans-extension eask-package-file)))))
 
 (defun eask-guess-entry-point (&optional project-name)
   "Return the guess entry point by its PROJECT-NAME."
@@ -1119,14 +1133,6 @@ This uses function `locate-dominating-file' to look up directory tree."
     (nongnu-devel . "https://elpa.nongnu.org/nongnu-devel/"))
   "Mapping of source name and url.")
 
-(defun eask-2url (url)
-  "Convert secure/insecure URL."
-  (if (and url
-           (gnutls-available-p)
-           (eask-network-insecure-p))
-      (eask-s-replace "https://" "http://" url)
-    url))
-
 (defun eask-source-url (name &optional location)
   "Get the source url by it's NAME and LOCATION."
   (setq location (or location (cdr (assq (intern (eask-2str name)) eask-source-mapping)))
@@ -1643,12 +1649,6 @@ Arguments FNC and ARGS are used for advice `:around'."
 
 ;;
 ;;; File
-
-(defun eask-guess-package-name ()
-  "Return the possible package name."
-  (or (eask-package-name)
-      (ignore-errors (file-name-nondirectory
-                      (file-name-sans-extension eask-package-file)))))
 
 (defun eask-files-spec ()
   "Return files spec."
