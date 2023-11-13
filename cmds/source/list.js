@@ -17,15 +17,10 @@
 
 "use strict";
 
-exports.command = ['delete [names..]', 'remove [names..]'];
-exports.desc = 'Delete local linked packages';
-exports.builder = yargs => yargs
-  .positional(
-    '[names..]', {
-      description: 'name of the link, accept array',
-      type: 'array',
-    });
+exports.command = ['list'];
+exports.desc = 'List all source information';
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'link/delete', argv.names);
+  await UTIL.e_call(argv, 'source/list');
 };
+

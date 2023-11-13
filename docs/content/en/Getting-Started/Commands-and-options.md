@@ -328,11 +328,11 @@ $ eask [GLOBAL-OPTIONS] run script [NAMES..]
 
 Run the command.
 
+Alias: `cmd`
+
 ```sh
 $ eask [GLOBAL-OPTIONS] run command [NAMES..]
 ```
-
-Alias: `cmd`
 
 ## 🔍 eask docker
 
@@ -540,6 +540,8 @@ $ eask [GLOBAL-OPTIONS] link add <name> <path>
 
 Deletes the link for the given packages.
 
+Alias: `remove`
+
 ```sh
 $ eask [GLOBAL-OPTIONS] link delete [names..]
 ```
@@ -558,6 +560,8 @@ $ eask [GLOBAL-OPTIONS] link list
 
 Delete `.eask` from the current workspace.
 
+Alias: `.eask`
+
 ```sh
 $ eask [GLOBAL-OPTIONS] clean workspace
 ```
@@ -567,8 +571,6 @@ $ eask [GLOBAL-OPTIONS] clean workspace
 ```elisp
 $ eask clean workspace -g
 ```
-
-Alias: `.eask`
 
 ## 🔍 eask clean elc
 
@@ -582,11 +584,11 @@ $ eask [GLOBAL-OPTIONS] clean elc
 
 Delete dist subdirectory.
 
+Alias: `distribution`
+
 ```sh
 $ eask [GLOBAL-OPTIONS] clean dist
 ```
-
-Alias: `distribution`
 
 ## 🔍 eask clean autoloads
 
@@ -623,13 +625,13 @@ This command is the combination of all other clean commands.
 - `clean pkg-file`
 - `clean log-file`
 
+Alias: `everything`
+
 ```sh
 $ eask [GLOBAL-OPTIONS] clean all
 ```
 
-Alias: `everything`
-
-# 🚩 Linter
+# 🚩 Linting
 
 Commands that lint your Emacs package.
 
@@ -711,11 +713,11 @@ $ eask [GLOBAL-OPTIONS] lint declare [FILES..]
 
 Run [relint](https://github.com/mattiase/relint).
 
+Alias: `lint relint`
+
 ```sh
 $ eask [GLOBAL-OPTIONS] lint regexps [FILES..]
 ```
-
-Alias: `lint relint`
 
 # 🚩 Testing
 
@@ -767,6 +769,40 @@ $ eask [GLOBAL-OPTIONS] test melpazoid [DIRECTORIES..]
 
 {{< hint info >}}
 💡 If **[DIRECTORIES..]** is not passed in; it will use the current workspace instead.
+{{< /hint >}}
+
+# 🚩 Control DSL
+
+List of commands that control DSL.
+
+## 🔍 eask source add
+
+Add an archive source.
+
+```sh
+$ eask [GLOBAL-OPTIONS] source add <NAME> [URL]
+```
+
+## 🔍 eask source delete
+
+Remove an archive source.
+
+Alias: `remove`
+
+```sh
+$ eask [GLOBAL-OPTIONS] source delete <NAME>
+```
+
+## 🔍 eask source list
+
+List all source information.
+
+```sh
+$ eask [GLOBAL-OPTIONS] source list
+```
+
+{{< hint info >}}
+💡 This command is the same as `$ eask archives`!
 {{< /hint >}}
 
 # 🚩 Utilities

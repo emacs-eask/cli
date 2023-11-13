@@ -36,6 +36,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add command `commnad` for custom commands (#195)
 * Merge the two commands `run` and `command` (#196)
 * Add `melpazoid` command (#202)
+* Add `source` command and its subcommands (#203)
 
 ## 0.8.x
 > Released Mar 08, 2023

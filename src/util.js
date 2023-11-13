@@ -237,15 +237,6 @@ async function e_call(argv, script, ...args) {
 }
 
 /**
- * Hide command unless options `--show-hidden` is specified.
- * @param { string | boolean } description - to display when comand is showed,
- * @return Return a string to show command, else we return false.
- */
-function hide_cmd(description) {
-  return (process.argv.includes('--show-hidden')) ? description : false;
-}
-
-/**
  * Get the command count, not including options.
  * @return Return a size of the command array.
  */
@@ -253,6 +244,18 @@ function cmd_count() {
   let args = process.argv.slice(2);
   args = args.filter(elm => { return !elm.startsWith('-'); });
   return args.length;
+}
+
+/**
+ * Hide command unless options `--show-hidden` is specified.
+ * @param { string | boolean } description - to display when comand is showed,
+ * @return Return a string to show command, else we return false.
+ */
+function hide_cmd(description) {
+  if ((process.argv.includes('--show-hidden'))
+      || 1 <= cmd_count())  // When display in submenu!
+    return description;
+  return false;
 }
 
 

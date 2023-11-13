@@ -1,0 +1,7 @@
+
+💡 The given source name is not found in our database. You have following options:
+
+Options are,
+
+  - [ ] Pass in one extra argument to specify an `[url]`
+  - [ ] Edit variable `eask-source-mapping` and create a pull request to https://github.com/emacs-eask/cli
