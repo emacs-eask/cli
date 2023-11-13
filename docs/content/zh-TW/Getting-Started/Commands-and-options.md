@@ -252,6 +252,18 @@ $ eask [GLOBAL-OPTIONS] recipe [FILES..]
 $ eask [GLOBAL-OPTIONS] keywords
 ```
 
+## 🔍 eask bump
+
+為你的專案或 Eask-file 遞增版本號。
+
+```sh
+$ eask [GLOBAL-OPTIONS] bump [LEVELS..]
+```
+
+{{< hint info >}}
+💡 參數 **[LEVELS..]** 接受 **major**、**minor** 和/或 **patch**！
+{{< /hint >}}
+
 ## 🔍 eask cat
 
 查看文件名。
@@ -272,14 +284,6 @@ $ eask [GLOBAL-OPTIONS] cat [PATTERNS..]
 
 ```sh
 $ eask [GLOBAL-OPTIONS] concate [FILES..]
-```
-
-## 🔍 eask bump
-
-為你的專案或 Eask-file 遞增版本號。
-
-```sh
-$ eask [GLOBAL-OPTIONS] bump [LEVELS..]
 ```
 
 # 🚩 執行
