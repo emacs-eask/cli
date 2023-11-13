@@ -276,8 +276,6 @@ $ eask [GLOBAL-OPTIONS] concate [FILES..]
 
 ## 🔍 eask bump
 
-Bump version for your project and/or Eask-file.
-
 為你的專案或 Eask-file 遞增版本號。
 
 ```sh
