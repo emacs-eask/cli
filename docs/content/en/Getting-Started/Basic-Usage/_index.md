@@ -146,6 +146,7 @@ Here is a list of known nested subcommands:
 - eask link
 - eask lint
 - eask run
+- eask source
 - eask test
 
 ## 📌 Knowing your `elpa` directory

@@ -1118,6 +1118,20 @@ This uses function `locate-dominating-file' to look up directory tree."
     (nongnu-devel . "https://elpa.nongnu.org/nongnu-devel/"))
   "Mapping of source name and url.")
 
+(defun eask-2url (url)
+  "Convert secure/insecure URL."
+  (if (and url
+           (gnutls-available-p)
+           (eask-network-insecure-p))
+      (eask-s-replace "https://" "http://" url)
+    url))
+
+(defun eask-source-url (name &optional location)
+  "Get the source url by it's NAME and LOCATION."
+  (setq location (or location (cdr (assq (intern (eask-2str name)) eask-source-mapping)))
+        location (eask-2url location))
+  location)
+
 (defvar eask-package            nil)
 (defvar eask-package-desc       nil)  ; package descriptor
 (defvar eask-package-descriptor nil)
@@ -1299,12 +1313,8 @@ argument COMMAND."
   (when (symbolp name) (setq name (eask-2str name)))  ; ensure to string, accept symbol
   (when (assoc name package-archives)
     (eask-error "Multiple definition of source `%s'" name))
-  (setq location (or location (cdr (assq (intern name) eask-source-mapping))))
+  (setq location (eask-source-url name location))
   (unless location (eask-error "Unknown package archive `%s'" name))
-  (when (and location
-             (gnutls-available-p)
-             (not (eask-network-insecure-p)))
-    (setq location (eask-s-replace "https://" "http://" location)))
   (add-to-list 'package-archives (cons name location) t))
 
 (defun eask-f-source-priority (archive-id &optional priority)

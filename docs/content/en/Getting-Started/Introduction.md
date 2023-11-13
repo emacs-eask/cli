@@ -114,11 +114,11 @@ list.
 
 ### 🔍 Core commands
 
-- [ ] [FEAT] Add `publish` command; to publish package to eask archive?
+- [ ] [FEAT] Add `publish` command; to publish the package to the eask archive?
 
 ### 🔍 Eask-file commands
 
-- [ ] [FEAT] Add `add-source` command
+- N/A
 
 ## 📂 Underlying Projects
 

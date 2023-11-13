@@ -71,7 +71,7 @@ eask generate recipe -y
 #eask generate license gpl-3.0  # XXX: Avoid API rate limit exceeded error
 eask generate ignore elisp
 
-# Linter
+# Linting
 eask lint checkdoc
 eask lint declare
 eask lint elint
@@ -86,7 +86,7 @@ eask lint regexps
 # Testing
 eask test activate
 
-# Clean up
+# Cleaning
 eask clean .eask
 eask clean elc
 eask clean dist
@@ -94,6 +94,11 @@ eask clean autoloads
 eask clean pkg-file
 eask clean log-file
 eask clean all
+
+# Control DSL
+eask source add test "https://test.elpa.com"
+eask source delete test
+eask source list
 
 # Util
 eask locate

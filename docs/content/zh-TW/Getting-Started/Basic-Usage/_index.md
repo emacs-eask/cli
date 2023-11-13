@@ -141,6 +141,7 @@ Positionals:
 - eask link
 - eask lint
 - eask run
+- eask source
 - eask test
 
 ## 📌 了解你的 `elpa` 目錄

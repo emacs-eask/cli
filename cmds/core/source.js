@@ -17,15 +17,22 @@
 
 "use strict";
 
-exports.command = ['delete [names..]', 'remove [names..]'];
-exports.desc = 'Delete local linked packages';
-exports.builder = yargs => yargs
-  .positional(
-    '[names..]', {
-      description: 'name of the link, accept array',
-      type: 'array',
-    });
+exports.command = ['source <type>'];
+exports.desc = UTIL.hide_cmd('Add/Remove source from DSL');
+exports.builder = function (yargs) {
+  yargs.usage(`${exports.desc}
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'link/delete', argv.names);
-};
+Usage: eask source <type> [options..]`)
+    .commandDir('../source/')
+    .demandCommand();
+
+  /* XXX: Configure only in the menu. */
+  if (UTIL.cmd_count() == 1) {
+    yargs.positional(
+      '<type>', {
+      description: 'type of the control',
+    });
+  }
+}
+
+exports.handler = async (argv) => {};

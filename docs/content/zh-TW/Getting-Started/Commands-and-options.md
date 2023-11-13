@@ -324,11 +324,11 @@ $ eask [GLOBAL-OPTIONS] run script [NAMES..]
 
 運行指令。
 
+別名: `cmd`
+
 ```sh
 $ eask [GLOBAL-OPTIONS] run command [NAMES..]
 ```
-
-別名: `cmd`
 
 ## 🔍 eask docker
 
@@ -352,7 +352,7 @@ $ eask docker 26.1 info
 
 ## 🔍 eask archives
 
-列出所有包檔案。
+列出所有包源。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] archives
@@ -360,7 +360,7 @@ $ eask [GLOBAL-OPTIONS] archives
 
 ## 🔍 eask search
 
-從檔案中搜索包。
+從包源中搜索包。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] search [QUEIRES..]
@@ -392,7 +392,7 @@ $ eask [GLOBAL-OPTIONS] outdated [--depth]
 
 ## 🔍 eask refresh
 
-刷新包 archives。
+刷新包源。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] refresh
@@ -527,6 +527,8 @@ $ eask [GLOBAL-OPTIONS] link add <name> <path>
 
 刪除給定包的鏈接。
 
+別名: `remove`
+
 ```sh
 $ eask [GLOBAL-OPTIONS] link delete [names..]
 ```
@@ -545,18 +547,17 @@ $ eask [GLOBAL-OPTIONS] link list
 
 從當前工作區中刪除 `.eask` 。
 
+別名: `.eask`
+
 ```sh
 $ eask [GLOBAL-OPTIONS] clean workspace
 ```
 
 ⛔️ 不要指定選項 `--config, -c`，否則它會刪除你的整個 `~/.emacs.d`。
 
-
 ```elisp
 $ eask clean workspace -g
 ```
-
-別名: `.eask`
 
 ## 🔍 eask clean elc
 
@@ -570,11 +571,11 @@ $ eask [GLOBAL-OPTIONS] clean elc
 
 刪除 dist 子目錄。
 
+別名: `distribution`
+
 ```sh
 $ eask [GLOBAL-OPTIONS] clean dist
 ```
-
-別名: `distribution`
 
 ## 🔍 eask clean autoloads
 
@@ -611,13 +612,13 @@ $ eask [GLOBAL-OPTIONS] clean log-file
 - `clean pkg-file`
 - `clean log-file`
 
+別名: `everything`
+
 ```sh
 $ eask [GLOBAL-OPTIONS] clean all
 ```
 
-別名: `everything`
-
-# 🚩 检查器
+# 🚩 检查
 
 對 Emacs 包進行 lint 的命令。
 
@@ -699,11 +700,11 @@ $ eask [GLOBAL-OPTIONS] lint declare [FILES..]
 
 Run [relint](https://github.com/mattiase/relint).
 
+別名: `lint relint`
+
 ```sh
 $ eask [GLOBAL-OPTIONS] lint regexps [FILES..]
 ```
-
-別名: `lint relint`
 
 # 🚩 測試框架
 
@@ -755,6 +756,40 @@ $ eask [GLOBAL-OPTIONS] test melpazoid [DIRECTORIES..]
 
 {{< hint info >}}
 💡 如果未傳入 **[DIRECTORIES..]**，它將使用目前工作空間。
+{{< /hint >}}
+
+# 🚩 控制 DSL
+
+控制 DSL 的指令列表。
+
+## 🔍 eask source add
+
+新增一個包源。
+
+```sh
+$ eask [GLOBAL-OPTIONS] source add <NAME> [URL]
+```
+
+## 🔍 eask source delete
+
+移除一個包源。
+
+別名: `remove`
+
+```sh
+$ eask [GLOBAL-OPTIONS] source delete <NAME>
+```
+
+## 🔍 eask source list
+
+列出所有包源。
+
+```sh
+$ eask [GLOBAL-OPTIONS] source list
+```
+
+{{< hint info >}}
+💡 指令與 `$ eask archives` 相同!
 {{< /hint >}}
 
 # 🚩 實用工具

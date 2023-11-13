@@ -25,7 +25,7 @@
          (priority (assoc name package-archive-priorities))
          (priority (cdr priority)))
     (message (concat "  %-" eask--length-name "s  %-" eask--length-url "s  %-" eask--length-priority "s")
-             name url (or priority 0))))
+             name (eask-2url url) (or priority 0))))
 
 (defun eask--print-archive-alist (alist)
   "Print the archvie ALIST."
