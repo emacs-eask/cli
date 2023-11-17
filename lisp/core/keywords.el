@@ -21,8 +21,7 @@
          (offset (eask-seq-str-max keywords))
          (fmt (concat "  %-" (eask-2str offset) "s  %s")))
     (dolist (keyword keywords)
-      (eask-msg fmt keyword (cdr (assq keyword finder-known-keywords))))
-    (eask-msg "")
+      (eask-println fmt keyword (cdr (assq keyword finder-known-keywords))))
     (eask-info "(Total of %s keywords listed)" (length keywords))))
 
 ;;; core/keywords.el ends here

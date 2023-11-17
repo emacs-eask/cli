@@ -16,7 +16,7 @@
 
 (defun eask--print-filename (filename)
   "Print out the FILENAME."
-  (message "%s" filename))
+  (eask-println "%s" filename))
 
 (eask-start
   (let* ((patterns (eask-args))
@@ -26,7 +26,6 @@
     (mapc #'eask--print-filename files)
     (if (zerop (length files))
         (eask-info "(No package files found)")
-      (eask-msg "")
       (eask-info "(Total of %s item%s listed)" (length files) (eask--sinr files "" "s")))))
 
 ;;; core/files.el ends here

@@ -15,6 +15,6 @@
         nil t))
 
 (eask-start
-  (message "%s" package-user-dir))
+  (eask-print "%s" package-user-dir))
 
 ;;; core/package-directory.el ends here

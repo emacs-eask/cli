@@ -16,7 +16,7 @@
 
 (defun eask--print-load-path (path)
   "Print out the PATH."
-  (message "%s" path))
+  (eask-println "%s" path))
 
 (defun eask--filter-path (path)
   "Filter the PATH out by search regex."
@@ -34,7 +34,6 @@
     (mapc #'eask--print-load-path load-path)
     (if (zerop (length load-path))
         (eask-info "(No load-path found)")
-      (eask-msg "")
       (eask-info "(Total of %s load-path)" (length load-path)))))
 
 ;;; core/load-path.el ends here

@@ -31,19 +31,19 @@
 
 (defun eask--print-title (title)
   "Print section TITLE."
-  (eask-msg "")
-  (eask-msg (ansi-underscore title))
-  (eask-msg ""))
+  (eask-println "")
+  (eask-println (ansi-underscore title))
+  (eask-println ""))
 
 (defun eask--print-info (pair)
   "Print environment info PAIR."
   (let ((title   (eask-2str (car pair)))
         (content (eask-2str (cdr pair))))
-    (eask-msg "   %-22s %s" title (ansi-bright-black content))))
+    (eask-println "   %-22s %s" title (ansi-bright-black content))))
 
 (eask-start
-  (eask-msg "In the %s environment" (eask--environment-name))
-  (eask-msg "Your emacs home is point to %s" user-emacs-directory)
+  (eask-println "In the %s environment" (eask--environment-name))
+  (eask-println "Your emacs home is point to %s" user-emacs-directory)
 
   (eask--print-title "System:")
   (eask--print-info `("Emacs version" . ,emacs-version))
@@ -66,7 +66,6 @@
   (eask--print-info `("Eask file" . ,(or eask-file "missing")))
   (eask--print-info `("Eask-file Count" . ,(length (eask--find-files default-directory))))
 
-  (eask-msg "")
   ;; XXX: Please increment the number everytime a new information is added!
   (eask-info "(Total of %s states listed)" (+ 6 5 2)))
 
