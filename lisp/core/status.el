@@ -66,7 +66,6 @@
   (eask--print-info `("Eask file" . ,(or eask-file "missing")))
   (eask--print-info `("Eask-file Count" . ,(length (eask--find-files default-directory))))
 
-  (eask-println "")
   ;; XXX: Please increment the number everytime a new information is added!
   (eask-info "(Total of %s states listed)" (+ 6 5 2)))
 

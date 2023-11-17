@@ -753,9 +753,25 @@ to display.
 2022-04-14 17:31:54 [ERROR] This is ERROR message
 ```
 
+## 🔍 Function: eask-print (`msg` &rest `args`)
+
+Standard output printing without newline.
+
+```elisp
+(eask-println "Print to stdout!")
+```
+
+## 🔍 Function: eask-println (`msg` &rest `args`)
+
+Like the function `eask-print` but contains the newline at the end.
+
+```elisp
+(eask-println "Print to stdout! (with newline)")
+```
+
 ## 🔍 Function: eask-msg (`msg` &rest `args`)
 
-Like `message` function but will replace unicodes with color.
+Like the `message` function but will replace unicode with color.
 
 ```elisp
 (eask-msg "Print this message with newline!")
@@ -763,7 +779,7 @@ Like `message` function but will replace unicodes with color.
 
 ## 🔍 Function: eask-write (`msg` &rest `args`)
 
-Like `eask-msg` function but without newline at the end.
+Like the `eask-msg` function but without the newline at the end.
 
 ```elisp
 (eask-write "Print this message without newline...")

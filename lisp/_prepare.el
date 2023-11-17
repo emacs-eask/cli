@@ -1540,7 +1540,7 @@ character."
     string))
 
 (defun eask-princ (object &optional stderr)
-  "Like function `princ'; this is used as the stdin.
+  "Like function `princ'; with flag STDERR.
 
 For argument OBJECT, please see function `princ' for the detials.
 
@@ -1549,28 +1549,27 @@ If optional argument STDERR is non-nil; use stderr instead."
     (princ object (when stderr #'external-debugging-output))))
 
 (defun eask-print (msg &rest args)
-  "Like function `eask-princ'; this is used as the stdin.
+  "Standard output printing without newline.
 
 For arguments MSG and ARGS, please see function `eask--format-paint-kwds' for
 the detials."
   (eask-princ (apply #'eask--format-paint-kwds msg args)))
 
 (defun eask-println (msg &rest args)
-  "Like function `eask-print' but contains newline at the end; this is also used
-as the stdin.
+  "Like the function `eask-print' but contains the newline at the end.
 
 For arguments MSG and ARGS, please see function `eask-print' for the detials."
   (apply #'eask-print (concat msg "\n") args))
 
 (defun eask-msg (msg &rest args)
-  "Like function `message' but replace unicodes with color.
+  "Like the function `message' but replace unicode with color.
 
 For arguments MSG and ARGS, please see function `eask--format-paint-kwds' for
 the detials."
   (message (apply #'eask--format-paint-kwds msg args)))
 
 (defun eask-write (msg &rest args)
-  "Like function `eask-msg' but without newline at the end.
+  "Like the function `eask-msg' but without newline at the end.
 
 For arguments MSG and ARGS, please see function `eask-msg' for the detials."
   (eask-princ (apply #'eask--format-paint-kwds msg args) t))
