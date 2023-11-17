@@ -38,6 +38,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Add `melpazoid` command (#202)
 * Add `source` command and its subcommands (#203)
 * Add `bump` command (#204)
+* fix: Print with stdout (#205)
 
 ## 0.8.x
 > Released Mar 08, 2023
