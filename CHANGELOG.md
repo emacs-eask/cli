@@ -5,8 +5,13 @@ All notable changes to this project will be documented in this file.
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 
-## 0.9.x (Unreleased)
+## 0.10.x (Unreleased)
 > Released N/A
+
+* N/A
+
+## 0.9.x
+> Released Nov 17, 2023
 
 * Add command to generate LICENSE file (#155)
 * Add new DSLs `author` and `license` (#156)
