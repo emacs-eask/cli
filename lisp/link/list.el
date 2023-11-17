@@ -25,7 +25,7 @@
   "Print information regarding the LINK.
 
 The argument OFFSET is used to align the result."
-  (message (concat "  %-" (eask-2str offset) "s  %s") (car link) (cdr link)))
+  (eask-println (concat "  %-" (eask-2str offset) "s  %s") (car link) (cdr link)))
 
 (eask-start
   (if-let* ((links (eask--links))
@@ -34,7 +34,6 @@ The argument OFFSET is used to align the result."
         (eask-info "Available linked packages:")
         (eask-msg "")
         (dolist (link links) (eask--print-link link offset))
-        (eask-msg "")
         (eask-info "(Total of %s linked package%s)"
                    (length links)
                    (eask--sinr links "" "s")))

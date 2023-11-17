@@ -1102,7 +1102,7 @@ This uses function `locate-dominating-file' to look up directory tree."
                  (if (eask-file-try-load "./")
                      (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
                    (eask-msg "✗ Loading Eask file... missing!"))
-                 (message ""))
+                 (eask-msg ""))
                (if (not eask-file)
                    (eask-help "core/init")
                  (package-activate-all)
@@ -1539,6 +1539,29 @@ character."
          (string (eask--msg-displayable-kwds string)))
     string))
 
+(defun eask-princ (object &optional stderr)
+  "Like function `princ'; this is used as the stdin.
+
+For argument OBJECT, please see function `princ' for the detials.
+
+If optional argument STDERR is non-nil; use stderr instead."
+  (unless inhibit-message
+    (princ object (when stderr #'external-debugging-output))))
+
+(defun eask-print (msg &rest args)
+  "Like function `eask-princ'; this is used as the stdin.
+
+For arguments MSG and ARGS, please see function `eask--format-paint-kwds' for
+the detials."
+  (eask-princ (apply #'eask--format-paint-kwds msg args)))
+
+(defun eask-println (msg &rest args)
+  "Like function `eask-print' but contains newline at the end; this is also used
+as the stdin.
+
+For arguments MSG and ARGS, please see function `eask-print' for the detials."
+  (apply #'eask-print (concat msg "\n") args))
+
 (defun eask-msg (msg &rest args)
   "Like function `message' but replace unicodes with color.
 
@@ -1549,10 +1572,8 @@ the detials."
 (defun eask-write (msg &rest args)
   "Like function `eask-msg' but without newline at the end.
 
-For arguments MSG and ARGS, please see function `eask--format-paint-kwds' for
-the detials."
-  (unless inhibit-message
-    (princ (apply #'eask--format-paint-kwds msg args) 'external-debugging-output)))
+For arguments MSG and ARGS, please see function `eask-msg' for the detials."
+  (eask-princ (apply #'eask--format-paint-kwds msg args) t))
 
 (defun eask-report (&rest args)
   "Report error/warning depends on strict flag.

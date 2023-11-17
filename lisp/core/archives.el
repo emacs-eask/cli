@@ -24,8 +24,9 @@
          (url (cdr archive))
          (priority (assoc name package-archive-priorities))
          (priority (cdr priority)))
-    (message (concat "  %-" eask--length-name "s  %-" eask--length-url "s  %-" eask--length-priority "s")
-             name (eask-2url url) (or priority 0))))
+    (eask-println
+     (concat "  %-" eask--length-name "s  %-" eask--length-url "s  %-" eask--length-priority "s")
+     name (eask-2url url) (or priority 0))))
 
 (defun eask--print-archive-alist (alist)
   "Print the archvie ALIST."
@@ -43,14 +44,12 @@
     (eask-info "Available archives:")
     (eask-msg "")
     (eask--print-archive-alist eask-source-mapping)
-    (eask-msg "")
     (eask-info "(Total of %s archive%s available)" (length eask-source-mapping)
                (eask--sinr eask-source-mapping "" "s")))
    (package-archives
     (eask-info "In used archives:")
     (eask-msg "")
     (eask--print-archive-alist package-archives)
-    (eask-msg "")
     (eask-info "(Total of %s archive%s listed)" (length package-archives)
                (eask--sinr package-archives "" "s")))
    (t
