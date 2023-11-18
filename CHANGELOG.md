@@ -8,7 +8,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 0.10.x (Unreleased)
 > Released N/A
 
-* N/A
+* fix: Unsilent in Eask-file by default (40d82becaf20f0851e5fc37aa17c5f6871c163a3)
 
 ## 0.9.x
 > Released Nov 17, 2023
