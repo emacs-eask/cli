@@ -36,8 +36,6 @@ exports.handler = async (argv) => {
     return;
   }
 
-  console.log('');
-
   let epf = EASK_HOMEDIR + 'exec-path';
   let lpf = EASK_HOMEDIR + 'load-path';
 
