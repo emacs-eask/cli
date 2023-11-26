@@ -91,18 +91,21 @@
      ("System type" ,system-type)))
 
   (eask--print-title "Environment:")
-  (eask--print-infos
-   `(("Emacs directory" ,(expand-file-name user-emacs-directory)
-      ,(eask--status-file-dir user-emacs-directory))
-     ("ELPA directory" ,(expand-file-name package-user-dir)
-      ,(eask--status-file-dir package-user-dir))
-     ("early-init.el" ,(expand-file-name early-init-file)
-      ,(eask--status-file-dir early-init-file))
-     ("init.el" ,(expand-file-name user-init-file)
-      ,(eask--status-file-dir user-init-file))
-     ("custom.el" ,(if custom-file (expand-file-name custom-file)
-                     "nil")
-      ,(when custom-file (eask--status-file-dir custom-file)))))
+  (let ((dot-emacs-file (locate-user-emacs-file "../.emacs")))
+    (eask--print-infos
+     `(("Emacs directory" ,(expand-file-name user-emacs-directory)
+        ,(eask--status-file-dir user-emacs-directory))
+       ("ELPA directory" ,(expand-file-name package-user-dir)
+        ,(eask--status-file-dir package-user-dir))
+       ("early-init.el" ,(expand-file-name early-init-file)
+        ,(eask--status-file-dir early-init-file))
+       (".emacs" ,(expand-file-name dot-emacs-file)
+        ,(eask--status-file-dir dot-emacs-file))
+       ("init.el" ,(expand-file-name user-init-file)
+        ,(eask--status-file-dir user-init-file))
+       ("custom.el" ,(if custom-file (expand-file-name custom-file)
+                       "nil")
+        ,(when custom-file (eask--status-file-dir custom-file))))))
 
   (eask--print-title "Eask-file:")
   (eask--print-infos

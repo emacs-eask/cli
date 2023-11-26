@@ -1049,6 +1049,21 @@ This uses function `locate-dominating-file' to look up directory tree."
           (custom-file (locate-user-emacs-file "custom.el")))
      ,@body))
 
+(defun eask--load-config ()
+  "Load configuration if valid."
+  (let ((inhibit-config (eask-quick-p)))
+    (eask-with-progress
+      (ansi-green "Loading configuration... ")
+      (eask-with-verbosity 'all
+        (unless inhibit-config
+          (load early-init-file t)
+          (load (if (boundp 'dot-emacs-file)
+                    dot-emacs-file
+                  (locate-user-emacs-file "../.emacs"))
+                t)
+          (load user-init-file t)))
+      (ansi-green (if inhibit-config "skipped ✗" "done ✓")))))
+
 (defmacro eask-start (&rest body)
   "Execute BODY with workspace setup."
   (declare (indent 0) (debug t))
@@ -1059,8 +1074,7 @@ This uses function `locate-dominating-file' to look up directory tree."
          (eask--handle-global-options)
          (cond
           ((eask-config-p)
-           (let ((inhibit-config (eask-quick-p))
-                 (early-init-file (locate-user-emacs-file "early-init.el"))
+           (let ((early-init-file (locate-user-emacs-file "early-init.el"))
                  (dot-emacs-file (locate-user-emacs-file "../.emacs"))
                  (user-init-file (locate-user-emacs-file "init.el")))
              ;; We accept Eask-file in `config' scope, but it shouldn't be used
@@ -1071,14 +1085,7 @@ This uses function `locate-dominating-file' to look up directory tree."
                  (eask-msg "✗ Loading config Eask file... missing!"))
                (eask-msg ""))
              (package-activate-all)
-             (eask-with-progress
-               (ansi-green "Loading your configuration... ")
-               (eask-with-verbosity 'all
-                 (unless inhibit-config
-                   (load early-init-file t)
-                   (load dot-emacs-file t)
-                   (load user-init-file t)))
-               (ansi-green (if inhibit-config "skipped ✗" "done ✓")))
+             (eask--load-config)
              (eask--with-hooks ,@body)))
           ((eask-global-p)
            (eask--setup-home (concat eask-homedir "../")  ; `/home/user/', escape `.eask'
@@ -1093,21 +1100,26 @@ This uses function `locate-dominating-file' to look up directory tree."
                  (eask-msg ""))
                (package-activate-all)
                (ignore-errors (make-directory package-user-dir t))
+               (eask-with-verbosity 'debug (eask--load-config))
                (eask--with-hooks ,@body))))
           ((eask-special-p)  ; Commands without Eask-file needed!
-           (eask-file-try-load "./")
+           ;; First, try to find a valid Eask-file!
+           (eask-file-try-load default-directory)
+           ;; Then setup the user directory according to the Eask-file!
            (eask--setup-home (or eask-file-root
                                  (concat eask-homedir "../"))
              (let ((eask--first-init-p (not (file-directory-p user-emacs-directory)))
                    (scope (if eask-file-root "" "global ")))
                (eask-with-verbosity 'debug
                  (eask-ignore-errors  ; Again, without Eask-file needed!
-                   (if eask-file-root
+                   (if (or eask-file-root
+                           (eask-file-try-load eask-homedir))
                        (eask-msg "✓ Loading %sEask file in %s... done!" scope eask-file)
                      (eask-msg "✗ Loading %sEask file... missing!" scope)))
                  (eask-msg ""))
                (package-activate-all)
                (ignore-errors (make-directory package-user-dir t))
+               (eask-with-verbosity 'debug (eask--load-config))
                (eask--with-hooks ,@body))))
           (t
            (eask--setup-home nil  ; `nil' is the `default-directory'
@@ -1122,6 +1134,7 @@ This uses function `locate-dominating-file' to look up directory tree."
                  (package-activate-all)
                  (ignore-errors (make-directory package-user-dir t))
                  (eask--silent (eask-setup-paths))
+                 (eask-with-verbosity 'debug (eask--load-config))
                  (eask--with-hooks ,@body))))))))))
 
 ;;
