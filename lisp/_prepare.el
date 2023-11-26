@@ -136,7 +136,10 @@ will return `lint/checkdoc' with a dash between two subcommands."
                  "/"))))
 
 (defun eask-special-p ()
-  "Return t if the command that can be run without Eask-file existence."
+  "Return t if the command that can be run without Eask-file existence.
+
+These commands will first respect the current workspace.  If the current
+workspace has no valid Eask-file; it will load global workspace instead."
   (member (eask-command) '("init/cask" "init/eldev" "init/keg"
                            "init/source"
                            "bump" "cat" "keywords"
@@ -907,14 +910,7 @@ If the optional argument INDEX is non-nil, return the element."
   "Execute BODY with workspace setup."
   (declare (indent 0) (debug t))
   `(eask--batch-mode
-     (let (;; XXX: this will make command `info', `files' work as expected;
-           ;; but the relative paths file spec will be lost...
-           ;;
-           ;; So commands like `load' would NOT work!
-           (default-directory (cond ((eask-global-p) eask-homedir)
-                                    ((eask-config-p) user-emacs-directory)
-                                    (t default-directory)))
-           (alist))
+     (let ((alist))
        (dolist (cmd eask--command-list)
          (push (cons cmd (lambda (&rest _))) alist))
        (setq command-switch-alist (append command-switch-alist alist))
@@ -1062,26 +1058,15 @@ This uses function `locate-dominating-file' to look up directory tree."
        (eask--setup-env
          (eask--handle-global-options)
          (cond
-          ((or (eask-global-p) (eask-special-p))  ; Commands without Eask-file needed!
-           (eask--setup-home (concat eask-homedir "../")  ; `/home/user/', escape `.eask'
-             (let ((eask--first-init-p (not (file-directory-p user-emacs-directory))))
-               ;; We accept Eask-file in `global' scope, but it shouldn't be used
-               ;; for the sandbox.
-               (eask-with-verbosity 'debug
-                 (eask-ignore-errors  ; Again, without Eask-file needed!
-                   (if (eask-file-try-load "./")
-                       (eask-msg "✓ Loading global Eask file in %s... done!" eask-file)
-                     (eask-msg "✗ Loading global Eask file... missing!")))
-                 (eask-msg ""))
-               (package-activate-all)
-               (ignore-errors (make-directory package-user-dir t))
-               (eask--with-hooks ,@body))))
           ((eask-config-p)
-           (let ((inhibit-config (eask-quick-p)))
+           (let ((inhibit-config (eask-quick-p))
+                 (early-init-file (locate-user-emacs-file "early-init.el"))
+                 (dot-emacs-file (locate-user-emacs-file "../.emacs"))
+                 (user-init-file (locate-user-emacs-file "init.el")))
              ;; We accept Eask-file in `config' scope, but it shouldn't be used
              ;; for the sandbox.
              (eask-with-verbosity 'debug
-               (if (eask-file-try-load "./")
+               (if (eask-file-try-load user-emacs-directory)
                    (eask-msg "✓ Loading config Eask file in %s... done!" eask-file)
                  (eask-msg "✗ Loading config Eask file... missing!"))
                (eask-msg ""))
@@ -1090,16 +1075,45 @@ This uses function `locate-dominating-file' to look up directory tree."
                (ansi-green "Loading your configuration... ")
                (eask-with-verbosity 'all
                  (unless inhibit-config
-                   (load (locate-user-emacs-file "early-init.el") t)
-                   (load (locate-user-emacs-file "../.emacs") t)
-                   (load (locate-user-emacs-file "init.el") t)))
+                   (load early-init-file t)
+                   (load dot-emacs-file t)
+                   (load user-init-file t)))
                (ansi-green (if inhibit-config "skipped ✗" "done ✓")))
              (eask--with-hooks ,@body)))
+          ((eask-global-p)
+           (eask--setup-home (concat eask-homedir "../")  ; `/home/user/', escape `.eask'
+             (let ((eask--first-init-p (not (file-directory-p user-emacs-directory))))
+               ;; We accept Eask-file in `global' scope, but it shouldn't be used
+               ;; for the sandbox.
+               (eask-with-verbosity 'debug
+                 (eask-ignore-errors  ; Eask-file is optional!
+                   (if (eask-file-try-load eask-homedir)
+                       (eask-msg "✓ Loading global Eask file in %s... done!" eask-file)
+                     (eask-msg "✗ Loading global Eask file... missing!")))
+                 (eask-msg ""))
+               (package-activate-all)
+               (ignore-errors (make-directory package-user-dir t))
+               (eask--with-hooks ,@body))))
+          ((eask-special-p)  ; Commands without Eask-file needed!
+           (eask-file-try-load "./")
+           (eask--setup-home (or eask-file-root
+                                 (concat eask-homedir "../"))
+             (let ((eask--first-init-p (not (file-directory-p user-emacs-directory)))
+                   (scope (if eask-file-root "" "global ")))
+               (eask-with-verbosity 'debug
+                 (eask-ignore-errors  ; Again, without Eask-file needed!
+                   (if eask-file-root
+                       (eask-msg "✓ Loading %sEask file in %s... done!" scope eask-file)
+                     (eask-msg "✗ Loading %sEask file... missing!" scope)))
+                 (eask-msg ""))
+               (package-activate-all)
+               (ignore-errors (make-directory package-user-dir t))
+               (eask--with-hooks ,@body))))
           (t
            (eask--setup-home nil  ; `nil' is the `default-directory'
              (let ((eask--first-init-p (not (file-directory-p user-emacs-directory))))
                (eask-with-verbosity 'debug
-                 (if (eask-file-try-load "./")
+                 (if (eask-file-try-load default-directory)
                      (eask-msg "✓ Loading Eask file in %s... done!" eask-file)
                    (eask-msg "✗ Loading Eask file... missing!"))
                  (eask-msg ""))
