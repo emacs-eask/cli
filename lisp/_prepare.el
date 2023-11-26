@@ -68,6 +68,9 @@
       package-archives           nil            ; Leave it to custom use
       package-archive-priorities nil)
 
+(defvar eask-dot-emacs-file nil
+  "Variable hold .emacs file location.")
+
 (defun eask--load--adv (fnc &rest args)
   "Prevent `_prepare.el' loading twice.
 
@@ -1045,6 +1048,7 @@ This uses function `locate-dominating-file' to look up directory tree."
   `(let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/") ,dir))
           (package-user-dir (expand-file-name "elpa" user-emacs-directory))
           (early-init-file (locate-user-emacs-file "early-init.el"))
+          (eask-dot-emacs-file (locate-user-emacs-file ".emacs"))
           (user-init-file (locate-user-emacs-file "init.el"))
           (custom-file (locate-user-emacs-file "custom.el")))
      ,@body))
@@ -1058,10 +1062,7 @@ This uses function `locate-dominating-file' to look up directory tree."
         (unless inhibit-config
           (when (version<= "27" emacs-version)
             (load early-init-file t))
-          (load (if (boundp 'dot-emacs-file)
-                    dot-emacs-file
-                  (locate-user-emacs-file "../.emacs"))
-                t)
+          (load eask-dot-emacs-file t)
           (load user-init-file t)))
       (ansi-green (if inhibit-config "skipped ✗" "done ✓")))))
 
@@ -1076,7 +1077,7 @@ This uses function `locate-dominating-file' to look up directory tree."
          (cond
           ((eask-config-p)
            (let ((early-init-file (locate-user-emacs-file "early-init.el"))
-                 (dot-emacs-file (locate-user-emacs-file "../.emacs"))
+                 (eask-dot-emacs-file (locate-user-emacs-file "../.emacs"))
                  (user-init-file (locate-user-emacs-file "init.el")))
              ;; We accept Eask-file in `config' scope, but it shouldn't be used
              ;; for the sandbox.
