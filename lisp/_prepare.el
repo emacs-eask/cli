@@ -1056,7 +1056,8 @@ This uses function `locate-dominating-file' to look up directory tree."
       (ansi-green "Loading configuration... ")
       (eask-with-verbosity 'all
         (unless inhibit-config
-          (load early-init-file t)
+          (when (version<= "27" emacs-version)
+            (load early-init-file t))
           (load (if (boundp 'dot-emacs-file)
                     dot-emacs-file
                   (locate-user-emacs-file "../.emacs"))
