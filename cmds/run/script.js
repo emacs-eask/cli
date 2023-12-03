@@ -62,7 +62,7 @@ function startCommand(commands, count) {
 
   let command = commands[count];
 
-  console.log('[RUN]: ' + command);
+  console.warn('[RUN]: ' + command);
 
   let proc = spawn(command, { stdio: 'inherit', shell: true });
 

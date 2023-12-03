@@ -44,23 +44,23 @@ exports.handler = async (argv) => {
 
   proc.on('close', function (code) {
     if (code == 0) {
-      console.log('✓ Done cloning the elisp package template');
-      console.log('');
+      console.warn('✓ Done cloning the elisp package template');
+      console.warn('');
       process.chdir(project_name);
       _cloned(argv);
       return;
     }
     // Help instruction here!
-    console.log('✗ Error while cloning template project');
-    console.log('');
-    console.log('  [1] Make sure you have git installed and has the right permission');
-    process.stdout.write(`  [2] Failed because of the target directory isn't empty`);
+    console.warn('✗ Error while cloning template project');
+    console.warn('');
+    console.warn('  [1] Make sure you have git installed and has the right permission');
+    process.stderr.write(`  [2] Failed because of the target directory isn't empty`);
   });
 };
 
 /* Operations after _cloned */
 async function _cloned(argv) {
-  console.log('Initialize the Eask-file for your project...');
+  console.warn('Initialize the Eask-file for your project...');
   await init.create_eask_file();
   UTIL.e_call(argv, 'create/package');
 }

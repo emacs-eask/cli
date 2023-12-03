@@ -50,7 +50,7 @@ exports.handler = async (argv) => {
                         , argv.files);
       break;
     default:
-      console.log(`Invalid argument, from: ${argv.from}`);
+      console.warn(`Invalid argument, from: ${argv.from}`);
       break;
     }
   } else {
@@ -180,7 +180,6 @@ function ask(question, callback) {
  */
 function check_eask_filename(name) {
   let base = path.basename(name);
-  console.log(base);
   let prefix;
   if (base.startsWith('Easkfile')) prefix = 'Easkfile';
   else if (base.startsWith('Eask')) prefix = 'Eask';

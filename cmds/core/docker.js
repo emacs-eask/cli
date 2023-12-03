@@ -34,7 +34,7 @@ exports.builder = async (yargs) => {
 
 exports.handler = async (argv) => {
   if (!UTIL.which('docker')) {
-    console.log("Docker is not installed (cannot find `docker' executable)");
+    console.warn("Docker is not installed (cannot find `docker' executable)");
     return;
   }
 

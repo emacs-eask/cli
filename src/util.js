@@ -208,7 +208,7 @@ function _environment_name (argv) {
  */
 async function e_call(argv, script, ...args) {
   if (!which(EASK_EMACS)) {
-    console.log("Emacs is not installed (cannot find `" + EASK_EMACS + "' executable)");
+    console.warn("Emacs is not installed (cannot find `" + EASK_EMACS + "' executable)");
     return;
   }
 
@@ -230,8 +230,8 @@ async function e_call(argv, script, ...args) {
       console.log('');
     }
     if (5 <= argv.verbose) {  // `all` scope
-      console.log('[EXEC] ' + EASK_EMACS +  ' ' + cmd.join(' '));
-      console.log('');
+      console.warn('[EXEC] ' + EASK_EMACS +  ' ' + cmd.join(' '));
+      console.warn('');
     }
 
     setup_env();
