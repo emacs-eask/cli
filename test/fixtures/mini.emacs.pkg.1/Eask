@@ -10,10 +10,14 @@
 (files "files/*.el")
 
 (script "test" "echo \"Have a nice day!~ ;)\"")
+(script "extra" "echo :")
 (script "info" "eask info")
 
-(eask-defcommand mini-test-1 "Command 1." (message "mini test 1"))
-(eask-defcommand mini-test-2 "Command 2." (message "mini test 2"))
+(eask-defcommand mini-test-1 "Test command 1." (message "Test 1"))
+(eask-defcommand mini-test-2 "Test command 2." (message "Test 2"))
+(eask-defcommand mini-test-3
+  "Test command 3."
+  (message "Test 3: %s" eask-rest-args))
 
 (source "gnu")
 (source "melpa")
