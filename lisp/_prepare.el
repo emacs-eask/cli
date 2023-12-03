@@ -90,6 +90,20 @@ Arguments FNC and ARGS are used for advice `:around'."
 (defconst eask-is-pkg (getenv "EASK_IS_PKG")
   "Eask is pkg.")
 
+(defconst eask-rest-args
+  (let ((args (getenv "EASK_REST_ARGS")))
+    (setq args (split-string args ","))
+    args)
+  "Eask arguments in list after command separator `--'.
+
+If the argument is `-- hello world'; it will return `(hello world)'.")
+
+(defun eask-rest-args ()
+  "Eask arguments in string after command separator `--'.
+
+If the argument is `-- hello world'; it will return `hello world'."
+  (mapconcat #'identity eask-rest-args " "))
+
 (defcustom eask-import-timeout 10
   "Number of seconds before timing out elisp importation attempts.
 If nil, never time out."
