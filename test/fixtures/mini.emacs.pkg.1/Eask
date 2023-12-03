@@ -17,7 +17,7 @@
 (eask-defcommand mini-test-2 "Test command 2." (message "Test 2"))
 (eask-defcommand mini-test-3
   "Test command 3."
-  (message "Test 3: %s" eask-rest-args))
+  (message "Test 3: %s" eask-rest))
 
 (source "gnu")
 (source "melpa")
