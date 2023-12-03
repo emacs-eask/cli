@@ -53,7 +53,7 @@ function escape_str(str) {
 /**
  * Return arguments after `--` in list.
  */
-function rest_args() {
+function _rest_args() {
   let index = process.argv.indexOf('--');
   if (index === -1)
     return [];
@@ -129,7 +129,7 @@ function setup_env() {
   process.env.EASK_INVOCATION = _invocation();
   process.env.EASK_HOMEDIR = EASK_HOMEDIR;
   if (IS_PKG) process.env.EASK_IS_PKG = IS_PKG;
-  process.env.EASK_REST_ARGS = rest_args();
+  process.env.EASK_REST_ARGS = _rest_args();
 
   if (GITHUB_ACTIONS) {
     /* XXX: isTTY flag will always be undefined in GitHub Actions; we will have
@@ -279,7 +279,6 @@ module.exports.slash = slash;
 
 module.exports.escape_str = escape_str;
 module.exports.cli_args = cli_args;
-module.exports.rest_args = rest_args;
 module.exports.plugin_dir = plugin_dir;
 module.exports.def_flag = def_flag;
 module.exports.setup_env = setup_env;
