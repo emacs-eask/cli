@@ -42,7 +42,7 @@
 (declare-function ansi-white "ext:ansi.el")
 
 ;;
-;;; Environments
+;;; Environment
 
 ;; Determine the underlying operating system
 (defconst eask-is-windows (memq system-type '(cygwin windows-nt ms-dos))
@@ -79,29 +79,29 @@ Arguments FNC and ARGS are used for advice `:around'."
 (advice-add 'load :around #'eask--load--adv)
 
 (defconst eask-has-colors (getenv "EASK_HASCOLORS")
-  "Return non-nil if terminal support colors.")
+  "Return non-nil if terminal supports colors.")
 
 (defconst eask-homedir (getenv "EASK_HOMEDIR")
-  "Eask temporary storage.")
+  "Eask's home directory path.")
 
 (defconst eask-invocation (getenv "EASK_INVOCATION")
-  "Eask invocation program.")
+  "Eask's invocation program path.")
 
 (defconst eask-is-pkg (getenv "EASK_IS_PKG")
-  "Eask is pkg.")
+  "Return non-nil if Eask is packaged.")
 
 (defconst eask-rest
   (let ((args (getenv "EASK_REST_ARGS")))
     (setq args (ignore-errors (split-string args ",")))
     args)
-  "Eask arguments in list after command separator `--'.
+  "Eask's arguments after command separator `--'; return a list.
 
-If the argument is `-- hello world'; it will return `(hello world)'.")
+If the argument is `-- arg0 arg1'; it will return `(arg0 arg1)'.")
 
 (defun eask-rest ()
-  "Eask arguments in string after command separator `--'.
+  "Eask's arguments after command separator `--'; return a string.
 
-If the argument is `-- hello world'; it will return `hello world'."
+If the argument is `-- arg0 arg1'; it will return `arg0 arg1'."
   (mapconcat #'identity eask-rest " "))
 
 (defcustom eask-import-timeout 10

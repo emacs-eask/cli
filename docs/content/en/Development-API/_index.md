@@ -33,6 +33,70 @@ Command entry point. Each command file should contain this macro somewhere in th
   )
 ```
 
+# 🚩 Environment
+
+## 🔍 Variable: eask-has-colors
+
+Return non-nil if the terminal supports colors.
+
+```elisp
+(when eask-has-colors ...
+```
+
+## 🔍 Variable: eask-homedir
+
+Eask's home directory path.
+
+```elisp
+(message "%s" eask-homedir)
+```
+
+## 🔍 Variable: eask-invocation
+
+Eask's invocation program path.
+
+```elisp
+(message "%s" eask-invocation)
+```
+
+It could be the `node` executable or the `eask` executable itself.
+
+## 🔍 Variable: eask-is-pkg
+
+Return non-nil if Eask is packaged.
+
+```elisp
+(when eask-is-pkg ...
+```
+
+## 🔍 Variable: eask-rest
+
+Eask's arguments after command separator `--'; return a list.
+
+```sh
+$ eask <command> -- args0 args1
+```
+
+Output:
+
+```elisp
+(message "%s" eask-rest)  ; '(args0 args1)
+```
+
+## 🔍 Function: eask-rest ()
+
+Eask's arguments after command separator `--'; return a string.
+
+```sh
+$ eask <command> -- args0 args1
+```
+
+Output:
+
+```elisp
+(message "%s" (eask-rest))  ; "args0 args1"
+```
+
 # 🚩 Core
 
 ## 🔍 Variable: eask-lisp-root
@@ -45,9 +109,7 @@ Points to `lisp` directory from the project root.
 
 ## 🔍 Function: eask-command ()
 
-Return the current command in string.
-
-Suppose the command is:
+Return the current command in string. Suppose the command is:
 
 ```sh
 $ eask init

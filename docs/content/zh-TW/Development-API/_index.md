@@ -32,6 +32,70 @@ weight: 700
   )
 ```
 
+# 🚩 環境
+
+## 🔍 變數: eask-has-colors
+
+如果終端支援顏色，則傳回非零。
+
+```elisp
+(when eask-has-colors ...
+```
+
+## 🔍 變數: eask-homedir
+
+Eask 的主目錄路徑。
+
+```elisp
+(message "%s" eask-homedir)
+```
+
+## 🔍 變數: eask-invocation
+
+Eask的呼叫程式路徑。
+
+```elisp
+(message "%s" eask-invocation)
+```
+
+它可以是 `node` 可執行檔或 `eask` 執行檔本身。
+
+## 🔍 變數: eask-is-pkg
+
+如果 Eask 已打包，則傳回非零。
+
+```elisp
+(when eask-is-pkg ...
+```
+
+## 🔍 變數: eask-rest
+
+命令分隔符號 `--` 之後的 Eask 參數；傳回一個列表。
+
+```sh
+$ eask <command> -- args0 args1
+```
+
+輸出:
+
+```elisp
+(message "%s" eask-rest)  ; '(args0 args1)
+```
+
+## 🔍 函式: eask-rest ()
+
+命令分隔符號 `--` 之後的 Eask 參數；傳回一個字串。
+
+```sh
+$ eask <command> -- args0 args1
+```
+
+輸出:
+
+```elisp
+(message "%s" (eask-rest))  ; "args0 args1"
+```
+
 # 🚩 核心
 
 ## 🔍 變數: eask-lisp-root
@@ -44,9 +108,7 @@ weight: 700
 
 ## 🔍 函式: eask-command ()
 
-返回字符串中的當前命令。
-
-假設命令是：
+返回字符串中的當前命令。假設命令是：
 
 ```sh
 $ eask init
