@@ -44,6 +44,7 @@
     ;;
     ;; We must split up all commands!
     (setq command (eask-s-replace " && " "\n" command)))
+  (setq command (concat command " " (eask-rest-args)))
   (write-region (concat command "\n") nil eask--run-file t))
 
 (defun eask--unmatched-scripts (scripts)
