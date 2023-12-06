@@ -272,7 +272,7 @@ The function `directory-empty-p' only exists 28.1 or above; copied it."
 
 (defun eask--guess-package-name (basename)
   "Convert the BASENAME to a valid, commonly seen package name."
-  (when-let ((name (downcase basename)))
+  (when-let ((name (ignore-errors (downcase basename))))
     (setq name (eask-s-replace "emacs-" "" name)
           name (eask-s-replace "-emacs" "" name)
           name (replace-regexp-in-string "[.-]el$" "" name))
