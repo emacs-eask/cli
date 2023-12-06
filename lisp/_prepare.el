@@ -270,18 +270,29 @@ The function `directory-empty-p' only exists 28.1 or above; copied it."
          ;; 27.2 or lower!
          (null (directory-files dir nil directory-files-no-dot-files-regexp t)))))
 
-(defun eask-guess-package-name ()
-  "Return the possible package name."
-  (or (eask-package-name)
-      (ignore-errors (file-name-nondirectory
-                      (file-name-sans-extension eask-package-file)))))
+(defun eask--guess-package-name (basename)
+  "Convert the BASENAME to a valid, commonly seen package name."
+  (when-let ((name (downcase basename)))
+    (setq name (eask-s-replace "emacs-" "" name)
+          name (eask-s-replace "-emacs" "" name)
+          name (replace-regexp-in-string "[.-]el$" "" name))
+    name))
 
-(defun eask-guess-entry-point (&optional project-name)
-  "Return the guess entry point by its PROJECT-NAME."
-  (let ((project-name (or project-name (eask-guess-package-name))))
-    (if (string-suffix-p ".el" project-name)
-        project-name
-      (format "%s.el" project-name))))
+(defun eask-guess-package-name (&optional basename)
+  "Return the possible package name.
+
+Optional argument BASENAME accepts a string; it will convert the string to a
+valid, commonly seen package name."
+  (or (eask--guess-package-name basename)
+      (eask-package-name)
+      (eask--guess-package-name
+       (ignore-errors (file-name-nondirectory
+                       (file-name-sans-extension eask-package-file))))))
+
+(defun eask-guess-entry-point (&optional basename)
+  "Return the guess entry point by its BASENAME."
+  (let ((name (eask-guess-package-name basename)))
+    (format "%s.el" name)))
 
 (defun eask-read-string (prompt &optional
                                 initial-input

@@ -115,10 +115,18 @@ async function create_eask_file(dir) {
 
   // Starting writing Eask-file!
   let name, version, description, entry_point, emacs_version, website_url, keywords;
-  await ask(`package name: (${basename}) `, (answer) => { name = answer || basename; });
+
+  let guessed_package_name = guess_package_name(basename);
+  let guessed_entry_point = guess_entry_point(basename);
+
+  await ask(`package name: (${guessed_package_name}) `, (answer) => {
+    name = answer || guessed_package_name;
+  });
   await ask(`version: (1.0.0) `, (answer) => { version = answer || '1.0.0'; });
   await ask(`description: `, (answer) => { description = answer; });
-  await ask(`entry point: (${guess_entry_point(basename)}) `, (answer) => { entry_point = answer || `${basename}.el`; });
+  await ask(`entry point: (${guessed_entry_point}) `, (answer) => {
+    entry_point = answer || guessed_entry_point;
+  });
   await ask(`emacs version: (26.1) `, (answer) => { emacs_version = answer || '26.1'; });
   await ask(`website: `, (answer) => { website_url = answer; });
   await ask(`keywords: `, (answer) => { keywords = answer; });
@@ -189,14 +197,25 @@ function check_eask_filename(name) {
 }
 
 /**
- * Return the guess entry point by its basname.
- * @param { String } basename - The directory name.
+ * Return the guessed project name by its basename.
+ * @param { String } basename - The working directory name.
+ * @return Guessed project name.
+ */
+function guess_package_name(basename) {
+  basename = basename.toLowerCase();
+  basename = basename.replaceAll('emacs-', '');
+  basename = basename.replaceAll('-emacs', '');
+  basename = basename.replace(/[-.]el$/, '');
+  return basename;
+}
+
+/**
+ * Return the guessed entry point by its basname.
+ * @param { String } basename - The working directory name.
  * @return Guessed entry point filename.
  */
 function guess_entry_point(basename) {
-  if (basename.endsWith(".el")) {
-    return basename;
-  }
+  basename = guess_package_name(basename);
   return basename + ".el";
 }
 
