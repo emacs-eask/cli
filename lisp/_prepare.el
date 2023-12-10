@@ -1078,6 +1078,8 @@ This uses function `locate-dominating-file' to look up directory tree."
           (custom-file (locate-user-emacs-file "custom.el")))
      ,@body))
 
+;; NOTE: If you modified this function, make sure you modified `core/emacs.el'
+;; file as well!
 (defun eask--load-config ()
   "Load configuration if valid."
   (let ((inhibit-config (eask-quick-p)))
