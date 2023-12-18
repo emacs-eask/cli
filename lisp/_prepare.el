@@ -315,10 +315,8 @@ and INHERIT-INPUT-METHOD see function `read-string' for more information."
   "Get column at POINT."
   (save-excursion (goto-char point) (current-column)))
 
-(defcustom eask-buffer-name "*eask*"
-  "Buffer name is used for temporary storage throughout the life cycle."
-  :type 'string
-  :group 'eask)
+(defconst eask-buffer-name "*eask*"
+  "Buffer name is used for temporary storage throughout the life cycle.")
 
 (defmacro eask-with-buffer (&rest body)
   "Create a temporary buffer (for this program), and evaluate BODY there."
