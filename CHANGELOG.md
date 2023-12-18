@@ -11,6 +11,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * fix: Unsilent in Eask-file by default (40d82becaf20f0851e5fc37aa17c5f6871c163a3)
 * Make better use for `special` commands (#206)
 * feat: Accept rest arguments after command line separator (#207)
+* feat(_prepare.el): Add program temp buffer (6262821596edb48d4f3b9bc61405129e084350b1)
+* fix(indent.el): Further improve indent-lint (c0bf56ccc0c47846cd314067fde6ee4eeedee5aa)
 
 ## 0.9.x
 > Released Nov 17, 2023
