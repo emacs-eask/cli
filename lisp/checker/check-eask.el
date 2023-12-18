@@ -33,10 +33,6 @@
   "Return pretty JSON."
   (with-temp-buffer (insert json) (json-pretty-print-buffer) (buffer-string)))
 
-(defun eask--column-at-point (point)
-  "Get column at POINT."
-  (save-excursion (goto-char point) (current-column)))
-
 (defun eask--load-buffer ()
   "Return the current file loading session."
   (car (cl-remove-if-not
