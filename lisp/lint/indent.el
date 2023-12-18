@@ -27,25 +27,41 @@
 ;;
 ;;; Core
 
-(defun eask--undo-lines (undo-list)
-  "Return list of lines changed in UNDO-LIST."
-  (let ((lines))
+(defun eask--undo-pos (entry)
+  "Return the undo pos from ENTRY."
+  (cl-typecase (car entry)
+    (number (car entry))
+    (string (abs (cdr entry)))))
+
+(defun eask--undo-infos (undo-list)
+  "Return list of infos in UNDO-LIST."
+  (let ((infos))
     (dolist (elm undo-list)
-      (when (and (consp elm) (numberp (cdr elm)))
-        (push (line-number-at-pos (abs (cdr elm))) lines)))
-    (reverse lines)))
+      (when-let* ((pos (eask--undo-pos elm))
+                  (line (line-number-at-pos pos))
+                  (expected (progn (eask--goto-line line)
+                                   (current-indentation))))
+        (push (list line expected) infos)))
+    infos))
 
 (defun eask--indent-lint-file (file)
   "Lint indent for FILE."
   (eask-msg "")
   (eask-msg "`%s` with indent-lint" (ansi-green (eask-root-del file)))
   (find-file file)
-  (let ((tick (buffer-modified-tick)))
+  (let ((tick (buffer-modified-tick))
+        (bs (buffer-string)))
+    (eask-with-temp-buffer (insert bs))
     (eask--silent (indent-region (point-min) (point-max)))
     (if (/= tick (buffer-modified-tick))
         ;; Indentation changed: warn for each line.
-        (dolist (line (eask--undo-lines buffer-undo-list))
-          (eask-report "%s:%s: mismatch indentation" (buffer-name) line))
+        (dolist (info (eask--undo-infos buffer-undo-list))
+          (let* ((line    (nth 0 info))
+                 (column  (nth 1 info))
+                 (current (eask-with-buffer
+                            (eask--goto-line line) (current-indentation))))
+            (eask-report "%s:%s: Expected indentation is %s but found %s"
+                         (buffer-name) line column current)))
       (eask-log "No mismatch indentation found"))))
 
 (eask-start
