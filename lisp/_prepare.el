@@ -306,6 +306,30 @@ and INHERIT-INPUT-METHOD see function `read-string' for more information."
   (let ((str (read-string prompt initial-input history default-value inherit-input-method)))
     (eask-s-replace "\"" "" str)))
 
+(defun eask--goto-line (line)
+  "Go to LINE."
+  (goto-char (point-min))
+  (forward-line (1- line)))
+
+(defun eask--column-at-point (point)
+  "Get column at POINT."
+  (save-excursion (goto-char point) (current-column)))
+
+(defcustom eask-buffer-name "*eask*"
+  "Buffer name is used for temporary storage throughout the life cycle."
+  :type 'string
+  :group 'eask)
+
+(defmacro eask-with-buffer (&rest body)
+  "Create a temporary buffer (for this program), and evaluate BODY there."
+  (declare (indent 0) (debug t))
+  `(with-current-buffer (get-buffer-create ,eask-buffer-name) ,@body))
+
+(defmacro eask-with-temp-buffer (&rest body)
+  "Create a temporary buffer (for this program), and evaluate BODY there."
+  (declare (indent 0) (debug t))
+  `(eask-with-buffer (erase-buffer) ,@body))
+
 ;;
 ;;; Progress
 
