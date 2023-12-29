@@ -663,10 +663,10 @@ Argument BODY are forms for execution."
         (if (eask-strict-p)
             (eask-error "  - %sSkipping %s (%s)... it requires Emacs %s and above ✗"
                         eask--action-prefix
-                        pkg (eask-package--version-string pkg) emacs-version)
+                        pkg (eask-package--version-string pkg) req-emacs)
           (eask-msg "  - %sSkipping %s (%s)... it requires Emacs %s and above ✗"
                     eask--action-prefix
-                    name version (ansi-yellow emacs-version)))))
+                    name version (ansi-yellow req-emacs)))))
      (t
       (eask--pkg-process pkg
         (eask-with-progress
