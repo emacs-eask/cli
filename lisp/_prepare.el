@@ -483,15 +483,18 @@ Arguments FNC and ARGS are used for advice `:around'."
 ;;
 ;;; Package
 
-(defun eask-install-package-build ()
-  "Correct way to install the package `package-build'."
-  (cond ((version< emacs-version "27.1")
-         (add-to-list 'load-path
-                      (format "%sextern/package-build/%s/" eask-lisp-root
-                              emacs-major-version)
-                      t))
-        (t (eask-with-archives "melpa"
-             (eask-package-install 'package-build)))))
+(defun eask-load-legacy-package-build ()
+  "Load the legacy `package-build' package."
+  (eask-with-progress
+    (let ((name (ansi-green"package-build"))
+          (version (ansi-yellow (eask-2str emacs-major-version))))
+      (format "  - %sInstalling legacy %s (%s)... " eask--action-prefix name version))
+    (add-to-list 'load-path
+                 (format "%sextern/package-build/%s/"
+                         eask-lisp-root
+                         emacs-major-version)
+                 t)
+    "done ✓"))
 
 (defun eask--update-exec-path ()
   "Add all bin directory to the variable `exec-path'."
@@ -547,7 +550,8 @@ scope of the dependencies (it's either `production' or `development')."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (when eask-depends-on-recipe-p
     (eask-log "Installing required external packages...")
-    (eask-install-package-build)
+    (eask-with-archives "melpa"
+      (eask-package-install 'package-build))
     (eask-with-progress
       "Building temporary archives (this may take a while)... "
       (eask-with-verbosity 'debug (github-elpa-build))
@@ -642,6 +646,9 @@ Argument BODY are forms for execution."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (eask--pkg-process pkg
     (cond
+     ((and (equal (eask-2str pkg) "package-build")
+           (version< emacs-version "27.1"))
+      (eask-load-legacy-package-build))
      ((package-installed-p pkg)
       (eask-msg "  - %sSkipping %s (%s)... already installed ✗"
                 eask--action-prefix

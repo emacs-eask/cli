@@ -206,8 +206,8 @@ Optional argument CONTENTS is used for nested directives.  e.g. development."
 
 (eask-start
   ;; Preparation
-  (eask-install-package-build)
   (eask-with-archives `("jcs-elpa" "melpa")
+    (eask-package-install 'package-build)
     (eask-package-install 'cask))
 
   ;; Start Converting
