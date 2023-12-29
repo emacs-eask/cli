@@ -483,6 +483,21 @@ Arguments FNC and ARGS are used for advice `:around'."
 ;;
 ;;; Package
 
+(defun eask-use-legacy-package-build ()
+  "Return t if using the legacy `package-build' package."
+  (version< emacs-version "27.1"))
+
+(defun eask-load-legacy-package-build ()
+  "Load the legacy `package-build' package."
+  (when (eask-use-legacy-package-build)
+    (add-to-list 'load-path
+                 (format "%sextern/package-build/%s/"
+                         eask-lisp-root
+                         emacs-major-version)
+                 t)))
+
+(eask-load-legacy-package-build)
+
 (defun eask--update-exec-path ()
   "Add all bin directory to the variable `exec-path'."
   (dolist (entry (directory-files package-user-dir t directory-files-no-dot-files-regexp))
@@ -1460,7 +1475,11 @@ ELPA)."
         (eask-with-verbosity 'debug
           (eask-with-progress
             (ansi-blue (format "Generating recipe for package %s... " (ansi-yellow pkg)))
-            (write-region (pp-to-string recipe) nil (expand-file-name pkg github-elpa-recipes-dir))
+            (progn
+              (ignore-errors (make-directory github-elpa-recipes-dir t))
+              (with-current-buffer (find-file (expand-file-name pkg github-elpa-recipes-dir))
+                (insert (pp-to-string recipe))
+                (save-buffer)))
             (ansi-blue "done ✓")))
         (setq eask-depends-on-recipe-p t))
       recipe))))
@@ -1972,14 +1991,6 @@ variable we use to test validation."
   (setq eask-lint-first-file-p t))
 
 ;;
-;;; Externals
-
-(eask-load "extern/compat")
-(eask-load "extern/ansi")
-(eask-load "extern/package")
-(eask-load "extern/package-build")
-
-;;
 ;;; API
 
 (defvar eask-commands nil
@@ -1992,5 +2003,13 @@ variable we use to test validation."
   (push name eask-commands)
   (setq eask-commands (delete-dups eask-commands))
   `(defun ,name nil ,@body))
+
+;;
+;;; Externals
+
+(eask-load "extern/compat")
+(eask-load "extern/ansi")
+(eask-load "extern/package")
+(eask-load "extern/package-build")
 
 ;;; _prepare.el ends here

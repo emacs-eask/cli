@@ -25,4 +25,4 @@ set -e
 # Naviate to the test package
 cd "./test/fixtures/mini.emacs.pkg.1/"
 
-eask docker 26.1 info
+eask docker 27.1 info
