@@ -1475,11 +1475,7 @@ ELPA)."
         (eask-with-verbosity 'debug
           (eask-with-progress
             (ansi-blue (format "Generating recipe for package %s... " (ansi-yellow pkg)))
-            (progn
-              (ignore-errors (make-directory github-elpa-recipes-dir t))
-              (with-current-buffer (find-file (expand-file-name pkg github-elpa-recipes-dir))
-                (insert (pp-to-string recipe))
-                (save-buffer)))
+            (write-region (pp-to-string recipe) nil (expand-file-name pkg github-elpa-recipes-dir))
             (ansi-blue "done ✓")))
         (setq eask-depends-on-recipe-p t))
       recipe))))
