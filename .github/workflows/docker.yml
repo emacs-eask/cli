@@ -29,14 +29,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]  # XXX: `windows-latest` is not possible at the moment!
-        emacs-version:
-          - 29.1
 
     steps:
-    - uses: jcs090218/setup-emacs@master
-      with:
-        version: ${{ matrix.emacs-version }}
-
     - uses: actions/checkout@v4
 
     - name: Install Docker
