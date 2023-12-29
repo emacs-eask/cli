@@ -483,18 +483,20 @@ Arguments FNC and ARGS are used for advice `:around'."
 ;;
 ;;; Package
 
+(defun eask-use-legacy-package-build ()
+  "Return t if using the legacy `package-build' package."
+  (version< emacs-version "27.1"))
+
 (defun eask-load-legacy-package-build ()
   "Load the legacy `package-build' package."
-  (eask-with-progress
-    (let ((name (ansi-green"package-build"))
-          (version (ansi-yellow (eask-2str emacs-major-version))))
-      (format "  - %sInstalling legacy %s (%s)... " eask--action-prefix name version))
+  (when (eask-use-legacy-package-build)
     (add-to-list 'load-path
                  (format "%sextern/package-build/%s/"
                          eask-lisp-root
                          emacs-major-version)
-                 t)
-    "done ✓"))
+                 t)))
+
+(eask-load-legacy-package-build)
 
 (defun eask--update-exec-path ()
   "Add all bin directory to the variable `exec-path'."
@@ -646,9 +648,6 @@ Argument BODY are forms for execution."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (eask--pkg-process pkg
     (cond
-     ((and (equal (eask-2str pkg) "package-build")
-           (version< emacs-version "27.1"))
-      (eask-load-legacy-package-build))
      ((package-installed-p pkg)
       (eask-msg "  - %sSkipping %s (%s)... already installed ✗"
                 eask--action-prefix
