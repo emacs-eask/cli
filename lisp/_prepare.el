@@ -483,6 +483,16 @@ Arguments FNC and ARGS are used for advice `:around'."
 ;;
 ;;; Package
 
+(defun eask-install-package-build ()
+  "Correct way to install the package `package-build'."
+  (cond ((version< emacs-version "27.1")
+         (add-to-list 'load-path
+                      (format "%sextern/package-build/%s/" eask-lisp-root
+                              emacs-major-version)
+                      t))
+        (t (eask-with-archives "melpa"
+             (eask-package-install 'package-build)))))
+
 (defun eask--update-exec-path ()
   "Add all bin directory to the variable `exec-path'."
   (dolist (entry (directory-files package-user-dir t directory-files-no-dot-files-regexp))
@@ -537,8 +547,7 @@ scope of the dependencies (it's either `production' or `development')."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (when eask-depends-on-recipe-p
     (eask-log "Installing required external packages...")
-    (eask-with-archives "melpa"
-      (eask-package-install 'package-build))
+    (eask-install-package-build)
     (eask-with-progress
       "Building temporary archives (this may take a while)... "
       (eask-with-verbosity 'debug (github-elpa-build))
@@ -1972,14 +1981,6 @@ variable we use to test validation."
   (setq eask-lint-first-file-p t))
 
 ;;
-;;; Externals
-
-(eask-load "extern/compat")
-(eask-load "extern/ansi")
-(eask-load "extern/package")
-(eask-load "extern/package-build")
-
-;;
 ;;; API
 
 (defvar eask-commands nil
@@ -1992,5 +1993,13 @@ variable we use to test validation."
   (push name eask-commands)
   (setq eask-commands (delete-dups eask-commands))
   `(defun ,name nil ,@body))
+
+;;
+;;; Externals
+
+(eask-load "extern/compat")
+(eask-load "extern/ansi")
+(eask-load "extern/package")
+(eask-load "extern/package-build")
 
 ;;; _prepare.el ends here
