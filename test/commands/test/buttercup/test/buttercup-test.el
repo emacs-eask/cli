@@ -1,6 +1,6 @@
 ;;; buttercup-test.el --- Test the command buttercup  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2022  Jen-Chieh Shen
+;; Copyright (C) 2022-2024  the Eask authors.
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by

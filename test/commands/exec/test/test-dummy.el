@@ -1,6 +1,6 @@
 ;;; test-dummy.el --- Dummy buttercup test  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2023  Shen, Jen-Chieh
+;; Copyright (C) 2023  the Eask authors.
 
 ;; This file is not part of GNU Emacs.
 

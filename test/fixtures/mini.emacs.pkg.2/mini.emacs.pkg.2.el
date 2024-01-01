@@ -1,6 +1,6 @@
 ;;; mini.emacs.pkg.2.el --- Minimal test package  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2022-2023  Shen, Jen-Chieh
+;; Copyright (C) 2022-2024  the Eask authors.
 ;; Created date 2022-03-29 01:52:58
 
 ;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>
