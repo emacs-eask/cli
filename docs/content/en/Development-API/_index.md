@@ -235,7 +235,7 @@ Scope that temporary makes archives available.
 
 ```elisp
 (eask-with-archives "melpa"
-  (eask-package-install 'package-build))  ; install packages that are only defined in MELPA
+  (eask-package-install 'dash))  ; install packages that are only defined in MELPA
 ```
 
 {{< hint info >}}

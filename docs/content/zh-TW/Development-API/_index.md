@@ -232,7 +232,7 @@ $ eask init
 
 ```elisp
 (eask-with-archives "melpa"
-  (eask-package-install 'package-build))  ; 安裝僅在 MELPA 中定義的包
+  (eask-package-install 'dash))  ; 安裝僅在 MELPA 中定義的包
 ```
 
 {{< hint info >}}
