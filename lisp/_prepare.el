@@ -552,7 +552,7 @@ scope of the dependencies (it's either `production' or `development')."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (when eask-depends-on-recipe-p
     (eask-log "Installing required external packages...")
-    (eask-with-archives "melpa"
+    (eask-with-archives '("gnu" "melpa")
       (eask-package-install 'package-build))
     (eask-with-progress
       "Building temporary archives (this may take a while)... "
