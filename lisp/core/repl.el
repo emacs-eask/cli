@@ -39,6 +39,7 @@
     (while (setq input (read-from-minibuffer (ansi-blue "ELISP> ")))
       (with-current-buffer "*ielm*"
         (insert input)
+        (setq eask--repl-old-pos (point))  ; skip all input
         (eask--silent (ielm-send-input))
         (eask--repl-output)))))
 
