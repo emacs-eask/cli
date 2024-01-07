@@ -2,7 +2,7 @@
          "0.0.1"
          "Test (trigger) error on GitHub Actions")
 
-(source "gnu")
-(source "melpa")
+(source 'gnu)
+(source 'melpa)
 
 (depends-on "emacs" "999.99")  ; This is the error we are going to see!

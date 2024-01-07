@@ -4,8 +4,8 @@
 
 (package-file "buttercup.el")
 
-(source "gnu")
-(source "melpa")
+(source 'gnu)
+(source 'melpa)
 
 (development
  (depends-on "buttercup"))

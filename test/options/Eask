@@ -7,6 +7,6 @@
 
 (package-file "options.el")
 
-(source "gnu")
+(source 'gnu)
 
 (depends-on "emacs" "26.1")
