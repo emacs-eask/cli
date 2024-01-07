@@ -14,6 +14,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * feat(_prepare.el): Add program temp buffer (6262821596edb48d4f3b9bc61405129e084350b1)
 * fix(indent.el): Further improve indent-lint (c0bf56ccc0c47846cd314067fde6ee4eeedee5aa)
 * fix: Compatible to Emacs 26.x (#209)
+* feat(repl): Add the Elisp REPL command (#210)
 
 ## 0.9.x
 > Released Nov 17, 2023

@@ -159,7 +159,7 @@ These commands will first respect the current workspace.  If the current
 workspace has no valid Eask-file; it will load global workspace instead."
   (member (eask-command) '("init/cask" "init/eldev" "init/keg"
                            "init/source"
-                           "bump" "cat" "keywords"
+                           "bump" "cat" "keywords" "repl"
                            "generate/ignore" "generate/license"
                            "test/melpazoid")))
 
