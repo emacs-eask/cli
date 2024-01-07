@@ -27,8 +27,8 @@
 (script "test" "echo \"Error: no test specified\" && exit 1")
 (script "test" "echo \"Error: no test specified\" && exit 1")
 
-(source "gnu")                                           ; duplicate archives
-(source "gnu")
+(source 'gnu)                                            ; duplicate archives
+(source 'gnu)
 
 (source "magic-archive")                                 ; Unkown archive
 
