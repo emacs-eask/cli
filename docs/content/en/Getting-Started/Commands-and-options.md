@@ -292,9 +292,9 @@ $ eask [GLOBAL-OPTIONS] concate [FILES..]
 
 # 🚩 Execution
 
-Commands allow you execute on top of Eask core.
+Commands allow you to execute on top of the Eask core.
 
-Basically, this allow you to do anything you want!
+Basically, this allows you to do anything you want!
 
 ## 🔍 eask load
 
@@ -327,6 +327,16 @@ Evaluate `FORM` as a lisp form.
 ```sh
 $ eask [GLOBAL-OPTIONS] eval [FORM]
 ```
+
+## 🔍 eask repl
+
+Start the Elisp REPL.
+
+```sh
+$ eask [GLOBAL-OPTIONS] repl [FILES..]
+```
+
+Alias: `ielm`
 
 ## 🔍 eask run script
 

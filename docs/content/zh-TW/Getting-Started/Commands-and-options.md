@@ -324,6 +324,16 @@ $ eask [GLOBAL-OPTIONS] emacs [ARGUMENTS ...]
 $ eask [GLOBAL-OPTIONS] eval [FORM]
 ```
 
+## 🔍 eask repl
+
+啟動 Elisp REPL。
+
+```sh
+$ eask [GLOBAL-OPTIONS] repl [FILES..]
+```
+
+別名: `ielm`
+
 ## 🔍 eask run script
 
 運行腳本。

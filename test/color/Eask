@@ -4,6 +4,6 @@
 
 (package-file "color.el")
 
-(source "gnu")
+(source 'gnu)
 
 (depends-on "emacs" "26.1")

@@ -4,8 +4,8 @@
 
 (package-file "outdated-upgrade.el")
 
-(source "gnu")
-(source "melpa")
+(source 'gnu)
+(source 'melpa)
 
 (depends-on "f")
 (depends-on "s")

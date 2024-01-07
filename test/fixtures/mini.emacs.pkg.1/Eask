@@ -19,9 +19,9 @@
   "Test command 3."
   (message "Test 3: %s" eask-rest))
 
-(source "gnu")
-(source "melpa")
-(source "jcs-elpa")
+(source 'gnu)
+(source 'melpa)
+(source 'jcs-elpa)
 
 (depends-on "emacs" "26.1")
 (depends-on "f")

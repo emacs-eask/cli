@@ -9,6 +9,7 @@
 
 (exec-paths "./bin/")
 
+(source 'gnu)
 (source 'melpa)
 
 (depends-on "emacs" "26.1")

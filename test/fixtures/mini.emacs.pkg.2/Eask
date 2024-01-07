@@ -12,9 +12,9 @@
 (script "test" "echo \"Have a nice day!~ ;)\"")
 (script "info" "eask info")
 
-(source "gnu")
-(source "melpa")
-(source "jcs-elpa")
+(source 'gnu)
+(source 'melpa)
+(source 'jcs-elpa)
 
 (depends-on "emacs" "26.1")
 (depends-on "f")
