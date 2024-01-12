@@ -60,7 +60,7 @@
 
 (eask-start
   ;; Preparation
-  (eask-with-archives "melpa"
+  (eask-with-archives '("gnu" "melpa")
     (eask-package-install 'elsa))
   (setq eask--elsa-version (eask-package--version-string 'elsa))
 

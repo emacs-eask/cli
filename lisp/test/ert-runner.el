@@ -20,7 +20,7 @@
             (when (= eask-verbosity 4) (setq ert-runner-verbose t))))
 
 (eask-start
-  (eask-with-archives "melpa"
+  (eask-with-archives '("gnu" "melpa")
     (eask-package-install 'ert-runner))
   (require 'ert-runner))
 

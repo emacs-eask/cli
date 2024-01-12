@@ -30,7 +30,7 @@
 
 (eask-start
   ;; Preparation
-  (eask-with-archives "melpa"
+  (eask-with-archives '("gnu" "melpa")
     (eask-package-install 'package-lint)
     (eask-package-install 'pkg-info))
   ;; Start test
