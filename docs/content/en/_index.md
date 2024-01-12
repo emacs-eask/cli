@@ -5,7 +5,7 @@ geekdocAlign: center
 geekdocAnchor: false
 ---
 
-### CLI for building, runing, testing, and managing your Emacs Lisp dependencies
+### CLI for building, running, testing, and managing your Emacs Lisp dependencies
 
 <p>
 <img src="/logo.png" width="15%" />

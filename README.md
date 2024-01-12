@@ -1,7 +1,7 @@
 <a href="#"><img align="right" src="./docs/static/logo.png" width="20%"></a>
 
 # Eask
-> CLI for building, runing, testing, and managing your Emacs Lisp dependencies
+> CLI for building, running, testing, and managing your Emacs Lisp dependencies
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-green.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Emacs Version](https://img.shields.io/badge/Emacs-26.1+-7F5AB6.svg?logo=gnu%20emacs&logoColor=white)](https://www.gnu.org/software/emacs/download.html)
