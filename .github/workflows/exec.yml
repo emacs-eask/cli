@@ -33,7 +33,7 @@ jobs:
         emacs-version:
           - 27.2
           - 28.2
-          - 29.2
+          - ${{ vars.EMACS_VER }}
         experimental: [false]
         include:
           - os: ubuntu-latest
