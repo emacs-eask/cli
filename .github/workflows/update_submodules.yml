@@ -18,11 +18,6 @@ jobs:
         persist-credentials: false
         fetch-depth: 0 
 
-    - name: Set git config
-      run: |
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-
     - name: Submodule update
       run: |
         git submodule init
@@ -31,7 +26,6 @@ jobs:
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v5
       with:
-        token: ${{ secrets.PAT }}
         title: 'Update submodules'
         body: ''
         commit-message: 'Update all submodules'
