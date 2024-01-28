@@ -734,6 +734,16 @@ Define each log level color.
         (error . ansi-red)))
 ```
 
+## 🔍 Function: eask-reach-verbosity-p (`symbol`)
+
+Make execution when it reaches the verbosity level.
+
+```elisp
+(when (eask-reach-verbosity-p 'debug)
+  ;; TODO: execution here..
+  )
+```
+
 ## 🔍 Macro: eask-with-verbosity (`symbol` &rest `body`)
 
 Define verbosity scope.

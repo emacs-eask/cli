@@ -726,6 +726,16 @@ $ cat /.log/messages.log
         (error . ansi-red)))
 ```
 
+## 🔍 函式: eask-reach-verbosity-p (`symbol`)
+
+達到詳細等級時執行。
+
+```elisp
+(when (eask-reach-verbosity-p 'debug)
+  ;; TODO: 在這裡執行..
+  )
+```
+
 ## 🔍 巨集: eask-with-verbosity (`symbol` &rest `body`)
 
 定義消息範圍。
