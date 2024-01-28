@@ -1098,11 +1098,12 @@ This uses function `locate-dominating-file' to look up directory tree."
   `(let* ((command (eask-command))
           (before  (concat "eask-before-" command "-hook"))
           (after   (concat "eask-after-" command "-hook")))
-     (run-hooks 'eask-before-command-hook)
-     (run-hooks (intern before))
-     ,@body
-     (run-hooks (intern after))
-     (run-hooks 'eask-after-command-hook)))
+     (eask--unsilent
+       (run-hooks 'eask-before-command-hook)
+       (run-hooks (intern before))
+       ,@body
+       (run-hooks (intern after))
+       (run-hooks 'eask-after-command-hook))))
 
 (defmacro eask--setup-home (dir &rest body)
   "Set up config directory in DIR, then execute BODY."
@@ -1538,7 +1539,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 (debug), 5 (all)."
     (`error 0)
     (t symbol)))
 
-(defun eask--reach-verbosity-p (symbol)
+(defun eask-reach-verbosity-p (symbol)
   "Return t if SYMBOL reach verbosity (should be printed)."
   (>= eask-verbosity (eask--verb2lvl symbol)))
 
@@ -1547,7 +1548,7 @@ Standard is, 0 (error), 1 (warning), 2 (info), 3 (log), 4 (debug), 5 (all)."
 
 Execute forms BODY limit by the verbosity level (SYMBOL)."
   (declare (indent 1) (debug t))
-  `(if (eask--reach-verbosity-p ,symbol) (progn ,@body)
+  `(if (eask-reach-verbosity-p ,symbol) (progn ,@body)
      (eask--silent ,@body)))
 
 (defmacro eask-with-verbosity-override (symbol &rest body)
@@ -1555,7 +1556,7 @@ Execute forms BODY limit by the verbosity level (SYMBOL)."
 
 Execute forms BODY limit by the verbosity level (SYMBOL)."
   (declare (indent 1) (debug t))
-  `(if (eask--reach-verbosity-p ,symbol) (eask--unsilent ,@body)
+  `(if (eask-reach-verbosity-p ,symbol) (eask--unsilent ,@body)
      (eask--silent ,@body)))
 
 (defun eask--ansi (symbol string)
