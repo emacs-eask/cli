@@ -34,7 +34,11 @@
 
 (add-hook 'eask-before-command-hook
           (lambda ()
-            (setq package-lint-batch-fail-on-warnings t)))
+            (when (and (not (boundp 'package-lint-batch-fail-on-warnings))
+                       (not (eask-strict-p)))
+              ;; TODO: This doesn't work since this variable only controls
+              ;; `package-lint' exit code.
+              (setq package-lint-batch-fail-on-warnings nil))))
 
 ;;
 ;;; Core
