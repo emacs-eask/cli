@@ -41,8 +41,6 @@
             (end-of-line)
             (let ((spaces (spaces-string (current-column))))
               (delete-region (line-beginning-position) (line-end-position))
-              (message "minimum-version: %s" minimum-version)
-              (message "version<= minimum-version 27.1 ---- %s" (version<= minimum-version "27.1"))
               (when (version<= minimum-version "26.3")
                 (insert spaces "  - 26.3" "\n"))
               (when (version<= minimum-version "27.2")
