@@ -15,6 +15,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * fix(indent.el): Further improve indent-lint (c0bf56ccc0c47846cd314067fde6ee4eeedee5aa)
 * fix: Compatible to Emacs 26.x (#209)
 * feat(repl): Add the Elisp REPL command (#210)
+* fix(generate/workflow): Require emacs version (f643c5da8992bf8b93287578dd8f3b553398ad85)
 
 ## 0.9.x
 > Released Nov 17, 2023
