@@ -29,8 +29,10 @@
 
 (add-hook 'eask-before-command-hook
           (lambda ()
-            (when (eask-strict-p)      (setq byte-compile-error-on-warn t))
-            (when (= eask-verbosity 4) (setq byte-compile-verbose t))))
+            (when (eask-strict-p)
+              (setq byte-compile-error-on-warn t))
+            (when (eask-reach-verbosity-p 'debug)
+              (setq byte-compile-verbose t))))
 
 ;;
 ;;; Core

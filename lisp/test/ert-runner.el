@@ -17,7 +17,8 @@
 ;; Handle options
 (add-hook 'eask-before-command-hook
           (lambda ()
-            (when (= eask-verbosity 4) (setq ert-runner-verbose t))))
+            (when (eask-reach-verbosity-p 'debug)
+              (setq ert-runner-verbose t))))
 
 (eask-start
   (eask-with-archives '("gnu" "melpa")
