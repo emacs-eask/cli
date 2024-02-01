@@ -17,7 +17,7 @@
 
 "use strict";
 
-exports.command = ['package [destination]'];
+exports.command = ['package [destination]', 'pack [destination]'];
 exports.desc = 'Build a package artifact, and put it into the given destination';
 exports.builder = yargs => yargs
   .positional(

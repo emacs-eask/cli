@@ -170,6 +170,8 @@ $ eask uninstall
 
 構建包工件。
 
+別名: `pack`
+
 ```sh
 $ eask package [DESTINATION]
 ```

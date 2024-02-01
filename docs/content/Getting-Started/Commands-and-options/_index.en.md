@@ -172,6 +172,8 @@ $ eask uninstall
 
 Build the package artifact.
 
+Alias: `pack`
+
 ```sh
 $ eask package [DESTINATION]
 ```
