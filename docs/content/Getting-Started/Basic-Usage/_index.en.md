@@ -202,7 +202,6 @@ By default, Eask uses your current directory as your workspace since most of
 the time you would just want to operate jobs for your elisp packages.
 
 
-<!-- 
-   - Links 
-   -->
+<!-- Links -->
+
 [e2ansi]: https://github.com/Lindydancer/e2ansi

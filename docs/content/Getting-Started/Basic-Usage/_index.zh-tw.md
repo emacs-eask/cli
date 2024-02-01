@@ -187,7 +187,6 @@ $ eask cat [PATTERNS..]
 默認情況下，Eask 使用您的當前目錄作為您的工作區，因為大多數時候您只想為您的 elisp 包運行作業。
 
 
-<!-- 
-   - Links 
-   -->
+<!-- Links -->
+
 [e2ansi]: https://github.com/Lindydancer/e2ansi

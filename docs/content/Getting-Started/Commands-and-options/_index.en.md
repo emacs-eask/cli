@@ -1020,6 +1020,8 @@ Do not use a proxy for any URL matching pattern.
 `<pattern>`is an Emacs regular expression.
 
 
+<!-- Links -->
+
 [Cask]: https://github.com/cask/cask
 [Eldev]: https://emacs-eldev.github.io/eldev/
 [Keg]: https://github.com/conao3/keg.el

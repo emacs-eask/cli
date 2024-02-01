@@ -130,6 +130,8 @@ The design of Eask was greatly influenced by the following projects:
 * [Eldev][] - Elisp Development Tool
 
 
+<!-- Links -->
+
 [emacs-eask/archives]: https://github.com/emacs-eask/archives
 [Cask]: https://github.com/cask/cask
 [makem.sh]: https://github.com/alphapapa/makem.sh

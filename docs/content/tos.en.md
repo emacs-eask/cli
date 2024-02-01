@@ -43,4 +43,6 @@ that they can no further help with diagnosing the problem or the problem is solv
 This web page does not use any cookies.
 
 
+<!-- Links -->
+
 [GDPR]: https://gdpr-info.eu/art-6-gdpr/

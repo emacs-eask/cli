@@ -146,6 +146,9 @@ set PATH=%PATH%;c:/path/to/eask/bin
 
 正確設置後，嘗試 `eask --version` 然後您應該會看到當前 eask 的版本號！ 🎉🎊
 
+
+<!-- Links -->
+
 [Git]: https://git-scm.com/
 [Node.js]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/
