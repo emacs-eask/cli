@@ -58,12 +58,12 @@ made? Drop support? Project's layout? Etc.
 |                | Eask              | Cask                        | Eldev          | makem.sh                    |
 |----------------|-------------------|-----------------------------|----------------|-----------------------------|
 | bin folder     | binary, bash, bat | bash, bat                   | bash, bat, ps1 | bash                        |
-| Cross-Platform | yes               | no, doesn't support Windows | yes            | no, doesn't support Windows |
+| Cross-Platform | ✅                | ❌, doesn't support Windows | ✅             | ❌, doesn't support Windows |
 | Emacs version  | 26.1+             | 24.5+                       | 24.4+          | 26.1+                       |
 | Size           | 7,000+ lines      | 3,000+ lines                | 8,000+ lines   | 1,200+ lines                |
-| Executable     | yes               | no                          | no             | no                          |
-| Pure Elisp     | no, JavaScript    | yes                         | yes            | yes                         |
-| CLI Parser     | yargs             | commander                   | built-in       | built-in                    |
+| Executable     | ✅                | ❌                          | ❌             | ❌                          |
+| Pure Elisp     | ❌, JavaScript    | ✅                          | ✅             | ✅                          |
+| CLI Parser     | [yargs][]         | [commander][]               | built-in       | built-in                    |
 
 {{< hint info >}}
 💡 **makem.sh** has a good comparisons document as well, visit their [site](https://github.com/alphapapa/makem.sh#comparisons)
@@ -78,20 +78,20 @@ If the features are not listed below, either it is forgotten or simply
 considered too essential, so every tool has it; hence we don't add them to the
 list.
 
-|                           | Eask                             | Cask         | Eldev           | makem.sh |
-|---------------------------|----------------------------------|--------------|-----------------|----------|
-| Elisp configuration       | yes, DSL is optional             | no, DSL only | yes, pure elisp | no       |
-| Handle `archives` failure | yes, see [emacs-eask/archives][] | no           | no              | no       |
-| `create` project, etc     | yes                              | no           | no              | no       |
-| `link` local dependencies | yes                              | yes          | yes             | no       |
-| `exec` program            | yes                              | yes          | no              | no       |
-| `eval` expressions        | yes                              | yes          | yes             | no       |
-| `emacs` execution         | yes                              | yes          | no              | no       |
-| Built-in `linters`        | yes                              | no           | yes             | no       |
-| Built-in `tests`          | yes                              | no           | yes             | no       |
-| Run script                | yes                              | no           | no              | no       |
-| Self-defined commands     | no, replaced with run script     | no           | yes             | no       |
-| Subcommand                | yes                              | no           | no              | no       |
+|                           | Eask                                    | Cask                     | Eldev          | makem.sh |
+|---------------------------|-----------------------------------------|--------------------------|----------------|----------|
+| Elisp configuration       | ✅, [DSL][DSL-Eask] is optional         | ❌, [DSL][DSL-Cask] only | ✅, pure elisp | ❌       |
+| Handle `archives` failure | ✅, see [archives][emacs-eask/archives] | ❌                       | ❌             | ❌       |
+| `create` project, etc     | ✅                                      | ❌                       | ❌             | ❌       |
+| `link` local dependencies | ✅                                      | ✅                       | ✅             | ❌       |
+| `exec` program            | ✅                                      | ✅                       | ❌             | ❌       |
+| `eval` expressions        | ✅                                      | ✅                       | ✅             | ❌       |
+| `emacs` execution         | ✅                                      | ✅                       | ❌             | ❌       |
+| Built-in `linters`        | ✅                                      | ❌                       | ✅             | ❌       |
+| Built-in `tests`          | ✅                                      | ❌                       | ✅             | ❌       |
+| Run script                | ✅                                      | ❌                       | ❌             | ❌       |
+| Self-defined commands     | ✅                                      | ❌                       | ✅             | ❌       |
+| Subcommand                | ✅                                      | ❌                       | ❌             | ❌       |
 
 ## 📰 News
 
@@ -136,3 +136,9 @@ The design of Eask was greatly influenced by the following projects:
 [Cask]: https://github.com/cask/cask
 [makem.sh]: https://github.com/alphapapa/makem.sh
 [Eldev]: https://github.com/doublep/eldev
+
+[yargs]: https://github.com/yargs/yargs
+[commander]: https://github.com/rejeep/commander.el
+
+[DSL-Eask]: https://emacs-eask.github.io/DSL/
+[DSL-Cask]: https://cask.readthedocs.io/en/latest/guide/dsl.html

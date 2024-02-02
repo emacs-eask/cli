@@ -45,15 +45,15 @@ Eask 是最好的選擇之一。
 
 該表顯示了作者選擇的技術以及項目的構建方式。 此外，他們做出了哪些技術決策？ 放棄支持？ 項目佈局？ 等等。
 
-|                | Eask              | Cask                        | Eldev          | makem.sh                    |
-|----------------|-------------------|-----------------------------|----------------|-----------------------------|
-| bin folder     | binary, bash, bat | bash, bat                   | bash, bat, ps1 | bash                        |
-| Cross-Platform | yes               | no, doesn't support Windows | yes            | no, doesn't support Windows |
-| Emacs version  | 26.1+             | 24.5+                       | 24.4+          | 26.1+                       |
-| Size           | 7,000+ lines      | 3,000+ lines                | 8,000+ lines   | 1,200+ lines                |
-| Executable     | yes               | no                          | no             | no                          |
-| Pure Elisp     | no, JavaScript    | yes                         | yes            | yes                         |
-| CLI Parser     | yargs             | commander                   | built-in       | built-in                    |
+|                | Eask              | Cask               | Eldev          | makem.sh           |
+|----------------|-------------------|--------------------|----------------|--------------------|
+| bin folder     | binary, bash, bat | bash, bat          | bash, bat, ps1 | bash               |
+| Cross-Platform | ✅                | ❌, 不支援 Windows | ✅             | ❌, 不支援 Windows |
+| Emacs version  | 26.1+             | 24.5+              | 24.4+          | 26.1+              |
+| Size           | 7,000+ 行         | 3,000+ 行          | 8,000+ 行      | 1,200+ 行          |
+| Executable     | ✅                | ❌                 | ❌             | ❌                 |
+| Pure Elisp     | ❌, JavaScript    | ✅                 | ✅             | ✅                 |
+| CLI Parser     | [yargs][]         | [commander][]      | 內建           | 內建               |
 
 {{< hint info >}}
 💡 **makem.sh** 也有很好的比較文檔，請訪問他們的[站點](https://github.com/alphapapa/makem.sh#comparisons)
@@ -65,20 +65,20 @@ Eask 是最好的選擇之一。
 
 如果這些功能沒有在下面列出，要么被遺忘，要么只是被認為太重要了，所以每個工具都有它； 因此我們不將它們添加到列表中。
 
-|                           | Eask                             | Cask         | Eldev           | makem.sh |
-|---------------------------|----------------------------------|--------------|-----------------|----------|
-| Elisp configuration       | yes, DSL is optional             | no, DSL only | yes, pure elisp | no       |
-| Handle `archives` failure | yes, see [emacs-eask/archives][] | no           | no              | no       |
-| `create` project, etc     | yes                              | no           | no              | no       |
-| `link` local dependencies | yes                              | yes          | yes             | no       |
-| `exec` program            | yes                              | yes          | no              | no       |
-| `eval` expressions        | yes                              | yes          | yes             | no       |
-| `emacs` execution         | yes                              | yes          | no              | no       |
-| Built-in `linters`        | yes                              | no           | yes             | no       |
-| Built-in `tests`          | yes                              | no           | yes             | no       |
-| Run script                | yes                              | no           | no              | no       |
-| Self-defined commands     | no, replaced with run script     | no           | yes             | no       |
-| Subcommand                | yes                              | no           | no              | no       |
+|                           | Eask                                    | Cask                   | Eldev        | makem.sh |
+|---------------------------|-----------------------------------------|------------------------|--------------|----------|
+| Elisp configuration       | ✅, [DSL][DSL-Eask] 是可選的            | ❌, 僅 [DSL][DSL-Cask] | ✅, 純 elisp | ❌       |
+| Handle `archives` failure | ✅, see [archives][emacs-eask/archives] | ❌                     | ❌           | ❌       |
+| `create` project, etc     | ✅                                      | ❌                     | ❌           | ❌       |
+| `link` local dependencies | ✅                                      | ✅                     | ✅           | ❌       |
+| `exec` program            | ✅                                      | ✅                     | ❌           | ❌       |
+| `eval` expressions        | ✅                                      | ✅                     | ✅           | ❌       |
+| `emacs` execution         | ✅                                      | ✅                     | ❌           | ❌       |
+| Built-in `linters`        | ✅                                      | ❌                     | ✅           | ❌       |
+| Built-in `tests`          | ✅                                      | ❌                     | ✅           | ❌       |
+| Run script                | ✅                                      | ❌                     | ❌           | ❌       |
+| Self-defined commands     | ✅                                      | ❌                     | ✅           | ❌       |
+| Subcommand                | ✅                                      | ❌                     | ❌           | ❌       |
 
 ## 📰 消息
 
@@ -113,3 +113,9 @@ Eask 的設計深受以下項目的影響：
 [Cask]: https://github.com/cask/cask
 [makem.sh]: https://github.com/alphapapa/makem.sh
 [Eldev]: https://github.com/doublep/eldev
+
+[yargs]: https://github.com/yargs/yargs
+[commander]: https://github.com/rejeep/commander.el
+
+[DSL-Eask]: https://emacs-eask.github.io/DSL/
+[DSL-Cask]: https://cask.readthedocs.io/en/latest/guide/dsl.html
