@@ -60,8 +60,25 @@ jobs:
         mv COPYING dist
         mv README.md dist
 
-    - name: Uploading...
-      uses: actions/upload-artifact@v3
+    - name: Change permissions (Unix)
+      if: matrix.target == 'linux-arm64' || matrix.target == 'linux-x64' || matrix.target == 'macos-arm64' || matrix.target == 'macos-x64'
+      run: |
+        chmod -R 777 ./dist
+
+    - name: Tar files
+      run: |
+        tar czf eask_${{ env.VERSION }}_${{ matrix.target }}.tar -C dist .
+        
+    - name: Uploading... (Unix)
+      if: matrix.target == 'linux-arm64' || matrix.target == 'linux-x64' || matrix.target == 'macos-arm64' || matrix.target == 'macos-x64'
+      uses: actions/upload-artifact@v4
+      with:
+        name: eask_${{ env.VERSION }}_${{ matrix.target }}
+        path: eask_${{ env.VERSION }}_${{ matrix.target }}.tar
+
+    - name: Uploading... (Windows)
+      if: matrix.target == 'win-arm64' || matrix.target == 'win-x64'
+      uses: actions/upload-artifact@v4
       with:
         name: eask_${{ env.VERSION }}_${{ matrix.target }}
         path: dist
