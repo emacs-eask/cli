@@ -69,6 +69,7 @@ jobs:
       if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
       run: |
         tar czf ${{ matrix.target }}.tar.gz -C ./dist/ .
+        cp ${{ matrix.target }}.tar.gz eask_${{ env.VERSION }}_${{ matrix.target }}.tar.gz
 
     - name: Zipping dist (Windows)
       if: contains(fromJSON('["win-arm64", "win-x64"]'), matrix.target)
@@ -76,20 +77,24 @@ jobs:
       run: |
         zip -r ${{ matrix.target }}.zip .
         mv ${{ matrix.target }}.zip ../
+        cd ..
+        cp ${{ matrix.target }}.zip eask_${{ env.VERSION }}_${{ matrix.target }}.zip
 
     - name: Uploading... (Unix)
       if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
       uses: actions/upload-artifact@v4
       with:
-        name: eask_${{ env.VERSION }}_${{ matrix.target }}
-        path: ${{ matrix.target }}.tar.gz
+        name: eask_${{ env.VERSION }}
+        path: eask_${{ env.VERSION }}_${{ matrix.target }}.tar.gz
 
     - name: Uploading... (Windows)
       if: contains(fromJSON('["win-arm64", "win-x64"]'), matrix.target)
       uses: actions/upload-artifact@v4
       with:
-        name: eask_${{ env.VERSION }}_${{ matrix.target }}
-        path: ${{ matrix.target }}.zip
+        name: eask_${{ env.VERSION }}
+        path: eask_${{ env.VERSION }}_${{ matrix.target }}.zip
+
+    #### Prepare to push to `binaries` repository!
 
     - name: Move tar to HOME (Unix)
       if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
