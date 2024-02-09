@@ -86,6 +86,7 @@ jobs:
       with:
         repository: ${{ env.REPO_BIN }}
         tag_name: snapshot
+        token: ${{ secrets.PAT }}
         files: eask_${{ env.VERSION }}_${{ matrix.target }}.tar.gz
 
     - name: Uploading... (Windows)
@@ -94,6 +95,7 @@ jobs:
       with:
         repository: ${{ env.REPO_BIN }}
         tag_name: snapshot
+        token: ${{ secrets.PAT }}
         files: eask_${{ env.VERSION }}_${{ matrix.target }}.zip
 
     #### Prepare to push to `binaries` repository!
