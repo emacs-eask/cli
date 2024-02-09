@@ -60,20 +60,49 @@ jobs:
         mv COPYING dist
         mv README.md dist
 
-    - name: Uploading...
-      uses: actions/upload-artifact@v3
-      with:
-        name: eask_${{ env.VERSION }}_${{ matrix.target }}
-        path: dist
+    - name: Setup environment (Unix)
+      if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
+      run: |
+        echo "_EXT=tar.gz" >> $GITHUB_ENV
 
-    - name: Zipping dist
+    - name: Setup environment (Windows)
+      if: contains(fromJSON('["win-arm64", "win-x64"]'), matrix.target)
+      run: |
+        echo "_EXT=zip" >> $GITHUB_ENV
+
+    - name: Change permissions (Unix)
+      if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
+      run: |
+        chmod -R 777 ./dist
+
+    - name: Tar dist (Unix)
+      if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
+      run: |
+        tar czf ${{ matrix.target }}.${{ env._EXT }} -C ./dist/ .
+        cp ${{ matrix.target }}.${{ env._EXT }} eask_${{ env.VERSION }}_${{ matrix.target }}.${{ env._EXT }}
+
+    - name: Zipping dist (Windows)
+      if: contains(fromJSON('["win-arm64", "win-x64"]'), matrix.target)
       working-directory: dist
       run: |
-        zip -r ${{ matrix.target }}.zip .
-        mv ${{ matrix.target }}.zip ../
+        zip -r ${{ matrix.target }}.${{ env._EXT }} .
+        mv ${{ matrix.target }}.${{ env._EXT }} ../
+        cd ..
+        cp ${{ matrix.target }}.${{ env._EXT }} eask_${{ env.VERSION }}_${{ matrix.target }}.${{ env._EXT }}
+        
+    - name: Uploading...
+      if: github.ref == 'refs/heads/master'
+      uses: softprops/action-gh-release@v0.1.15
+      with:
+        repository: ${{ env.REPO_BIN }}
+        tag_name: ${{ env.VERSION }}
+        token: ${{ secrets.PAT }}
+        files: eask_${{ env.VERSION }}_${{ matrix.target }}.${{ env._EXT }}
 
-    - name: Move zip to HOME
-      run: mv ${{ matrix.target }}.zip ~/
+    #### Prepare to push to `binaries` repository!
+
+    - name: Move tar to HOME
+      run: mv ${{ matrix.target }}.${{ env._EXT }} ~/
 
     - name: Checkout binaries repository
       uses: actions/checkout@v4
@@ -84,10 +113,10 @@ jobs:
 
     - name: Clean up previous binaires
       continue-on-error: true
-      run: rm -rf eask/${{ matrix.target }}.zip
+      run: rm -rf eask/${{ matrix.target }}.${{ env._EXT }}
 
     - name: Move binaires to repository
-      run: mv ~/${{ matrix.target }}.zip ./
+      run: mv ~/${{ matrix.target }}.${{ env._EXT }} ./
 
     - name: Set git config
       run: |
@@ -99,7 +128,7 @@ jobs:
       run: |
         git pull
         git add .
-        git commit -m "Update binairs ${{ matrix.target }}.zip"
+        git commit -m "Update binairs ${{ matrix.target }}.${{ env._EXT }}"
 
     - name: Push
       if: github.ref == 'refs/heads/master'
