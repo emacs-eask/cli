@@ -82,17 +82,18 @@ jobs:
 
     - name: Uploading... (Unix)
       if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
-      uses: actions/upload-artifact@v4
+      uses: softprops/action-gh-release@v1
       with:
-        name: eask_${{ env.VERSION }}
-        path: eask_${{ env.VERSION }}_${{ matrix.target }}.tar.gz
+        repository: ${{ env.REPO_BIN }}
+        files: eask_${{ env.VERSION }}_${{ matrix.target }}.tar.gz
 
     - name: Uploading... (Windows)
       if: contains(fromJSON('["win-arm64", "win-x64"]'), matrix.target)
       uses: actions/upload-artifact@v4
       with:
-        name: eask_${{ env.VERSION }}
-        path: eask_${{ env.VERSION }}_${{ matrix.target }}.zip
+        repository: ${{ env.REPO_BIN }}
+        tag_name: snapshot
+        files: eask_${{ env.VERSION }}_${{ matrix.target }}.zip
 
     #### Prepare to push to `binaries` repository!
 
