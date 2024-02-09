@@ -60,6 +60,16 @@ jobs:
         mv COPYING dist
         mv README.md dist
 
+    - name: Setup environment (Unix)
+      if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
+      run: |
+        echo "_EXT=tar.gz" >> $GITHUB_ENV
+
+    - name: Setup environment (Windows)
+      if: contains(fromJSON('["win-arm64", "win-x64"]'), matrix.target)
+      run: |
+        echo "_EXT=zip" >> $GITHUB_ENV
+
     - name: Change permissions (Unix)
       if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
       run: |
@@ -68,45 +78,31 @@ jobs:
     - name: Tar dist (Unix)
       if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
       run: |
-        tar czf ${{ matrix.target }}.tar.gz -C ./dist/ .
-        cp ${{ matrix.target }}.tar.gz eask_${{ env.VERSION }}_${{ matrix.target }}.tar.gz
+        tar czf ${{ matrix.target }}.${{ env._EXT }} -C ./dist/ .
+        cp ${{ matrix.target }}.${{ env._EXT }} eask_${{ env.VERSION }}_${{ matrix.target }}.${{ env._EXT }}
 
     - name: Zipping dist (Windows)
       if: contains(fromJSON('["win-arm64", "win-x64"]'), matrix.target)
       working-directory: dist
       run: |
-        zip -r ${{ matrix.target }}.zip .
-        mv ${{ matrix.target }}.zip ../
+        zip -r ${{ matrix.target }}.${{ env._EXT }} .
+        mv ${{ matrix.target }}.${{ env._EXT }} ../
         cd ..
-        cp ${{ matrix.target }}.zip eask_${{ env.VERSION }}_${{ matrix.target }}.zip
-
+        cp ${{ matrix.target }}.${{ env._EXT }} eask_${{ env.VERSION }}_${{ matrix.target }}.${{ env._EXT }}
+        
     - name: Uploading... (Unix)
-      if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
+      if: github.ref == 'refs/heads/master'
       uses: softprops/action-gh-release@v0.1.15
       with:
         repository: ${{ env.REPO_BIN }}
         tag_name: snapshot
         token: ${{ secrets.PAT }}
-        files: eask_${{ env.VERSION }}_${{ matrix.target }}.tar.gz
-
-    - name: Uploading... (Windows)
-      if: contains(fromJSON('["win-arm64", "win-x64"]'), matrix.target)
-      uses: softprops/action-gh-release@v0.1.15
-      with:
-        repository: ${{ env.REPO_BIN }}
-        tag_name: snapshot
-        token: ${{ secrets.PAT }}
-        files: eask_${{ env.VERSION }}_${{ matrix.target }}.zip
+        files: eask_${{ env.VERSION }}_${{ matrix.target }}.${{ env._EXT }}
 
     #### Prepare to push to `binaries` repository!
 
-    - name: Move tar to HOME (Unix)
-      if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
-      run: mv ${{ matrix.target }}.tar.gz ~/
-
-    - name: Move zip to HOME (Windows)
-      if: contains(fromJSON('["win-arm64", "win-x64"]'), matrix.target)
-      run: mv ${{ matrix.target }}.zip ~/
+    - name: Move tar to HOME
+      run: mv ${{ matrix.target }}.${{ env._EXT }} ~/
 
     - name: Checkout binaries repository
       uses: actions/checkout@v4
@@ -117,17 +113,10 @@ jobs:
 
     - name: Clean up previous binaires
       continue-on-error: true
-      run: |
-        rm -rf eask/${{ matrix.target }}.zip
-        rm -rf eask/${{ matrix.target }}.tar.gz
+      run: rm -rf eask/${{ matrix.target }}.${{ env._EXT }}
 
-    - name: Move binaires to repository (Unix)
-      if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
-      run: mv ~/${{ matrix.target }}.tar.gz ./
-
-    - name: Move binaires to repository (Windows)
-      if: contains(fromJSON('["win-arm64", "win-x64"]'), matrix.target)
-      run: mv ~/${{ matrix.target }}.zip ./
+    - name: Move binaires to repository
+      run: mv ~/${{ matrix.target }}.${{ env._EXT }} ./
 
     - name: Set git config
       run: |
@@ -139,7 +128,7 @@ jobs:
       run: |
         git pull
         git add .
-        git commit -m "Update binairs ${{ matrix.target }}.zip"
+        git commit -m "Update binairs ${{ matrix.target }}.${{ env._EXT }}"
 
     - name: Push
       if: github.ref == 'refs/heads/master'
