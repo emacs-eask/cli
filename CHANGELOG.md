@@ -17,6 +17,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * feat(repl): Add the Elisp REPL command (#210)
 * fix(generate/workflow): Require emacs version (f643c5da8992bf8b93287578dd8f3b553398ad85)
 * chore: Alias `pack` to `package` command (e209d7c8152a17de81613f09b380a2f5ad05697a)
+* fix(build.yml): Release with `.tar.gz` instead of `.zip` on Unix-like system (#214 and #216)
 
 ## 0.9.x
 > Released Nov 17, 2023
