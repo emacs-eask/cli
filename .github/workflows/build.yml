@@ -85,6 +85,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         repository: ${{ env.REPO_BIN }}
+        tag_name: snapshot
         files: eask_${{ env.VERSION }}_${{ matrix.target }}.tar.gz
 
     - name: Uploading... (Windows)
