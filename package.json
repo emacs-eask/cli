@@ -6,12 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "pkg-all": "pkg package.json",
-    "pkg-linux-arm64": "pkg package.json -t node16-linux-arm64 --output dist/eask",
-    "pkg-linux-x64": "pkg package.json -t node16-linux-x64 --output dist/eask",
-    "pkg-macos-arm64": "pkg package.json -t node16-macos-arm64 --output dist/eask",
-    "pkg-macos-x64": "pkg package.json -t node16-macos-x64 --output dist/eask",
-    "pkg-win-arm64": "pkg package.json -t node16-win-arm64 --output dist/eask",
-    "pkg-win-x64": "pkg package.json -t node16-win-x64 --output dist/eask"
+    "pkg-linux-arm64": "pkg package.json -t node18-linux-arm64 --output dist/eask",
+    "pkg-linux-x64": "pkg package.json -t node18-linux-x64 --output dist/eask",
+    "pkg-macos-arm64": "pkg package.json -t node18-macos-arm64 --output dist/eask",
+    "pkg-macos-x64": "pkg package.json -t node18-macos-x64 --output dist/eask",
+    "pkg-win-arm64": "pkg package.json -t node18-win-arm64 --output dist/eask",
+    "pkg-win-x64": "pkg package.json -t node18-win-x64 --output dist/eask"
   },
   "bin": {
     "eask": "./eask"
