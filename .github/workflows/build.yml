@@ -90,7 +90,7 @@ jobs:
         cd ..
         cp ${{ matrix.target }}.${{ env._EXT }} eask_${{ env.VERSION }}_${{ matrix.target }}.${{ env._EXT }}
         
-    - name: Uploading... (Unix)
+    - name: Uploading...
       if: github.ref == 'refs/heads/master'
       uses: softprops/action-gh-release@v0.1.15
       with:
