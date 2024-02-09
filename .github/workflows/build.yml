@@ -61,42 +61,42 @@ jobs:
         mv README.md dist
 
     - name: Change permissions (Unix)
-      if: contains(['linux-arm64', 'linux-x64', 'macos-arm64', 'macos-x64'], matrix.target)
+      if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
       run: |
         chmod -R 777 ./dist
 
     - name: Tar dist (Unix)
-      if: contains(['linux-arm64', 'linux-x64', 'macos-arm64', 'macos-x64'], matrix.target)
+      if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
       run: |
         tar czf ${{ matrix.target }}.tar.gz -C ./dist/ .
 
     - name: Zipping dist (Windows)
-      if: contains(['win-arm64', 'win-x64'], matrix.target)
+      if: contains(fromJSON('["win-arm64", "win-x64"]'), matrix.target)
       working-directory: dist
       run: |
         zip -r ${{ matrix.target }}.zip .
         mv ${{ matrix.target }}.zip ../
 
     - name: Uploading... (Unix)
-      if: contains(['linux-arm64', 'linux-x64', 'macos-arm64', 'macos-x64'], matrix.target)
+      if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
       uses: actions/upload-artifact@v4
       with:
         name: eask_${{ env.VERSION }}_${{ matrix.target }}
         path: ${{ matrix.target }}.tar.gz
 
     - name: Uploading... (Windows)
-      if: contains(['win-arm64', 'win-x64'], matrix.target)
+      if: contains(fromJSON('["win-arm64", "win-x64"]'), matrix.target)
       uses: actions/upload-artifact@v4
       with:
         name: eask_${{ env.VERSION }}_${{ matrix.target }}
         path: ${{ matrix.target }}.zip
 
     - name: Move tar to HOME (Unix)
-      if: contains(['linux-arm64', 'linux-x64', 'macos-arm64', 'macos-x64'], matrix.target)
+      if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
       run: mv ${{ matrix.target }}.tar.gz ~/
 
     - name: Move zip to HOME (Windows)
-      if: contains(['win-arm64', 'win-x64'], matrix.target)
+      if: contains(fromJSON('["win-arm64", "win-x64"]'), matrix.target)
       run: mv ${{ matrix.target }}.zip ~/
 
     - name: Checkout binaries repository
@@ -113,11 +113,11 @@ jobs:
         rm -rf eask/${{ matrix.target }}.tar.gz
 
     - name: Move binaires to repository (Unix)
-      if: contains(['linux-arm64', 'linux-x64', 'macos-arm64', 'macos-x64'], matrix.target)
+      if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
       run: mv ~/${{ matrix.target }}.tar.gz ./
 
     - name: Move binaires to repository (Windows)
-      if: contains(['win-arm64', 'win-x64'], matrix.target)
+      if: contains(fromJSON('["win-arm64", "win-x64"]'), matrix.target)
       run: mv ~/${{ matrix.target }}.zip ./
 
     - name: Set git config
