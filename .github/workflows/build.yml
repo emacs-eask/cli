@@ -61,35 +61,42 @@ jobs:
         mv README.md dist
 
     - name: Change permissions (Unix)
-      if: matrix.target == 'linux-arm64' || matrix.target == 'linux-x64' || matrix.target == 'macos-arm64' || matrix.target == 'macos-x64'
+      if: contains(['linux-arm64', 'linux-x64', 'macos-arm64', 'macos-x64'], matrix.target)
       run: |
         chmod -R 777 ./dist
 
-    - name: Tar files
+    - name: Tar dist (Unix)
+      if: contains(['linux-arm64', 'linux-x64', 'macos-arm64', 'macos-x64'], matrix.target)
       run: |
-        tar czf eask_${{ env.VERSION }}_${{ matrix.target }}.tar -C dist .
-        
-    - name: Uploading... (Unix)
-      if: matrix.target == 'linux-arm64' || matrix.target == 'linux-x64' || matrix.target == 'macos-arm64' || matrix.target == 'macos-x64'
-      uses: actions/upload-artifact@v4
-      with:
-        name: eask_${{ env.VERSION }}_${{ matrix.target }}
-        path: eask_${{ env.VERSION }}_${{ matrix.target }}.tar
+        tar czf ${{ matrix.target }}.tar.gz -C ./dist/ .
 
-    - name: Uploading... (Windows)
-      if: matrix.target == 'win-arm64' || matrix.target == 'win-x64'
-      uses: actions/upload-artifact@v4
-      with:
-        name: eask_${{ env.VERSION }}_${{ matrix.target }}
-        path: dist
-
-    - name: Zipping dist
+    - name: Zipping dist (Windows)
+      if: contains(['win-arm64', 'win-x64'], matrix.target)
       working-directory: dist
       run: |
         zip -r ${{ matrix.target }}.zip .
         mv ${{ matrix.target }}.zip ../
 
-    - name: Move zip to HOME
+    - name: Uploading... (Unix)
+      if: contains(['linux-arm64', 'linux-x64', 'macos-arm64', 'macos-x64'], matrix.target)
+      uses: actions/upload-artifact@v4
+      with:
+        name: eask_${{ env.VERSION }}_${{ matrix.target }}
+        path: ${{ matrix.target }}.tar.gz
+
+    - name: Uploading... (Windows)
+      if: contains(['win-arm64', 'win-x64'], matrix.target)
+      uses: actions/upload-artifact@v4
+      with:
+        name: eask_${{ env.VERSION }}_${{ matrix.target }}
+        path: ${{ matrix.target }}.zip
+
+    - name: Move tar to HOME (Unix)
+      if: contains(['linux-arm64', 'linux-x64', 'macos-arm64', 'macos-x64'], matrix.target)
+      run: mv ${{ matrix.target }}.tar.gz ~/
+
+    - name: Move zip to HOME (Windows)
+      if: contains(['win-arm64', 'win-x64'], matrix.target)
       run: mv ${{ matrix.target }}.zip ~/
 
     - name: Checkout binaries repository
@@ -101,9 +108,16 @@ jobs:
 
     - name: Clean up previous binaires
       continue-on-error: true
-      run: rm -rf eask/${{ matrix.target }}.zip
+      run: |
+        rm -rf eask/${{ matrix.target }}.zip
+        rm -rf eask/${{ matrix.target }}.tar.gz
 
-    - name: Move binaires to repository
+    - name: Move binaires to repository (Unix)
+      if: contains(['linux-arm64', 'linux-x64', 'macos-arm64', 'macos-x64'], matrix.target)
+      run: mv ~/${{ matrix.target }}.tar.gz ./
+
+    - name: Move binaires to repository (Windows)
+      if: contains(['win-arm64', 'win-x64'], matrix.target)
       run: mv ~/${{ matrix.target }}.zip ./
 
     - name: Set git config

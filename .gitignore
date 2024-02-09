@@ -156,3 +156,6 @@ dist/
 # packaging
 *-autoloads.el
 *-pkg.el
+*.zip
+*.tar
+*.tar.gz
