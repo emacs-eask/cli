@@ -6,7 +6,7 @@
 ;;; Requirement
 
 (when (version< emacs-version "26.1")
-  (error "Eask requires Emacs 26.1 and above!"))
+  (error "Eask requires Emacs 26.1 and above! test"))
 
 ;;
 ;;; Includes
