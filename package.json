@@ -32,6 +32,9 @@
     "which": "^4.0.0",
     "yargs": "^17.0.0"
   },
+  "devDependencies": {
+    "pkg": "^5.0.0"
+  },
   "files": [
     "cmds",
     "src",
