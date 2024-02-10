@@ -148,6 +148,7 @@ emacs_backtrace.txt
 
 # ignore generated files
 *.elc
+package-lock.json
 
 # eask packages
 .eask/
