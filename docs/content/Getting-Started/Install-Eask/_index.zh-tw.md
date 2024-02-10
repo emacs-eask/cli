@@ -164,12 +164,12 @@ set PATH=%PATH%;c:/path/to/eask/bin
 To run `eask` through executable, you will need [pkg][] installed on your machine.
 
 ```sh
-# install it locally in the workspace scope
+# 區域安裝
 $ npm install --dev
 
-# or
+# 或
 
-# install it globally
+# 全域安裝
 $ npm install -g pkg
 ```
 
