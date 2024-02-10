@@ -141,6 +141,8 @@ $ cd eask-cli
 
 # install the requirements
 $ npm install
+# build from sources. For available targets see `scripts` in `package.json`
+$ npm run pkg-linux-x64
 ```
 
 ### 🏡 Setup
