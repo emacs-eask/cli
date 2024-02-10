@@ -141,13 +141,12 @@ $ cd eask-cli
 
 # install the requirements
 $ npm install
-# build from sources. For available targets see `scripts` in `package.json`
-$ npm run pkg-linux-x64
 ```
 
-### 🏡 Setup
+### 🏡 Setup (through script)
 
-Make sure you set up the environment path variable according to your system,
+You can now run `eask` using the script `bin/eask`; add `/path/to/eask-cli/bin/`
+to your environment `PATH` to execute eask from any location!
 
 On Linux/macOS,
 
@@ -162,7 +161,35 @@ set PATH=%PATH%;c:/path/to/eask/bin
 ```
 
 Once you have set it up correctly, try `eask --version` then you should see
-the current eask's version number! 🎉 🎊
+the current `eask`'s version number! 🎉 🎊
+
+### 🏡 Setup (through executable)
+
+To run `eask` through executable, you will need [pkg][] installed on your machine.
+
+```sh
+# install it locally in the workspace scope
+$ npm install --dev
+
+# or
+
+# install it globally
+$ npm install -g pkg
+```
+
+Subsequently, run the following command to build the executable.
+By default, it will generate an executable in the `dist` folder.
+
+```sh
+# build from sources. For available targets see `scripts` in `package.json`
+$ npm run pkg-linux-x64
+
+# move `lisp` to `dist` folder
+mv lisp dist
+```
+
+You can now run `eask` using the executable `dist/eask`; add `/path/to/eask-cli/dist/`
+to your environment `PATH` to execute eask from any location! 🎉 🎊
 
 
 <!-- Links -->
@@ -180,3 +207,5 @@ the current eask's version number! 🎉 🎊
 [Pop!_OS]: https://pop.system76.com/
 [Ubuntu]: https://ubuntu.com/
 [Zorin OS]: https://zorin.com/os/
+
+[pkg]: https://github.com/vercel/pkg

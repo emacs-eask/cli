@@ -85,6 +85,14 @@ snap 套件適用於大多數發行版，安裝簡單且會自動更新。
 $ sudo snap install eask-cli
 ```
 
+### 📦 Arch (Linux)
+
+有一個 `PKGBUILD` 可以從原始程式碼建立 `eask` 並建立一個包，因此在儲存庫的最上層目錄中您可以簡單地運行：
+
+```sh
+$ makepkg -i
+```
+
 ### 📦 Chocolatey (Windows)
 
 如果您的計算機上安裝了 [Chocolatey](https://chocolatey.org/)，則可以使用以下一行代碼安裝 Eask：
@@ -128,7 +136,12 @@ $ cd eask-cli
 $ npm install
 ```
 
-### 🏡 設置
+```sh
+# 從源頭建構; 有關可用目標，請參閱 `package.json` 中的 `scripts`
+$ npm run pkg-linux-x64
+```
+
+### 🏡 設定（透過腳本）
 
 確保根據您的系統設置環境路徑變量:
 
@@ -144,7 +157,34 @@ export PATH="path/to/eask/bin:$PATH"
 set PATH=%PATH%;c:/path/to/eask/bin
 ```
 
-正確設置後，嘗試 `eask --version` 然後您應該會看到當前 eask 的版本號！ 🎉🎊
+正確設置後，嘗試 `eask --version` 然後您應該會看到當前 `eask` 的版本號！ 🎉🎊
+
+### 🏡 設定（透過可執行檔）
+
+To run `eask` through executable, you will need [pkg][] installed on your machine.
+
+```sh
+# install it locally in the workspace scope
+$ npm install --dev
+
+# or
+
+# install it globally
+$ npm install -g pkg
+```
+
+隨後，執行以下命令產生可執行檔。
+預設情況下，它會在 `dist` 資料夾中產生一個可執行檔。
+
+```sh
+# 從原始碼建置。有關可用目標，請參閱 `package.json` 中的 `scripts` 。
+$ npm run pkg-linux-x64
+
+# 將 `lisp` 移至 `dist` 資料夾
+mv lisp dist
+```
+
+現在，您可以使用可執行檔 `dist/eask` 執行 `eask`；在環境 `PATH` 中新增 `/path/to/eask-cli/dist/`，以便從任何位置執行 `eask`！🎉🎊
 
 
 <!-- Links -->
@@ -162,3 +202,5 @@ set PATH=%PATH%;c:/path/to/eask/bin
 [Pop!_OS]: https://pop.system76.com/
 [Ubuntu]: https://ubuntu.com/
 [Zorin OS]: https://zorin.com/os/
+
+[pkg]: https://github.com/vercel/pkg
