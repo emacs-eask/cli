@@ -90,6 +90,15 @@ automatically updated.
 $ sudo snap install eask-cli
 ```
 
+### 📦 Arch (Linux)
+
+There's a `PKGBUILD` that builds `eask` from sources and creates a package, so
+inside the top directory of the repository you can simply run:
+
+```sh
+$ makepkg -i
+```
+
 ### 📦 Chocolatey (Windows)
 
 If you have [Chocolatey](https://chocolatey.org/) installed on your machine, you can
@@ -150,7 +159,7 @@ On Windows,
 set PATH=%PATH%;c:/path/to/eask/bin
 ```
 
-Once you have set it up correctly, try `eask --version` then you should see 
+Once you have set it up correctly, try `eask --version` then you should see
 the current eask's version number! 🎉 🎊
 
 
