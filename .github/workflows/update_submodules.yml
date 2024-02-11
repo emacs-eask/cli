@@ -31,3 +31,4 @@ jobs:
         commit-message: 'Update all submodules'
         branch: submodules-update
         delete-branch: true
+        token: ${{ secrets.PAT }}
