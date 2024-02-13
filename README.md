@@ -1,5 +1,4 @@
 <a href="#"><img align="right" src="./docs/static/logo.png" width="20%"></a>
-
 # Eask
 > CLI for building, running, testing, and managing your Emacs Lisp dependencies
 
