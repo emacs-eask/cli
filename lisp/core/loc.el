@@ -19,10 +19,10 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defvar eask-loc-lines 0)
-(defvar eask-loc-chars 0)
+(defvar eask-loc--lines 0)
+(defvar eask-loc--chars 0)
 
-(defun eask--loc-file (file)
+(defun eask-loc--file (file)
   "Insert LOC information for FILE."
   (unless (file-directory-p file)
     (let ((lines) (chars))
@@ -30,8 +30,8 @@
         (insert-file-contents file)
         (setq lines (line-number-at-pos (point-max))
               chars (point-max)))
-      (cl-incf eask-loc-lines lines)
-      (cl-incf eask-loc-chars chars)
+      (cl-incf eask-loc--lines lines)
+      (cl-incf eask-loc--chars chars)
       (insert (format "| %s | %s | %s |\n" file lines chars)))))
 
 (eask-start
@@ -52,11 +52,11 @@
           (insert (format "|---|---|---|\n")))
         (eask-with-progress
           "Retrieving LOC information... "
-          (mapc #'eask--loc-file files)
+          (mapc #'eask-loc--file files)
           "done ✓")
         (progn  ; Print total
           (insert (format "|---|---|---|\n"))
-          (insert (format "| Total | %s | %s |\n" eask-loc-lines eask-loc-chars)))
+          (insert (format "| Total | %s | %s |\n" eask-loc--lines eask-loc--chars)))
         (progn  ; Organize
           (goto-char (point-min))
           (markdown-table-align))

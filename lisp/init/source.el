@@ -14,7 +14,7 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defun eask--convert-source (filename)
+(defun eask-init-source--convert (filename)
   "Convert elisp source FILENAME to Eask."
   (let* ((filename (expand-file-name filename))
          (file (file-name-nondirectory (eask-root-del filename)))
@@ -88,7 +88,7 @@
      ;; Files found, do the action!
      (files
       (dolist (file files)
-        (when-let ((new-filename (eask--convert-source file)))
+        (when-let ((new-filename (eask-init-source--convert file)))
           (push new-filename converted-files)))
       ;; Automatically rename file into Eask file when only one file is converted!
       (when (= (length converted-files) 1)

@@ -27,7 +27,7 @@
 ;;
 ;;; Core
 
-(defun eask--check-declare-file (filename)
+(defun eask-lint-declare--file (filename)
   "Run check-declare on FILENAME."
   (let* ((filename (expand-file-name filename))
          (file (eask-root-del filename))
@@ -49,7 +49,7 @@
     (cond
      ;; Files found, do the action!
      (files
-      (mapcar #'eask--check-declare-file files)
+      (mapcar #'eask-lint-declare--file files)
       (eask-msg "")
       (eask-info "(Total of %s file%s %s checked)" (length files)
                  (eask--sinr files "" "s")

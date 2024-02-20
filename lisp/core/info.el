@@ -14,17 +14,17 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defvar eask--max-offset 0)
+(defvar eask-info--max-offset 0)
 
-(defun eask--print-deps (title dependencies)
+(defun eask-info--print-deps (title dependencies)
   "Print DEPENDENCIES with TITLE identifier."
   (when dependencies
     (eask-println "")
     (eask-println title)
     (let* ((names (mapcar #'car dependencies))
            (offset (eask-seq-str-max names)))
-      (setq eask--max-offset (max offset eask--max-offset)
-            offset (eask-2str eask--max-offset))
+      (setq eask-info--max-offset (max offset eask-info--max-offset)
+            offset (eask-2str eask-info--max-offset))
       (dolist (dep dependencies)
         (let* ((target-version (cdr dep))
                (target-version (if (= (length target-version) 1)
@@ -57,8 +57,8 @@
         (eask-println "dist")
         (eask-println ".total-files: %s" (length (eask-package-files)))
         (eask-println ".unpacked-size: %s" (eask-unpacked-size))
-        (eask--print-deps "dependencies:" eask-depends-on)
-        (eask--print-deps "devDependencies:" eask-depends-on-dev))
+        (eask-info--print-deps "dependencies:" eask-depends-on)
+        (eask-info--print-deps "devDependencies:" eask-depends-on-dev))
     (eask-info "(Eask file has no package information)")
     (eask-help "core/info")))
 

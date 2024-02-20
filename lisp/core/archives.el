@@ -14,42 +14,43 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defvar eask--length-name)
-(defvar eask--length-url)
-(defvar eask--length-priority)
+(defvar eask-archive--length-name)
+(defvar eask-archive--length-url)
+(defvar eask-archive--length-priority)
 
-(defun eask--print-archive (archive)
+(defun eask-archive--print (archive)
   "Print the ARCHIVE."
   (let* ((name (car archive))
          (url (cdr archive))
          (priority (assoc name package-archive-priorities))
          (priority (cdr priority)))
     (eask-println
-     (concat "  %-" eask--length-name "s  %-" eask--length-url "s  %-" eask--length-priority "s")
+     (concat "  %-" eask-archive--length-name "s  %-" eask-archive--length-url
+             "s  %-" eask-archive--length-priority "s")
      name (eask-2url url) (or priority 0))))
 
-(defun eask--print-archive-alist (alist)
+(defun eask-archive--print-alist (alist)
   "Print the archvie ALIST."
   (let* ((names (mapcar #'car alist))
-         (eask--length-name (eask-2str (eask-seq-str-max names)))
+         (eask-archive--length-name (eask-2str (eask-seq-str-max names)))
          (urls (mapcar #'cdr alist))
-         (eask--length-url (eask-2str (eask-seq-str-max urls)))
+         (eask-archive--length-url (eask-2str (eask-seq-str-max urls)))
          (priorities (mapcar #'cdr package-archive-priorities))
-         (eask--length-priority (eask-2str (eask-seq-str-max priorities))))
-    (mapc #'eask--print-archive alist)))
+         (eask-archive--length-priority (eask-2str (eask-seq-str-max priorities))))
+    (mapc #'eask-archive--print alist)))
 
 (eask-start
   (cond
    ((eask-all-p)
     (eask-info "Available archives:")
     (eask-msg "")
-    (eask--print-archive-alist eask-source-mapping)
+    (eask-archive--print-alist eask-source-mapping)
     (eask-info "(Total of %s archive%s available)" (length eask-source-mapping)
                (eask--sinr eask-source-mapping "" "s")))
    (package-archives
     (eask-info "In used archives:")
     (eask-msg "")
-    (eask--print-archive-alist package-archives)
+    (eask-archive--print-alist package-archives)
     (eask-info "(Total of %s archive%s listed)" (length package-archives)
                (eask--sinr package-archives "" "s")))
    (t

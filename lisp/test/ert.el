@@ -21,15 +21,15 @@
 
 (require 'ert)
 
-(defvar eask--message-loop nil
+(defvar eask-test-ert--message-loop nil
   "Prevent inifinite recursive message function.")
 
-(defun eask--ert-message (fnc &rest args)
+(defun eask-test-ert--message (fnc &rest args)
   "Colorized ert messages.
 
 Arguments FNC and ARGS are used for advice `:around'."
-  (if eask--message-loop (apply fnc args)
-    (let ((eask--message-loop t))
+  (if eask-test-ert--message-loop (apply fnc args)
+    (let ((eask-test-ert--message-loop t))
       (cond
        ((string-match-p "^[ ]+FAILED " (apply #'format args))
         (eask-msg (ansi-red (apply #'format args))))
@@ -39,7 +39,7 @@ Arguments FNC and ARGS are used for advice `:around'."
         (eask-msg (ansi-green (apply #'format args))))
        (t (apply fnc args))))))
 
-(advice-add 'message :around #'eask--ert-message)
+(advice-add 'message :around #'eask-test-ert--message)
 
 (eask-start
   (let* ((patterns (eask-args))

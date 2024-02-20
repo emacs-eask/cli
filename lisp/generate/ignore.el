@@ -31,7 +31,7 @@
 ;;
 ;;; Core
 
-(defun eask--print-ignore-menu ()
+(defun eask-generate-ignore--print-menu ()
   "Print all available ignore."
   (eask-msg "available via `eask generate ignore`")
   (eask-msg "")
@@ -58,7 +58,7 @@
           ((not (member name (eask-with-verbosity 'debug
                                (gitignore-templates-names))))
            (eask-info "(Invalid ignore type: `%s`)" name)
-           (eask--print-ignore-menu))
+           (eask-generate-ignore--print-menu))
           (t
            (eask-with-progress
              (format "  - [1/1] Generating ignore file in %s... " filename)

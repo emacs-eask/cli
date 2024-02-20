@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['check-eask [files..]'];
-exports.desc = 'Run eask checker';
+exports.desc = 'Run Eask checker';
 exports.builder = yargs => yargs
   .positional(
     '[files..]', {

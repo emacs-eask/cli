@@ -15,7 +15,7 @@
         nil t))
 
 ;; Copied from `keg.el'
-(defun eask--keg-file-read (path)
+(defun eask-init-keg--file-read (path)
   "Return sexp from Keg file (PATH) search from `deafult-directory'.
 If no found the Keg file, returns nil."
   (let (sources devs packages lint-disables scripts)
@@ -42,13 +42,13 @@ If no found the Keg file, returns nil."
         (disables . ,(nreverse (delete-dups lint-disables)))
         (scripts . ,(nreverse (delete-dups scripts)))))))
 
-(defun eask--convert-keg (filename)
+(defun eask-init-key--convert (filename)
   "Convert Keg FILENAME to Eask."
   (let* ((filename (expand-file-name filename))
          (file (file-name-nondirectory (eask-root-del filename)))
          (new-file (eask-s-replace "Keg" "Eask" file))
          (new-filename (expand-file-name new-file))
-         (contents (ignore-errors (eask--keg-file-read filename)))  ; Read it!
+         (contents (ignore-errors (eask-init-keg--file-read filename)))  ; Read it!
          (converted))
     (eask-with-progress
       (format "Converting file `%s` to `%s`... " file new-file)
@@ -142,7 +142,7 @@ If no found the Keg file, returns nil."
      ;; Files found, do the action!
      (files
       (dolist (file files)
-        (when (eask--convert-keg file)
+        (when (eask-init-key--convert file)
           (cl-incf converted)))
       (eask-msg "")
       (eask-info "(Total of %s Keg-file%s converted)" converted

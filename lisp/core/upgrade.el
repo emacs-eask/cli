@@ -19,18 +19,18 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defun eask--package-version-string (pkg-desc)
+(defun eask-upgrade--package-version-string (pkg-desc)
   "Get package version string with color from PKG-DESC."
   (let ((version (package-desc-version pkg-desc)))
     (ansi-yellow (package-version-join version))))
 
-(defun eask-package-upgrade (pkg-desc)
+(defun eask-upgrade--package (pkg-desc)
   "Upgrade package using PKG-DESC."
   (let* ((name (package-desc-name pkg-desc))
          (pkg-string (ansi-green (eask-2str name)))
-         (version-new (eask--package-version-string pkg-desc))
+         (version-new (eask-upgrade--package-version-string pkg-desc))
          (old-pkg-desc (eask-package-desc name t))
-         (version-old (eask--package-version-string old-pkg-desc)))
+         (version-old (eask-upgrade--package-version-string old-pkg-desc)))
     (eask-with-progress
       (format "  - Upgrading %s (%s) -> (%s)..." pkg-string version-old version-new)
       (eask-with-verbosity 'debug
@@ -56,11 +56,11 @@
       (ansi-green "done ✓"))
     upgrades))
 
-(defun eask-package-upgrade-all ()
+(defun eask-upgrade--package-all ()
   "Upgrade for archive packages."
   (if-let ((upgrades (eask-package--upgrades)))
       (progn
-        (mapc #'eask-package-upgrade upgrades)
+        (mapc #'eask-upgrade--package upgrades)
         (eask-msg "")
         (eask-info "(Done upgrading all packages)"))
     (eask-msg "")
@@ -73,9 +73,9 @@
         (setq name (intern name))
         (if (package-installed-p name)
             (if (or (eask-package--upgradable-p name) (eask-force-p))
-                (eask-package-upgrade (cadr (assq name package-archive-contents)))
+                (eask-upgrade--package (cadr (assq name package-archive-contents)))
               (eask-warn "Package `%s` is already up to date" name))
           (eask-error "Package does not exists `%s`, you need to install before upgrade" name)))
-    (eask-package-upgrade-all)))
+    (eask-upgrade--package-all)))
 
 ;;; core/upgrade.el ends here

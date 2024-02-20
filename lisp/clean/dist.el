@@ -21,13 +21,13 @@
 
 (eask-load "core/package")  ; load dist path
 
-(defun eask--clean-dist (path)
+(defun eask-clean-dist (path)
   "Clean up dist PATH."
   (let* ((name (eask-guess-package-name))
          (version (eask-package-version))
          (readme (expand-file-name (format "%s-readme.txt" name) path))
          (entry (expand-file-name (format "%s-%s.entry" name version) path))
-         (packaged (eask-packaged-file))
+         (packaged (eask-package-packaged-file))
          (deleted 0)
          (delete-dir))
     (when (eask-delete-file readme)   (cl-incf deleted))
@@ -49,7 +49,7 @@
   (let* ((eask-dist-path (or (eask-args 0) eask-dist-path))
          (eask-dist-path (expand-file-name eask-dist-path)))
     (if (file-directory-p eask-dist-path)
-        (eask--clean-dist eask-dist-path)
+        (eask-clean-dist eask-dist-path)
       (eask-info "(No dist folder needs to be cleaned)" eask-dist-path)
       (setq eask-no-cleaning-operation-p t))))
 

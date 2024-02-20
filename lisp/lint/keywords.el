@@ -24,7 +24,7 @@
 
 (require 'finder)
 
-(defun eask--defined-keywords (keywords)
+(defun eask-lint-keywords--defined (keywords)
   "Return t if KEYWORDS are defined correctly."
   (let ((available-keywords (mapcar #'car finder-known-keywords))
         (result))
@@ -46,7 +46,7 @@
      (t
       (eask-lint-first-newline)
       (eask-msg "`%s` with keywords-lint" (ansi-green file))
-      (if (eask--defined-keywords keywords)
+      (if (eask-lint-keywords--defined keywords)
           (progn
             (eask-msg "")
             (eask-info "(No issues found.)"))

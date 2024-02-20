@@ -27,24 +27,24 @@
 ;;
 ;;; Core
 
-(defun eask--undo-pos (entry)
+(defun eask-lint-indent--undo-pos (entry)
   "Return the undo pos from ENTRY."
   (cl-typecase (car entry)
     (number (car entry))
     (string (abs (cdr entry)))))
 
-(defun eask--undo-infos (undo-list)
+(defun eask-lint-indent--undo-infos (undo-list)
   "Return list of infos in UNDO-LIST."
   (let ((infos))
     (dolist (elm undo-list)
-      (when-let* ((pos (eask--undo-pos elm))
+      (when-let* ((pos (eask-lint-indent--undo-pos elm))
                   (line (line-number-at-pos pos))
                   (expected (progn (eask--goto-line line)
                                    (current-indentation))))
         (push (list line expected) infos)))
     infos))
 
-(defun eask--indent-lint-file (file)
+(defun eask-lint-indent--file (file)
   "Lint indent for FILE."
   (eask-msg "")
   (eask-msg "`%s` with indent-lint" (ansi-green (eask-root-del file)))
@@ -55,7 +55,7 @@
     (eask--silent (indent-region (point-min) (point-max)))
     (if (/= tick (buffer-modified-tick))
         ;; Indentation changed: warn for each line.
-        (dolist (info (eask--undo-infos buffer-undo-list))
+        (dolist (info (eask-lint-indent--undo-infos buffer-undo-list))
           (let* ((line    (nth 0 info))
                  (column  (nth 1 info))
                  (current (eask-with-buffer
@@ -74,7 +74,7 @@
     (cond
      ;; Files found, do the action!
      (files
-      (mapcar #'eask--indent-lint-file files)
+      (mapcar #'eask-lint-indent--file files)
       (eask-msg "")
       (eask-info "(Total of %s file%s linted)" (length files)
                  (eask--sinr files "" "s")))

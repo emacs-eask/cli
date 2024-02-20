@@ -20,7 +20,7 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defun eask--uninstall-packages(names)
+(defun eask-uninstall--packages(names)
   "Uninstall packages by its NAMES."
   (let* ((names (mapcar #'eask-intern names))
          (len (length names)) (s (eask--sinr len "" "s"))
@@ -36,7 +36,7 @@
 (eask-start
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (if-let ((names (eask-args)))
-      (eask--uninstall-packages names)
+      (eask-uninstall--packages names)
     (if-let* ((name (intern (eask-guess-package-name)))
               ((package-installed-p name)))
         (progn

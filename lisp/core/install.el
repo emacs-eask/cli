@@ -23,7 +23,7 @@
 
 (eask-load "core/package")  ; load dist path
 
-(defun eask--install-packages (names)
+(defun eask-install-packages (names)
   "Install packages with their NAMES."
   (let* ((names (mapcar #'eask-intern names))
          (len (length names)) (s (eask--sinr len "" "s"))
@@ -39,7 +39,7 @@
 ;; NOTE: This is copied from `eldev'! Great thanks!
 ;;
 ;; XXX: remove this after we drop 28.x
-(defun eask--package-install-file (file)
+(defun eask-install--package-file (file)
   "Old compatible version of function `package-install-file'.
 
 For argument FILE, please see function `package-install-file' for the details."
@@ -80,11 +80,11 @@ For argument FILE, please see function `package-install-file' for the details."
   (eask-pkg-init)
   (if-let ((names (eask-args)))
       ;; If package [name..] are specified, we try to install it
-      (eask--install-packages names)
+      (eask-install-packages names)
     ;; Else we try to install package from the working directory
     (eask-install-dependencies)
     (let* ((name (eask-guess-package-name))
-           (packaged (eask-packaged-file))
+           (packaged (eask-package-packaged-file))
            (packaged (when (file-exists-p packaged) packaged))
            (target (or packaged eask-package-file)))
       (eask-log "Searching for artifact to install...")
@@ -92,9 +92,9 @@ For argument FILE, please see function `package-install-file' for the details."
         (eask-info "💡 Missing artifact, install directly from %s" target))
       (if target
           (progn
-            (add-to-list 'load-path (expand-file-name (eask-packaged-name) package-user-dir))
+            (add-to-list 'load-path (expand-file-name (eask-package-packaged-name) package-user-dir))
             ;; XXX: Use regular `package-install-file' function after we drop 28.x
-            (eask--package-install-file target)
+            (eask-install--package-file target)
             (eask-msg "")
             (eask-info "(Installed in %s)"
                        (file-name-directory (locate-library name))))

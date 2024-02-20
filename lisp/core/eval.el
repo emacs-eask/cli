@@ -23,7 +23,7 @@
   (if-let ((name (eask-argv 0)))
       (eask-with-progress
         (ansi-green "Exporting environment variables... ")
-        (eask--export-env)
+        (eask-exec-export-env)
         (ansi-green "done ✓"))
     (eask-info "(No expression found)")
     (eask-help "core/eval")))

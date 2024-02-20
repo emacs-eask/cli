@@ -19,10 +19,10 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defconst eask--run-file (expand-file-name "run" eask-homedir)
+(defconst eask-run-script--file (expand-file-name "run" eask-homedir)
   "Target file to export the `run' scripts.")
 
-(defun eask--print-scripts ()
+(defun eask-run-script--print-scripts ()
   "Print all available scripts."
   (eask-msg "available via `eask run script`")
   (eask-msg "")
@@ -35,7 +35,7 @@
     (eask-info "(Total of %s available script%s)" (length keys)
                (eask--sinr keys "" "s"))))
 
-(defun eask--export-command (command)
+(defun eask-run-command--export (command)
   "Export COMMAND instruction."
   (ignore-errors (make-directory eask-homedir t))  ; generate dir `~/.eask/'
   (when eask-is-pkg
@@ -45,9 +45,9 @@
     ;; We must split up all commands!
     (setq command (eask-s-replace " && " "\n" command)))
   (setq command (concat command " " (eask-rest)))
-  (write-region (concat command "\n") nil eask--run-file t))
+  (write-region (concat command "\n") nil eask-run-script--file t))
 
-(defun eask--unmatched-scripts (scripts)
+(defun eask-run-script--unmatched-scripts (scripts)
   "Return a list of SCRIPTS that cannot be found in `eask-scripts'."
   (let (unmatched)
     (dolist (script scripts)
@@ -57,7 +57,7 @@
 
 (eask-start
   ;; Preparation
-  (ignore-errors (delete-file eask--run-file))
+  (ignore-errors (delete-file eask-run-script--file))
 
   ;; Start the task
   (cond
@@ -66,21 +66,21 @@
     (eask-help "run/script"))
    ((eask-all-p)  ; Run all scripts
     (dolist (data (reverse eask-scripts))
-      (eask--export-command (cdr data))))
+      (eask-run-command--export (cdr data))))
    ((when-let ((scripts (eask-args)))
-      (if-let ((unmatched (eask--unmatched-scripts scripts)))
+      (if-let ((unmatched (eask-run-script--unmatched-scripts scripts)))
           (progn  ; if there are unmatched scripts, don't even try to execute
             (eask-info "(Missing script%s: `%s`)"
                        (eask--sinr unmatched "" "s")
                        (mapconcat #'identity unmatched ", "))
             (eask-msg "")
-            (eask--print-scripts))
+            (eask-run-script--print-scripts))
         (dolist (script scripts)
           (let* ((data (assoc script eask-scripts))
                  (name (car data))
                  (command (cdr data)))
-            (eask--export-command command)))
+            (eask-run-command--export command)))
         t)))
-   (t (eask--print-scripts))))
+   (t (eask-run-script--print-scripts))))
 
 ;;; run/script.el ends here

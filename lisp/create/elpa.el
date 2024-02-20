@@ -19,7 +19,7 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defconst eask--template-elpa-name "template-elpa"
+(defconst eask-create-elpa--template-name "template-elpa"
   "Holds template project name.")
 
 (eask-start

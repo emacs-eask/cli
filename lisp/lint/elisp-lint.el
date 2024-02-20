@@ -32,16 +32,16 @@
 ;;
 ;;; Core
 
-(defconst eask--elisp-lint-version nil
+(defconst eask-lint-elisp-lint--version nil
   "`elisp-lint' version.")
 
-(defun eask--elisp-lint-process-file (filename)
+(defun eask-lint-elisp-lint--process-file (filename)
   "Process FILENAME."
   (let* ((filename (expand-file-name filename))
          (file (eask-root-del filename))
          success)
     (eask-msg "")
-    (eask-msg "`%s` with elisp-lint (%s)" (ansi-green file) eask--elisp-lint-version)
+    (eask-msg "`%s` with elisp-lint (%s)" (ansi-green file) eask-lint-elisp-lint--version)
     (eask-with-verbosity 'debug
       (setq success (elisp-lint-file filename)))
     ;; Report result!
@@ -54,7 +54,7 @@
   ;; Preparation
   (eask-with-archives '("gnu" "melpa")
     (eask-package-install 'elisp-lint))
-  (setq eask--elisp-lint-version (eask-package--version-string 'elisp-lint))
+  (setq eask-lint-elisp-lint--version (eask-package--version-string 'elisp-lint))
 
   ;; Start Linting
   (require 'elisp-lint)
@@ -65,7 +65,7 @@
     (cond
      ;; Files found, do the action!
      (files
-      (mapcar #'eask--elisp-lint-process-file files)
+      (mapcar #'eask-lint-elisp-lint--process-file files)
       (eask-msg "")
       (eask-info "(Total of %s file%s linted)" (length files)
                  (eask--sinr files "" "s")))

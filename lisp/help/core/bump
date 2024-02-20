@@ -5,4 +5,4 @@
 
 💡 The `bump` command accepts multiple values:
 
-    $ eask bump major
+    $ eask bump major minor patch

@@ -21,7 +21,7 @@
 
 (eask-load "core/list")
 
-(defun eask--search-packages (query)
+(defun eask-search--packages (query)
   "Filter available packages with QUERY."
   (let ((result))
     (dolist (package (mapcar #'car package-archive-contents))
@@ -34,9 +34,9 @@
   (if-let ((queries (eask-args)))
       (let ((result))
         (dolist (query queries)
-          (setq result (append result (eask--search-packages query))))
+          (setq result (append result (eask-search--packages query))))
         (delete-dups result)
-        (eask--list result package-archive-contents)
+        (eask-list result package-archive-contents)
         (eask-msg "")
         (eask-info "(Search result of %s package%s)" (length result)
                    (eask--sinr result "" "s")))

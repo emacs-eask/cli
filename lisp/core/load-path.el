@@ -14,11 +14,11 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defun eask--print-load-path (path)
+(defun eask-load-path--print (path)
   "Print out the PATH."
   (eask-println "%s" path))
 
-(defun eask--filter-path (path)
+(defun eask-load-path--filter (path)
   "Filter the PATH out by search regex."
   (cl-some (lambda (regex)
              (string-match-p regex path))
@@ -28,10 +28,10 @@
   (eask-pkg-init)
   (let* ((patterns (eask-args))
          (load-path (if patterns
-                        (cl-remove-if-not #'eask--filter-path load-path)
+                        (cl-remove-if-not #'eask-load-path--filter load-path)
                       load-path)))
     (eask-msg "")
-    (mapc #'eask--print-load-path load-path)
+    (mapc #'eask-load-path--print load-path)
     (if (zerop (length load-path))
         (eask-info "(No load-path found)")
       (eask-info "(Total of %s load-path)" (length load-path)))))

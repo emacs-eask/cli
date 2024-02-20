@@ -32,16 +32,16 @@
 ;;
 ;;; Core
 
-(defconst eask--relint-version nil
+(defconst eask-lint-regexps--relint-version nil
   "`relint' version.")
 
-(defun eask--relint-file (filename)
+(defun eask-lint-regexps--relint-file (filename)
   "Package lint FILENAME."
   (let* ((filename (expand-file-name filename))
          (file (eask-root-del filename))
          (errors))
     (eask-msg "")
-    (eask-msg "`%s` with relint (%s)" (ansi-green file) eask--relint-version)
+    (eask-msg "`%s` with relint (%s)" (ansi-green file) eask-lint-regexps--relint-version)
     (with-current-buffer (find-file filename)
       (setq errors (relint-buffer (current-buffer)))
       (dolist (err errors)
@@ -62,7 +62,7 @@
   ;; Preparation
   (eask-with-archives "gnu"
     (eask-package-install 'relint))
-  (setq eask--relint-version (eask-package--version-string 'relint))
+  (setq eask-lint-regexps--relint-version (eask-package--version-string 'relint))
 
   ;; Start Linting
   (require 'relint)
@@ -74,7 +74,7 @@
      ;; Files found, do the action!
      (files
       (setq package-lint-main-file eask-package-file)
-      (mapcar #'eask--relint-file files)
+      (mapcar #'eask-lint-regexps--relint-file files)
       (eask-msg "")
       (eask-info "(Total of %s file%s linted)" (length files)
                  (eask--sinr files "" "s")))

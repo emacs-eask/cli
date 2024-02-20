@@ -52,20 +52,20 @@ Argument VERSION is a string represent the version number of this package."
     (setf (slot-value rcp 'time) (eask-current-time))
     rcp))
 
-(defun eask-packaged-name ()
+(defun eask-package-packaged-name ()
   "Find a possible packaged name."
   (let ((name (eask-guess-package-name))
         (version (eask-package-version)))
     (concat name "-" version)))
 
-(defun eask--packaged-file (ext)
+(defun eask-package--packaged-file (ext)
   "Find a possible packaged file with extension (EXT)."
-  (expand-file-name (concat (eask-packaged-name) "." ext) eask-dist-path))
+  (expand-file-name (concat (eask-package-packaged-name) "." ext) eask-dist-path))
 
-(defun eask-packaged-file ()
+(defun eask-package-packaged-file ()
   "Return generated package artifact; it could be a tar or el."
-  (if (eask-package-multi-p) (eask--packaged-file "tar")
-    (eask--packaged-file "el")))
+  (if (eask-package-multi-p) (eask-package--packaged-file "tar")
+    (eask-package--packaged-file "el")))
 
 (eask-start
   (let* ((eask-dist-path (or (eask-args 0) eask-dist-path))
@@ -88,7 +88,7 @@ Argument VERSION is a string represent the version number of this package."
         (package-build--package rcp)
         "done ✓"))
 
-    (setq packaged (eask-packaged-file)
+    (setq packaged (eask-package-packaged-file)
           packaged (when (file-exists-p packaged) packaged))
 
     (when (and eask-is-windows (eask-package-single-p))

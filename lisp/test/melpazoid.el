@@ -22,7 +22,7 @@
 ;;
 ;;; Core
 
-(defcustom eask-melpazoid-el-url
+(defcustom eask-test-melpazoid-el-url
   "https://raw.githubusercontent.com/riscy/melpazoid/master/melpazoid/melpazoid.el"
   "Url path to melpazoid's elisp file."
   :type 'string
@@ -41,7 +41,7 @@
       (dolist (dir dirs)
         (let ((default-directory (expand-file-name dir)))
           (eask-info "[+] %s" default-directory)
-          (eask-import eask-melpazoid-el-url))))
+          (eask-import eask-test-melpazoid-el-url))))
      ;; Default, print help!
      (t
       (eask-info "(No tests found.)")
