@@ -292,6 +292,14 @@ Concatenate all Emacs Lisp files into one file.
 $ eask [GLOBAL-OPTIONS] concate [FILES..]
 ```
 
+## 🔍 eask loc
+
+Print LOC information.
+
+```sh
+$ eask [GLOBAL-OPTIONS] loc [FILES..]
+```
+
 # 🚩 Execution
 
 Commands allow you to execute on top of the Eask core.
