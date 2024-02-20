@@ -37,10 +37,10 @@
   (if eask-package
       (progn
         (eask-println "%s (%s) | deps: %s | devDeps: %s"
-                  (ansi-green (eask-package-name))
-                  (ansi-yellow (eask-package-version))
-                  (ansi-cyan (eask-2str (length eask-depends-on)))
-                  (ansi-cyan (eask-2str (length eask-depends-on-dev))))
+                      (ansi-green (eask-package-name))
+                      (ansi-yellow (eask-package-version))
+                      (ansi-cyan (eask-2str (length eask-depends-on)))
+                      (ansi-cyan (eask-2str (length eask-depends-on-dev))))
         (unless (string-empty-p (eask-package-description))
           (eask-println (eask-package-description)))
         (when-let* ((url (or (eask-package-desc-url) eask-website-url))

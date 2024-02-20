@@ -19,9 +19,9 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defvar eask--list-pkg-name-offset nil)
-(defvar eask--list-pkg-version-offset nil)
-(defvar eask--list-pkg-archive-offset nil)
+(defvar eask-list--pkg-name-offset nil)
+(defvar eask-list--pkg-version-offset nil)
+(defvar eask-list--pkg-archive-offset nil)
 
 (defun eask-list--format-s (offset)
   "Format OFFSET."
@@ -35,9 +35,9 @@ for string concatenation."
   (let ((prefix (if (= depth 0) "[+]" "[+]")))
     (concat (spaces-string (* depth 2))  ; indent for depth
             " " prefix
-            (eask-list--format-s (- eask--list-pkg-name-offset (* depth 2)))
-            (eask-list--format-s eask--list-pkg-version-offset)
-            (eask-list--format-s eask--list-pkg-archive-offset)
+            (eask-list--format-s (- eask-list--pkg-name-offset (* depth 2)))
+            (eask-list--format-s eask-list--pkg-version-offset)
+            (eask-list--format-s eask-list--pkg-archive-offset)
             rest)))
 
 (defun eask-list--print-pkg (name depth max-depth pkg-alist)
@@ -84,11 +84,11 @@ PKG-ALIST is the archive contents."
 Argument LIST is the list of packages we want to list.  PKG-ALIST is the archive
 contents we want to retrieve package's metadate from.  Optional argument DEPTH
 is the deepness of the dependency nested level we want to go."
-  (let* ((eask--list-pkg-name-offset (eask-seq-str-max list))
+  (let* ((eask-list--pkg-name-offset (eask-seq-str-max list))
          (version-list (eask-list--version-list pkg-alist))
-         (eask--list-pkg-version-offset (eask-seq-str-max version-list))
+         (eask-list--pkg-version-offset (eask-seq-str-max version-list))
          (archive-list (eask-list--archive-list pkg-alist))
-         (eask--list-pkg-archive-offset (eask-seq-str-max archive-list)))
+         (eask-list--pkg-archive-offset (eask-seq-str-max archive-list)))
     (dolist (name list)
       (eask-list--print-pkg name 0 (or depth (eask-depth) 999) pkg-alist))))
 

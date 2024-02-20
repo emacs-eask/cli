@@ -37,19 +37,19 @@
 ;;
 ;;; Core
 
-(defconst eask-compile-log-buffer-name "*Compile-Log*"
+(defconst eask-compile--log-buffer-name "*Compile-Log*"
   "Byte-compile log buffer name.")
 
-(defun eask--print-compile-log ()
+(defun eask-compile--print-log ()
   "Print `*Compile-Log*' buffer."
-  (when (get-buffer eask-compile-log-buffer-name)
-    (with-current-buffer eask-compile-log-buffer-name
+  (when (get-buffer eask-compile--log-buffer-name)
+    (with-current-buffer eask-compile--log-buffer-name
       (if (and (eask-clean-p) (eask-strict-p))
           (eask-error (buffer-string))  ; Exit with error code!
         (eask-print-log-buffer))
       (eask-msg ""))))
 
-(defun eask--byte-compile-file-external-contetnt (filename cmd)
+(defun eask-compile--byte-compile-file-external-contetnt (filename cmd)
   "Extract result after executing byte-compile the FILENAME.
 
 The CMD is the command to start a new Emacs session."
@@ -69,7 +69,7 @@ The CMD is the command to start a new Emacs session."
       (delete-region (line-beginning-position -1) (point-max)))
     (string-trim (buffer-string))))
 
-(defun eask--byte-compile-file-external (filename)
+(defun eask-compile--byte-compile-file-external (filename)
   "Byte compile FILENAME with clean environment by opening a new Emacs session."
   (let* ((cmd (split-string eask-invocation "\n" t))
          (cmd (format "\"%s\""(mapconcat #'identity cmd "\" \"")))
@@ -82,37 +82,37 @@ The CMD is the command to start a new Emacs session."
          (args (append `(,(eask-command) ,(concat "\"" filename "\"")) argv))
          (args (mapconcat #'identity args " "))
          (cmd (concat cmd " " args))
-         (content (eask--byte-compile-file-external-contetnt filename cmd)))
+         (content (eask-compile--byte-compile-file-external-contetnt filename cmd)))
     (if (string-empty-p content)
         t  ; no error, good!
-      (with-current-buffer (get-buffer-create eask-compile-log-buffer-name)
+      (with-current-buffer (get-buffer-create eask-compile--log-buffer-name)
         (insert content)))))
 
-(defun eask--byte-compile-file (filename)
+(defun eask-compile--byte-compile-file (filename)
   "Byte compile FILENAME."
   ;; *Compile-Log* does not kill itself. Make sure it's clean before we do
   ;; next byte-compile task.
-  (ignore-errors (kill-buffer eask-compile-log-buffer-name))
+  (ignore-errors (kill-buffer eask-compile--log-buffer-name))
   (let* ((filename (expand-file-name filename))
          (result))
     (eask-with-progress
       (unless byte-compile-verbose (format "Compiling %s... " filename))
       (eask-with-verbosity 'debug
         (setq result (if (eask-clean-p)
-                         (eask--byte-compile-file-external filename)
+                         (eask-compile--byte-compile-file-external filename)
                        (byte-compile-file filename))
               result (eq result t)))
       (if result "done ✓" "skipped ✗"))
-    (eask--print-compile-log)
+    (eask-compile--print-log)
     result))
 
-(defun eask--compile-files (files)
+(defun eask-compile--files (files)
   "Compile sequence of FILES."
-  (let* ((compiled (cl-remove-if-not #'eask--byte-compile-file files))
+  (let* ((compiled (cl-remove-if-not #'eask-compile--byte-compile-file files))
          (compiled (length compiled))
          (skipped (- (length files) compiled)))
     ;; XXX: Avoid last newline from the log buffer!
-    (unless (get-buffer eask-compile-log-buffer-name)
+    (unless (get-buffer eask-compile--log-buffer-name)
       (eask-msg ""))
     (eask-info "(Total of %s file%s compiled, %s skipped)" compiled
                (eask--sinr compiled "" "s")
@@ -127,7 +127,7 @@ The CMD is the command to start a new Emacs session."
     (cond
      ;; Files found, do the action!
      (files
-      (eask--compile-files files))
+      (eask-compile--files files))
      ;; Pattern defined, but no file found!
      (patterns
       (eask-info "(No files match wildcard: %s)"
