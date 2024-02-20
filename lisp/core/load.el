@@ -6,6 +6,11 @@
 ;;
 ;;   $ eask load
 ;;
+;;
+;;  Positionals:
+;;
+;;    [files..]     specify files to load
+;;
 
 ;;; Code:
 

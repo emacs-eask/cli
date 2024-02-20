@@ -35,10 +35,12 @@ eask status
 eask archives
 eask archives --all
 eask list --depth=0
+eask bump major minor patch
 eask cat package.json --insecure
 eask cat package.json --number --insecure
 eask concat
-eask bump major minor patch
+#eask loc                       # Only 27.1+
+#eask loc Eask                  # Only 27.1+
 
 # PATH environment
 eask path

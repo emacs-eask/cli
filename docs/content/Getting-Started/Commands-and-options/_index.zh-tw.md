@@ -288,6 +288,14 @@ $ eask [GLOBAL-OPTIONS] cat [PATTERNS..]
 $ eask [GLOBAL-OPTIONS] concate [FILES..]
 ```
 
+## 🔍 eask loc
+
+列印 LOC 信息。
+
+```sh
+$ eask [GLOBAL-OPTIONS] loc [FILES..]
+```
+
 # 🚩 執行
 
 指令允許執行在 Eask 核心之上。
