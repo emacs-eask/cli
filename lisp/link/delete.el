@@ -21,19 +21,19 @@
 
 (eask-load "link/list")
 
-(defun eask--delete-symlink (path)
+(defun eask-link-delete-symlink (path)
   "Delete symlink PATH."
   (ignore-errors (delete-file path))
   (ignore-errors (delete-directory path t)))
 
-(defun eask--delete-link (name)
+(defun eask-link-delete--link (name)
   "Delete a link by its' NAME."
-  (let* ((links (eask--links))
+  (let* ((links (eask-link-list))
          (source (assoc name links))
          (link (expand-file-name name package-user-dir)))
     (if (and source (file-symlink-p link))
         (progn
-          (eask--delete-symlink link)
+          (eask-link-delete-symlink link)
           (eask-info "✓ Package `%s` unlinked" name)
           t)
       (eask-info "✗ No linked package name `%s`" name)
@@ -41,7 +41,7 @@
 
 (eask-start
   (let* ((names (eask-args))
-         (links (eask--links))
+         (links (eask-link-list))
          (link-names (mapcar #'car links))
          (deleted 0))
     (cond
@@ -68,7 +68,7 @@
      ;; Okay! Good to go!
      (t
       (dolist (name names)
-        (when (eask--delete-link name)
+        (when (eask-link-delete--link name)
           (cl-incf deleted)))
       (eask-msg "")
       (eask-info "(Total of %s package%s unlinked, %s skipped)"

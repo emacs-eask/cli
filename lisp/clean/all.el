@@ -17,31 +17,31 @@
 (defvar eask-no-cleaning-operation-p nil
   "Set to non-nil if there is no cleaning operation done.")
 
-(defconst eask--clean-tasks-total 6
+(defconst eask-clean-all--tasks-total 6
   "Count cleaning task.")
 
-(defvar eask--clean-tasks-count 0
+(defvar eask-clean-all--tasks-count 0
   "Count cleaning task.")
 
-(defvar eask--clean-tasks-cleaned 0
+(defvar eask-clean-all--tasks-cleaned 0
   "Total cleaned tasks.")
 
 (defmacro eask--clean-section (title &rest body)
   "Print clean up TITLE and execute BODY."
   (declare (indent 1))
   `(let (eask-no-cleaning-operation-p)
-     (cl-incf eask--clean-tasks-count)
+     (cl-incf eask-clean-all--tasks-count)
      (eask-with-progress
-       (concat (format "  - [%s/%s] " eask--clean-tasks-count eask--clean-tasks-total)
+       (concat (format "  - [%s/%s] " eask-clean-all--tasks-count eask-clean-all--tasks-total)
                (format "%s... " ,title))
        (eask-with-verbosity 'debug ,@body)
        (if eask-no-cleaning-operation-p
            "skipped ✗"
-         (cl-incf eask--clean-tasks-cleaned)
+         (cl-incf eask-clean-all--tasks-cleaned)
          "done ✓"))))
 
 (eask-start
-  (eask-msg "Applying %s cleaning tasks..." eask--clean-tasks-total)
+  (eask-msg "Applying %s cleaning tasks..." eask-clean-all--tasks-total)
   (eask-msg "")
   (eask--clean-section (format "Cleaning %s" (ansi-green "workspace"))
     (eask-call "clean/workspace"))
@@ -57,8 +57,8 @@
     (eask-call "clean/log-file"))
   (eask-msg "")
   (eask-info "(Total of %s task%s cleaned, %s skipped)"
-             eask--clean-tasks-cleaned
-             (eask--sinr eask--clean-tasks-cleaned "" "s")
-             (- eask--clean-tasks-count eask--clean-tasks-cleaned)))
+             eask-clean-all--tasks-cleaned
+             (eask--sinr eask-clean-all--tasks-cleaned "" "s")
+             (- eask-clean-all--tasks-count eask-clean-all--tasks-cleaned)))
 
 ;;; clean/all.el ends here

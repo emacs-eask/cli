@@ -14,7 +14,7 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defun eask--clean-log (path)
+(defun eask-clean-log-file (path)
   "Clean up .log PATH."
   (let ((log-files '("messages.log"
                      "warnings.log"
@@ -41,7 +41,7 @@
 (eask-start
   (let ((log-dir (expand-file-name eask-log-path eask-file-root)))
     (if (file-directory-p log-dir)
-        (eask--clean-log log-dir)
+        (eask-clean-log-file log-dir)
       (eask-info "(No log file found in workspace)")
       (setq eask-no-cleaning-operation-p t))))
 

@@ -19,11 +19,11 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defun eask--command-desc (name)
+(defun eask-run-command--desc (name)
   "Return command's description by its command's NAME."
   (car (split-string (or (documentation name) "") "\n")))
 
-(defun eask--print-commands ()
+(defun eask-run-command--print-commands ()
   "Print all available commands."
   (eask-msg "available via `eask run command`")
   (eask-msg "")
@@ -31,17 +31,17 @@
          (offset (eask-seq-str-max keys))
          (fmt (concat "  %-" (eask-2str offset) "s  %s")))
     (dolist (key keys)
-      (eask-msg fmt key (eask--command-desc key)))
+      (eask-msg fmt key (eask-run-command--desc key)))
     (eask-msg "")
     (eask-info "(Total of %s available script%s)" (length keys)
                (eask--sinr keys "" "s"))))
 
-(defun eask--execute-command (name)
+(defun eask-run-command--execute (name)
   "Execute the command by NAME."
   (eask-info "[RUN]: %s" name)
   (funcall (eask-intern name)))
 
-(defun eask--unmatched-commands (commands)
+(defun eask-run-command--unmatched-commands (commands)
   "Return a list of COMMANDS that cannot be found in `eask-commands'."
   (let (unmatched)
     (dolist (command commands)
@@ -55,18 +55,18 @@
          (eask-help "run/command"))
         ((eask-all-p)
          (dolist (name (reverse eask-commands))
-           (eask--execute-command name)))
+           (eask-run-command--execute name)))
         ((when-let ((commands (eask-args)))
-           (if-let ((unmatched (eask--unmatched-commands commands)))
+           (if-let ((unmatched (eask-run-command--unmatched-commands commands)))
                (progn  ; if there are unmatched commands, don't even try to execute
                  (eask-info "(Missing command%s: `%s`)"
                             (eask--sinr unmatched "" "s")
                             (mapconcat #'identity unmatched ", "))
                  (eask-msg "")
-                 (eask--print-commands))
+                 (eask-run-command--print-commands))
              (dolist (command commands)
-               (eask--execute-command command))
+               (eask-run-command--execute command))
              t)))
-        (t (eask--print-commands))))
+        (t (eask-run-command--print-commands))))
 
 ;;; run/command.el ends here

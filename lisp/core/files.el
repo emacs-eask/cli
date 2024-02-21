@@ -14,7 +14,7 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defun eask--print-filename (filename)
+(defun eask-files--print-filename (filename)
   "Print out the FILENAME."
   (eask-println "%s" filename))
 
@@ -23,7 +23,7 @@
          (files (if patterns
                     (eask-expand-file-specs patterns)
                   (eask-package-files))))
-    (mapc #'eask--print-filename files)
+    (mapc #'eask-files--print-filename files)
     (if (zerop (length files))
         (eask-info "(No package files found)")
       (eask-info "(Total of %s item%s listed)" (length files) (eask--sinr files "" "s")))))

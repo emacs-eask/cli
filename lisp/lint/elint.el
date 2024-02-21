@@ -32,7 +32,7 @@
 ;;
 ;;; Core
 
-(defun eask--elint-file (filename)
+(defun eask-lint-elint--file (filename)
   "Run elint on FILENAME."
   (let* ((filename (expand-file-name filename))
          (file (eask-root-del filename))
@@ -52,7 +52,7 @@
     (cond
      ;; Files found, do the action!
      (files
-      (mapcar #'eask--elint-file files)
+      (mapcar #'eask-lint-elint--file files)
       (eask-msg "")
       (eask-info "(Total of %s file%s %s checked)" (length files)
                  (eask--sinr files "" "s")

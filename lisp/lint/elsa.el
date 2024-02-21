@@ -38,16 +38,16 @@
 ;;
 ;;; Core
 
-(defconst eask--elsa-version nil
+(defconst eask-lint-elsa--version nil
   "Elsa version.")
 
-(defun eask--elsa-analyse-file (filename)
+(defun eask-lint-elsa--analyse-file (filename)
   "Process FILENAME."
   (let* ((filename (expand-file-name filename))
          (file (eask-root-del filename))
          errors)
     (eask-msg "")
-    (eask-msg "`%s` with elsa (%s)" (ansi-green file) eask--elsa-version)
+    (eask-msg "`%s` with elsa (%s)" (ansi-green file) eask-lint-elsa--version)
     (eask-with-verbosity 'debug
       (setq errors (oref (elsa-analyse-file filename elsa-global-state) errors)))
     (if errors
@@ -62,7 +62,7 @@
   ;; Preparation
   (eask-with-archives '("gnu" "melpa")
     (eask-package-install 'elsa))
-  (setq eask--elsa-version (eask-package--version-string 'elsa))
+  (setq eask-lint-elsa--version (eask-package--version-string 'elsa))
 
   ;; Start Linting
   (require 'elsa)
@@ -74,7 +74,7 @@
      ;; Files found, do the action!
      (files
       (elsa-load-config)
-      (mapcar #'eask--elsa-analyse-file files)
+      (mapcar #'eask-lint-elsa--analyse-file files)
       (eask-msg "")
       (eask-info "(Total of %s file%s linted)" (length files)
                  (eask--sinr files "" "s")))

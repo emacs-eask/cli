@@ -19,23 +19,23 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defun eask-bump-version--version (version index)
+(defun eask-bump--version (version index)
   "Bump VERSION with INDEX."
   (let ((lst (if (stringp version) (version-to-list version) version)))
     (setf (nth index lst) (cl-incf (nth index lst)))
     (mapconcat #'eask-2str lst version-separator)))
 
-(defun eask-bump-version--major-version (version)
+(defun eask-bump--version-major-version (version)
   "Bump VERSION major level."
-  (eask-bump-version--version version 0))
+  (eask-bump--version version 0))
 
-(defun eask-bump-version--minor-version (version)
+(defun eask-bump--version-minor-version (version)
   "Bump VERSION minor level."
-  (eask-bump-version--version version 1))
+  (eask-bump--version version 1))
 
-(defun eask-bump-version--patch-level (version)
+(defun eask-bump--version-patch-level (version)
   "Bump VERSION patch level."
-  (eask-bump-version--version version 2))
+  (eask-bump--version version 2))
 
 (eask-start
   (let ((package-file (or eask-package-file
@@ -58,11 +58,11 @@
         (setq desc (package-buffer-info)))
       (setq version (package-desc-version desc))
       (when (member "major" levels)
-        (setq version (eask-bump-version--major-version version)))
+        (setq version (eask-bump--version-major-version version)))
       (when (member "minor" levels)
-        (setq version (eask-bump-version--minor-version version)))
+        (setq version (eask-bump--version-minor-version version)))
       (when (member "patch" levels)
-        (setq version (eask-bump-version--patch-level version)))
+        (setq version (eask-bump--version-patch-level version)))
       (eask-msg "New version: %s" version)
       (let (success)
         (eask-with-progress

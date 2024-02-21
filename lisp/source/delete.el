@@ -19,7 +19,7 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defun eask--source-delete (name)
+(defun eask-source-delete (name)
   "Delete an archive source by NAME."
   (with-current-buffer (find-file eask-file)
     (goto-char (point-min))
@@ -32,7 +32,7 @@
   (let* ((args (eask-args))
          (name (nth 0 args)))
     (if-let ((exists (assoc name package-archives)))
-        (eask--source-delete name)
+        (eask-source-delete name)
       (eask-info "(Invalid source name, `%s')" name)
       (eask-help "source/delete"))))
 

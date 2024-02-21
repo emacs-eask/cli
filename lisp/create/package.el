@@ -19,10 +19,10 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defconst eask--template-project-name "template-elisp"
+(defconst eask-create-package--template-name "template-elisp"
   "Holds template project name.")
 
-(defun eask--replace-string-in-buffer (old new)
+(defun eask-create-package--replace-s-in-buffer (old new)
   "Replace OLD to NEW in buffer."
   (let ((str (buffer-string)))
     (setq str (eask-s-replace old new str))
@@ -31,13 +31,13 @@
 
 ;; XXX: we can't use `user-full-name' in batch-mode. It will always return
 ;; empty string.
-(defun eask--get-user ()
+(defun eask-create-package--get-user ()
   "Return user name."
   (string-trim (shell-command-to-string "git config user.name")))
 
 ;; XXX: we can't use `user-mail-address' in batch-mode. It will always return
 ;; empty string.
-(defun eask--get-mail ()
+(defun eask-create-package--get-mail ()
   "Return user email."
   (string-trim (shell-command-to-string "git config user.email")))
 
@@ -45,18 +45,18 @@
   (ignore-errors (delete-directory ".git" t))
   (eask-with-progress
     "Preparing your new elisp project... "
-    (let ((template-package-file (expand-file-name (concat eask--template-project-name ".el"))))
+    (let ((template-package-file (expand-file-name (concat eask-create-package--template-name ".el"))))
       (rename-file template-package-file eask-package-file)
       (with-current-buffer (find-file eask-package-file)
-        (eask--replace-string-in-buffer eask--template-project-name (eask-package-name))
-        (eask--replace-string-in-buffer "{ SUMMARY }" (eask-package-description))
-        (eask--replace-string-in-buffer "{ YEAR }" (format-time-string "%Y"))
-        (eask--replace-string-in-buffer "{ FULL_NAME }" (eask--get-user))
-        (eask--replace-string-in-buffer "{ MAIL_ADDR }" (eask--get-mail))
-        (eask--replace-string-in-buffer "{ WEBSITE_URL }" (or eask-website-url ""))
-        (eask--replace-string-in-buffer "{ VERSION }" (eask-package-version))
-        (eask--replace-string-in-buffer "{ EMACS_VERSION }" (eask-depends-emacs-version))
-        (eask--replace-string-in-buffer "{ KEYWORDS }" (string-join eask-keywords " "))
+        (eask-create-package--replace-s-in-buffer eask-create-package--template-name (eask-package-name))
+        (eask-create-package--replace-s-in-buffer "{ SUMMARY }" (eask-package-description))
+        (eask-create-package--replace-s-in-buffer "{ YEAR }" (format-time-string "%Y"))
+        (eask-create-package--replace-s-in-buffer "{ FULL_NAME }" (eask-create-package--get-user))
+        (eask-create-package--replace-s-in-buffer "{ MAIL_ADDR }" (eask-create-package--get-mail))
+        (eask-create-package--replace-s-in-buffer "{ WEBSITE_URL }" (or eask-website-url ""))
+        (eask-create-package--replace-s-in-buffer "{ VERSION }" (eask-package-version))
+        (eask-create-package--replace-s-in-buffer "{ EMACS_VERSION }" (eask-depends-emacs-version))
+        (eask-create-package--replace-s-in-buffer "{ KEYWORDS }" (string-join eask-keywords " "))
         (save-buffer)))
     "done ✓")
   (eask-msg "")

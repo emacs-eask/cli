@@ -21,7 +21,7 @@
 
 (eask-load "core/package")  ; load dist path
 
-(defun eask--reinstall-packages (names)
+(defun eask-reinstall--packages (names)
   "Install packages by its NAMES."
   (let* ((names (mapcar #'eask-intern names))
          (len (length names)) (s (eask--sinr len "" "s"))
@@ -38,7 +38,7 @@
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (if-let ((names (eask-args)))
       ;; If package [name..] are specified, we try to install it
-      (eask--reinstall-packages names)
+      (eask-reinstall--packages names)
     (if-let* ((name (intern (eask-guess-package-name)))
               ((package-installed-p name)))
         (progn

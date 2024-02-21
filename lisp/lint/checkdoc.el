@@ -35,14 +35,14 @@
 ;;
 ;;; Core
 
-(defvar eask--checkdoc-errors nil "Error flag.")
+(defvar eask-lint-checkdoc--errors nil "Error flag.")
 
-(defun eask--checkdoc-print-error (text start _end &optional _unfixable)
+(defun eask-lint-checkdoc--print-error (text start _end &optional _unfixable)
   "Print error for checkdoc.
 
 Arguments TEXT, START, END and UNFIXABLE are required for this function to
 be assigned to variable `checkdoc-create-error-function'."
-  (setq eask--checkdoc-errors t)
+  (setq eask-lint-checkdoc--errors t)
   (let ((msg (concat (checkdoc-buffer-label) ":"
                      (int-to-string (count-lines (point-min) (or start (point-min))))
                      ": " text)))
@@ -50,17 +50,17 @@ be assigned to variable `checkdoc-create-error-function'."
     ;; Return nil because we *are* generating a buffered list of errors.
     nil))
 
-(setq checkdoc-create-error-function #'eask--checkdoc-print-error)
+(setq checkdoc-create-error-function #'eask-lint-checkdoc--print-error)
 
-(defun eask--checkdoc-file (filename)
+(defun eask-lint-checkdoc--file (filename)
   "Run checkdoc on FILENAME."
   (let* ((filename (expand-file-name filename))
          (file (eask-root-del filename))
-         (eask--checkdoc-errors))
+         (eask-lint-checkdoc--errors))
     (eask-lint-first-newline)
     (eask-msg "`%s` with checkdoc (%s)" (ansi-green file) checkdoc-version)
     (checkdoc-file filename)
-    (unless eask--checkdoc-errors (eask-msg "No issues found"))))
+    (unless eask-lint-checkdoc--errors (eask-msg "No issues found"))))
 
 (eask-start
   (require 'checkdoc)
@@ -71,7 +71,7 @@ be assigned to variable `checkdoc-create-error-function'."
     (cond
      ;; Files found, do the action!
      (files
-      (mapcar #'eask--checkdoc-file files)
+      (mapcar #'eask-lint-checkdoc--file files)
       (eask-msg "")
       (eask-info "(Total of %s file%s %s checked)" (length files)
                  (eask--sinr files "" "s")

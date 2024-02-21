@@ -16,7 +16,7 @@
 
 (eask-load "core/load-path")
 
-(defun eask--print-exec-path (path)
+(defun eask-exec-path--print (path)
   "Print out the PATH."
   (eask-println "%s" path))
 
@@ -24,10 +24,10 @@
   (eask-pkg-init)
   (let* ((patterns (eask-args))
          (exec-path (if patterns
-                        (cl-remove-if-not #'eask--filter-path exec-path)
+                        (cl-remove-if-not #'eask-load-path--filter exec-path)
                       exec-path)))
     (eask-msg "")
-    (mapc #'eask--print-exec-path exec-path)
+    (mapc #'eask-exec-path--print exec-path)
     (if (zerop (length exec-path))
         (eask-info "(No exec-path found)")
       (eask-info "(Total of %s exec-path)" (length exec-path)))))

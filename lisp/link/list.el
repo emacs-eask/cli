@@ -14,7 +14,7 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defun eask--links ()
+(defun eask-link-list ()
   "Return a list of all links."
   (mapcar
    (lambda (file)
@@ -28,7 +28,7 @@ The argument OFFSET is used to align the result."
   (eask-println (concat "  %-" (eask-2str offset) "s  %s") (car link) (cdr link)))
 
 (eask-start
-  (if-let* ((links (eask--links))
+  (if-let* ((links (eask-link-list))
             (offset (eask-seq-str-max (mapcar #'car links))))
       (progn
         (eask-info "Available linked packages:")

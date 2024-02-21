@@ -25,7 +25,7 @@
         (when (eask-local-p)
           ;; Remove current developing packages
           (setq pkg-list (remove (intern (eask-guess-package-name)) pkg-list)))
-        (eask--list pkg-list package-alist 0)
+        (eask-list pkg-list package-alist 0)
         (eask-msg "")
         (eask-info "(Total of %s dependenc%s %s outdated)" (length pkg-list)
                    (eask--sinr pkg-list "y" "ies")

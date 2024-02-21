@@ -14,14 +14,14 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defvar eask--repl-old-pos nil
+(defvar eask-repl--old-pos nil
   "Record the last position to output on the screen for the `ielm' buffer.")
 
-(defun eask--repl-output ()
+(defun eask-repl--output ()
   "Print the REPL result to screen."
-  (unless eask--repl-old-pos (setq eask--repl-old-pos (point-min)))
+  (unless eask-repl--old-pos (setq eask-repl--old-pos (point-min)))
   (with-current-buffer "*ielm*"
-    (goto-char eask--repl-old-pos)
+    (goto-char eask-repl--old-pos)
     (while (not (eobp))
       (let ((line (thing-at-point 'line t)))
         (unless (string-prefix-p "ELISP> " line)
@@ -29,18 +29,18 @@
       (forward-line 1)
       (end-of-line))
     ;; Record last output position
-    (setq eask--repl-old-pos (point))))
+    (setq eask-repl--old-pos (point))))
 
 (eask-start
   (require 'ielm)
   (ielm)
-  (eask--repl-output)
+  (eask-repl--output)
   (let ((input))
     (while (setq input (read-from-minibuffer (ansi-blue "ELISP> ")))
       (with-current-buffer "*ielm*"
         (insert input)
-        (setq eask--repl-old-pos (1+ (point)))  ; skip all input, move to next line
+        (setq eask-repl--old-pos (1+ (point)))  ; skip all input, move to next line
         (eask--silent (ielm-send-input))
-        (eask--repl-output)))))
+        (eask-repl--output)))))
 
 ;;; core/repl.el ends here

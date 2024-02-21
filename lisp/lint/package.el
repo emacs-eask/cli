@@ -43,15 +43,15 @@
 ;;
 ;;; Core
 
-(defconst eask--package-lint-version nil
+(defconst eask-lint-package--version nil
   "`package-lint' version.")
 
-(defun eask--package-lint-file (filename)
+(defun eask-lint-package--file (filename)
   "Package lint FILENAME."
   (let* ((filename (expand-file-name filename))
          (file (eask-root-del filename)))
     (eask-msg "")
-    (eask-msg "`%s` with package-lint (%s)" (ansi-green file) eask--package-lint-version)
+    (eask-msg "`%s` with package-lint (%s)" (ansi-green file) eask-lint-package--version)
     (with-current-buffer (find-file filename)
       (package-lint-current-buffer)
       (kill-this-buffer)))
@@ -61,7 +61,7 @@
   ;; Preparation
   (eask-with-archives '("gnu" "melpa")
     (eask-package-install 'package-lint))
-  (setq eask--package-lint-version (eask-package--version-string 'package-lint))
+  (setq eask-lint-package--version (eask-package--version-string 'package-lint))
 
   ;; Start Linting
   (require 'package-lint)
@@ -74,7 +74,7 @@
      (files
       (eask-pkg-init)  ; XXX: Avoid not installable error!
       (setq package-lint-main-file eask-package-file)
-      (mapcar #'eask--package-lint-file files)
+      (mapcar #'eask-lint-package--file files)
       (eask-msg "")
       (eask-info "(Total of %s file%s linted)" (length files)
                  (eask--sinr files "" "s")))

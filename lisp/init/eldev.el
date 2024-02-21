@@ -14,13 +14,13 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defun eask--eldev-map-elpa (name)
+(defun eask-init-eldev--map-elpa (name)
   "Convert Eldev mapping to Eask mapping."
   (pcase name
     ("melpa-unstable" 'melpa)
     (_ name)))
 
-(defun eask--convert-eldev (filename)
+(defun eask-init-eldev--convert (filename)
   "Convert Eldev FILENAME to Eask."
   (let* ((filename (expand-file-name filename))
          (file (file-name-nondirectory (eask-root-del filename)))
@@ -66,7 +66,7 @@
                    (insert content)
 
                    (when-let* ((names (mapcar #'car package-archives))
-                               (sources (mapcar #'eask--eldev-map-elpa names)))
+                               (sources (mapcar #'eask-init-eldev--map-elpa names)))
                      (insert "\n")
                      (dolist (source sources)
                        (insert "(source '" (eask-2str source) ")\n"))))
@@ -95,7 +95,7 @@
      (files
       (eldev--set-up)  ; XXX: Load once!
       (dolist (file files)
-        (when (eask--convert-eldev file)
+        (when (eask-init-eldev--convert file)
           (cl-incf converted)))
       (eask-msg "")
       (eask-info "(Total of %s Eldev-file%s converted)" converted

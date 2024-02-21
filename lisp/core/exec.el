@@ -19,19 +19,19 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defconst eask--exec-path-file (expand-file-name "exec-path" eask-homedir)
+(defconst eask-exec--exec-path-file (expand-file-name "exec-path" eask-homedir)
   "Target file to export the variable `exec-path'.")
 
-(defconst eask--load-path-file (expand-file-name "load-path" eask-homedir)
+(defconst eask-exec--load-path-file (expand-file-name "load-path" eask-homedir)
   "Target file to export the variable `load-path'.")
 
-(defun eask--export-env ()
+(defun eask-exec-export-env ()
   "Export environments."
-  (ignore-errors (delete-file eask--exec-path-file))
-  (ignore-errors (delete-file eask--load-path-file))
+  (ignore-errors (delete-file eask-exec--exec-path-file))
+  (ignore-errors (delete-file eask-exec--load-path-file))
   (ignore-errors (make-directory eask-homedir t))  ; generate dir `~/.eask/'
-  (write-region (getenv "PATH") nil eask--exec-path-file)
-  (write-region (getenv "EMACSLOADPATH") nil eask--load-path-file))
+  (write-region (getenv "PATH") nil eask-exec--exec-path-file)
+  (write-region (getenv "EMACSLOADPATH") nil eask-exec--load-path-file))
 
 (eask-start
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
@@ -40,7 +40,7 @@
   (if (eask-argv 1)
       (eask-with-progress
         (ansi-green "Exporting environment variables... ")
-        (eask--export-env)
+        (eask-exec-export-env)
         (ansi-green "done ✓"))
     (eask-info "(No exeuction output)")
     (eask-help "core/exec")))

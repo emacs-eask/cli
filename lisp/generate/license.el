@@ -33,7 +33,7 @@
 ;;
 ;;; Core
 
-(defun eask--print-license-menu ()
+(defun eask-generate-license--print-menu ()
   "Print all available license."
   (eask-msg "available via `eask generate license`")
   (eask-msg "")
@@ -62,7 +62,7 @@
            (eask-info "(The license file already exists `%s`)" filename))
           ((not (member name (license-templates-keys)))
            (eask-info "(Invalid license type: `%s`)" name)
-           (eask--print-license-menu))
+           (eask-generate-license--print-menu))
           (t
            (eask-with-progress
              (format "  - [1/1] Generating license file in %s... " filename)
