@@ -19,8 +19,6 @@
 
 const child_process = require('child_process');
 
-const init = require('../core/init');
-
 exports.command = ['package <name>', 'pkg <name>'];
 exports.desc = 'Create a new package';
 exports.builder = yargs => yargs
@@ -61,6 +59,6 @@ exports.handler = async (argv) => {
 /* Operations after _cloned */
 async function _cloned(argv) {
   console.warn('Initialize the Eask-file for your project...');
-  await init.create_eask_file();
-  UTIL.e_call(argv, 'create/package');
+  await UTIL.e_call(argv, 'core/init');
+  await UTIL.e_call(argv, 'create/package');
 }
