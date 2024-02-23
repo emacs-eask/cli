@@ -17,7 +17,7 @@
 
 "use strict";
 
-exports.command = ['check-eask [files..]'];
+exports.command = ['analyze [files..]'];
 exports.desc = 'Run Eask checker';
 exports.builder = yargs => yargs
   .positional(
@@ -40,7 +40,7 @@ exports.builder = yargs => yargs
   });
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'checker/check-eask'
+  await UTIL.e_call(argv, 'core/analyze'
                     , argv.files
                     , UTIL.def_flag(argv.json, '--json')
                     , UTIL.def_flag(argv.output, '--output', argv.output));

@@ -854,28 +854,28 @@ $ eask [GLOBAL-OPTIONS] locate
 
 檢查您的 Eask 文件的命令。
 
-## 🔍 eask check-eask
+## 🔍 eask analyze
 
 檢查 `Eask` 文件。
 
 ```sh
-$ eask [GLOBAL-OPTIONS] check-eask [FILES..]
+$ eask [GLOBAL-OPTIONS] analyze [FILES..]
 ```
 
 例子:
 
 ```bash
 # lint all Eask-files in the current directory and subdirectories
-eask check-eask
+eask analyze
 # lint specific files
-eask check-eask Eask Eask.27
+eask analyze Eask Eask.27
 # lint all Eask-files in specified directory and subdirectories
-eask check-eask src/
+eask analyze src/
 # print result as JSON
-eask check-eask --json
+eask analyze --json
 ```
 
-有關更多詳細信息，請運行 `eask check-eask --help`。
+有關更多詳細信息，請運行 `eask analyze --help`。
 
 # 🚩 全域選項
 
