@@ -107,6 +107,14 @@ Points to `lisp` directory from the project root.
 (message "%s" eask-lisp-root)  ; path/to/eask/cli/lisp/
 ```
 
+## 🔍 Function: eask-working-directory ()
+
+Return the working directory of the program going to be executed.
+
+```elisp
+(message "%s" (eask-working-directory))  ; path/to/current/work/space/
+```
+
 ## 🔍 Function: eask-command ()
 
 Return the current command in string. Suppose the command is:
@@ -166,7 +174,7 @@ Call another eask script.
 
 ## 🔍 Function: eask-import (`url`)
 
-Load and evaluate the script from a url.
+Load and evaluate the script from the url.
 
 ```elisp
 (eask-import "https://raw.githubusercontent.com/emacsmirror/emacswiki.org/master/yes-no.el")
@@ -176,7 +184,7 @@ Load and evaluate the script from a url.
 
 ## 🔍 Macro: eask-defvc< (`version` &rest `body`)
 
-Define scope if Emacs version is below specific version.
+Define the scope if the Emacs version is below a specific version.
 
 `VERSION` is an integer and will be compared with `emacs-major-version`.
 
@@ -292,7 +300,7 @@ The following output is with Emacs 28.1:
 
 Return a list of Eask files from DIR.
 
-Consider following directory tree:
+Consider the following directory tree:
 
 ```
 . root
@@ -311,7 +319,7 @@ The following output is with Emacs 28.1:
 
 Find the Eask-file from START-PATH.
 
-Consider following directory tree:
+Consider the following directory tree:
 
 ```
 .project

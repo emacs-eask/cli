@@ -1024,7 +1024,7 @@ Argument BODY are forms for execution."
      result))
 
 (defun eask-working-directory ()
-  "Return the working directory of program is going to be executed."
+  "Return the working directory of the program going to be executed."
   (cond ((eask-config-p) user-emacs-directory)
         ((eask-global-p) (expand-file-name "../../" user-emacs-directory))
         (t default-directory)))

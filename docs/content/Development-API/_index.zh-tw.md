@@ -106,6 +106,14 @@ $ eask <command> -- args0 args1
 (message "%s" eask-lisp-root)  ; path/to/eask/cli/lisp/
 ```
 
+## 🔍 函式: eask-working-directory ()
+
+傳回將要執行的程式的工作目錄。
+
+```elisp
+(message "%s" (eask-working-directory))  ; path/to/current/work/space/
+```
+
 ## 🔍 函式: eask-command ()
 
 返回字符串中的當前命令。假設命令是：
