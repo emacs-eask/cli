@@ -19,6 +19,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * chore: Alias `pack` to `package` command (e209d7c8152a17de81613f09b380a2f5ad05697a)
 * fix(build.yml): Release with `.tar.gz` instead of `.zip` on Unix-like system (#214 and #216)
 * feat: Add `loc` command (#227)
+* fix: Allow initialize in other scopes (#229)
 
 ## 0.9.x
 > Released Nov 17, 2023
