@@ -157,8 +157,8 @@ will return `lint/checkdoc' with a dash between two subcommands."
 
 These commands will first respect the current workspace.  If the current
 workspace has no valid Eask-file; it will load global workspace instead."
-  (member (eask-command) '("init/cask" "init/eldev" "init/keg"
-                           "init/source"
+  (member (eask-command) '("init" "init/source" "init/cask" "init/eldev" "init/keg"
+                           "create/package" "create/elpa"
                            "bump" "cat" "keywords" "repl"
                            "generate/ignore" "generate/license"
                            "test/melpazoid")))
@@ -1022,6 +1022,12 @@ Argument BODY are forms for execution."
       (lambda (keyword _api old)
         (defalias keyword (symbol-function old))))
      result))
+
+(defun eask-working-directory ()
+  "Return the working directory of program is going to be executed."
+  (cond ((eask-config-p) user-emacs-directory)
+        ((eask-global-p) (expand-file-name "../../" user-emacs-directory))
+        (t default-directory)))
 
 (defvar eask-file nil "The Eask file's filename.")
 (defvar eask-file-root nil "The Eask file's directory.")
