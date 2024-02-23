@@ -29,6 +29,7 @@ Eask is a command-line tool that helps you build, lint, and test Emacs Lisp pack
 Usage: eask <command> [options..]
 
 Commands:
+  analyze [files..]          Run Eask checker
   archives                   List out all package archives                                                                                                                                     [aliases: sources]
   clean <type>               Delete various files produced during building
   compile [names..]          Byte compile all Emacs Lisp files in the package
@@ -52,7 +53,7 @@ Commands:
   load [files..]             Load elisp files
   outdated                   Show all outdated dependencies
   package-directory          Print path to package directory
-  package [destination]      Build a package artifact, and put it into the given destination
+  package [destination]      Build a package artifact, and put it into the given destination                                                                                                      [aliases: pack]
   recipe                     Suggest a recipe format
   refresh                    Download package archives
   reinstall [names..]        Reinstall packages
@@ -62,7 +63,6 @@ Commands:
   test <type>                Run test
   uninstall [names..]        Uninstall packages                                                                                                                                                 [aliases: delete]
   upgrade [names..]          Upgrade packages
-  check-eask [files..]       Run eask checker
   locate                     Print out Eask installed location
   upgrade-eask               Upgrade Eask itself                                                                                                                                          [aliases: upgrade-self]
 

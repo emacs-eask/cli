@@ -17,7 +17,7 @@
 
 ## Commentary:
 #
-# Test command/checker `check-eask`
+# Test command/checker `analyze`
 #
 
 set -e
@@ -25,10 +25,10 @@ set -e
 # Naviate to the test package
 cd $(dirname "$0")
 
-echo "Testing check-eask command... (Plain text)"
-eask check-eask
-eask check-eask Eask
+echo "Testing analyze command... (Plain text)"
+eask analyze
+eask analyze Eask
 
-echo "Testing check-eask command... (JSON format)"
-eask check-eask --json
-eask check-eask Eask --json
+echo "Testing analyze command... (JSON format)"
+eask analyze --json
+eask analyze Eask --json

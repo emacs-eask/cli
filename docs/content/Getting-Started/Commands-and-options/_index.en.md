@@ -867,28 +867,28 @@ $ eask [GLOBAL-OPTIONS] locate
 
 Commands to check your Eask-file.
 
-## 🔍 eask check-eask
+## 🔍 eask analyze
 
 Lint an `Eask`-file.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] check-eask [FILES..]
+$ eask [GLOBAL-OPTIONS] analyze [FILES..]
 ```
 
 Example:
 
 ```bash
 # lint all Eask-files in the current directory and subdirectories
-eask check-eask
+eask analyze
 # lint specific files
-eask check-eask Eask Eask.27
+eask analyze Eask Eask.27
 # lint all Eask-files in specified directory and subdirectories
-eask check-eask src/
+eask analyze src/
 # print result as JSON
-eask check-eask --json
+eask analyze --json
 ```
 
-For more detail, run `eask check-eask --help`.
+For more detail, run `eask analyze --help`.
 
 # 🚩 Global Options
 

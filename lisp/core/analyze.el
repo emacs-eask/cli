@@ -1,10 +1,10 @@
-;;; checker/check-eask.el --- Run eask checker  -*- lexical-binding: t; -*-
+;;; core/analyze.el --- Run eask checker  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
 ;; Commmand use to run Eask checker
 ;;
-;;   $ eask check-eask [FILES..]
+;;   $ eask analyze [FILES..]
 ;;
 ;;
 ;;  Positionals:
@@ -24,24 +24,24 @@
         nil t))
 
 ;; Plain Text
-(defvar eask-checker--log nil)
+(defvar eask-analyze--log nil)
 ;; JSON format
-(defvar eask-checker--warnings nil)
-(defvar eask-checker--errors nil)
+(defvar eask-analyze--warnings nil)
+(defvar eask-analyze--errors nil)
 
-(defun eask-checker--pretty-json (json)
+(defun eask-analyze--pretty-json (json)
   "Return pretty JSON."
   (with-temp-buffer (insert json) (json-pretty-print-buffer) (buffer-string)))
 
-(defun eask-checker--load-buffer ()
+(defun eask-analyze--load-buffer ()
   "Return the current file loading session."
   (car (cl-remove-if-not
         (lambda (elm) (string-prefix-p " *load*-" (buffer-name elm))) (buffer-list))))
 
-(defun eask-checker--write-json-format (level msg)
+(defun eask-analyze--write-json-format (level msg)
   "Prepare log for JSON format.
 
-For arguments LEVEL and MSG, please see function `eask-checker--write-log' for more
+For arguments LEVEL and MSG, please see function `eask-analyze--write-log' for more
 information."
   (let* ((bounds (bounds-of-thing-at-point 'sexp))
          (filename (or load-file-name eask-file))
@@ -63,13 +63,13 @@ information."
             (filename . ,filename)
             (message . ,msg))
           (cl-case level
-            (`error eask-checker--errors)
-            (`warn  eask-checker--warnings)))))
+            (`error eask-analyze--errors)
+            (`warn  eask-analyze--warnings)))))
 
-(defun eask-checker--write-plain-text (level msg)
+(defun eask-analyze--write-plain-text (level msg)
   "Prepare log for plain text format.
 
-For arguments LEVEL and MSG, please see function `eask-checker--write-log' for more
+For arguments LEVEL and MSG, please see function `eask-analyze--write-log' for more
 information."
   (let* ((level-string (cl-case level
                          (`error "Error")
@@ -80,20 +80,20 @@ information."
                       (if load-file-name (current-column) 0)
                       level-string
                       msg)))
-    (push (ansi-color-filter-apply log) eask-checker--log)))
+    (push (ansi-color-filter-apply log) eask-analyze--log)))
 
-(defun eask-checker--write-log (level msg)
+(defun eask-analyze--write-log (level msg)
   "Write the log.
 
 Argument LEVEL and MSG are data from the debug log signal."
   (unless (string= " *temp*" (buffer-name))  ; avoid error from `package-file' directive
-    (with-current-buffer (or (eask-checker--load-buffer) (buffer-name))
+    (with-current-buffer (or (eask-analyze--load-buffer) (buffer-name))
       (funcall
-       (cond ((eask-json-p) #'eask-checker--write-json-format)
-             (t             #'eask-checker--write-plain-text))
+       (cond ((eask-json-p) #'eask-analyze--write-json-format)
+             (t             #'eask-analyze--write-plain-text))
        level msg))))
 
-(defun eask-checker--check-file (files)
+(defun eask-analyze--file (files)
   "Lint list of Eask FILES."
   (let (checked-files content)
     ;; Linting
@@ -105,19 +105,19 @@ Argument LEVEL and MSG are data from the debug log signal."
     ;; Print result
     (eask-msg "")
     (cond ((and (eask-json-p)  ; JSON format
-                (or eask-checker--warnings eask-checker--errors))
+                (or eask-analyze--warnings eask-analyze--errors))
            (setq content
-                 (eask-checker--pretty-json (json-encode
-                                             `((warnings . ,eask-checker--warnings)
-                                               (errors   . ,eask-checker--errors)))))
+                 (eask-analyze--pretty-json (json-encode
+                                             `((warnings . ,eask-analyze--warnings)
+                                               (errors   . ,eask-analyze--errors)))))
            (eask-msg content))
-          (eask-checker--log  ; Plain text
+          (eask-analyze--log  ; Plain text
            (setq content
                  (with-temp-buffer
-                   (dolist (msg (reverse eask-checker--log))
+                   (dolist (msg (reverse eask-analyze--log))
                      (insert msg "\n"))
                    (buffer-string)))
-           (mapc #'eask-msg (reverse eask-checker--log)))
+           (mapc #'eask-msg (reverse eask-analyze--log)))
           (t
            (eask-info "(Checked %s file%s)"
                       (length checked-files)
@@ -131,8 +131,8 @@ Argument LEVEL and MSG are data from the debug log signal."
 ;;; Program Entry
 
 ;; Preparation
-(add-hook 'eask-on-error-hook #'eask-checker--write-log)
-(add-hook 'eask-on-warning-hook #'eask-checker--write-log)
+(add-hook 'eask-on-error-hook #'eask-analyze--write-log)
+(add-hook 'eask-on-warning-hook #'eask-analyze--write-log)
 
 (let* ((default-directory (cond ((eask-global-p) eask-homedir)
                                 ((eask-config-p) user-emacs-directory)
@@ -144,7 +144,7 @@ Argument LEVEL and MSG are data from the debug log signal."
   (cond
    ;; Files found, do the action!
    (files
-    (eask-checker--check-file files))
+    (eask-analyze--file files))
    ;; Pattern defined, but no file found!
    (patterns
     (eask-info "(No files match wildcard: %s)"
@@ -152,6 +152,6 @@ Argument LEVEL and MSG are data from the debug log signal."
    ;; Default, print help!
    (t
     (eask-info "(No Eask-files have been checked)")
-    (eask-help "checker/check-eask"))))
+    (eask-help "checker/analyze"))))
 
-;;; checker/check-eask.el ends here
+;;; core/analyze.el ends here

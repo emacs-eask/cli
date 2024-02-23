@@ -20,6 +20,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * fix(build.yml): Release with `.tar.gz` instead of `.zip` on Unix-like system (#214 and #216)
 * feat: Add `loc` command (#227)
 * fix: Allow initialize in other scopes (#229)
+* feat: Rename command `check-eask` to `analyze` (#230)
 
 ## 0.9.x
 > Released Nov 17, 2023

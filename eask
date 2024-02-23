@@ -18,7 +18,6 @@ yargs
   .scriptName('')
   .epilogue(epilogue)
   .commandDir('cmds/core/')
-  .commandDir('cmds/checker/')
   .commandDir('cmds/util/')
   .command({
     command: '*',

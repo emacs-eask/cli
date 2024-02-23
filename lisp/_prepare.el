@@ -165,7 +165,7 @@ workspace has no valid Eask-file; it will load global workspace instead."
 
 (defun eask-checker-p ()
   "Return t if running Eask as the checker."
-  (member (eask-command) '("check-eask")))
+  (member (eask-command) '("analyze")))
 
 (defun eask-script (script)
   "Return full SCRIPT filename."
