@@ -66,4 +66,4 @@ jobs:
 
     - name: Testing...
       run: |
-        make command-check-eask
+        make command-analyze

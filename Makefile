@@ -32,7 +32,7 @@ command-config:
 command-local:
 	./test/commands/local/run.sh
 
-command-check-eask:
+command-analyze:
 	./test/checker/dsl/run.sh
 	./test/checker/metadata/run.sh
 
