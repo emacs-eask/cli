@@ -9,6 +9,9 @@ license=('GPL-3.0')
 
 prepare() {
     npm i
+}
+
+build() {
     npm run pkg-linux-x64
 }
 
