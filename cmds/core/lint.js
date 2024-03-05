@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['lint <type>'];
-exports.desc = 'Run linter';
+exports.desc = 'Run linters';
 exports.builder = function (yargs) {
   yargs.usage(`${exports.desc}
 

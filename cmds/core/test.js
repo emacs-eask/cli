@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['test <type>'];
-exports.desc = 'Run test';
+exports.desc = "Run regression/unit tests";
 exports.builder = function (yargs) {
   yargs.usage(`${exports.desc}
 

@@ -575,6 +575,8 @@ $ eask [GLOBAL-OPTIONS] link list
 
 # 🚩 清理
 
+刪除建置過程中產生的各種檔案。
+
 ## 🔍 eask clean workspace
 
 從當前工作區中刪除 `.eask` 。
@@ -740,6 +742,8 @@ $ eask [GLOBAL-OPTIONS] lint regexps [FILES..]
 
 # 🚩 測試框架
 
+運行回歸/單元測試。
+
 ## 🔍 eask test activate
 
 激活包； 用於測試包激活
@@ -789,6 +793,26 @@ $ eask [GLOBAL-OPTIONS] test melpazoid [DIRECTORIES..]
 {{< hint info >}}
 💡 如果未傳入 **[DIRECTORIES..]**，它將使用目前工作空間。
 {{< /hint >}}
+
+# 🚩 格式化
+
+格式化 Emacs 源文件的命令。
+
+## 🔍 eask format elisp-autofmt
+
+運行 [elisp-autofmt][] 格式器.
+
+```sh
+$ eask [GLOBAL-OPTIONS] format elisp-autofmt [FILES..]
+```
+
+## 🔍 eask format elfmt
+
+運行 [elfmt][] 格式器.
+
+```sh
+$ eask [GLOBAL-OPTIONS] format elfmt [FILES..]
+```
 
 # 🚩 控制 DSL
 
@@ -1026,3 +1050,6 @@ $ eask --proxy "localhost:8888" [COMMAND]
 [ert-runner]: https://github.com/rejeep/ert-runner.el
 [buttercup]: https://github.com/jorgenschaefer/emacs-buttercup
 [melpazoid]: https://github.com/riscy/melpazoid
+
+[elisp-autofmt]: https://codeberg.org/ideasman42/emacs-elisp-autofmt
+[elfmt]: https://github.com/riscy/elfmt

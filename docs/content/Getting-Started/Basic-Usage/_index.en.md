@@ -43,6 +43,7 @@ Commands:
   path [patterns..]          Print the PATH (exec-path) from workspace                                                                                                                       [aliases: exec-path]
   exec [args..]              Execute command with correct environment PATH set up
   files [patterns..]         Print all package files
+  format <type>              Run formatters                                                                                                                                                        [aliases: fmt]
   generate <type>            Generate files that are used for the development
   info                       Display information about the current package
   init [files..]             Initialize project to use Eask
@@ -50,7 +51,7 @@ Commands:
   install [names..]          Install packages
   keywords                   List available keywords that can be used in the header section
   link <action>              Manage links
-  lint <type>                Run linter
+  lint <type>                Run linters
   list                       List packages
   load-path [patterns..]     Print the load-path from workspace
   load [files..]             Load elisp files
@@ -63,7 +64,7 @@ Commands:
   run <type>                 Run custom tasks
   search [queries..]         Search packages
   status                     Display the state of the workspace
-  test <type>                Run test
+  test <type>                Run regression/unit tests
   uninstall [names..]        Uninstall packages                                                                                                                                                 [aliases: delete]
   upgrade [names..]          Upgrade packages
   locate                     Print out Eask installed location
