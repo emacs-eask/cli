@@ -91,6 +91,10 @@ eask lint regexps
 # Testing
 eask test activate
 
+# Formatting
+eask format elisp-autofmt
+eask format elfmt
+
 # Cleaning
 eask clean .eask
 eask clean elc

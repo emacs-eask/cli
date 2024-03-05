@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2022-2024 the Eask authors.
+ * Copyright (C) 2024 the Eask authors.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,9 +17,15 @@
 
 "use strict";
 
-exports.command = ['autoloads'];
-exports.desc = 'Generate autoloads file';
+exports.command = ['elfmt [files..]'];
+exports.desc = 'Reformat Elisp source with elfmt';
+exports.builder = yargs => yargs
+  .positional(
+    '[files..]', {
+      description: 'specify files to do elfmt',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'generate/autoloads');
+  await UTIL.e_call(argv, 'format/elfmt', argv.files);
 };

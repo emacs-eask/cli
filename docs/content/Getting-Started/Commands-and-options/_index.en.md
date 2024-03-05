@@ -588,6 +588,8 @@ $ eask [GLOBAL-OPTIONS] link list
 
 # 🚩 Cleaning
 
+Delete various files produced during building.
+
 ## 🔍 eask clean workspace
 
 Delete `.eask` from the current workspace.
@@ -753,6 +755,8 @@ $ eask [GLOBAL-OPTIONS] lint regexps [FILES..]
 
 # 🚩 Testing
 
+Run regression/unit tests.
+
 ## 🔍 eask test activate
 
 Activate package; use to test the package activation
@@ -802,6 +806,26 @@ $ eask [GLOBAL-OPTIONS] test melpazoid [DIRECTORIES..]
 {{< hint info >}}
 💡 If **[DIRECTORIES..]** is not passed in; it will use the current workspace instead.
 {{< /hint >}}
+
+# 🚩 Formatting
+
+Commands that formats your Emacs source files.
+
+## 🔍 eask format elisp-autofmt
+
+Run [elisp-autofmt][] formatter.
+
+```sh
+$ eask [GLOBAL-OPTIONS] format elisp-autofmt [FILES..]
+```
+
+## 🔍 eask format elfmt
+
+Run [elfmt][] formatter.
+
+```sh
+$ eask [GLOBAL-OPTIONS] format elfmt [FILES..]
+```
 
 # 🚩 Control DSL
 
@@ -1040,3 +1064,6 @@ Do not use a proxy for any URL matching pattern.
 [ert-runner]: https://github.com/rejeep/ert-runner.el
 [buttercup]: https://github.com/jorgenschaefer/emacs-buttercup
 [melpazoid]: https://github.com/riscy/melpazoid
+
+[elisp-autofmt]: https://codeberg.org/ideasman42/emacs-elisp-autofmt
+[elfmt]: https://github.com/riscy/elfmt

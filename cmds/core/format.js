@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2022-2024 the Eask authors.
+ * Copyright (C) 2024 the Eask authors.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,9 +17,22 @@
 
 "use strict";
 
-exports.command = ['autoloads'];
-exports.desc = 'Generate autoloads file';
+exports.command = ['format <type>', 'fmt <type>'];
+exports.desc = 'Run formatters';
+exports.builder = function (yargs) {
+  yargs.usage(`${exports.desc}
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'generate/autoloads');
-};
+Usage: eask format <type> [options..]`)
+    .commandDir('../format/')
+    .demandCommand();
+
+  /* XXX: Configure only in the menu. */
+  if (UTIL.cmd_count() == 1) {
+    yargs.positional(
+      '<type>', {
+        description: 'type of the formatter',
+      });
+  }
+}
+
+exports.handler = async (argv) => { };
