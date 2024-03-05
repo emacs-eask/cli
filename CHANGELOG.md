@@ -21,6 +21,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * feat: Add `loc` command (#227)
 * fix: Allow initialize in other scopes (#229)
 * feat: Rename command `check-eask` to `analyze` (#230)
+* feat(fmt): Add formatters (#232)
 
 ## 0.9.x
 > Released Nov 17, 2023
