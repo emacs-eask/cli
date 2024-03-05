@@ -22,7 +22,7 @@ exports.desc = 'Reformat Elisp source with elisp-autofmt';
 exports.builder = yargs => yargs
   .positional(
     '[files..]', {
-      description: 'specify files to do elfmt',
+      description: 'specify files to do elisp-autofmt',
       type: 'array',
     });
 
