@@ -65,3 +65,6 @@ test-ert-runner:
 
 test-buttercup:
 	./test/commands/test/buttercup/run.sh
+
+test-ecukes:
+	./test/commands/test/ecukes/run.sh
