@@ -83,6 +83,7 @@ information.*
 | Test `ert` command        | ✔    | [![Test ert](https://github.com/emacs-eask/cli/actions/workflows/test_ert.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/test_ert.yml)                      |
 | Test `ert-runner` command | ✔    | [![Test ert-runner](https://github.com/emacs-eask/cli/actions/workflows/test_ert-runner.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/test_ert-runner.yml) |
 | Test `buttercup` command  | ✔    | [![Test buttercup](https://github.com/emacs-eask/cli/actions/workflows/test_buttercup.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/test_buttercup.yml)    |
+| Test `ecukes` command     | ✔    | [![Test ecukes](https://github.com/emacs-eask/cli/actions/workflows/test_ecukes.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/test_ecukes.yml)             |
 
 ###### Others
 

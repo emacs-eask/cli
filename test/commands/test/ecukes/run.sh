@@ -26,4 +26,4 @@ echo "Test command 'ert'..."
 cd $(dirname "$0")
 
 eask test ecukes
-eask test ecukes ./test/*.el
+eask test ecukes ./features/foo.feature
