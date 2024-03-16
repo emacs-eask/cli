@@ -33,7 +33,8 @@
   (eask-with-archives '("gnu" "melpa")
     (eask-package-install 'package-lint)
     (eask-package-install 'pkg-info))
-  ;; Start test
+
+  ;; Start Testing
   (let* ((dirs (or (eask-args) `(,default-directory))))
     (cond
      ;; Files found, do the action!
