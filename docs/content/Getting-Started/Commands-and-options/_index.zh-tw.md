@@ -787,7 +787,7 @@ $ eask [GLOBAL-OPTIONS] test buttercup
 運行 [ecukes][] 測試。
 
 ```sh
-$ eask [GLOBAL-OPTIONS] test ecukes
+$ eask [GLOBAL-OPTIONS] test ecukes [FILES..]
 ```
 
 ## 🔍 eask test melpazoid

@@ -6,6 +6,11 @@
 ;;
 ;;   $ eask ecukes
 ;;
+;;
+;;  Positionals:
+;;
+;;    [files..]     specify feature files to do ecukes tests
+;;
 
 ;;; Code:
 
@@ -14,6 +19,14 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
+(defun eask-test-ecukes--run (files)
+  "Run ecukes on FILES.
+
+Modified from function `ecukes-cli/run'."
+  (ecukes-load)
+  (ecukes-reporter-use ecukes-cli-reporter)
+  (ecukes-run files))
+
 (eask-start
   ;; Preparation
   (eask-with-archives '("gnu" "melpa")
@@ -21,6 +34,19 @@
 
   ;; Start Testing
   (require 'ecukes)
-  (ecukes))
+  (let* ((patterns (eask-args))
+         (files (eask-expand-file-specs patterns)))
+    (cond
+     ;; Files found, do the action!
+     (files
+      (eask-test-ecukes--run files))
+     ;; Pattern defined, but no file found!
+     (patterns
+      (eask-msg "")
+      (eask-info "(No files match wildcard: %s)"
+                 (mapconcat #'identity patterns " ")))
+     ;; Run default action.
+     (t
+      (ecukes)))))
 
 ;;; test/ecukes.el ends here

@@ -800,7 +800,7 @@ $ eask [GLOBAL-OPTIONS] test buttercup
 Run [ecukes][] tests.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] test ecukes
+$ eask [GLOBAL-OPTIONS] test ecukes [FILES..]
 ```
 
 ## 🔍 eask test melpazoid
