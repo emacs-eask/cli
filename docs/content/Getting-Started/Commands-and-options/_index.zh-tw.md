@@ -782,6 +782,14 @@ $ eask [GLOBAL-OPTIONS] test ert-runner
 $ eask [GLOBAL-OPTIONS] test buttercup
 ```
 
+## 🔍 eask test ecukes
+
+運行 [ecukes][] 測試。
+
+```sh
+$ eask [GLOBAL-OPTIONS] test ecukes
+```
+
 ## 🔍 eask test melpazoid
 
 運行 [melpazoid][] 測試。
@@ -1049,6 +1057,7 @@ $ eask --proxy "localhost:8888" [COMMAND]
 [ert]: https://www.gnu.org/software/emacs/manual/html_node/ert/
 [ert-runner]: https://github.com/rejeep/ert-runner.el
 [buttercup]: https://github.com/jorgenschaefer/emacs-buttercup
+[ecukes]: https://github.com/ecukes/ecukes
 [melpazoid]: https://github.com/riscy/melpazoid
 
 [elisp-autofmt]: https://codeberg.org/ideasman42/emacs-elisp-autofmt

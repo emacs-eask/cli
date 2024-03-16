@@ -15,8 +15,11 @@
         nil t))
 
 (eask-start
-  (eask-with-archives "melpa"
+  ;; Preparation
+  (eask-with-archives '("gnu" "melpa")
     (eask-package-install 'buttercup))
+
+  ;; Start Testing
   (require 'buttercup)
   ;; Propose fix from https://github.com/jorgenschaefer/emacs-buttercup/pull/217
   (let ((load-path (cons "." load-path)))

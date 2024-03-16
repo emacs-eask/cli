@@ -795,6 +795,14 @@ Run [buttercup][] tests.
 $ eask [GLOBAL-OPTIONS] test buttercup
 ```
 
+## 🔍 eask test ecukes
+
+Run [ecukes][] tests.
+
+```sh
+$ eask [GLOBAL-OPTIONS] test ecukes
+```
+
 ## 🔍 eask test melpazoid
 
 Run [melpazoid][] tests.
@@ -1063,6 +1071,7 @@ Do not use a proxy for any URL matching pattern.
 [ert]: https://www.gnu.org/software/emacs/manual/html_node/ert/
 [ert-runner]: https://github.com/rejeep/ert-runner.el
 [buttercup]: https://github.com/jorgenschaefer/emacs-buttercup
+[ecukes]: https://github.com/ecukes/ecukes
 [melpazoid]: https://github.com/riscy/melpazoid
 
 [elisp-autofmt]: https://codeberg.org/ideasman42/emacs-elisp-autofmt
