@@ -129,20 +129,30 @@ then,
 (message "%s" (eask-command))  ; init
 ```
 
+## 🔍 Function: eask-command-p (`commands`)
+
+Return t if COMMANDS is the current command.
+
 ## 🔍 Function: eask-special-p ()
 
 Return `t` if the command that can be run without Eask-file existence.
 
-This allow some commands can still be executed without defining the user
+This allows some commands can still be executed without defining the user
 directory. This can be handy when you want to do normal operations without
 touching the user directory.
+
+## 🔍 Function: eask-execution-p ()
+
+Return `t` if the command is the execution command.
+
+This is added because we don't want to pollute `error` and `warn` functions.
 
 ## 🔍 Function: eask-checker-p ()
 
 Return `t` if running Eask as the checker.
 
-Without this flag, the process will be terminated once the error is occured.
-This flag allows you to run through operations without report error.
+Without this flag, the process will be terminated once the error is occurred.
+This flag allows you to run through operations without reporting errors.
 
 ## 🔍 Function: eask-script (`script`)
 

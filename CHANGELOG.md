@@ -23,6 +23,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * feat: Rename command `check-eask` to `analyze` (#230)
 * feat(fmt): Add formatters (#232)
 * feat(test): Add built-in `ecukes` test command (#236)
+* fix: Don't pollute outer programs (#239)
 
 ## 0.9.x
 > Released Nov 17, 2023

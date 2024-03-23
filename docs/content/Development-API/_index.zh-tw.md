@@ -128,12 +128,22 @@ $ eask init
 (message "%s" (eask-command))  ; init
 ```
 
+## 🔍 函式: eask-command-p (`commands`)
+
+如果 COMMANDS 是目前命令，則傳回 `t`。
+
 ## 🔍 函式: eask-special-p ()
 
 如果在沒有 Eask 文件存在的情況下可以運行的命令，則返回 `t`。
 
 這允許一些命令仍然可以在不定義用戶的情況下執行目錄。 當您想在沒有的情況下進行正常操作時，這會很方便
 觸摸用戶目錄。
+
+## 🔍 函式: eask-execution-p ()
+
+如果命令是執行命令，則傳回 `t`。
+
+加入這項功能是因為我們不想污染 `error` 和 `warn` 函數。
 
 ## 🔍 函式: eask-checker-p ()
 
