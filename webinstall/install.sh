@@ -28,6 +28,12 @@ if ! command -v unzip >/dev/null; then
 fi
 
 if [ "$OS" = "Windows_NT" ]; then
+  ext="zip"
+else
+  ext="tar.gz"
+fi
+
+if [ "$OS" = "Windows_NT" ]; then
   target="win-x64"
 else
   case $(uname -sm) in
@@ -38,18 +44,22 @@ else
   esac
 fi
 
-eask_uri="https://github.com/emacs-eask/binaries/raw/master/${target}.zip"
+eask_uri="https://github.com/emacs-eask/binaries/raw/master/${target}.${ext}"
 
 eask_bin_dir=~/.local/bin
-zip=$eask_bin_dir/eask.zip
+dwd_file=$eask_bin_dir/eask.${ext}
 
 mkdir -p $eask_bin_dir
 
-curl -fsSL $eask_uri -o $zip
+curl -fsSL $eask_uri -o $dwd_file
 
-unzip -d "$eask_bin_dir" -o "$zip"
+if [ "$OS" = "Windows_NT" ]; then
+  unzip -d "$eask_bin_dir" -o "$dwd_file"
+else
+  tar -xvzf "$dwd_file" -C "$eask_bin_dir"
+fi
 
-rm $zip
+rm $dwd_file
 
 echo
 echo "✓ Eask is installed in ${eask_bin_dir}."
