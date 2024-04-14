@@ -514,7 +514,7 @@ to generate ignore file.
 Create a new test project for the [ert][] tests.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] generate test ert
+$ eask [GLOBAL-OPTIONS] generate test ert [NAMES..]
 ```
 
 ## 🔍 eask generate test ert-runner
@@ -522,7 +522,7 @@ $ eask [GLOBAL-OPTIONS] generate test ert
 Create a new test project for the [ert-runner][].
 
 ```sh
-$ eask [GLOBAL-OPTIONS] generate test ert-runner
+$ eask [GLOBAL-OPTIONS] generate test ert-runner [NAMES..]
 ```
 
 ## 🔍 eask generate test buttercup
@@ -591,23 +591,23 @@ Link between this package and a dependency on the local filesystem. A linked
 dependency avoids the need to download a dependency from a remote archive. The 
 package linked to must either have a `Eask`-file or a `-pkg.el`-file.
 
-## 🔍 eask link add <name> <path>
+## 🔍 eask link add
 
 Links the given *source* directory into the package directory of this project,
 under the given *package* name.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] link add <name> <path>
+$ eask [GLOBAL-OPTIONS] link add <NAME> <PATH>
 ```
 
-## 🔍 eask link delete [name..]
+## 🔍 eask link delete
 
 Deletes the link for the given packages.
 
 Alias: `remove`
 
 ```sh
-$ eask [GLOBAL-OPTIONS] link delete [names..]
+$ eask [GLOBAL-OPTIONS] link delete [NAMES..]
 ```
 
 ## 🔍 eask link list

@@ -17,9 +17,15 @@
 
 "use strict";
 
-exports.command = ['ert-runner [file]'];
+exports.command = ['ert-runner [names..]'];
 exports.desc = 'Create a new test project for the ert-runner';
+exports.builder = yargs => yargs
+  .positional(
+    '[names..]', {
+      description: 'specify test names',
+      type: 'array',
+    });
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'generate/test/ert-runner', argv.file);
+  await UTIL.e_call(argv, 'generate/test/ert-runner', argv.names);
 };

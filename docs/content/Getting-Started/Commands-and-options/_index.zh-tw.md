@@ -503,7 +503,7 @@ $ eask [GLOBAL-OPTIONS] generate ignore <name>
 為 [ert][]測試建立一個新的測試項目。
 
 ```sh
-$ eask [GLOBAL-OPTIONS] generate test ert
+$ eask [GLOBAL-OPTIONS] generate test ert [NAMES..]
 ```
 
 ## 🔍 eask generate test ert-runner
@@ -511,7 +511,7 @@ $ eask [GLOBAL-OPTIONS] generate test ert
 為 [ert-runner][] 建立一個新的測試項目。
 
 ```sh
-$ eask [GLOBAL-OPTIONS] generate test ert-runner
+$ eask [GLOBAL-OPTIONS] generate test ert-runner [NAMES..]
 ```
 
 ## 🔍 eask generate test buttercup
@@ -579,22 +579,22 @@ $ eask [GLOBAL-OPTIONS] generate workflow travis-ci [--file]
 此包與本地文件系統的依賴關係之間的鏈接。 鏈接的依賴項避免了從遠程存檔下載依賴項的需要。
 鏈接到的包必須有一個 `Eask` 文件或一個 `-pkg.el` 文件。
 
-## 🔍 eask link add <name> <path>
+## 🔍 eask link add
 
 將給定的 *source* 目錄鏈接到此項目的包目錄，在給定的 *package* 名稱下。
 
 ```sh
-$ eask [GLOBAL-OPTIONS] link add <name> <path>
+$ eask [GLOBAL-OPTIONS] link add <NAME> <PATH>
 ```
 
-## 🔍 eask link delete [name..]
+## 🔍 eask link delete
 
 刪除給定包的鏈接。
 
 別名: `remove`
 
 ```sh
-$ eask [GLOBAL-OPTIONS] link delete [names..]
+$ eask [GLOBAL-OPTIONS] link delete [NAMES..]
 ```
 
 ## 🔍 eask link list

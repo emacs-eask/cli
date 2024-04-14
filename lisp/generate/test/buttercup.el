@@ -15,11 +15,11 @@
         nil t))
 
 (defun eask-generate-test-buttercup--init (&optional name)
-  "Create new test project (optional project name)."
+  "Create new test buffercup project (optional project NAME)."
   (let ((name (or name (f-filename default-directory)))
         (test-path (expand-file-name "tests" default-directory)))
     (when (f-dir? test-path)
-      (error "%s" (ansi-red "Directory `tests` already exists.")))
+      (eask-error "Directory `tests` already exists."))
     (message "create %s" (ansi-green (f-filename test-path)))
     (f-mkdir "tests")
     (let ((test-file (s-concat  "test-" name ".el")))

@@ -17,7 +17,7 @@
 
 "use strict";
 
-exports.command = ['buttercup [file]'];
+exports.command = ['buttercup'];
 exports.desc = 'Create a new Buttercup setup for the project';
 
 exports.handler = async (argv) => {

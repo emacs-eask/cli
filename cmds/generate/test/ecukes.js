@@ -17,7 +17,7 @@
 
 "use strict";
 
-exports.command = ['ecukes [file]'];
+exports.command = ['ecukes'];
 exports.desc = 'Create a new Ecukes setup for the project';
 
 exports.handler = async (argv) => {
