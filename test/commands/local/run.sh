@@ -69,12 +69,25 @@ eask run command -all
 # Exection
 eask eval "(progn (require 'mini.emacs.pkg.1))"
 
-# Generation
+# Generating
 eask generate autoloads
 eask generate pkg-file
 eask generate recipe -y
 #eask generate license gpl-3.0  # XXX: Avoid API rate limit exceeded error
 eask generate ignore elisp
+
+# Generating tests
+eask generate test ert
+rm -rf test
+eask generate test ert-runner
+eask generate test buttercup
+eask generate test ecukes
+
+# Generating workflow
+eask generate workflow circle-ci
+eask generate workflow github
+eask generate workflow gitlab
+eask generate workflow travis-ci
 
 # Linting
 eask lint checkdoc
