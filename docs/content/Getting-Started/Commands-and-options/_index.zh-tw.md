@@ -498,9 +498,41 @@ $ eask [GLOBAL-OPTIONS] generate ignore <name>
 💡 此命令使用包 [gitignore-templates](https://github.com/xuchunyang/gitignore-templates.el) 生成忽略文件。
 {{< /hint >}}
 
+## 🔍 eask generate test ert
+
+為 [ert][]測試建立一個新的測試項目。
+
+```sh
+$ eask [GLOBAL-OPTIONS] generate test ert [NAMES..]
+```
+
+## 🔍 eask generate test ert-runner
+
+為 [ert-runner][] 建立一個新的測試項目。
+
+```sh
+$ eask [GLOBAL-OPTIONS] generate test ert-runner [NAMES..]
+```
+
+## 🔍 eask generate test buttercup
+
+為專案建立一個新的 [Buttercup][] 設定。
+
+```sh
+$ eask [GLOBAL-OPTIONS] generate test buttercup
+```
+
+## 🔍 eask generate test ecukes
+
+為專案創建一個新的 [Ecukes][] 設定。
+
+```sh
+$ eask [GLOBAL-OPTIONS] generate test ecukes
+```
+
 ## 🔍 eask generate workflow circle-ci
 
-生成 CircleCI 工作流 yaml 文件。
+生成 [CircleCI][] 工作流 yaml 文件。
 
 默認文件名為 `config.yml`。
 
@@ -512,7 +544,7 @@ $ eask [GLOBAL-OPTIONS] generate workflow circle-ci [--file]
 
 ## 🔍 eask generate workflow github
 
-生成 GitHub Actions 工作流 yaml 文件。
+生成 [GitHub Actions][] 工作流 yaml 文件。
 
 默認文件名為 `test.yml`。
 
@@ -524,7 +556,7 @@ $ eask [GLOBAL-OPTIONS] generate workflow github [--file]
 
 ## 🔍 eask generate workflow gitlab
 
-生成 GitLab Runner 工作流程 yaml 文件。
+生成 [GitLab Runner][] 工作流程 yaml 文件。
 
 默認文件名為 `.gitlab-ci.yml`。
 
@@ -534,7 +566,7 @@ $ eask [GLOBAL-OPTIONS] generate workflow gitlab [--file]
 
 ## 🔍 eask generate workflow travis-ci
 
-生成 Travis CI 工作流 yaml 文件。
+生成 [Travis CI][] 工作流 yaml 文件。
 
 默認文件名為 `.travis.yml`。
 
@@ -547,22 +579,22 @@ $ eask [GLOBAL-OPTIONS] generate workflow travis-ci [--file]
 此包與本地文件系統的依賴關係之間的鏈接。 鏈接的依賴項避免了從遠程存檔下載依賴項的需要。
 鏈接到的包必須有一個 `Eask` 文件或一個 `-pkg.el` 文件。
 
-## 🔍 eask link add <name> <path>
+## 🔍 eask link add
 
 將給定的 *source* 目錄鏈接到此項目的包目錄，在給定的 *package* 名稱下。
 
 ```sh
-$ eask [GLOBAL-OPTIONS] link add <name> <path>
+$ eask [GLOBAL-OPTIONS] link add <NAME> <PATH>
 ```
 
-## 🔍 eask link delete [name..]
+## 🔍 eask link delete
 
 刪除給定包的鏈接。
 
 別名: `remove`
 
 ```sh
-$ eask [GLOBAL-OPTIONS] link delete [names..]
+$ eask [GLOBAL-OPTIONS] link delete [NAMES..]
 ```
 
 ## 🔍 eask link list
@@ -1053,6 +1085,11 @@ $ eask --proxy "localhost:8888" [COMMAND]
 [Cask]: https://github.com/cask/cask
 [Eldev]: https://emacs-eldev.github.io/eldev/
 [Keg]: https://github.com/conao3/keg.el
+
+[CircleCI]: https://circleci.com/
+[GitHub Actions]: https://github.com/features/actions
+[GitLab Runner]: https://docs.gitlab.com/runner/
+[Travis CI]: https://www.travis-ci.com/
 
 [ert]: https://www.gnu.org/software/emacs/manual/html_node/ert/
 [ert-runner]: https://github.com/rejeep/ert-runner.el

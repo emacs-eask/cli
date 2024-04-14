@@ -509,9 +509,41 @@ $ eask [GLOBAL-OPTIONS] generate ignore <name>
 to generate ignore file.
 {{< /hint >}}
 
+## 🔍 eask generate test ert
+
+Create a new test project for the [ert][] tests.
+
+```sh
+$ eask [GLOBAL-OPTIONS] generate test ert [NAMES..]
+```
+
+## 🔍 eask generate test ert-runner
+
+Create a new test project for the [ert-runner][].
+
+```sh
+$ eask [GLOBAL-OPTIONS] generate test ert-runner [NAMES..]
+```
+
+## 🔍 eask generate test buttercup
+
+Create a new [Buttercup][] setup for the project.
+
+```sh
+$ eask [GLOBAL-OPTIONS] generate test buttercup
+```
+
+## 🔍 eask generate test ecukes
+
+Create a new [Ecukes][] setup for the project.
+
+```sh
+$ eask [GLOBAL-OPTIONS] generate test ecukes
+```
+
 ## 🔍 eask generate workflow circle-ci
 
-Generate CircleCI workflow yaml file.
+Generate [CircleCI][] workflow yaml file.
 
 The default filename is `config.yml`.
 
@@ -523,7 +555,7 @@ This will generate the yaml file under `.circleci/`!
 
 ## 🔍 eask generate workflow github
 
-Generate GitHub Actions workflow yaml file.
+Generate [GitHub Actions][] workflow yaml file.
 
 The default filename is `test.yml`.
 
@@ -535,7 +567,7 @@ This will generate the yaml file under `.github/workflow/`!
 
 ## 🔍 eask generate workflow gitlab
 
-Generate GitLab Runner workflow yaml file.
+Generate [GitLab Runner][] workflow yaml file.
 
 The default filename is `.gitlab-ci.yml`.
 
@@ -545,7 +577,7 @@ $ eask [GLOBAL-OPTIONS] generate workflow gitlab [--file]
 
 ## 🔍 eask generate workflow travis-ci
 
-Generate Travis CI workflow yaml file.
+Generate [Travis CI][] workflow yaml file.
 
 The default filename is `.travis.yml`.
 
@@ -559,23 +591,23 @@ Link between this package and a dependency on the local filesystem. A linked
 dependency avoids the need to download a dependency from a remote archive. The 
 package linked to must either have a `Eask`-file or a `-pkg.el`-file.
 
-## 🔍 eask link add <name> <path>
+## 🔍 eask link add
 
 Links the given *source* directory into the package directory of this project,
 under the given *package* name.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] link add <name> <path>
+$ eask [GLOBAL-OPTIONS] link add <NAME> <PATH>
 ```
 
-## 🔍 eask link delete [name..]
+## 🔍 eask link delete
 
 Deletes the link for the given packages.
 
 Alias: `remove`
 
 ```sh
-$ eask [GLOBAL-OPTIONS] link delete [names..]
+$ eask [GLOBAL-OPTIONS] link delete [NAMES..]
 ```
 
 ## 🔍 eask link list
@@ -1067,6 +1099,11 @@ Do not use a proxy for any URL matching pattern.
 [Cask]: https://github.com/cask/cask
 [Eldev]: https://emacs-eldev.github.io/eldev/
 [Keg]: https://github.com/conao3/keg.el
+
+[CircleCI]: https://circleci.com/
+[GitHub Actions]: https://github.com/features/actions
+[GitLab Runner]: https://docs.gitlab.com/runner/
+[Travis CI]: https://www.travis-ci.com/
 
 [ert]: https://www.gnu.org/software/emacs/manual/html_node/ert/
 [ert-runner]: https://github.com/rejeep/ert-runner.el

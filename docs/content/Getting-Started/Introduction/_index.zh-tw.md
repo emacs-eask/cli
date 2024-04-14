@@ -45,15 +45,15 @@ Eask 是最好的選擇之一。
 
 該表顯示了作者選擇的技術以及項目的構建方式。 此外，他們做出了哪些技術決策？ 放棄支持？ 項目佈局？ 等等。
 
-|                | Eask              | Cask               | Eldev          | makem.sh           |
-|----------------|-------------------|--------------------|----------------|--------------------|
-| bin folder     | binary, bash, bat | bash, bat          | bash, bat, ps1 | bash               |
-| Cross-Platform | ✅                | ❌, 不支援 Windows | ✅             | ❌, 不支援 Windows |
-| Emacs version  | 26.1+             | 24.5+              | 24.4+          | 26.1+              |
-| Size           | 7,000+ 行         | 3,000+ 行          | 8,000+ 行      | 1,200+ 行          |
-| Executable     | ✅                | ❌                 | ❌             | ❌                 |
-| Pure Elisp     | ❌, JavaScript    | ✅                 | ✅             | ✅                 |
-| CLI Parser     | [yargs][]         | [commander][]      | 內建           | 內建               |
+|                | Eask              | Cask                   | Eldev          | makem.sh               |
+|----------------|-------------------|------------------------|----------------|------------------------|
+| bin folder     | binary, bash, bat | bash, bat              | bash, bat, ps1 | bash                   |
+| Cross-Platform | ✅                | ❌, 不支援 [Windows][] | ✅             | ❌, 不支援 [Windows][] |
+| Emacs version  | 26.1+             | 24.5+                  | 24.4+          | 26.1+                  |
+| Size           | 9,000+ 行         | 3,000+ 行              | 8,000+ 行      | 1,200+ 行              |
+| Executable     | ✅                | ❌                     | ❌             | ❌                     |
+| Pure Elisp     | ❌, JavaScript    | ✅                     | ✅             | ✅                     |
+| CLI Parser     | [yargs][]         | [commander][]          | 內建           | 內建                   |
 
 {{< hint info >}}
 💡 **makem.sh** 也有很好的比較文檔，請訪問他們的[站點](https://github.com/alphapapa/makem.sh#comparisons)
@@ -119,3 +119,5 @@ Eask 的設計深受以下項目的影響：
 
 [DSL-Eask]: https://emacs-eask.github.io/DSL/
 [DSL-Cask]: https://cask.readthedocs.io/en/latest/guide/dsl.html
+
+[Windows]: https://www.microsoft.com/en-us/windows?r=1
