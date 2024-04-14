@@ -50,7 +50,7 @@ Eask 是最好的選擇之一。
 | bin folder     | binary, bash, bat | bash, bat          | bash, bat, ps1 | bash               |
 | Cross-Platform | ✅                | ❌, 不支援 Windows | ✅             | ❌, 不支援 Windows |
 | Emacs version  | 26.1+             | 24.5+              | 24.4+          | 26.1+              |
-| Size           | 7,000+ 行         | 3,000+ 行          | 8,000+ 行      | 1,200+ 行          |
+| Size           | 9,000+ 行         | 3,000+ 行          | 8,000+ 行      | 1,200+ 行          |
 | Executable     | ✅                | ❌                 | ❌             | ❌                 |
 | Pure Elisp     | ❌, JavaScript    | ✅                 | ✅             | ✅                 |
 | CLI Parser     | [yargs][]         | [commander][]      | 內建           | 內建               |

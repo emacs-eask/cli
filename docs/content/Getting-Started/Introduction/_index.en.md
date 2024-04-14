@@ -55,15 +55,15 @@ The table shows what technology has been chosen by their author and how the
 project is being constructed. Furthermore, what technical decisions have they
 made? Drop support? Project's layout? Etc.
 
-|                | Eask              | Cask                        | Eldev          | makem.sh                    |
-|----------------|-------------------|-----------------------------|----------------|-----------------------------|
-| bin folder     | binary, bash, bat | bash, bat                   | bash, bat, ps1 | bash                        |
-| Cross-Platform | ✅                | ❌, doesn't support Windows | ✅             | ❌, doesn't support Windows |
-| Emacs version  | 26.1+             | 24.5+                       | 24.4+          | 26.1+                       |
-| Size           | 7,000+ lines      | 3,000+ lines                | 8,000+ lines   | 1,200+ lines                |
-| Executable     | ✅                | ❌                          | ❌             | ❌                          |
-| Pure Elisp     | ❌, JavaScript    | ✅                          | ✅             | ✅                          |
-| CLI Parser     | [yargs][]         | [commander][]               | built-in       | built-in                    |
+|                | Eask              | Cask                    | Eldev          | makem.sh                  |
+|----------------|-------------------|-------------------------|----------------|---------------------------|
+| bin folder     | binary, bash, bat | bash, bat               | bash, bat, ps1 | bash                      |
+| Cross-Platform | ✅                | ❌, Windows not support | ✅             | ❌, Windows not supported |
+| Emacs version  | 26.1+             | 24.5+                   | 24.4+          | 26.1+                     |
+| Size           | 9,000+ lines      | 3,000+ lines            | 8,000+ lines   | 1,200+ lines              |
+| Executable     | ✅                | ❌                      | ❌             | ❌                        |
+| Pure Elisp     | ❌, JavaScript    | ✅                      | ✅             | ✅                        |
+| CLI Parser     | [yargs][]         | [commander][]           | built-in       | built-in                  |
 
 {{< hint info >}}
 💡 **makem.sh** has a good comparisons document as well, visit their [site](https://github.com/alphapapa/makem.sh#comparisons)
