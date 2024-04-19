@@ -1987,7 +1987,12 @@ variable we use to test validation."
   :group 'eask)
 
 (defcustom eask-dist-path "dist"
-  "Name of default target directory for building packages."
+  "Default path where to place the package artifact."
+  :type 'string
+  :group 'eask)
+
+(defcustom eask-docs-path "docs/public/"
+  "Default path where to place the documentation."
   :type 'string
   :group 'eask)
 

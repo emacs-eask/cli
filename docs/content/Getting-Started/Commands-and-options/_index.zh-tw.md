@@ -296,6 +296,18 @@ $ eask [GLOBAL-OPTIONS] concate [FILES..]
 $ eask [GLOBAL-OPTIONS] loc [FILES..]
 ```
 
+# 🚩 文件
+
+用於建立文檔站點的命令。
+
+## 🔍 eask docs
+
+建置文檔。
+
+```sh
+$ eask [GLOBAL-OPTIONS] docs [NAMES..]
+```
+
 # 🚩 執行
 
 指令允許執行在 Eask 核心之上。

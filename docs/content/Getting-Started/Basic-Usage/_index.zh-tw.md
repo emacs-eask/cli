@@ -5,7 +5,7 @@ weight: 250
 
 Eask 的 CLI 功能齊全但易於使用，即使對於那些使用命令行的經驗非常有限的人也是如此。
 
-以下是您在開發 Eask 項目時將使用的最常用命令的說明。 請參閱 
+以下是您在開發 Eask 項目時將使用的最常用命令的說明。 請參閱
 [命令和選項](https://emacs-eask.github.io/Getting-Started/Commands-and-options/)
 以全面了解 Eask 的 CLI。
 
@@ -35,6 +35,7 @@ Commands:
   compile [names..]          Byte compile all Emacs Lisp files in the package
   create <type>              Create a new elisp project
   docker <version> [args..]  Launch specified Emacs version in a Docker container
+  docs                       Build documentation                                                                                                                                                   [aliases: doc]
   emacs [args..]             Execute emacs with the appropriate environment
   eval [form]                Evaluate lisp form with a proper PATH
   path [patterns..]          Print the PATH (exec-path) from workspace                                                                                                                       [aliases: exec-path]

@@ -229,7 +229,7 @@ Print the load path containing the dependencies of the current project.
 $ eask [GLOBAL-OPTIONS] load-path [PATTERNS..]
 ```
 
-Optionally, you can pass in `[PATTERNS..]` to perform the search. 
+Optionally, you can pass in `[PATTERNS..]` to perform the search.
 
 ## 🔍 eask files
 
@@ -298,6 +298,18 @@ Print LOC information.
 
 ```sh
 $ eask [GLOBAL-OPTIONS] loc [FILES..]
+```
+
+# 🚩 Documentation
+
+Commands used to build documentation site.
+
+## 🔍 eask docs
+
+Build documentation.
+
+```sh
+$ eask [GLOBAL-OPTIONS] docs [NAMES..]
 ```
 
 # 🚩 Execution
@@ -587,8 +599,8 @@ $ eask [GLOBAL-OPTIONS] generate workflow travis-ci [--file]
 
 # 🚩 Linking
 
-Link between this package and a dependency on the local filesystem. A linked 
-dependency avoids the need to download a dependency from a remote archive. The 
+Link between this package and a dependency on the local filesystem. A linked
+dependency avoids the need to download a dependency from a remote archive. The
 package linked to must either have a `Eask`-file or a `-pkg.el`-file.
 
 ## 🔍 eask link add

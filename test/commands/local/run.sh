@@ -42,6 +42,10 @@ eask concat
 #eask loc                       # Only 27.1+
 #eask loc Eask                  # Only 27.1+
 
+# Documentation
+eask docs
+eask docs *.el
+
 # PATH environment
 eask path
 eask path      bin

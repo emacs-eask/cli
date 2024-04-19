@@ -38,6 +38,7 @@ Commands:
   compile [names..]          Byte compile all Emacs Lisp files in the package
   create <type>              Create a new elisp project
   docker <version> [args..]  Launch specified Emacs version in a Docker container
+  docs                       Build documentation                                                                                                                                                   [aliases: doc]
   emacs [args..]             Execute emacs with the appropriate environment
   eval [form]                Evaluate lisp form with a proper PATH
   path [patterns..]          Print the PATH (exec-path) from workspace                                                                                                                       [aliases: exec-path]
