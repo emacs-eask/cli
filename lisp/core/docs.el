@@ -9,7 +9,7 @@
 ;;
 ;;  Positionals:
 ;;
-;;    [names..]         specify files to concatenate
+;;    [names..]         specify files to scan
 ;;
 ;;  Action options:
 ;;
