@@ -1,0 +1,4 @@
+
+💡 You would need to specify the [names..] in order to build documentation!
+
+    $ eask docs [names..]
