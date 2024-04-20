@@ -284,12 +284,12 @@ $ eask [GLOBAL-OPTIONS] cat [PATTERNS..]
 to accomplish the syntax highlighting.
 {{< /hint >}}
 
-## 🔍 eask concate
+## 🔍 eask concat
 
 Concatenate all Emacs Lisp files into one file.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] concate [FILES..]
+$ eask [GLOBAL-OPTIONS] concat [FILES..]
 ```
 
 ## 🔍 eask loc

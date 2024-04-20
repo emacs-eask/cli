@@ -280,12 +280,12 @@ $ eask [GLOBAL-OPTIONS] cat [PATTERNS..]
 💡 此命令使用包 [e2ansi](https://github.com/Lindydancer/e2ansi) 來完成語法高亮。
 {{< /hint >}}
 
-## 🔍 eask concate
+## 🔍 eask concat
 
 將所有 Emacs Lisp 文件連接成一個文件。
 
 ```sh
-$ eask [GLOBAL-OPTIONS] concate [FILES..]
+$ eask [GLOBAL-OPTIONS] concat [FILES..]
 ```
 
 ## 🔍 eask loc
