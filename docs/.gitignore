@@ -4,3 +4,5 @@ _site
 
 /archetypes
 .hugo_build.lock
+
+/public
