@@ -34,7 +34,7 @@ $ curl.exe -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinst
 
 ### 📦 npm (跨平台)
 
-如果您的機器上安裝了 [npm](https://www.npmjs.com/)，您可以使用以下一行代碼安裝 Eask：
+如果您的機器上安裝了 [npm][]，您可以使用以下一行代碼安裝 Eask：
 
 ```sh
 $ npm install -g @emacs-eask/cli
@@ -42,8 +42,8 @@ $ npm install -g @emacs-eask/cli
 
 ### 📦 Homebrew (macOS 或 Linux)
 
-[Homebrew](https://brew.sh/) 是一個適用於 macOS 和 Linux 的免費開源套件管理器。
-這將安裝 Eask CLI：
+[Homebrew][] 是一個適用於 macOS 和 Linux 的免費開源套件管理器。
+若要安裝 Eask CLI，請執行下列操作：
 
 ```sh
 $ brew tap emacs-eask/cli https://github.com/emacs-eask/packaging
@@ -52,8 +52,8 @@ $ brew install eask-cli
 
 ### 📦 MacPorts (macOS)
 
-[MacPorts](https://www.macports.org/) 是一款適用於 macOS 的免費開源套件管理器。
-這將安裝 Eask CLI：
+[MacPorts][] 是一款適用於 macOS 的免費開源套件管理器。
+若要安裝 Eask CLI，請執行下列操作：
 
 ```sh
 $ sudo port install eask-cli
@@ -73,12 +73,11 @@ $ sudo apt install eask-cli --allow-unauthenticated
 ```
 
 您也可以直接從
-[packaging](https://github.com/emacs-eask/packaging/tree/master/debian)
-代碼庫下載 Debian 軟體包。
+[packaging][] 代碼庫下載 Debian 軟體包。
 
 ### 📦 Snap (Linux)
 
-[Snap](https://snapcraft.io/) 是一款適用於 Linux 的免費開源套件管理器。
+[Snap][] 是一款適用於 Linux 的免費開源套件管理器。
 snap 套件適用於大多數發行版，安裝簡單且會自動更新。
 
 ```sh
@@ -95,7 +94,7 @@ $ makepkg -i
 
 ### 📦 Chocolatey (Windows)
 
-如果您的計算機上安裝了 [Chocolatey](https://chocolatey.org/)，則可以使用以下一行代碼安裝 Eask：
+如果您的計算機上安裝了 [Chocolatey][]，則可以使用以下一行代碼安裝 Eask：
 
 ```sh
 $ choco install eask-cli
@@ -103,8 +102,8 @@ $ choco install eask-cli
 
 ### 📦 Scoop (Windows)
 
-[Scoop](https://scoop.sh/) 是一個適用於 Windows 的免費開源套件管理器。
-這將安裝 Eask CLI：
+[Scoop][] 是一個適用於 Windows 的免費開源套件管理器。
+若要安裝 Eask CLI，請執行下列操作：
 
 ```sh
 $ scoop bucket add emacs-eask/cli https://github.com/emacs-eask/packaging
@@ -113,7 +112,12 @@ $ scoop install eask-cli
 
 ### 📦 Winget (Windows)
 
-WIP
+[Winget][]是微軟官方的 Windows 免費開源軟體套件管理器。
+若要安裝 Eask CLI，請執行下列操作：
+
+```
+$ winget install eask.cli
+```
 
 ## 💾 從原始碼構建
 
@@ -189,9 +193,20 @@ mv lisp dist
 
 <!-- Links -->
 
+[packaging]: https://github.com/emacs-eask/packaging/tree/master/debian
+
+[Homebrew]: https://brew.sh/
+[MacPorts]: https://www.macports.org/
+[Snap]: https://snapcraft.io/
+[Chocolatey]: https://chocolatey.org/
+[Scoop]: https://scoop.sh/
+[Winget]: https://learn.microsoft.com/en-us/windows/package-manager/
+
 [Git]: https://git-scm.com/
 [Node.js]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/
+
+[pkg]: https://github.com/vercel/pkg
 
 [Debian]: https://www.debian.org/
 [elementary OS]: https://elementary.io/
@@ -202,5 +217,3 @@ mv lisp dist
 [Pop!_OS]: https://pop.system76.com/
 [Ubuntu]: https://ubuntu.com/
 [Zorin OS]: https://zorin.com/os/
-
-[pkg]: https://github.com/vercel/pkg

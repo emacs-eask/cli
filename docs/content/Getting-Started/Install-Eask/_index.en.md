@@ -37,7 +37,7 @@ $ curl.exe -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinst
 
 ### 📦 npm (Cross-platform)
 
-If you have [npm](https://www.npmjs.com/) installed on your machine, you can
+If you have [npm][] installed on your machine, you can
 install Eask with the following one-liner:
 
 ```sh
@@ -46,8 +46,8 @@ $ npm install -g @emacs-eask/cli
 
 ### 📦 Homebrew (macOS or Linux)
 
-[Homebrew](https://brew.sh/) is a free and open source package manager for
-macOS and Linux. This will install the Eask CLI:
+[Homebrew][] is a free and open-source package manager for macOS and Linux.
+To install the Eask CLI:
 
 ```sh
 $ brew tap emacs-eask/cli https://github.com/emacs-eask/packaging
@@ -56,8 +56,8 @@ $ brew install eask-cli
 
 ### 📦 MacPorts (macOS)
 
-[MacPorts](https://www.macports.org/) is a free and open source package manager for macOS.
-This will install the Eask CLI:
+[MacPorts][] is a free and open-source package manager for macOS.
+To install the Eask CLI:
 
 ```sh
 $ sudo port install eask-cli
@@ -76,13 +76,11 @@ $ sudo apt update --allow-insecure-repositories
 $ sudo apt install eask-cli --allow-unauthenticated
 ```
 
-You can also download Debian packages from the
-[packaging](https://github.com/emacs-eask/packaging/tree/master/debian)
-repo.
+You can also download Debian packages from the [packaging][] repo.
 
 ### 📦 Snap (Linux)
 
-[Snap](https://snapcraft.io/) is a free and open source package manager for Linux.
+[Snap][] is a free and open-source package manager for Linux.
 Available for most distributions, snap packages are simple to install and are
 automatically updated.
 
@@ -101,7 +99,7 @@ $ makepkg -i
 
 ### 📦 Chocolatey (Windows)
 
-If you have [Chocolatey](https://chocolatey.org/) installed on your machine, you can
+If you have [Chocolatey][] installed on your machine, you can
 install Eask with the following one-liner:
 
 ```sh
@@ -110,8 +108,8 @@ $ choco install eask-cli
 
 ### 📦 Scoop (Windows)
 
-[Scoop](https://scoop.sh/) is a free and open source package manager for Windows.
-This will install the Eask CLI:
+[Scoop][] is a free and open-source package manager for Windows.
+To install the Eask CLI:
 
 ```sh
 $ scoop bucket add emacs-eask/cli https://github.com/emacs-eask/packaging
@@ -120,7 +118,12 @@ $ scoop install eask-cli
 
 ### 📦 Winget (Windows)
 
-WIP
+[Winget][] is Microsoft’s official free and open-source package manager for Windows.
+To install the Eask CLI:
+
+```
+$ winget install eask.cli
+```
 
 ## 💾 Build from source
 
@@ -194,9 +197,20 @@ to your environment `PATH` to execute eask from any location! 🎉 🎊
 
 <!-- Links -->
 
+[packaging]: https://github.com/emacs-eask/packaging/tree/master/debian
+
+[Homebrew]: https://brew.sh/
+[MacPorts]: https://www.macports.org/
+[Snap]: https://snapcraft.io/
+[Chocolatey]: https://chocolatey.org/
+[Scoop]: https://scoop.sh/
+[Winget]: https://learn.microsoft.com/en-us/windows/package-manager/
+
 [Git]: https://git-scm.com/
 [Node.js]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/
+
+[pkg]: https://github.com/vercel/pkg
 
 [Debian]: https://www.debian.org/
 [elementary OS]: https://elementary.io/
@@ -207,5 +221,3 @@ to your environment `PATH` to execute eask from any location! 🎉 🎊
 [Pop!_OS]: https://pop.system76.com/
 [Ubuntu]: https://ubuntu.com/
 [Zorin OS]: https://zorin.com/os/
-
-[pkg]: https://github.com/vercel/pkg
