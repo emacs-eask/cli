@@ -15,9 +15,9 @@ geekdocAnchor: false
 [![Emacs Version](https://img.shields.io/badge/Emacs-26.1+-7F5AB6.svg?logo=gnu%20emacs&logoColor=white)](https://www.gnu.org/software/emacs/download.html)
 [![Release](https://img.shields.io/github/release/emacs-eask/cli.svg?logo=github)](https://github.com/emacs-eask/cli/releases/latest)
 
-After installing Eask, you can easily develop any Elisp packages.
+After installing Eask, you can easily develop any Elisp package.
 
-Out of the box, Eask supports **50+ commands** to help you throughout the development. 🔥
+Out of the box, Eask supports **50+ commands** to help you throughout development. 🔥
 
 {{< button size="large" relref="Getting-Started/Introduction/" >}}Getting Started{{< /button >}}
 
@@ -31,7 +31,7 @@ Out of the box, Eask supports **50+ commands** to help you throughout the develo
 
 Eask is very similar to Cask!
 
-Eask has **all the commands** from Cask and even more!
+Eask has **all the commands** from Cask, plus even more!
 
 <--->
 
@@ -39,16 +39,16 @@ Eask has **all the commands** from Cask and even more!
 
 <img src="/images/lint.png" width="85%" />
 
-Come with 10+ built-in linters and test runners, so you don't have to worry about how to use it!
+Eask comes with 10+ built-in linters and test runners, so you don't have to worry about how to use it!
 
 <--->
 
-### Eask-file is an elisp file
+### Eask-file is an Elisp file
 
 <img src="/images/eask-elisp.png" width="90%" />
 
-Eask is treated as an elisp file.
+Eask is treated as an Elisp file.
 
-You can do anything like how you do it in Emacs!
+You can do anything just like you do in Emacs!
 
 {{< /columns >}}
