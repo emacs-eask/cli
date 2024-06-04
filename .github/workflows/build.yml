@@ -24,7 +24,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  VERSION: 0.9.9
+  VERSION: 0.9.10
   NODE: node20
   REPO_BIN: 'emacs-eask/binaries'
 
@@ -89,7 +89,7 @@ jobs:
         mv ${{ matrix.target }}.${{ env._EXT }} ../
         cd ..
         cp ${{ matrix.target }}.${{ env._EXT }} eask_${{ env.VERSION }}_${{ matrix.target }}.${{ env._EXT }}
-        
+
     - name: Uploading...
       if: github.ref == 'refs/heads/master'
       uses: softprops/action-gh-release@v0.1.15
