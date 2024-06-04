@@ -24,7 +24,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  VERSION: 0.9.8
+  VERSION: 0.9.9
   NODE: node20
   REPO_BIN: 'emacs-eask/binaries'
 
