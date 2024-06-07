@@ -59,6 +59,7 @@ eask package
 # Development
 eask compile
 eask compile --clean
+eask recompile
 eask recipe
 eask keywords
 eask run script

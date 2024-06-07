@@ -35,10 +35,10 @@ Commands:
   analyze [files..]          Run Eask checker
   archives                   List out all package archives                                                                                                                                     [aliases: sources]
   clean <type>               Delete various files produced during building
-  compile [names..]          Byte compile all Emacs Lisp files in the package
+  compile [names..]          Byte-compile `.el' files
   create <type>              Create a new elisp project
   docker <version> [args..]  Launch specified Emacs version in a Docker container
-  docs                       Build documentation                                                                                                                                                   [aliases: doc]
+  docs [names..]             Build documentation                                                                                                                                                   [aliases: doc]
   emacs [args..]             Execute emacs with the appropriate environment
   eval [form]                Evaluate lisp form with a proper PATH
   path [patterns..]          Print the PATH (exec-path) from workspace                                                                                                                       [aliases: exec-path]
@@ -60,6 +60,7 @@ Commands:
   package-directory          Print path to package directory
   package [destination]      Build a package artifact, and put it into the given destination                                                                                                      [aliases: pack]
   recipe                     Suggest a recipe format
+  recompile [names..]        Byte-recompile `.el' files
   refresh                    Download package archives
   reinstall [names..]        Reinstall packages
   run <type>                 Run custom tasks

@@ -180,7 +180,7 @@ $ eask package [DESTINATION]
 
 ## 🔍 eask compile
 
-字節編譯文件。
+字節編譯 `.el` 文件。
 
 ```sh
 $ eask compile [FILES..]
@@ -197,6 +197,18 @@ $ eask compile file-1.el file-2.el
 ```sh
 $ eask compile
 ```
+
+## 🔍 eask recompile
+
+重新字節編譯 `.el` 文件。
+
+```sh
+$ eask recompile [FILES..]
+```
+
+{{< hint info >}}
+💡 與 `eask compile` 類似，但它在編譯前會刪除舊的 `.elc` 檔案。
+{{< /hint >}}
 
 ## 🔍 eask package-directory
 
