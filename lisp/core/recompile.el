@@ -24,7 +24,7 @@
 
 (eask-start
   (eask-call "clean/elc")
-  (eask-println "")
+  (eask-write "")
   (eask-call "core/compile"))
 
 ;;; core/recompile.el ends here
