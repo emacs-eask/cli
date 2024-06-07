@@ -183,7 +183,7 @@ by default.
 
 ## 🔍 eask compile
 
-Byte-compile files.
+Byte-compile `.el` files.
 
 ```sh
 $ eask compile [FILES..]
@@ -200,6 +200,19 @@ Or compile files that are already specified in your `Eask`-file.
 ```sh
 $ eask compile
 ```
+
+## 🔍 eask recompile
+
+Byte-recompile `.el` files.
+
+```sh
+$ eask recompile [FILES..]
+```
+
+{{< hint info >}}
+💡 Similar to `eask compile`, but it will also remove old `.elc` files before
+compiling.
+{{< /hint >}}
 
 ## 🔍 eask package-directory
 

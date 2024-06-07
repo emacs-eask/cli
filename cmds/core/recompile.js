@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2022-2024 the Eask authors.
+ * Copyright (C) 2024 the Eask authors.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,8 +17,8 @@
 
 "use strict";
 
-exports.command = ['compile [names..]'];
-exports.desc = "Byte-compile `.el' files";
+exports.command = ['recompile [names..]'];
+exports.desc = "Byte-recompile `.el' files";
 exports.builder = yargs => yargs
   .positional(
     '[names..]', {
@@ -27,14 +27,14 @@ exports.builder = yargs => yargs
     })
   .options({
     'clean': {
-      description: 'clean byte-compile files individually',
+      description: 'clean byte-recompile files individually',
       type: 'boolean',
       group: TITLE_CMD_OPTION,
     },
   });
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/compile'
+  await UTIL.e_call(argv, 'core/recompile'
                     , argv.names
                     , UTIL.def_flag(argv.clean, '--clean'));
 };

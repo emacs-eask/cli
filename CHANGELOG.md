@@ -26,6 +26,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * fix: Don't pollute outer programs (#239)
 * feat(generate/test): Add commands to setup test files (#243)
 * feat: Add `docs` command (#245)
+* feat(cmds): Add `recompile` command (#254)
 
 ## 0.9.x
 > Released Nov 17, 2023

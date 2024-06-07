@@ -1,8 +1,8 @@
-;;; core/compile.el --- Byte compile all Emacs Lisp files in the package  -*- lexical-binding: t; -*-
+;;; core/compile.el --- Byte-compile `.el' files  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
-;; Byte compile all Emacs Lisp files in the package
+;; Byte-compile `.el' files,
 ;;
 ;;   $ eask compile [names..]
 ;;
