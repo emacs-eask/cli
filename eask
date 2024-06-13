@@ -90,8 +90,9 @@ yargs
       type: 'boolean',
       hidden: true,
     },
-    'no-color': {
-      description: `disable color output`,
+    'color': {
+      description: `enable/disable color output`,
+      prefix: 'no',
       type: 'boolean',
       hidden: true,
     },

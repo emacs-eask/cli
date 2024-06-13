@@ -34,8 +34,6 @@ eask info -q
 eask info --qucik
 eask info -f
 eask info --force
-eask info --dev
-eask info --development
 eask info --debug
 eask info --strict
 eask info --allow-error
