@@ -28,6 +28,7 @@ exports.builder = async (yargs) => {
   yargs.help(false);
   yargs.version(false);
   yargs.getOptions().narg = [];
+  yargs.strict(false);
 };
 
 exports.handler = async (argv) => {
@@ -39,7 +40,6 @@ exports.handler = async (argv) => {
 
   UTIL.setup_env();
   let proc = child_process.spawn(UTIL.cli_args(cmd), { stdio: 'inherit', shell: true });
-
   proc.on('close', function (code) {
     if (code == 0) return;
     process.exit(code);

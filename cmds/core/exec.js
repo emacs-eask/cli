@@ -26,7 +26,7 @@ exports.builder = async (yargs) => {
   yargs.help(false);
   yargs.version(false);
   yargs.getOptions().narg = [];
-  //console.warn(yargs.getOptions());
+  yargs.strict(false);
 };
 
 exports.handler = async (argv) => {
