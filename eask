@@ -91,10 +91,9 @@ yargs
       hidden: true,
     },
     'color': {
-      description: `enable/disable color output`,
+      description: 'enable/disable color output with `--no-` prefix',
       prefix: 'no',
       type: 'boolean',
-      hidden: true,
     },
     'verbose': {
       description: `set verbosity from 0 to 5`,
