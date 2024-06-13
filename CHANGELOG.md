@@ -27,6 +27,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * feat(generate/test): Add commands to setup test files (#243)
 * feat: Add `docs` command (#245)
 * feat(cmds): Add `recompile` command (#254)
+* feat(eask): Use `strict` option (#256)
 
 ## 0.9.x
 > Released Nov 17, 2023
