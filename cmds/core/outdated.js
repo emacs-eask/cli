@@ -19,6 +19,15 @@
 
 exports.command = ['outdated'];
 exports.desc = 'Show all outdated dependencies';
+exports.builder = yargs => yargs
+  .options({
+    'depth': {
+      description: 'dependency depth level to print',
+      requiresArg: true,
+      type: 'number',
+      group: TITLE_CMD_OPTION,
+    },
+  });
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/outdated');
