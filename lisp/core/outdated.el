@@ -6,6 +6,11 @@
 ;;
 ;;   $ eask outdated
 ;;
+;;
+;;  Action options:
+;;
+;;    [--depth]  dependency level to print
+;;
 
 ;;; Code:
 
