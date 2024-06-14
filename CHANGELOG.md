@@ -5,8 +5,13 @@ All notable changes to this project will be documented in this file.
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 
-## 0.10.x (Unreleased)
+## 0.11.x (Unreleased)
 > Released N/A
+
+* N/A
+
+## 0.10.x
+> Released Jun 13, 2024
 
 * fix: Unsilent in Eask-file by default (40d82becaf20f0851e5fc37aa17c5f6871c163a3)
 * Make better use for `special` commands (#206)
