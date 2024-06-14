@@ -66,11 +66,11 @@ eask keywords
 eask run script
 eask run script test
 eask run script extra -- Extra arguments!
-eask run script -all
+eask run script --all
 eask run command
 eask run command test
 eask run command mini-test-3 -- Extra arguments!
-eask run command -all
+eask run command --all
 
 # Exection
 eask eval "(progn (require 'mini.emacs.pkg.1))"

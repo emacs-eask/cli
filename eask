@@ -23,7 +23,6 @@ yargs
     command: '*',
     handler() { yargs.showHelp(); }
   })
-  .showHelpOnFail(true)
   .version('version', 'output version information and exit', version)
   .help('help', 'show usage instructions')
   .showHidden('show-hidden', 'Show hidden commands and options')
@@ -91,10 +90,10 @@ yargs
       type: 'boolean',
       hidden: true,
     },
-    'no-color': {
-      description: `disable color output`,
+    'color': {
+      description: 'enable/disable color output with `--no-` prefix',
       type: 'boolean',
-      hidden: true,
+      prefix: 'no',
     },
     'verbose': {
       description: `set verbosity from 0 to 5`,
@@ -125,6 +124,8 @@ yargs
       group: TITLE_PROXY_OPTION,
     },
   })
+  .strict()
   .demandCommand()
+  .showHelpOnFail(true)
   .wrap(yargs.terminalWidth())
   .argv;

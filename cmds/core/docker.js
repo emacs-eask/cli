@@ -26,6 +26,7 @@ exports.builder = async (yargs) => {
   yargs.help(false);
   yargs.version(false);
   yargs.getOptions().narg = [];
+  yargs.strict(false);
   yargs.positional('<version>', {
     description: 'Emacs version to test',
     type: 'string',

@@ -28,6 +28,7 @@ exports.builder = async (yargs) => {
   yargs.help(false);
   yargs.version(false);
   yargs.getOptions().narg = [];
+  yargs.strict(false);
 };
 
 exports.handler = async (argv) => {

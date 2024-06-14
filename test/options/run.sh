@@ -31,11 +31,9 @@ eask info --global
 eask info -a
 eask info --all
 eask info -q
-eask info --qucik
+eask info --quick
 eask info -f
 eask info --force
-eask info --dev
-eask info --development
 eask info --debug
 eask info --strict
 eask info --allow-error
@@ -48,6 +46,6 @@ eask info --no-color
 eask info --proxy localhost:8080
 eask info --http-proxy localhost:8080
 eask info --https-proxy localhost:8080
-eask info --no-proxy localhost:8080
+#eask info --no-proxy localhost:8080
 eask info -v 4
 eask info --verbose 4
