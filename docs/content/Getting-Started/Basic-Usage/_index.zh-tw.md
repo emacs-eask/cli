@@ -30,22 +30,22 @@ Usage: eask <command> [options..]
 
 Commands:
   analyze [files..]          Run Eask checker
-  archives                   List out all package archives                                                                                                                [aliases: sources]
+  archives                   List out all package archives                                                                                                                                     [aliases: sources]
   clean <type>               Delete various files produced during building
   compile [names..]          Byte-compile `.el' files
   create <type>              Create a new elisp project
   docker <version> [args..]  Launch specified Emacs version in a Docker container
-  docs [names..]             Build documentation                                                                                                                              [aliases: doc]
+  docs [names..]             Build documentation                                                                                                                                                   [aliases: doc]
   emacs [args..]             Execute emacs with the appropriate environment
   eval [form]                Evaluate lisp form with a proper PATH
-  path [patterns..]          Print the PATH (exec-path) from workspace                                                                                                  [aliases: exec-path]
+  path [patterns..]          Print the PATH (exec-path) from workspace                                                                                                                       [aliases: exec-path]
   exec [args..]              Execute command with correct environment PATH set up
   files [patterns..]         Print all package files
-  format <type>              Run formatters                                                                                                                                   [aliases: fmt]
+  format <type>              Run formatters                                                                                                                                                        [aliases: fmt]
   generate <type>            Generate files that are used for the development
   info                       Display information about the current package
   init [files..]             Initialize project to use Eask
-  install-deps               Automatically install package dependencies                                                                             [aliases: install-dependencies, prepare]
+  install-deps               Automatically install package dependencies                                                                                                  [aliases: install-dependencies, prepare]
   install [names..]          Install packages
   keywords                   List available keywords that can be used in the header section
   link <action>              Manage links
@@ -55,7 +55,7 @@ Commands:
   load [files..]             Load elisp files
   outdated                   Show all outdated dependencies
   package-directory          Print path to package directory
-  package [destination]      Build a package artifact, and put it into the given destination                                                                                 [aliases: pack]
+  package [destination]      Build a package artifact, and put it into the given destination                                                                                                      [aliases: pack]
   recipe                     Suggest a recipe format
   recompile [names..]        Byte-recompile `.el' files
   refresh                    Download package archives
@@ -64,32 +64,32 @@ Commands:
   search [queries..]         Search packages
   status                     Display the state of the workspace
   test <type>                Run regression/unit tests
-  uninstall [names..]        Uninstall packages                                                                                                                            [aliases: delete]
+  uninstall [names..]        Uninstall packages                                                                                                                                                 [aliases: delete]
   upgrade [names..]          Upgrade packages
   locate                     Print out Eask installed location
-  upgrade-eask               Upgrade Eask itself                                                                                                                     [aliases: upgrade-self]
+  upgrade-eask               Upgrade Eask itself                                                                                                                                          [aliases: upgrade-self]
 
 Proxy Options:
-      --proxy        update proxy for HTTP and HTTPS to host                                                                                                                        [string]
-      --http-proxy   update proxy for HTTP to host                                                                                                                                  [string]
-      --https-proxy  update proxy for HTTPS to host                                                                                                                                 [string]
-      --no-proxy     set no-proxy to host                                                                                                                                           [string]
+      --proxy        update proxy for HTTP and HTTPS to host                                                                                                                                             [string]
+      --http-proxy   update proxy for HTTP to host                                                                                                                                                       [string]
+      --https-proxy  update proxy for HTTPS to host                                                                                                                                                      [string]
+      --no-proxy     set no-proxy to host                                                                                                                                                                [string]
 
 Options:
-      --version      output version information and exit                                                                                                                           [boolean]
-      --help         show usage instructions                                                                                                                                       [boolean]
-      --show-hidden  Show hidden commands and options                                                                                                                              [boolean]
-  -g, --global       change default workspace to ~/.eask/                                                                                                                          [boolean]
-  -c, --config       change default workspace to ~/.emacs.d/                                                                                                                       [boolean]
-  -a, --all          enable all flag                                                                                                                                               [boolean]
-  -q, --quick        start cleanly without loading the configuration files                                                                                                         [boolean]
-  -f, --force        enable force flag                                                                                                                                             [boolean]
-      --debug        turn on debug mode                                                                                                                                            [boolean]
-      --strict       report error instead of warnings                                                                                                                              [boolean]
-      --allow-error  continue the executioon even there is error reported                                                                                                          [boolean]
-      --insecure     allow insecure connection                                                                                                                                     [boolean]
-      --color        enable/disable color output with `--no-` prefix                                                                                                               [boolean]
-  -v, --verbose      set verbosity from 0 to 5                                                                                                                                      [number]
+      --version      output version information and exit                                                                                                                                                [boolean]
+      --help         show usage instructions                                                                                                                                                            [boolean]
+      --show-hidden  Show hidden commands and options                                                                                                                                                   [boolean]
+  -g, --global       change default workspace to ~/.eask/                                                                                                                                               [boolean]
+  -c, --config       change default workspace to ~/.emacs.d/                                                                                                                                            [boolean]
+  -a, --all          enable all flag                                                                                                                                                                    [boolean]
+  -q, --quick        start cleanly without loading the configuration files                                                                                                                              [boolean]
+  -f, --force        enable force flag                                                                                                                                                                  [boolean]
+      --debug        turn on debug mode                                                                                                                                                                 [boolean]
+      --strict       report error instead of warnings                                                                                                                                                   [boolean]
+      --allow-error  continue the executioon even there is error reported                                                                                                                               [boolean]
+      --insecure     allow insecure connection                                                                                                                                                          [boolean]
+      --no-color     enable/disable color output                                                                                                                                                        [boolean]
+  -v, --verbose      set verbosity from 0 to 5                                                                                                                                                           [number]
 
 For more information, find the manual at https://emacs-eask.github.io/
 ```
