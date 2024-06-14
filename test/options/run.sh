@@ -46,6 +46,6 @@ eask info --no-color
 eask info --proxy localhost:8080
 eask info --http-proxy localhost:8080
 eask info --https-proxy localhost:8080
-#eask info --no-proxy localhost:8080
+eask info --no-proxy localhost:8080
 eask info -v 4
 eask info --verbose 4
