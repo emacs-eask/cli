@@ -40,6 +40,7 @@ exports.handler = async (argv) => {
 
   UTIL.setup_env();
   let proc = child_process.spawn(UTIL.cli_args(cmd), { stdio: 'inherit', shell: true });
+
   proc.on('close', function (code) {
     if (code == 0) return;
     process.exit(code);
