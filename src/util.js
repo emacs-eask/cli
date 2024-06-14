@@ -166,7 +166,7 @@ function _global_options(argv) {
   flags.push(def_flag(argv['log-level'], (argv['log-level']) ? '--log-level' : '--no-log-level'));
   flags.push(def_flag(argv['log-file'], (argv['log-file']) ? '--log-file' : '--no-log-file'));
   flags.push(def_flag(argv['elapsed-time'], (argv['elapsed-time']) ? '--elapsed-time' : '--no-elapsed-time'));
-  flags.push(def_flag(argv['color'], '--no-color'));
+  flags.push(def_flag(argv['no-color'], '--no-color'));
   /* Number type */
   flags.push(def_flag(argv.verbose, '--verbose', argv.verbose));
   /* String type */

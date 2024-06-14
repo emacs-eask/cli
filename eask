@@ -90,10 +90,9 @@ yargs
       type: 'boolean',
       hidden: true,
     },
-    'color': {
-      description: 'enable/disable color output with `--no-` prefix',
+    'no-color': {
+      description: 'enable/disable color output',
       type: 'boolean',
-      prefix: 'no',
     },
     'verbose': {
       description: `set verbosity from 0 to 5`,
@@ -124,6 +123,7 @@ yargs
       group: TITLE_PROXY_OPTION,
     },
   })
+  .parserConfiguration({ "boolean-negation": false })
   .strict()
   .demandCommand()
   .showHelpOnFail(true)
