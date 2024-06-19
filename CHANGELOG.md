@@ -141,7 +141,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Rename package to `@emacs-eask/cli` (#60)
 
 ## 0.6.17
-> Released Mar 05, 2022
+> Released May 05, 2022
 
 * Reset `command-line-args-left` variable by default (fbda232e962e3566efb94d8061a4035709b7c6e2)
 * Clean up `.git` directory after creating a new elisp project (d845fd281707f0ed47fa955139e1ebddd56b8f58)
