@@ -92,7 +92,7 @@ jobs:
 
     - name: Uploading...
       if: github.ref == 'refs/heads/master'
-      uses: softprops/action-gh-release@v0.1.15
+      uses: softprops/action-gh-release@v2.0.7
       with:
         tag_name: ${{ env.VERSION }}
         token: ${{ secrets.PAT }}
