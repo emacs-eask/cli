@@ -73,7 +73,7 @@
                 (insert spaces "- test-ubuntu-emacs-27" "\n"))
               (when (version<= minimum-version "28.2")
                 (insert spaces "- test-ubuntu-emacs-28" "\n"))
-              (when (version<= minimum-version "29.3")
+              (when (version<= minimum-version "29.4")
                 (insert spaces "- test-ubuntu-emacs-29" "\n"))
               (when (version<= minimum-version "30")
                 (insert spaces "- test-ubuntu-emacs-master"))))

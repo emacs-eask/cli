@@ -53,8 +53,8 @@
               (eask-generate-workflow-gitlab--insert-jobs "27.2"))
             (when (version<= minimum-version "28.2")
               (eask-generate-workflow-gitlab--insert-jobs "28.2"))
-            (when (version<= minimum-version "29.3")
-              (eask-generate-workflow-gitlab--insert-jobs "29.3"))
+            (when (version<= minimum-version "29.4")
+              (eask-generate-workflow-gitlab--insert-jobs "29.4"))
             (when (version<= minimum-version "30")
               ;; TODO: snapshot?
               ))
