@@ -6,3 +6,6 @@ _site
 .hugo_build.lock
 
 /public
+
+# macOS
+.DS_Store
