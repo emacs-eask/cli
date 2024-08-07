@@ -30,7 +30,7 @@ purposes! But here are Eask aims to be:
 information.*
 
 ## 🔗 Links
-> 💡 `node` is not required to use Eask!
+> 💡 [`node`][node] is not required to use Eask!
 
 - [Documentation](https://emacs-eask.github.io/)
 - [Installation](https://emacs-eask.github.io/Getting-Started/Install-Eask/)
@@ -39,6 +39,8 @@ information.*
 - [FAQ](https://emacs-eask.github.io/FAQ/)
 
 ## 🧪 Testing
+
+We have incorporated a range of tests to ensure Eask remains stable throughout its release cycle.
 
 ###### Documentation
 
@@ -114,3 +116,5 @@ See [`COPYING`](./COPYING) for details.
 [Cask]: https://github.com/cask/cask
 [makem.sh]: https://github.com/alphapapa/makem.sh
 [Eldev]: https://github.com/doublep/eldev
+
+[node]: https://nodejs.org/
