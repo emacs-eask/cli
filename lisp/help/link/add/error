@@ -3,5 +3,5 @@
    
 Options are,
    
-  - [ ] Use `eask pkg-file` to create one
+  - [ ] Use `eask generate pkg-file` to create one
   - [ ] Write your own `-pkg.el` file
