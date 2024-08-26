@@ -105,7 +105,7 @@ eask lint indent
 eask lint keywords
 eask lint license
 eask lint package
-eask lint regexps
+#eask lint regexps              # Only 27.1+
 
 # Testing
 eask test activate
