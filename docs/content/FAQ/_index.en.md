@@ -14,7 +14,7 @@ Here is a list of general frequently asked questions.
 The answer is **NO**.
 
 Eask builds native executable on every release, see our [release page](https://github.com/emacs-eask/cli/releases)
-to download it! However, Node.JS is requied if you are going to develop Eask!
+to download it! However, Node.JS is required if you are going to develop Eask!
 
 ## ❓ Who should use this tool?
 
