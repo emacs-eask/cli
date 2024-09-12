@@ -11,7 +11,7 @@ pluralizeListTitles: false
 defaultContentLanguage: en
 
 disablePathToLower: true
-enableGitInfo: true
+enableGitInfo: false
 
 enableRobotsTXT: true
 
