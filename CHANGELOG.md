@@ -8,7 +8,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 0.11.x (Unreleased)
 > Released N/A
 
-* N/A
+* fix(init): Preview final Eask file (ee7c36cbd0d934523825c9c9430c73b50d4a8666)
 
 ## 0.10.x
 > Released Jun 13, 2024
