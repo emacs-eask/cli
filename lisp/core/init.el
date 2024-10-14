@@ -48,6 +48,17 @@
               base-name (file-name-nondirectory (directory-file-name new-name))
               invalid-name (not (eask-init--check-filename base-name)))))
     (when continue
+      (eask-println
+       "This utility will walk you through creating an Eask file.
+It only covers the most common items, and tries to guess sensible defaults.
+
+See `eask init --help` for definitive documentation on these fields
+and exactly what they do.
+
+Use `eask install <pkg>` afterwards to install a package and
+save it as a dependency in the package.json file.
+
+Press ^C at any time to quit.")
       ;; Starting Eask-file creation!
       (let* ((project-dir (file-name-nondirectory (directory-file-name dir)))
              (project-name (eask-guess-package-name project-dir))
@@ -82,7 +93,8 @@
 "
                        package-name version description website keywords
                        entry-point emacs-version))
-             (prompt (format "About to write to %s:\n\nIs this Okay? " new-name)))
+             (prompt (format "About to write to %s:\n\n%s\n\nIs this Okay? "
+                             new-name content)))
         (when (yes-or-no-p prompt)
           (write-region content nil new-name)
           (find-file new-name))))))
