@@ -37,7 +37,7 @@
     (setq errors (check-declare-file filename))
     (if errors
         (with-current-buffer check-declare-warning-buffer
-          (eask-msg (buffer-string)))
+          (eask-report (string-remove-prefix "\n" (buffer-string))))
       (eask-msg "No issues found"))))
 
 (eask-start
