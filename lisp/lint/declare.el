@@ -25,6 +25,11 @@
 (defvar check-declare-warning-buffer)
 
 ;;
+;;; Flags
+
+(advice-add #'eask-allow-error-p :override #'always)
+
+;;
 ;;; Core
 
 (defun eask-lint-declare--file (filename)
