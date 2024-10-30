@@ -39,7 +39,7 @@
          (errors))
     (eask-lint-first-newline)
     (eask-msg "`%s` with check-declare" (ansi-green file))
-    (setq errors (dlet ((inhibit-message 't)) (check-declare-file filename)))
+    (setq errors (eask--silent (check-declare-file filename)))
     (if errors
         (with-current-buffer check-declare-warning-buffer
           (eask-report (string-remove-prefix "\n" (buffer-string))))
