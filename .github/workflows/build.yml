@@ -128,7 +128,7 @@ jobs:
       run: |
         git pull
         git add .
-        git commit -m "Update binairs ${{ matrix.target }}.${{ env._EXT }}"
+        git commit -m "Update binaries ${{ matrix.target }}.${{ env._EXT }}"
 
     - name: Push
       if: github.ref == 'refs/heads/master'
