@@ -65,12 +65,12 @@ We have incorporated a range of tests to ensure Eask remains stable throughout i
 | Test commands in development (`./`) mode     | ✔    | [![Local](https://github.com/emacs-eask/cli/actions/workflows/local.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/local.yml)                                  |
 | Test install packages                        | ✔    | [![Install](https://github.com/emacs-eask/cli/actions/workflows/install.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/install.yml)                            |
 | Test link packages                           | ✔    | [![Link](https://github.com/emacs-eask/cli/actions/workflows/link.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/link.yml)                                     |
+| Test `analyze` command / `Eask`-file checker | ✔    | [![Analyze](https://github.com/emacs-eask/cli/actions/workflows/analyze.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/analyze.yml)                            |
 | Test `docker` command                        | ✔    | [![Docker](https://github.com/emacs-eask/cli/actions/workflows/docker.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/docker.yml)                               |
 | Test `exec` command                          | ✔    | [![Exec](https://github.com/emacs-eask/cli/actions/workflows/exec.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/exec.yml)                                     |
 | Test `emacs` command                         | ✔    | [![Emacs](https://github.com/emacs-eask/cli/actions/workflows/emacs.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/emacs.yml)                                  |
 | Test search packages                         | ✔    | [![Search](https://github.com/emacs-eask/cli/actions/workflows/search.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/search.yml)                               |
 | Test upgrade and check outdated packages     | ✔    | [![Outdated_Upgrade](https://github.com/emacs-eask/cli/actions/workflows/outdated_upgrade.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/outdated_upgrade.yml) |
-| `Eask`-file checker                          | ✔    | [![Checker](https://github.com/emacs-eask/cli/actions/workflows/checker.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/checker.yml)                            |
 
 ###### Options
 

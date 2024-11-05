@@ -33,8 +33,8 @@ command-local:
 	./test/commands/local/run.sh
 
 command-analyze:
-	./test/checker/dsl/run.sh
-	./test/checker/metadata/run.sh
+	./test/commands/analyze/dsl/run.sh
+	./test/commands/analyze/metadata/run.sh
 
 command-docker:
 	./test/commands/docker/run.sh
