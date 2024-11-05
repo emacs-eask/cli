@@ -33,13 +33,13 @@
 
 :root[color-theme="light"] {
   --header-background: #4E666D;
-  --accent-color-lite: #F1F4F2;
+  --accent-color-lite: #E3EAE6;
   --footer-background: #4E666D;
 }
 @media (prefers-color-scheme: light) {
   :root {
     --header-background: #4E666D;
-    --accent-color-lite: #F1F4F2;
+    --accent-color-lite: #E3EAE6;
     --footer-background: #4E666D;
   }
 }
@@ -47,14 +47,14 @@
 :root[color-theme="dark"] {
   --header-background: #4E666D;
   --body-background: #3F3F3F;
-  --accent-color-lite: #2E2E2E;
+  --accent-color-lite: #4F5759;
   --footer-background: #3F4B4E;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --header-background: #4E666D;
     --body-background: #3F3F3F;
-	--accent-color-lite: #2E2E2E;
+	--accent-color-lite: #4F5759;
     --footer-background: #3F4B4E;
   }
 }
