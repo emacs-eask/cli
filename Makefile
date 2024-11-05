@@ -35,6 +35,7 @@ command-local:
 command-analyze:
 	./test/checker/dsl/run.sh
 	./test/checker/metadata/run.sh
+	./test/commands/analyze/run.sh
 
 command-docker:
 	./test/commands/docker/run.sh
