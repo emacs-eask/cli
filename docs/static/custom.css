@@ -3,7 +3,6 @@
 }
 
 .gdoc-header {
-  background: #44879A;
   border-bottom: 0rem solid #8B8B8B;
   box-shadow: 0 0 1rem #8B8B8B;
 }
@@ -15,12 +14,10 @@
 
 .gdoc-brand__img {
   margin-right: 0.8rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
   width: 3.5rem;
   height: 3.5rem;
-}
-
-.gdoc-footer {
-  background: #44879A;
 }
 
 /* Icons */
@@ -30,4 +27,34 @@
   background-repeat: no-repeat;
   margin-top: 5px;
   background-size: 90%;
+}
+
+/* Themes */
+
+:root[color-theme="light"] {
+  --header-background: #4E666D;
+  --accent-color-lite: #F1F4F2;
+  --footer-background: #4E666D;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --header-background: #4E666D;
+    --accent-color-lite: #F1F4F2;
+    --footer-background: #4E666D;
+  }
+}
+
+:root[color-theme="dark"] {
+  --header-background: #4E666D;
+  --body-background: #3F3F3F;
+  --accent-color-lite: #2E2E2E;
+  --footer-background: #3F4B4E;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --header-background: #4E666D;
+    --body-background: #3F3F3F;
+	--accent-color-lite: #2E2E2E;
+    --footer-background: #3F4B4E;
+  }
 }
