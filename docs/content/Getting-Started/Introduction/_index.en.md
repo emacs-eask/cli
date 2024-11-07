@@ -87,6 +87,7 @@ list.
 | `exec` program            | ✅                                      | ✅                       | ❌             | ❌       |
 | `eval` expressions        | ✅                                      | ✅                       | ✅             | ❌       |
 | `emacs` execution         | ✅                                      | ✅                       | ❌             | ❌       |
+| Support `docker`          | ✅                                      | ❌                       | ✅             | ❌       |
 | Built-in `linters`        | ✅                                      | ❌                       | ✅             | ❌       |
 | Built-in `tests`          | ✅                                      | ❌                       | ✅             | ❌       |
 | Run script                | ✅                                      | ❌                       | ❌             | ❌       |
