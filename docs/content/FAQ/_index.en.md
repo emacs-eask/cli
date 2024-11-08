@@ -46,9 +46,9 @@ See [issue #140](https://github.com/emacs-eask/cli/issues/140) for more informat
 
 ## ❓ Why yargs?
 
-[yargs](https://www.npmjs.com/package/yargs) has a very wide community; and it
-has been used in many tools. It's cross-platform! And most importantly, this is
-one of the tools that work well on Linux, macOS, and Windows.
+[yargs][] has a very wide community; and it has been used in many tools.
+It's cross-platform! And most importantly, this is one of the tools that
+work well on Linux, macOS, and Windows.
 
 There is also the major difference compared with Eask and other alternatives.
 [Cask][], [makem.sh][], or [Eldev][] rely more on `batch` and `bash`. We chose a
@@ -151,3 +151,5 @@ Add the following code snippet to your Eask-file:
 [Cask]: https://github.com/cask/cask
 [makem.sh]: https://github.com/alphapapa/makem.sh
 [Eldev]: https://github.com/doublep/eldev
+
+[yargs]: https://www.npmjs.com/package/yargs

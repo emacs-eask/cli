@@ -42,9 +42,8 @@ Node 對各種終端應用程序有更好的支持（相比 shell 腳本）！ �
 
 ## ❓ 為什麼是 yargs?
 
-[yargs](https://www.npmjs.com/package/yargs) 擁有非常廣泛的社區； 和它
-已經被用在很多工具中。 它是跨平台的！ 最重要的是，這是在 Linux、macOS 和
-Windows 上運行良好的工具之一。
+[yargs][] 擁有非常廣泛的社區； 和它已經被用在很多工具中。 它是跨平台的！
+最重要的是，這是在 Linux、macOS 和 Windows 上運行良好的工具之一。
 
 與 Eask 和其他替代方案相比，也存在主要差異。[Cask][]、[makem.sh][] 或 [Eldev][] 更依賴於
 `batch` 和 `bash`。 我們選擇了一個路線不同，想把繁重的任務交給高層編程語言，**`JavaScript`**。
@@ -137,3 +136,5 @@ Error: Process completed with exit code 1.
 [Cask]: https://github.com/cask/cask
 [makem.sh]: https://github.com/alphapapa/makem.sh
 [Eldev]: https://github.com/doublep/eldev
+
+[yargs]: https://www.npmjs.com/package/yargs
