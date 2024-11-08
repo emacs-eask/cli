@@ -10,7 +10,7 @@ The following is a description of the most common commands you will use while
 developing your Eask project. See the [Commands and options](https://emacs-eask.github.io/Getting-Started/Commands-and-options/)
 for a comprehensive view of Eask’s CLI.
 
-Once you have installed [Eask](), make sure it is in your `PATH`. You can test
+Once you have installed [Eask][], make sure it is in your `PATH`. You can test
 that Eask has been installed correctly via the help command:
 
 ```
@@ -207,5 +207,7 @@ the time you would just want to operate jobs for your elisp packages.
 
 
 <!-- Links -->
+
+[Eask]: https://github.com/emacs-eask/cli
 
 [e2ansi]: https://github.com/Lindydancer/e2ansi

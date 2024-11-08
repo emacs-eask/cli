@@ -9,7 +9,7 @@ Eask 的 CLI 功能齊全但易於使用，即使對於那些使用命令行的�
 [命令和選項](https://emacs-eask.github.io/Getting-Started/Commands-and-options/)
 以全面了解 Eask 的 CLI。
 
-一旦你安裝了 [Eask]()，確保它在你的 `PATH` 中。 您可以通過 help 命令測試 Eask 是否已正確安裝：
+一旦你安裝了 [Eask][]，確保它在你的 `PATH` 中。 您可以通過 help 命令測試 Eask 是否已正確安裝：
 
 ```
 $ eask --help
@@ -192,5 +192,7 @@ $ eask cat [PATTERNS..]
 
 
 <!-- Links -->
+
+[Eask]: https://github.com/emacs-eask/cli
 
 [e2ansi]: https://github.com/Lindydancer/e2ansi
