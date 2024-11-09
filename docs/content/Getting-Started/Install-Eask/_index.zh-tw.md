@@ -72,8 +72,7 @@ $ sudo apt update --allow-insecure-repositories
 $ sudo apt install eask-cli --allow-unauthenticated
 ```
 
-您也可以直接從
-[packaging][] 代碼庫下載 Debian 軟體包。
+您也可以直接從 [packaging][packaging/debian] 代碼庫下載 Debian 軟體包。
 
 ### 📦 Snap (Linux)
 
@@ -193,7 +192,7 @@ mv lisp dist
 
 <!-- Links -->
 
-[packaging]: https://github.com/emacs-eask/packaging/tree/master/debian
+[packaging/debian]: https://github.com/emacs-eask/packaging/tree/master/debian
 
 [Homebrew]: https://brew.sh/
 [MacPorts]: https://www.macports.org/

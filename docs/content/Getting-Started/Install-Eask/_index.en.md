@@ -76,7 +76,7 @@ $ sudo apt update --allow-insecure-repositories
 $ sudo apt install eask-cli --allow-unauthenticated
 ```
 
-You can also download Debian packages from the [packaging][] repo.
+You can also download Debian packages from the [packaging][packaging/debian] repo.
 
 ### 📦 Snap (Linux)
 
@@ -197,7 +197,7 @@ to your environment `PATH` to execute eask from any location! 🎉 🎊
 
 <!-- Links -->
 
-[packaging]: https://github.com/emacs-eask/packaging/tree/master/debian
+[packaging/debian]: https://github.com/emacs-eask/packaging/tree/master/debian
 
 [Homebrew]: https://brew.sh/
 [MacPorts]: https://www.macports.org/
