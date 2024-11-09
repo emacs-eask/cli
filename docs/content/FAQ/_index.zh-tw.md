@@ -7,7 +7,7 @@ weight: 900
 
 {{< toc >}}
 
-# 🔍 About Eask
+# 🔍 關於 Eask
 
 ## ❓ 您需要 Node.JS 才能使用 Eask 嗎？
 
