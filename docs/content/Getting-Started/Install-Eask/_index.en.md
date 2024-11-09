@@ -129,9 +129,9 @@ $ winget install eask.cli
 
 ### 🚩 Prerequisite Tools
 
-* [Git][]
-* [Node.js][]
-* [npm][]
+- [Git][]
+- [Node.js][]
+- [npm][]
 
 Alternatively, you can clone it directly from this repo
 

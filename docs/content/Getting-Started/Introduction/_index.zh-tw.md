@@ -102,10 +102,10 @@ Eask 是最好的選擇之一。
 
 Eask 的設計深受以下項目的影響：
 
-* [Cask][] - Emacs 的項目管理工具
-* [makem.sh][] -用於構建和測試 Emacs Lisp 包的類似 Makefile 的腳本
-* [epm](https://github.com/xuchunyang/epm) - Emacs 包管理器
-* [Eldev][] - Elisp 開發工具
+- [Cask][] - Emacs 的項目管理工具
+- [makem.sh][] -用於構建和測試 Emacs Lisp 包的類似 Makefile 的腳本
+- [epm](https://github.com/xuchunyang/epm) - Emacs 包管理器
+- [Eldev][] - Elisp 開發工具
 
 
 <!-- Links -->

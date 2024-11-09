@@ -125,10 +125,10 @@ list.
 
 The design of Eask was greatly influenced by the following projects:
 
-* [Cask][] - Project management tool for Emacs
-* [makem.sh][] - Makefile-like script for building and testing Emacs Lisp packages
-* [epm](https://github.com/xuchunyang/epm) - Emacs Package Manager
-* [Eldev][] - Elisp Development Tool
+- [Cask][] - Project management tool for Emacs
+- [makem.sh][] - Makefile-like script for building and testing Emacs Lisp packages
+- [epm](https://github.com/xuchunyang/epm) - Emacs Package Manager
+- [Eldev][] - Elisp Development Tool
 
 
 <!-- Links -->
