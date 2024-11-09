@@ -208,6 +208,7 @@ to your environment `PATH` to execute eask from any location! 🎉 🎊
 
 [packaging/debian]: https://github.com/emacs-eask/packaging/tree/master/debian
 
+[Nix]: https://nixos.org/
 [Homebrew]: https://brew.sh/
 [MacPorts]: https://www.macports.org/
 [Snap]: https://snapcraft.io/
