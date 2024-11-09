@@ -3,8 +3,8 @@ title: 🔭 尋找 Emacs
 weight: 150
 ---
 
-默認情況下，會為默認的 Emacs 安裝軟件包，即“emacs”命令後面的軟件包。 要選擇不同的
-Emacs，請將環境變量“EMACS”設置為要使用的 `Emacs` 的命令名稱或可執行路徑：
+默認情況下，會為默認的 Emacs 安裝軟件包，即 `emacs` 命令後面的軟件包。 要選擇不同的
+Emacs，請將環境變量 `EMACS` 設置為要使用的 `Emacs` 的命令名稱或可執行路徑：
 
 ```sh
 $ EMACS="emacs26.1" eask command
