@@ -9,10 +9,10 @@ weight: 20
 
 To make changes to Eask, you should have:
 
-1. [Node.js](https://nodejs.org/en/) for the development environment.
-2. [npm](https://www.npmjs.com/) for the package manager.
-3. [yargs](https://github.com/yargs/yargs) for CLI parser.
-4. [Emacs](https://www.gnu.org/software/emacs/), 26.1 or above!
+1. [Node.js][] for the development environment.
+2. [npm][] for the package manager.
+3. [yargs][] for CLI parser.
+4. [Emacs][], 26.1 or above!
 
 ### 📝 Building
 
@@ -27,9 +27,9 @@ After you have stepped through the installation, try:
 $ eask locate
 ```
 
-It should print out the location of your working Eask workspace. You
-should be able to identify the Eask workspace, even you have multiple
-Eask versions installed!
+It should print out the location of the `eask` executable.
+You should be able to identify the Eask executable's location,
+even you have multiple Eask versions installed!
 
 ### 📈 Testing
 
@@ -40,3 +40,11 @@ Actions should pick up the test for you!
 Make sure you have GitHub Actions enabled in your repository (forked). Got to
 **Settings** -> **Actions** -> **General** -> **Actions Permissions**; make sure
 you have checked the correct options.
+
+
+<!-- Links -->
+
+[Node.js]: https://nodejs.org/en/
+[npm]: https://www.npmjs.com/
+[yargs]: https://github.com/yargs/yargs
+[Emacs]: https://www.gnu.org/software/emacs/
