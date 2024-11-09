@@ -17,7 +17,7 @@ To make changes to Eask, you should have:
 ### 📝 Building
 
 To build the development environment, you would have to install Eask using
-the [source](https://emacs-eask.github.io/Getting-Started/Install-Eask/#-source)
+the [build from source](https://emacs-eask.github.io/Getting-Started/Install-Eask/#-build-from-source)
 method. Make sure you have set up the environment PATH variable, so you can call
 `eask` from the terminal.
 
