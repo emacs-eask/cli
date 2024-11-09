@@ -40,6 +40,15 @@ $ curl.exe -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinst
 $ npm install -g @emacs-eask/cli
 ```
 
+### 📦 Nix (macOS or Linux)
+
+[Nix][] 是一個適用於 macOS 和 Linux 的免費開源套件管理器。
+若要安裝 Eask CLI，請執行下列操作：
+
+```sh
+$ nix profile install nixpkgs#eask-cli
+```
+
 ### 📦 Homebrew (macOS 或 Linux)
 
 [Homebrew][] 是一個適用於 macOS 和 Linux 的免費開源套件管理器。

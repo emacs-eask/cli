@@ -44,6 +44,15 @@ install Eask with the following one-liner:
 $ npm install -g @emacs-eask/cli
 ```
 
+### 📦 Nix (macOS or Linux)
+
+[Nix][] is a free and open-source package manager for macOS and Linux.
+To install the Eask CLI:
+
+```sh
+$ nix profile install nixpkgs#eask-cli
+```
+
 ### 📦 Homebrew (macOS or Linux)
 
 [Homebrew][] is a free and open-source package manager for macOS and Linux.
