@@ -8,14 +8,14 @@ the `emacs` command. To pick a different Emacs, set the environment variable
 `EMACS` to the command name or executable path of the Emacs to use:
 
 ```sh
-$ EMACS="emacs26.1" eask command
+$ EMACS="emacs-26.1" eask command
 ```
 
 Note that installed dependencies are scoped on the version of Emacs. So when
 switching between versions you will have to install the dependencies for each:
 
 ```sh
-$ EMACS="emacs26.3" eask install
+$ EMACS="emacs-26.3" eask install
 ```
 
 There are, unfortunately, circumstances under which Emacs itself resets the

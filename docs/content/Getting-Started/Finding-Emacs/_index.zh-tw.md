@@ -7,13 +7,13 @@ weight: 150
 Emacs，請將環境變量 `EMACS` 設置為要使用的 `Emacs` 的命令名稱或可執行路徑：
 
 ```sh
-$ EMACS="emacs26.1" eask command
+$ EMACS="emacs-26.1" eask command
 ```
 
 請注意，已安裝的依賴項受 Emacs 版本的影響。 因此，在版本之間切換時，您必須為每個版本安裝依賴項：
 
 ```sh
-$ EMACS="emacs26.3" eask install
+$ EMACS="emacs-26.3" eask install
 ```
 
 不幸的是，在某些情況下，Emacs 本身會以與 **eask** 衝突的方式重置 `EMACS` 變量，在這種情況下，
