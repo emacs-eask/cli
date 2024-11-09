@@ -151,13 +151,13 @@ $ npm run pkg-linux-x64
 在 Linux/macOS 上，
 
 ```sh
-export PATH="path/to/eask/bin:$PATH"
+export PATH="path/to/eask-cli/bin:$PATH"
 ```
 
 在 Windows 上，
 
 ```batch
-set PATH=%PATH%;c:/path/to/eask/bin
+set PATH=%PATH%;c:/path/to/eask-cli/bin
 ```
 
 正確設置後，嘗試 `eask --version` 然後您應該會看到當前 `eask` 的版本號！ 🎉🎊

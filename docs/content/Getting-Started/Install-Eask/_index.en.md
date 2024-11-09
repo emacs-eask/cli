@@ -154,13 +154,13 @@ to your environment `PATH` to execute eask from any location!
 On Linux/macOS,
 
 ```sh
-export PATH="path/to/eask/bin:$PATH"
+export PATH="path/to/eask-cli/bin:$PATH"
 ```
 
 On Windows,
 
 ```batch
-set PATH=%PATH%;c:/path/to/eask/bin
+set PATH=%PATH%;c:/path/to/eask-cli/bin
 ```
 
 Once you have set it up correctly, try `eask --version` then you should see
