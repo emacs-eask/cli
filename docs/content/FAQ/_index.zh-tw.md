@@ -40,7 +40,7 @@ Node 對各種終端應用程序有更好的支持（相比 shell 腳本）！ �
 
 有關詳細信息，請參閱[問題 #140](https://github.com/emacs-eask/cli/issues/140)！
 
-## ❓ 為什麼是 yargs?
+## ❓ 為什麼選擇 yargs?
 
 [yargs][] 擁有非常廣泛的社區； 和它已經被用在很多工具中。 它是跨平台的！
 最重要的是，這是在 Linux、macOS 和 Windows 上運行良好的工具之一。
