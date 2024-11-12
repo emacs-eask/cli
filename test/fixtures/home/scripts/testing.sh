@@ -47,7 +47,7 @@ should_error() {
 # Check if (grep) pattern ARG1 is found in string ARG2
 # E.g. should_match "foo*" "foobar"
 should_match() {
-    echo "$1" | grep "$2"  - | true
+    echo "$2" | grep "$1"  - | cat > /dev/null
     local SEARCH_RES=${PIPESTATUS[1]}
 
     if [ $SEARCH_RES -gt 0 ]; then
