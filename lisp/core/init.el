@@ -56,7 +56,7 @@ See `eask init --help` for definitive documentation on these fields
 and exactly what they do.
 
 Use `eask install <pkg>` afterwards to install a package and
-save it as a dependency in the package.json file.
+save it as a dependency in the Eask file.
 
 Press ^C at any time to quit.")
       ;; Starting Eask-file creation!
