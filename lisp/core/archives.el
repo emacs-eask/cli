@@ -48,7 +48,7 @@
     (eask-info "(Total of %s archive%s available)" (length eask-source-mapping)
                (eask--sinr eask-source-mapping "" "s")))
    (package-archives
-    (eask-info "In used archives:")
+    (eask-info "Archives in use:")
     (eask-msg "")
     (eask-archive--print-alist package-archives)
     (eask-info "(Total of %s archive%s listed)" (length package-archives)
