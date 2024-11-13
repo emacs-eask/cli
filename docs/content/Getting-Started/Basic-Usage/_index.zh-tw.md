@@ -86,7 +86,7 @@ Options:
   -f, --force        enable force flag                                                                                                                                                                  [boolean]
       --debug        turn on debug mode                                                                                                                                                                 [boolean]
       --strict       report error instead of warnings                                                                                                                                                   [boolean]
-      --allow-error  continue the executioon even there is error reported                                                                                                                               [boolean]
+      --allow-error  attempt to continue execution on error                                                                                                                                             [boolean]
       --insecure     allow insecure connection                                                                                                                                                          [boolean]
       --no-color     enable/disable color output                                                                                                                                                        [boolean]
   -v, --verbose      set verbosity from 0 to 5                                                                                                                                                           [number]
