@@ -39,7 +39,7 @@
     (when (file-exists-p link-path)
       (eask-msg "")
       (eask-with-progress
-        (ansi-yellow "!! The link is already presented; override the existing link... ")
+        (ansi-yellow "!! The link is already present; overriding the existing link... ")
         (eask-link-delete-symlink link-path)
         (ansi-yellow "done !!")))
     (make-symbolic-link source link-path)
@@ -104,12 +104,12 @@
                     (format "  - [1/2] Generating %s file... " autoloads-file)
                     (unless autoloads-file-presented
                       (eask-with-verbosity 'debug (eask-call "generate/autoloads")))
-                    (if autoloads-file-presented "already presented ✗" "done ✓"))
+                    (if autoloads-file-presented "already present ✗" "done ✓"))
                   (eask-with-progress
                     (format "  - [2/2] Generating %s file... " pkg-file)
                     (unless pkg-file-presented
                       (eask-with-verbosity 'debug (eask-call "generate/pkg-file")))
-                    (if pkg-file-presented "already presented ✗" "done ✓")))
+                    (if pkg-file-presented "already present ✗" "done ✓")))
                 (eask-link-add--create source)
                 (when (and (zerop (length links))         ; if no link previously,
                            (= 1 (length (eask-link-list))))  ; and first link created!

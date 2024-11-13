@@ -51,7 +51,7 @@
       (eask-help "link/delete"))
      ;; No link to delete
      ((zerop (length links))
-      (eask-info "No links presented; tasks ended with no operation"))
+      (eask-info "No links present; task ended with no operation"))
      ;; Link not found
      ((cl-some (lambda (name)
                  (not (member name link-names)))
