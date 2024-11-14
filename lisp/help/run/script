@@ -1,4 +1,4 @@
 
-💡 Make sure you have specify a (scripts ..) directive inside your Eask file!
-   
-    [+] (scripts "test" "echo This is a test command!")
+💡 Make sure you have a (script ..) directive inside your Eask file!
+
+    [+] (script "test" "echo This is a test command!")

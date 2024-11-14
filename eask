@@ -61,7 +61,7 @@ yargs
       type: 'boolean',
     },
     'allow-error': {
-      description: `continue the executioon even there is error reported`,
+      description: `attempt to continue execution on error`,
       type: 'boolean',
     },
     'insecure': {

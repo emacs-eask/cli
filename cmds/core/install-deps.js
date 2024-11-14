@@ -22,7 +22,7 @@ exports.desc = 'Automatically install package dependencies';
 exports.builder = yargs => yargs
   .options({
     'development': {
-      description: 'install include development dependencies',
+      description: 'also install development dependencies',
       alias: 'dev',
       type: 'boolean',
       group: TITLE_CMD_OPTION,
