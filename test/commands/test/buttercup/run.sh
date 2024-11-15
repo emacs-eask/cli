@@ -26,4 +26,25 @@ echo "Test command 'buttercup'..."
 cd $(dirname "$0")
 
 eask install-deps --dev
-eask test buttercup
+if eask test buttercup; then
+    # this runs all tests, so should error
+    echo "expected error"
+    exit 1
+fi
+
+# buttercup takes directories as arguments
+eask test buttercup ./test-ok
+if eask test buttercup ./test-ok ./test-fail; then
+    echo "expected error"
+    exit 1
+fi
+
+# buttercup does not take options
+eask test buttercup --no-color ./test-ok
+
+# Because load-path is manually set, cannot refer to parent directories.
+# Note this does work if you do ../buttercup/test-ok/, but not for any other directory.
+if eask test buttercup ../ert/ 2>&1 | grep 'No suites defined'; then
+    echo "expected error"
+    exit 1
+fi
