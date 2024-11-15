@@ -22,7 +22,13 @@
   ;; Start Testing
   (require 'buttercup)
   ;; Propose fix from https://github.com/jorgenschaefer/emacs-buttercup/pull/217
-  (let ((load-path (cons "." load-path)))
+  (let* ((load-path (cons "." load-path))
+         ;; this does not include options
+         (args (eask-args)))
+    ;; buttercup-run-discover uses command-line-args-left not command-line-args
+    (setq command-line-args-left args)
+    (when (cl-some (apply-partially #'string-prefix-p "..") args)
+      (error "Buttercup cannot run in parent directories"))
     (buttercup-run-discover)))
 
 ;;; test/buttercup.el ends here
