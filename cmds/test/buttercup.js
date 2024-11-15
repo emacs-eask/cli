@@ -17,15 +17,15 @@
 
 "use strict";
 
-exports.command = ['buttercup [files..]'];
+exports.command = ['buttercup [directories..]'];
 exports.desc = 'Run buttercup tests';
 exports.builder = yargs => yargs
   .positional(
-    '[files..]', {
-      description: 'files you want buttercup to run on',
+    '[directories..]', {
+      description: 'directories containing buttercup tests, must be children of the current directory',
       type: 'array',
     });
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'test/buttercup', argv.files);
+  await UTIL.e_call(argv, 'test/buttercup', argv.directories);
 };
