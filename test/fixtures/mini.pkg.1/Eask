@@ -1,16 +1,23 @@
-(package "mini.emacs.pkg.2"
+(package "mini.pkg.1"
          "0.0.1"
          "Minimal test package")
 
-(website-url "https://github.com/emacs-eask/mini.emacs.pkg.2")
+(website-url "https://github.com/emacs-eask/cli/tree/master/test/fixtures/mini.pkg.1")
 (keywords "test")
 
-(package-file "mini.emacs.pkg.2.el")
+(package-file "mini.pkg.1.el")
 
 (files "files/*.el")
 
 (script "test" "echo \"Have a nice day!~ ;)\"")
+(script "extra" "echo :")
 (script "info" "eask info")
+
+(eask-defcommand mini-test-1 "Test command 1." (message "Test 1"))
+(eask-defcommand mini-test-2 "Test command 2." (message "Test 2"))
+(eask-defcommand mini-test-3
+  "Test command 3."
+  (message "Test 3: %s" eask-rest))
 
 (source 'gnu)
 (source 'melpa)

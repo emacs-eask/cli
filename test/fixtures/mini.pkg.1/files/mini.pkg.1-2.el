@@ -1,13 +1,4 @@
-;;; mini.emacs.pkg.2.el --- Minimal test package  -*- lexical-binding: t; -*-
-
-;; Copyright (C) 2022-2024  the Eask authors.
-;; Created date 2022-03-29 01:52:58
-
-;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>
-;; URL: https://github.com/emacs-eask/mini.emacs.pkg.2
-;; Version: 0.0.1
-;; Package-Requires: ((emacs "24.3") (s "1.12.0") (fringe-helper "1.0.1"))
-;; Keywords: test
+;;; mini.pkg.1-2.el --- Extern file 2  -*- lexical-binding: t; -*-
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -26,14 +17,15 @@
 
 ;;; Commentary:
 ;;
-;; Minimal Emacs package to simulate development environment; only for testing
-;; purposes!
+;; files/mini.pkg.1-2.el
 ;;
 
 ;;; Code:
 
-(require 's)
-(require 'fringe-helper)
+(defun mini.pkg.1-2 ()
+  "Test function 2."
+  (interactive)
+  )
 
-(provide 'mini.emacs.pkg.2)
-;;; mini.emacs.pkg.2.el ends here
+(provide 'mini.pkg.1-2)
+;;; mini.pkg.1-2.el ends here

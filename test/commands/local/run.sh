@@ -27,7 +27,7 @@
 set -e
 
 # Naviate to the test package
-cd "./test/fixtures/mini.emacs.pkg.1/"
+cd "./test/fixtures/mini.pkg.1/"
 
 echo "Testing local commands..."
 eask info
@@ -73,7 +73,7 @@ eask run command mini-test-3 -- Extra arguments!
 eask run command --all
 
 # Exection
-eask eval "(progn (require 'mini.emacs.pkg.1))"
+eask eval "(progn (require 'mini.pkg.1))"
 
 # Generating
 eask generate autoloads

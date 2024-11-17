@@ -26,6 +26,6 @@
 
 set -e
 
-eask link add "mini.emacs.pkg.1" "./test/fixtures/mini.emacs.pkg.1/"
+eask link add "mini.pkg.1" "./test/fixtures/mini.pkg.1/"
 eask link list
-eask link delete mini.emacs.pkg.1-0.0.1
+eask link delete mini.pkg.1-0.0.1

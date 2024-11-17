@@ -20,7 +20,7 @@
 # Here we test all config (~/.emacs.d/) that the Emacser can be use daily!
 #
 # Notice, to make config commands work; we need a minimum configuration
-# (mini.emacs.d), and place it under to the default Emacs directory!
+# (home/.emacs.d), and place it under to the default Emacs directory!
 #
 
 set -e
