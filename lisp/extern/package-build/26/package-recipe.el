@@ -191,7 +191,7 @@ file is invalid, then raise an error."
         (let ((val (plist-get plist key)))
           (when val
             (cl-assert (stringp val) nil "%s must be a string but is %S" key val))))
-      (when-let ((spec (plist-get plist :files)))
+      (when-let* ((spec (plist-get plist :files)))
         ;; `:defaults' is only allowed as the first element.
         ;; If we find it in that position, skip over it.
         (when (eq (car spec) :defaults)

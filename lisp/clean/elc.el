@@ -15,7 +15,7 @@
         nil t))
 
 (eask-start
-  (if-let ((files (eask-package-elc-files)))
+  (if-let* ((files (eask-package-elc-files)))
       (progn
         (mapc #'eask-delete-file files)
         (eask-msg "")

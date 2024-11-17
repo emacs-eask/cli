@@ -597,7 +597,7 @@ value specified in the file \"NAME.el\"."
                         nil t)
                        (match-string-no-properties 1)))
                 "No description available.")
-            (when-let ((require-lines (lm-header-multiline "package-requires")))
+            (when-let* ((require-lines (lm-header-multiline "package-requires")))
               (package--prepare-dependencies
                (package-read-from-string (mapconcat #'identity require-lines " "))))
             :kind       (or kind 'single)

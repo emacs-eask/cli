@@ -57,8 +57,8 @@ contents."
     (if (= depth 0)
         (eask-msg (eask-list--align depth " %-80s") name version archive summary)
       (eask-msg (eask-list--align depth) name "" "" ""))
-    (when-let ((reqs (package-desc-reqs desc))
-               ((< depth max-depth)))
+    (when-let* ((reqs (package-desc-reqs desc))
+                ((< depth max-depth)))
       (dolist (req reqs)
         (eask-list--print-pkg (car req) (1+ depth) max-depth pkg-alist)))))
 

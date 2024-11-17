@@ -31,7 +31,7 @@
 (eask-start
   (let* ((args (eask-args))
          (name (nth 0 args)))
-    (if-let ((exists (assoc name package-archives)))
+    (if-let* ((exists (assoc name package-archives)))
         (eask-source-delete name)
       (eask-info "(Invalid source name, `%s')" name)
       (eask-help "source/delete"))))

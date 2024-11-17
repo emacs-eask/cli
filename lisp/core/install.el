@@ -78,7 +78,7 @@ For argument FILE, please see function `package-install-file' for the details."
   ;; XXX: You must refresh content before you install the package,
   ;; see https://github.com/ericdallo/jet.el/issues/1
   (eask-pkg-init)
-  (if-let ((names (eask-args)))
+  (if-let* ((names (eask-args)))
       ;; If package [name..] are specified, we try to install it
       (eask-install-packages names)
     ;; Else we try to install package from the working directory

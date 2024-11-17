@@ -168,14 +168,14 @@ Optional argument CONTENTS is used for nested directives.  e.g. development."
                          (insert "\n " (eask-2str file))))
                      (insert ")\n"))
 
-                   (when-let ((pkg-desc (eask--cask-package-descriptor)))
+                   (when-let* ((pkg-desc (eask--cask-package-descriptor)))
                      (insert "\n")
                      (insert "(package-descriptor \"" (eask-2str pkg-desc) "\")\n"))
 
                    (insert "\n")
                    (insert "(script \"test\" \"echo \\\"Error: no test specified\\\" && exit 1\")\n")
 
-                   (when-let ((sources (eask--cask-sources)))
+                   (when-let* ((sources (eask--cask-sources)))
                      (insert "\n")
                      (dolist (source sources)
                        (insert "(source '" (eask-2str (cadr source)) ")\n")))
@@ -185,13 +185,13 @@ Optional argument CONTENTS is used for nested directives.  e.g. development."
                    (unless (eask--cask-reqs-no-emacs)
                      (insert "\n"))  ; Make sure end line exists!
 
-                   (when-let ((pkgs (eask--cask-reqs-no-emacs)))
+                   (when-let* ((pkgs (eask--cask-reqs-no-emacs)))
                      (insert "\n")
                      (dolist (pkg pkgs)
                        (let ((val (mapconcat #'eask-2str (cdr pkg) "\" \"")))
                          (insert "(depends-on \"" val "\")\n"))))
 
-                   (when-let ((pkgs (eask--cask-reqs-dev-no-emacs)))
+                   (when-let* ((pkgs (eask--cask-reqs-dev-no-emacs)))
                      (insert "\n")
                      (insert "(development\n")
                      (dolist (pkg pkgs)

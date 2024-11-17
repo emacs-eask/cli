@@ -67,8 +67,8 @@
    ((eask-all-p)  ; Run all scripts
     (dolist (data (reverse eask-scripts))
       (eask-run-command--export (cdr data))))
-   ((when-let ((scripts (eask-args)))
-      (if-let ((unmatched (eask-run-script--unmatched-scripts scripts)))
+   ((when-let* ((scripts (eask-args)))
+      (if-let* ((unmatched (eask-run-script--unmatched-scripts scripts)))
           (progn  ; if there are unmatched scripts, don't even try to execute
             (eask-info "(Missing script%s: `%s`)"
                        (eask--sinr unmatched "" "s")

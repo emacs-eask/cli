@@ -86,8 +86,8 @@ The argument EXISTS is use to search for correct position to insert new source."
   "Ask source overwrite if needed.
 
 Arguments NAME and URL are main arguments for this command."
-  (if-let ((exists (assoc name package-archives))
-           (old-url (cdr exists)))
+  (if-let* ((exists (assoc name package-archives))
+            (old-url (cdr exists)))
       (cond ((string= old-url url)
              (eask-info "(Nothing has changed due to the URLs are the same)"))
             ((yes-or-no-p

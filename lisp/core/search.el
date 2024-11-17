@@ -31,7 +31,7 @@
 
 (eask-start
   (eask-pkg-init)
-  (if-let ((queries (eask-args)))
+  (if-let* ((queries (eask-args)))
       (let ((result))
         (dolist (query queries)
           (setq result (append result (eask-search--packages query))))

@@ -289,7 +289,7 @@ The function `directory-empty-p' only exists 28.1 or above; copied it."
 
 (defun eask--guess-package-name (basename)
   "Convert the BASENAME to a valid, commonly seen package name."
-  (when-let ((name (ignore-errors (downcase basename))))
+  (when-let* ((name (ignore-errors (downcase basename))))
     (setq name (eask-s-replace "emacs-" "" name)
           name (eask-s-replace "-emacs" "" name)
           name (replace-regexp-in-string "[.-]el$" "" name))
@@ -744,13 +744,13 @@ otherwise, we retrieve it from the variable `package-archive-contents'."
 
 For arguments NAME and CURRENT, please see function `eask-package-desc' for
 full detials."
-  (when-let ((desc (eask-package-desc name current)))
+  (when-let* ((desc (eask-package-desc name current)))
     (package-desc-version desc)))
 
 (defun eask-package--version-string (pkg)
   "Return PKG's version."
-  (if-let ((version (or (eask-package--version pkg t)
-                        (eask-package--version pkg nil))))
+  (if-let* ((version (or (eask-package--version pkg t)
+                         (eask-package--version pkg nil))))
       (package-version-join version)
     ;; Just in case, but this should never happens!
     "0"))
@@ -758,7 +758,7 @@ full detials."
 (defun eask-package-desc-url ()
   "Return url from package descriptor."
   (when eask-package-desc
-    (when-let ((extras (package-desc-extras eask-package-desc)))
+    (when-let* ((extras (package-desc-extras eask-package-desc)))
       (cdr (assoc :url extras)))))
 
 (defun eask-package-desc-keywords ()
@@ -1390,7 +1390,7 @@ version number.  DESCRIPTION is the package description."
     (if (file-exists-p eask-package-file)
         (eask--try-construct-package-desc eask-package-file)
       (eask-warn "Package-file seems to be missing `%s'" file))
-    (when-let
+    (when-let*
         (((and (not eask-package-descriptor)  ; prevent multiple definition error
                (not eask-package-desc)))      ; check if constructed
          (pkg-file (eask-pkg-el)))
@@ -1584,7 +1584,7 @@ Execute forms BODY limit by the verbosity level (SYMBOL)."
 
 (defun eask--ansi (symbol string)
   "Paint STRING with color defined by log level (SYMBOL)."
-  (if-let ((ansi-function (cdr (assq symbol eask-level-color))))
+  (if-let* ((ansi-function (cdr (assq symbol eask-level-color))))
       (funcall ansi-function string)
     string))
 
@@ -1817,7 +1817,7 @@ Arguments FNC and ARGS are used for advice `:around'."
 
 (defun eask-package-elc-files ()
   "Return package files' elc in workspace."
-  (when-let ((elcs (mapcar (lambda (elm) (concat elm "c")) (eask-package-el-files))))
+  (when-let* ((elcs (mapcar (lambda (elm) (concat elm "c")) (eask-package-el-files))))
     (setq elcs (cl-remove-if-not (lambda (elm) (file-exists-p elm)) elcs))
     elcs))
 
