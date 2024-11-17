@@ -1,8 +1,8 @@
-(package "mini.emacs.d"
+(package ".emacs.d"
          "0.0.1"
          "Minimal test configuration")
 
-(website-url "https://github.com/emacs-eask/mini.emacs.d")
+(website-url "https://github.com/emacs-eask/cli/tree/master/test/fixtures/home/.emacs.d")
 (keywords "test")
 
 (depends-on "emacs" "26.1")
