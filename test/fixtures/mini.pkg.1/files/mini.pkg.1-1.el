@@ -1,4 +1,4 @@
-;;; mini.emacs.pkg.2-1.el --- Extern file 1  -*- lexical-binding: t; -*-
+;;; mini.pkg.1-1.el --- Extern file 1  -*- lexical-binding: t; -*-
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -17,16 +17,16 @@
 
 ;;; Commentary:
 ;;
-;; files/mini.emacs.pkg.2-1.el
+;; files/mini.pkg.1-1.el
 ;;
 
 ;;; Code:
 
 
-(defun mini.emacs.pkg.2-1 ()
+(defun mini.pkg.1-1 ()
   "Test function 1."
   (interactive)
   )
 
-(provide 'mini.emacs.pkg.2-1)
-;;; mini.emacs.pkg.2-1.el ends here
+(provide 'mini.pkg.1-1)
+;;; mini.pkg.1-1.el ends here
