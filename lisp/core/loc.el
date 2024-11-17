@@ -42,7 +42,7 @@
   (require 'markdown-mode)
   ;; Start LOC
   (if-let* ((files (or (eask-expand-file-specs (eask-args))
-                      (eask-package-files)))
+                       (eask-package-files)))
            (eask-output (get-buffer-create "*eask-output*")))
       (with-current-buffer eask-output
         (erase-buffer)

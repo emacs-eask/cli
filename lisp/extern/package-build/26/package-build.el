@@ -618,7 +618,7 @@ Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING).
 
 (defun package-build--ensure-count-increase (rcp version ahead)
   (if-let* ((previous (cdr (assq (intern (oref rcp name))
-                                (package-build-archive-alist)))))
+                                 (package-build-archive-alist)))))
       ;; Because upstream may have rewritten history, we cannot be certain
       ;; that appending the new count of commits would result in a version
       ;; string that is greater than the version string used for the
@@ -1564,13 +1564,13 @@ a package."
 (defun package-build--archive-alist-for-json ()
   "Return the archive alist in a form suitable for JSON encoding."
   (cl-flet ((format-person
-             (person)
-             (let ((name (car person))
-                   (mail (cdr person)))
-               (if (and name mail)
-                   (format "%s <%s>" name mail)
-                 (or name
-                     (format "<%s>" mail))))))
+              (person)
+              (let ((name (car person))
+                    (mail (cdr person)))
+                (if (and name mail)
+                    (format "%s <%s>" name mail)
+                  (or name
+                      (format "<%s>" mail))))))
     (cl-mapcan (lambda (entry)
                  (list (intern (format ":%s" (car entry)))
                        (let* ((info (cdr entry))

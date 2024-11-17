@@ -36,7 +36,7 @@
 
 (eask-start
   (if-let* ((recipe (eask-recipe-string))
-           (name (eask-guess-package-name)))
+            (name (eask-guess-package-name)))
       (progn
         (eask-msg "")
         (eask-msg "recipes/%s:" name)
