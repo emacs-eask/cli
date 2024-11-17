@@ -20,7 +20,7 @@
         nil t))
 
 (eask-start
-  (if-let ((files (eask-expand-file-specs (eask-args))))
+  (if-let* ((files (eask-expand-file-specs (eask-args))))
       (mapc #'load-file files)
     (eask-info "(Nothing to load.)")))
 

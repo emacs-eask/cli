@@ -20,7 +20,7 @@
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (eask-setup-paths)
 
-  (if-let ((name (eask-argv 0)))
+  (if-let* ((name (eask-argv 0)))
       (eask-with-progress
         (ansi-green "Exporting environment variables... ")
         (eask-exec-export-env)

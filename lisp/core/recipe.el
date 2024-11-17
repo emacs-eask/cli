@@ -16,7 +16,7 @@
 
 (defun eask-recipe-string ()
   "Return the recipe format in string."
-  (when-let ((url (eask-package-desc-url)))
+  (when-let* ((url (eask-package-desc-url)))
     (let* ((fetcher (cond ((string-match-p "github.com" url) 'github)
                           ((string-match-p "gitlab.com" url) 'gitlab)
                           (t 'git)))
@@ -35,8 +35,8 @@
       recipe)))
 
 (eask-start
-  (if-let ((recipe (eask-recipe-string))
-           (name (eask-guess-package-name)))
+  (if-let* ((recipe (eask-recipe-string))
+            (name (eask-guess-package-name)))
       (progn
         (eask-msg "")
         (eask-msg "recipes/%s:" name)

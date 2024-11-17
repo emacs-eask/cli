@@ -365,7 +365,7 @@ main library to a version that qualifies as a release, ignoring
 any pre-releases.
 
 Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING)."
-  (when-let ((lib (package-build--main-library rcp)))
+  (when-let* ((lib (package-build--main-library rcp)))
     (with-temp-buffer
       (let (commit date version)
         (save-excursion
@@ -426,7 +426,7 @@ Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING)."
 (defun package-build-pkg-version (rcp)
   "Return version specified in the \"NAME-pkg.el\" file.
 Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING)."
-  (when-let ((file (package-build--pkgfile rcp)))
+  (when-let* ((file (package-build--pkgfile rcp)))
     (let ((regexp (or (oref rcp version-regexp) package-build-version-regexp))
           commit date version)
       (catch 'before-latest
@@ -617,8 +617,8 @@ Return (COMMIT-HASH COMMITTER-DATE VERSION-STRING).
       (list rcommit rtime (package-version-join version))))))
 
 (defun package-build--ensure-count-increase (rcp version ahead)
-  (if-let ((previous (cdr (assq (intern (oref rcp name))
-                                (package-build-archive-alist)))))
+  (if-let* ((previous (cdr (assq (intern (oref rcp name))
+                                 (package-build-archive-alist)))))
       ;; Because upstream may have rewritten history, we cannot be certain
       ;; that appending the new count of commits would result in a version
       ;; string that is greater than the version string used for the
@@ -993,7 +993,7 @@ value specified in the file \"NAME.el\"."
                  (if (fboundp 'lm-maintainers)
                      (lm-maintainers)
                    (with-no-warnings
-                     (when-let ((maintainer (lm-maintainer)))
+                     (when-let* ((maintainer (lm-maintainer)))
                        (list maintainer)))))
            (package-desc-from-define
             name version
@@ -1003,7 +1003,7 @@ value specified in the file \"NAME.el\"."
 ^;;; [^ ]*\\.el ---[ \t]*\\(.*?\\)[ \t]*\\(-\\*-.*-\\*-[ \t]*\\)?$" nil t)
                        (match-string-no-properties 1)))
                 "No description available.")
-            (when-let ((require-lines (lm-header-multiline "package-requires")))
+            (when-let* ((require-lines (lm-header-multiline "package-requires")))
               (package--prepare-dependencies
                (package-read-from-string
                 (mapconcat #'identity require-lines " "))))
@@ -1564,13 +1564,13 @@ a package."
 (defun package-build--archive-alist-for-json ()
   "Return the archive alist in a form suitable for JSON encoding."
   (cl-flet ((format-person
-             (person)
-             (let ((name (car person))
-                   (mail (cdr person)))
-               (if (and name mail)
-                   (format "%s <%s>" name mail)
-                 (or name
-                     (format "<%s>" mail))))))
+              (person)
+              (let ((name (car person))
+                    (mail (cdr person)))
+                (if (and name mail)
+                    (format "%s <%s>" name mail)
+                  (or name
+                      (format "<%s>" mail))))))
     (cl-mapcan (lambda (entry)
                  (list (intern (format ":%s" (car entry)))
                        (let* ((info (cdr entry))

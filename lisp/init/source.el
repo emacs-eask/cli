@@ -88,7 +88,7 @@
      ;; Files found, do the action!
      (files
       (dolist (file files)
-        (when-let ((new-filename (eask-init-source--convert file)))
+        (when-let* ((new-filename (eask-init-source--convert file)))
           (push new-filename converted-files)))
       ;; Automatically rename file into Eask file when only one file is converted!
       (when (= (length converted-files) 1)

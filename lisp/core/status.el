@@ -85,8 +85,8 @@
      ("Invocation" ,invocation-directory)
      ("Build No." ,emacs-build-number)
      ("System configuration" ,system-configuration)
-     ,(when-let ((emacs-build-time)
-                 (time (format-time-string "%Y-%m-%d" emacs-build-time)))
+     ,(when-let* ((emacs-build-time)
+                  (time (format-time-string "%Y-%m-%d" emacs-build-time)))
         `("Build time" ,time))
      ("System type" ,system-type)))
 

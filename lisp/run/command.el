@@ -56,8 +56,8 @@
         ((eask-all-p)
          (dolist (name (reverse eask-commands))
            (eask-run-command--execute name)))
-        ((when-let ((commands (eask-args)))
-           (if-let ((unmatched (eask-run-command--unmatched-commands commands)))
+        ((when-let* ((commands (eask-args)))
+           (if-let* ((unmatched (eask-run-command--unmatched-commands commands)))
                (progn  ; if there are unmatched commands, don't even try to execute
                  (eask-info "(Missing command%s: `%s`)"
                             (eask--sinr unmatched "" "s")

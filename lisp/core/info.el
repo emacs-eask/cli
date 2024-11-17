@@ -46,7 +46,7 @@
         (when-let* ((url (or (eask-package-desc-url) eask-website-url))
                     ((not (string-empty-p url))))
           (eask-println (ansi-cyan url)))
-        (when-let ((keywords (or (eask-package-desc-keywords) eask-keywords)))
+        (when-let* ((keywords (or (eask-package-desc-keywords) eask-keywords)))
           (eask-println "")
           (eask-println "keywords: %s" (string-join keywords ", ")))
         (eask-println "")

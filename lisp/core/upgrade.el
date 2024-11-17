@@ -58,7 +58,7 @@
 
 (defun eask-upgrade--package-all ()
   "Upgrade for archive packages."
-  (if-let ((upgrades (eask-package--upgrades)))
+  (if-let* ((upgrades (eask-package--upgrades)))
       (progn
         (mapc #'eask-upgrade--package upgrades)
         (eask-msg "")
@@ -68,7 +68,7 @@
 
 (eask-start
   (eask-pkg-init)
-  (if-let ((names (eask-args)))
+  (if-let* ((names (eask-args)))
       (dolist (name names)
         (setq name (intern name))
         (if (package-installed-p name)
