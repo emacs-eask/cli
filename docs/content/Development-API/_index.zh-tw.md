@@ -981,7 +981,7 @@ This will kill Emacs process.
 
 ## 🔍 函式: eask-print-log-buffer (&optional `buffer-or-name`)
 
-打印緩衝區並突出顯示“錯誤和“警告”。
+打印緩衝區並突出顯示 `錯誤` 和 `警告`。
 
 ```elisp
 (eask-print-log-buffer "*Package-Lint*")

@@ -15,7 +15,7 @@ $ eask [GLOBAL-OPTIONS] [COMMAND] [COMMAND-OPTIONS] [COMMAND-ARGUMENTS]
 
 ## 🔍 eask create package
 
-使用默認的“Eask”文件和 CI/CD 支持創建一個新的 elisp 項目。
+使用默認的 `Eask` 文件和 CI/CD 支持創建一個新的 elisp 項目。
 
 ```sh
 $ eask [GLOBAL-OPTIONS] create package <name>
