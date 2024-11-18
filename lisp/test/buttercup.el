@@ -22,7 +22,18 @@
   ;; Start Testing
   (require 'buttercup)
   ;; Propose fix from https://github.com/jorgenschaefer/emacs-buttercup/pull/217
-  (let ((load-path (cons "." load-path)))
+  (let* ((load-path (cons "." load-path))
+         ;; this does not include options
+         (args (eask-args)))
+    ;; buttercup-run-discover uses command-line-args-left not command-line-args
+    (setq command-line-args-left args)
+    ;; Seems like buttercup-run-discover only works on directories that are children of
+    ;; the current directory.
+    ;; When given a parent directory it always fails with "No suites found", even if there are tests.
+    ;; Since this is a bit confusing, we warn the user specifically.
+    ;; See discussion https://github.com/emacs-eask/cli/pull/281
+    (when-let ((bad-arg (seq-find (lambda (x) (not (file-in-directory-p x default-directory))) args)))
+      (error "Buttercup cannot run in parent directory: %s" bad-arg))
     (buttercup-run-discover)))
 
 ;;; test/buttercup.el ends here
