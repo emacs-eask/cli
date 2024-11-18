@@ -11,6 +11,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * fix(init): Preview final Eask file (ee7c36cbd0d934523825c9c9430c73b50d4a8666)
 * fix(lint): match behavior of declare linter to checkdoc (#272)
 * fix(test): ERT test fails on Emacs 30+ (cc1f4e15b7b40b986ad1a93f6e40d121340598de)
+* fix(test): eask options should not be passed to buttercup (#281)
 
 ## 0.10.x
 > Released Jun 13, 2024
