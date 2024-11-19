@@ -109,10 +109,6 @@ list.
 
 ## 📝 Todo list
 
-### 🔍 Development
-
-- [ ] [DEV] Publish package to [winget]()
-
 ### 🔍 Core commands
 
 - [ ] [FEAT] Add `publish` command; to publish the package to the eask archive?
