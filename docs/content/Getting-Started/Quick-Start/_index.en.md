@@ -161,7 +161,7 @@ Or else you would get an error **`package-name-' is unavailable**!
 
 Now we can install the dependencies we have specified in the **Eask**-file:
 
-```elisp
+```sh
 $ eask install-deps
 ```
 

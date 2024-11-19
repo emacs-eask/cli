@@ -157,7 +157,7 @@ dist
 
 現在我們可以安裝我們在 **Eask** 文件中指定的依賴項：
 
-```elisp
+```sh
 $ eask install-deps
 ```
 
