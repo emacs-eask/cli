@@ -52,10 +52,10 @@ $ cd /path/to/project/dir/
 To create one:
 
 ```sh
-$ eask create package project-name
+$ eask create package <your-project>
 ```
 
-It should create a folder named `project-name` in your current working directory.
+It should create a folder named `<your-project>` in your current working directory.
 
 ## 🔍 Step 4: Create `Eask`-file
 

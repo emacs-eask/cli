@@ -48,10 +48,10 @@ $ cd /path/to/project/dir/
 創建一個：
 
 ```sh
-$ eask create package project-name
+$ eask create package <your-project>
 ```
 
-它應該在您當前的工作目錄中創建一個名為 `project-name` 的文件夾。
+它應該在您當前的工作目錄中創建一個名為 `<your-project>` 的文件夾。
 
 ## 🔍 步驟 4： 創建 `Eask` 文件
 
