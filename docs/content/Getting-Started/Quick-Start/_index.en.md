@@ -8,14 +8,16 @@ weight: 100
 Using Eask as your Emacs package management tool.
 
 {{< hint info >}}
-The installation are cross-platform, using [npm](https://www.npmjs.com/).
-For instructions about how to install Eask with other methods, see [install](https://emacs-eask.github.io/Getting-Started/Install-Eask/).
+The installation is cross-platform and uses [npm](https://www.npmjs.com/).
+For instructions on how to install Eask using other methods, see the
+[install](https://emacs-eask.github.io/Getting-Started/Install-Eask/)
+section.
 
 It is required to have [Git installed](https://git-scm.com/downloads)
 to run this tutorial.
 {{< /hint >}}
 
-## Step 1: Setup NodeJS runtime and `npm`
+## 🔍 Step 1: Setup NodeJS runtime and `npm`
 
 Please check out their official site
 [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-installer-to-install-nodejs-and-npm)
@@ -26,7 +28,7 @@ and install `NodeJS` and `npm` corresponds to your current operating system
 from our [release](https://github.com/emacs-eask/cli/releases) page.
 {{< /hint >}}
 
-## Step 2: Install Eask
+## 🔍 Step 2: Install Eask
 
 ```sh
 $ npm install -g @emacs-eask/cli
@@ -38,7 +40,7 @@ To verify your new installation:
 $ eask --version
 ```
 
-## Step 3: Navigate to an existing project or create a new project
+## 🔍 Step 3: Navigate to an existing project or create a new project
 
 If you already have an existing elisp project, navigate to the project root
 folder.
@@ -55,7 +57,7 @@ $ eask create package project-name
 
 It should create a folder named `project-name` in your current working directory.
 
-## Step 4: Create `Eask`-file
+## 🔍 Step 4: Create `Eask`-file
 
 Skip this step if you chose to create the project with **`eask create`**!
 
@@ -98,7 +100,7 @@ Is this OK? (yes) yes ⏎
 
 You should be able to see an `Eask` file in your project folder. 🎉🎊
 
-## Step 5: Start the package development
+## 🔍 Step 5: Start the package development
 
 To check your package information, run:
 
@@ -125,7 +127,7 @@ dist
 
 From the start, you would not have any `dependencies` and `devDependencies` (`0` by default)!
 
-## Step 6: Manage package archives
+## 🔍 Step 6: Manage package archives
 
 You can manage package archives by using the `source` directive in your **Eask**-file.
 
@@ -138,7 +140,7 @@ You can manage package archives by using the `source` directive in your **Eask**
 💡 See [DSL/source](https://emacs-eask.github.io/DSL/#-source-alias) for more information!
 {{< /hint >}}
 
-## Step 7: Add some dependencies
+## 🔍 Step 7: Add some dependencies
 
 You can add dependencies by using `depends-on` directive in your **Eask**-file.
 
@@ -155,7 +157,7 @@ You can add dependencies by using `depends-on` directive in your **Eask**-file.
 Or else you would get an error **`package-name-' is unavailable**!
 {{< /hint >}}
 
-## Step 8: Install dependencies
+## 🔍 Step 8: Install dependencies
 
 Now we can install the dependencies we have specified in the **Eask**-file:
 
@@ -174,7 +176,7 @@ Installing 2 package dependencies...
 (Total of 2 dependencies installed, 0 skipped)
 ```
 
-## See Also
+## 🔗 See Also
 
 - [Commands and options](https://emacs-eask.github.io/Getting-Started/Commands-and-options/)
 - [Domain Specific Language](https://emacs-eask.github.io/DSL/)

@@ -17,7 +17,7 @@ a directory with the following structure:
 └── {package-file}.el
 ```
 
-## Directory Structure Explained
+## 📂 Directory Structure Explained
 
 The following is a high-level overview of each of the files.
 
