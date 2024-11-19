@@ -164,10 +164,11 @@ $ eask install-deps
 您應該會看到 Eask 正確執行，輸出類似如下：
 
 ```
-Loading package information... done
+Loading package information... done ✓
 Installing 2 package dependencies...
-  - Installing f (20220405.1534)... done
-  - Installing ht (20210119.741)... done
+
+  - [1/2] Installing f (20241003.1131)... done ✓
+  - [2/2] Installing ht (20230703.558)... done ✓
 
 (Total of 2 dependencies installed, 0 skipped)
 ```
