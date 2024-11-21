@@ -179,7 +179,7 @@ $ eask init
 💡 我們不經常呼叫它，因為我們不希望直接執行另一個命令！
 {{< /hint >}}
 
-## 🔍 Function: eask-import (`url`)
+## 🔍 函式: eask-import (`url`)
 
 從 url 載入並評估腳本。
 
@@ -1026,6 +1026,6 @@ This will kill Emacs process.
 
 返回可能的包名稱。
 
-## 🔍 Function: eask-guess-entry-point ()
+## 🔍 函式: eask-guess-entry-point ()
 
 返回可能的包的入口點。
