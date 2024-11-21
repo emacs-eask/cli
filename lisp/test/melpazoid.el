@@ -30,9 +30,8 @@
 
 (eask-start
   ;; Preparation
-  (eask-with-archives '("gnu" "melpa")
-    (eask-package-install 'package-lint)
-    (eask-package-install 'pkg-info))
+  (eask-archive-install-packages '("gnu" "melpa")
+                                 '(package-lint pkg-info))
 
   ;; Start Testing
   (let* ((dirs (or (eask-args) `(,default-directory))))

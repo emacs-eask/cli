@@ -43,8 +43,8 @@
 
 (eask-start
   ;; Preparation
-  (eask-with-archives '("gnu" "melpa")
-    (eask-package-install 'el2org))
+  (eask-archive-install-packages '("gnu" "melpa")
+                                 'el2org)
 
   ;; Start building...
   (require 'el2org)

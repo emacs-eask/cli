@@ -31,8 +31,8 @@
 " name))))
 
 (eask-start
-  (eask-with-archives '("gnu" "melpa")
-    (eask-package-install 'ert-runner))
+  (eask-archive-install-packages '("gnu" "melpa")
+                                 'ert-runner)
   (advice-add 'ert-runner/run :override #'ignore)
   (load-library "ert-runner")
   (load-library "f")

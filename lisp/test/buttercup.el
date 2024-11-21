@@ -16,8 +16,8 @@
 
 (eask-start
   ;; Preparation
-  (eask-with-archives '("gnu" "melpa")
-    (eask-package-install 'buttercup))
+  (eask-archive-install-packages '("gnu" "melpa")
+                                 'buttercup)
 
   ;; Start Testing
   (require 'buttercup)

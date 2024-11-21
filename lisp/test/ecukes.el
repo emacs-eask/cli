@@ -29,8 +29,8 @@ Modified from function `ecukes-cli/run'."
 
 (eask-start
   ;; Preparation
-  (eask-with-archives '("gnu" "melpa")
-    (eask-package-install 'ecukes))
+  (eask-archive-install-packages '("gnu" "melpa")
+                                 'ecukes)
 
   ;; Start Testing
   (require 'ecukes)

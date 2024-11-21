@@ -44,8 +44,8 @@
 
 (eask-start
   ;; Preparation
-  (eask-with-archives "melpa"
-    (eask-package-install 'gitignore-templates))
+  (eask-archive-install-packages '("gnu" "melpa")
+                                 'gitignore-templates)
 
   ;; Start the task
   (require 'gitignore-templates)

@@ -125,8 +125,8 @@ If no found the Keg file, returns nil."
 
 (eask-start
   ;; Preparation
-  (eask-with-archives "melpa"
-    (eask-package-install 'keg))
+  (eask-archive-install-packages '("gnu" "melpa")
+                                 'keg)
 
   ;; Start Converting
   (require 'keg)
