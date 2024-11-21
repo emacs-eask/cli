@@ -60,8 +60,8 @@
 
 (eask-start
   ;; Preparation
-  (eask-with-archives "gnu"
-    (eask-package-install 'relint))
+  (eask-archive-install-packages '("gnu")
+                                 'relint)
   (setq eask-lint-regexps--relint-version (eask-package--version-string 'relint))
 
   ;; Start Linting

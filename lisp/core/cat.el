@@ -25,8 +25,8 @@
 
 (eask-start
   ;; Preparation
-  (eask-with-archives "melpa"
-    (eask-package-install 'e2ansi))
+  (eask-archive-install-packages '("gnu" "melpa")
+                                 'e2ansi)
   (eask-msg "")
 
   ;; Start the task

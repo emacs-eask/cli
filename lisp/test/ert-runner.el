@@ -21,8 +21,8 @@
               (setq ert-runner-verbose t))))
 
 (eask-start
-  (eask-with-archives '("gnu" "melpa")
-    (eask-package-install 'ert-runner))
+  (eask-archive-install-packages '("gnu" "melpa")
+                                 'ert-runner)
   (require 'ert-runner))
 
 ;;; test/ert-runner.el ends here

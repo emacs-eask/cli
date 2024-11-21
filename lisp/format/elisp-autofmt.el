@@ -46,8 +46,8 @@
 
 (eask-start
   ;; Preparation
-  (eask-with-archives '("gnu" "melpa")
-    (eask-package-install 'elisp-autofmt))
+  (eask-archive-install-packages '("gnu" "melpa")
+                                 'elisp-autofmt)
   (setq eask-format-elisp-autofmt--version (eask-package--version-string 'elisp-autofmt))
 
   ;; Start formatting

@@ -46,8 +46,8 @@
 
 (eask-start
   ;; Preparation
-  (eask-with-archives '("gnu" "melpa" "jcs-elpa")
-    (eask-package-install 'elfmt))
+  (eask-archive-install-packages '("gnu" "melpa" "jcs-elpa")
+                                 'elfmt)
   (setq eask-format-elfmt--version (eask-package--version-string 'elfmt))
 
   ;; Start formatting

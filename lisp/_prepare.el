@@ -656,6 +656,13 @@ Argument BODY are forms for execution."
          "done ✓"))
      ,@body))
 
+(defun eask-archive-install-packages (archives names)
+  "Install package NAMES with ARCHIVES setup."
+  (when-let* ((names (eask-listify names))
+              ((cl-some (lambda (pkg) (not (package-installed-p pkg))) names)))
+    (eask-with-archives archives
+      (eask--package-mapc #'eask-package-install names))))
+
 (defun eask-package-installable-p (pkg)
   "Return non-nil if package (PKG) is installable."
   (assq (eask-intern pkg) package-archive-contents))

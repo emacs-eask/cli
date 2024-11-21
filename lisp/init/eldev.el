@@ -77,8 +77,8 @@
 
 (eask-start
   ;; Preparation
-  (eask-with-archives "melpa"
-    (eask-package-install 'eldev))
+  (eask-archive-install-packages '("gnu" "melpa")
+                                 'eldev)
 
   ;; Start Converting
   (require 'eldev)

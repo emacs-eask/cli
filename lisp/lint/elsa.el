@@ -60,8 +60,8 @@
 
 (eask-start
   ;; Preparation
-  (eask-with-archives '("gnu" "melpa")
-    (eask-package-install 'elsa))
+  (eask-archive-install-packages '("gnu" "melpa")
+                                 'elsa)
   (setq eask-lint-elsa--version (eask-package--version-string 'elsa))
 
   ;; Start Linting

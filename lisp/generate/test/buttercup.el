@@ -41,9 +41,8 @@
 " test-file name test-file))))))
 
 (eask-start
-  (eask-with-archives '("gnu" "melpa")
-    (eask-package-install 'buttercup)
-    (eask-package-install 'f))
+  (eask-archive-install-packages '("gnu" "melpa")
+                                 '(buttercup f))
   (require 'buttercup)
   (require 'f)
   (eask-generate-test-buttercup--init (eask-guess-package-name)))

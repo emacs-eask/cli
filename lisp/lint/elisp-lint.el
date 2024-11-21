@@ -52,8 +52,8 @@
 
 (eask-start
   ;; Preparation
-  (eask-with-archives '("gnu" "melpa")
-    (eask-package-install 'elisp-lint))
+  (eask-archive-install-packages '("gnu" "melpa")
+                                 'elisp-lint)
   (setq eask-lint-elisp-lint--version (eask-package--version-string 'elisp-lint))
 
   ;; Start Linting

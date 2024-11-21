@@ -48,8 +48,8 @@
 
 (eask-start
   ;; Preparation
-  (eask-with-archives "melpa"
-    (eask-package-install 'license-templates))
+  (eask-archive-install-packages '("gnu" "melpa")
+                                 'license-templates)
 
   ;; Start the task
   (require 'license-templates)

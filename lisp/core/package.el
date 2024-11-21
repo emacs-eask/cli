@@ -74,8 +74,8 @@ Argument VERSION is a string represent the version number of this package."
     (ignore-errors (make-directory eask-dist-path t))
 
     (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
-    (eask-with-archives '("gnu" "melpa")
-      (eask-package-install 'package-build))
+    (eask-archive-install-packages '("gnu" "melpa")
+                                   'package-build)
     (eask-load "extern/package-build")  ; override
 
     (let* ((version (eask-package-version))

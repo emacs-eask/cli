@@ -36,14 +36,14 @@
 
 (eask-start
   ;; Preparation
-  (eask-with-archives '("gnu" "melpa")
-    (eask-package-install 'markdown-mode))
+  (eask-archive-install-packages '("gnu" "melpa")
+                                 'markdown-mode)
 
   (require 'markdown-mode)
   ;; Start LOC
   (if-let* ((files (or (eask-expand-file-specs (eask-args))
                        (eask-package-files)))
-           (eask-output (get-buffer-create "*eask-output*")))
+            (eask-output (get-buffer-create "*eask-output*")))
       (with-current-buffer eask-output
         (erase-buffer)
         (progn  ; Print header

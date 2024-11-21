@@ -59,8 +59,8 @@
 
 (eask-start
   ;; Preparation
-  (eask-with-archives '("gnu" "melpa")
-    (eask-package-install 'package-lint))
+  (eask-archive-install-packages '("gnu" "melpa")
+                                 'package-lint)
   (setq eask-lint-package--version (eask-package--version-string 'package-lint))
 
   ;; Start Linting
