@@ -249,7 +249,7 @@ Initialize packages for use.
 
 Scope that temporary makes archives available.
 
-`ARCHIVES` can either be a string or a list of strings.
+The argument `ARCHIVES` can either be a string or a list of strings.
 
 ```elisp
 (eask-with-archives "melpa"
@@ -258,6 +258,21 @@ Scope that temporary makes archives available.
 
 {{< hint info >}}
 💡 This is handy when you need certain packages from certain archives.
+{{< /hint >}}
+
+## 🔍 Function: eask-archive-install-packages (`archives` `names`)
+
+Install packages with archives setup.
+
+The arugment `names` can be a symbol or list of symbols.
+
+```elisp
+(eask-archive-install-packages '("gnu" "melpa")
+                               'el2org)  ; accept list
+```
+
+{{< hint info >}}
+💡 This only installs packages if they are missing.
 {{< /hint >}}
 
 ## 🔍 Function: eask-package-desc (`name` &optional `current`)
@@ -975,7 +990,7 @@ Return size of the current package.
 Create execution with the responsive message output.
 
 ```elisp
-(eask-with-progress 
+(eask-with-progress
   "Downloading files... "
   (eask-with-verbosity 'debug  ; Often used with `eask-with-verbosity'
     ;; Execute some operations..

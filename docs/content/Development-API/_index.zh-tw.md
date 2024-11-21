@@ -246,7 +246,7 @@ $ eask init
 
 臨時使存檔可用的範圍。
 
-`ARCHIVES` 可以是字符串或字符串列表。
+參數 `archives` 可以是字串或字串列表。
 
 ```elisp
 (eask-with-archives "melpa"
@@ -254,7 +254,22 @@ $ eask init
 ```
 
 {{< hint info >}}
-💡 當您需要某些檔案中的某些包時，這很方便。
+💡 當您需要某些存檔中的特定套件時，這非常方便。
+{{< /hint >}}
+
+## 🔍 函式: eask-archive-install-packages (`archives` `names`)
+
+使用 archives 設定安裝套件。
+
+參數 `names` 可以是符號或符號列表。
+
+```elisp
+(eask-archive-install-packages '("gnu" "melpa")
+                               'el2org)  ; 接受列表
+```
+
+{{< hint info >}}
+💡 這只會在套件遺失時安裝套件。
 {{< /hint >}}
 
 ## 🔍 函式: eask-package-desc (`name` &optional `current`)
@@ -965,7 +980,7 @@ This will kill Emacs process.
 使用響應消息輸出創建執行。
 
 ```elisp
-(eask-with-progress 
+(eask-with-progress
   "檔案下載中s... "
   (eask-with-verbosity 'debug  ; 通常與 `eask-with-verbosity` 一起使用
     ;; 執行一些操作..
