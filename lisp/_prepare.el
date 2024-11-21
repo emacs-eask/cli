@@ -569,8 +569,8 @@ scope of the dependencies (it's either `production' or `development')."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (when eask-depends-on-recipe-p
     (eask-log "Installing required external packages...")
-    (eask-with-archives '("gnu" "melpa")
-      (eask-package-install 'package-build))
+    (eask-archive-install-packages '("gnu" "melpa")
+                                   'package-build)
     (eask-with-progress
       "Building temporary archives (this may take a while)... "
       (eask-with-verbosity 'debug (github-elpa-build))
@@ -658,6 +658,7 @@ Argument BODY are forms for execution."
 
 (defun eask-archive-install-packages (archives names)
   "Install package NAMES with ARCHIVES setup."
+  (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (when-let* ((names (eask-listify names))
               ((cl-some (lambda (pkg) (not (package-installed-p pkg))) names)))
     (eask-with-archives archives
