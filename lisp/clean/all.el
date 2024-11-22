@@ -2,7 +2,7 @@
 
 ;;; Commentary:
 ;;
-;; Command that cleans .eask directory, and all elc files.
+;; Command that does all other cleaning tasks.
 ;;
 ;;   $ eask clean all
 ;;
