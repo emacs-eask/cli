@@ -600,7 +600,7 @@ scope of the dependencies (it's either `production' or `development')."
 
 If the argument FORCE is non-nil, force initialize packages in this session."
   (when (or (not package--initialized) (not package-archive-contents) force
-            ;; XXX we need to initialize once in global scope since most Emacs
+            ;; XXX: we need to initialize once in global scope since most Emacs
             ;; configuration would likely to set `package-archives' variable
             ;; themselves.
             (and (eask-config-p) (not eask--package-initialized)))
@@ -697,7 +697,7 @@ Argument BODY are forms for execution."
         (eask-with-progress
           (format "  - %sInstalling %s (%s)... " eask--action-prefix name version)
           (eask-with-verbosity 'debug
-            ;; XXX Without ignore-errors guard, it will trigger error
+            ;; XXX: Without ignore-errors guard, it will trigger error
             ;;
             ;;   Can't find library xxxxxxx.el
             ;;
