@@ -37,13 +37,21 @@
 ;;
 ;;; Core
 
-(defconst eask-compile--log-buffer-name "*Compile-Log*"
-  "Byte-compile log buffer name.")
+(require 'bytecomp)
+
+;; XXX: The function `byte-compile-warn' last modified is 2015;
+;; I'll say it's safe to override this function.
+(advice-add 'byte-compile-warn :override
+            (lambda (format &rest args)
+              (setq format (apply #'format-message format args))
+              (byte-compile-log-warning format t (if byte-compile-error-on-warn
+                                                     :error
+                                                   :warning))))
 
 (defun eask-compile--print-log ()
   "Print `*Compile-Log*' buffer."
-  (when (get-buffer eask-compile--log-buffer-name)
-    (with-current-buffer eask-compile--log-buffer-name
+  (when (get-buffer byte-compile-log-buffer)
+    (with-current-buffer byte-compile-log-buffer
       (if (and (eask-clean-p) (eask-strict-p))
           (eask-error (buffer-string))  ; Exit with error code!
         (eask-print-log-buffer))
@@ -85,14 +93,14 @@ The CMD is the command to start a new Emacs session."
          (content (eask-compile--byte-compile-file-external-content filename cmd)))
     (if (string-empty-p content)
         t  ; no error, good!
-      (with-current-buffer (get-buffer-create eask-compile--log-buffer-name)
+      (with-current-buffer (get-buffer-create byte-compile-log-buffer)
         (insert content)))))
 
 (defun eask-compile--byte-compile-file (filename)
   "Byte compile FILENAME."
   ;; *Compile-Log* does not kill itself. Make sure it's clean before we do
   ;; next byte-compile task.
-  (ignore-errors (kill-buffer eask-compile--log-buffer-name))
+  (ignore-errors (kill-buffer byte-compile-log-buffer))
   (let* ((filename (expand-file-name filename))
          (result))
     (eask-with-progress
@@ -102,7 +110,7 @@ The CMD is the command to start a new Emacs session."
                          (eask-compile--byte-compile-file-external filename)
                        (byte-compile-file filename))
               result (eq result t)))
-      (if result "done ✓" "skipped ✗"))
+      (unless byte-compile-verbose (if result "done ✓" "skipped ✗")))
     (eask-compile--print-log)
     result))
 
@@ -112,7 +120,7 @@ The CMD is the command to start a new Emacs session."
          (compiled (length compiled))
          (skipped (- (length files) compiled)))
     ;; XXX: Avoid last newline from the log buffer!
-    (unless (get-buffer eask-compile--log-buffer-name)
+    (unless (get-buffer byte-compile-log-buffer)
       (eask-msg ""))
     (eask-info "(Total of %s file%s compiled, %s skipped)" compiled
                (eask--sinr compiled "" "s")

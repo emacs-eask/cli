@@ -28,5 +28,4 @@
   (it "contains a spec with an expectation"
     (expect t :to-be t)))
 
-(provide 'buttercup-test)
 ;;; buttercup-test.el ends here

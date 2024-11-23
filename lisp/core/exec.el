@@ -35,7 +35,7 @@
 
 (eask-start
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
-  ;; XXX This is the hack by adding all `bin' folders from local elpa.
+  ;; XXX: This is the hack by adding all `bin' folders from local elpa.
   (eask-setup-paths)
   (if (eask-argv 1)
       (eask-with-progress
