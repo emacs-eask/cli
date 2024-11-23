@@ -49,7 +49,7 @@
         (eask-print-log-buffer))
       (eask-msg ""))))
 
-(defun eask-compile--byte-compile-file-external-contetnt (filename cmd)
+(defun eask-compile--byte-compile-file-external-content (filename cmd)
   "Extract result after executing byte-compile the FILENAME.
 
 The CMD is the command to start a new Emacs session."
@@ -82,7 +82,7 @@ The CMD is the command to start a new Emacs session."
          (args (append `(,(eask-command) ,(concat "\"" filename "\"")) argv))
          (args (mapconcat #'identity args " "))
          (cmd (concat cmd " " args))
-         (content (eask-compile--byte-compile-file-external-contetnt filename cmd)))
+         (content (eask-compile--byte-compile-file-external-content filename cmd)))
     (if (string-empty-p content)
         t  ; no error, good!
       (with-current-buffer (get-buffer-create eask-compile--log-buffer-name)
