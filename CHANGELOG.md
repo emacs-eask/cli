@@ -13,6 +13,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * fix(test): ERT test fails on Emacs 30+ (cc1f4e15b7b40b986ad1a93f6e40d121340598de)
 * fix(test): eask options should not be passed to buttercup (#281)
 * feat(core): Lazy install on required packages (#284)
+* feat(compile): Improve compile messages on error (#285)
 
 ## 0.10.x
 > Released Jun 13, 2024
