@@ -99,7 +99,7 @@ For more information, find the manual at https://emacs-eask.github.io/
 最常見的用法可能是在當前目錄作為輸入目錄的情況下運行 eask。 然後你運行 eask 後跟一個子命令：
 
 ```sh
-$ eask info             # 打印出Eask文件信息
+$ eask info             # 打印出 Eask 文件信息
 ```
 
 Notice the subcommand can be nested:
@@ -134,7 +134,7 @@ Positionals:
   <type>  type of the cleaning task
 
 ...
-````
+```
 
 以下是已知的嵌套子命令列表：
 

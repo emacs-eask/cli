@@ -139,7 +139,7 @@ Positionals:
   <type>  type of the cleaning task
 
 ...
-````
+```
 
 Here is a list of known nested subcommands:
 
