@@ -39,7 +39,7 @@
 
 (require 'bytecomp)
 
-;; XXX: The function `byte-compile-warn' last modified is 2015;
+;; XXX: The function `byte-compile-warn' was last modified in 2015;
 ;; I'll say it's safe to override this function.
 (advice-add 'byte-compile-warn :override
             (lambda (format &rest args)
