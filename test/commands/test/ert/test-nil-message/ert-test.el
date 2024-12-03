@@ -26,4 +26,5 @@
 
 (ert-deftest ert-test-1 ()
   (should-not (message nil)))
+
 ;;; ert-test.el ends here
