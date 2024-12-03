@@ -31,6 +31,10 @@ Arguments FNC and ARGS are used for advice `:around'."
   (if eask-test-ert--message-loop (apply fnc args)
     (let ((eask-test-ert--message-loop t))
       (cond
+       ;; (message nil) is used to clear the minibuffer
+       ;; However, format requires the first argument to be a format string
+       ((null (car args))
+        (apply fnc args))
        ((string-match-p "^[ ]+FAILED " (apply #'format args))
         (eask-msg (ansi-red (apply #'format args))))
        ((string-match-p "^[ ]+SKIPPED " (apply #'format args))
