@@ -26,3 +26,7 @@ echo "Test command 'ert'..."
 cd $(dirname "$0")
 
 eask test ert ./test/*.el
+
+# regression
+echo "Test ert: nil message"
+eask test ert ./test-nil-message/*.el
