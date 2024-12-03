@@ -1,6 +1,6 @@
 ;;; ert-test.el --- Test the command ert      -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2022-2024  the Eask authors.
+;; Copyright (C) 2024  the Eask authors.
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -26,4 +26,5 @@
 
 (ert-deftest ert-test-1 ()
   (should (= 1 1)))
+
 ;;; ert-test.el ends here
