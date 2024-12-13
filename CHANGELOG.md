@@ -14,6 +14,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * fix(test): eask options should not be passed to buttercup (#281)
 * feat(core): Lazy install on required packages (#284)
 * feat(compile): Improve compile messages on error (#285)
+* feat(test): Make `ert-runner` accepts `files` arguments (d9041eaa3d15c82d196e9264faf74660eaa117ff)
 
 ## 0.10.x
 > Released Jun 13, 2024
