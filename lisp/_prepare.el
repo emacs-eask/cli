@@ -773,6 +773,7 @@ full detials."
   "Return keywords from package descriptor."
   (when eask-package-desc
     (or (package-desc--keywords eask-package-desc)
+        ;; XXX: Handle Emacs 26.x keywords cannot be parsed issue.
         (and eask-package-file
              (with-temp-buffer
                (insert-file-contents eask-package-file)
