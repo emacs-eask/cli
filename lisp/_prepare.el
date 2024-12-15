@@ -771,7 +771,12 @@ full detials."
 
 (defun eask-package-desc-keywords ()
   "Return keywords from package descriptor."
-  (when eask-package-desc (package-desc--keywords eask-package-desc)))
+  (when eask-package-desc
+    (or (package-desc--keywords eask-package-desc)
+        (and eask-package-file
+             (with-temp-buffer
+               (insert-file-contents eask-package-file)
+               (lm-keywords-list))))))
 
 (defun eask-pkg-el ()
   "Return package description file if exists."
