@@ -1,5 +1,5 @@
 (package "cli"
-         "0.10.2"
+         "0.10.3"
          "A set of command-line tools to build Emacs packages")
 
 (website-url "https://github.com/emacs-eask/cli")
