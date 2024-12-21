@@ -27,6 +27,7 @@ global.IS_PKG = path.basename(process.execPath).startsWith('eask');
 global.EASK_HOMEDIR = os.homedir().replace(/\\/g, '/') + '/.eask/';
 
 global.EASK_EMACS = process.env.EMACS || process.env.EASK_EMACS || "emacs";
+process.env.EMACS = EASK_EMACS;  // Set back the value.
 
 /* Titles */
 global.TITLE_CMD_OPTION = 'Command Options:';

@@ -16,6 +16,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * feat(compile): Improve compile messages on error (#285)
 * feat(test): Make `ert-runner` accepts `files` arguments (d9041eaa3d15c82d196e9264faf74660eaa117ff)
 * fix(_prepare.el): Keywords cannot be parsed in Emacs 26.x (0cb755e0c18d37a59c76add905ea089c61b3a931)
+* feat(src/env.js): Ensure `Emacs` env (#289)
 
 ## 0.10.x
 > Released Jun 13, 2024

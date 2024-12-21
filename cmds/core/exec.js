@@ -50,7 +50,7 @@ exports.handler = async (argv) => {
   }
 
   process.env.PATH = fs.readFileSync(epf, 'utf8');
-  process.env.EMACSLOADPATH = fs.readFileSync(lpf, 'utf8');;
+  process.env.EMACSLOADPATH = fs.readFileSync(lpf, 'utf8');
 
   let proc = child_process.spawn(UTIL.cli_args(cmd), { stdio: 'inherit', shell: true });
 
