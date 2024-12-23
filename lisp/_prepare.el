@@ -1084,7 +1084,7 @@ function `load' for more detials."
   "Check to see if NAME is our target Eask-file, then return it."
   (let (;; Ensure path to filename
         (name             (file-name-nondirectory (directory-file-name name)))
-        ;; `p-' stards for pattern
+        ;; `p-' stands for pattern
         (p-easkfile-full  (format "Easkfile.%s" emacs-version))
         (p-easkfile-major (format "Easkfile.%s" emacs-major-version))
         (p-easkfile       "Easkfile")
