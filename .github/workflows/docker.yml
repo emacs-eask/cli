@@ -34,7 +34,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Install Docker
-      uses: crazy-max/ghaction-setup-docker@master
+      uses: docker/setup-docker-action@v4
 
     - name: Prepare Eask (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
