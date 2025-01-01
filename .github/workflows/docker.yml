@@ -33,8 +33,19 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install Docker
+    - name: Install Docker (Linux)
+      if: runner.os == 'Linux'
       uses: docker/setup-docker-action@v4
+
+    - name: Install Docker (macOS)
+      if: runner.os == 'macOS'
+      run: brew install docker
+
+    - name: Install Docker (Windows)
+      if: runner.os == 'Windows'
+      uses: crazy-max/ghaction-chocolatey@v3
+      with:
+        args: install docker
 
     - name: Prepare Eask (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
