@@ -1,6 +1,6 @@
 ;;; mini.pkg.1.el --- Minimal test package  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2022-2024  the Eask authors.
+;; Copyright (C) 2022-2025  the Eask authors.
 ;; Created date 2022-03-29 01:52:58
 
 ;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>
