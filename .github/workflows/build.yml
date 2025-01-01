@@ -25,7 +25,6 @@ concurrency:
 
 env:
   VERSION: 0.10.3
-  NODE: node20
   REPO_BIN: 'emacs-eask/binaries'
 
 jobs:
