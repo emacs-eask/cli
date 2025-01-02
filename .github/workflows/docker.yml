@@ -40,7 +40,10 @@ jobs:
     - name: Install Docker (macOS)
       if: runner.os == 'macOS'
       run: |
-        brew install --cask docker
+        brew install --cask docker virtualbox 
+        brew install docker-machine
+        docker-machine create --driver virtualbox default
+        docker-machine restart
 
     - name: Install Docker (Windows)
       if: runner.os == 'Windows'
