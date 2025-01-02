@@ -40,7 +40,7 @@ jobs:
     - name: Install Docker (macOS)
       if: runner.os == 'macOS'
       run: |
-        brew install docker colima
+        brew install docker
         colima start
 
     - name: Install Docker (Windows)
