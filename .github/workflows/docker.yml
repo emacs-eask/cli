@@ -28,7 +28,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]  # XXX: `windows-latest` is not possible at the moment!
+        os: 
+        - ubuntu-latest
+        # XXX: `macos-latest` on arm64 is not possible as well!?
+        # See https://stackoverflow.com/questions/77675906/github-actions-build-docker-image-on-arm64-macos-latest-xlarge
+        #- macos-latest
+        # XXX: `windows-latest` is not possible at the moment!
+        #- windows-latest
 
     steps:
     - uses: actions/checkout@v4
@@ -41,7 +47,6 @@ jobs:
       if: runner.os == 'macOS'
       run: |
         brew install docker
-        colima start
 
     - name: Install Docker (Windows)
       if: runner.os == 'Windows'
