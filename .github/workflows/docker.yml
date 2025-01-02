@@ -39,7 +39,8 @@ jobs:
 
     - name: Install Docker (macOS)
       if: runner.os == 'macOS'
-      run: brew install docker
+      run: |
+        brew install --cask docker
 
     - name: Install Docker (Windows)
       if: runner.os == 'Windows'
