@@ -68,11 +68,6 @@ jobs:
         mv COPYING dist
         mv README.md dist
 
-    - uses: actions/upload-artifact@v4
-      with:
-        name: ${{ matrix.target }}
-        path: dist
-
     - name: Setup environment (Unix)
       if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
       run: |
@@ -103,7 +98,7 @@ jobs:
         cd ..
         cp ${{ matrix.target }}.${{ env._EXT }} eask_${{ env.VERSION }}_${{ matrix.target }}.${{ env._EXT }}
 
-    - name: Uploading...
+    - name: Upload for prerelease
       if: github.ref == 'refs/heads/master'
       uses: softprops/action-gh-release@v2.0.8
       with:
@@ -111,6 +106,12 @@ jobs:
         token: ${{ secrets.PAT }}
         prerelease: true
         files: eask_${{ env.VERSION }}_${{ matrix.target }}.${{ env._EXT }}
+
+    - name: Upload for tests
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.target }}
+        path: dist
 
     #### Prepare to push to `binaries` repository!
 
