@@ -49,6 +49,10 @@ jobs:
         sudo apt-get update
         sudo apt-get install --assume-yes qemu-user-binfmt
 
+    - uses: MOZGIII/install-ldid-action@master
+      with:
+        tag: v2.1.5-procursus7
+
     - name: Install pkg
       run: npm install -g @yao-pkg/pkg
 
