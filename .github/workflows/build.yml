@@ -46,8 +46,8 @@ jobs:
 
     - name: Install dependencies
       run: |
-        apt-get update
-        apt-get install --assume-yes qemu-user-binfmt
+        sudo apt-get update
+        sudo apt-get install --assume-yes qemu-user-binfmt
 
     - name: Install pkg
       run: npm install -g @yao-pkg/pkg
