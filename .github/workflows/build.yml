@@ -68,6 +68,11 @@ jobs:
         mv COPYING dist
         mv README.md dist
 
+    - name: Test build
+      working-directory: dist
+      run: |
+        ./dist/eask --version
+
     - name: Setup environment (Unix)
       if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
       run: |
