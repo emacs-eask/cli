@@ -107,6 +107,8 @@ jobs:
         prerelease: true
         files: eask_${{ env.VERSION }}_${{ matrix.target }}.${{ env._EXT }}
 
+    #### Upload an artifact for testing purposes
+
     - name: Upload for tests
       uses: actions/upload-artifact@v4
       with:
@@ -153,66 +155,3 @@ jobs:
         branch: master
         rebase: true
         retry: 7
-
-  test-linux:
-    runs-on: ubuntu-latest
-    needs: [build]
-    strategy:
-      fail-fast: false
-      matrix:
-        target:
-        - linux-arm64
-        - linux-x64
-
-    steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: ${{ matrix.target }}
-        path: dist
-
-    - name: Test build
-      working-directory: dist
-      run: |
-        ./eask --version
-
-  test-macos:
-    runs-on: macos-latest
-    needs: [build]
-    strategy:
-      fail-fast: false
-      matrix:
-        target:
-        - macos-arm64
-        - macos-x64
-
-    steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: ${{ matrix.target }}
-        path: dist
-
-    - name: Test build
-      working-directory: dist
-      run: |
-        ./eask --version
-
-  test-windows:
-    runs-on: windows-latest
-    needs: [build]
-    strategy:
-      fail-fast: false
-      matrix:
-        target:
-        - win-arm64
-        - win-x64
-
-    steps:
-    - uses: actions/download-artifact@v4
-      with:
-        name: ${{ matrix.target }}
-        path: dist
-
-    - name: Test build
-      working-directory: dist
-      run: |
-        ./eask.exe --version
