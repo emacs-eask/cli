@@ -45,7 +45,9 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Install dependencies
-      run: apt install --assume-yes qemu-user-binfmt
+      run: |
+        apt-get update
+        apt-get install --assume-yes qemu-user-binfmt
 
     - name: Install pkg
       run: npm install -g @yao-pkg/pkg
