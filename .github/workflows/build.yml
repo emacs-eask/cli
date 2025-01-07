@@ -68,10 +68,10 @@ jobs:
         mv COPYING dist
         mv README.md dist
 
-    - name: Test build
-      working-directory: dist
-      run: |
-        ./eask --version
+    - uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.target }}
+        path: dist
 
     - name: Setup environment (Unix)
       if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
@@ -152,3 +152,27 @@ jobs:
         branch: master
         rebase: true
         retry: 7
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+        - linux-arm64
+        - linux-x64
+        - macos-arm64
+        - macos-x64
+        - win-arm64
+        - win-x64
+
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: ${{ matrix.target }}
+        path: dist
+
+    - name: Test build
+      working-directory: dist
+      run: |
+        ./eask --version
