@@ -6,7 +6,7 @@ on:
       - master
     paths:
       - 'eask'    
-      - '**.yml'
+      #- '**.yml'
       - lisp/**
       - cmds/**
       - src/**

@@ -6,13 +6,13 @@ on:
       - master
       - docs
     paths:
-      - '**.yml'
+      #- '**.yml'
       - docs/**
   pull_request:
     branches:
       - master
     paths:
-      - '**.yml'
+      #- '**.yml'
       - docs/**
   workflow_dispatch:
 
