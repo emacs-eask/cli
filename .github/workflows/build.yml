@@ -53,11 +53,8 @@ jobs:
       with:
         tag: v2.1.5-procursus7
 
-    - name: Install pkg
-      run: npm install -g @yao-pkg/pkg
-
     - name: Preparing...
-      run: npm install
+      run: npm install --include=dev
 
     - name: Building...
       run: npm run-script pkg-${{ matrix.target }}
