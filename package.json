@@ -8,9 +8,9 @@
     "pkg-all": "pkg package.json",
     "pkg-linux-arm64": "pkg package.json -t node*-linuxstatic-arm64 --output dist/eask",
     "pkg-linux-x64": "pkg package.json -t node*-linuxstatic-x64 --output dist/eask",
-    "pkg-macos-arm64": "pkg package.json -t node*-macos-arm64 --output dist/eask",
+    "pkg-macos-arm64": "pkg package.json -t node*-macos-arm64 --output dist/eask --public",
     "pkg-macos-x64": "pkg package.json -t node*-macos-x64 --output dist/eask",
-    "pkg-win-arm64": "pkg package.json -t node*-win-arm64 --output dist/eask",
+    "pkg-win-arm64": "pkg package.json -t node*-win-arm64 --output dist/eask --public",
     "pkg-win-x64": "pkg package.json -t node*-win-x64 --output dist/eask"
   },
   "bin": {
