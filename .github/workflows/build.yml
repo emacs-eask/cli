@@ -44,8 +44,17 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install --assume-yes qemu-user-binfmt
+
+    - uses: MOZGIII/install-ldid-action@master
+      with:
+        tag: v2.1.5-procursus7
+
     - name: Install pkg
-      run: npm install -g pkg
+      run: npm install -g @yao-pkg/pkg
 
     - name: Preparing...
       run: npm install
@@ -89,7 +98,7 @@ jobs:
         cd ..
         cp ${{ matrix.target }}.${{ env._EXT }} eask_${{ env.VERSION }}_${{ matrix.target }}.${{ env._EXT }}
 
-    - name: Uploading...
+    - name: Upload for prerelease
       if: github.ref == 'refs/heads/master'
       uses: softprops/action-gh-release@v2.0.8
       with:
@@ -97,6 +106,14 @@ jobs:
         token: ${{ secrets.PAT }}
         prerelease: true
         files: eask_${{ env.VERSION }}_${{ matrix.target }}.${{ env._EXT }}
+
+    #### Upload an artifact for testing purposes
+
+    - name: Upload for tests
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.target }}
+        path: dist
 
     #### Prepare to push to `binaries` repository!
 
