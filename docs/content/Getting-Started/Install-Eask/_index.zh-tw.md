@@ -114,6 +114,13 @@ $ choco install eask-cli
 若要安裝 Eask CLI，請執行下列操作：
 
 ```sh
+$ scoop bucket add extras
+$ scoop install eask-cli
+```
+
+另外，您也可以使用我們的 bucket 來獲得最新版本。
+
+```sh
 $ scoop bucket add emacs-eask/cli https://github.com/emacs-eask/packaging
 $ scoop install eask-cli
 ```
