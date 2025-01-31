@@ -1456,9 +1456,10 @@ argument COMMAND."
   (unless location (eask-error "Unknown package archive `%s'" name))
   (add-to-list 'package-archives (cons name location) t))
 
-(defun eask-f-source-priority (archive-id &optional priority)
-  "Add PRIORITY for to ARCHIVE-ID."
-  (add-to-list 'package-archive-priorities (cons archive-id priority) t))
+(defun eask-f-source-priority (name &optional priority)
+  "Add PRIORITY for to NAME."
+  (when (symbolp name) (setq name (eask-2str name)))  ; ensure to string, accept symbol
+  (add-to-list 'package-archive-priorities (cons name priority) t))
 
 (defvar eask-depends-on-recipe-p nil
   "Set to t if package depends on recipe.")
