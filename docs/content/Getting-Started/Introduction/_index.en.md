@@ -11,8 +11,8 @@ major ways:
 2. Dependency management for your configuration
 3. Run elisp programs for all other purposes
 
-So what are the major differences between Eask and other build tools like
-[Cask][], [makem.sh][], and [Eldev][], other than the things above?
+So, other than the things above, what are the major differences between Eask
+and other build tools like [Cask][], [makem.sh][], and [Eldev][]?
 
 Good question! Eask is more than a build tool now, it can be used for various
 purposes! But here are Eask aims to be:
