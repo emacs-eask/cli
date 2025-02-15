@@ -31,13 +31,13 @@ from our [release](https://github.com/emacs-eask/cli/releases) page.
 ## 🔍 Step 2: Install Eask
 
 ```sh
-$ npm install -g @emacs-eask/cli
+npm install -g @emacs-eask/cli
 ```
 
 To verify your new installation:
 
 ```sh
-$ eask --version
+eask --version
 ```
 
 ## 🔍 Step 3: Navigate to an existing project or create a new project
@@ -46,13 +46,13 @@ If you already have an existing elisp project, navigate to the project root
 folder.
 
 ```sh
-$ cd /path/to/project/dir/
+cd /path/to/project/dir/
 ```
 
 To create one:
 
 ```sh
-$ eask create package <your-project>
+eask create package <your-project>
 ```
 
 It should create a folder named `<your-project>` in your current working directory.
@@ -64,7 +64,7 @@ Skip this step if you chose to create the project with **`eask create`**!
 Otherwise, to create Eask-file in the existing project:
 
 ```sh
-$ eask init
+eask init
 ```
 
 You will be asked some questions about the package you are going to create:
@@ -105,7 +105,7 @@ You should be able to see an `Eask` file in your project folder. 🎉🎊
 To check your package information, run:
 
 ```sh
-$ eask info
+eask info
 ```
 
 You should be able to see the following information:
@@ -162,7 +162,7 @@ Or else you would get an error **`package-name-' is unavailable**!
 Now we can install the dependencies we have specified in the **Eask**-file:
 
 ```sh
-$ eask install-deps
+eask install-deps
 ```
 
 You should see Eask executed correctly with the similar output below:

@@ -21,13 +21,13 @@ weight: 200
 在 macOS 或 Linux:
 
 ```sh
-$ curl -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.sh | sh
 ```
 
 在 Windows:
 
 ```sh
-$ curl.exe -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.bat | cmd /Q
+curl.exe -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.bat | cmd /Q
 ```
 
 ## 💾 包管理器
@@ -37,7 +37,7 @@ $ curl.exe -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinst
 如果您的機器上安裝了 [npm][]，您可以使用以下一行代碼安裝 Eask：
 
 ```sh
-$ npm install -g @emacs-eask/cli
+npm install -g @emacs-eask/cli
 ```
 
 ### 📦 Nix (macOS 或 Linux)
@@ -46,7 +46,7 @@ $ npm install -g @emacs-eask/cli
 若要安裝 Eask CLI，請執行下列操作：
 
 ```sh
-$ nix profile install nixpkgs#eask-cli
+nix profile install nixpkgs#eask-cli
 ```
 
 ### 📦 Homebrew (macOS 或 Linux)
@@ -55,8 +55,8 @@ $ nix profile install nixpkgs#eask-cli
 若要安裝 Eask CLI，請執行下列操作：
 
 ```sh
-$ brew tap emacs-eask/cli https://github.com/emacs-eask/packaging
-$ brew install eask-cli
+brew tap emacs-eask/cli https://github.com/emacs-eask/packaging
+brew install eask-cli
 ```
 
 ### 📦 MacPorts (macOS)
@@ -65,7 +65,7 @@ $ brew install eask-cli
 若要安裝 Eask CLI，請執行下列操作：
 
 ```sh
-$ sudo port install eask-cli
+sudo port install eask-cli
 ```
 
 ### 📦 Debian (Linux)
@@ -75,10 +75,10 @@ Linux [Debian][] 發行版的衍生版本包括 [elementary OS][]、[KDE neon][]
 [Zorin OS][] 等。
 
 ```sh
-$ sudo curl -SsL -o /etc/apt/trusted.gpg.d/easksource.gpg https://raw.githubusercontent.com/emacs-eask/packaging/master/debian/KEY.gpg
-$ sudo curl -SsL -o /etc/apt/sources.list.d/easksource.list https://raw.githubusercontent.com/emacs-eask/packaging/master/debian/easksource.list
-$ sudo apt update --allow-insecure-repositories
-$ sudo apt install eask-cli --allow-unauthenticated
+sudo curl -SsL -o /etc/apt/trusted.gpg.d/easksource.gpg https://raw.githubusercontent.com/emacs-eask/packaging/master/debian/KEY.gpg
+sudo curl -SsL -o /etc/apt/sources.list.d/easksource.list https://raw.githubusercontent.com/emacs-eask/packaging/master/debian/easksource.list
+sudo apt update --allow-insecure-repositories
+sudo apt install eask-cli --allow-unauthenticated
 ```
 
 您也可以直接從 [packaging][packaging/debian] 代碼庫下載 Debian 軟體包。
@@ -89,7 +89,7 @@ $ sudo apt install eask-cli --allow-unauthenticated
 snap 套件適用於大多數發行版，安裝簡單且會自動更新。
 
 ```sh
-$ sudo snap install eask-cli
+sudo snap install eask-cli
 ```
 
 ### 📦 Arch (Linux)
@@ -97,7 +97,7 @@ $ sudo snap install eask-cli
 有一個 `PKGBUILD` 可以從原始程式碼建立 `eask` 並建立一個包，因此在儲存庫的最上層目錄中您可以簡單地運行：
 
 ```sh
-$ makepkg -i
+makepkg -i
 ```
 
 ### 📦 Chocolatey (Windows)
@@ -105,7 +105,7 @@ $ makepkg -i
 如果您的計算機上安裝了 [Chocolatey][]，則可以使用以下一行代碼安裝 Eask：
 
 ```sh
-$ choco install eask-cli
+choco install eask-cli
 ```
 
 ### 📦 Scoop (Windows)
@@ -114,15 +114,15 @@ $ choco install eask-cli
 若要安裝 Eask CLI，請執行下列操作：
 
 ```sh
-$ scoop bucket add extras
-$ scoop install eask-cli
+scoop bucket add extras
+scoop install eask-cli
 ```
 
 另外，您也可以使用我們的 bucket 來獲得最新版本。
 
 ```sh
-$ scoop bucket add emacs-eask/cli https://github.com/emacs-eask/packaging
-$ scoop install eask-cli
+scoop bucket add emacs-eask/cli https://github.com/emacs-eask/packaging
+scoop install eask-cli
 ```
 
 ### 📦 Winget (Windows)
@@ -131,7 +131,7 @@ $ scoop install eask-cli
 若要安裝 Eask CLI，請執行下列操作：
 
 ```
-$ winget install eask.cli
+winget install eask.cli
 ```
 
 ## 💾 從原始碼構建
@@ -146,18 +146,18 @@ $ winget install eask.cli
 
 ```sh
 # 克隆這個代碼庫
-$ git clone https://github.com/emacs-eask/cli eask-cli
+git clone https://github.com/emacs-eask/cli eask-cli
 
 # 將工作目錄更改為 eask-cli
-$ cd eask-cli
+cd eask-cli
 
 # 安裝所有依賴
-$ npm install
+npm install
 ```
 
 ```sh
 # 從源頭建構; 有關可用目標，請參閱 `package.json` 中的 `scripts`
-$ npm run pkg-linux-x64
+npm run pkg-linux-x64
 ```
 
 ### 🏡 設定（透過腳本）
@@ -184,12 +184,12 @@ To run `eask` through executable, you will need [pkg][] installed on your machin
 
 ```sh
 # 區域安裝
-$ npm install --dev
+npm install --dev
 
 # 或
 
 # 全域安裝
-$ npm install -g pkg
+npm install -g pkg
 ```
 
 隨後，執行以下命令產生可執行檔。
@@ -197,7 +197,7 @@ $ npm install -g pkg
 
 ```sh
 # 從原始碼建置。有關可用目標，請參閱 `package.json` 中的 `scripts` 。
-$ npm run pkg-linux-x64
+npm run pkg-linux-x64
 
 # 將 `lisp` 移至 `dist` 資料夾
 mv lisp dist

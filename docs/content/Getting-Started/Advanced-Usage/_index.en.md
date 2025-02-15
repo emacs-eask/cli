@@ -33,7 +33,7 @@ For example, to consider warnings as errors when byte-compiling with the command
 This is also equivalent to option `--strict`:
 
 ```sh
-$ eask compile [FILES..] --strict
+eask compile [FILES..] --strict
 ```
 
 Or hooks that run on every command:
@@ -50,8 +50,8 @@ Or hooks that run on every command:
 For subcommands that contain spaces, will concatenate with `/`:
 
 ```sh
-$ eask lint checkdoc     # lint/checkdoc
-$ eask generate license  # generate/license
+eask lint checkdoc     # lint/checkdoc
+eask generate license  # generate/license
 ```
 
 therefore,

@@ -30,7 +30,7 @@ weight: 400
 這也等同於選項 `--strict`：
 
 ```sh
-$ eask compile [FILES..] --strict
+eask compile [FILES..] --strict
 ```
 
 或者在每個命令上運行的 hooks：
@@ -47,8 +47,8 @@ $ eask compile [FILES..] --strict
 對於包含空格的子命令，將與`/`連接：
 
 ```sh
-$ eask lint checkdoc     # lint/checkdoc
-$ eask generate license  # generate/license
+eask lint checkdoc     # lint/checkdoc
+eask generate license  # generate/license
 ```
 
 所以，

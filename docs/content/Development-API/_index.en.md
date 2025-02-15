@@ -74,7 +74,7 @@ Return non-nil if Eask is packaged.
 Eask's arguments after command separator `--'; return a list.
 
 ```sh
-$ eask <command> -- args0 args1
+eask <command> -- args0 args1
 ```
 
 Output:
@@ -88,7 +88,7 @@ Output:
 Eask's arguments after command separator `--'; return a string.
 
 ```sh
-$ eask <command> -- args0 args1
+eask <command> -- args0 args1
 ```
 
 Output:
@@ -120,7 +120,7 @@ Return the working directory of the program going to be executed.
 Return the current command in string. Suppose the command is:
 
 ```sh
-$ eask init
+eask init
 ```
 
 then,
@@ -291,7 +291,7 @@ Return a command-line argument by index.
 Return a list that is extracted from command-line arguments.
 
 ```sh
-$ eask info --verbose 4 foo bar
+eask info --verbose 4 foo bar
 ```
 
 It will ignore `--verbose` and `4`, and only returns `foo`, and `bar`.
@@ -535,10 +535,10 @@ Return `t` if the `insecure` option is enabled.
 Return a **string** represents `hostname` + `port number`.
 
 ```sh
-$ eask [command] --proxy "localhost:1000"
-$ eask [command] --http-proxy "localhost:2000"
-$ eask [command] --https-proxy "localhost:3000"
-$ eask [command] --no-proxy "localhost:4000"
+eask [command] --proxy "localhost:1000"
+eask [command] --http-proxy "localhost:2000"
+eask [command] --https-proxy "localhost:3000"
+eask [command] --no-proxy "localhost:4000"
 ```
 
 ## 🔍 Function: eask-destination ()
@@ -751,7 +751,7 @@ Weather to generate log files. (default: `nil`)
 Use command `cat` to see the log,
 
 ```
-$ cat /.log/messages.log
+cat /.log/messages.log
 ```
 
 ## 🔍 Variable: eask-level-color

@@ -28,13 +28,13 @@ weight: 100
 ## 🔍 步驟 2: 安裝 Eask
 
 ```sh
-$ npm install -g @emacs-eask/cli
+npm install -g @emacs-eask/cli
 ```
 
 驗證您的新安裝：
 
 ```sh
-$ eask --version
+eask --version
 ```
 
 ## 🔍 步驟 3: 導航到現有項目或創建新項目
@@ -42,13 +42,13 @@ $ eask --version
 如果您已有一個現有的 elisp 項目，請導航到項目根文件夾。
 
 ```sh
-$ cd /path/to/project/dir/
+cd /path/to/project/dir/
 ```
 
 創建一個：
 
 ```sh
-$ eask create package <your-project>
+eask create package <your-project>
 ```
 
 它應該在您當前的工作目錄中創建一個名為 `<your-project>` 的文件夾。
@@ -60,7 +60,7 @@ $ eask create package <your-project>
 否則，在現有項目中創建 Eask 文件：
 
 ```sh
-$ eask init
+eask init
 ```
 
 您將被問到一些關於您將要創建的包的問題：
@@ -101,7 +101,7 @@ Is this OK? (yes) yes ⏎
 要檢查您的包裹信息，請運行：
 
 ```sh
-$ eask info
+eask info
 ```
 
 您應該能夠看到以下信息：
@@ -158,7 +158,7 @@ dist
 現在我們可以安裝我們在 **Eask** 文件中指定的依賴項：
 
 ```sh
-$ eask install-deps
+eask install-deps
 ```
 
 您應該會看到 Eask 正確執行，輸出類似如下：
