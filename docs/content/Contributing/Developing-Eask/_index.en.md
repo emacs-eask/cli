@@ -24,7 +24,7 @@ method. Make sure you have set up the environment PATH variable, so you can call
 After you have stepped through the installation, try:
 
 ```sh
-$ eask locate
+eask locate
 ```
 
 It should print out the location of the `eask` executable.

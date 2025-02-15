@@ -22,7 +22,7 @@ weight: 20
 完成安裝後，嘗試：
 
 ```sh
-$ eask locate
+eask locate
 ```
 
 它應該會列印出 `eask` 可執行檔的位置。即使您已安裝多個 Eask 版本，也應該可以辨識 Eask 可執行檔的位置！

@@ -8,7 +8,7 @@ weight: 300
 The general syntax of the **eask** program is:
 
 ```sh
-$ eask [GLOBAL-OPTIONS] [COMMAND] [COMMAND-OPTIONS] [COMMAND-ARGUMENTS]
+eask [GLOBAL-OPTIONS] [COMMAND] [COMMAND-OPTIONS] [COMMAND-ARGUMENTS]
 ```
 
 # 🚩 Creating
@@ -18,7 +18,7 @@ $ eask [GLOBAL-OPTIONS] [COMMAND] [COMMAND-OPTIONS] [COMMAND-ARGUMENTS]
 Create a new elisp project with the default `Eask`-file and CI/CD support.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] create package <name>
+eask [GLOBAL-OPTIONS] create package <name>
 ```
 
 {{< hint info >}}
@@ -30,7 +30,7 @@ $ eask [GLOBAL-OPTIONS] create package <name>
 Create a new ELPA using [github-elpa](https://github.com/10sr/github-elpa).
 
 ```sh
-$ eask [GLOBAL-OPTIONS] create elpa <name>
+eask [GLOBAL-OPTIONS] create elpa <name>
 ```
 
 {{< hint info >}}
@@ -46,7 +46,7 @@ Often use commands that are uncategorized.
 Initialize the current directory to start using Eask.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] init
+eask [GLOBAL-OPTIONS] init
 ```
 
 Eask will generate the file like this:
@@ -72,25 +72,25 @@ Eask will generate the file like this:
 `.el` file to Eask-file:
 
 ```
-$ eask init --from source /path/to/source.el
+eask init --from source /path/to/source.el
 ```
 
 If you already have a [Cask][] project, you can convert Cask-file to Eask-file:
 
 ```
-$ eask init --from cask /path/to/Cask
+eask init --from cask /path/to/Cask
 ```
 
 If you already have a [Eldev][] project, you can convert Eldev-file to Eask-file:
 
 ```
-$ eask init --from eldev /path/to/Eldev
+eask init --from eldev /path/to/Eldev
 ```
 
 If you already have a [Keg][] project, you can convert Keg-file to Eask-file:
 
 ```
-$ eask init --from keg /path/to/Keg
+eask init --from keg /path/to/Keg
 ```
 
 {{< hint ok >}}
@@ -103,7 +103,7 @@ Eask-file examples!
 Show information about the project or configuration.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] info
+eask [GLOBAL-OPTIONS] info
 ```
 
 ## 🔍 eask status
@@ -111,7 +111,7 @@ $ eask [GLOBAL-OPTIONS] info
 Display the state of the workspace.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] status
+eask [GLOBAL-OPTIONS] status
 ```
 
 ## 🔍 eask install-deps
@@ -121,7 +121,7 @@ To install all dependencies.
 Alias: `install-dependencies`, `prepare`
 
 ```sh
-$ eask [GLOBAL-OPTIONS] install-deps [--dev]
+eask [GLOBAL-OPTIONS] install-deps [--dev]
 ```
 
 {{< hint ok >}}
@@ -133,19 +133,19 @@ $ eask [GLOBAL-OPTIONS] install-deps [--dev]
 To install packages.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] install [PACKAGES..]
+eask [GLOBAL-OPTIONS] install [PACKAGES..]
 ```
 
 Install packages by specifying arguments:
 
 ```sh
-$ eask install auto-complete helm magit
+eask install auto-complete helm magit
 ```
 
 Or else, it will install the package from the current development:
 
 ```sh
-$ eask install
+eask install
 ```
 
 ## 🔍 eask uninstall
@@ -153,19 +153,19 @@ $ eask install
 To uninstall/delete packages.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] uninstall [PACKAGES..]
+eask [GLOBAL-OPTIONS] uninstall [PACKAGES..]
 ```
 
 Uninstall packages by specifying arguments:
 
 ```sh
-$ eask uninstall dash f s
+eask uninstall dash f s
 ```
 
 Or else, it will uninstall the package from the current development:
 
 ```sh
-$ eask uninstall
+eask uninstall
 ```
 
 ## 🔍 eask package
@@ -175,7 +175,7 @@ Build the package artifact.
 Alias: `pack`
 
 ```sh
-$ eask package [DESTINATION]
+eask package [DESTINATION]
 ```
 
 If [DESTINATION] is not specified, it will generate to the `/dist` folder
@@ -186,19 +186,19 @@ by default.
 Byte-compile `.el` files.
 
 ```sh
-$ eask compile [FILES..]
+eask compile [FILES..]
 ```
 
 Compile files by specifying arguments:
 
 ```sh
-$ eask compile file-1.el file-2.el
+eask compile file-1.el file-2.el
 ```
 
 Or compile files that are already specified in your `Eask`-file.
 
 ```sh
-$ eask compile
+eask compile
 ```
 
 ## 🔍 eask recompile
@@ -206,7 +206,7 @@ $ eask compile
 Byte-recompile `.el` files.
 
 ```sh
-$ eask recompile [FILES..]
+eask recompile [FILES..]
 ```
 
 {{< hint info >}}
@@ -219,7 +219,7 @@ compiling.
 Print path to package directory, where all dependencies are installed.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] package-directory
+eask [GLOBAL-OPTIONS] package-directory
 ```
 
 ## 🔍 eask path
@@ -229,7 +229,7 @@ Print the `PATH` environment variable of this project.
 Alias: `exec-path`
 
 ```sh
-$ eask [GLOBAL-OPTIONS] path [PATTERNS..]
+eask [GLOBAL-OPTIONS] path [PATTERNS..]
 ```
 
 Optionally, you can pass in `[PATTERNS..]` to perform the search.
@@ -239,7 +239,7 @@ Optionally, you can pass in `[PATTERNS..]` to perform the search.
 Print the load path containing the dependencies of the current project.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] load-path [PATTERNS..]
+eask [GLOBAL-OPTIONS] load-path [PATTERNS..]
 ```
 
 Optionally, you can pass in `[PATTERNS..]` to perform the search.
@@ -249,7 +249,7 @@ Optionally, you can pass in `[PATTERNS..]` to perform the search.
 Print the list of all package files.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] files [PATTERNS..]
+eask [GLOBAL-OPTIONS] files [PATTERNS..]
 ```
 
 If `[PATTERNS..]` are defined, it will display files that match that pattern.
@@ -259,7 +259,7 @@ If `[PATTERNS..]` are defined, it will display files that match that pattern.
 Suggest a recipe format.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] recipe [FILES..]
+eask [GLOBAL-OPTIONS] recipe [FILES..]
 ```
 
 ## 🔍 eask keywords
@@ -267,7 +267,7 @@ $ eask [GLOBAL-OPTIONS] recipe [FILES..]
 List available keywords that can be used in the header section.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] keywords
+eask [GLOBAL-OPTIONS] keywords
 ```
 
 ## 🔍 eask bump
@@ -275,7 +275,7 @@ $ eask [GLOBAL-OPTIONS] keywords
 Bump version for your project and/or Eask-file.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] bump [LEVELS..]
+eask [GLOBAL-OPTIONS] bump [LEVELS..]
 ```
 
 {{< hint info >}}
@@ -289,7 +289,7 @@ View filename(s).
 The positional argument `[PATTERNS..]` is an array of wildcard patterns.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] cat [PATTERNS..]
+eask [GLOBAL-OPTIONS] cat [PATTERNS..]
 ```
 
 {{< hint info >}}
@@ -302,7 +302,7 @@ to accomplish the syntax highlighting.
 Concatenate all Emacs Lisp files into one file.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] concat [FILES..]
+eask [GLOBAL-OPTIONS] concat [FILES..]
 ```
 
 ## 🔍 eask loc
@@ -310,7 +310,7 @@ $ eask [GLOBAL-OPTIONS] concat [FILES..]
 Print LOC information.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] loc [FILES..]
+eask [GLOBAL-OPTIONS] loc [FILES..]
 ```
 
 # 🚩 Documentation
@@ -322,7 +322,7 @@ Commands used to build documentation site.
 Build documentation.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] docs [NAMES..]
+eask [GLOBAL-OPTIONS] docs [NAMES..]
 ```
 
 # 🚩 Execution
@@ -336,7 +336,7 @@ Basically, this allows you to do anything you want!
 Load Emacs Lisp files in order.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] load [FILES..]
+eask [GLOBAL-OPTIONS] load [FILES..]
 ```
 
 ## 🔍 eask exec
@@ -344,7 +344,7 @@ $ eask [GLOBAL-OPTIONS] load [FILES..]
 Execute the system command with the given arguments.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] exec [COMMAND] [ARGUMENTS ...]
+eask [GLOBAL-OPTIONS] exec [COMMAND] [ARGUMENTS ...]
 ```
 
 ## 🔍 eask emacs
@@ -352,7 +352,7 @@ $ eask [GLOBAL-OPTIONS] exec [COMMAND] [ARGUMENTS ...]
 Execute emacs with the appropriate environment.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] emacs [ARGUMENTS ...]
+eask [GLOBAL-OPTIONS] emacs [ARGUMENTS ...]
 ```
 
 ## 🔍 eask eval
@@ -360,7 +360,7 @@ $ eask [GLOBAL-OPTIONS] emacs [ARGUMENTS ...]
 Evaluate `FORM` as a lisp form.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] eval [FORM]
+eask [GLOBAL-OPTIONS] eval [FORM]
 ```
 
 ## 🔍 eask repl
@@ -368,7 +368,7 @@ $ eask [GLOBAL-OPTIONS] eval [FORM]
 Start the Elisp REPL.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] repl [FILES..]
+eask [GLOBAL-OPTIONS] repl [FILES..]
 ```
 
 Alias: `ielm`
@@ -378,7 +378,7 @@ Alias: `ielm`
 Run the script.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] run script [NAMES..]
+eask [GLOBAL-OPTIONS] run script [NAMES..]
 ```
 
 ## 🔍 eask run command
@@ -388,7 +388,7 @@ Run the command.
 Alias: `cmd`
 
 ```sh
-$ eask [GLOBAL-OPTIONS] run command [NAMES..]
+eask [GLOBAL-OPTIONS] run command [NAMES..]
 ```
 
 ## 🔍 eask docker
@@ -396,13 +396,13 @@ $ eask [GLOBAL-OPTIONS] run command [NAMES..]
 Launch specified Emacs version in a Docker container.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] docker <VERSION> [ARGUMENTS ...]
+eask [GLOBAL-OPTIONS] docker <VERSION> [ARGUMENTS ...]
 ```
 
 For example:
 
 ```sh
-$ eask docker 26.1 info
+eask docker 26.1 info
 ```
 
 This is the same as jumping right into Emacs 26.1 (in docker) and executing
@@ -417,7 +417,7 @@ Commands that help you manage your package's dependencies.
 List out all package archives.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] archives
+eask [GLOBAL-OPTIONS] archives
 ```
 
 ## 🔍 eask search
@@ -425,7 +425,7 @@ $ eask [GLOBAL-OPTIONS] archives
 Search packages from archives.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] search [QUEIRES..]
+eask [GLOBAL-OPTIONS] search [QUEIRES..]
 ```
 
 ## 🔍 eask upgrade
@@ -433,7 +433,7 @@ $ eask [GLOBAL-OPTIONS] search [QUEIRES..]
 Upgrade all packages.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] upgrade
+eask [GLOBAL-OPTIONS] upgrade
 ```
 
 ## 🔍 eask list
@@ -441,7 +441,7 @@ $ eask [GLOBAL-OPTIONS] upgrade
 List packages.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] list [--depth]
+eask [GLOBAL-OPTIONS] list [--depth]
 ```
 
 ## 🔍 eask outdated
@@ -449,7 +449,7 @@ $ eask [GLOBAL-OPTIONS] list [--depth]
 List out all outdated packages.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] outdated [--depth]
+eask [GLOBAL-OPTIONS] outdated [--depth]
 ```
 
 ## 🔍 eask refresh
@@ -457,7 +457,7 @@ $ eask [GLOBAL-OPTIONS] outdated [--depth]
 Download package archives.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] refresh
+eask [GLOBAL-OPTIONS] refresh
 ```
 
 # 🚩 Generating
@@ -471,7 +471,7 @@ Generate autoload file.
 Write a package autoloads to `project-autoloads.el` in the project root.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] generate autoloads
+eask [GLOBAL-OPTIONS] generate autoloads
 ```
 
 `project` is the project name, as declared in `Eask`-file. See
@@ -487,7 +487,7 @@ Write a package descriptor file to `project-pkg.el` in the project root.
 Alias: `pkg`, `pkg-el`
 
 ```sh
-$ eask [GLOBAL-OPTIONS] generate pkg-file
+eask [GLOBAL-OPTIONS] generate pkg-file
 ```
 
 `project` is the project name, as declared in `Eask`-file. See
@@ -499,7 +499,7 @@ for details.
 Generate recipe file.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] generate recipe [DESTINATION]
+eask [GLOBAL-OPTIONS] generate recipe [DESTINATION]
 ```
 
 If [DESTINATION] is not specified, it will generate to the `/recipes` folder
@@ -510,7 +510,7 @@ by default.
 Generate LICENSE file.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] generate license <name>
+eask [GLOBAL-OPTIONS] generate license <name>
 ```
 
 `name` is the type of the license, see https://api.github.com/licenses for all
@@ -526,7 +526,7 @@ to generate ignore file.
 Generate ignore file.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] generate ignore <name>
+eask [GLOBAL-OPTIONS] generate ignore <name>
 ```
 
 {{< hint info >}}
@@ -539,7 +539,7 @@ to generate ignore file.
 Create a new test project for the [ert][] tests.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] generate test ert [NAMES..]
+eask [GLOBAL-OPTIONS] generate test ert [NAMES..]
 ```
 
 ## 🔍 eask generate test ert-runner
@@ -547,7 +547,7 @@ $ eask [GLOBAL-OPTIONS] generate test ert [NAMES..]
 Create a new test project for the [ert-runner][].
 
 ```sh
-$ eask [GLOBAL-OPTIONS] generate test ert-runner [NAMES..]
+eask [GLOBAL-OPTIONS] generate test ert-runner [NAMES..]
 ```
 
 ## 🔍 eask generate test buttercup
@@ -555,7 +555,7 @@ $ eask [GLOBAL-OPTIONS] generate test ert-runner [NAMES..]
 Create a new [Buttercup][] setup for the project.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] generate test buttercup
+eask [GLOBAL-OPTIONS] generate test buttercup
 ```
 
 ## 🔍 eask generate test ecukes
@@ -563,7 +563,7 @@ $ eask [GLOBAL-OPTIONS] generate test buttercup
 Create a new [Ecukes][] setup for the project.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] generate test ecukes
+eask [GLOBAL-OPTIONS] generate test ecukes
 ```
 
 ## 🔍 eask generate workflow circle-ci
@@ -573,7 +573,7 @@ Generate [CircleCI][] workflow yaml file.
 The default filename is `config.yml`.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] generate workflow circle-ci [--file]
+eask [GLOBAL-OPTIONS] generate workflow circle-ci [--file]
 ```
 
 This will generate the yaml file under `.circleci/`!
@@ -585,7 +585,7 @@ Generate [GitHub Actions][] workflow yaml file.
 The default filename is `test.yml`.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] generate workflow github [--file]
+eask [GLOBAL-OPTIONS] generate workflow github [--file]
 ```
 
 This will generate the yaml file under `.github/workflow/`!
@@ -597,7 +597,7 @@ Generate [GitLab Runner][] workflow yaml file.
 The default filename is `.gitlab-ci.yml`.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] generate workflow gitlab [--file]
+eask [GLOBAL-OPTIONS] generate workflow gitlab [--file]
 ```
 
 ## 🔍 eask generate workflow travis-ci
@@ -607,7 +607,7 @@ Generate [Travis CI][] workflow yaml file.
 The default filename is `.travis.yml`.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] generate workflow travis-ci [--file]
+eask [GLOBAL-OPTIONS] generate workflow travis-ci [--file]
 ```
 
 # 🚩 Linking
@@ -622,7 +622,7 @@ Links the given *source* directory into the package directory of this project,
 under the given *package* name.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] link add <NAME> <PATH>
+eask [GLOBAL-OPTIONS] link add <NAME> <PATH>
 ```
 
 ## 🔍 eask link delete
@@ -632,7 +632,7 @@ Deletes the link for the given packages.
 Alias: `remove`
 
 ```sh
-$ eask [GLOBAL-OPTIONS] link delete [NAMES..]
+eask [GLOBAL-OPTIONS] link delete [NAMES..]
 ```
 
 ## 🔍 eask link list
@@ -640,7 +640,7 @@ $ eask [GLOBAL-OPTIONS] link delete [NAMES..]
 List all links.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] link list
+eask [GLOBAL-OPTIONS] link list
 ```
 
 # 🚩 Cleaning
@@ -654,13 +654,13 @@ Delete `.eask` from the current workspace.
 Alias: `.eask`
 
 ```sh
-$ eask [GLOBAL-OPTIONS] clean workspace
+eask [GLOBAL-OPTIONS] clean workspace
 ```
 
 ⛔️ Don't specify the option `--config, -c`, or else it will delete your entire `~/.emacs.d`.
 
 ```elisp
-$ eask clean workspace -g
+eask clean workspace -g
 ```
 
 ## 🔍 eask clean elc
@@ -668,7 +668,7 @@ $ eask clean workspace -g
 Delete all `.elc` files. This would respect to your `Eask` file.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] clean elc
+eask [GLOBAL-OPTIONS] clean elc
 ```
 
 ## 🔍 eask clean dist
@@ -678,7 +678,7 @@ Delete dist subdirectory.
 Alias: `distribution`
 
 ```sh
-$ eask [GLOBAL-OPTIONS] clean dist
+eask [GLOBAL-OPTIONS] clean dist
 ```
 
 ## 🔍 eask clean autoloads
@@ -686,7 +686,7 @@ $ eask [GLOBAL-OPTIONS] clean dist
 Remove generated autoloads file.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] clean autoloads
+eask [GLOBAL-OPTIONS] clean autoloads
 ```
 
 ## 🔍 eask clean pkg-file
@@ -694,7 +694,7 @@ $ eask [GLOBAL-OPTIONS] clean autoloads
 Remove generated pkg-file.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] clean pkg-file
+eask [GLOBAL-OPTIONS] clean pkg-file
 ```
 
 ## 🔍 eask clean log-file
@@ -702,7 +702,7 @@ $ eask [GLOBAL-OPTIONS] clean pkg-file
 Remove all generated log files.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] clean log-file
+eask [GLOBAL-OPTIONS] clean log-file
 ```
 
 ## 🔍 eask clean all
@@ -719,7 +719,7 @@ This command is the combination of all other clean commands.
 Alias: `everything`
 
 ```sh
-$ eask [GLOBAL-OPTIONS] clean all
+eask [GLOBAL-OPTIONS] clean all
 ```
 
 # 🚩 Linting
@@ -731,7 +731,7 @@ Commands that lint your Emacs package.
 Run [package-lint](https://github.com/purcell/package-lint).
 
 ```sh
-$ eask [GLOBAL-OPTIONS] lint package [FILES..]
+eask [GLOBAL-OPTIONS] lint package [FILES..]
 ```
 
 ## 🔍 eask lint checkdoc
@@ -739,7 +739,7 @@ $ eask [GLOBAL-OPTIONS] lint package [FILES..]
 Run checkdoc (built-in).
 
 ```sh
-$ eask [GLOBAL-OPTIONS] lint checkdoc [FILES..]
+eask [GLOBAL-OPTIONS] lint checkdoc [FILES..]
 ```
 
 ## 🔍 eask lint elint
@@ -747,7 +747,7 @@ $ eask [GLOBAL-OPTIONS] lint checkdoc [FILES..]
 Run elint (built-in).
 
 ```sh
-$ eask [GLOBAL-OPTIONS] lint elint [FILES..]
+eask [GLOBAL-OPTIONS] lint elint [FILES..]
 ```
 
 ## 🔍 eask lint elisp-lint
@@ -755,7 +755,7 @@ $ eask [GLOBAL-OPTIONS] lint elint [FILES..]
 Run [elisp-lint](https://github.com/gonewest818/elisp-lint).
 
 ```sh
-$ eask [GLOBAL-OPTIONS] lint elisp-lint [FILES..]
+eask [GLOBAL-OPTIONS] lint elisp-lint [FILES..]
 ```
 
 This does respect the `.dir-locals.el` file! 🎉
@@ -765,7 +765,7 @@ This does respect the `.dir-locals.el` file! 🎉
 Run [elsa](https://github.com/emacs-elsa/Elsa).
 
 ```sh
-$ eask [GLOBAL-OPTIONS] lint lint elsa [FILES..]
+eask [GLOBAL-OPTIONS] lint lint elsa [FILES..]
 ```
 
 ## 🔍 eask lint indent
@@ -773,7 +773,7 @@ $ eask [GLOBAL-OPTIONS] lint lint elsa [FILES..]
 Run indent-lint.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] lint indent [FILES..]
+eask [GLOBAL-OPTIONS] lint indent [FILES..]
 ```
 
 ## 🔍 eask lint keywords
@@ -781,7 +781,7 @@ $ eask [GLOBAL-OPTIONS] lint indent [FILES..]
 Run keywords checker (built-in).
 
 ```sh
-$ eask [GLOBAL-OPTIONS] lint keywords
+eask [GLOBAL-OPTIONS] lint keywords
 ```
 
 ## 🔍 eask lint license
@@ -789,7 +789,7 @@ $ eask [GLOBAL-OPTIONS] lint keywords
 Run license check.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] lint license
+eask [GLOBAL-OPTIONS] lint license
 ```
 
 ## 🔍 eask lint declare
@@ -797,7 +797,7 @@ $ eask [GLOBAL-OPTIONS] lint license
 Run check-declare (built-in).
 
 ```sh
-$ eask [GLOBAL-OPTIONS] lint declare [FILES..]
+eask [GLOBAL-OPTIONS] lint declare [FILES..]
 ```
 
 ## 🔍 eask lint regexps
@@ -807,7 +807,7 @@ Run [relint](https://github.com/mattiase/relint).
 Alias: `lint relint`
 
 ```sh
-$ eask [GLOBAL-OPTIONS] lint regexps [FILES..]
+eask [GLOBAL-OPTIONS] lint regexps [FILES..]
 ```
 
 # 🚩 Testing
@@ -819,7 +819,7 @@ Run regression/unit tests.
 Activate package; use to test the package activation
 
 ```sh
-$ eask [GLOBAL-OPTIONS] activate [FILES..]
+eask [GLOBAL-OPTIONS] activate [FILES..]
 ```
 
 {{< hint info >}}
@@ -833,7 +833,7 @@ $ eask [GLOBAL-OPTIONS] activate [FILES..]
 Run [ert][] tests.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] test ert [FILES..]
+eask [GLOBAL-OPTIONS] test ert [FILES..]
 ```
 
 ## 🔍 eask test ert-runner
@@ -841,7 +841,7 @@ $ eask [GLOBAL-OPTIONS] test ert [FILES..]
 Run [ert][] test using [ert-runner][].
 
 ```sh
-$ eask [GLOBAL-OPTIONS] test ert-runner
+eask [GLOBAL-OPTIONS] test ert-runner
 ```
 
 ## 🔍 eask test buttercup
@@ -849,7 +849,7 @@ $ eask [GLOBAL-OPTIONS] test ert-runner
 Run [buttercup][] tests.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] test buttercup
+eask [GLOBAL-OPTIONS] test buttercup
 ```
 
 ## 🔍 eask test ecukes
@@ -857,7 +857,7 @@ $ eask [GLOBAL-OPTIONS] test buttercup
 Run [ecukes][] tests.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] test ecukes [FILES..]
+eask [GLOBAL-OPTIONS] test ecukes [FILES..]
 ```
 
 ## 🔍 eask test melpazoid
@@ -865,7 +865,7 @@ $ eask [GLOBAL-OPTIONS] test ecukes [FILES..]
 Run [melpazoid][] tests.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] test melpazoid [DIRECTORIES..]
+eask [GLOBAL-OPTIONS] test melpazoid [DIRECTORIES..]
 ```
 
 {{< hint info >}}
@@ -881,7 +881,7 @@ Commands that formats your Emacs source files.
 Run [elisp-autofmt][] formatter.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] format elisp-autofmt [FILES..]
+eask [GLOBAL-OPTIONS] format elisp-autofmt [FILES..]
 ```
 
 ## 🔍 eask format elfmt
@@ -889,7 +889,7 @@ $ eask [GLOBAL-OPTIONS] format elisp-autofmt [FILES..]
 Run [elfmt][] formatter.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] format elfmt [FILES..]
+eask [GLOBAL-OPTIONS] format elfmt [FILES..]
 ```
 
 # 🚩 Control DSL
@@ -901,7 +901,7 @@ List of commands that control DSL.
 Add an archive source.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] source add <NAME> [URL]
+eask [GLOBAL-OPTIONS] source add <NAME> [URL]
 ```
 
 ## 🔍 eask source delete
@@ -911,7 +911,7 @@ Remove an archive source.
 Alias: `remove`
 
 ```sh
-$ eask [GLOBAL-OPTIONS] source delete <NAME>
+eask [GLOBAL-OPTIONS] source delete <NAME>
 ```
 
 ## 🔍 eask source list
@@ -919,11 +919,11 @@ $ eask [GLOBAL-OPTIONS] source delete <NAME>
 List all source information.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] source list
+eask [GLOBAL-OPTIONS] source list
 ```
 
 {{< hint info >}}
-💡 This command is the same as `$ eask archives`!
+💡 This command is the same as `eask archives`!
 {{< /hint >}}
 
 # 🚩 Utilities
@@ -937,7 +937,7 @@ Upgrade Eask to the latest version.
 Alias: `upgrade-self`
 
 ```sh
-$ eask [GLOBAL-OPTIONS] upgrade-eask
+eask [GLOBAL-OPTIONS] upgrade-eask
 ```
 
 {{< hint warning >}}
@@ -949,7 +949,7 @@ $ eask [GLOBAL-OPTIONS] upgrade-eask
 Show Eask installed location.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] locate
+eask [GLOBAL-OPTIONS] locate
 ```
 
 # 🚩 Checker
@@ -961,7 +961,7 @@ Commands to check your Eask-file.
 Lint an `Eask`-file.
 
 ```sh
-$ eask [GLOBAL-OPTIONS] analyze [FILES..]
+eask [GLOBAL-OPTIONS] analyze [FILES..]
 ```
 
 Example:
@@ -990,7 +990,7 @@ This will use `~/.eask/` instead of the package development environment.
 This is used for other tasks. e.g., `cat`, etc.
 
 ```sh
-$ eask -g [COMMAND]
+eask -g [COMMAND]
 ```
 
 ## 🔍 --config, -c
@@ -1001,7 +1001,7 @@ This is used for doing stuff for your **Emacs configuration**. e.g., package
 management, etc.
 
 ```sh
-$ eask -c [COMMAND]
+eask -c [COMMAND]
 ```
 
 ## 🔍 --all, -a
@@ -1009,7 +1009,7 @@ $ eask -c [COMMAND]
 Enable the `all` flag.
 
 ```sh
-$ eask -a [COMMAND]
+eask -a [COMMAND]
 ```
 
 ## 🔍 --quick, -q
@@ -1017,7 +1017,7 @@ $ eask -a [COMMAND]
 Start cleanly without loading the configuration files.
 
 ```sh
-$ eask -q [COMMAND]
+eask -q [COMMAND]
 ```
 
 ## 🔍 --force, -f
@@ -1027,7 +1027,7 @@ Force command's execution.
 Force to uninstall the package `dash` even it's a dependency from another packages.
 
 ```sh
-$ eask -f [COMMAND]
+eask -f [COMMAND]
 ```
 
 ## 🔍 --debug
@@ -1083,7 +1083,7 @@ Show elapsed time between each operation.
 Set verbosity from 0 to 5.
 
 ```sh
-$ eask --verbose 4 [COMMAND]
+eask --verbose 4 [COMMAND]
 ```
 
 ## 🔍 --version
@@ -1101,7 +1101,7 @@ Show help.
 Set Emacs proxy for HTTP and HTTPS:
 
 ```sh
-$ eask --proxy "localhost:8888" [COMMAND]
+eask --proxy "localhost:8888" [COMMAND]
 ```
 
 ## 🔍 --http-proxy `<proxy>`
