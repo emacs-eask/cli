@@ -90,6 +90,22 @@ jobs:
       - setup-linux
       - test
 
+  test-ubuntu-emacs-29:
+    docker:
+      - image: silex/emacs:29-ci
+        entrypoint: bash
+    steps:
+      - setup-linux
+      - test
+
+  test-ubuntu-emacs-30:
+    docker:
+      - image: silex/emacs:30-ci
+        entrypoint: bash
+    steps:
+      - setup-linux
+      - test
+
   test-ubuntu-emacs-master:
     docker:
       - image: silex/emacs:master-ci
@@ -122,6 +138,8 @@ workflows:
       - test-ubuntu-emacs-26
       - test-ubuntu-emacs-27
       - test-ubuntu-emacs-28
+      - test-ubuntu-emacs-29
+      - test-ubuntu-emacs-30
       - test-ubuntu-emacs-master
       - test-macos-emacs-latest
       - test-windows-emacs-latest
@@ -129,11 +147,11 @@ workflows:
 
 This example is testing your Emacs Lisp package in the below environment;
 
-| OS             | Emacs                              | Eask   |
-|----------------|------------------------------------|--------|
-| Linux (Ubuntu) | `26.x`, `27.x`, `28.x`, `snapshot` | latest |
-| macOS          | `snapshot`                         | latest |
-| Windows        | `snapshot`                         | latest |
+| OS             | Emacs                                              | Eask   |
+|----------------|----------------------------------------------------|--------|
+| Linux (Ubuntu) | `26.x`, `27.x`, `28.x`, `29.x`, `30.x`, `snapshot` | latest |
+| macOS          | `snapshot`                                         | latest |
+| Windows        | `snapshot`                                         | latest |
 
 {{< hint info >}}
 💡 You can generate workflow file via `eask generate workflow circle-ci`, see 

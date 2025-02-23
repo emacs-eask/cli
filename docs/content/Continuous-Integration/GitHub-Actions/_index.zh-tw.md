@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        emacs-version: [26.3, 27.2, 28.2, 29.1, snapshot]
+        emacs-version: [26.3, 27.2, 28.2, 29.4, 30.1, snapshot]
 
     steps:
     - uses: actions/checkout@v3
@@ -42,11 +42,11 @@ jobs:
 
 此示例在以下環境中測試您的 Emacs Lisp 包；
 
-| OS             | Emacs                                      | Eask   |
-|----------------|--------------------------------------------|--------|
-| Linux (Ubuntu) | `26.x`, `27.x`, `28.x`, `29.x`, `snapshot` | latest |
-| macOS          | `26.x`, `27.x`, `28.x`, `29.x`, `snapshot` | latest |
-| Windows        | `26.x`, `27.x`, `28.x`, `29.x`, `snapshot` | latest |
+| OS             | Emacs                                              | Eask   |
+|----------------|----------------------------------------------------|--------|
+| Linux (Ubuntu) | `26.x`, `27.x`, `28.x`, `29.x`, `30.x`, `snapshot` | latest |
+| macOS          | `26.x`, `27.x`, `28.x`, `29.x`, `30.x`, `snapshot` | latest |
+| Windows        | `26.x`, `27.x`, `28.x`, `29.x`, `30.x`, `snapshot` | latest |
 
 通過以下`操作`，
 
