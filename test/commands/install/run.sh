@@ -35,10 +35,10 @@ eask package
 eask install
 
 echo "Install by sepcifying packages"
-eask install beacon company-fuzzy lsp-ltex
+eask install beacon company-fuzzy transwin
 
 echo "Uninstall by sepcifying packages"
-eask uninstall beacon lsp-ltex
+eask uninstall beacon transwin
 
 echo "Uninstall project package"
 eask uninstall
