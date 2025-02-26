@@ -681,14 +681,6 @@ Argument BODY are forms for execution."
         (eask-pkg-init)
         (unless (eask-package-installable-p pkg)
           (eask-error "Package not installable `%s'; make sure the package archive (source) is included" pkg))))
-     ((when-let* ((desc (eask-package-desc pkg))
-                  (req-emacs (assoc 'emacs (package-desc-reqs desc)))
-                  (req-emacs (package-version-join (nth 0 (cdr req-emacs))))
-                  ((version< emacs-version req-emacs)))
-        (eask-print "  - %sSkipping %s (%s)... "
-                    eask--action-prefix
-                    pkg version)
-        (eask-error "Package requires Emacs %s and above ✗" req-emacs)))
      (t
       (eask--pkg-process pkg
         (eask-with-progress
