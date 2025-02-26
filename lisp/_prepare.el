@@ -685,13 +685,10 @@ Argument BODY are forms for execution."
                   (req-emacs (assoc 'emacs (package-desc-reqs desc)))
                   (req-emacs (package-version-join (nth 0 (cdr req-emacs))))
                   ((version< emacs-version req-emacs)))
-        (if (eask-strict-p)
-            (eask-error "  - %sSkipping %s (%s)... it requires Emacs %s and above ✗"
-                        eask--action-prefix
-                        pkg (eask-package--version-string pkg) req-emacs)
-          (eask-msg "  - %sSkipping %s (%s)... it requires Emacs %s and above ✗"
+        (eask-print "  - %sSkipping %s (%s)... "
                     eask--action-prefix
-                    name version (ansi-yellow req-emacs)))))
+                    pkg version)
+        (eask-error "Package requires Emacs %s and above ✗" req-emacs)))
      (t
       (eask--pkg-process pkg
         (eask-with-progress
