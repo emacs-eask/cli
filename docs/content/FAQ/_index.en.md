@@ -87,10 +87,9 @@ The example error message,
 Package not installable `helm'; make sure package archives are included
 ```
 
-You would need to first ask yourself; where does the package came from and what
-specific source holds this package information. From the above example message,
-`helm` is listed on the `melpa` source. You would have to edit your **Eask**-file
-like this:
+First, determine the origin of the package and the specific source that
+provides its information. In the example above, `helm` is listed under the
+`melpa` source. To properly include it, update your **Eask**-file as follows:
 
 ```elisp
 ...
@@ -99,6 +98,25 @@ like this:
 
 (depends-on "helm")
 ```
+
+## ❓ Why am I seeing the error: "Package `emacs-XX.X' is unavailable"?
+
+The example error message,
+
+```
+Loading package information... done v
+Installing 1 specified package...
+
+  - [1/1] Installing markdown-mode (20250226.231)... Package `emacs-28.1' is unavailable
+Wrong type argument: package-desc, nil
+```
+
+This error occurs when Emacs attempts to install a package that requires a newer
+version of Emacs. In some cases, the requirement does not come directly from
+the package itself but from one of its dependencies.
+
+You can either refrain from using this package or upgrade Emacs to the
+required version.
 
 ## ❓ Why am I getting git errors with status 2?
 

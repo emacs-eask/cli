@@ -87,6 +87,23 @@ Package not installable `helm'; make sure package archives are included
 (depends-on "helm")
 ```
 
+## ❓ 為什麼我會看到錯誤？「Package emacs-XX.X' is unavailable」?
+
+示例錯誤消息，
+
+```
+Loading package information... done v
+Installing 1 specified package...
+
+  - [1/1] Installing markdown-mode (20250226.231)... Package `emacs-28.1' is unavailable
+Wrong type argument: package-desc, nil
+```
+
+當 Emacs 嘗試安裝一個需要較新版本 Emacs 的套件時，就會發生這個錯誤。
+在某些情況下，此需求並非直接來自套件本身，而是來自其依賴的其中一個套件。
+
+您可以選擇不使用這個套件，或是將 Emacs 升級到所需的版本。
+
 ## ❓ 為什麼我會收到狀態為 2 的 git 錯誤？
 
 如果您收到此示例錯誤消息:
