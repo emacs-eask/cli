@@ -96,15 +96,16 @@ list.
 
 ## 📰 News
 
-- `0.9.x` - Improve UX in general
-- `0.8.x` - Add `link` command
-- `0.7.x` - Fix `default-directory` isn't honored by **-g** option
-- `0.6.x` - You can now use `eask create` to create an Elisp project
-- `0.5.x` - Handle error for failed archive
-- `0.4.x` - Add color logger
-- `0.3.x` - Add verbosity level and timestamps
-- `0.2.x` - Done basic error handling with exit code at the end of executions
-- `0.1.39` - Use `spawn` instead `exec`; now messages will be printed immediately
+- `0.10.x` - Add five new commands and improve the default user experience.
+- `0.9.x` - Enhance overall user experience.
+- `0.8.x` - Add `link` command.
+- `0.7.x` - Fix `default-directory` isn't honored by **-g** option.
+- `0.6.x` - You can now use `eask create` to create an Elisp project.
+- `0.5.x` - Handle error for failed archive.
+- `0.4.x` - Add color logger.
+- `0.3.x` - Add verbosity level and timestamps.
+- `0.2.x` - Done basic error handling with exit code at the end of executions.
+- `0.1.39` - Use `spawn` instead `exec`; now messages will be printed immediately.
 - `0.1.x` - Project bare-bones are pretty much complete!
 
 ## 📝 Todo list
