@@ -106,7 +106,6 @@ list.
 - `0.3.x` - Add verbosity level and timestamps.
 - `0.2.x` - Done basic error handling with exit code at the end of executions.
 - `0.1.39` - Use `spawn` instead `exec`; now messages will be printed immediately.
-- `0.1.x` - Project bare-bones are pretty much complete!
 
 ## 📝 Todo list
 
