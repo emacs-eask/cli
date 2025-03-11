@@ -22,27 +22,31 @@ purposes! But here are Eask aims to be:
 - **Robust** enough to provide useful results even in the presence of user errors
 - **Dependency-free** so that the tool can be run on any platform
 
-*P.S. See [Why Eask?](https://emacs-eask.github.io/#-why-eask) for more detailed
+*📝 P.S. See [Why Eask?](https://emacs-eask.github.io/#-why-eask) for more detailed
 information.*
 
 ## ❓ Why Eask?
 
-`Eask` has the same philosophy as Cask, see their site [Why Cask?](https://cask.readthedocs.io/en/latest/guide/introduction.html#introduction-why-cask)
-to understand why you should use Eask (or Cask).
+`Eask` follows the same philosophy as [Cask][]. To understand why you should use
+`Eask` (or [Cask][]), check out the [Why Cask?](https://cask.readthedocs.io/en/latest/guide/introduction.html#introduction-why-cask)
+section on their website.
 
-Many tools like [Cask][], [makem.sh][], or [Eldev][] don't **"really"** support
-Windows. `Cask` has dropped support for Legacy Windows, `makem.sh` runs on bash,
-`Eldev` does support Windows, but the author doesn't use it on Windows (not
-having full tests, see their
-[CI workflows](https://github.com/doublep/eldev/actions/workflows/test.yml)).
-`Eask` aims to adapt all platforms, including `Linux`, `macOS`, and `Windows`.
-It focuses on the cross-platform capability and the consistency between each
-OS. If Eask works on your machine, then it will work on any platform.
+Many tools, such as [Cask][], [makem.sh][], and [Eldev][], don’t fully support Windows.
+`Cask` has dropped support for Legacy Windows, `makem.sh` relies on Bash, and while
+`Eldev` does support Windows, its author doesn’t actively use it on the platform,
+meaning it lacks full testing (as seen in their CI workflows). In contrast, `Eask`
+is designed to work across all major platforms, including Linux, macOS, and Windows
+It prioritizes cross-platform compatibility and ensures consistency across different
+operating systems. If `Eask` runs on your machine, it will work reliably on any platform.
 
-Here are our suggestions; if you plan to work on an OS-specific package (never
-going to other platforms), go for other tools. On the other hand, Eask aims to
-provide the best consistency between each OS. Alternatively, if you want to
-learn a tool that works everywhere, Eask is one of the best choices.
+Here’s our recommendation: if you’re developing an OS-specific package that will never
+need cross-platform support, other tools may be a better fit. However, if you want a
+tool that ensures seamless consistency across different operating systems, Eask is an excellent choice.
+
+Another major advantage of `Eask` is its transparency—there are no hidden workflows
+or obscure processes running in the background. Additionally, `Eask` strictly
+avoids hacks or workaround fixes, ensuring that solutions are clean, maintainable,
+and aligned with best practices.
 
 ## ⚖️ Comparisons
 

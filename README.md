@@ -26,7 +26,7 @@ purposes! But here are Eask aims to be:
 - **Robust** enough to provide useful results even in the presence of user errors
 - **Dependency-free** so that the tool can be run on any platform
 
-*P.S. See [Why Eask?](https://emacs-eask.github.io/Getting-Started/Introduction/#-why-eask) for more detailed
+*📝 P.S. See [Why Eask?](https://emacs-eask.github.io/Getting-Started/Introduction/#-why-eask) for more detailed
 information.*
 
 ## 🔗 Links

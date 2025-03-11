@@ -23,19 +23,20 @@ Eask 被構建為用作 Elisp 包中的包開發工具。 但是現在，Eask �
 
 ## ❓ 為什麼選擇 Eask？
 
-`Eask` 與 Cask 具有相同的理念，請參閱他們的網站 [Why Cask?](https://cask.readthedocs.io/en/latest/guide/introduction.html#introduction-why-cask)
-以了解您為什麼應該這樣做, 使用 Eask（或 Cask）。
+`Eask` 遵循與 [Cask][] 相同的理念。若要瞭解為何要使用 `Eask` (或 [Cask][])，請查看其網站上的
+[Why Cask?](https://cask.readthedocs.io/en/latest/guide/introduction.html#introduction-why-cask)。
 
-[Cask][]、[makem.sh][] 或 [Eldev][] 等許多工具並不**“真正”**支持 Windows。 `Cask`
-已經放棄了對舊版 Windows 的支持，`makem.sh` 在 bash 上運行，`Eldev` 確實支持 Windows，
-但作者沒有在 Windows 上使用它（沒有完整的測試，請參閱他們的
-[CI 工作流程]（https //github.com/doublep/eldev/actions/workflows/test.yml））。
-`Eask` 旨在適配所有平台，包括 `Linux`、`macOS` 和 `Windows`。 它側重於跨平台能力和每個
-操作系統之間的一致性。 如果 Eask 可以在您的機器上運行，那麼它也可以在任何平台上運行。
+許多工具，例如 [Cask][]、[makem.sh][] 和 [Eldev][]，並不完全支援 Windows。
+`Cask` 已經放棄對傳統 Windows 的支援，`makem.sh` 則依賴 Bash，而 Eldev 雖然支援 Windows，
+但其作者並未在該平台上積極使用，這意味著它缺乏完整的測試（從其 CI 工作流程中可以看出）。
+相較之下，`Eask` 的設計可在所有主要平台上運作，包括 Linux、macOS 和 Windows 它優先處理跨平台相容性，
+並確保不同作業系統之間的一致性。如果 `Eask` 在您的機器上運行，它將可靠地在任何平台上運行。
 
-這是我們的建議； 如果您打算在特定於操作系統的軟件包上工作（從不使用其他平台），請使用其他工具。
-另一方面，Eask 旨在提供每個操作系統之間的最佳一致性。 或者，如果你想學習一個隨處可用的工具，
-Eask 是最好的選擇之一。
+以下是我們的建議：如果您要開發一個永遠不需要跨平台支援的特定作業系統套件，其他工具可能更適合
+。但是，如果您想要一個能夠確保跨不同作業系統的無縫一致性的工具，`Eask` 是一個絕佳的選擇。
+
+`Eask` 的另一大優勢是它的透明性--沒有隱藏的工作流程，也沒有在背景中運行的隱晦進程。
+此外，`Eask` 嚴格避免駭客或變通修正，確保解決方案乾淨、可維護且符合最佳實務。
 
 ## ⚖️ 比較
 
