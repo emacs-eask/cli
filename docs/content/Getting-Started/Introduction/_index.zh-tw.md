@@ -19,7 +19,7 @@ Eask 被構建為用作 Elisp 包中的包開發工具。 但是現在，Eask �
 - **穩健**即使在出現用戶錯誤的情況下也足以提供有用的結果
 - **無依賴**，使該工具可以在任何平台上運行
 
-*附言 有關更多詳細信息，請參閱[為什麼使用 Eask？](https://emacs-eask.github.io/#-why-eask)。*
+*📝 附言 有關更多詳細信息，請參閱[為什麼使用 Eask？](https://emacs-eask.github.io/#-why-eask)。*
 
 ## ❓ 為什麼選擇 Eask？
 
