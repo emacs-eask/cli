@@ -3,23 +3,23 @@ title: 🚪 介紹
 weight: 0
 ---
 
-Eask 被構建為用作 Elisp 包中的包開發工具。 但是現在，Eask 支持各種類型的 Emacs Lisp 任務。
-它可以通過三種主要方式使用：
+Eask 原本是為 Elisp 專案設計的套件開發工具。然而，它後來擴展到支援廣泛的 Emacs Lisp 任務。
+現在它可以用在三個主要方面：
 
-1. Elisp 包的開發工具
-2. 配置的依賴管理
-3. 為所有其他目的運行 elisp 程序
+1. 作為 Elisp 套件的開發工具。
+2. 用於管理 Emacs 設定中的相依性。
+3. 運行 Elisp 程式以達到各種目的 （本質上作為運行時）。
 
-那麼，除上述內容外，Eask 與其他構建工具（如 [Cask][]、[makem.sh][] 和 [Eldev][] 之間的主要區別是什麼？
+考慮到這些功能，Eask 與 [Cask][]、[makem.sh][] 和 [Eldev][] 等其他編譯工具有何不同？
 
-好問題！ Eask 現在不僅僅是一個構建工具，它可以用於各種目的！ 但 Eask 的目標是：
+很好的問題！Eask 已經不僅僅是一個編譯工具，它還具有多種用途！以下是 Eask 的目標：
 
-- **一致**足以跨所有系統進行沙盒
-- **通用**足以讓 Emacsers 經常使用命令（`byte-compile`、`checkdoc` 等）
-- **穩健**即使在出現用戶錯誤的情況下也足以提供有用的結果
-- **無依賴**，使該工具可以在任何平台上運行
+- **一致性**： 在所有系統中提供可靠的沙箱環境。
+- **多功能**： 包含常用的 Emacs 指令，如 `byte-compilation`、`checkdoc` 等。
+- **可靠**： 即使發生使用者錯誤，也能提供有用的結果。
+- **輕量級**： 可在任何平台上執行，無須依賴任何平台。
 
-*📝 附言 有關更多詳細信息，請參閱[為什麼使用 Eask？](https://emacs-eask.github.io/#-why-eask)。*
+*📝 P.S. 詳細資訊請參閱 [為什麼選擇 Eask？](https://emacs-eask.github.io/zh-tw/Getting-Started/Introduction/#-%e7%82%ba%e4%bb%80%e9%ba%bc%e9%81%b8%e6%93%87-eask)。*
 
 ## ❓ 為什麼選擇 Eask？
 

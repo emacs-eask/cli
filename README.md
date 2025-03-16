@@ -7,24 +7,23 @@
 [![Release](https://img.shields.io/github/release/emacs-eask/cli.svg?logo=github)](https://github.com/emacs-eask/cli/releases/latest)
 [![Discord](https://img.shields.io/discord/1131434607213023262?label=Discord&logo=discord&logoColor=white&color=7289DA)](https://discord.gg/E9zzjWGfFD)
 
-Eask was built to use as a package development tool in your Elisp packages. But
-now, Eask supports various types of Emacs Lisp tasks. It can be used in three
-major ways:
+Eask was originally designed as a package development tool for Elisp projects.
+However, it has since expanded to support a wide range of Emacs Lisp tasks.
+It can now be used in three major ways:
 
-1. Dev tool for Elisp packages
-2. Dependency management for your configuration
-3. Run elisp programs for all other purposes
+1. As a development tool for Elisp packages.
+2. For managing dependencies in your Emacs configuration.
+3. To run Elisp programs for a variety of purposes (essentially functioning as a runtime).
 
-So, other than the things above, what are the major differences between Eask
-and other build tools like [Cask][], [makem.sh][], and [Eldev][]?
+With these capabilities in mind, what sets Eask apart from other build tools
+like [Cask][], [makem.sh][], and [Eldev][]?
 
-Good question! Eask is more than a build tool now, it can be used for various
-purposes! But here are Eask aims to be:
+Great question! Eask has evolved beyond just a build tool—it serves multiple purposes! Here’s what Eask aims to be:
 
-- **Consistent** enough to sandbox across all systems
-- **General** enough to have Emacsers frequently used commands (`byte-compile`, `checkdoc`, etc)
-- **Robust** enough to provide useful results even in the presence of user errors
-- **Dependency-free** so that the tool can be run on any platform
+- **Consistent**: Provides a reliable sandboxing environment across all systems.
+- **Versatile**: Includes commonly used Emacs commands like `byte-compilation`, `checkdoc`, and more.
+- **Robust**: Delivers useful results even when user errors occur.
+- **Lightweight**: Runs on any platform without dependencies.
 
 *📝 P.S. See [Why Eask?](https://emacs-eask.github.io/Getting-Started/Introduction/#-why-eask) for more detailed
 information.*
