@@ -14,7 +14,7 @@ weight: 900
 答案是 **不**.
 
 Eask 在每個版本上構建本機可執行文件，您可以從我們的[發布頁面](https://github.com/emacs-eask/cli/releases)
-下載！ 但是，如果您要開發 Eask，那就需要需要 Node.JS！
+下載！ 但是，如果您要開發 Eask，那就需要需要 [Node.JS][]！
 
 ## ❓ 誰應該使用這個工具？
 
@@ -31,14 +31,27 @@ Eask 在每個版本上構建本機可執行文件，您可以從我們的[發�
 
 ## ❓ 為什麼選擇 Node.JS?
 
-Node 對各種終端應用程序有更好的支持（相比 shell 腳本）！ 比如豐富多彩的界面，整個 npm 社區等等。
+[Node][Node.js] 對各種終端應用程序有更好的支持（相比 shell 腳本）！ 比如豐富多彩的界面，整個 [npm][] 社區等等。
 所以你可以更輕鬆地構建跨平台軟件！ 尤其是在微軟之後已經購買了 NPM 公司，並且可能會很好地支持他
 們自己的系統。
 
-在 0.8.6 版本之後，Cask 似乎不支持 Windows（無 WSL）。 在裡面早期版本，他們使用的是 Python
-但由於 Python 在 Windows 上的支持只是不如 Node.JS。
+在 `0.8.6` 版本之後，[Cask][] 似乎不支持 Windows（但支援 [WSL][]）。 在裡面早期版本，他們使用的是 [Python][]
+但由於 [Python][] 在 Windows 上的支持只是不如 [Node.JS][]。
 
 有關詳細信息，請參閱[問題 #140](https://github.com/emacs-eask/cli/issues/140)！
+
+## ❓ 為什麼選擇 JavaScript?
+
+我可以使用許多語言來建立 Eask，為什麼我選擇 [JavaScript][]？
+
+我有三個理由
+
+- [JavaScript][] 容易學習。
+- 得益於 [Node.js][] runtime，它提供了極佳的跨平台兼容性。
+- 我恰好了解 [JavaScript][]，而且用起來得心應手。
+
+我也考慮過 [Rust][] 和 [Common Lisp][]。然而，當我開始這個專案時，[Rust][]
+仍是比較新的語言，而 [Common Lisp][] 雖然功能強大，但學習曲線較陡，而且經常被視為有點落伍。因此，我選擇了 JavaScript。
 
 ## ❓ 為什麼選擇 yargs?
 
@@ -46,11 +59,11 @@ Node 對各種終端應用程序有更好的支持（相比 shell 腳本）！ �
 最重要的是，這是在 Linux、macOS 和 Windows 上運行良好的工具之一。
 
 與 Eask 和其他替代方案相比，也存在主要差異。[Cask][]、[makem.sh][] 或 [Eldev][] 更依賴於
-`batch` 和 `bash`。 我們選擇了一個路線不同，想把繁重的任務交給高層編程語言，**`JavaScript`**。
+`batch` 和 `bash`。 我們選擇了一個路線不同，想把繁重的任務交給高層編程語言，[JavaScript][]。
 開髮變得更加容易，因為我們不再需要關心不同類型的 shell！
 
-缺點是 NodeJS 的 runtime，但我們可以簡單地打包整個 CLI 程序變成可執行文件！ 這樣我們就不需要安裝
-`Node` 和`npm`！
+缺點是 [Node.JS][] 的 runtime，但我們可以簡單地打包整個 CLI 程序變成可執行文件！ 這樣我們就不需要安裝
+[Node][Node.js] 和 [npm][]！
 
 # 🔍 用法
 
@@ -150,8 +163,17 @@ Error: Process completed with exit code 1.
 <!-- Links -->
 
 [emacs-eask/archives]: https://github.com/emacs-eask/archives
+
 [Cask]: https://github.com/cask/cask
 [makem.sh]: https://github.com/alphapapa/makem.sh
 [Eldev]: https://github.com/doublep/eldev
 
+[Node.js]: https://nodejs.org/
+[npm]: https://www.npmjs.com/
 [yargs]: https://www.npmjs.com/package/yargs
+
+[WSL]: https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux
+[JavaScript]: https://simple.wikipedia.org/wiki/JavaScript
+[Python]: https://www.python.org/
+[Rust]: https://www.rust-lang.org/
+[Common Lisp]: https://lisp-lang.org/
