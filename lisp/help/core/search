@@ -1,4 +1,4 @@
 
-💡 You would need to specify queries to do search operations
+💡 You need to specify queries to search for
 
     $ eask search QUERY-1 QUERY-2 ..

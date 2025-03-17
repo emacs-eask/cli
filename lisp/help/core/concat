@@ -1,4 +1,4 @@
 
-💡 You would need to specify the [names..] in order to make concatenation!
+💡 You need to specify the file [names..] in order to concatenate!
 
     $ eask concat [names..]
