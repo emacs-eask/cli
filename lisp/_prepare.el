@@ -1870,14 +1870,14 @@ Arguments FNC and ARGS are used for advice `:around'."
               (erase-buffer)
               (insert buf-str))
             (eask--help-display)))
-      (eask-error "Help manual missig %s" help-file))))
+      (eask-error "Help manual missing %s" help-file))))
 
 ;;
 ;;; Checker
 
 (defun eask--checker-existence ()
   "Return errors if required metadata is missing."
-  (unless eask-package (eask-error "Missing metadata package; make sure you have create Eask-file with $ eask init!")))
+  (unless eask-package (eask-error "Missing metadata package; make sure you have created an Eask-file with $ eask init!")))
 
 (defun eask--check-strings (fmt f p &rest args)
   "Test strings (F and P); then print FMT and ARGS if not equal."
