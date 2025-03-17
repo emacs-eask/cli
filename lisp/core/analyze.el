@@ -152,6 +152,6 @@ Argument LEVEL and MSG are data from the debug log signal."
    ;; Default, print help!
    (t
     (eask-info "(No Eask-files have been checked)")
-    (eask-help "checker/analyze"))))
+    (eask-help "core/analyze"))))
 
 ;;; core/analyze.el ends here
