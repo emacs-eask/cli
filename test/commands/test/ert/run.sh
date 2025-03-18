@@ -22,6 +22,8 @@
 
 set -e
 
+source ./test/fixtures/home/scripts/testing.sh
+
 echo "Test command 'ert'..."
 cd $(dirname "$0")
 
@@ -30,3 +32,6 @@ eask test ert ./test/*.el
 # regression
 echo "Test ert: nil message"
 eask test ert ./test-nil-message/*.el
+
+echo "Testing ert command... no files"
+should_error eask test ert

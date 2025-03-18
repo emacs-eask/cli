@@ -17,41 +17,36 @@
 
 ## Commentary:
 #
-# Test commands related to install, and uninstall
+# Test command/lint errors
 #
 
 set -e
 
 source ./test/fixtures/home/scripts/testing.sh
 
-echo "Test commands related to install, and uninstall"
-
 # Naviate to the test package
-cd "./test/fixtures/mini.pkg.1/"
-
-echo "Install dependencies"
-eask install-deps
-
-echo "Install project package"
-eask package
-eask install
-
-echo "Install by sepcifying packages"
-eask install beacon company-fuzzy transwin
-
-echo "Uninstall by sepcifying packages"
-eask uninstall beacon transwin
-
-echo "Uninstall project package"
-eask uninstall
-
-echo "Test eask install ... no files"
-cd -
 cd $(dirname "$0")
-should_error eask install
 
-echo "Test eask uninstall ... no files"
-should_error eask uninstall
+echo "Testing lint checkdoc command... no files"
+should_error eask lint checkdoc
 
-echo "Test eask reinstall ... no files"
-should_error eask reinstall
+echo "Testing lint declare command... no files"
+should_error eask lint declare
+
+echo "Testing lint elint command... no files"
+should_error eask lint elint
+
+echo "Testing lint elisp-lint command... no files"
+should_error eask lint elisp-lint
+
+echo "Testing lint elsa command... no files"
+should_error eask lint elsa
+
+echo "Testing lint indent command... no files"
+should_error eask lint indent
+
+echo "Testing lint keywords command... no files"
+should_error eask lint keywords
+
+echo "Testing lint regexps command... no files"
+should_error eask lint regexps

@@ -22,6 +22,8 @@
 
 set -e
 
+source ./test/fixtures/home/scripts/testing.sh
+
 echo "Test command 'exec'..."
 cd $(dirname "$0")
 
@@ -32,3 +34,6 @@ eask exec echo hello world
 
 eask exec buttercup -L .
 eask exec buttercup -L . --pattern 'pattern 1'
+
+echo "Testing exec command... no files"
+should_error eask exec

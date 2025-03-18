@@ -22,10 +22,12 @@
 
 set -e
 
+source ./test/fixtures/home/scripts/testing.sh
+
 echo "Test command 'search'..."
 cd $(dirname "$0")
 
-eask search
+should_error eask search
 eask search company
 eask search company dash --depth 0
 eask search company dash f s --depth 0 -g

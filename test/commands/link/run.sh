@@ -26,6 +26,15 @@
 
 set -e
 
+source ./test/fixtures/home/scripts/testing.sh
+
 eask link add "mini.pkg.1" "./test/fixtures/mini.pkg.1/"
 eask link list
 eask link delete mini.pkg.1-0.0.1
+
+cd $(dirname "$0")
+
+echo "Testing link command... no files"
+should_error eask link add       # not enough args
+should_error eask link add foo . # missing package, prints help
+should_error eask link delete
