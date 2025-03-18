@@ -1727,7 +1727,9 @@ Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
   (declare (indent 0) (debug t))
   `(eask-ignore-errors (eask--silent-error ,@body)))
 
-(defun eask--exit (&rest _) "Send exit code." (kill-emacs 1))
+(defun eask--exit (&optional exit-code &rest _)
+  "Kill Emacs with EXIT-CODE (default 1)."
+  (kill-emacs (or exit-code 1)))
 
 (defun eask--trigger-error ()
   "Trigger error event."
