@@ -21,7 +21,7 @@ const fs = require('fs');
 const child_process = require("child_process");
 
 exports.command = ['script [names..]'];
-exports.desc = 'Run script nameds [names..]';
+exports.desc = 'Run script named [names..]';
 exports.builder = yargs => yargs
   .positional(
     '[names..]', {
