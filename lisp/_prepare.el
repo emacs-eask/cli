@@ -1116,6 +1116,7 @@ This uses function `locate-dominating-file' to look up directory tree."
   "Try load the Eask-file in START-PATH."
   (when-let* ((files (eask--find-files start-path))
               (file (car files)))
+    ;; Revert printing behaviour when loading Eask-file.
     (eask--unsilent (eask-file-load file))))
 
 (defmacro eask--with-hooks (&rest body)
@@ -1149,8 +1150,10 @@ This uses function `locate-dominating-file' to look up directory tree."
   (let ((inhibit-config (eask-quick-p)))
     (eask-with-progress
       (ansi-green "Loading configuration... ")
-      (eask-with-verbosity 'all
+      ;; Revert printing behaviour when loading user files.
+      (eask--unsilent
         (unless inhibit-config
+          ;; `early-init.el' is supported after 27.1
           (when (version<= "27" emacs-version)
             (load early-init-file t))
           (load eask-dot-emacs-file t)
