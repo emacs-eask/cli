@@ -67,6 +67,16 @@ Eask 在每個版本上構建本機可執行文件，您可以從我們的[發�
 
 # 🔍 用法
 
+## ❓ 如何設定 Eask？
+
+`Eask`-file 是一個 Elisp 檔案，類似於 `.emacs` 或 `init.el`。
+正如 Emacs 允許您自訂您不喜歡的方面一樣，Eask 也遵循同樣的原則，讓您配置任何您不喜歡 Eask 的地方。
+
+另一種配置工作區的方法與配置 Emacs 本身類似：
+
+- 使用 .eask/VERSION_NO/early-init.el (僅限於 Emacs 27.1 以後)
+- 使用 .eask/VERSION_NO/init.el
+
 ## ❓ 為什麼安裝時出現錯誤 package target `tar`/`el` not found？
 
 示例錯誤消息，

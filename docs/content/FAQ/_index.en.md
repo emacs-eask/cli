@@ -77,6 +77,17 @@ need to install [Node][Node.js] or [npm][] beforehand to use Eask!
 
 # 🔍 Usage
 
+## ❓ How to configure Eask?
+
+`Eask`-file is an Elisp file, similar to `.emacs` or `init.el`.
+Just as Emacs allows you to customize aspects you don’t like,
+Eask follows the same principle, letting you configure anything you dislike about Eask.
+
+Another way to configure your workspace is similar to configuring Emacs itself:
+
+- Use `.eask/VERSION_NO/early-init.el` (only after Emacs `27.1` onward)
+- Use `.eask/VERSION_NO/init.el`
+
 ## ❓ Why am I getting the error package target `tar`/`el` not found while installing?
 
 The example error message,
