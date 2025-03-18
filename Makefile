@@ -32,6 +32,9 @@ command-config:
 command-local:
 	./test/commands/local/run.sh
 
+# new tests which check missing args not covered by existing tests
+command-help-exit: command-bump command-concat command-docs command-eval command-format command-info command-init command-lint command-recipe command-run command-source
+
 command-analyze:
 	./test/commands/analyze/dsl/run.sh
 	./test/commands/analyze/metadata/run.sh
