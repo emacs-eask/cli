@@ -1155,9 +1155,9 @@ This uses function `locate-dominating-file' to look up directory tree."
         (unless inhibit-config
           ;; `early-init.el' is supported after 27.1
           (when (version<= "27" emacs-version)
-            (load early-init-file t))
-          (load eask-dot-emacs-file t)
-          (load user-init-file t)))
+            (load early-init-file t t))
+          (load eask-dot-emacs-file t t)
+          (load user-init-file t t)))
       (ansi-green (if inhibit-config "skipped ✗" "done ✓")))))
 
 (defmacro eask-start (&rest body)
