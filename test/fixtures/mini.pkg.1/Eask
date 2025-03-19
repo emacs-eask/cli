@@ -3,7 +3,7 @@
          "Minimal test package")
 
 (website-url "https://github.com/emacs-eask/cli/tree/master/test/fixtures/mini.pkg.1")
-(keywords "test")
+(keywords "test" "local")
 
 (package-file "mini.pkg.1.el")
 
