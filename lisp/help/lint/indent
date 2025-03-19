@@ -1,5 +1,4 @@
 
-
 💡 You need to specify file(s) you want indent-lint to check
     [+] (package-file "ENTRY")         ; One argument with a string
     [+] (files "FILE-1" "FILE-2" ...)  ; All arguments are wildcard patterns
