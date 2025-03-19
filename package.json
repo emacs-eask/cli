@@ -4,7 +4,7 @@
   "description": "A set of command-line tools to build Emacs packages",
   "main": "eask",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "pkg-all": "pkg package.json",
     "pkg-linux-arm64": "pkg package.json -t node*-linuxstatic-arm64 --output dist/eask --public",
     "pkg-linux-x64": "pkg package.json -t node*-linuxstatic-x64 --output dist/eask --public",
@@ -33,7 +33,11 @@
     "yargs": "^17.0.0"
   },
   "devDependencies": {
-    "@yao-pkg/pkg": "^6.0.0"
+    "@yao-pkg/pkg": "^6.0.0",
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "rootDir": "./test-js"
   },
   "files": [
     "cmds",
