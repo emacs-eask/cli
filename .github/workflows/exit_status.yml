@@ -1,4 +1,4 @@
-name: Help-Exit
+name: Exit Status
 
 on:
   push:
@@ -49,4 +49,4 @@ jobs:
 
     - name: Testing...
       run: |
-        make command-help-exit
+        make command-exit-status
