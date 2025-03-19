@@ -4,6 +4,7 @@
   "description": "A set of command-line tools to build Emacs packages",
   "main": "eask",
   "scripts": {
+    "test-docker": "env ALLOW_UNSAFE=1 jest",
     "test": "jest",
     "pkg-all": "pkg package.json",
     "pkg-linux-arm64": "pkg package.json -t node*-linuxstatic-arm64 --output dist/eask --public",
