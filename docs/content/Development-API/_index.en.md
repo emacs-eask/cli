@@ -947,7 +947,7 @@ Prevent Emacs from being killed and inhibit display error/warning messages.
   (error "Nothing happens!"))
 ```
 
-## 🔍 Function: eask--exit ()
+## 🔍 Function: eask--exit (&optional `exit-code` &rest `_`)
 
 Send exit code.
 

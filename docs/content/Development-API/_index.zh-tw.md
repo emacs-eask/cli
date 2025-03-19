@@ -937,11 +937,11 @@ cat /.log/messages.log
   (error "Nothing happens!"))
 ```
 
-## 🔍 函式: eask--exit ()
+## 🔍 函式: eask--exit (&optional `exit-code` &rest `_`)
 
-Send exit code.
+傳送退出代碼。
 
-This will kill Emacs process.
+這會結束 Emacs 程序。
 
 # 🚩 文件
 
