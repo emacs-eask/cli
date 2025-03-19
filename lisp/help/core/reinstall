@@ -1,13 +1,13 @@
-    
-💡 Make sure you have specify a (package-file ..) directive inside your Eask file!
-   
+
+💡 Make sure you have specified a (package-file ..) directive inside your Eask file!
+
     [+] (package-file "PKG-MAIN.el")
-    
+
 💡 Or specify package names as arguments
-   
+
     $ eask reinstall PKG-1 PKG-2
-    
-💡 You would need to first install packages before reinstalling!
+
+💡 You first need to install packages before reinstalling!
 
   Try the command:
 

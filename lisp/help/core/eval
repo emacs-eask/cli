@@ -1,4 +1,4 @@
 
-💡 You would need to specify the [form] in order to make execution!
+💡 You need to specify the [form] to evaluate!
 
     $ eask eval [form]

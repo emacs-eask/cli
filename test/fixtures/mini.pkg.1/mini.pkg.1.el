@@ -7,7 +7,7 @@
 ;; URL: https://github.com/emacs-eask/cli/tree/master/test/fixtures/mini.pkg.1
 ;; Version: 0.0.1
 ;; Package-Requires: ((emacs "24.3") (s "1.12.0") (fringe-helper "1.0.1"))
-;; Keywords: test
+;; Keywords: test local
 
 ;; This file is NOT part of GNU Emacs.
 

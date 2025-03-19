@@ -22,6 +22,8 @@
 
 set -e
 
+source ./test/fixtures/home/scripts/testing.sh
+
 echo "Test commands related to install, and uninstall"
 
 # Naviate to the test package
@@ -42,3 +44,14 @@ eask uninstall beacon transwin
 
 echo "Uninstall project package"
 eask uninstall
+
+echo "Test eask install ... no files"
+cd -
+cd $(dirname "$0")
+should_error eask install
+
+echo "Test eask uninstall ... no files"
+should_error eask uninstall
+
+echo "Test eask reinstall ... no files"
+should_error eask reinstall

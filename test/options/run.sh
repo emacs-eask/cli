@@ -22,12 +22,14 @@
 
 set -e
 
+source ./test/fixtures/home/scripts/testing.sh
+
 echo "Test all options flag"
 cd $(dirname "$0")
 
 # Please have these flags in order, see `eask` file in the project root!
-eask info -g
-eask info --global
+should_error eask info -g
+should_error eask info --global
 eask info -a
 eask info --all
 eask info -q

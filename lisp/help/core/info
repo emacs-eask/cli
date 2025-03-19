@@ -1,5 +1,5 @@
 
-💡 You need Eask-file to show information about the config/package, to create one:
+💡 You need an Eask-file to show information about the config/package; to create one:
 
     $ eask init
 

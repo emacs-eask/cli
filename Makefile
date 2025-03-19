@@ -32,12 +32,31 @@ command-config:
 command-local:
 	./test/commands/local/run.sh
 
+# new tests which check missing args not covered by existing tests
+command-help-exit: command-bump command-concat command-docs command-eval command-format command-info command-init command-lint command-recipe command-run command-source
+
 command-analyze:
 	./test/commands/analyze/dsl/run.sh
 	./test/commands/analyze/metadata/run.sh
+	./test/commands/analyze/error/run.sh
+
+command-bump:
+	./test/commands/bump/run.sh
+
+command-compile:
+	./test/commands/compile/run.sh
+
+command-concat:
+	./test/commands/concat/run.sh
 
 command-docker:
 	./test/commands/docker/run.sh
+
+command-docs:
+	./test/commands/docs/run.sh
+
+command-eval:
+	./test/commands/eval/run.sh
 
 command-exec:
 	./test/commands/exec/run.sh
@@ -45,17 +64,38 @@ command-exec:
 command-emacs:
 	./test/commands/emacs/run.sh
 
+command-format:
+	./test/commands/format/run.sh
+
+command-info:
+	./test/commands/info/run.sh
+
+command-init:
+	./test/commands/init/run.sh
+
 command-install:
 	./test/commands/install/run.sh
+
+command-link:
+	./test/commands/link/run.sh
+
+command-lint:
+	./test/commands/lint/run.sh
 
 command-outdated-upgrade:
 	./test/commands/outdated_upgrade/run.sh
 
+command-recipe:
+	./test/commands/recipe/run.sh
+
+command-run:
+	./test/commands/run/run.sh
+
 command-search:
 	./test/commands/search/run.sh
 
-command-link:
-	./test/commands/link/run.sh
+command-source:
+	./test/commands/source/run.sh
 
 test-ert:
 	./test/commands/test/ert/run.sh

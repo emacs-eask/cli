@@ -1730,7 +1730,9 @@ Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
   (declare (indent 0) (debug t))
   `(eask-ignore-errors (eask--silent-error ,@body)))
 
-(defun eask--exit (&rest _) "Send exit code." (kill-emacs 1))
+(defun eask--exit (&optional exit-code &rest _)
+  "Kill Emacs with EXIT-CODE (default 1)."
+  (kill-emacs (or exit-code 1)))
 
 (defun eask--trigger-error ()
   "Trigger error event."
@@ -1861,10 +1863,21 @@ Arguments FNC and ARGS are used for advice `:around'."
     (eask-msg (ansi-white (buffer-string)))
     (eask-msg (concat "''" (spaces-string max-column) "''"))))
 
-(defun eask-help (command)
-  "Show COMMAND's help instruction."
+(defun eask-help (command &optional print-or-exit-code)
+  "Show COMMAND's help instruction.
+
+When the optional variable PRINT-OR-EXIT-CODE is a number, it will exit with
+that code.  Set to non-nil would just print the help message without sending
+the exit code.  The default value `nil' will be replaced by `1'; therefore
+would send exit code of `1'."
   (let* ((command (eask-2str command))  ; convert to string
-         (help-file (concat eask-lisp-root "help/" command)))
+         (help-file (concat eask-lisp-root "help/" command))
+         ;; The default exit code is `1' since `eask-help' prints the help
+         ;; message on user error 99% of the time.
+         ;;
+         ;; TODO: Later replace exit code `1' with readable symbol after
+         ;; the exit code has specified.
+         (print-or-exit-code (or print-or-exit-code 1)))
     (if (file-exists-p help-file)
         (with-temp-buffer
           (insert-file-contents help-file)
@@ -1872,15 +1885,19 @@ Arguments FNC and ARGS are used for advice `:around'."
             (let ((buf-str (eask--msg-displayable-kwds (buffer-string))))
               (erase-buffer)
               (insert buf-str))
-            (eask--help-display)))
-      (eask-error "Help manual missig %s" help-file))))
+            (eask--help-display))
+          ;; Exit with code if needed
+          (cond ((numberp print-or-exit-code)
+                 (eask--exit print-or-exit-code))
+                (t )))  ; Don't exit with anything else.
+      (eask-error "Help manual missing %s" help-file))))
 
 ;;
 ;;; Checker
 
 (defun eask--checker-existence ()
   "Return errors if required metadata is missing."
-  (unless eask-package (eask-error "Missing metadata package; make sure you have create Eask-file with $ eask init!")))
+  (unless eask-package (eask-error "Missing metadata package; make sure you have created an Eask-file with $ eask init!")))
 
 (defun eask--check-strings (fmt f p &rest args)
   "Test strings (F and P); then print FMT and ARGS if not equal."
