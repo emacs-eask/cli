@@ -88,9 +88,10 @@ We have incorporated a range of tests to ensure Eask remains stable throughout i
 
 ###### Others
 
-| Description | Done | Status                                                                                                                                                            |
-|-------------|------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Webinstall  | ✔    | [![Webinstall](https://github.com/emacs-eask/cli/actions/workflows/webinstall.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/webinstall.yml) |
+| Description | Done | Status                                                                                                                                                               |
+|-------------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Webinstall  | ✔    | [![Webinstall](https://github.com/emacs-eask/cli/actions/workflows/webinstall.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/webinstall.yml)    |
+| Exit Status | ✔    | [![Exit Status](https://github.com/emacs-eask/cli/actions/workflows/exit_status.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/exit_status.yml) |
 
 ## ⚜️ License
 
