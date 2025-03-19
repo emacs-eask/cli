@@ -1018,12 +1018,25 @@ Print buffer and highlight the `errors` and `warnings`.
 
 # 🚩 Help
 
-## 🔍 Function: eask-help (`command`)
+## 🔍 Function: eask-help (`command` &optional `print-or-exit-code`)
 
 Print help manual located under `lisp/help/` directory.
 
 ```elisp
-(eask-help "core/search")
+(eask-help "core/search")  ; Exit code 1
+```
+
+Alternatively, you can specify the exit code using the second parameter,
+`print-or-exit-code`, which defaults to 1.
+
+```elisp
+(eask-help "core/search" 4)  ; Exit code 4
+```
+
+To prevent the program from exiting with a code, pass any non-nil value.
+
+```elisp
+(eask-help "core/search" t)  ; Skip exiting
 ```
 
 {{< hint info >}}

@@ -1013,7 +1013,19 @@ This will kill Emacs process.
 打印位於 `lisp/help/` 目錄下的幫助手冊。
 
 ```elisp
-(eask-help "core/search")
+(eask-help "core/search")  ; 程式的退出碼 1
+```
+
+另外，您也可以使用第二個參數 `print-or-exit-code` 指定退出代碼，預設值為 1。
+
+```elisp
+(eask-help "core/search" 4)  ; 程式的退出碼 4
+```
+
+若要防止程式以代碼退出，請傳入任何非零值。
+
+```elisp
+(eask-help "core/search" t)  ; 跳過退出
 ```
 
 {{< hint info >}}
