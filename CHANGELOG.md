@@ -18,6 +18,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * fix(_prepare.el): Keywords cannot be parsed in Emacs 26.x (0cb755e0c18d37a59c76add905ea089c61b3a931)
 * feat(src/env.js): Ensure `Emacs` env (#289)
 * ci(build.yml): Try forked pkg to fix `arm64` build 2 (#292 and #294)
+* feat: Set error status when help is printed (#307)
 
 ## 0.10.x
 > Released Jun 13, 2024
