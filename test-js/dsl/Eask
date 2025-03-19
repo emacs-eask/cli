@@ -1,0 +1,44 @@
+(setq network-security-level 'low)  ; see https://github.com/jcs090218/setup-emacs-windows/issues/156#issuecomment-932956432
+
+;;
+;;; Below are errors/warnings to lint
+
+(package "check-dsl" "0.0.1" "Test for DSL")  ; duplicate `package` directive
+(package "" "" "")
+
+(website-url "https://github.com/emacs-eask/check-dsl")  ; duplicate url
+(website-url "https://github.com/emacs-eask/check-dsl")
+(keywords "dsl")                                         ; duplicate keywords
+(keywords "dsl")
+
+(author "name")                                          ; duplicate `author`
+(author "name")
+
+(license "GPLv3")                                        ; duplicate `license`
+(license "GPLv3")
+
+(package-file "check-dsl.el")                            ; duplicate `package-file` directive
+(package-file "check-dsl.el")
+
+(package-descriptor "check-pkg.el")                      ; duplicate `package-descriptor` directive
+(package-descriptor "check-pkg.el")
+
+;; duplicate scripts
+(script "test" "echo \"Error: no test specified\" && exit 1")
+(script "test" "echo \"Error: no test specified\" && exit 1")
+
+(source 'gnu)                                            ; duplicate archives
+(source 'gnu)
+
+(source "magic-archive")                                 ; Unkown archive
+
+(depends-on "emacs" "26.1")                              ; duplicate `emacs` dependency
+(depends-on "emacs")
+
+(depends-on "dash")                                      ; duplicate dependency
+(depends-on "dash")
+
+(development
+ (depends-on "f")                                        ; duplicate dependency
+ (depends-on "f")
+ )
