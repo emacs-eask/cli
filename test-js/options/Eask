@@ -1,0 +1,12 @@
+(package "options"
+         "0.0.0"
+         "Test all options flag")
+
+(website-url "https://github.com/emacs-eask/options")
+(keywords "test")
+
+(package-file "options.el")
+
+(source 'gnu)
+
+(depends-on "emacs" "26.1")
