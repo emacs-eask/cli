@@ -1,0 +1,13 @@
+(package "buttercup"
+         "0.0.1"
+         "Test project for command `buttercup'")
+
+(package-file "buttercup.el")
+
+(source 'gnu)
+(source 'melpa)
+
+(development
+ (depends-on "buttercup"))
+
+(setq network-security-level 'low)  ; see https://github.com/jcs090218/setup-emacs-windows/issues/156#issuecomment-932956432
