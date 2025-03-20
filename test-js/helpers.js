@@ -48,6 +48,13 @@ class TestContext {
       cwd: this.cwd,
       signal: this.controller.signal,
       ...config,
+    }).then((obj) => {
+      if (process.env.DEBUG) {
+        console.log(command);
+        console.log(obj.stdout);
+        console.log(obj.stderr);
+      }
+      return obj;
     });
   }
 
