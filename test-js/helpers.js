@@ -29,4 +29,31 @@ async function emacsVersion() {
   return version;
 }
 
-module.exports = { testUnsafe, emacsVersion };
+class TestContext {
+  /**
+   * @param {string} cwd Current Working Directory, used for all commands.
+   */
+  constructor(cwd) {
+    this.cwd = cwd;
+    this.easkCommand = process.env.EASK_COMMAND || "eask";
+    this.controller = new AbortController();
+  }
+
+  runEask(command, config) {
+    return this.run(this.easkCommand + " " + command, config);
+  }
+
+  run(command, config) {
+    return exec(command, {
+      cwd: this.cwd,
+      signal: this.controller.signal,
+      ...config,
+    });
+  }
+
+  cleanUp() {
+    this.controller.abort();
+  }
+}
+
+module.exports = { testUnsafe, emacsVersion, TestContext };

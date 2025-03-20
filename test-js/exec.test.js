@@ -1,40 +1,33 @@
-const util = require("node:util");
-const exec = util.promisify(require("node:child_process").exec);
-const execSync = require("node:child_process").execSync;
+const { TestContext } = require("./helpers");
 
 describe("exec", () => {
-  const cwd = "./test-js/exec";
+  const ctx = new TestContext("./test-js/exec");
 
-  beforeAll(() => execSync("eask install-deps", { cwd }));
+  beforeAll(async () => await ctx.runEask("install-deps"), 10000);
+
+  afterAll(() => ctx.cleanUp());
 
   test("eask exec ert-runner", async () => {
-    const res = await exec("eask exec ert-runner -h", { cwd });
-    expect(res).toBeTruthy();
+    await ctx.runEask("exec ert-runner -h");
   });
 
   test("eask exec github-elpa", async () => {
-    const res = await exec("eask exec github-elpa -h", { cwd });
-    expect(res).toBeTruthy();
+    await ctx.runEask("exec github-elpa -h");
   });
 
   test("eask exec echo", async () => {
-    const res = await exec("eask exec echo hello world", { cwd });
-    expect(res).toBeTruthy();
+    await ctx.runEask("exec echo hello world");
   });
 
   test("eask exec buttercup -L .", async () => {
-    const res = await exec("eask exec buttercup -L .", { cwd });
-    expect(res).toBeTruthy();
+    await ctx.runEask("exec buttercup -L .");
   });
 
   test("eask exec buttercup -L . --pattern 'pattern 1'", async () => {
-    const res = await exec("eask exec buttercup -L . --pattern 'pattern 1'", {
-      cwd,
-    });
-    expect(res).toBeTruthy();
+    await ctx.runEask("exec buttercup -L . --pattern 'pattern 1'");
   });
 
   test("should error with no args", async () => {
-    await expect(exec("./bin/eask exec", { cwd })).rejects.toThrow();
+    await expect(ctx.runEask("exec")).rejects.toThrow();
   });
 });
