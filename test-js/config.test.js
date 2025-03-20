@@ -11,12 +11,12 @@ describe("config param", () => {
   // TODO perhaps teardown the following two?
   // TODO check in docker
   testUnsafe("eask install -c", async () => {
-    const res = await exec("eask install -cp spinner ivy beacon company fuzzy");
+    const res = await exec("eask install -c spinner ivy beacon company-fuzzy");
     expect(res).toBeTruthy();
   });
 
   testUnsafe("eask uninstall -c", async () => {
-    const res = await exec("eask uninstall -c ivy fuzzy");
+    const res = await exec("eask uninstall -c ivy");
     expect(res).toBeTruthy();
   });
 
