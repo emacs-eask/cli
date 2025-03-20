@@ -1,32 +1,33 @@
-const util = require("node:util");
-const exec = util.promisify(require("node:child_process").exec);
-const { testUnsafe } = require("./helpers");
+const { testUnsafe, TestContext } = require("./helpers");
 
 describe("config param", () => {
+  const ctx = new TestContext();
+
+  afterAll(() => ctx.cleanUp());
+
+  // TODO timeout
   test("eask archives -c", async () => {
-    const res = await exec("eask archives -c");
-    expect(res).toBeTruthy();
+    await ctx.runEask("archives -c");
   });
 
   // TODO perhaps teardown the following two?
   // TODO check in docker
   testUnsafe("eask install -c", async () => {
-    const res = await exec("eask install -cp spinner ivy beacon company fuzzy");
-    expect(res).toBeTruthy();
+    await ctx.runEask("install -c spinner ivy beacon company-fuzzy");
   });
 
+  // TODO should test uninstalling multiple
   testUnsafe("eask uninstall -c", async () => {
-    const res = await exec("eask uninstall -c ivy fuzzy");
-    expect(res).toBeTruthy();
+    await ctx.runEask("uninstall -c ivy company-fuzzy");
   });
 
+  // TODO timeout
   test("eask list -c", async () => {
-    const res = await exec("eask list -c --depth=0");
-    expect(res).toBeTruthy();
+    await ctx.runEask("list -c --depth=0");
   });
 
+  // TODO timeout
   test("eask outdated -c", async () => {
-    const res = await exec("eask outdated -c");
-    expect(res).toBeTruthy();
+    await ctx.runEask("outdated -c");
   });
 });
