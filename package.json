@@ -6,6 +6,7 @@
   "scripts": {
     "test-docker": "env ALLOW_UNSAFE=1 jest",
     "test": "jest",
+    "test-reset": "rm -rf ./test-js/.eask ./test-js/*/.eask; git restore ./test-js/*/",
     "pkg-all": "pkg package.json",
     "pkg-linux-arm64": "pkg package.json -t node*-linuxstatic-arm64 --output dist/eask --public",
     "pkg-linux-x64": "pkg package.json -t node*-linuxstatic-x64 --output dist/eask --public",
