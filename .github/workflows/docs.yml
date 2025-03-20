@@ -8,12 +8,6 @@ on:
     paths:
       - '**.yml'
       - docs/**
-  pull_request:
-    branches:
-      - master
-    paths:
-      - '**.yml'
-      - docs/**
   workflow_dispatch:
 
 concurrency:

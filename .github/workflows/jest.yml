@@ -1,4 +1,4 @@
-name: Options
+name: Jest Tests
 
 on:
   push:
@@ -25,12 +25,13 @@ concurrency:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        emacs-version:
-          - 30.1
+        emacs-version: [snapshot]
+        experimental: [true]
 
     steps:
     - uses: jcs090218/setup-emacs@master
@@ -51,4 +52,4 @@ jobs:
 
     - name: Testing...
       run: |
-        make test-options
+        npm run test-docker
