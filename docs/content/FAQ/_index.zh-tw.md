@@ -77,6 +77,28 @@ Eask 在每個版本上構建本機可執行文件，您可以從我們的[發�
 - 使用 .eask/VERSION_NO/early-init.el (僅限於 Emacs 27.1 以後)
 - 使用 .eask/VERSION_NO/init.el
 
+## ❓ 如何直接從套件庫安裝套件？
+
+有幾種方法可以做到這一點，但標準的方法是在 Eask 檔案中定義一個 [recipe format][]。
+
+```elisp
+(depends-on "organize-imports-java"
+            :repo "jcs-elpa/organize-imports-java"
+            :fetcher 'github
+            :files '(:defaults "sdk" "default"))
+```
+
+Eask 會一次建立套件，並寄存本機 ELPA，讓您稍後安裝時使用。這是安裝套件最安全的方式，因為它模擬了最實際的情況。
+
+不過，由於 Eask 也是一個 Elisp 檔案，因此任何其他替代方式也同樣適用。
+
+- [package-vc-install][]
+- [quelpa][]
+- [use-package][]
+- [straight.el][]
+
+# 🔍 故障排除
+
 ## ❓ 為什麼安裝時出現錯誤 package target `tar`/`el` not found？
 
 示例錯誤消息，
@@ -187,3 +209,10 @@ Error: Process completed with exit code 1.
 [Python]: https://www.python.org/
 [Rust]: https://www.rust-lang.org/
 [Common Lisp]: https://lisp-lang.org/
+
+[recipe format]: https://github.com/melpa/melpa?tab=readme-ov-file#recipe-format
+
+[package-vc-install]: https://www.gnu.org/software/emacs/manual/html_node/emacs/Fetching-Package-Sources.html
+[quelpa]: https://github.com/quelpa/quelpa
+[use-package]: https://github.com/jwiegley/use-package
+[straight.el]: https://github.com/radian-software/straight.el

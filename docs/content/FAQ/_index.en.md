@@ -88,6 +88,30 @@ Another way to configure your workspace is similar to configuring Emacs itself:
 - Use `.eask/VERSION_NO/early-init.el` (only after Emacs `27.1` onward)
 - Use `.eask/VERSION_NO/init.el`
 
+## ❓ How can I install packages directly from the repository?
+
+There are several ways to do this, but the standard method is to define a
+[recipe format][] in the Eask file.
+
+```elisp
+(depends-on "organize-imports-java"
+            :repo "jcs-elpa/organize-imports-java"
+            :fetcher 'github
+            :files '(:defaults "sdk" "default"))
+```
+
+Eask builds the package once and hosts a local ELPA, allowing you to use it for later installation.
+This is the safest way to install packages as it simulates the most practical scenario.
+
+However, any other alternative would work as well since Eask is also an Elisp file.
+
+- [package-vc-install][]
+- [quelpa][]
+- [use-package][]
+- [straight.el][]
+
+# 🔍 Troubleshooting
+
 ## ❓ Why am I getting the error package target `tar`/`el` not found while installing?
 
 The example error message,
@@ -206,3 +230,10 @@ Add the following code snippet to your Eask-file:
 [Python]: https://www.python.org/
 [Rust]: https://www.rust-lang.org/
 [Common Lisp]: https://lisp-lang.org/
+
+[recipe format]: https://github.com/melpa/melpa?tab=readme-ov-file#recipe-format
+
+[package-vc-install]: https://www.gnu.org/software/emacs/manual/html_node/emacs/Fetching-Package-Sources.html
+[quelpa]: https://github.com/quelpa/quelpa
+[use-package]: https://github.com/jwiegley/use-package
+[straight.el]: https://github.com/radian-software/straight.el
