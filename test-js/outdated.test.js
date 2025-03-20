@@ -1,0 +1,23 @@
+const { TestContext } = require("./helpers");
+
+describe("outdated and upgrade", () => {
+  const ctx = new TestContext("./test-js/outdated_upgrade");
+
+  beforeAll(async () => {
+    await ctx.runEask("install-deps");
+    await ctx.runEask("load make-outdate.el");
+  }, 15000);
+
+  // these will run in sequence
+  afterAll(async () => await ctx.runEask("clean all"));
+  afterAll(() => ctx.cleanUp());
+
+  test("list outdated", async () => {
+    await ctx.runEask("outdated");
+    await ctx.runEask("outdated --depth 0");
+  });
+
+  test("upgrade", async () => {
+    await ctx.runEask("upgrade");
+  });
+});
