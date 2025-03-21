@@ -37,11 +37,9 @@ jobs:
       with:
         hugo-version: '0.134.2'
 
-    - name: Build theme
+    - name: Get theme
       working-directory: ./docs/themes/geekdoc
-      run: |
-        npm install
-        npm run build
+      run: curl -L https://github.com/thegeeklab/hugo-geekdoc/releases/latest/download/hugo-geekdoc.tar.gz | tar -xz --strip-components=1
 
     - name: Check out GitHub page repo
       uses: actions/checkout@v4
