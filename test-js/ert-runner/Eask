@@ -1,0 +1,13 @@
+(package "ert-runner"
+         "0.0.1"
+         "Test project for command `ert-runner'")
+
+(package-file "ert-runner.el")
+
+(source 'gnu)
+(source 'melpa)
+
+(development
+ (depends-on "ert-runner"))
+
+(setq network-security-level 'low)  ; see https://github.com/jcs090218/setup-emacs-windows/issues/156#issuecomment-932956432
