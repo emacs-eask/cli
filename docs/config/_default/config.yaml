@@ -16,6 +16,7 @@ enableGitInfo: false
 enableRobotsTXT: true
 
 params:
+  geekdocSubtitle: Learn once, run anywhere
   geekdocToC: 3
   geekdocLogo: './logo.png'
   geekdocRepo: 'https://github.com/emacs-eask/cli/'

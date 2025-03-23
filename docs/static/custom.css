@@ -21,7 +21,13 @@
 }
 
 .gdoc-brand__title {
-  margin-top: 0.6rem;
+  margin-top: 0.4rem;
+}
+
+.gdoc-brand__subtitle {
+  margin-top: 0.2rem;
+  color: #B5B5B5;
+  font-size: 1.0rem;
 }
 
 /* Icons */
@@ -63,20 +69,13 @@
   }
 }
 
-/* Custom */
-
-._subtitle {
-  color: #B5B5B5;
-  font-size: 1.0rem;
-}
-
 /*
  * Typewriter Effect
  *
  * Copied from https://css-tricks.com/snippets/css/typewriter-effect/
  */
 
-._subtitle {
+.gdoc-brand__subtitle {
   overflow: hidden;
   white-space: nowrap;
   animation:
