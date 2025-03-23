@@ -53,7 +53,7 @@ jobs:
 
     - name: Build doc artifacts with Hugo
       run: |
-        mkdir ../emacs-eask.github.io
+        mkdir -p ../emacs-eask.github.io
         hugo --destination ../emacs-eask.github.io --minify
       working-directory: docs
 
