@@ -50,9 +50,11 @@ class TestContext {
       ...config,
     }).then((obj) => {
       if (process.env.DEBUG) {
-        console.log(command);
-        console.log(obj.stdout);
-        console.log(obj.stderr);
+        console.log(
+          `--> ${command}\n` +
+            (obj.stdout ? obj.stdout : "") +
+            (obj.stderr ? obj.stderr : ""),
+        );
       }
       return obj;
     });
