@@ -1,10 +1,11 @@
+const fs = require("node:fs/promises");
+const path = require("node:path");
+const process = require("node:process");
+
 const { testUnsafe, TestContext } = require("./helpers");
 
 describe("global", () => {
   // global => install to ~/.eask
-  // TODO may need to copy a global eask file?
-  // or perhaps need --insecure option?
-  // cp -R ./test/fixtures/home/Eask ~/Eask
 
   const ctx = new TestContext();
 
@@ -26,12 +27,22 @@ describe("global", () => {
     /*
      * This test modifies ~/.eask
      */
-    testUnsafe("eask install -g", async () => {
-      await ctx.runEask("install -g spinner ivy beacon company fuzzy");
-    });
+    testUnsafe(
+      "eask install -g",
+      async () => {
+        // add a global Easkfile
+        await fs.copyFile(
+          "./test-js/global/Eask",
+          path.join(process.env.HOME, "Eask"),
+        );
+
+        await ctx.runEask("install -g spinner ivy beacon company-fuzzy");
+      },
+      15000,
+    );
 
     testUnsafe("eask uninstall -g", async () => {
-      await ctx.runEask("uninstall -g ivy fuzzy");
+      await ctx.runEask("uninstall -g ivy company-fuzzy");
     });
   });
 });
