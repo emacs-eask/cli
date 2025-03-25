@@ -16,6 +16,17 @@ function testUnsafe(name, fn, timeout) {
 }
 
 /**
+ * Global timeout in ms, set by TIMEOUT env var.
+ * This is used in TestContext to limit `exec`.
+ * @returns {number}
+ */
+function getTimeout() {
+  // parseInt returns NaN if it fails
+  // TIMEOUT <= 0 will be ignored too
+  return Number.parseInt(process.env.TIMEOUT) || 25000;
+}
+
+/**
  * The version string for system emacs, e.g. "30.0.50".
  * You can compare lexicographically, e.g. if ((await emacsVersion()) > "27") { ... }
  * @returns {Promise.<string>} emacs version string.
@@ -47,17 +58,23 @@ class TestContext {
     return exec(command, {
       cwd: this.cwd,
       signal: this.controller.signal,
+      timeout: getTimeout(),
       ...config,
-    }).then((obj) => {
-      if (process.env.DEBUG) {
-        console.log(
-          `--> ${command}\n` +
-            (obj.stdout ? obj.stdout : "") +
-            (obj.stderr ? obj.stderr : ""),
-        );
-      }
-      return obj;
-    });
+    })
+      .then((obj) => {
+        if (process.env.DEBUG) {
+          console.log(
+            `--> ${command}\n` +
+              (obj.stdout ? obj.stdout : "") +
+              (obj.stderr ? obj.stderr : ""),
+          );
+        }
+        return obj;
+      })
+      .catch((err) => {
+        if (!err.code) err.message += "\nexec: TIMEOUT";
+        throw err;
+      });
   }
 
   cleanUp() {
@@ -65,4 +82,4 @@ class TestContext {
   }
 }
 
-module.exports = { testUnsafe, emacsVersion, TestContext };
+module.exports = { testUnsafe, emacsVersion, TestContext, getTimeout };

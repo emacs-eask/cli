@@ -40,7 +40,8 @@
     "jest": "^29.7.0"
   },
   "jest": {
-    "rootDir": "./test-js"
+    "rootDir": "./test-js",
+    "testTimeout": 40000
   },
   "files": [
     "cmds",
