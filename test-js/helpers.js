@@ -1,11 +1,18 @@
 const util = require("node:util");
 const exec = util.promisify(require("node:child_process").exec);
 
+/*
+ * This file uses JsDoc syntax.
+ * Documentation for type helpers like @param: https://jsdoc.app/tags-type
+ * Documentation for types in braces:
+ *   https://github.com/google/closure-compiler/wiki/Types-in-the-Closure-Type-System
+ */
+
 /**
  * As for jest.test but skips running if the ALLOW_UNSAFE env var is set.
  * @param {string} name
- * @param {any} fn
- * @param {number} timeout
+ * @param {function({ fail: function }): void | function(): PromiseLike.<unknown>} fn
+ * @param {number} [timeout]
  */
 function testUnsafe(name, fn, timeout) {
   if (process.env.ALLOW_UNSAFE) {
@@ -50,6 +57,14 @@ class TestContext {
     this.controller = new AbortController();
   }
 
+  /**
+   * Runs command with "eask" prefix.
+   * See https://nodejs.org/docs/latest-v20.x/api/child_process.html#child_processexeccommand-options-callback
+   * for additional config options.
+   * @param {string} command
+   * @param {any} config
+   * @returns {Promise.<{ stdout, stderr }>}
+   */
   runEask(command, config) {
     return this.run(this.easkCommand + " " + command, config);
   }
