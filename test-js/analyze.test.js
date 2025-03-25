@@ -1,53 +1,40 @@
-const util = require("node:util");
-const exec = util.promisify(require("node:child_process").exec);
+const { TestContext } = require("./helpers");
 
 describe("analyze", () => {
   describe("dsl", () => {
     const cwd = "./test-js/dsl";
-    it("handles plain text", async () => {
-      const res = await exec("eask analyze", { cwd });
-      expect(res).toBeTruthy();
+    const ctx = new TestContext(cwd);
 
-      const res1 = await exec("eask analyze Eask", { cwd });
-      expect(res1).toBeTruthy();
+    it("handles plain text", async () => {
+      await ctx.runEask("analyze");
+      await ctx.runEask("analyze Eask");
     });
 
     it("handles json", async () => {
-      const res = await exec("eask analyze --json", { cwd });
-      expect(res).toBeTruthy();
-
-      const res1 = await exec("eask analyze Eask --json", {
-        cwd,
-      });
-      expect(res1).toBeTruthy();
+      await ctx.runEask("analyze --json");
+      await ctx.runEask("analyze Eask --json");
     });
   });
 
   describe("error", () => {
-    const cwd = "./test-js/empty";
+    const ctx = new TestContext("./test-js/empty");
+
     it("errors in an empty dir", async () => {
-      await expect(exec("eask scrog", { cwd })).rejects.toThrow();
+      await expect(ctx.runEask("analyze")).rejects.toThrow();
     });
   });
 
   describe("metadata", () => {
-    const cwd = "./test-js/metadata";
-    it("handles plain text", async () => {
-      const res = await exec("eask analyze", { cwd });
-      expect(res).toBeTruthy();
+    const ctx = new TestContext("./test-js/metadata");
 
-      const res1 = await exec("eask analyze Eask", { cwd });
-      expect(res1).toBeTruthy();
+    it("handles plain text", async () => {
+      await ctx.runEask("analyze");
+      await ctx.runEask("analyze Eask");
     });
 
     it("handles json", async () => {
-      const res = await exec("eask analyze --json", { cwd });
-      expect(res).toBeTruthy();
-
-      const res1 = await exec("eask analyze Eask --json", {
-        cwd,
-      });
-      expect(res1).toBeTruthy();
+      await ctx.runEask("analyze --json");
+      await ctx.runEask("analyze Eask --json");
     });
   });
 });
