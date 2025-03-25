@@ -165,6 +165,7 @@ describe("local", () => {
   });
 
   describe("Linting", () => {
+    // TODO some lint commands may fail if packages are missing
     it("lint checkdoc", async () => {
       await ctx.runEask("lint checkdoc");
     });

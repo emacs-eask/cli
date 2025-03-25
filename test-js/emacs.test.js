@@ -1,8 +1,7 @@
 const { TestContext } = require("./helpers");
 
 describe("emacs", () => {
-  const cwd = "./test-js/empty";
-  const ctx = new TestContext(cwd);
+  const ctx = new TestContext("./test-js/empty");
 
   beforeAll(async () => await ctx.runEask("clean all"));
 
