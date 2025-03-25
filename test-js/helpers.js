@@ -49,6 +49,68 @@ async function emacsVersion() {
   return version;
 }
 
+/** Provides transformations on output of node.exec(). */
+class CommandOutput {
+  constructor(output, cwd) {
+    this.stderr = output.stderr;
+    this.stdout = output.stdout;
+    this.cwd = cwd;
+    this.cwdAbsolute = path.resolve(cwd || ".");
+  }
+
+  /**
+   * Both stdout and stderr concatenated as a string.
+   * @returns {string}
+   */
+  combined() {
+    return this.stdout + "\n" + this.stderr;
+  }
+
+  /**
+   * Output as a plain object.
+   * @returns {{ sdout: string, stderr: string }}
+   */
+  raw() {
+    return {
+      stderr: this.stderr,
+      stdout: this.stdout,
+    };
+  }
+
+  /**
+   * Attempt to make `s` safe for snapshotting by replacing local data.
+   * @param {string} s
+   * @returns {string}
+   */
+  sanitizeString(s) {
+    let working = s;
+    // replace absolute path
+    working = working.replace(RegExp(this.cwdAbsolute, "g"), "~");
+    // replace relative path
+    working = working.replace(RegExp(this.cwd, "g"), "~");
+    return working;
+  }
+
+  /**
+   * Create a copy of this object with output safe for snapshotting.
+   * @param {...function(string):string[]} sanitizeFns functions to apply to the output.
+   * These apply after the default sanitize functions.
+   * @returns {CommandOutput}
+   */
+  sanitized(...sanitizeFns) {
+    let sani = (s) =>
+      sanitizeFns.reduce((s1, f) => f.call({}, s1), this.sanitizeString(s));
+
+    return new CommandOutput(
+      {
+        stdout: sani(this.stdout),
+        stderr: sani(this.stderr),
+      },
+      this.cwd,
+    );
+  }
+}
+
 class TestContext {
   /**
    * @param {string} cwd Current Working Directory, used for all commands.
@@ -65,7 +127,7 @@ class TestContext {
    * for additional config options.
    * @param {string} command
    * @param {any} config
-   * @returns {Promise.<{ stdout, stderr }>}
+   * @returns {Promise.<CommandOutput>}
    */
   runEask(command, config) {
     return this.run(this.easkCommand + " " + command, config);
@@ -86,7 +148,7 @@ class TestContext {
               (obj.stderr ? obj.stderr : ""),
           );
         }
-        return obj;
+        return new CommandOutput(obj, this.cwd);
       })
       .catch((err) => {
         if (!err.code) err.message += "\nexec: TIMEOUT";
@@ -111,11 +173,12 @@ class TestContext {
       .stat(fullPath)
       .then((_) => true)
       .catch((_) => {
-        throw Error("File does not exist: " + fullPath);
+        throw Error("File does not exist, or is not readable: " + fullPath);
       });
   }
 
   /**
+   * Get file contents as a string, relative to the context's directory.
    * @param {string} relativePath
    * @returns {Promise.<string>}
    */
@@ -125,4 +188,10 @@ class TestContext {
   }
 }
 
-module.exports = { testUnsafe, emacsVersion, TestContext, getTimeout };
+module.exports = {
+  testUnsafe,
+  emacsVersion,
+  TestContext,
+  getTimeout,
+  CommandOutput,
+};
