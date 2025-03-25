@@ -260,11 +260,6 @@ describe("local", () => {
     it("locate", async () => {
       await ctx.runEask("locate");
     });
-    // TODO hmm, this might cause weird effects
-    test.skip("upgrade-eask", async () => {
-      await ctx.runEask("upgrade-eask");
-    });
-
     it("refresh", async () => {
       await ctx.runEask("refresh");
     });
