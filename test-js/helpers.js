@@ -1,5 +1,7 @@
 const util = require("node:util");
 const exec = util.promisify(require("node:child_process").exec);
+const fs = require("node:fs/promises");
+const path = require("node:path");
 
 /*
  * This file uses JsDoc syntax.
@@ -94,6 +96,32 @@ class TestContext {
 
   cleanUp() {
     this.controller.abort();
+  }
+
+  /**
+   * Test if a file exists using a path relative to this context's directory.
+   * Throws if file does not exist, to provide an explanation when used with
+   * expect().
+   * @param {string} relativePath
+   * @returns {Promise.<boolean>}
+   */
+  fileExists(relativePath) {
+    const fullPath = path.resolve(this.cwd, relativePath);
+    return fs
+      .stat(fullPath)
+      .then((_) => true)
+      .catch((_) => {
+        throw Error("File does not exist: " + fullPath);
+      });
+  }
+
+  /**
+   * @param {string} relativePath
+   * @returns {Promise.<string>}
+   */
+  fileContents(relativePath) {
+    const fullPath = path.resolve(this.cwd, relativePath);
+    return fs.readFile(fullPath);
   }
 }
 
