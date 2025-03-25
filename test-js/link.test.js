@@ -20,7 +20,9 @@ describe("link", () => {
     const ctx = new TestContext("./test-js/empty");
 
     it("eask link add should error", async () => {
-      await expect(ctx.runEask("link add")).rejects.toThrow();
+      await expect(ctx.runEask("link add")).rejects.toMatchObject({
+        code: 1,
+      });
     });
 
     it("adding an unknown package should error", async () => {
