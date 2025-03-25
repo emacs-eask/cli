@@ -3,7 +3,7 @@ const { TestContext } = require("./helpers");
 describe("test_ecukes", () => {
   const ctx = new TestContext("./test-js/ecukes");
 
-  beforeAll(async () => await ctx.runEask("install-deps --dev"), 10000);
+  beforeAll(async () => await ctx.runEask("install-deps --dev"));
   afterAll(() => ctx.cleanUp());
 
   test("eask test ecukes", async () => {

@@ -1,7 +1,5 @@
 const { TestContext } = require("./helpers");
 
-jest.setTimeout(10000);
-
 describe("buttercup", () => {
   const ctx = new TestContext("./test-js/buttercup");
 

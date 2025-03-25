@@ -31,23 +31,19 @@ describe("config param", () => {
     /*
      * This test modifies ~/.emacs.d/init.el and installs packages there when run with ALLOW_UNSAFE
      */
-    testUnsafe(
-      "eask install -c",
-      async () => {
-        // create ~/.emacs.d
-        await fs.mkdir(path.join(process.env.HOME, "/.emacs.d/"), {
-          recursive: true,
-        });
-        // copy init.el from fixtures
-        // it must enable sources for the installed packages
-        await fs.copyFile(
-          "./test-js/config/init.el",
-          path.join(process.env.HOME, "/.emacs.d/init.el"),
-        );
-        await ctx.runEask("install -c spinner ivy beacon company-fuzzy");
-      },
-      15000,
-    );
+    testUnsafe("eask install -c", async () => {
+      // create ~/.emacs.d
+      await fs.mkdir(path.join(process.env.HOME, "/.emacs.d/"), {
+        recursive: true,
+      });
+      // copy init.el from fixtures
+      // it must enable sources for the installed packages
+      await fs.copyFile(
+        "./test-js/config/init.el",
+        path.join(process.env.HOME, "/.emacs.d/init.el"),
+      );
+      await ctx.runEask("install -c spinner ivy beacon company-fuzzy");
+    });
 
     testUnsafe("eask uninstall -c", async () => {
       await ctx.runEask("uninstall -c ivy company-fuzzy");

@@ -9,8 +9,6 @@ const { emacsVersion, TestContext } = require("./helpers");
 const fs = require("node:fs/promises");
 const path = require("node:path");
 
-jest.setTimeout(15000);
-
 describe("local", () => {
   const cwd = "./test-js/local";
   const ctx = new TestContext(cwd);
@@ -70,7 +68,7 @@ describe("local", () => {
     // TODO this times out
     it("prepare --dev", async () => {
       await ctx.runEask("prepare --dev");
-    }, 20000);
+    });
 
     it("package", async () => {
       await ctx.runEask("package");
@@ -80,7 +78,7 @@ describe("local", () => {
   describe("Development", () => {
     // TODO takes a long time, organize-imports-java?
     // works when installed
-    beforeAll(async () => await ctx.runEask("install-deps"), 15000);
+    beforeAll(async () => await ctx.runEask("install-deps"));
     // this requires install-deps
     it("compile", async () => {
       await ctx.runEask("compile");

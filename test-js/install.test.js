@@ -1,19 +1,20 @@
 const { TestContext } = require("./helpers");
 
-jest.setTimeout(15000);
-
 describe("install and uninstall", () => {
   describe("in mini.pkg.1", () => {
     const ctx = new TestContext("./test-js/install/");
-    afterAll(() => ctx.cleanUp());
+
     // beforeAll(async () => await exec("eask clean all", { cwd }));
 
     // TODO also teardown?
+    afterAll(async () => await ctx.runEask("clean all"));
+    afterAll(() => ctx.cleanUp());
 
     // TODO this can take a really really long time!
-    it("installs dependencies", async () => {
+    // TODO all later commands depend on this?
+    test("installs dependencies", async () => {
       await ctx.runEask("install-deps");
-    }, 20000);
+    });
 
     it("installs project package", async () => {
       await ctx.runEask("package");

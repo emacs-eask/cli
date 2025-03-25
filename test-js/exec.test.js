@@ -3,7 +3,7 @@ const { TestContext } = require("./helpers");
 describe("exec", () => {
   const ctx = new TestContext("./test-js/exec");
 
-  beforeAll(async () => await ctx.runEask("install-deps"), 10000);
+  beforeAll(async () => await ctx.runEask("install-deps"));
 
   afterAll(() => ctx.cleanUp());
 

@@ -6,7 +6,7 @@ describe("outdated and upgrade", () => {
   beforeAll(async () => {
     await ctx.runEask("install-deps");
     await ctx.runEask("load make-outdate.el");
-  }, 15000);
+  });
 
   // these will run in sequence
   afterAll(async () => await ctx.runEask("clean all"));

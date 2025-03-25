@@ -91,7 +91,7 @@ describe("exit-status", () => {
     // takes a while to install elsa
     it("elsa should error with no files", async () => {
       await expect(ctx.runEask("lint elsa")).rejects.toThrow();
-    }, 10000);
+    });
 
     it("indent should error with no files", async () => {
       await expect(ctx.runEask("lint indent")).rejects.toThrow();

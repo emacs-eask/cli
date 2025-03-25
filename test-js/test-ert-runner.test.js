@@ -3,7 +3,7 @@ const { TestContext } = require("./helpers");
 describe("test ert-runner", () => {
   const ctx = new TestContext("./test-js/ert-runner");
 
-  beforeAll(async () => await ctx.runEask("install-deps --dev"), 10000);
+  beforeAll(async () => await ctx.runEask("install-deps --dev"));
 
   afterAll(() => ctx.cleanUp());
 

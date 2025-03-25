@@ -2,8 +2,7 @@ const { TestContext } = require("./helpers");
 
 describe("link", () => {
   describe("normally", () => {
-    const cwd = "./test-js/link";
-    const ctx = new TestContext(cwd);
+    const ctx = new TestContext("./test-js/link");
     it("adds a link", async () => {
       await ctx.runEask('link add "mini.pkg.1" "./test/mini.pkg.1/"');
     });
