@@ -1,7 +1,7 @@
 const { TestContext } = require("./helpers");
 
 describe("outdated and upgrade", () => {
-  const ctx = new TestContext("./test-js/outdated_upgrade");
+  const ctx = new TestContext("./test/jest/outdated_upgrade");
 
   beforeAll(async () => {
     await ctx.runEask("install-deps");

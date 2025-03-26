@@ -7,7 +7,7 @@
 const { emacsVersion, TestContext } = require("./helpers");
 
 describe("local", () => {
-  const cwd = "./test-js/local";
+  const cwd = "./test/jest/local";
   const ctx = new TestContext(cwd);
 
   // NOTE: install-deps takes a long time in this package

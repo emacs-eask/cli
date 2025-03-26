@@ -1,7 +1,7 @@
 const { TestContext } = require("./helpers");
 
 describe("options", () => {
-  const ctx = new TestContext("./test-js/options");
+  const ctx = new TestContext("./test/jest/options");
 
   describe("eask info errors", () => {
     const ctx = new TestContext(process.env.HOME);

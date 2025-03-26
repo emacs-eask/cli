@@ -1,9 +1,7 @@
 const { TestContext } = require("./helpers");
 
 describe("exit-status", () => {
-  const ctx = new TestContext("./test-js/empty");
-
-  // beforeAll(async () => await ctx.runEask("install-deps"), 10000);
+  const ctx = new TestContext("./test/jest/empty");
 
   afterAll(() => ctx.cleanUp());
 

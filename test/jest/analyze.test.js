@@ -2,7 +2,7 @@ const { TestContext } = require("./helpers");
 
 describe("analyze", () => {
   describe("in ./dsl", () => {
-    const ctx = new TestContext("./test-js/dsl");
+    const ctx = new TestContext("./test/jest/dsl");
 
     it("handles plain text", async () => {
       await ctx.runEask("analyze");
@@ -31,7 +31,7 @@ describe("analyze", () => {
   });
 
   describe("in ./empty", () => {
-    const ctx = new TestContext("./test-js/empty");
+    const ctx = new TestContext("./test/jest/empty");
 
     it("should error", async () => {
       await expect(ctx.runEask("analyze")).rejects.toThrow();
@@ -39,7 +39,7 @@ describe("analyze", () => {
   });
 
   describe("in ./metadata", () => {
-    const ctx = new TestContext("./test-js/metadata");
+    const ctx = new TestContext("./test/jest/metadata");
 
     it("handles plain text", async () => {
       await ctx.runEask("analyze");

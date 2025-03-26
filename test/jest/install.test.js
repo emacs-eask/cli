@@ -2,7 +2,7 @@ const { TestContext } = require("./helpers");
 
 describe("install and uninstall", () => {
   describe("in ./install", () => {
-    const ctx = new TestContext("./test-js/install/");
+    const ctx = new TestContext("./test/jest/install/");
     const packageName = "mini.pkg.1";
 
     beforeAll(async () => {
@@ -44,7 +44,7 @@ describe("install and uninstall", () => {
   });
 
   describe("in an empty project", () => {
-    const ctx = new TestContext("./test-js/empty");
+    const ctx = new TestContext("./test/jest/empty");
     beforeAll(async () => await ctx.runEask("clean all"));
     afterAll(() => ctx.cleanUp());
 

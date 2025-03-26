@@ -1,7 +1,7 @@
 const { TestContext } = require("./helpers");
 
 describe("docker", () => {
-  const ctx = new TestContext("./test-js/docker");
+  const ctx = new TestContext("./test/jest/docker");
 
   afterAll(() => ctx.cleanUp());
 

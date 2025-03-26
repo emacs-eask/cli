@@ -1,7 +1,7 @@
 const { TestContext } = require("./helpers");
 
 describe("test ert-runner", () => {
-  const ctx = new TestContext("./test-js/ert-runner");
+  const ctx = new TestContext("./test/jest/ert-runner");
 
   beforeAll(async () => await ctx.runEask("install-deps --dev"));
 

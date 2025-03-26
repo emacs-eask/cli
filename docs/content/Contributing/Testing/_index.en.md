@@ -61,7 +61,7 @@ If you use it, make sure to run `eask clean all` before your tests.
 const { TestContext } = require("./helpers");
 
 describe("emacs", () => {
-  const ctx = new TestContext("./test-js/empty");
+  const ctx = new TestContext("./test/jest/empty");
 
   beforeAll(async () => await ctx.runEask("clean all"));
   afterAll(() => ctx.cleanUp);

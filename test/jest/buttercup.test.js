@@ -1,7 +1,7 @@
 const { TestContext } = require("./helpers");
 
 describe("buttercup", () => {
-  const ctx = new TestContext("./test-js/buttercup");
+  const ctx = new TestContext("./test/jest/buttercup");
 
   beforeAll(async () => await ctx.runEask("install-deps --dev"));
 

@@ -31,7 +31,7 @@ describe("global", () => {
       // add a global Easkfile
       if (process.env.ALLOW_UNSAFE) {
         await fs.copyFile(
-          "./test-js/global/Eask",
+          "./test/jest/global/Eask",
           path.join(process.env.HOME, "Eask"),
         );
       }

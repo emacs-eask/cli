@@ -1,7 +1,7 @@
 const { TestContext } = require("./helpers");
 
 describe("search", () => {
-  const cwd = "./test-js/search";
+  const cwd = "./test/jest/search";
   const ctx = new TestContext(cwd);
 
   test("eask search company", async () => {

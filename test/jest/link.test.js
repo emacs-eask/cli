@@ -2,7 +2,7 @@ const { TestContext } = require("./helpers");
 
 describe("link", () => {
   describe("in ./link", () => {
-    const ctx = new TestContext("./test-js/link");
+    const ctx = new TestContext("./test/jest/link");
 
     beforeAll(async () => {
       await ctx.runEask("clean workspace");
@@ -86,7 +86,7 @@ describe("link", () => {
   });
 
   describe("in an empty directory", () => {
-    const ctx = new TestContext("./test-js/empty");
+    const ctx = new TestContext("./test/jest/empty");
 
     beforeAll(async () => {
       await ctx.runEask("clean all");

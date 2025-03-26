@@ -1,7 +1,7 @@
 const { TestContext } = require("./helpers");
 
 describe("test-ert", () => {
-  const ctx = new TestContext("./test-js/ert");
+  const ctx = new TestContext("./test/jest/ert");
 
   afterAll(() => ctx.cleanUp());
 

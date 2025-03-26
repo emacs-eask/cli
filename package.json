@@ -7,7 +7,7 @@
     "test-docker": "env ALLOW_UNSAFE=1 jest",
     "test-debug": "env DEBUG=1 jest",
     "test": "jest",
-    "test-reset": "rm -rf ./test-js/.eask ./test-js/*/.eask; git restore ./test-js/*/",
+    "test-reset": "rm -rf ./test/jest/.eask ./test/jest/*/.eask; git restore ./test/jest/*/",
     "pkg-all": "pkg package.json",
     "pkg-linux-arm64": "pkg package.json -t node*-linuxstatic-arm64 --output dist/eask --public",
     "pkg-linux-x64": "pkg package.json -t node*-linuxstatic-x64 --output dist/eask --public",
@@ -40,7 +40,7 @@
     "jest": "^29.7.0"
   },
   "jest": {
-    "rootDir": "./test-js",
+    "rootDir": "./test/jest",
     "testTimeout": 40000
   },
   "files": [

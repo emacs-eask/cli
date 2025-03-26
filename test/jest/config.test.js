@@ -39,7 +39,7 @@ describe("config param", () => {
       // copy init.el from fixtures
       // it must enable sources for the installed packages
       await fs.copyFile(
-        "./test-js/config/init.el",
+        "./test/jest/config/init.el",
         path.join(process.env.HOME, "/.emacs.d/init.el"),
       );
       await ctx.runEask("install -c spinner ivy beacon company-fuzzy");
