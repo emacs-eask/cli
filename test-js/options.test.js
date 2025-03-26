@@ -3,9 +3,19 @@ const { TestContext } = require("./helpers");
 describe("options", () => {
   const ctx = new TestContext("./test-js/options");
 
-  test("eask info -g should error", async () => {
-    await expect(ctx.runEask("info -g")).rejects.toThrow();
-    await expect(ctx.runEask("info -global")).rejects.toThrow();
+  describe("eask info errors", () => {
+    const ctx = new TestContext(process.env.HOME);
+    test("eask info should error without an Easkfile", async () => {
+      const hasGlobal =
+        (await ctx.fileExists("Eask").catch(() => false)) ||
+        (await ctx.fileExists("Easkfile").catch(() => false));
+      // If there is a global Easkfile then just skip testing
+      // Better to not test than to raise false errors
+      if (!hasGlobal) {
+        await expect(ctx.runEask("info -g")).rejects.toThrow();
+        await expect(ctx.runEask("info --global")).rejects.toThrow();
+      }
+    });
   });
 
   test.each([
