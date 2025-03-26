@@ -6,12 +6,11 @@
 
 const { emacsVersion, TestContext } = require("./helpers");
 
-const fs = require("node:fs/promises");
-const path = require("node:path");
-
 describe("local", () => {
   const cwd = "./test-js/local";
   const ctx = new TestContext(cwd);
+
+  // NOTE: install-deps takes a long time in this package
 
   afterAll(() => ctx.cleanUp());
 
@@ -35,14 +34,18 @@ describe("local", () => {
     it("bump", async () => {
       await ctx.runEask("bump major minor patch");
     });
+    // NOTE: eask cat is a long running command
     it("cat", async () => {
+      // cat requires e2ansi, installing it takes a while
       await ctx.runEask("cat package.json --insecure");
       await ctx.runEask("cat package.json --number --insecure");
     });
     it("concat", async () => {
       await ctx.runEask("concat");
     });
+    // NOTE: eask loc is a long running command
     it("loc", async () => {
+      // installs markdown mode
       if ((await emacsVersion()) > "27.1") {
         await ctx.runEask("loc");
         await ctx.runEask("loc Eask");
@@ -61,14 +64,9 @@ describe("local", () => {
     });
   });
 
-  describe("Preparation", () => {
-    afterAll(async () => await ctx.runEask("clean all"));
-
-    // install-deps
-    // TODO this times out
-    it("prepare --dev", async () => {
-      await ctx.runEask("prepare --dev");
-    });
+  describe.skip("Preparation", () => {
+    beforeAll(async () => await ctx.runEask("prepare --dev"));
+    afterAll(async () => await ctx.runEask("clean dist"));
 
     it("package", async () => {
       await ctx.runEask("package");
@@ -76,8 +74,6 @@ describe("local", () => {
   });
 
   describe("Development", () => {
-    // TODO takes a long time, organize-imports-java?
-    // works when installed
     beforeAll(async () => await ctx.runEask("install-deps"));
     // this requires install-deps
     it("compile", async () => {
@@ -110,94 +106,113 @@ describe("local", () => {
     });
   });
 
-  // TODO requires install-deps
   describe("Execution", () => {
+    beforeAll(async () => await ctx.runEask("install-deps"));
+
     test("eval", async () => {
       await ctx.runEask('eval "(progn (require \'mini.pkg.1))"');
     });
   });
 
   describe("Generating", () => {
-    it("generate autoloads", async () => {
-      await ctx.runEask("generate autoloads");
+    beforeAll(async () => {
+      // from generate ignore elisp
+      await ctx.removeFiles(".gitignore");
     });
-    it("generate pkg-file", async () => {
-      await ctx.runEask("generate pkg-file");
+
+    afterAll(async () => {
+      await ctx.runEask("clean autoloads").catch(() => {});
+      await ctx.runEask("clean pkg-file").catch(() => {});
+
+      await ctx.removeFiles(
+        "recipes", // from generate recipes
+        ".gitignore", // from generate ignore elisp
+      );
     });
-    it("generate recipe -y", async () => {
-      await ctx.runEask("generate recipe -y");
+
+    it.each([
+      "generate autoloads",
+      "generate pkg-file",
+      "generate recipe -y",
+      "generate ignore elisp",
+    ])("eask %s", async (cmd) => {
+      await ctx.runEask(cmd);
     });
-    // await ctx.runEask("generate license gpl-3.0"); # XXX: Avoid API rate limit exceeded error
-    it("generate ignore elisp", async () => {
-      await ctx.runEask("generate ignore elisp");
+
+    it.skip("eask generate license", async () => {
+      // XXX: Avoid API rate limit exceeded error
+      await ctx.runEask("generate license gpl-3.0");
     });
   });
 
   describe("Generating tests", () => {
-    it("generate test ert", async () => {
-      await ctx.runEask("generate test ert");
-      await fs.rm(path.join(cwd, "/test"), { recursive: true, retries: 1 });
-    });
-    it("generate test ert-runner", async () => {
-      await ctx.runEask("generate test ert-runner");
-    });
-    it("generate test buttercup", async () => {
-      await ctx.runEask("generate test buttercup");
-    });
-    it("generate test ecukes", async () => {
-      await ctx.runEask("generate test ecukes");
+    // some tests fail if ./test already exists
+    beforeEach(async () => await ctx.removeFiles("features", "test", "tests"));
+    afterAll(async () => await ctx.removeFiles("features", "test", "tests"));
+
+    it.each([
+      "generate test ert",
+      "generate test ert-runner",
+      "generate test buttercup",
+      "generate test ecukes",
+    ])("eask %s", async (cmd) => {
+      await ctx.runEask(cmd);
     });
   });
 
   describe("Generating workflow", () => {
-    it("generate workflow circle-ci", async () => {
-      await ctx.runEask("generate workflow circle-ci");
-    });
-    it("generate workflow github", async () => {
-      await ctx.runEask("generate workflow github");
-    });
-    it("generate workflow gitlab", async () => {
-      await ctx.runEask("generate workflow gitlab");
-    });
-    it("generate workflow travis-ci", async () => {
-      await ctx.runEask("generate workflow travis-ci");
+    beforeEach(
+      async () =>
+        await ctx.removeFiles(
+          ".circleci",
+          ".gitlab-ci.yml",
+          ".github",
+          ".travis.yml",
+        ),
+    );
+    afterAll(
+      async () =>
+        await ctx.removeFiles(
+          ".circleci",
+          ".gitlab-ci.yml",
+          ".github",
+          ".travis.yml",
+        ),
+    );
+
+    it.each([
+      "generate workflow circle-ci",
+      "generate workflow github",
+      "generate workflow gitlab",
+      "generate workflow travis-ci",
+    ])("eask %s", async (cmd) => {
+      await ctx.runEask(cmd);
     });
   });
 
   describe("Linting", () => {
-    // TODO some lint commands may fail if packages are missing
-    it("lint checkdoc", async () => {
-      await ctx.runEask("lint checkdoc");
-    });
-    it("lint declare", async () => {
-      await ctx.runEask("lint declare");
-    });
-    it("lint elint", async () => {
-      await ctx.runEask("lint elint");
-    });
-    it("lint elisp-lint", async () => {
-      await ctx.runEask("lint elisp-lint");
-    });
-    // XXX: Elsa is not stable, ignore it for now
-    test.skip("lint elsa", async () => {
-      await ctx.runEask("lint elsa");
-    });
-    it("lint indent", async () => {
-      await ctx.runEask("lint indent");
-    });
-    it("lint keywords", async () => {
-      await ctx.runEask("lint keywords");
-    });
-    it("lint license", async () => {
-      await ctx.runEask("lint license");
-    });
-    it("lint package", async () => {
-      await ctx.runEask("lint package");
+    // some lint commands may fail if packages are missing
+    beforeAll(async () => await ctx.runEask("install-deps"));
+    it.each([
+      "lint checkdoc",
+      "lint declare",
+      "lint elint",
+      "lint elisp-lint",
+      "lint indent",
+      "lint keywords",
+      "lint license",
+      "lint package",
+    ])("eask %s", async (cmd) => {
+      await ctx.runEask(cmd);
     });
     it("lint regexps", async () => {
       if ((await emacsVersion()) > "27.1") {
         await ctx.runEask("lint regexps");
       }
+    });
+    // XXX: Elsa is not stable, ignore it for now
+    test.skip("lint elsa", async () => {
+      await ctx.runEask("lint elsa");
     });
   });
 
@@ -221,26 +236,16 @@ describe("local", () => {
   });
 
   describe("Cleaning", () => {
-    it("clean .eask", async () => {
-      await ctx.runEask("clean .eask");
-    });
-    it("clean elc", async () => {
-      await ctx.runEask("clean elc");
-    });
-    it("clean dist", async () => {
-      await ctx.runEask("clean dist");
-    });
-    it("clean autoloads", async () => {
-      await ctx.runEask("clean autoloads");
-    });
-    it("clean pkg-file", async () => {
-      await ctx.runEask("clean pkg-file");
-    });
-    it("clean log-file", async () => {
-      await ctx.runEask("clean log-file");
-    });
-    it("clean all", async () => {
-      await ctx.runEask("clean all");
+    it.each([
+      "clean .eask",
+      "clean elc",
+      "clean dist",
+      "clean autoloads",
+      "clean pkg-file",
+      "clean log-file",
+      "clean all",
+    ])("eask %s", async (cmd) => {
+      await ctx.runEask(cmd);
     });
   });
 
