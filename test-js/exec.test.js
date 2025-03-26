@@ -24,8 +24,7 @@ describe("exec", () => {
   });
 
   test("eask exec buttercup -L . --pattern 'pattern 1'", async () => {
-    // TODO this causes a bug on windows docker image
-    await ctx.runEask("exec buttercup -L . --pattern 'pattern 1'");
+    await ctx.runEask('exec buttercup -L . --pattern "pattern 1"');
   });
 
   test("should error with no args", async () => {
