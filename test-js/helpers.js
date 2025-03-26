@@ -197,6 +197,20 @@ class TestContext {
     const fullPath = path.resolve(this.cwd, relativePath);
     return fs.readFile(fullPath);
   }
+
+  /**
+   * Removes files or directories under the context's directory.
+   * Errors are silently ignored.
+   * @param {...string} filesOrDirs files or directories to remove
+   * @returns {Promise.<void>}
+   */
+  async removeFiles(...filesOrDirs) {
+    for (let f of filesOrDirs) {
+      await fs
+        .rm(path.join(this.cwd, f), { recursive: true, retries: 1 })
+        .catch(() => {}); // ignore "does not exist errors"
+    }
+  }
 }
 
 module.exports = {
