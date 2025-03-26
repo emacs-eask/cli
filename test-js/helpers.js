@@ -84,10 +84,21 @@ class CommandOutput {
    */
   sanitizeString(s) {
     let working = s;
+    // windows paths
+    if (this.cwdAbsolute.startsWith(":", 1)) {
+      // cwdAbsolute is a windows path e.g. C:\foo\bar
+      // Eask outputs windows paths like d:/a/cli/Eask
+      let cwdTranslated = this.cwdAbsolute.replaceAll("\\", "/");
+      // lowercase the drive letter
+      cwdTranslated =
+        cwdTranslated[0].toLowerCase() + cwdTranslated.substring(1);
+      working = working.replaceAll(cwdTranslated, "~");
+    }
+
     // replace absolute path
-    working = working.replace(RegExp(this.cwdAbsolute, "g"), "~");
+    working = working.replaceAll(this.cwdAbsolute, "~");
     // replace relative path
-    working = working.replace(RegExp(this.cwd, "g"), "~");
+    working = working.replaceAll(this.cwd, "~");
     return working;
   }
 
