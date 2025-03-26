@@ -25,15 +25,27 @@ describe("global", () => {
 
   describe("install", () => {
     /*
-     * This test modifies ~/.eask
+     * This test modifies ~/.eask and ~/Eask
      */
-    testUnsafe("eask install -g", async () => {
+    beforeAll(async () => {
       // add a global Easkfile
-      await fs.copyFile(
-        "./test-js/global/Eask",
-        path.join(process.env.HOME, "Eask"),
-      );
+      if (process.env.ALLOW_UNSAFE) {
+        await fs.copyFile(
+          "./test-js/global/Eask",
+          path.join(process.env.HOME, "Eask"),
+        );
+      }
+    });
 
+    afterAll(async () => {
+      if (process.env.ALLOW_UNSAFE) {
+        // remove test changes
+        await ctx.runEask("uninstall -g spinner ivy beacon company-fuzzy");
+        await fs.rm(path.join(process.env.HOME, "Eask"));
+      }
+    });
+
+    testUnsafe("eask install -g", async () => {
       await ctx.runEask("install -g spinner ivy beacon company-fuzzy");
     });
 
