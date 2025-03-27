@@ -8,12 +8,9 @@ weight: 20
 This describes how to run tests locally, and how to write new tests for Eask.
 
 Local testing for Eask is done using the [Jest](https://jestjs.io) testing framework.
-
-- TODO why jest
-
-A custom `TestContext` class is used to manage the execution environment for each test suite.
-
-- TODO perhaps not relevant here
+Jest is a mature and well supported testing framework written in Javascript.
+Jest was chosen for much the [same reasons as Javascript](https://emacs-eask.github.io/FAQ/#-why-javascript) was chosen for this project.
+In addition, Jest is easy to learn and has built in support for snapshot based testing.
 
 ### Running Tests
 
@@ -36,10 +33,14 @@ For example
 
 | Name           | Type   | Default | Meaning                                                                                           |
 |:---------------|:-------|---------|:--------------------------------------------------------------------------------------------------|
-| `ALLOW_UNSAFE` | bool   | 0       | Run tests in `testUnsafe` blocks. These can **overwrite** your personal emacs config or settings. |
-| `DEBUG`        | bool   | 0       | Print full output from commands in test.                                                          |
-| `EASK_COMMAND` | path   | "eask"  | Path to Eask. Usually either `eask` or `./bin/eask` (include local changes).                      |
-| `TIMEOUT`      | number | 25000   | Command timeout in ms. Note this is different than Jest's timeout, which should be greater.        |
+| `ALLOW_UNSAFE` | bool*   | false   | Run tests in `testUnsafe` blocks. These can **overwrite** your personal emacs config or settings. |
+| `DEBUG`        | bool*   | false   | Print full output from commands in test.                                                          |
+| `EASK_COMMAND` | path   | "eask"  | Path to Eask. Usually either `eask` or `$PWD/bin/eask` to use local changes.                      |
+| `TIMEOUT`      | number | 25000   | Command timeout in ms. Note this is different than Jest's timeout, which should be greater.       |
+
+(*) Node.js handles environment variables as strings. That means that `DEBUG=0`, `DEBUG=false` all _enable_ `DEBUG`.
+    The only setting which disables a boolean flag is null, for example `DEBUG=`
+
 
 ### How to Write a Test
 
@@ -78,7 +79,7 @@ describe("emacs", () => {
 });
 ```
 
-In Jest, you group related tests using `describe`. Tests in the same describe block can share setup/teardown code,
+In Jest, you group related tests using `describe`. Tests in the same `describe` block can share setup/teardown code,
 can be disabled as a group and are grouped under the same heading in output.
 
 `describe` blocks can be nested within other `describe` blocks.
@@ -200,6 +201,7 @@ testUnsafe("global install", async () => {
 ### Common Problems
 
 - When using `runEask()`, pass only the Eask *arguments*, not the `eask` command itself.
+- Always `await` any expressions that trigger commands.
 - When using `expect(...).rejects` it should be awaited so that the promise rejects before the test completes.
 - The folder argument to `TestContext` should be relative to project root, if it doesn't exist you may get an error `ENOENT`
 - If you get an error from Jest reporting open handles, then try using `afterAll(() => ctx.cleanUp())`
