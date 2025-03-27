@@ -6,11 +6,16 @@
 
 const { emacsVersion, TestContext } = require("./helpers");
 
+jest.setTimeout(60000);
+
 describe("local", () => {
   const cwd = "./test/jest/local";
   const ctx = new TestContext(cwd);
 
   // NOTE: install-deps takes a long time in this package
+  //       this is because of recipe dependencies triggering
+  //       "temporary archives" build.
+  beforeAll(async () => await ctx.runEask("install-deps", { timeout: 40000 }));
 
   afterAll(() => ctx.cleanUp());
 
@@ -64,7 +69,7 @@ describe("local", () => {
     });
   });
 
-  describe.skip("Preparation", () => {
+  describe("Preparation", () => {
     beforeAll(async () => await ctx.runEask("prepare --dev"));
     afterAll(async () => await ctx.runEask("clean dist"));
 

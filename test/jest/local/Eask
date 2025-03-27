@@ -27,6 +27,8 @@
 (depends-on "f")
 (depends-on "s")
 (depends-on "fringe-helper")
+;; FIXME: including these takes a really long time
+;;        perhaps move to a dedicated test file
 (depends-on "watch-cursor"
             :repo "jcs-elpa/watch-cursor" :fetcher 'github)
 (depends-on "organize-imports-java"
