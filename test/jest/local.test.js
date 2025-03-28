@@ -50,8 +50,8 @@ describe("local", () => {
     });
     // NOTE: eask loc is a long running command
     it("loc", async () => {
-      // installs markdown mode
-      if ((await emacsVersion()) > "27.1") {
+      // installs markdown mode -- depends on emacs 28.1
+      if ((await emacsVersion()) >= "28.1") {
         await ctx.runEask("loc");
         await ctx.runEask("loc Eask");
       }
