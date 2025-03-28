@@ -1,0 +1,55 @@
+name: Upgrade Eask
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'eask'
+      - '**.yml'
+      - lisp/**
+      - cmds/**
+      - src/**
+      - test/**
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - '**/docs.yml'
+      - '**.md'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        emacs-version:
+          - 30.1
+
+    steps:
+    - uses: jcs090218/setup-emacs@master
+      with:
+        version: ${{ matrix.emacs-version }}
+
+    - uses: actions/checkout@v4
+
+    - name: Prepare Eask (Unix)
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
+      run: |
+        chmod -R 777 ./
+        .github/scripts/setup-eask
+
+    - name: Prepare Eask (Windows)
+      if: matrix.os == 'windows-latest'
+      run: .github/scripts/setup-eask.ps1
+
+    - name: Testing...
+      run: |
+        npm run test-unsafe test/jest/upgrade-eask.test.js
