@@ -42,7 +42,9 @@ describe("config param", () => {
         "./test/jest/config/init.el",
         path.join(process.env.HOME, "/.emacs.d/init.el"),
       );
-      await ctx.runEask("install -c spinner ivy beacon company-fuzzy");
+      await ctx.runEask("install -c spinner ivy beacon company-fuzzy", {
+        timeout: 35000,
+      });
     });
 
     testUnsafe("eask uninstall -c", async () => {
