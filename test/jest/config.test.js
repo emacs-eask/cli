@@ -41,6 +41,7 @@ describe("config param", () => {
       await fs.copyFile(
         "./test/jest/config/init.el",
         path.join(process.env.HOME, "/.emacs.d/init.el"),
+        fs.constants.COPYFILE_EXCL, // throw if init.el already exists
       );
       await ctx.runEask("install -c spinner ivy beacon company-fuzzy", {
         timeout: 35000,
