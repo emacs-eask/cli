@@ -14,14 +14,14 @@ Eask 包含全面的用戶指南。 請嘗試相應地擴展它您實施新功�
 💡 您可以在 **docs/content/** 文件夾下找到我們所有的文檔。
 {{< /hint >}}
 
-### 🚩 必備條件
+## 🚩 必備條件
 
 要更改文檔，您應該：
 
 - [hugo](https://gohugo.io/getting-started/quick-start/#step-1-install-hugo)
 可執行； 靜態站點生成器。
 
-### 📐 設置
+## 📐 設置
 
 要在本地設置網站，您需要先安裝主題：
 
