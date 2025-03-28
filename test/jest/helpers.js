@@ -144,6 +144,15 @@ class TestContext {
     return this.run(this.easkCommand + " " + command, config);
   }
 
+  /**
+   * Runs a command in the context's directory.
+   * Prefer using Node APIs for commands like copy, delete etc.
+   * See https://nodejs.org/docs/latest-v20.x/api/child_process.html#child_processexeccommand-options-callback
+   * for additional config options.
+   * @param {string} command
+   * @param {any} config
+   * @returns {Promise.<CommandOutput>}
+   */
   run(command, config) {
     return exec(command, {
       cwd: this.cwd,
@@ -167,6 +176,10 @@ class TestContext {
       });
   }
 
+  /**
+   * Abort any processes created using `runEask` or `run`.
+   * @returns {void}
+   */
   cleanUp() {
     this.controller.abort();
   }
