@@ -52,4 +52,4 @@ jobs:
 
     - name: Testing...
       run: |
-        make command-search
+        npm run test-unsafe test/jest/search.test.js

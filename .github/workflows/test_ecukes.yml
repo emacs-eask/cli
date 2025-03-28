@@ -52,4 +52,4 @@ jobs:
 
     - name: Testing...
       run: |
-        make test-ecukes
+        npm run test-unsafe test/jest/test-ecukes.test.js

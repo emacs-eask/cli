@@ -52,4 +52,4 @@ jobs:
 
     - name: Testing...
       run: |
-        make test-options
+        npm run test-unsafe test/jest/options.test.js

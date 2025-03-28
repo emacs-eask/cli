@@ -52,4 +52,4 @@ jobs:
 
     - name: Testing...
       run: |
-        make command-outdated-upgrade
+        npm run test-unsafe test/jest/outdated.test.js

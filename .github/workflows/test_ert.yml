@@ -52,4 +52,4 @@ jobs:
 
     - name: Testing...
       run: |
-        make test-ert
+        npm run test-unsafe test/jest/test-ert.test.js

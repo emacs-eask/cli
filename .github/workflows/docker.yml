@@ -29,7 +29,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: 
+        os:
         - ubuntu-latest
         # XXX: `macos-latest` on arm64 is not possible as well!?
         # See https://stackoverflow.com/questions/77675906/github-actions-build-docker-image-on-arm64-macos-latest-xlarge
@@ -67,4 +67,4 @@ jobs:
 
     - name: Testing...
       run: |
-        make command-docker
+        npm run test-unsafe test/jest/docker.test.js

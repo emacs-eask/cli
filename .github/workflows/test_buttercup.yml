@@ -52,4 +52,4 @@ jobs:
 
     - name: Testing...
       run: |
-        make test-buttercup
+        npm run test-unsafe test/jest/buttercup.test.js
