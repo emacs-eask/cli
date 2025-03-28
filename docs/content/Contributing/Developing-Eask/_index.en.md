@@ -11,8 +11,7 @@ To make changes to Eask, you should have:
 
 1. [Node.js][] for the development environment.
 2. [npm][] for the package manager.
-3. [yargs][] for CLI parser.
-4. [Emacs][], 26.1 or above!
+3. [Emacs][], 26.1 or above!
 
 ## 📝 Building
 
@@ -31,14 +30,14 @@ It should print out the location of the `eask` executable.
 You should be able to identify the Eask executable's location,
 even you have multiple Eask versions installed!
 
-## 📈 Testing
+## 🧪 Testing
 
-Local testing for Eask is done using the [Jest](https://jestjs.io) testing framework.
+Local testing for Eask is done using the [Jest][] testing framework.
 Jest is a mature and well supported testing framework written in Javascript.
-Jest was chosen for much the [same reasons as Javascript](https://emacs-eask.github.io/FAQ/#-why-javascript) was chosen for this project.
+Jest was chosen for much the [same reasons as Javascript][Why JS?] was chosen for this project.
 In addition, Jest is easy to learn and has built in support for snapshot based testing.
 
-### Running Tests
+### ⚗️ Running Tests
 
 If you have not done so already, run `npm install --dev`
 
@@ -50,12 +49,12 @@ Always run from the project root (i.e. same directory as `package.json`)
 - remove files created during test `npm run test-reset`
 
 Since `npm run test` just runs Jest, you can also pass Jest options to the
-commands above.
-For example
+commands above. For example:
+
 - run tests whose names (in `test()` blocks) match `npm run test -t 'eask lint .*'`
 - re-run failed tests `npm run test -f`
 
-### Environment Vars
+### 🌍 Environment Vars
 
 | Name           | Type   | Default | Meaning                                                                                           |
 |:---------------|:-------|---------|:--------------------------------------------------------------------------------------------------|
@@ -64,10 +63,12 @@ For example
 | `EASK_COMMAND` | path   | "eask"  | Path to Eask. Usually either `eask` or `$PWD/bin/eask` to use local changes.                      |
 | `TIMEOUT`      | number | 25000   | Command timeout in ms. Note this is different than Jest's timeout, which should be greater.       |
 
-(*) Node.js handles environment variables as strings. That means that `DEBUG=0`, `DEBUG=false` all _enable_ `DEBUG`.
-    The only setting which disables a boolean flag is null, for example `DEBUG=`
+{{< hint info >}}
+💡 Node.js handles environment variables as strings. That means that `DEBUG=0`, `DEBUG=false` all _enable_ `DEBUG`.
+The only setting which disables a boolean flag is null, for example `DEBUG=`.
+{{< /hint >}}
 
-### How to Write a Test
+### 🔬 How to Write a Test
 
 **Folder structure**
 
@@ -115,6 +116,7 @@ All `runEask` commands will use the `TestContext`'s working directory.
 
 Jest's tests are in `test` blocks. Note that `it` is an alias for `test`.
 Tests can be selectively disabled in code, like so:
+
 - `test.only(name, fn)` runs only that test in the file
 - `test.skip(name, fn)` skips running the test but still prints its name
 - `test.failing(name, fn)` invert the meaning of the test: it *should* fail.
@@ -127,11 +129,13 @@ That's why many tests don't have an `expect` call, they simply check that the co
 
 Output from `runEask` is wrapped in a helper class `CommandOutput` which provides some transformation methods.
 For example, if you have `const out = await ctx.runEask("analyze");`, then
+
 - `out.combined()` concatenates both stdout and stderr as a string,
 - `out.raw()` returns a plain object with just `stdout` and `stderr` as properties,
 - `out.sanitized()` replaces all absolute paths that match the context's path
 
 Since the class wraps the output of Node's `exec()` method you can still access `stdout` and `stderr`:
+
 ``` javascript
 const { stderr, stdout } = await ctx.runEask("analyze");
 ```
@@ -140,6 +144,7 @@ Some commands create files or directories which should be removed after the test
 For example, `eask generate ignore elisp` creates a `.gitignore` file.
 You can use the context's `removeFiles` method to remove files and directories relative
 to the context's path:
+
 ``` javascript
   describe("Generating", () => {
     beforeAll(async () => await ctx.removeFiles(".gitignore"));
@@ -150,6 +155,7 @@ to the context's path:
     });
   });
 ```
+
 Note that `removeFiles()` will recursively remove directories, but does not accept patterns.
 So, to remove all files in `./test` just call `ctx.remove("test")`.
 You can pass multiple files or directory names in single call: `ctx.remove("test", ".gitignore")`.
@@ -159,10 +165,11 @@ Use this if Jest reports "open handles were detected" after a test run.
 Note that `cleanUp` sends a signal to *all* processes started using the context's `runEask` command.
 If used in an `afterEach` hook (i.e. after every test) it may result in failures.
 
-### Snapshots
+### 🪧 Snapshots
 
 [Snapshot tests](https://jestjs.io/docs/snapshot-testing) match the output of a test against a saved copy of the expected output.
-For example
+For example:
+
 ``` javascript
 test("eask analyze", async () => {
   const res = await ctx.runEask("analyze");
@@ -177,6 +184,7 @@ If the snapshot changes, you can update the snapshot by running Jest with option
 `npm run test -- -u` will update all changed snapshots.
 
 Any type of output can be used for a snapshot test. You could snapshot the contents of a file after changing it
+
 ``` javascript
 test("eask analyze", async () => {
   await ctx.runEask("foo");
@@ -190,6 +198,7 @@ The snapshot of `eask analyze` contains absolute file paths that will be differe
 
 Output from `runEask` is wrapped in a helper class `CommandOutput` which provides some transformation methods.
 The simplest just removes the absolute file paths:
+
 ``` javascript
 it("matches snapshot", async () => {
   const res = await ctx.runEask("analyze");
@@ -201,6 +210,7 @@ it("matches snapshot", async () => {
 
 You can include custom replacement functions. Here, numbers will be replaced by `"x"`.
 Then strings `"x:x"` will be replaced by `"y"`.
+
 ``` javascript
 it("matches snapshot", async () => {
   const res = await ctx.runEask("analyze");
@@ -217,7 +227,7 @@ it("matches snapshot", async () => {
 It's important to use the `g` regex flag so all occurrences of the match are replaced, or you could use `replaceAll`.
 User provided functions run in addition to the default sanitize function and run in the order they were given.
 
-### Timeouts
+### ⏱️ Timeouts
 
 There are two timeout settings, one for Jest and one for Node's `exec()`.
 All timeout values are in milliseconds.
@@ -226,11 +236,13 @@ Since the `exec()` timeout immediately terminates the running command and report
 use that instead of Jest's timeout.
 
 To change a timeout for a single command
+
 ``` javascript
 ctx.runEask("analyze", { timeout: 10000})
 ```
 
 To change the global timeout for a single run, use the env var
+
 ``` shell
 env TIMEOUT=30000 npm run test
 ```
@@ -246,12 +258,13 @@ If you change either global timeout, **make sure the global Jest timeout is grea
 }
 ```
 
-### Patterns
+### 📜 Patterns
 
 Here are some common patterns for testing commands.
 Each of these assumes that `ctx` is a `TestContext` object.
 
 **Check a command succeeds:**
+
 ``` javascript
 test("eask analyze", async () => {
   await ctx.runEask("analyze");
@@ -262,6 +275,7 @@ Uncaught errors thrown in a `test` block will fail the test and report the error
 Failed commands will include stderr and stdout.
 
 **Check a command fails:**
+
 ``` javascript
 test("eask analyze", async () => {
   await expect(ctx.runEask("analyze")).rejects.toThrow();
@@ -269,6 +283,7 @@ test("eask analyze", async () => {
 ```
 
 **Check a command fails with a specific code:**
+
 ``` javascript
 test("eask link add should error", async () => {
   // the error object should have property code = 1
@@ -279,6 +294,7 @@ test("eask link add should error", async () => {
 ```
 
 **Check a command produces some output:**
+
 ``` javascript
 test("eask analyze", async () => {
   const out = await ctx.runEask("analyze");
@@ -305,6 +321,7 @@ Update all changed snapshots:
 `npm run test -- -u`
 
 Remove absolute file paths from output:
+
 ``` javascript
 it("matches snapshot", async () => {
   const res = await ctx.runEask("analyze");
@@ -315,6 +332,7 @@ it("matches snapshot", async () => {
 ```
 
 Apply custom transformations for sanitizing output:
+
 ``` javascript
 it("matches snapshot", async () => {
   const res = await ctx.runEask("analyze");
@@ -344,7 +362,7 @@ testUnsafe("global install", async () => {
 });
 ```
 
-### Common Problems
+### 🩺 Common Problems
 
 - When using `runEask()`, pass only the Eask *arguments*, not the `eask` command itself.
 - Always `await` any expressions that trigger commands.
@@ -355,9 +373,13 @@ testUnsafe("global install", async () => {
   The `node.exec` timeout is set lower than the Jest one, so changing timeout values for tests or by `jest.setTimeout` usually won't
   have an effect. Instead set the timeout on the command itself `runEask("eask emacs", { timeout: 100000 })`
 
+
 <!-- Links -->
 
 [Node.js]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/
 [yargs]: https://github.com/yargs/yargs
 [Emacs]: https://www.gnu.org/software/emacs/
+
+[Jest]: https://jestjs.io
+[Why JS?]: https://emacs-eask.github.io/FAQ/#-why-javascript
