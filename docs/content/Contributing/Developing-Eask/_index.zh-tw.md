@@ -15,7 +15,7 @@ weight: 20
 
 ### 📝 建構
 
-要構建開發環境，您必須使用安裝 Eask [從源代碼建構](https://emacs-eask.github.io/Getting-Started/Install-Eask/#-build-from-source)
+要構建開發環境，您必須使用安裝 Eask [從源代碼建構][Build from source]
 的方法。 確保你已經設置了環境 `PATH` 變量，這樣你就可以調用來自終端的`eask`。
 
 完成安裝後，嘗試：
@@ -177,7 +177,7 @@ test("eask analyze", async () => {
 ``` javascript
 test("eask analyze", async () => {
   await ctx.runEask("foo");
-  const file = ctx.fileContents("Easkfile"); // file as a string
+  const file = ctx.fileContents("Easkfile"); // 檔案為字串
   expect(file).toMatchSnapshot();
 });
 ```
@@ -191,8 +191,8 @@ test("eask analyze", async () => {
 ``` javascript
 it("matches snapshot", async () => {
   const res = await ctx.runEask("analyze");
-  const resClean = res.sanitized() // a CommandOutput object with absolute paths replaced by "~"
-                      .raw();      // an object { stderr, stdout } suitable for snapshotting
+  const resClean = res.sanitized() // 以 "~" 取代絕對路徑的 CommandOutput 物件
+                      .raw();      // 適合快照的物件 { stderr、stdout }
   expect(resClean).toMatchSnapshot();
 });
 ```
@@ -274,7 +274,7 @@ test("eask analyze", async () => {
 
 ``` javascript
 test("eask link add should error", async () => {
-  // the error object should have property code = 1
+  // 錯誤物件的屬性代碼應該是 1
   await expect(ctx.runEask("link add")).rejects.toMatchObject({
     code: 1,
   });
@@ -286,10 +286,10 @@ test("eask link add should error", async () => {
 ``` javascript
 test("eask analyze", async () => {
   const out = await ctx.runEask("analyze");
-  expect(out.stderr).toMatch("success"); // should apppear as a substring
-  // If you want to check both `stderr` and `stdout`, just concatenate them
+  expect(out.stderr).toMatch("success"); // 應顯示為子字串
+  // 如果您要同時檢查 `stderr` 和 `stdout`，只要將它們串連即可
   expect(out.stdout + "/n" + out.stderr).toMatch("success");
-  // Same thing using helper methods
+  // 使用輔助方法也是一樣
   expect(out.combined()).toMatch("success");
 });
 ```
@@ -312,8 +312,8 @@ test("eask analyze", async () => {
 ``` javascript
 it("matches snapshot", async () => {
   const res = await ctx.runEask("analyze");
-  const resClean = res.sanitized() // a CommandOutput object with absolute paths replaced by "~"
-                      .raw();      // an object { stderr, stdout } suitable for snapshotting
+  const resClean = res.sanitized() // 以 "~" 取代絕對路徑的 CommandOutput 物件
+                      .raw();      // 適合快照的物件 { stderr、stdout }
   expect(resClean).toMatchSnapshot();
 });
 ```
@@ -342,9 +342,9 @@ it("matches snapshot", async () => {
 ``` javascript
 const { testUnsafe } = require('./helpers');
 
-// this will only run if ALLOW_UNSAFE is != 0
+// 只有當 ALLOW_UNSAFE 為 != 0 時，才會執行此指令。
 testUnsafe("global install", async () => {
-  // this installs in ~/.eask and changes ~/Eask
+  // 這會安裝在 ~/.eask 中，並變更 ~/Eask
   await ctx.runEask("install -g foo");
 });
 ```
@@ -363,10 +363,12 @@ testUnsafe("global install", async () => {
 
 <!-- Links -->
 
+[Build from source]: https://emacs-eask.github.io/zh-tw/Getting-Started/Install-Eask/#-%e5%be%9e%e5%8e%9f%e5%a7%8b%e7%a2%bc%e6%a7%8b%e5%bb%ba
+[Why JS?]: https://emacs-eask.github.io/zh-tw/FAQ/#-%E7%82%BA%E4%BB%80%E9%BA%BC%E9%81%B8%E6%93%87-javascript
+
 [Node.js]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/
 [yargs]: https://github.com/yargs/yargs
 [Emacs]: https://www.gnu.org/software/emacs/
 
 [Jest]: https://jestjs.io
-[Why JS?]: https://emacs-eask.github.io/zh-tw/FAQ/#-%E7%82%BA%E4%BB%80%E9%BA%BC%E9%81%B8%E6%93%87-javascript

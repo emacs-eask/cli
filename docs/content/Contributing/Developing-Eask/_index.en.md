@@ -16,7 +16,7 @@ To make changes to Eask, you should have:
 ## 📝 Building
 
 To build the development environment, you would have to install Eask using
-the [build from source](https://emacs-eask.github.io/Getting-Started/Install-Eask/#-build-from-source)
+the [build from source][Build from source]
 method. Make sure you have set up the environment PATH variable, so you can call
 `eask` from the terminal.
 
@@ -375,10 +375,12 @@ have an effect. Instead set the timeout on the command itself `runEask("eask ema
 
 <!-- Links -->
 
+[Build from source]: https://emacs-eask.github.io/Getting-Started/Install-Eask/#-build-from-source
+[Why JS?]: https://emacs-eask.github.io/FAQ/#-why-javascript
+
 [Node.js]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/
 [yargs]: https://github.com/yargs/yargs
 [Emacs]: https://www.gnu.org/software/emacs/
 
 [Jest]: https://jestjs.io
-[Why JS?]: https://emacs-eask.github.io/FAQ/#-why-javascript
