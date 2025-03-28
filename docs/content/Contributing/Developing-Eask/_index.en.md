@@ -56,12 +56,12 @@ commands above. For example:
 
 ### 🌍 Environment Vars
 
-| Name           | Type   | Default | Meaning                                                                                           |
-|:---------------|:-------|---------|:--------------------------------------------------------------------------------------------------|
-| `ALLOW_UNSAFE` | bool*  | false   | Run tests in `testUnsafe` blocks. These can **overwrite** your personal emacs config or settings. |
-| `DEBUG`        | bool*  | false   | Print full output from commands in test.                                                          |
-| `EASK_COMMAND` | path   | "eask"  | Path to Eask. Usually either `eask` or `$PWD/bin/eask` to use local changes.                      |
-| `TIMEOUT`      | number | 25000   | Command timeout in ms. Note this is different than Jest's timeout, which should be greater.       |
+| Name           | Type    | Default | Meaning                                                                                           |
+|:---------------|:--------|:--------|:--------------------------------------------------------------------------------------------------|
+| `ALLOW_UNSAFE` | `bool*` | false   | Run tests in `testUnsafe` blocks. These can **overwrite** your personal emacs config or settings. |
+| `DEBUG`        | `bool*` | false   | Print full output from commands in test.                                                          |
+| `EASK_COMMAND` | path    | "eask"  | Path to Eask. Usually either `eask` or `$PWD/bin/eask` to use local changes.                      |
+| `TIMEOUT`      | number  | 25000   | Command timeout in ms. Note this is different than Jest's timeout, which should be greater.       |
 
 {{< hint info >}}
 💡 Node.js handles environment variables as strings. That means that `DEBUG=0`, `DEBUG=false` all _enable_ `DEBUG`.
@@ -317,8 +317,7 @@ test("eask analyze", async () => {
 });
 ```
 
-Update all changed snapshots:
-`npm run test -- -u`
+Update all changed snapshots: `npm run test -- -u`
 
 Remove absolute file paths from output:
 
@@ -370,8 +369,8 @@ testUnsafe("global install", async () => {
 - The folder argument to `TestContext` should be relative to project root, if it doesn't exist you may get an error `ENOENT`
 - If you get an error from Jest reporting open handles, then try using `afterAll(() => ctx.cleanUp())`
 - There are two timeout values: one used for Jest (set in `package.json`), and one used for `node.exec`, set via env var in `./helpers.js`.
-  The `node.exec` timeout is set lower than the Jest one, so changing timeout values for tests or by `jest.setTimeout` usually won't
-  have an effect. Instead set the timeout on the command itself `runEask("eask emacs", { timeout: 100000 })`
+The `node.exec` timeout is set lower than the Jest one, so changing timeout values for tests or by `jest.setTimeout` usually won't
+have an effect. Instead set the timeout on the command itself `runEask("eask emacs", { timeout: 100000 })`
 
 
 <!-- Links -->
