@@ -1,0 +1,15 @@
+(package "link-to"
+         "1.0.0"
+         "simple package to link")
+
+(website-url "https://example.org")
+(keywords "test")
+
+(package-file "link-to.el")
+
+(script "test" "echo \"Error: no test specified\" && exit 1")
+
+(source "gnu")
+
+(depends-on "emacs" "26.1")
+(depends-on "json-mode")

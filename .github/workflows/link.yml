@@ -70,4 +70,4 @@ jobs:
 
     - name: Testing...
       run: |
-        make command-link
+        npm run test-unsafe test/jest/link.test.js

@@ -50,4 +50,4 @@ jobs:
 
     - name: Testing...
       run: |
-        make command-exit-status
+        npm run test-unsafe test/jest/exit-status.test.js
