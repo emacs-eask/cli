@@ -70,6 +70,7 @@ We have incorporated a range of tests to ensure Eask remains stable throughout i
 | Test `emacs` command                         | ✔    | [![Emacs](https://github.com/emacs-eask/cli/actions/workflows/emacs.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/emacs.yml)                                  |
 | Test search packages                         | ✔    | [![Search](https://github.com/emacs-eask/cli/actions/workflows/search.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/search.yml)                               |
 | Test upgrade and check outdated packages     | ✔    | [![Outdated_Upgrade](https://github.com/emacs-eask/cli/actions/workflows/outdated_upgrade.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/outdated_upgrade.yml) |
+| Test `upgrade-eask` command                  | ✔    | [![Upgrade Eask](https://github.com/emacs-eask/cli/actions/workflows/upgrade-eask.yml/badge.svg)](https://github.com/emacs-eask/cli/actions/workflows/upgrade-eask.yml)             |
 
 ###### Options
 
