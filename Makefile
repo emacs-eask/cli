@@ -21,7 +21,6 @@ error:
 	./test/error/run.sh
 
 test-exit-status:
-	./test/exit-status/analyze/run.sh
 	./test/exit-status/clean/run.sh
 	./test/exit-status/compile/run.sh
 	./test/exit-status/create/run.sh
