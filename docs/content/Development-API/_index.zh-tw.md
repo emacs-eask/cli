@@ -73,7 +73,7 @@ Eask的呼叫程式路徑。
 命令分隔符號 `--` 之後的 Eask 參數；傳回一個列表。
 
 ```sh
-$ eask <command> -- args0 args1
+eask <command> -- args0 args1
 ```
 
 輸出:
@@ -87,7 +87,7 @@ $ eask <command> -- args0 args1
 命令分隔符號 `--` 之後的 Eask 參數；傳回一個字串。
 
 ```sh
-$ eask <command> -- args0 args1
+eask <command> -- args0 args1
 ```
 
 輸出:
@@ -119,7 +119,7 @@ $ eask <command> -- args0 args1
 返回字符串中的當前命令。假設命令是：
 
 ```sh
-$ eask init
+eask init
 ```
 
 然後，
@@ -287,7 +287,7 @@ $ eask init
 返回從命令行參數中提取的列表。
 
 ```sh
-$ eask info --verbose 4 foo bar
+eask info --verbose 4 foo bar
 ```
 
 它會忽略 `--verbose` 和 `4`，只返回 `foo` 和 `bar`。
@@ -529,10 +529,10 @@ $ eask info --verbose 4 foo bar
 返回一個 **string** 表示 `hostname` + `port number`。
 
 ```sh
-$ eask [command] --proxy "localhost:1000"
-$ eask [command] --http-proxy "localhost:2000"
-$ eask [command] --https-proxy "localhost:3000"
-$ eask [command] --no-proxy "localhost:4000"
+eask [command] --proxy "localhost:1000"
+eask [command] --http-proxy "localhost:2000"
+eask [command] --https-proxy "localhost:3000"
+eask [command] --no-proxy "localhost:4000"
 ```
 
 ## 🔍 函式: eask-destination ()
@@ -743,7 +743,7 @@ Output:
 使用命令 `cat` 查看日誌，
 
 ```
-$ cat /.log/messages.log
+cat /.log/messages.log
 ```
 
 ## 🔍 變數: eask-level-color
@@ -937,11 +937,11 @@ $ cat /.log/messages.log
   (error "Nothing happens!"))
 ```
 
-## 🔍 函式: eask--exit ()
+## 🔍 函式: eask--exit (&optional `exit-code` &rest `_`)
 
-Send exit code.
+傳送退出代碼。
 
-This will kill Emacs process.
+這會結束 Emacs 程序。
 
 # 🚩 文件
 
@@ -1013,7 +1013,19 @@ This will kill Emacs process.
 打印位於 `lisp/help/` 目錄下的幫助手冊。
 
 ```elisp
-(eask-help "core/search")
+(eask-help "core/search")  ; 程式的退出碼 1
+```
+
+另外，您也可以使用第二個參數 `print-or-exit-code` 指定退出代碼，預設值為 1。
+
+```elisp
+(eask-help "core/search" 4)  ; 程式的退出碼 4
+```
+
+若要防止程式以代碼退出，請傳入任何非零值。
+
+```elisp
+(eask-help "core/search" t)  ; 跳過退出
 ```
 
 {{< hint info >}}

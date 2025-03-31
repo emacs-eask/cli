@@ -20,6 +20,8 @@ env:
   - EMACS_CI=emacs-26-3
   - EMACS_CI=emacs-27-2
   - EMACS_CI=emacs-28-2
+  - EMACS_CI=emacs-29-4
+  - EMACS_CI=emacs-30-1
   - EMACS_CI=emacs-snapshot
 
 matrix:
@@ -40,11 +42,11 @@ script:
 
 This example is testing your Emacs Lisp package in the below environment;
 
-| OS             | Emacs                              | Eask   |
-|----------------|------------------------------------|--------|
-| Linux (Ubuntu) | `26.x`, `27.x`, `28.x`, `snapshot` | latest |
-| macOS          | n/a                                | latest |
-| Windows        | n/a                                | latest |
+| OS             | Emacs                                              | Eask   |
+|----------------|----------------------------------------------------|--------|
+| Linux (Ubuntu) | `26.x`, `27.x`, `28.x`, `29.x`, `30.x`, `snapshot` | latest |
+| macOS          | n/a                                                | latest |
+| Windows        | n/a                                                | latest |
 
 
 {{< hint info >}}

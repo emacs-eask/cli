@@ -15,7 +15,8 @@ on:
     branches:
       - master
     paths-ignore:
-    - '**.md'
+      - '**/docs.yml'
+      - '**.md'
   workflow_dispatch:
 
 concurrency:
@@ -28,13 +29,31 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]  # XXX: `windows-latest` is not possible at the moment!
+        os:
+        - ubuntu-latest
+        # XXX: `macos-latest` on arm64 is not possible as well!?
+        # See https://stackoverflow.com/questions/77675906/github-actions-build-docker-image-on-arm64-macos-latest-xlarge
+        #- macos-latest
+        # XXX: `windows-latest` is not possible at the moment!
+        #- windows-latest
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install Docker
-      uses: crazy-max/ghaction-setup-docker@master
+    - name: Install Docker (Linux)
+      if: runner.os == 'Linux'
+      uses: docker/setup-docker-action@v4
+
+    - name: Install Docker (macOS)
+      if: runner.os == 'macOS'
+      run: |
+        brew install docker
+
+    - name: Install Docker (Windows)
+      if: runner.os == 'Windows'
+      uses: crazy-max/ghaction-chocolatey@v3
+      with:
+        args: install docker
 
     - name: Prepare Eask (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
@@ -48,4 +67,4 @@ jobs:
 
     - name: Testing...
       run: |
-        make command-docker
+        npm run test-unsafe test/jest/docker.test.js

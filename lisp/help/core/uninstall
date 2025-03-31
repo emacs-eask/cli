@@ -1,6 +1,6 @@
 
-💡 Make sure you have specify a (package-file ..) inside your Eask file!
    
+💡 Make sure you have specified a (package-file ..) inside your Eask file!
     [+] (package-file "PKG-MAIN.el")
     
 💡 Or specify package names as arguments

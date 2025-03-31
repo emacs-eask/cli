@@ -14,7 +14,7 @@ Once you have installed [Eask][], make sure it is in your `PATH`. You can test
 that Eask has been installed correctly via the help command:
 
 ```
-$ eask --help
+eask --help
 ```
 
 {{< hint ok >}}
@@ -103,20 +103,20 @@ The most common usage is probably to run eask with your current directory being
 the input directory. Then you run eask followed by a subcommand:
 
 ```sh
-$ eask info             # Print out Eask-file information
+eask info             # Print out Eask-file information
 ```
 
 Notice the subcommand can be nested:
 
 ```sh
-$ eask clean workspace  # Deletes your `.eask` folder
+eask clean workspace  # Deletes your `.eask` folder
 ```
 
 Pass in option `--help` to look up more information regarding the command you
 are using:
 
 ```sh
-$ eask clean --help
+eask clean --help
 ```
 
 The output, and it shows there are 7 subcommands supported:
@@ -183,7 +183,7 @@ Eask is more than a build tool now. Several commands don't require their
 dependencies as package dependencies. For example, the `cat` command:
 
 ```sh
-$ eask cat [PATTERNS..]
+eask cat [PATTERNS..]
 ```
 
 `cat` is a simple command that mimics Linux's default `cat` command, but it does

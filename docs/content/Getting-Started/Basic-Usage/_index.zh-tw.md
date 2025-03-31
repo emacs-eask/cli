@@ -12,7 +12,7 @@ Eask 的 CLI 功能齊全但易於使用，即使對於那些使用命令行的�
 一旦你安裝了 [Eask][]，確保它在你的 `PATH` 中。 您可以通過 help 命令測試 Eask 是否已正確安裝：
 
 ```
-$ eask --help
+eask --help
 ```
 
 {{< hint ok >}}
@@ -99,19 +99,19 @@ For more information, find the manual at https://emacs-eask.github.io/
 最常見的用法可能是在當前目錄作為輸入目錄的情況下運行 eask。 然後你運行 eask 後跟一個子命令：
 
 ```sh
-$ eask info             # 打印出 Eask 文件信息
+eask info             # 打印出 Eask 文件信息
 ```
 
 Notice the subcommand can be nested:
 
 ```sh
-$ eask clean workspace  # 刪除你的 .eask 文件夾
+eask clean workspace  # 刪除你的 .eask 文件夾
 ```
 
 傳遞選項 `--help` 以查找有關您正在使用的命令的更多信息：
 
 ```sh
-$ eask clean --help
+eask clean --help
 ```
 
 輸出，它顯示支持 7 個子命令：
@@ -173,7 +173,7 @@ Eask 創建了一個隔離的環境，因此在播放、測試和運行您的 el
 Eask 現在不僅僅是一個構建工具。 一些命令不需要它們的依賴項作為包依賴項。 例如，`cat` 命令：
 
 ```sh
-$ eask cat [PATTERNS..]
+eask cat [PATTERNS..]
 ```
 
 `cat` 是一個模仿 Linux 的默認 `cat` 命令的簡單命令，但它會為您突出顯示語法！ 它是如何實施的？

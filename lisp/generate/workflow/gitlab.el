@@ -55,7 +55,9 @@
               (eask-generate-workflow-gitlab--insert-jobs "28.2"))
             (when (version<= minimum-version "29.4")
               (eask-generate-workflow-gitlab--insert-jobs "29.4"))
-            (when (version<= minimum-version "30")
+            (when (version<= minimum-version "30.1")
+              (eask-generate-workflow-gitlab--insert-jobs "30.1"))
+            (when (version<= minimum-version "31")
               ;; TODO: snapshot?
               ))
           (delete-trailing-whitespace)

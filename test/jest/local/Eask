@@ -1,0 +1,39 @@
+(package "mini.pkg.1"
+         "0.0.1"
+         "Minimal test package")
+
+(website-url "https://github.com/emacs-eask/cli/tree/master/test/fixtures/mini.pkg.1")
+(keywords "test" "local")
+
+(package-file "mini.pkg.1.el")
+
+(files "files/*.el")
+
+(script "test" "echo \"Have a nice day!~ ;)\"")
+(script "extra" "echo :")
+(script "info" "eask info")
+
+(eask-defcommand mini-test-1 "Test command 1." (message "Test 1"))
+(eask-defcommand mini-test-2 "Test command 2." (message "Test 2"))
+(eask-defcommand mini-test-3
+  "Test command 3."
+  (message "Test 3: %s" eask-rest))
+
+(source 'gnu)
+(source 'melpa)
+(source 'jcs-elpa)
+
+(depends-on "emacs" "26.1")
+(depends-on "f")
+(depends-on "s")
+(depends-on "fringe-helper")
+;; FIXME: including these takes a really long time
+;;        perhaps move to a dedicated test file
+(depends-on "watch-cursor"
+            :repo "jcs-elpa/watch-cursor" :fetcher 'github)
+(depends-on "organize-imports-java"
+            :repo "jcs-elpa/organize-imports-java"
+            :fetcher 'github
+            :files '(:defaults "sdk" "default"))
+
+(setq network-security-level 'low)  ; see https://github.com/jcs090218/setup-emacs-windows/issues/156#issuecomment-932956432

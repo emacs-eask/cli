@@ -16,14 +16,14 @@ from GitHub.
 💡 You can find all our documentation under the **docs/content/** folder.
 {{< /hint >}}
 
-### 🚩 Prerequisites
+## 🚩 Prerequisites
 
 To make changes to documentation, you should have:
 
 * [hugo](https://gohugo.io/getting-started/quick-start/#step-1-install-hugo)
 executable; the static site generator.
 
-### 📐 Setup
+## 📐 Setup
 
 To set up the website locally, you need to first install the theme:
 

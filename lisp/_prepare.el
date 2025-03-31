@@ -681,17 +681,6 @@ Argument BODY are forms for execution."
         (eask-pkg-init)
         (unless (eask-package-installable-p pkg)
           (eask-error "Package not installable `%s'; make sure the package archive (source) is included" pkg))))
-     ((when-let* ((desc (eask-package-desc pkg))
-                  (req-emacs (assoc 'emacs (package-desc-reqs desc)))
-                  (req-emacs (package-version-join (nth 0 (cdr req-emacs))))
-                  ((version< emacs-version req-emacs)))
-        (if (eask-strict-p)
-            (eask-error "  - %sSkipping %s (%s)... it requires Emacs %s and above ✗"
-                        eask--action-prefix
-                        pkg (eask-package--version-string pkg) req-emacs)
-          (eask-msg "  - %sSkipping %s (%s)... it requires Emacs %s and above ✗"
-                    eask--action-prefix
-                    name version (ansi-yellow req-emacs)))))
      (t
       (eask--pkg-process pkg
         (eask-with-progress
@@ -1084,7 +1073,7 @@ function `load' for more detials."
   "Check to see if NAME is our target Eask-file, then return it."
   (let (;; Ensure path to filename
         (name             (file-name-nondirectory (directory-file-name name)))
-        ;; `p-' stards for pattern
+        ;; `p-' stands for pattern
         (p-easkfile-full  (format "Easkfile.%s" emacs-version))
         (p-easkfile-major (format "Easkfile.%s" emacs-major-version))
         (p-easkfile       "Easkfile")
@@ -1127,6 +1116,7 @@ This uses function `locate-dominating-file' to look up directory tree."
   "Try load the Eask-file in START-PATH."
   (when-let* ((files (eask--find-files start-path))
               (file (car files)))
+    ;; Revert printing behaviour when loading Eask-file.
     (eask--unsilent (eask-file-load file))))
 
 (defmacro eask--with-hooks (&rest body)
@@ -1160,12 +1150,14 @@ This uses function `locate-dominating-file' to look up directory tree."
   (let ((inhibit-config (eask-quick-p)))
     (eask-with-progress
       (ansi-green "Loading configuration... ")
-      (eask-with-verbosity 'all
+      ;; Revert printing behaviour when loading user files.
+      (eask--unsilent
         (unless inhibit-config
+          ;; `early-init.el' is supported after 27.1
           (when (version<= "27" emacs-version)
-            (load early-init-file t))
-          (load eask-dot-emacs-file t)
-          (load user-init-file t)))
+            (load early-init-file t t))
+          (load eask-dot-emacs-file t t)
+          (load user-init-file t t)))
       (ansi-green (if inhibit-config "skipped ✗" "done ✓")))))
 
 (defmacro eask-start (&rest body)
@@ -1456,9 +1448,10 @@ argument COMMAND."
   (unless location (eask-error "Unknown package archive `%s'" name))
   (add-to-list 'package-archives (cons name location) t))
 
-(defun eask-f-source-priority (archive-id &optional priority)
-  "Add PRIORITY for to ARCHIVE-ID."
-  (add-to-list 'package-archive-priorities (cons archive-id priority) t))
+(defun eask-f-source-priority (name &optional priority)
+  "Add PRIORITY for to NAME."
+  (when (symbolp name) (setq name (eask-2str name)))  ; ensure to string, accept symbol
+  (add-to-list 'package-archive-priorities (cons name priority) t))
 
 (defvar eask-depends-on-recipe-p nil
   "Set to t if package depends on recipe.")
@@ -1737,7 +1730,9 @@ Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
   (declare (indent 0) (debug t))
   `(eask-ignore-errors (eask--silent-error ,@body)))
 
-(defun eask--exit (&rest _) "Send exit code." (kill-emacs 1))
+(defun eask--exit (&optional exit-code &rest _)
+  "Kill Emacs with EXIT-CODE (default 1)."
+  (kill-emacs (or exit-code 1)))
 
 (defun eask--trigger-error ()
   "Trigger error event."
@@ -1868,10 +1863,21 @@ Arguments FNC and ARGS are used for advice `:around'."
     (eask-msg (ansi-white (buffer-string)))
     (eask-msg (concat "''" (spaces-string max-column) "''"))))
 
-(defun eask-help (command)
-  "Show COMMAND's help instruction."
+(defun eask-help (command &optional print-or-exit-code)
+  "Show COMMAND's help instruction.
+
+When the optional variable PRINT-OR-EXIT-CODE is a number, it will exit with
+that code.  Set to non-nil would just print the help message without sending
+the exit code.  The default value `nil' will be replaced by `1'; therefore
+would send exit code of `1'."
   (let* ((command (eask-2str command))  ; convert to string
-         (help-file (concat eask-lisp-root "help/" command)))
+         (help-file (concat eask-lisp-root "help/" command))
+         ;; The default exit code is `1' since `eask-help' prints the help
+         ;; message on user error 99% of the time.
+         ;;
+         ;; TODO: Later replace exit code `1' with readable symbol after
+         ;; the exit code has specified.
+         (print-or-exit-code (or print-or-exit-code 1)))
     (if (file-exists-p help-file)
         (with-temp-buffer
           (insert-file-contents help-file)
@@ -1879,15 +1885,19 @@ Arguments FNC and ARGS are used for advice `:around'."
             (let ((buf-str (eask--msg-displayable-kwds (buffer-string))))
               (erase-buffer)
               (insert buf-str))
-            (eask--help-display)))
-      (eask-error "Help manual missig %s" help-file))))
+            (eask--help-display))
+          ;; Exit with code if needed
+          (cond ((numberp print-or-exit-code)
+                 (eask--exit print-or-exit-code))
+                (t )))  ; Don't exit with anything else.
+      (eask-error "Help manual missing %s" help-file))))
 
 ;;
 ;;; Checker
 
 (defun eask--checker-existence ()
   "Return errors if required metadata is missing."
-  (unless eask-package (eask-error "Missing metadata package; make sure you have create Eask-file with $ eask init!")))
+  (unless eask-package (eask-error "Missing metadata package; make sure you have created an Eask-file with $ eask init!")))
 
 (defun eask--check-strings (fmt f p &rest args)
   "Test strings (F and P); then print FMT and ARGS if not equal."

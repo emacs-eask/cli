@@ -24,13 +24,13 @@ is the most probable location.
 On macOS or Linux:
 
 ```sh
-$ curl -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.sh | sh
 ```
 
 On Windows:
 
 ```sh
-$ curl.exe -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.bat | cmd /Q
+curl.exe -fsSL https://raw.githubusercontent.com/emacs-eask/cli/master/webinstall/install.bat | cmd /Q
 ```
 
 ## 💾 Package managers
@@ -41,7 +41,7 @@ If you have [npm][] installed on your machine, you can
 install Eask with the following one-liner:
 
 ```sh
-$ npm install -g @emacs-eask/cli
+npm install -g @emacs-eask/cli
 ```
 
 ### 📦 Nix (macOS or Linux)
@@ -50,7 +50,7 @@ $ npm install -g @emacs-eask/cli
 To install the Eask CLI:
 
 ```sh
-$ nix profile install nixpkgs#eask-cli
+nix profile install nixpkgs#eask-cli
 ```
 
 ### 📦 Homebrew (macOS or Linux)
@@ -59,8 +59,8 @@ $ nix profile install nixpkgs#eask-cli
 To install the Eask CLI:
 
 ```sh
-$ brew tap emacs-eask/cli https://github.com/emacs-eask/packaging
-$ brew install eask-cli
+brew tap emacs-eask/cli https://github.com/emacs-eask/packaging
+brew install eask-cli
 ```
 
 ### 📦 MacPorts (macOS)
@@ -69,7 +69,7 @@ $ brew install eask-cli
 To install the Eask CLI:
 
 ```sh
-$ sudo port install eask-cli
+sudo port install eask-cli
 ```
 
 ### 📦 Debian (Linux)
@@ -79,10 +79,10 @@ Derivatives of the [Debian][] distribution of Linux include [elementary OS][],
 [Ubuntu][], [Zorin OS][], and others.
 
 ```sh
-$ sudo curl -SsL -o /etc/apt/trusted.gpg.d/easksource.gpg https://raw.githubusercontent.com/emacs-eask/packaging/master/debian/KEY.gpg
-$ sudo curl -SsL -o /etc/apt/sources.list.d/easksource.list https://raw.githubusercontent.com/emacs-eask/packaging/master/debian/easksource.list
-$ sudo apt update --allow-insecure-repositories
-$ sudo apt install eask-cli --allow-unauthenticated
+sudo curl -SsL -o /etc/apt/trusted.gpg.d/easksource.gpg https://raw.githubusercontent.com/emacs-eask/packaging/master/debian/KEY.gpg
+sudo curl -SsL -o /etc/apt/sources.list.d/easksource.list https://raw.githubusercontent.com/emacs-eask/packaging/master/debian/easksource.list
+sudo apt update --allow-insecure-repositories
+sudo apt install eask-cli --allow-unauthenticated
 ```
 
 You can also download Debian packages from the [packaging][packaging/debian] repo.
@@ -94,7 +94,7 @@ Available for most distributions, snap packages are simple to install and are
 automatically updated.
 
 ```sh
-$ sudo snap install eask-cli
+sudo snap install eask-cli
 ```
 
 ### 📦 Arch (Linux)
@@ -103,7 +103,7 @@ There's a `PKGBUILD` that builds `eask` from sources and creates a package, so
 inside the top directory of the repository you can simply run:
 
 ```sh
-$ makepkg -i
+makepkg -i
 ```
 
 ### 📦 Chocolatey (Windows)
@@ -112,7 +112,7 @@ If you have [Chocolatey][] installed on your machine, you can
 install Eask with the following one-liner:
 
 ```sh
-$ choco install eask-cli
+choco install eask-cli
 ```
 
 ### 📦 Scoop (Windows)
@@ -121,8 +121,15 @@ $ choco install eask-cli
 To install the Eask CLI:
 
 ```sh
-$ scoop bucket add emacs-eask/cli https://github.com/emacs-eask/packaging
-$ scoop install eask-cli
+scoop bucket add extras
+scoop install eask-cli
+```
+
+Alternatively, you can use our bucket to access the latest release.
+
+```sh
+scoop bucket add emacs-eask/cli https://github.com/emacs-eask/packaging
+scoop install eask-cli
 ```
 
 ### 📦 Winget (Windows)
@@ -131,7 +138,7 @@ $ scoop install eask-cli
 To install the Eask CLI:
 
 ```
-$ winget install eask.cli
+winget install eask.cli
 ```
 
 ## 💾 Build from source
@@ -146,13 +153,13 @@ Alternatively, you can clone it directly from this repo
 
 ```sh
 # clone the repo
-$ git clone https://github.com/emacs-eask/cli eask-cli
+git clone https://github.com/emacs-eask/cli eask-cli
 
 # change the working directory to eask-cli
-$ cd eask-cli
+cd eask-cli
 
 # install the requirements
-$ npm install
+npm install
 ```
 
 ### 🏡 Setup (through script)
@@ -181,12 +188,12 @@ To run `eask` through executable, you will need [pkg][] installed on your machin
 
 ```sh
 # install it locally in the workspace scope
-$ npm install --dev
+npm install --dev
 
 # or
 
 # install it globally
-$ npm install -g pkg
+npm install -g pkg
 ```
 
 Subsequently, run the following command to build the executable.
@@ -194,7 +201,7 @@ By default, it will generate an executable in the `dist` folder.
 
 ```sh
 # build from sources. For available targets see `scripts` in `package.json`
-$ npm run pkg-linux-x64
+npm run pkg-linux-x64
 
 # move `lisp` to `dist` folder
 mv lisp dist

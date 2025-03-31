@@ -14,7 +14,7 @@ Here is a list of general frequently asked questions.
 The answer is **NO**.
 
 Eask builds native executable on every release, see our [release page](https://github.com/emacs-eask/cli/releases)
-to download it! However, Node.JS is required if you are going to develop Eask!
+to download it! However, [Node.JS][] is required if you are going to develop Eask!
 
 ## ❓ Who should use this tool?
 
@@ -33,34 +33,84 @@ repository!
 
 ## ❓ Why Node.JS?
 
-Node has better support on all kinds of terminal applications (compare to just
-the shell script)! Like colorful interface, entire npm community, etc. So you
-can build cross-platform software with fewer hassles! Especially after Microsoft
-had bought the NPM inc, and would likely support their own system well.
+[Node][Node.js] provides better support for various terminal applications compared to shell
+scripts. It offers features like a rich, colorful interface and access to the
+vast npm ecosystem, making cross-platform development more convenient. This is
+especially true since Microsoft acquired [npm][] Inc., likely ensuring strong
+support for their own systems.
 
-Cask does not seem to support Windows (no WSL) after version `0.8.6`. In the
-early versions, they have used Python, but due to the Python supports on Windows
-are just not as good as Node.JS.
+[Cask][] seems to have dropped support for Windows (while still supporting [WSL][])
+after version `0.8.6`. Earlier versions were built on [Python][], but [Python][]’s support
+on Windows has traditionally been less reliable than [Node.js][].
 
 See [issue #140](https://github.com/emacs-eask/cli/issues/140) for more information!
 
+## ❓ Why JavaScript?
+
+There are many languages I could use to build around Eask, so why did I choose [JavaScript][]?
+
+I have three reasons:
+
+- [JavaScript][] is easy to learn.
+- It offers excellent cross-platform compatibility, thanks to the [Node.js][] runtime.
+- I just happen to know [JavaScript][], and I’m comfortable with it.
+
+I also considered [Rust][] and [Common Lisp][]. However, [Rust][] was still relatively
+new when I started this project, and [Common Lisp][], while powerful, has a steeper
+learning curve and is often seen as somewhat outdated. So, I went with [JavaScript][].
+
 ## ❓ Why yargs?
 
-[yargs][] has a very wide community; and it has been used in many tools.
-It's cross-platform! And most importantly, this is one of the tools that
-work well on Linux, macOS, and Windows.
+[yargs][] has a large and active community and is widely used in various tools.
+It’s fully cross-platform and, most importantly, works seamlessly on Linux, macOS,
+and Windows.
 
-There is also the major difference compared with Eask and other alternatives.
-[Cask][], [makem.sh][], or [Eldev][] rely more on `batch` and `bash`. We chose a
-different route and would like to hand over heavy tasks to a high-level
-programming language, **`JavaScript`**. The development simply became easier,
-since we don't need to care about different types of shells anymore!
+One key difference between Eask and other alternatives is how they handle scripting.
+Tools like [Cask][], [makem.sh][], and [Eldev][] rely heavily on batch and bash scripts.
+Instead, we took a different approach by leveraging a high-level programming
+language-[JavaScript][]. This made development significantly easier, as we no longer
+need to worry about shell compatibility.
 
-The drawback is the NodeJS runtime, but we can simply pack the entire CLI
-program into an executable! That way we would not need to install `Node` and
-`npm` before using eask!
+The main drawback is the [Node.js][] runtime requirement, but we can mitigate this
+by packaging the entire CLI program into an executable. This way, users won’t
+need to install [Node][Node.js] or [npm][] beforehand to use Eask!
 
 # 🔍 Usage
+
+## ❓ How to configure Eask?
+
+`Eask`-file is an Elisp file, similar to `.emacs` or `init.el`.
+Just as Emacs allows you to customize aspects you don’t like,
+Eask follows the same principle, letting you configure anything you dislike about Eask.
+
+Another way to configure your workspace is similar to configuring Emacs itself:
+
+- Use `.eask/VERSION_NO/early-init.el` (only after Emacs `27.1` onward)
+- Use `.eask/VERSION_NO/init.el`
+
+## ❓ How can I install packages directly from the repository?
+
+There are several ways to do this, but the standard method is to define a
+[recipe format][] in the Eask file.
+
+```elisp
+(depends-on "organize-imports-java"
+            :repo "jcs-elpa/organize-imports-java"
+            :fetcher 'github
+            :files '(:defaults "sdk" "default"))
+```
+
+Eask builds the package once and hosts a local ELPA, allowing you to use it for later installation.
+This is the safest way to install packages as it simulates the most practical scenario.
+
+However, any other alternative would work as well since Eask is also an Elisp file.
+
+- [package-vc-install][]
+- [quelpa][]
+- [use-package][]
+- [straight.el][]
+
+# 🔍 Troubleshooting
 
 ## ❓ Why am I getting the error package target `tar`/`el` not found while installing?
 
@@ -87,10 +137,9 @@ The example error message,
 Package not installable `helm'; make sure package archives are included
 ```
 
-You would need to first ask yourself; where does the package came from and what
-specific source holds this package information. From the above example message,
-`helm` is listed on the `melpa` source. You would have to edit your **Eask**-file
-like this:
+First, determine the origin of the package and the specific source that
+provides its information. In the example above, `helm` is listed under the
+`melpa` source. To properly include it, update your **Eask**-file as follows:
 
 ```elisp
 ...
@@ -99,6 +148,25 @@ like this:
 
 (depends-on "helm")
 ```
+
+## ❓ Why am I seeing the error: "Package `emacs-XX.X' is unavailable"?
+
+The example error message,
+
+```
+Loading package information... done v
+Installing 1 specified package...
+
+  - [1/1] Installing markdown-mode (20250226.231)... Package `emacs-28.1' is unavailable
+Wrong type argument: package-desc, nil
+```
+
+This error occurs when Emacs attempts to install a package that requires a newer
+version of Emacs. In some cases, the requirement does not come directly from
+the package itself but from one of its dependencies.
+
+You can either refrain from using this package or upgrade Emacs to the
+required version.
 
 ## ❓ Why am I getting git errors with status 2?
 
@@ -148,8 +216,24 @@ Add the following code snippet to your Eask-file:
 <!-- Links -->
 
 [emacs-eask/archives]: https://github.com/emacs-eask/archives
+
 [Cask]: https://github.com/cask/cask
 [makem.sh]: https://github.com/alphapapa/makem.sh
 [Eldev]: https://github.com/doublep/eldev
 
+[Node.js]: https://nodejs.org/
+[npm]: https://www.npmjs.com/
 [yargs]: https://www.npmjs.com/package/yargs
+
+[WSL]: https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux
+[JavaScript]: https://simple.wikipedia.org/wiki/JavaScript
+[Python]: https://www.python.org/
+[Rust]: https://www.rust-lang.org/
+[Common Lisp]: https://lisp-lang.org/
+
+[recipe format]: https://github.com/melpa/melpa?tab=readme-ov-file#recipe-format
+
+[package-vc-install]: https://www.gnu.org/software/emacs/manual/html_node/emacs/Fetching-Package-Sources.html
+[quelpa]: https://github.com/quelpa/quelpa
+[use-package]: https://github.com/jwiegley/use-package
+[straight.el]: https://github.com/radian-software/straight.el

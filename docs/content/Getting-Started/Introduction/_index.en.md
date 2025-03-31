@@ -3,46 +3,49 @@ title: 🚪 Introduction
 weight: 0
 ---
 
-Eask was built to use as a package development tool in your Elisp packages. But
-now, Eask supports various types of Emacs Lisp tasks. It can be used in three
-major ways:
+Eask was originally designed as a package development tool for Elisp projects.
+However, it has since expanded to support a wide range of Emacs Lisp tasks.
+It can now be used in three major ways:
 
-1. Dev tool for Elisp packages
-2. Dependency management for your configuration
-3. Run elisp programs for all other purposes
+1. As a development tool for Elisp packages.
+2. For managing dependencies in your Emacs configuration.
+3. To run Elisp programs for a variety of purposes (essentially functioning as a runtime).
 
-So what are the major differences between Eask and other build tools like
-[Cask][], [makem.sh][], and [Eldev][], other than the things above?
+With these capabilities in mind, what sets Eask apart from other build tools
+like [Cask][], [makem.sh][], and [Eldev][]?
 
-Good question! Eask is more than a build tool now, it can be used for various
-purposes! But here are Eask aims to be:
+Great question! Eask has evolved beyond just a build tool—it serves multiple purposes! Here’s what Eask aims to be:
 
-- **Consistent** enough to sandbox across all systems
-- **General** enough to have Emacsers frequently used commands (`byte-compile`, `checkdoc`, etc)
-- **Robust** enough to provide useful results even in the presence of user errors
-- **Dependency-free** so that the tool can be run on any platform
+- **Consistent**: Provides a reliable sandboxing environment across all systems.
+- **Versatile**: Includes commonly used Emacs commands like `byte-compilation`, `checkdoc`, and more.
+- **Robust**: Delivers useful results even when user errors occur.
+- **Lightweight**: Runs on any platform without dependencies.
 
-*P.S. See [Why Eask?](https://emacs-eask.github.io/#-why-eask) for more detailed
+*📝 P.S. See [Why Eask?](https://emacs-eask.github.io/Getting-Started/Introduction/#-why-eask) for more detailed
 information.*
 
 ## ❓ Why Eask?
 
-`Eask` has the same philosophy as Cask, see their site [Why Cask?](https://cask.readthedocs.io/en/latest/guide/introduction.html#introduction-why-cask)
-to understand why you should use Eask (or Cask).
+`Eask` follows the same philosophy as [Cask][]. To understand why you should use
+`Eask` (or [Cask][]), check out the [Why Cask?](https://cask.readthedocs.io/en/latest/guide/introduction.html#introduction-why-cask)
+section on their website.
 
-Many tools like [Cask][], [makem.sh][], or [Eldev][] don't **"really"** support
-Windows. `Cask` has dropped support for Legacy Windows, `makem.sh` runs on bash,
-`Eldev` does support Windows, but the author doesn't use it on Windows (not
-having full tests, see their
-[CI workflows](https://github.com/doublep/eldev/actions/workflows/test.yml)).
-`Eask` aims to adapt all platforms, including `Linux`, `macOS`, and `Windows`.
-It focuses on the cross-platform capability and the consistency between each
-OS. If Eask works on your machine, then it will work on any platform.
+Many tools, such as [Cask][], [makem.sh][], and [Eldev][], don’t fully support Windows.
+`Cask` has dropped support for Legacy Windows, `makem.sh` relies on Bash, and while
+`Eldev` does support Windows, its author doesn’t actively use it on the platform,
+meaning it lacks full testing (as seen in their CI workflows). In contrast, `Eask`
+is designed to work across all major platforms, including Linux, macOS, and Windows
+It prioritizes cross-platform compatibility and ensures consistency across different
+operating systems. If `Eask` runs on your machine, it will work reliably on any platform.
 
-Here are our suggestions; if you plan to work on an OS-specific package (never
-going to other platforms), go for other tools. On the other hand, Eask aims to
-provide the best consistency between each OS. Alternatively, if you want to
-learn a tool that works everywhere, Eask is one of the best choices.
+Here’s our recommendation: if you’re developing an OS-specific package that will never
+need cross-platform support, other tools may be a better fit. However, if you want a
+tool that ensures seamless consistency across different operating systems, Eask is an excellent choice.
+
+Another major advantage of `Eask` is its transparency—there are no hidden workflows
+or obscure processes running in the background. Additionally, `Eask` strictly
+avoids hacks or workaround fixes, ensuring that solutions are clean, maintainable,
+and aligned with best practices.
 
 ## ⚖️ Comparisons
 
@@ -96,16 +99,16 @@ list.
 
 ## 📰 News
 
-- `0.9.x` - Improve UX in general
-- `0.8.x` - Add `link` command
-- `0.7.x` - Fix `default-directory` isn't honored by **-g** option
-- `0.6.x` - You can now use `eask create` to create an Elisp project
-- `0.5.x` - Handle error for failed archive
-- `0.4.x` - Add color logger
-- `0.3.x` - Add verbosity level and timestamps
-- `0.2.x` - Done basic error handling with exit code at the end of executions
-- `0.1.39` - Use `spawn` instead `exec`; now messages will be printed immediately
-- `0.1.x` - Project bare-bones are pretty much complete!
+- `0.10.x` - Add five new commands and improve the default user experience.
+- `0.9.x` - Enhance overall user experience.
+- `0.8.x` - Add `link` command.
+- `0.7.x` - Fix `default-directory` isn't honored by **-g** option.
+- `0.6.x` - You can now use `eask create` to create an Elisp project.
+- `0.5.x` - Handle error for failed archive.
+- `0.4.x` - Add color logger.
+- `0.3.x` - Add verbosity level and timestamps.
+- `0.2.x` - Done basic error handling with exit code at the end of executions.
+- `0.1.39` - Use `spawn` instead `exec`; now messages will be printed immediately.
 
 ## 📝 Todo list
 

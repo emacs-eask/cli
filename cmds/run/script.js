@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2022-2024 the Eask authors.
+ * Copyright (C) 2022-2025 the Eask authors.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ const fs = require('fs');
 const child_process = require("child_process");
 
 exports.command = ['script [names..]'];
-exports.desc = 'Run script nameds [names..]';
+exports.desc = 'Run script named [names..]';
 exports.builder = yargs => yargs
   .positional(
     '[names..]', {

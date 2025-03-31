@@ -6,13 +6,13 @@ on:
       - master
       - docs
     paths:
-      - '**.yml'
+      - '**/docs.yml'
       - docs/**
   pull_request:
     branches:
       - master
     paths:
-      - '**.yml'
+      - '**/docs.yml'
       - docs/**
   workflow_dispatch:
 
@@ -45,13 +45,16 @@ jobs:
 
     - name: Check out GitHub page repo
       uses: actions/checkout@v4
+      if: github.ref == 'refs/heads/master'
       with:
         repository: emacs-eask/emacs-eask.github.io
         path: emacs-eask.github.io
         token: ${{ secrets.PAT }}
 
     - name: Build doc artifacts with Hugo
-      run: hugo --destination ../emacs-eask.github.io --minify
+      run: |
+        mkdir -p ../emacs-eask.github.io
+        hugo --destination ../emacs-eask.github.io --minify
       working-directory: docs
 
     # TODO: Generate better commit message

@@ -83,7 +83,7 @@
           (eask-link-add--create source)
           (when (and (zerop (length links))         ; if no link previously,
                      (= 1 (length (eask-link-list))))  ; and first link created!
-            (eask-help "link/add/success/pkg")))
+            (eask-help "link/add/success/pkg" t))) ;; don't error
          ((ignore-errors (file-exists-p pkg-eask))
           (eask-log "💡 Validating package through %s... done!" pkg-eask)
           (eask--save-load-eask-file pkg-eask
@@ -113,7 +113,7 @@
                 (eask-link-add--create source)
                 (when (and (zerop (length links))         ; if no link previously,
                            (= 1 (length (eask-link-list))))  ; and first link created!
-                  (eask-help "link/add/success/eask")))
+                  (eask-help "link/add/success/eask" t))) ;; don't error
             (eask-error "✗ Error loading Eask-file: %s" pkg-eask)))
          (t
           (eask-info "(Missing `%s-pkg.el` file in your source folder)" name)

@@ -40,15 +40,31 @@ test-28.2:
     - eask package
     - eask install
     - eask compile
+
+test-29.4:
+  image: silex/emacs:29.4-ci
+  script:
+    - eask clean all
+    - eask package
+    - eask install
+    - eask compile
+
+test-30.1:
+  image: silex/emacs:30.1-ci
+  script:
+    - eask clean all
+    - eask package
+    - eask install
+    - eask compile
 ```
 
 此示例在以下環境中測試您的 Emacs Lisp 包；
 
-| OS             | Emacs                              | Eask   |
-|----------------|------------------------------------|--------|
-| Linux (Debian) | `26.x`, `27.x`, `28.x`, `snapshot` | latest |
-| macOS          | n/a                                | latest |
-| Windows        | n/a                                | latest |
+| OS             | Emacs                                              | Eask   |
+|----------------|----------------------------------------------------|--------|
+| Linux (Debian) | `26.x`, `27.x`, `28.x`, `29.x`, `30.x`, `snapshot` | latest |
+| macOS          | n/a                                                | latest |
+| Windows        | n/a                                                | latest |
 
 {{< hint info >}}
 💡 您可以通過 `eask generate workflow gitlab` 生成工作流文件，

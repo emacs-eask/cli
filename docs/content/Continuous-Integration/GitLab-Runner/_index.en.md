@@ -40,15 +40,31 @@ test-28.2:
     - eask package
     - eask install
     - eask compile
+
+test-29.4:
+  image: silex/emacs:29.4-ci
+  script:
+    - eask clean all
+    - eask package
+    - eask install
+    - eask compile
+
+test-30.1:
+  image: silex/emacs:30.1-ci
+  script:
+    - eask clean all
+    - eask package
+    - eask install
+    - eask compile
 ```
 
 This example is testing your Emacs Lisp package in the below environment;
 
-| OS             | Emacs                              | Eask   |
-|----------------|------------------------------------|--------|
-| Linux (Debian) | `26.x`, `27.x`, `28.x`, `snapshot` | latest |
-| macOS          | n/a                                | latest |
-| Windows        | n/a                                | latest |
+| OS             | Emacs                                              | Eask   |
+|----------------|----------------------------------------------------|--------|
+| Linux (Debian) | `26.x`, `27.x`, `28.x`, `29.x`, `30.x`, `snapshot` | latest |
+| macOS          | n/a                                                | latest |
+| Windows        | n/a                                                | latest |
 
 {{< hint info >}}
 💡 You can generate workflow file via `eask generate workflow gitlab`, see 

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2022-2024 the Eask authors.
+ * Copyright (C) 2022-2025 the Eask authors.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,6 +27,7 @@ global.IS_PKG = path.basename(process.execPath).startsWith('eask');
 global.EASK_HOMEDIR = os.homedir().replace(/\\/g, '/') + '/.eask/';
 
 global.EASK_EMACS = process.env.EMACS || process.env.EASK_EMACS || "emacs";
+process.env.EMACS = EASK_EMACS;  // Set back the value.
 
 /* Titles */
 global.TITLE_CMD_OPTION = 'Command Options:';

@@ -1,9 +1,9 @@
 
-💡 You need to specify file(s) you want the check-declare to run
+💡 You need to specify file(s) you want check-declare to check
 
     $ eask lint declare FILE-1 FILE-2
 
-💡 Or edit Eask file with [package-file] or [files] specifier
+💡 Or edit the Eask-file with [package-file] or [files] specifier
 
     [+] (package-file "ENTRY")         ; One argument with a string
     [+] (files "FILE-1" "FILE-2" ...)  ; All arguments are wildcard patterns

@@ -160,5 +160,5 @@ dist/
 *.tar
 *.tar.gz
 
-# macOS
+# OS generated
 .DS_Store

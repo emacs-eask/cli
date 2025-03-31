@@ -1,6 +1,6 @@
 @echo off
 
-:: Copyright (C) 2023-2024 the Eask authors.
+:: Copyright (C) 2023-2025 the Eask authors.
 
 :: This program is free software; you can redistribute it and/or modify
 :: it under the terms of the GNU General Public License as published by
@@ -20,7 +20,16 @@
 :: TODO(everyone): Keep this script simple and easily auditable.
 ::
 
-set URL=https://github.com/emacs-eask/binaries/raw/master/win-x64.zip
+if "%PROCESSOR_ARCHITECTURE%" == "AMD64" (
+    set ARCH=x64
+) else if "%PROCESSOR_ARCHITECTURE%" == "ARM64" (
+    set ARCH=arm64
+) else (
+    echo Error: Unsupported architecture detected: `%PROCESSOR_ARCHITECTURE%`.
+    exit /b 1
+)
+
+set URL=https://github.com/emacs-eask/binaries/raw/master/win-%ARCH%.zip
 set EASK_BIN_DIR=%USERPROFILE%\.local\bin
 set ZIP=%EASK_BIN_DIR%\eask.zip
 

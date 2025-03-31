@@ -20,6 +20,16 @@
   height: 3.5rem;
 }
 
+.gdoc-brand__title {
+  margin-top: 0.4rem;
+}
+
+.gdoc-brand__subtitle {
+  margin-top: 0.2rem;
+  color: #B5B5B5;
+  font-size: 1.0rem;
+}
+
 /* Icons */
 
 .gdoc_dicord {
@@ -38,9 +48,9 @@
 }
 @media (prefers-color-scheme: light) {
   :root {
-    --header-background: #4E666D;
-    --accent-color-lite: #E3EAE6;
-    --footer-background: #4E666D;
+	--header-background: #4E666D;
+	--accent-color-lite: #E3EAE6;
+	--footer-background: #4E666D;
   }
 }
 
@@ -52,9 +62,28 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --header-background: #4E666D;
-    --body-background: #3F3F3F;
+	--header-background: #4E666D;
+	--body-background: #3F3F3F;
 	--accent-color-lite: #4F5759;
-    --footer-background: #3F4B4E;
+	--footer-background: #3F4B4E;
   }
+}
+
+/*
+ * Typewriter Effect
+ *
+ * Copied from https://css-tricks.com/snippets/css/typewriter-effect/
+ */
+
+.gdoc-brand__subtitle {
+  overflow: hidden;
+  white-space: nowrap;
+  animation:
+	typing 1.0s steps(40, end),
+	blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
 }
