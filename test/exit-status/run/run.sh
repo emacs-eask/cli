@@ -27,10 +27,9 @@ cd $(dirname "$0")
 should_error eask run
 # FIXME
 # should_error eask run command
-# FIXME
-# cd ./no-scripts/
-# should_error eask run script
-# cd ../
+cd ./no-scripts/
+should_error eask run script
+cd ../
 
 should_run eask run command my-command my-warn
 # FIXME

@@ -27,8 +27,7 @@ cd $(dirname "$0")
 # partial input
 should_error eask link
 should_error eask link add
-# FIXME should error
-# should_error eask link delete
+should_error eask link delete
 
 # FIXME stack trace when package name doesn't match link name
 # prefer a better warning if this is important
@@ -44,8 +43,7 @@ OUTPUT="$(should_run eask link list)"
 echo "$OUTPUT"
 should_match "valid-package" "$OUTPUT"
 
-# when package/link doesn't exist
-# FIXME: doesn't error
+# FIXME when package/link doesn't exist
 # should_error eask link delete foo
 
 # no package after delete

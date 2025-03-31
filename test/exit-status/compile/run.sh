@@ -24,11 +24,10 @@ set -e
 source ./test/fixtures/home/scripts/testing.sh
 cd $(dirname "$0")
 
-# FIXME this should match other commands which exit with status 1
 # partial input errors when there are no files
-# cd empty
-# should_error eask compile
-# cd ../
+cd empty
+should_error eask compile
+cd ../
 
 # compiles with a warning
 should_run eask compile mock.el

@@ -28,9 +28,6 @@ cd $(dirname "$0")
 # partial input
 should_error eask test
 
-# FIXME
-# should_error eask test ert
-
 echo "activate"
 echo "----------"
 cd ./activate/
@@ -74,8 +71,8 @@ should_error eask test ert-runner # all tests
 
 echo "ert"
 echo "----------"
-# FIXME partial input should error
-# should_error eask test ert
+# partial input should error
+should_error eask test ert
 
 should_run eask test ert test/ert-test.el
 should_error eask test ert test/ert-fail-test.el
