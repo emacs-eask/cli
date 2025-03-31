@@ -51,4 +51,42 @@ describe("analyze", () => {
       await ctx.runEask("analyze Eask --json");
     });
   });
+
+  describe("in ./analyze/errors", () => {
+    const ctx = new TestContext("./test/jest/analyze/errors");
+
+    // Eask-normal - no errors or warnings
+    // Eask-warn   - only warnings
+    // Eask-error  - errors and  warnings
+
+    it("should check Eask-normal", async () => {
+      await ctx.runEask("analyze Eask-normal");
+    });
+
+    it("should check Eask-warn", async () => {
+      await ctx.runEask("analyze Eask-warn");
+    });
+
+    it.failing("should error on Eask-errors", async () => {
+      await expect(ctx.runEask("analyze Eask-error")).rejects.toThrow();
+    });
+
+    it.failing("should error when using --strict on Eask-warn", async () => {
+      await expect(ctx.runEask("analyze --strict Eask-warn")).rejects.toThrow();
+    });
+
+    // sanity check: flag should not change behavior in this case
+    // this is because the menaing of --allow-error is "continue to the end"
+    it.failing("should error when --allow-error is set", async () => {
+      await expect(
+        ctx.runEask("analyze Eask-error --allow-error"),
+      ).rejects.toThrow();
+    });
+
+    it.failing("should check all files when --allow-error is set", async () => {
+      await expect(
+        ctx.runEask("analyze --allow-error Eask-normal Eask-error"),
+      ).rejects.toMatchObject({ stderr: "(Checked 2 files)" });
+    });
+  });
 });
