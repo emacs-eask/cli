@@ -749,6 +749,16 @@ Argument BODY are forms for execution."
       (eask-ignore-errors (package-install-file (expand-file-name pkg-path))))
    "done ✓"))
 
+(defun eask-list-local-packages ()
+  "Alist of package name (symbol) to absolute path for local packages."
+  (eask-read-state-var 'local-packages))
+
+(defun eask-save-local-package (name path)
+  "Record local package NAME installed from PATH in Eask state."
+  (let* ((existing-packages (eask-read-state-var 'local-packages))
+         (updated-packages (seq-union (list (cons name path)) existing-packages)))
+    (eask-set-state-var 'local-packages updated-packages)))
+
 (defun eask-package-delete (pkg)
   "Delete the package (PKG)."
   (eask-defvc< 27 (eask-pkg-init)) ; XXX: remove this after we drop 26.x
