@@ -24,6 +24,7 @@
 (require 'pp)
 (require 'rect)
 (require 'subr-x)
+(require 'map)
 
 ;;
 ;;; Externals
@@ -344,6 +345,41 @@ and INHERIT-INPUT-METHOD see function `read-string' for more information."
   "Create a temporary buffer (for this program), and evaluate BODY there."
   (declare (indent 0) (debug t))
   `(eask-with-buffer (erase-buffer) ,@body))
+
+(defvar eask--state-alist '()
+  "Alist mapping symbols to values which will be persisted between sessions.")
+
+(defun eask-read-state-var (var)
+  "Read a persisted value named VAR."
+  (unless eask--state-alist
+    (eask--restore-state))
+  (alist-get var eask--state-alist))
+
+(defun eask-set-state-var (var value)
+  "Set a persisted VALUE named VAR."
+  (unless eask--state-alist
+    (eask--restore-state))
+  (setq eask--state-alist (cons (cons var value) eask--state-alist)))
+
+(defconst eask--state-file-name "eask-state.el"
+  "Name of the file to save persistent state in.")
+
+(defun eask--save-state ()
+  "Save `eask--state-alist' as a file."
+  (let ((state-file (expand-file-name eask--state-file-name user-emacs-directory)))
+   (when eask--state-alist
+     (with-temp-file state-file
+       (let ((state-unique (map-merge 'alist (reverse eask--state-alist))))
+        (insert (format "%S" state-unique)))))))
+
+(defun eask--restore-state ()
+  "Read `eask--state-alist' as a file."
+  (let ((state-file (expand-file-name eask--state-file-name user-emacs-directory)))
+    (when (file-exists-p state-file)
+     (with-temp-buffer
+       (insert-file-contents state-file)
+       ;; TODO ensure lisp data is correctly deserialized
+       (setq eask--state-alist (read (current-buffer)))))))
 
 ;;
 ;;; Progress
