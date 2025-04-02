@@ -733,21 +733,37 @@ Argument BODY are forms for execution."
 
 (defun eask-package-local-install (pkg-path)
   "Install the package from PKG-PATH which should be a file or directory."
-  (setq pkg-path (symbol-name pkg-path))
+  (when (symbolp pkg-path)
+   (setq pkg-path (symbol-name pkg-path)))
+
   (unless (file-exists-p pkg-path)
     (eask-error "Local package not installable: path `%s' does not exist" pkg-path))
-  (eask-pkg-init)
-  (eask-with-progress
-   (format "  - %sInstalling %s ...\n" eask--action-prefix pkg-path)
-   (eask-with-verbosity 'debug
-      ;; XXX: Without ignore-errors guard, it will trigger error
-      ;;
-      ;;   Can't find library xxxxxxx.el
-      ;;
-      ;; But we can remove this after Emacs 28, since function `find-library-name'
-      ;; has replaced the function `signal' instead of the `error'.
-      (eask-ignore-errors (package-install-file (expand-file-name pkg-path))))
-   "done ✓"))
+
+  (setq pkg-path (expand-file-name pkg-path))
+
+  ;; Get package info before installing
+  ;; Note package-dir-info doesn't work outside of dired mode!
+  (let ((pkg-desc (with-current-buffer (dired pkg-path)
+                    (eask-ignore-errors-silent (package-dir-info)))))
+    (unless pkg-desc
+      (eask-error "Local package not installable: path `%s' does not contain a package" pkg-path))
+
+    (eask-with-progress
+     (format "  - %sInstalling %s ...\n" eask--action-prefix pkg-path)
+     (progn
+       (eask-with-verbosity 'debug
+                            ;; XXX: Without ignore-errors guard, it will trigger error
+                            ;;
+                            ;;   Can't find library xxxxxxx.el
+                            ;;
+                            ;; But we can remove this after Emacs 28, since function `find-library-name'
+                            ;; has replaced the function `signal' instead of the `error'.
+                            (eask-ignore-errors (package-install-file pkg-path)))
+       ;; Try to install packages first, then save to avoid bugged state
+       (if (package-installed-p (package-desc-name pkg-desc))
+           (eask-save-local-package (package-desc-name pkg-desc) pkg-path)
+         (eask-error "Failed to install package %s" pkg-path)))
+     "done ✓")))
 
 (defun eask-list-local-packages ()
   "Alist of package name (symbol) to absolute path for local packages."

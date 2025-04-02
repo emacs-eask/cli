@@ -38,16 +38,18 @@
     (eask-msg "")
     (if local-install
         (progn
-          (let* ((existing-local-packages (eask-read-state-var 'local-packages))
-                 (all-local-packages (seq-union names existing-local-packages)))
-            ;; try to install pacakges first, then save to avoid bugged state
-            (eask--package-mapc #'eask-package-local-install all-local-packages)
-            (eask-set-state-var 'local-packages all-local-packages)))
+          (let* ((local-packages-and-paths (eask-list-local-packages))
+                 (local-package-paths (mapcar #'cdr local-packages-and-paths))
+                 ;; TODO this may include duplicates as names may be relative paths
+                 (all-local-packages (seq-union names local-package-paths)))
+            (eask--package-mapc #'eask-package-local-install all-local-packages)))
       (eask--package-mapc #'eask-package-install names))
 
     (eask-msg "")
     (eask-info "(Total of %s package%s installed, %s skipped)"
-               installed s skipped)))
+               installed s skipped)
+    (eask--save-state) ;; TODO this should be in a lifecycle hook
+    ))
 
 ;; NOTE: This is copied from `eldev'! Great thanks!
 ;;
