@@ -47,9 +47,7 @@
 
     (eask-msg "")
     (eask-info "(Total of %s package%s installed, %s skipped)"
-               installed s skipped)
-    (eask--save-state) ;; TODO this should be in a lifecycle hook
-    ))
+               installed s skipped)))
 
 ;; NOTE: This is copied from `eldev'! Great thanks!
 ;;

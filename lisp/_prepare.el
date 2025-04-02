@@ -1245,6 +1245,7 @@ This uses function `locate-dominating-file' to look up directory tree."
   "Execute BODY with workspace setup."
   (declare (indent 0) (debug t))
   `(unless eask-loading-file-p
+     (add-hook 'eask-after-command-hook #'eask--save-state)
      (if eask--initialized-p (progn ,@body)
        (setq eask--initialized-p t)
        (eask--setup-env
@@ -1813,7 +1814,10 @@ Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
 
 (defun eask--exit (&optional exit-code &rest _)
   "Kill Emacs with EXIT-CODE (default 1)."
-  (kill-emacs (or exit-code 1)))
+  (setq exit-code (or exit-code 1))
+  (when (zerop exit-code)
+    (eask--save-state))
+  (kill-emacs exit-code))
 
 (defun eask--trigger-error ()
   "Trigger error event."
