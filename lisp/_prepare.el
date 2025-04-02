@@ -975,7 +975,8 @@ other scripts internally.  See function `eask-call'.")
      "--clean"
      "--json"
      "--number"
-     "--yes"))
+     "--yes"
+     "--local"))
   "List of boolean type options.")
 
 (defconst eask--option-args
