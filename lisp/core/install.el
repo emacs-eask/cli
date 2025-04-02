@@ -26,12 +26,25 @@
 (defun eask-install-packages (names)
   "Install packages with their NAMES."
   (let* ((names (mapcar #'eask-intern names))
-         (len (length names)) (s (eask--sinr len "" "s"))
-         (pkg-not-installed (cl-remove-if #'package-installed-p names))
-         (installed (length pkg-not-installed)) (skipped (- len installed)))
+         (len (length names))
+         (s (eask--sinr len "" "s"))
+         (local-install (eask--flag "--local"))
+         (pkg-not-installed (if local-install
+                                names ;; always install local files
+                              (cl-remove-if #'package-installed-p names)))
+         (installed (length pkg-not-installed))
+         (skipped (- len installed)))
     (eask-log "Installing %s specified package%s..." len s)
     (eask-msg "")
-    (eask--package-mapc #'eask-package-install names)
+    (if local-install
+        (progn
+          (let* ((existing-local-packages (eask-read-state-var 'local-packages))
+                 (all-local-packages (seq-union names existing-local-packages)))
+            ;; try to install pacakges first, then save to avoid bugged state
+            (eask--package-mapc #'eask-package-local-install all-local-packages)
+            (eask-set-state-var 'local-packages all-local-packages)))
+      (eask--package-mapc #'eask-package-install names))
+
     (eask-msg "")
     (eask-info "(Total of %s package%s installed, %s skipped)"
                installed s skipped)))

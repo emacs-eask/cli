@@ -720,7 +720,7 @@ Argument BODY are forms for execution."
      (t
       (eask--pkg-process pkg
         (eask-with-progress
-          (format "  - %sInstalling %s (%s)... " eask--action-prefix name version)
+          (format "  - %sInstalling %s (%s)..." eask--action-prefix name version)
           (eask-with-verbosity 'debug
             ;; XXX: Without ignore-errors guard, it will trigger error
             ;;
@@ -731,20 +731,38 @@ Argument BODY are forms for execution."
             (eask-ignore-errors (package-install pkg)))
           "done ✓"))))))
 
+(defun eask-package-local-install (pkg-path)
+  "Install the package from PKG-PATH which should be a file or directory."
+  (setq pkg-path (symbol-name pkg-path))
+  (unless (file-exists-p pkg-path)
+    (eask-error "Local package not installable: path `%s' does not exist" pkg-path))
+  (eask-pkg-init)
+  (eask-with-progress
+   (format "  - %sInstalling %s ...\n" eask--action-prefix pkg-path)
+   (eask-with-verbosity 'debug
+      ;; XXX: Without ignore-errors guard, it will trigger error
+      ;;
+      ;;   Can't find library xxxxxxx.el
+      ;;
+      ;; But we can remove this after Emacs 28, since function `find-library-name'
+      ;; has replaced the function `signal' instead of the `error'.
+      (eask-ignore-errors (package-install-file (expand-file-name pkg-path))))
+   "done ✓"))
+
 (defun eask-package-delete (pkg)
   "Delete the package (PKG)."
-  (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
+  (eask-defvc< 27 (eask-pkg-init)) ; XXX: remove this after we drop 26.x
   (eask--pkg-process pkg
-    (cond
-     ((not (package-installed-p pkg))
-      (eask-msg "  - %sSkipping %s (%s)... not installed ✗" eask--action-prefix name version))
-     (t
-      (eask--pkg-process pkg
-        (eask-with-progress
-          (format "  - %sUninstalling %s (%s)... " eask--action-prefix name version)
-          (eask-with-verbosity 'debug
-            (package-delete (eask-package-desc pkg t) (eask-force-p)))
-          "done ✓"))))))
+                     (cond
+                      ((not (package-installed-p pkg))
+                       (eask-msg "  - %sSkipping %s (%s)... not installed ✗" eask--action-prefix name version))
+                      (t
+                       (eask--pkg-process pkg
+                                          (eask-with-progress
+                                           (format "  - %sUninstalling %s (%s)... " eask--action-prefix name version)
+                                           (eask-with-verbosity 'debug
+                                                                (package-delete (eask-package-desc pkg t) (eask-force-p)))
+                                           "done ✓"))))))
 
 (defun eask-package-reinstall (pkg)
   "Reinstall the package (PKG)."
