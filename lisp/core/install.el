@@ -26,12 +26,19 @@
 (defun eask-install-packages (names)
   "Install packages with their NAMES."
   (let* ((names (mapcar #'eask-intern names))
-         (len (length names)) (s (eask--sinr len "" "s"))
+         (len (length names))
+         (s (eask--sinr len "" "s"))
+         (local-install (eask--flag "--local"))
          (pkg-not-installed (cl-remove-if #'package-installed-p names))
-         (installed (length pkg-not-installed)) (skipped (- len installed)))
+         (installed (length pkg-not-installed))
+         (skipped (- len installed)))
     (eask-log "Installing %s specified package%s..." len s)
     (eask-msg "")
-    (eask--package-mapc #'eask-package-install names)
+    (if local-install
+        ;; TODO this may include duplicates as names may be relative paths
+        (eask--package-mapc #'eask-package-local-install names)
+      (eask--package-mapc #'eask-package-install names))
+
     (eask-msg "")
     (eask-info "(Total of %s package%s installed, %s skipped)"
                installed s skipped)))

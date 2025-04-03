@@ -17,15 +17,27 @@
 
 "use strict";
 
-exports.command = ['install [names..]'];
-exports.desc = 'Install packages';
-exports.builder = yargs => yargs
-  .positional(
-    '[names..]', {
-      description: 'packages to install',
-      type: 'array',
+exports.command = ["install [names..]"];
+exports.desc = "Install packages";
+exports.builder = (yargs) =>
+  yargs
+    .positional("[names..]", {
+      description: "packages to install, or paths when --local is set",
+      type: "array",
+    })
+    .options({
+      local: {
+        description: "install from a local path",
+        type: "boolean",
+        group: TITLE_CMD_OPTION,
+      },
     });
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/install', argv.names);
+  await UTIL.e_call(
+    argv,
+    "core/install",
+    UTIL.def_flag(argv.local, "--local"),
+    argv.names,
+  );
 };

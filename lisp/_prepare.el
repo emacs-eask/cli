@@ -24,6 +24,7 @@
 (require 'pp)
 (require 'rect)
 (require 'subr-x)
+(require 'map)
 
 ;;
 ;;; Externals
@@ -345,6 +346,41 @@ and INHERIT-INPUT-METHOD see function `read-string' for more information."
   (declare (indent 0) (debug t))
   `(eask-with-buffer (erase-buffer) ,@body))
 
+(defvar eask--state-alist '()
+  "Alist mapping symbols to values which will be persisted between sessions.")
+
+(defun eask-read-state-var (var)
+  "Read a persisted value named VAR."
+  (unless eask--state-alist
+    (eask--restore-state))
+  (alist-get var eask--state-alist))
+
+(defun eask-set-state-var (var value)
+  "Set a persisted VALUE named VAR."
+  (unless eask--state-alist
+    (eask--restore-state))
+  (setq eask--state-alist (cons (cons var value) eask--state-alist)))
+
+(defconst eask--state-file-name "eask-state.el"
+  "Name of the file to save persistent state in.")
+
+(defun eask--save-state ()
+  "Save `eask--state-alist' as a file."
+  (let ((state-file (expand-file-name eask--state-file-name user-emacs-directory)))
+   (when eask--state-alist
+     (with-temp-file state-file
+       (let ((state-unique (map-merge 'alist (reverse eask--state-alist))))
+        (insert (format "%S" state-unique)))))))
+
+(defun eask--restore-state ()
+  "Read `eask--state-alist' as a file."
+  (let ((state-file (expand-file-name eask--state-file-name user-emacs-directory)))
+    (when (file-exists-p state-file)
+     (with-temp-buffer
+       (insert-file-contents state-file)
+       ;; TODO ensure lisp data is correctly deserialized
+       (setq eask--state-alist (read (current-buffer)))))))
+
 ;;
 ;;; Progress
 
@@ -612,7 +648,15 @@ If the argument FORCE is non-nil, force initialize packages in this session."
         (package-initialize t)
         (let ((eask--action-index 0)) (package-refresh-contents))
         (let ((eask--action-index 0)) (eask--download-archives)))
-      (ansi-green "done ✓"))))
+      (ansi-green "done ✓"))
+    (when-let* ((local-packages (eask-list-local-packages))
+                (local-package-paths (mapcar #'cdr local-packages)))
+     (eask-with-progress
+      (ansi-green "Refreshing local packages... \n")
+      (eask-with-verbosity 'log
+         ;; TODO this can run outside of the usual advice on error...
+         (with-demoted-errors "shh %s" (eask--package-mapc #'eask-package-local-install local-package-paths)))
+      (ansi-green "done ✓")))))
 
 (defun eask--pkg-transaction-vars (pkg)
   "Return 1 symbol and 2 strings.
@@ -685,7 +729,7 @@ Argument BODY are forms for execution."
      (t
       (eask--pkg-process pkg
         (eask-with-progress
-          (format "  - %sInstalling %s (%s)... " eask--action-prefix name version)
+          (format "  - %sInstalling %s (%s)..." eask--action-prefix name version)
           (eask-with-verbosity 'debug
             ;; XXX: Without ignore-errors guard, it will trigger error
             ;;
@@ -696,20 +740,64 @@ Argument BODY are forms for execution."
             (eask-ignore-errors (package-install pkg)))
           "done ✓"))))))
 
+(defun eask-package-local-install (pkg-path)
+  "Install the package from PKG-PATH which should be a file or directory."
+  (when (symbolp pkg-path)
+   (setq pkg-path (symbol-name pkg-path)))
+
+  (unless (file-exists-p pkg-path)
+    (eask-error "Local package not installable: path `%s' does not exist" pkg-path))
+
+  (setq pkg-path (expand-file-name pkg-path))
+
+  ;; Get package info before installing
+  ;; Note package-dir-info doesn't work outside of dired mode!
+  (let ((pkg-desc (with-current-buffer (dired pkg-path)
+                    (eask-ignore-errors-silent (package-dir-info)))))
+    (unless pkg-desc
+      (eask-error "Local package not installable: path `%s' does not contain a package" pkg-path))
+
+    (eask-with-progress
+     (format "  - %sInstalling %s ...\n" eask--action-prefix pkg-path)
+     (progn
+       (eask-with-verbosity 'debug
+                            ;; XXX: Without ignore-errors guard, it will trigger error
+                            ;;
+                            ;;   Can't find library xxxxxxx.el
+                            ;;
+                            ;; But we can remove this after Emacs 28, since function `find-library-name'
+                            ;; has replaced the function `signal' instead of the `error'.
+                            (eask-ignore-errors (package-install-file pkg-path)))
+       ;; Try to install packages first, then save to avoid bugged state
+       (if (package-installed-p (package-desc-name pkg-desc))
+           (eask-save-local-package (package-desc-name pkg-desc) pkg-path)
+         (eask-error "Failed to install package %s" pkg-path)))
+     "done ✓")))
+
+(defun eask-list-local-packages ()
+  "Alist of package name (symbol) to absolute path for local packages."
+  (eask-read-state-var 'local-packages))
+
+(defun eask-save-local-package (name path)
+  "Record local package NAME installed from PATH in Eask state."
+  (let* ((existing-packages (eask-read-state-var 'local-packages))
+         (updated-packages (seq-union (list (cons name path)) existing-packages)))
+    (eask-set-state-var 'local-packages updated-packages)))
+
 (defun eask-package-delete (pkg)
   "Delete the package (PKG)."
-  (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
+  (eask-defvc< 27 (eask-pkg-init)) ; XXX: remove this after we drop 26.x
   (eask--pkg-process pkg
-    (cond
-     ((not (package-installed-p pkg))
-      (eask-msg "  - %sSkipping %s (%s)... not installed ✗" eask--action-prefix name version))
-     (t
-      (eask--pkg-process pkg
-        (eask-with-progress
-          (format "  - %sUninstalling %s (%s)... " eask--action-prefix name version)
-          (eask-with-verbosity 'debug
-            (package-delete (eask-package-desc pkg t) (eask-force-p)))
-          "done ✓"))))))
+                     (cond
+                      ((not (package-installed-p pkg))
+                       (eask-msg "  - %sSkipping %s (%s)... not installed ✗" eask--action-prefix name version))
+                      (t
+                       (eask--pkg-process pkg
+                                          (eask-with-progress
+                                           (format "  - %sUninstalling %s (%s)... " eask--action-prefix name version)
+                                           (eask-with-verbosity 'debug
+                                                                (package-delete (eask-package-desc pkg t) (eask-force-p)))
+                                           "done ✓"))))))
 
 (defun eask-package-reinstall (pkg)
   "Reinstall the package (PKG)."
@@ -940,7 +1028,8 @@ other scripts internally.  See function `eask-call'.")
      "--clean"
      "--json"
      "--number"
-     "--yes"))
+     "--yes"
+     "--local"))
   "List of boolean type options.")
 
 (defconst eask--option-args
@@ -1165,6 +1254,7 @@ This uses function `locate-dominating-file' to look up directory tree."
   "Execute BODY with workspace setup."
   (declare (indent 0) (debug t))
   `(unless eask-loading-file-p
+     (add-hook 'eask-after-command-hook #'eask--save-state)
      (if eask--initialized-p (progn ,@body)
        (setq eask--initialized-p t)
        (eask--setup-env
@@ -1747,7 +1837,10 @@ Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
 
 (defun eask--exit (&optional exit-code &rest _)
   "Kill Emacs with EXIT-CODE (default 1)."
-  (kill-emacs (or exit-code 1)))
+  (setq exit-code (or exit-code 1))
+  (when (zerop exit-code)
+    (eask--save-state))
+  (kill-emacs exit-code))
 
 (defun eask--trigger-error ()
   "Trigger error event."
