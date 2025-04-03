@@ -19,6 +19,7 @@
 (require 'url-vars)
 
 (require 'cl-lib)
+(require 'ffap)
 (require 'files)
 (require 'ls-lisp)
 (require 'pp)

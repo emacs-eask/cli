@@ -22,11 +22,24 @@
 
 (eask-load "core/install-file")
 
+(defun eask-install-vc--split-sepcs (specs)
+  "Split the SPECS and return a list of specification."
+  (let ((new-specs)
+        (current-spec))
+    (dolist (spec specs)
+      ;; Detect new specification.
+      (cond ((ffap-url-p spec)
+             (push (reverse current-spec) new-specs)
+             (setq current-spec (list spec (eask-install-file--guess-name spec))))
+            (t
+             (push spec current-spec))))
+    ;; Push thes rest of the specification.
+    (push (reverse current-spec) new-specs)
+    (cl-remove-if #'null (reverse new-specs))))
+
 (defun eask-install-vc--packages (specs)
   "The vc install packages with SPECS."
-  (let* ((deps (mapcar (lambda (spec)
-                         (list (eask-install-file--guess-name spec) spec))
-                       specs))
+  (let* ((deps (eask-install-vc--split-sepcs specs))
          (names (mapcar #'car deps))
          (len (length deps))
          (s (eask--sinr len "" "s"))
