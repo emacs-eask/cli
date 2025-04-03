@@ -14,9 +14,11 @@ exports[`analyze in ./dsl matches snapshot 1`] = `
 ~/Eask:28:61 Error: Run-script with the same key name is not allowed: \`test\`
 ~/Eask:31:13 Error: Multiple definition of source \`gnu'
 ~/Eask:33:24 Error: Unknown package archive \`magic-archive'
-~/Eask:36:20 Error: Define dependencies with the same name \`emacs'
-~/Eask:39:19 Error: Define dependencies with the same name \`dash'
-~/Eask:44:2 Error: Define dependencies with the same name \`f'
+~/Eask:35:15 Error: Invalid archive name \`local'
+~/Eask:35:15 Error: Unknown package archive \`local'
+~/Eask:38:20 Error: Define dependencies with the same name \`emacs'
+~/Eask:41:19 Error: Define dependencies with the same name \`dash'
+~/Eask:46:2 Error: Define dependencies with the same name \`f'
 ",
   "stdout": "",
 }

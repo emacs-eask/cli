@@ -474,7 +474,8 @@ Arguments FNC and ARGS are used for advice `:around'."
            (url (format "https://raw.githubusercontent.com/emacs-eask/archives/master/%s/" name))
            (url-file (concat url file))
            (download-p)
-           (local-archive-p (string= name "local"))  ; exclude local elpa
+           ;; exclude local elpa
+           (local-archive-p (string= name eask--local-archive-name))
            (fmt (eask--action-format (length package-archives))))
       (unless (file-exists-p local-file)
         (eask-with-verbosity-override 'log
@@ -1442,6 +1443,10 @@ argument COMMAND."
 (defun eask-f-source (name &optional location)
   "Add archive NAME with LOCATION."
   (when (symbolp name) (setq name (eask-2str name)))  ; ensure to string, accept symbol
+  ;; Handle local archive.
+  (when (equal name eask--local-archive-name)
+    (eask-error "Invalid archive name `%s'" name))
+  ;; Handle multiple same archive name!
   (when (assoc name package-archives)
     (eask-error "Multiple definition of source `%s'" name))
   (setq location (eask-source-url name location))
@@ -1456,18 +1461,28 @@ argument COMMAND."
 (defvar eask-depends-on-recipe-p nil
   "Set to t if package depends on recipe.")
 
+(defvar eask--local-archive-name "local"
+  "The local archive name.")
+
 (defun eask--setup-dependencies ()
   "Setup dependencies list."
   (setq eask-depends-on (reverse eask-depends-on)
         eask-depends-on-dev (reverse eask-depends-on-dev))
   (when eask-depends-on-recipe-p
     (eask-with-progress
-      "✓ Checking local archives... "
+      (format "✓ Checking local archives %s... "
+              (ansi-magenta eask--local-archive-name))
       (eask-with-verbosity 'debug
-        (add-to-list 'package-archives `("local" . ,github-elpa-archive-dir) t)
-        ;; If the local archives is added, we set the priority to a very
-        ;; high number so user we always use the specified dependencies!
-        (add-to-list 'package-archive-priorities `("local" . 90) t))
+        ;; Make sure can be customized by `source'
+        (unless (assoc eask--local-archive-name package-archives)
+          (add-to-list 'package-archives
+                       `(,eask--local-archive-name . ,github-elpa-archive-dir) t))
+        ;; Make sure can be customized by `source-priority'
+        (unless (assoc eask--local-archive-name package-archive-priorities)
+          ;; If the local archives is added, we set the priority to a very
+          ;; high number so user we always use the specified dependencies!
+          (add-to-list 'package-archive-priorities
+                       `(,eask--local-archive-name . 90) t)))
       "done!")))
 
 (add-hook 'eask-file-loaded-hook #'eask--setup-dependencies)

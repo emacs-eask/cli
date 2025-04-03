@@ -30,7 +30,9 @@
 (source 'gnu)                                            ; duplicate archives
 (source 'gnu)
 
-(source "magic-archive")                                 ; Unkown archive
+(source "magic-archive")                                 ; unkown archive
+
+(source 'local)                                          ; inavlid local archive
 
 (depends-on "emacs" "26.1")                              ; duplicate `emacs` dependency
 (depends-on "emacs")
