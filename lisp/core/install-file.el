@@ -20,6 +20,8 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
+(eask-load "core/install")
+
 (defun eask-install-file--guess-name (file)
   "Guess the package name of the install FILE."
   (file-name-sans-extension (file-name-nondirectory (directory-file-name file))))
@@ -32,8 +34,9 @@
          (names (mapcar #'car deps))
          (len (length deps))
          (s (eask--sinr len "" "s"))
-         (pkg-not-installed (cl-remove-if #'package-installed-p names))
-         (installed (length pkg-not-installed)) (skipped (- len installed)))
+         (not-installed (eask-install--not-installed names))
+         (installed (length not-installed))
+         (skipped (- len installed)))
     (eask-log "Installing %s specified file package%s..." len s)
     (eask-msg "")
     (eask--package-mapc (lambda (dep &rest _)

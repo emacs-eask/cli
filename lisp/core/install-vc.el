@@ -20,6 +20,7 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
+(eask-load "core/install")
 (eask-load "core/install-file")
 
 (defun eask-install-vc--split-sepcs (specs)
@@ -44,8 +45,9 @@
          (names (mapcar #'car deps))
          (len (length deps))
          (s (eask--sinr len "" "s"))
-         (pkg-not-installed (cl-remove-if #'package-installed-p names))
-         (installed (length pkg-not-installed)) (skipped (- len installed)))
+         (not-installed (eask-install--not-installed names))
+         (installed (length not-installed))
+         (skipped (- len installed)))
     (eask-log "Installing %s specified vc package%s..." len s)
     (eask-msg "")
     (eask--package-mapc (lambda (dep &rest _)

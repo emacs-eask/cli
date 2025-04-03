@@ -79,7 +79,7 @@
                                                 (package-desc-version pkg-desc)))
           ;; XXX: Install dependencies for linked package
           (eask-msg "")
-          (eask-install-packages (eask-link-add--package-desc-reqs pkg-desc))
+          (eask-install--packages (eask-link-add--package-desc-reqs pkg-desc))
           (eask-link-add--create source)
           (when (and (zerop (length links))         ; if no link previously,
                      (= 1 (length (eask-link-list))))  ; and first link created!

@@ -23,12 +23,22 @@
 
 (eask-load "core/package")  ; load dist path
 
-(defun eask-install-packages (names)
+(defun eask-install--not-installed (names)
+  "Return a list of not installed packages' NAMES."
+  (cl-remove-if-not
+   (lambda (name)
+     (or (eask-force-p)
+         (not (package-installed-p (eask-intern name)))))
+   names))
+
+(defun eask-install--packages (names)
   "Install packages with their NAMES."
   (let* ((names (mapcar #'eask-intern names))
-         (len (length names)) (s (eask--sinr len "" "s"))
-         (pkg-not-installed (cl-remove-if #'package-installed-p names))
-         (installed (length pkg-not-installed)) (skipped (- len installed)))
+         (len (length names))
+         (s (eask--sinr len "" "s"))
+         (not-installed (eask-install--not-installed names))
+         (installed (length not-installed))
+         (skipped (- len installed)))
     (eask-log "Installing %s specified package%s..." len s)
     (eask-msg "")
     (eask--package-mapc #'eask-package-install names)
@@ -80,7 +90,7 @@ For argument FILE, please see function `package-install-file' for the details."
   (eask-pkg-init)
   (if-let* ((names (eask-args)))
       ;; If package [name..] are specified, we try to install it
-      (eask-install-packages names)
+      (eask-install--packages names)
     ;; Else we try to install package from the working directory
     (eask-install-dependencies)
     (let* ((name (eask-guess-package-name))
