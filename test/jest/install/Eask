@@ -26,6 +26,7 @@
 (depends-on "emacs" "26.1")
 (depends-on "f")
 (depends-on "s")
+(depends-on "fringe-helper")
 
 ;; File install
 (depends-on "mini.pkg.2" :file "./mini.pkg.2")

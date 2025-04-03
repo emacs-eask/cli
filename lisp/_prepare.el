@@ -1328,7 +1328,6 @@ This uses function `locate-dominating-file' to look up directory tree."
 (defvar eask-depends-on-emacs   nil)
 (defvar eask-depends-on         nil)
 (defvar eask-depends-on-dev     nil)
-(defvar eask-depends-on         nil)
 
 (defmacro eask--save-eask-file-state (&rest body)
   "Execute BODY without touching the Eask-file global variables."
@@ -1574,7 +1573,7 @@ ELPA)."
       (unless (eask--check-depends-on recipe)
         (push recipe eask-depends-on))
       recipe))
-   ;; Local packages
+   ;; File packages
    ((memq :file args)
     (let* ((recipe (append (list (intern pkg)) args)))
       (unless (eask--check-depends-on recipe)
