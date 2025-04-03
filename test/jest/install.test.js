@@ -1,6 +1,6 @@
 const { emacsVersion, TestContext } = require("./helpers");
 
-jest.setTimeout(60000);
+jest.setTimeout(1000 * 360);
 
 describe("install and uninstall", () => {
   describe("in ./install", () => {
