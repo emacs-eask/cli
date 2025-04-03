@@ -37,10 +37,10 @@
 ;; Recipe install
 (depends-on "watch-cursor"
             :repo "jcs-elpa/watch-cursor" :fetcher 'github)
-(depends-on "organize-imports-java"
-            :repo "jcs-elpa/organize-imports-java"
-            :fetcher 'github
-            :files '(:defaults "sdk" "default"))
+;; (depends-on "organize-imports-java"
+;;             :repo "jcs-elpa/organize-imports-java"
+;;             :fetcher 'github
+;;             :files '(:defaults "sdk" "default"))
 
 (development
  (depends-on "ert-runner"))

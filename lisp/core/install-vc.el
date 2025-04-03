@@ -30,6 +30,7 @@
       ;; Detect new specification.
       (cond ((ffap-url-p spec)
              (push (reverse current-spec) new-specs)
+             ;; We're using the push, so the order is reversed.
              (setq current-spec (list spec (eask-install-file--guess-name spec))))
             (t
              (push spec current-spec))))
