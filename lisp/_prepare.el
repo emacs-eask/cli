@@ -652,10 +652,12 @@ Argument PKG is the name of the package."
 (defmacro eask--pkg-process (pkg &rest body)
   "Execute BODY with PKG's related variables."
   (declare (indent 1) (debug t))
-  `(let* ((pkg-info (eask--pkg-transaction-vars ,pkg))
-          (pkg      (nth 0 pkg-info))
-          (name     (nth 1 pkg-info))
-          (version  (nth 2 pkg-info)))
+  `(let* ((pkg-info           (eask--pkg-transaction-vars ,pkg))
+          (pkg                (nth 0 pkg-info))
+          (name               (nth 1 pkg-info))
+          (version            (nth 2 pkg-info))
+          (installed-p        (package-installed-p pkg))
+          (should-reinstall-p (and installed-p (eask-force-p))))
      ,@body))
 
 (defmacro eask-with-archives (archives &rest body)
@@ -697,14 +699,19 @@ Argument BODY are forms for execution."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (eask--pkg-process pkg
     (cond
-     ((package-installed-p pkg)
+     ((and installed-p (not should-reinstall-p))
       (eask-msg "  - %sSkipping %s (%s)... already installed ✗"
                 eask--action-prefix
                 name version))
      (t
       (eask-with-progress
-        (format "  - %sInstalling %s (%s)... " eask--action-prefix name version)
+        (format "  - %s%snstalling %s (%s)... " eask--action-prefix
+                (if should-reinstall-p "Rei" "I")
+                name version)
         (eask-with-verbosity 'debug
+          ;; Handle `--force` flag.
+          (when should-reinstall-p (package-delete (eask-package-desc pkg t) t))
+          ;; Install it.
           (apply #'package-vc-install spec))
         "done ✓")))))
 
@@ -713,14 +720,19 @@ Argument BODY are forms for execution."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (eask--pkg-process pkg
     (cond
-     ((package-installed-p pkg)
+     ((and installed-p (not should-reinstall-p))
       (eask-msg "  - %sSkipping %s (%s)... already installed ✗"
                 eask--action-prefix
                 name version))
      (t
       (eask-with-progress
-        (format "  - %sInstalling %s (%s)... " eask--action-prefix name version)
+        (format "  - %s%snstalling %s (%s)... " eask--action-prefix
+                (if should-reinstall-p "Rei" "I")
+                name version)
         (eask-with-verbosity 'debug
+          ;; Handle `--force` flag.
+          (when should-reinstall-p (package-delete (eask-package-desc pkg t) t))
+          ;; Install it.
           (package-install-file (expand-file-name file)))
         "done ✓")))))
 
@@ -729,7 +741,7 @@ Argument BODY are forms for execution."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (eask--pkg-process pkg
     (cond
-     ((package-installed-p pkg)
+     ((and installed-p (not should-reinstall-p))
       (eask-msg "  - %sSkipping %s (%s)... already installed ✗"
                 eask--action-prefix
                 name version))
@@ -739,14 +751,20 @@ Argument BODY are forms for execution."
           (eask-error "Package not installable `%s'; make sure the package archive (source) is included" pkg))))
      (t
       (eask-with-progress
-        (format "  - %sInstalling %s (%s)... " eask--action-prefix name version)
+        (format "  - %s%snstalling %s (%s)... " eask--action-prefix
+                (if should-reinstall-p "Rei" "I")
+                name version)
         (eask-with-verbosity 'debug
+          ;; Handle `--force` flag.
+          (when should-reinstall-p (package-delete (eask-package-desc pkg t) t))
           ;; XXX: Without ignore-errors guard, it will trigger error
           ;;
           ;;   Can't find library xxxxxxx.el
           ;;
           ;; But we can remove this after Emacs 28, since function `find-library-name'
           ;; has replaced the function `signal' instead of the `error'.
+          ;;
+          ;; Install it.
           (eask-ignore-errors (package-install pkg)))
         "done ✓")))))
 
@@ -755,7 +773,7 @@ Argument BODY are forms for execution."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (eask--pkg-process pkg
     (cond
-     ((not (package-installed-p pkg))
+     ((not installed-p)
       (eask-msg "  - %sSkipping %s (%s)... not installed ✗" eask--action-prefix name version))
      (t
       (eask--pkg-process pkg
@@ -770,7 +788,8 @@ Argument BODY are forms for execution."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
   (eask--pkg-process pkg
     (cond
-     ((not (package-installed-p pkg))
+     ;; You cannot reinstall the package that are not installed.
+     ((not installed-p)
       (eask-msg "  - %sSkipping %s (%s)... not installed ✗" eask--action-prefix name version))
      (t
       (eask-pkg-init)
