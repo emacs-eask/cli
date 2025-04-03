@@ -114,20 +114,6 @@ Display the state of the workspace.
 eask [GLOBAL-OPTIONS] status
 ```
 
-## 🔍 eask install-deps
-
-To install all dependencies.
-
-Alias: `install-dependencies`, `prepare`
-
-```sh
-eask [GLOBAL-OPTIONS] install-deps [--dev]
-```
-
-{{< hint ok >}}
-💡 Specify option [--dev] to install dependencies from the development scope.
-{{< /hint >}}
-
 ## 🔍 eask install
 
 To install packages.
@@ -146,6 +132,36 @@ Or else, it will install the package from the current development:
 
 ```sh
 eask install
+```
+
+## 🔍 eask install-deps
+
+To install all dependencies.
+
+Alias: `install-dependencies`, `prepare`
+
+```sh
+eask [GLOBAL-OPTIONS] install-deps [--dev]
+```
+
+{{< hint ok >}}
+💡 Specify option [--dev] to install dependencies from the development scope.
+{{< /hint >}}
+
+## 🔍 eask install-file
+
+Install packages from files, `.tar` files, or directories.
+
+```sh
+eask [GLOBAL-OPTIONS] install-file [FILES..]
+```
+
+## 🔍 eask install-vc
+
+Install packages directly from the version control.
+
+```sh
+eask [GLOBAL-OPTIONS] install-vc [SPECS..]
 ```
 
 ## 🔍 eask uninstall
