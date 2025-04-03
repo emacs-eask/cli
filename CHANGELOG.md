@@ -19,6 +19,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * feat(src/env.js): Ensure `Emacs` env (#289)
 * ci(build.yml): Try forked pkg to fix `arm64` build 2 (#292 and #294)
 * feat: Set error status when help is printed (#307)
+* feat(install): Add commands `install-file` and `install-vc` (#317)
 
 ## 0.10.x
 > Released Jun 13, 2024
