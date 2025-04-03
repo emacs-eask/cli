@@ -35,6 +35,8 @@
       (insert (format "| %s | %s | %s |\n" file lines chars)))))
 
 (eask-start
+  (eask-command-check "28.1")
+
   ;; Preparation
   (eask-archive-install-packages '("gnu" "melpa")
                                  'markdown-mode)

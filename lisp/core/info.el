@@ -27,9 +27,12 @@
             offset (eask-2str eask-info--max-offset))
       (dolist (dep dependencies)
         (let* ((target-version (cdr dep))
-               (target-version (if (= (length target-version) 1)
-                                   (nth 0 target-version)
-                                 "specified")))
+               (target-version (cond ((= (length target-version) 1)
+                                      (or (nth 0 target-version)  ; verison number
+                                          "archive"))
+                                     ((memq :file dep) "file")
+                                     ((memq :vc dep)   "vc")
+                                     (t                "recipe"))))
           (eask-println (concat "  %-" offset "s (%s)") (car dep) target-version)
           (eask-debug "    Recipe: %s" (car dep)))))))
 

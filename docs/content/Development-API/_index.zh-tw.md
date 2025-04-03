@@ -128,6 +128,16 @@ eask init
 (message "%s" (eask-command))  ; init
 ```
 
+## 🔍 函式: eask-command-check (`version`)
+
+如果目前的指令需要最低的 `version` 就會報錯。
+
+```elisp
+(eask-start
+  (eask-command-check "27.1")  ; 此指令需要 27.1 及以上版本！
+  ...
+```
+
 ## 🔍 函式: eask-command-p (`commands`)
 
 如果 COMMANDS 是目前命令，則傳回 `t`。

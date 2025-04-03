@@ -1,0 +1,4 @@
+
+💡 You can add dependencies by using the specifier [depends-on]
+
+    [+] (depends-on "PACKAGE-NAME" :file "/path/to/PACKAGE-NAME")

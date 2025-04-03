@@ -1,4 +1,6 @@
-const { TestContext } = require("./helpers");
+const { emacsVersion, TestContext } = require("./helpers");
+
+jest.setTimeout(1000 * 60 * 10000);
 
 describe("install and uninstall", () => {
   describe("in ./install", () => {
@@ -7,7 +9,6 @@ describe("install and uninstall", () => {
 
     beforeAll(async () => {
       await ctx.runEask("clean all");
-      await ctx.runEask("install-deps");
     });
 
     afterAll(() => ctx.cleanUp());
@@ -40,6 +41,30 @@ describe("install and uninstall", () => {
       await ctx.runEask("uninstall");
       const { stderr } = await ctx.runEask("list");
       expect(stderr).not.toMatch(packageName);
+    });
+
+    it("installs dependencies", async () => {
+      const { stderr } = await ctx.runEask("install-deps");
+      expect(stderr).not.toMatch(packageName);
+    });
+
+    it("installs dev dependencies", async () => {
+      const { stderr } = await ctx.runEask("install-deps --dev");
+      expect(stderr).not.toMatch(packageName);
+    });
+
+    it("installs file directly", async () => {
+      const { stderr } = await ctx.runEask("install-file ./mini.pkg.2");
+      expect(stderr).toMatch("mini.pkg.2");
+    });
+
+    test.skip("installs vc directly", async () => {
+      if ((await emacsVersion()) >= "29.1") {
+        const { stderr } = await ctx.runEask(
+          "install-vc https://github.com/jcs-elpa/msgu"
+        );
+        expect(stderr).toMatch("msgu");
+      }
     });
   });
 

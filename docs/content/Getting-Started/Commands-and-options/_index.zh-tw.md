@@ -112,20 +112,6 @@ eask [GLOBAL-OPTIONS] info
 eask [GLOBAL-OPTIONS] status
 ```
 
-## 🔍 eask install-deps
-
-安裝所有依賴項。
-
-別名: `install-dependencies`, `prepare`
-
-```sh
-eask [GLOBAL-OPTIONS] install-deps [--dev]
-```
-
-{{< hint ok >}}
-💡 指定選項 [--dev] 從開發範圍安裝依賴項。
-{{< /hint >}}
-
 ## 🔍 eask install
 
 安裝軟件包。
@@ -144,6 +130,36 @@ eask install auto-complete helm magit
 
 ```sh
 eask install
+```
+
+## 🔍 eask install-deps
+
+安裝所有依賴項。
+
+別名: `install-dependencies`, `prepare`
+
+```sh
+eask [GLOBAL-OPTIONS] install-deps [--dev]
+```
+
+{{< hint ok >}}
+💡 指定選項 [--dev] 從開發範圍安裝依賴項。
+{{< /hint >}}
+
+## 🔍 eask install-file
+
+從檔案、`.tar` 檔案或目錄安裝套件。
+
+```sh
+eask [GLOBAL-OPTIONS] install-file [FILES..]
+```
+
+## 🔍 eask install-vc
+
+直接從版本控制安裝套件。
+
+```sh
+eask [GLOBAL-OPTIONS] install-vc [SPECS..]
 ```
 
 ## 🔍 eask uninstall

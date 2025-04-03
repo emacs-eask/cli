@@ -56,7 +56,7 @@ Declare package's author.
 
 ## 🔍 **package-file** (`file` `version` `description`)
 
-Define this package and its runtime dependencies from the package headers 
+Define this package and its runtime dependencies from the package headers
 of a file (used only for package development).
 
 ```elisp
@@ -65,7 +65,7 @@ of a file (used only for package development).
 
 ## 🔍 **package-descriptor** (`pkg-file`)
 
-Declare all package metadata directly by specifying a package descriptor 
+Declare all package metadata directly by specifying a package descriptor
 contained in file with name given by file.
 
 ```elisp
@@ -149,14 +149,30 @@ Specify dependencies that are listed in **archives**:
 (depends-on "company")
 ```
 
+Specify dependencies in **file** format:
+
+```elisp
+(depends-on "auto-rename-tag" :file "/path/to/auto-rename-tag")
+
+(depends-on "lsp-ui" :file "/path/to/lsp-ui")
+```
+
+Specify dependencies in **vc** format:
+
+```elisp
+(depends-on "auto-rename-tag" :vc "jcs-elpa/auto-rename-tag")
+
+(depends-on "lsp-ui" :vc "emacs-lsp/lsp-ui")
+```
+
 Specify dependencies in **recipe** format:
 
 ```elisp
-(depends-on "auto-rename-tag" 
-            :repo "jcs-elpa/auto-rename-tag" 
+(depends-on "auto-rename-tag"
+            :repo "jcs-elpa/auto-rename-tag"
             :fetcher 'github)
 
-(depends-on "lsp-ui" 
+(depends-on "lsp-ui"
             :repo "emacs-lsp/lsp-ui"
             :fetcher 'github
             :files '(:defaults "lsp-ui-doc.html" "resources"))

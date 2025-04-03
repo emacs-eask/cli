@@ -46,6 +46,8 @@ Commands:
   info                       Display information about the current package
   init [files..]             Initialize project to use Eask
   install-deps               Automatically install package dependencies                                                                                                  [aliases: install-dependencies, prepare]
+  install-file [files..]     Install packages from files, .tar files, or directories
+  install-vc [specs..]       Install packages directly from the version control
   install [names..]          Install packages
   keywords                   List available keywords that can be used in the header section
   link <action>              Manage links

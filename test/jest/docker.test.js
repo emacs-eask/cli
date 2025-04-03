@@ -1,6 +1,6 @@
 const { TestContext } = require("./helpers");
 
-jest.setTimeout(60000);
+jest.setTimeout(1000 * 60);
 
 describe("docker", () => {
   const ctx = new TestContext("./test/jest/docker");

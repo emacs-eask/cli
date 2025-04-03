@@ -145,14 +145,30 @@ weight: 200
 (depends-on "company")
 ```
 
+以 **file** 格式指定依賴項：
+
+```elisp
+(depends-on "auto-rename-tag" :file "/path/to/auto-rename-tag")
+
+(depends-on "lsp-ui" :file "/path/to/lsp-ui")
+```
+
+以 **vc** 格式指定依賴項：
+
+```elisp
+(depends-on "auto-rename-tag" :vc "jcs-elpa/auto-rename-tag")
+
+(depends-on "lsp-ui" :vc "emacs-lsp/lsp-ui")
+```
+
 以 **recipe** 格式指定依賴項：
 
 ```elisp
-(depends-on "auto-rename-tag" 
-            :repo "jcs-elpa/auto-rename-tag" 
+(depends-on "auto-rename-tag"
+            :repo "jcs-elpa/auto-rename-tag"
             :fetcher 'github)
 
-(depends-on "lsp-ui" 
+(depends-on "lsp-ui"
             :repo "emacs-lsp/lsp-ui"
             :fetcher 'github
             :files '(:defaults "lsp-ui-doc.html" "resources"))

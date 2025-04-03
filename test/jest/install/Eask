@@ -26,12 +26,26 @@
 (depends-on "emacs" "26.1")
 (depends-on "f")
 (depends-on "s")
-;; (depends-on "fringe-helper")
-;; (depends-on "watch-cursor"
-;;             :repo "jcs-elpa/watch-cursor" :fetcher 'github)
+(depends-on "fringe-helper")
+
+;; File install
+(depends-on "mini.pkg.2" :file "./mini.pkg.2")
+
+;; VC install
+(when (version<= "29.1" emacs-version)
+  ;; XXX: This takes too long to test, disable for now.
+  ;;(depends-on "msgu" :vc "https://github.com/jcs-elpa/msgu")
+  )
+
+;; Recipe install
+(depends-on "watch-cursor"
+            :repo "jcs-elpa/watch-cursor" :fetcher 'github)
 ;; (depends-on "organize-imports-java"
 ;;             :repo "jcs-elpa/organize-imports-java"
 ;;             :fetcher 'github
 ;;             :files '(:defaults "sdk" "default"))
+
+(development
+ (depends-on "ert-runner"))
 
 (setq network-security-level 'low)  ; see https://github.com/jcs090218/setup-emacs-windows/issues/156#issuecomment-932956432

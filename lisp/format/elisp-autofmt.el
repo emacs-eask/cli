@@ -45,6 +45,8 @@
       (kill-buffer))))
 
 (eask-start
+  (eask-command-check "28.1")
+
   ;; Preparation
   (eask-archive-install-packages '("gnu" "melpa")
                                  'elisp-autofmt)
