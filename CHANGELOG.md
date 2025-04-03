@@ -19,6 +19,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * feat(src/env.js): Ensure `Emacs` env (#289)
 * ci(build.yml): Try forked pkg to fix `arm64` build 2 (#292 and #294)
 * feat: Set error status when help is printed (#307)
+* feat: Add exit code specification (c49f53caa1f6ac94a9c8c884d70d0860f55728c1)
 * feat(install): Add commands `install-file` and `install-vc` (#317)
 
 ## 0.10.x
