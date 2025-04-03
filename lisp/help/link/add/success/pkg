@@ -1,10 +1,12 @@
 
-✓ You have now created the link, here are things you might want to consider:
+✓ The link has been created. Here are some important considerations:
 
-  - [ ] (Optional) `SOURCE-autoloads.el`                      Package autoloads
+  - [ ] (Required) `SOURCE-autoloads.el`                      Prepare autoloads
+  - [ ] (Required) `SOURCE-pkg.el`                            Prepare -pkg file
   - [ ] (Optional) Compile source package with `.elc` files
 
 If the source package uses Eask, you can use `eask` commands to accomplish these tasks.
 
-  * `eask generate autoloads`
-  * `eask compile`
+  - `eask generate autoloads`
+  - `eask generate pkg-file`
+  - `eask compile`
