@@ -5,8 +5,13 @@ All notable changes to this project will be documented in this file.
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 
-## 0.11.x (Unreleased)
+## 0.12.x (Unreleased)
 > Released N/A
+
+* N/A
+
+## 0.11.x
+> Released Apr 03, 2025
 
 * fix(init): Preview final Eask file (ee7c36cbd0d934523825c9c9430c73b50d4a8666)
 * fix(lint): match behavior of declare linter to checkdoc (#272)
