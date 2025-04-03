@@ -36,8 +36,8 @@
   (depends-on "msgu" :vc "https://github.com/jcs-elpa/msgu"))
 
 ;; Recipe install
-;; (depends-on "watch-cursor"
-;;             :repo "jcs-elpa/watch-cursor" :fetcher 'github)
+(depends-on "watch-cursor"
+            :repo "jcs-elpa/watch-cursor" :fetcher 'github)
 ;; (depends-on "organize-imports-java"
 ;;             :repo "jcs-elpa/organize-imports-java"
 ;;             :fetcher 'github
