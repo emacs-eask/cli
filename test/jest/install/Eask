@@ -33,7 +33,9 @@
 
 ;; VC install
 (when (version<= "29.1" emacs-version)
-  (depends-on "msgu" :vc "https://github.com/jcs-elpa/msgu"))
+  ;; XXX: This takes too long to test, disable for now.
+  ;;(depends-on "msgu" :vc "https://github.com/jcs-elpa/msgu")
+  )
 
 ;; Recipe install
 (depends-on "watch-cursor"
