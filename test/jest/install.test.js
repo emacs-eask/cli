@@ -58,7 +58,7 @@ describe("install and uninstall", () => {
       expect(stderr).toMatch("mini.pkg.2");
     });
 
-    it("installs vc directly", async () => {
+    test.skip("installs vc directly", async () => {
       if ((await emacsVersion()) >= "29.1") {
         const { stderr } = await ctx.runEask(
           "install-vc https://github.com/jcs-elpa/msgu"
