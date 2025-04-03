@@ -647,7 +647,15 @@ If the argument FORCE is non-nil, force initialize packages in this session."
         (package-initialize t)
         (let ((eask--action-index 0)) (package-refresh-contents))
         (let ((eask--action-index 0)) (eask--download-archives)))
-      (ansi-green "done ✓"))))
+      (ansi-green "done ✓"))
+    (when-let* ((local-packages (eask-list-local-packages))
+                (local-package-paths (mapcar #'cdr local-packages)))
+     (eask-with-progress
+      (ansi-green "Refreshing local packages... \n")
+      (eask-with-verbosity 'log
+         ;; TODO this can run outside of the usual advice on error...
+         (with-demoted-errors "shh %s" (eask--package-mapc #'eask-package-local-install local-package-paths)))
+      (ansi-green "done ✓")))))
 
 (defun eask--pkg-transaction-vars (pkg)
   "Return 1 symbol and 2 strings.

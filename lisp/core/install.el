@@ -29,20 +29,14 @@
          (len (length names))
          (s (eask--sinr len "" "s"))
          (local-install (eask--flag "--local"))
-         (pkg-not-installed (if local-install
-                                names ;; always install local files
-                              (cl-remove-if #'package-installed-p names)))
+         (pkg-not-installed (cl-remove-if #'package-installed-p names))
          (installed (length pkg-not-installed))
          (skipped (- len installed)))
     (eask-log "Installing %s specified package%s..." len s)
     (eask-msg "")
     (if local-install
-        (progn
-          (let* ((local-packages-and-paths (eask-list-local-packages))
-                 (local-package-paths (mapcar #'cdr local-packages-and-paths))
-                 ;; TODO this may include duplicates as names may be relative paths
-                 (all-local-packages (seq-union names local-package-paths)))
-            (eask--package-mapc #'eask-package-local-install all-local-packages)))
+        ;; TODO this may include duplicates as names may be relative paths
+        (eask--package-mapc #'eask-package-local-install names)
       (eask--package-mapc #'eask-package-install names))
 
     (eask-msg "")
