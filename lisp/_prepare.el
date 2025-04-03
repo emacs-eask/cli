@@ -1722,6 +1722,25 @@ Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
   (apply (if (eask-strict-p) #'eask-error #'eask-warn) args))
 
 ;;
+;;; Exit Code
+
+(defconst eask--exit-code
+  `((success . 0)   ; Unused
+    (failure . 1)   ; Catchall for general errors
+    (misuse  . 2))
+  "Exit code specification.")
+
+(defun eask-exit-code (key)
+  "Return the exit code by KEY symbol."
+  (alist-get key eask--exit-code))
+
+(defun eask--exit (&optional exit-code &rest _)
+  "Kill Emacs with EXIT-CODE (default 1)."
+  (kill-emacs (or (cond ((numberp exit-code) exit-code)
+                        ((symbolp exit-code) (eask-exit-code exit-code)))
+                  (eask-exit-code 'failure))))
+
+;;
 ;;; Error Handling
 
 (defvar eask--ignore-error-p nil
@@ -1744,10 +1763,6 @@ Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
   "Execute BODY by completely ignore errors."
   (declare (indent 0) (debug t))
   `(eask-ignore-errors (eask--silent-error ,@body)))
-
-(defun eask--exit (&optional exit-code &rest _)
-  "Kill Emacs with EXIT-CODE (default 1)."
-  (kill-emacs (or exit-code 1)))
 
 (defun eask--trigger-error ()
   "Trigger error event."
@@ -1887,12 +1902,10 @@ the exit code.  The default value `nil' will be replaced by `1'; therefore
 would send exit code of `1'."
   (let* ((command (eask-2str command))  ; convert to string
          (help-file (concat eask-lisp-root "help/" command))
-         ;; The default exit code is `1' since `eask-help' prints the help
+         ;; The default exit code is `2' since `eask-help' prints the help
          ;; message on user error 99% of the time.
-         ;;
-         ;; TODO: Later replace exit code `1' with readable symbol after
-         ;; the exit code has specified.
-         (print-or-exit-code (or print-or-exit-code 1)))
+         (print-or-exit-code (or print-or-exit-code
+                                 (eask-exit-code 'misuse))))
     (if (file-exists-p help-file)
         (with-temp-buffer
           (insert-file-contents help-file)

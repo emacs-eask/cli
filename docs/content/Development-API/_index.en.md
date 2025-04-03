@@ -900,6 +900,31 @@ Report error/warning depends on strict flag.
 
 See option [--strict](https://emacs-eask.github.io/Getting-Started/Commands-and-options/#---strict).
 
+# 🚩 Exit Code
+
+## 🔍 Variable: eask--exit-code
+
+Exit code specification.
+
+## 🔍 Function: eask-exit-code (&optional `key`)
+
+Return the exit code by the key symbol in the variable `eask--exit-code`.
+
+```elisp
+(eask-exit-code 'misuse)  ; by symbol
+```
+
+## 🔍 Function: eask--exit (&optional `exit-code` &rest `_`)
+
+Send exit code.
+
+This will kill Emacs process.
+
+```elisp
+(eask--exit 2)        ; by number
+(eask--exit 'misuse)  ; by symbol
+```
+
 # 🚩 Error Handling
 
 ## 🔍 Variable: eask--ignore-error-p
@@ -946,12 +971,6 @@ Prevent Emacs from being killed and inhibit display error/warning messages.
 (eask-ignore-errors-silent
   (error "Nothing happens!"))
 ```
-
-## 🔍 Function: eask--exit (&optional `exit-code` &rest `_`)
-
-Send exit code.
-
-This will kill Emacs process.
 
 # 🚩 File
 

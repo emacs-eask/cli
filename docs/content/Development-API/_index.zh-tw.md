@@ -890,6 +890,31 @@ cat /.log/messages.log
 
 見選項 [--strict](https://emacs-eask.github.io/Getting-Started/Commands-and-options/#---strict).
 
+# 🚩 退出代碼
+
+## 🔍 變數: eask--exit-code
+
+退出代碼規格。
+
+## 🔍 函式: eask-exit-code (&optional `key`)
+
+以變數 `eask--exit-code` 中的關鍵符號回傳 exit code。
+
+```elisp
+(eask-exit-code 'misuse)  ; 按符號
+```
+
+## 🔍 函式: eask--exit (&optional `exit-code` &rest `_`)
+
+傳送退出代碼。
+
+這會結束 Emacs 程序。
+
+```elisp
+(eask--exit 2)        ; 按數字
+(eask--exit 'misuse)  ; 按符號
+```
+
 # 🚩 錯誤處理
 
 ## 🔍 變數: eask--ignore-error-p
@@ -936,12 +961,6 @@ cat /.log/messages.log
 (eask-ignore-errors-silent
   (error "Nothing happens!"))
 ```
-
-## 🔍 函式: eask--exit (&optional `exit-code` &rest `_`)
-
-傳送退出代碼。
-
-這會結束 Emacs 程序。
 
 # 🚩 文件
 
