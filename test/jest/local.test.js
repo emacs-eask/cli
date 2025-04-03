@@ -130,7 +130,7 @@ describe("local", () => {
       await ctx.runEask("clean pkg-file").catch(() => {});
 
       await ctx.removeFiles(
-        "recipes", // from generate recipes
+        "recipes",    // from generate recipes
         ".gitignore", // from generate ignore elisp
       );
     });
@@ -168,21 +168,21 @@ describe("local", () => {
   describe("Generating workflow", () => {
     beforeEach(
       async () =>
-        await ctx.removeFiles(
-          ".circleci",
-          ".gitlab-ci.yml",
-          ".github",
-          ".travis.yml",
-        ),
+      await ctx.removeFiles(
+        ".circleci",
+        ".gitlab-ci.yml",
+        ".github",
+        ".travis.yml",
+      ),
     );
     afterAll(
       async () =>
-        await ctx.removeFiles(
-          ".circleci",
-          ".gitlab-ci.yml",
-          ".github",
-          ".travis.yml",
-        ),
+      await ctx.removeFiles(
+        ".circleci",
+        ".gitlab-ci.yml",
+        ".github",
+        ".travis.yml",
+      ),
     );
 
     it.each([
@@ -211,7 +211,7 @@ describe("local", () => {
       await ctx.runEask(cmd);
     });
     it("lint regexps", async () => {
-      if ((await emacsVersion()) > "27.1") {
+      if ((await emacsVersion()) >= "27.1") {
         await ctx.runEask("lint regexps");
       }
     });
@@ -230,7 +230,7 @@ describe("local", () => {
   describe("Formatting", () => {
     // installs elisp-autofmt
     it("format elisp-autofmt", async () => {
-      if ((await emacsVersion()) > "29.1") {
+      if ((await emacsVersion()) >= "28.1") {
         await ctx.runEask("format elisp-autofmt");
       }
     });

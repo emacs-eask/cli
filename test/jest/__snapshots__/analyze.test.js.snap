@@ -18,7 +18,9 @@ exports[`analyze in ./dsl matches snapshot 1`] = `
 ~/Eask:35:15 Error: Unknown package archive \`local'
 ~/Eask:38:20 Error: Define dependencies with the same name \`emacs'
 ~/Eask:41:19 Error: Define dependencies with the same name \`dash'
-~/Eask:46:2 Error: Define dependencies with the same name \`f'
+~/Eask:42:27 Error: Define dependencies with the same name \`dash' with different version
+~/Eask:48:2 Error: Define dependencies with the same name \`f'
+~/Eask:48:2 Error: Define dependencies with the same name \`f' with different version
 ",
   "stdout": "",
 }

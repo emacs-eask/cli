@@ -59,6 +59,8 @@
       (kill-this-buffer))))
 
 (eask-start
+  (eask-command-check "27.1")
+
   ;; Preparation
   (eask-archive-install-packages '("gnu")
                                  'relint)

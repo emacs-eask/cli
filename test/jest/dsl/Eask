@@ -39,8 +39,10 @@
 
 (depends-on "dash")                                      ; duplicate dependency
 (depends-on "dash")
+(depends-on "dash" "9.9.9")                              ; duplicate dependency; different version
 
 (development
  (depends-on "f")                                        ; duplicate dependency
  (depends-on "f")
+ (depends-on "f" "9.9.9")                                ; duplicate dependency; different version
  )
