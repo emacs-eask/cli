@@ -32,7 +32,8 @@
 (depends-on "mini.pkg.2" :file "./mini.pkg.2")
 
 ;; VC install
-(depends-on "msgu" :vc "https://github.com/jcs-elpa/msgu")
+(when (version<= "29.1" emacs-version)
+  (depends-on "msgu" :vc "https://github.com/jcs-elpa/msgu"))
 
 ;; Recipe install
 (depends-on "watch-cursor"
