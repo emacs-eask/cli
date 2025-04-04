@@ -52,7 +52,7 @@
       ;; If package [files..] are specified, we try to install it
       (eask-install-file--packages files)
     ;; Otherwise, report error.
-    (eask-info "(No file packages have been intalled)")
+    (eask-info "(No file packages have been installed)")
     (eask-help "core/install-file")))
 
 ;;; core/install-file.el ends here

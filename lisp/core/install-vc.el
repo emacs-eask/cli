@@ -67,7 +67,7 @@
       ;; If package [specs..] are specified, we try to install it
       (eask-install-vc--packages specs)
     ;; Otherwise, report error.
-    (eask-info "(No vc packages have been intalled)")
+    (eask-info "(No vc packages have been installed)")
     (eask-help "core/install-vc")))
 
 ;;; core/install-vc.el ends here
