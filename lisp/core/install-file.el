@@ -24,15 +24,32 @@
 
 (defun eask-install-file--get-package-name (path)
   "Get the package name from PATH, which is a file, directory or archive."
-  (when (not (file-exists-p path))
+  (cond
+   ((not (file-exists-p path))
     (eask-error "File does not exist %s" path))
-  ;; Note package-dir-info doesn't work outside of dired mode!
-  (let ((pkg-desc (with-current-buffer (dired (expand-file-name path))
-                    (eask-ignore-errors-silent (package-dir-info)))))
-    (unless pkg-desc
-      ;; package-dir-info will return nil if there is no -pkg.el and no .el files at path
-      (eask-error "No package in %s" path))
-    (package-desc-name pkg-desc)))
+   ((or (string-suffix-p ".tar" path)
+        (string-suffix-p ".tar.gz" path))
+    ;; tar file
+    ;; Note this can throw strange errors if
+    ;; - there is no -pkg.el in the tar file
+    ;; - the tar file was built in a folder with a different name
+    ;; tar files created with eask package are fine
+    (require 'tar-mode)
+    (let ((pkg-desc (with-current-buffer (find-file (expand-file-name path))
+                      (eask-ignore-errors-silent (package-tar-file-info)))))
+      (unless pkg-desc
+        ;; package-dir-info will return nil if there is no -pkg.el and no .el files at path
+        (eask-error "No package in %s" path))
+      (package-desc-name pkg-desc))
+    )
+   (t ;; .el file or directory
+    ;; Note package-dir-info doesn't work outside of dired mode!
+    (let ((pkg-desc (with-current-buffer (dired (expand-file-name path))
+                      (eask-ignore-errors-silent (package-dir-info)))))
+      (unless pkg-desc
+        ;; package-dir-info will return nil if there is no -pkg.el and no .el files at path
+        (eask-error "No package in %s" path))
+      (package-desc-name pkg-desc)))))
 
 (defun eask-install-file--packages (files)
   "The file install packages with FILES."
