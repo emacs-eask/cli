@@ -1,0 +1,14 @@
+(package "foo"
+         "0.0.1"
+         "")
+
+(website-url "")
+(keywords )
+
+(package-file "foo.el")
+
+(script "test" "echo \"Error: no test specified\" && exit 1")
+
+(source "gnu")
+
+(depends-on "emacs" "26.1")

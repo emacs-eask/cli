@@ -53,11 +53,6 @@ describe("install and uninstall", () => {
       expect(stderr).not.toMatch(packageName);
     });
 
-    it("installs file directly", async () => {
-      const { stderr } = await ctx.runEask("install-file ./mini.pkg.2");
-      expect(stderr).toMatch("mini.pkg.2");
-    });
-
     test.skip("installs vc directly", async () => {
       if ((await emacsVersion()) >= "29.1") {
         const { stderr } = await ctx.runEask(
@@ -65,6 +60,45 @@ describe("install and uninstall", () => {
         );
         expect(stderr).toMatch("msgu");
       }
+    });
+
+    describe("eask install-file", () => {
+      beforeAll(async () => {
+        await ctx.runEask("clean workspace");
+      });
+
+      it("installs file directly", async () => {
+        const { stderr } = await ctx.runEask("install-file ./mini.pkg.2");
+        expect(stderr).toMatch("mini.pkg.2");
+      });
+
+      it("uses the correct package name", async () => {
+        const { stderr } = await ctx.runEask("install-file ./foo-mode");
+        expect(stderr).toMatch("Installing foo");
+      });
+
+      it("can repeat installs", async () => {
+        await ctx.runEask("install-file ./foo-mode");
+      });
+
+      it("reinstalls a package using --force", async () => {
+        const { stderr } = await ctx.runEask("install-file --force ./foo-mode");
+        expect(stderr).toMatch("Reinstalling foo");
+      });
+
+      it("installs a package with only an Eask file", async () => {
+        await ctx.runEask("install-file ./foo-no-pkg");
+      });
+
+      it("errors when path is non-existing", async () => {
+        await expect(ctx.runEask("install-file ./foo")).rejects.toThrow();
+      });
+
+      it("errors when path is an empty directory", async () => {
+        await expect(ctx.runEask("install-file ../empty")).rejects.toThrow();
+      });
+
+      // it("gets the package name from a tar file", () => {});
     });
   });
 
