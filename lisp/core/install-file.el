@@ -22,14 +22,39 @@
 
 (eask-load "core/install")
 
-(defun eask-install-file--guess-name (file)
-  "Guess the package name of the install FILE."
-  (file-name-sans-extension (file-name-nondirectory (directory-file-name file))))
+(defun eask-install-file--get-package-name (path)
+  "Get the package name from PATH, which is a file, directory or archive."
+  (cond
+   ((not (file-exists-p path))
+    (eask-error "File does not exist %s" path))
+   ((or (string-suffix-p ".tar" path)
+        (string-suffix-p ".tar.gz" path))
+    ;; tar file
+    ;; Note this can throw strange errors if
+    ;; - there is no -pkg.el in the tar file
+    ;; - the tar file was built in a folder with a different name
+    ;; tar files created with eask package are fine
+    (require 'tar-mode)
+    (let ((pkg-desc (with-current-buffer (find-file (expand-file-name path))
+                      (eask-ignore-errors-silent (package-tar-file-info)))))
+      (unless pkg-desc
+        ;; package-dir-info will return nil if there is no -pkg.el and no .el files at path
+        (eask-error "No package in %s" path))
+      (package-desc-name pkg-desc))
+    )
+   (t ;; .el file or directory
+    ;; Note package-dir-info doesn't work outside of dired mode!
+    (let ((pkg-desc (with-current-buffer (dired (expand-file-name path))
+                      (eask-ignore-errors-silent (package-dir-info)))))
+      (unless pkg-desc
+        ;; package-dir-info will return nil if there is no -pkg.el and no .el files at path
+        (eask-error "No package in %s" path))
+      (package-desc-name pkg-desc)))))
 
 (defun eask-install-file--packages (files)
   "The file install packages with FILES."
   (let* ((deps (mapcar (lambda (file)
-                         (list (eask-install-file--guess-name file) file))
+                         (list (eask-install-file--get-package-name file) file))
                        files))
          (names (mapcar #'car deps))
          (len (length deps))
@@ -52,7 +77,7 @@
       ;; If package [files..] are specified, we try to install it
       (eask-install-file--packages files)
     ;; Otherwise, report error.
-    (eask-info "(No file packages have been intalled)")
+    (eask-info "(No file packages have been installed)")
     (eask-help "core/install-file")))
 
 ;;; core/install-file.el ends here

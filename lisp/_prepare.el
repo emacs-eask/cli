@@ -733,7 +733,7 @@ Argument BODY are forms for execution."
           ;; Handle `--force` flag.
           (when should-reinstall-p (package-delete (eask-package-desc pkg t) t))
           ;; Install it.
-          (package-install-file (expand-file-name file)))
+          (eask-ignore-errors (package-install-file (expand-file-name file))))
         "done ✓")))))
 
 (defun eask-package-install (pkg)
