@@ -21,7 +21,10 @@
         nil t))
 
 (eask-load "core/install")
-(eask-load "core/install-file")
+
+(defun eask-install-vc--guess-name (file)
+  "Guess the package name of the install FILE."
+  (file-name-sans-extension (file-name-nondirectory (directory-file-name file))))
 
 (defun eask-install-vc--split-sepcs (specs)
   "Split the SPECS and return a list of specification."
@@ -32,7 +35,7 @@
       (cond ((ffap-url-p spec)
              (push (reverse current-spec) new-specs)
              ;; We're using the push, so the order is reversed.
-             (setq current-spec (list spec (eask-install-file--guess-name spec))))
+             (setq current-spec (list spec (eask-install-vc--guess-name spec))))
             (t
              (push spec current-spec))))
     ;; Push thes rest of the specification.

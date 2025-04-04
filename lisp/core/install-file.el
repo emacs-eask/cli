@@ -22,14 +22,19 @@
 
 (eask-load "core/install")
 
-(defun eask-install-file--guess-name (file)
-  "Guess the package name of the install FILE."
-  (file-name-sans-extension (file-name-nondirectory (directory-file-name file))))
+(defun eask-install-file--get-package-name (path)
+  "Get the package name from PATH, which is a file, directory or archive."
+  (when (not (file-exists-p path))
+    (eask-error "File does not exist %s" path))
+  ;; Note package-dir-info doesn't work outside of dired mode!
+  (let ((pkg-desc (with-current-buffer (dired (expand-file-name path))
+                    (eask-ignore-errors-silent (package-dir-info)))))
+    (package-desc-name pkg-desc)))
 
 (defun eask-install-file--packages (files)
   "The file install packages with FILES."
   (let* ((deps (mapcar (lambda (file)
-                         (list (eask-install-file--guess-name file) file))
+                         (list (eask-install-file--get-package-name file) file))
                        files))
          (names (mapcar #'car deps))
          (len (length deps))
