@@ -732,6 +732,13 @@ Argument BODY are forms for execution."
         (eask-with-verbosity 'debug
           ;; Handle `--force` flag.
           (when should-reinstall-p (package-delete (eask-package-desc pkg t) t))
+          ;; XXX: Without ignore-errors guard, it will trigger error
+          ;;
+          ;;   Can't find library xxxxxxx.el
+          ;;
+          ;; But we can remove this after Emacs 28, since function `find-library-name'
+          ;; has replaced the function `signal' instead of the `error'.
+          ;;
           ;; Install it.
           (eask-ignore-errors (package-install-file (expand-file-name file))))
         "done ✓")))))
