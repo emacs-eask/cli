@@ -29,6 +29,9 @@
   ;; Note package-dir-info doesn't work outside of dired mode!
   (let ((pkg-desc (with-current-buffer (dired (expand-file-name path))
                     (eask-ignore-errors-silent (package-dir-info)))))
+    (unless pkg-desc
+      ;; package-dir-info will return nil if there is no -pkg.el and no .el files at path
+      (eask-error "No package in %s" path))
     (package-desc-name pkg-desc)))
 
 (defun eask-install-file--packages (files)
