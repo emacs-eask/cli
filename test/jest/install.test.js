@@ -53,15 +53,6 @@ describe("install and uninstall", () => {
       expect(stderr).not.toMatch(packageName);
     });
 
-    test.skip("installs vc directly", async () => {
-      if ((await emacsVersion()) >= "29.1") {
-        const { stderr } = await ctx.runEask(
-          "install-vc https://github.com/jcs-elpa/msgu"
-        );
-        expect(stderr).toMatch("msgu");
-      }
-    });
-
     describe("eask install-file", () => {
       beforeAll(async () => {
         await ctx.runEask("clean workspace");
@@ -76,6 +67,8 @@ describe("install and uninstall", () => {
         const { stderr } = await ctx.runEask("install-file ./foo-mode");
         expect(stderr).toMatch("foo");
       });
+
+      /* File install */
 
       it("can repeat installs", async () => {
         await ctx.runEask("install-file ./foo-mode");
@@ -105,6 +98,17 @@ describe("install and uninstall", () => {
       it("can install tar files created with eask package", async () => {
         // foo-0.0.1.tar is created by running eask package in ./foo-no-pkg
         await ctx.runEask("install-file ./foo-0.0.1.tar");
+      });
+
+      /* VC install */
+
+      test.skip("installs vc directly", async () => {
+        if ((await emacsVersion()) >= "29.1") {
+          const { stderr } = await ctx.runEask(
+            "install-vc https://github.com/jcs-elpa/msgu"
+          );
+          expect(stderr).toMatch("msgu");
+        }
       });
     });
   });
