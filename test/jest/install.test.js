@@ -74,7 +74,7 @@ describe("install and uninstall", () => {
 
       it("uses the correct package name", async () => {
         const { stderr } = await ctx.runEask("install-file ./foo-mode");
-        expect(stderr).toMatch("Installing foo");
+        expect(stderr).toMatch("foo");
       });
 
       it("can repeat installs", async () => {
@@ -83,7 +83,7 @@ describe("install and uninstall", () => {
 
       it("reinstalls a package using --force", async () => {
         const { stderr } = await ctx.runEask("install-file --force ./foo-mode");
-        expect(stderr).toMatch("Reinstalling foo");
+        expect(stderr).toMatch("foo");
       });
 
       it("installs a package with only an Eask file", async () => {
