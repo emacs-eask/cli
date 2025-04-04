@@ -8,7 +8,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 0.12.x (Unreleased)
 > Released N/A
 
-* N/A
+* fix(install): Package installed calculation (a479d5355dfc832286288b790338652e174d606d)
+* fix(install-file): Get correct install package name (#318)
 
 ## 0.11.x
 > Released Apr 03, 2025
