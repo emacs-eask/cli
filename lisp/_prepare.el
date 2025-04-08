@@ -566,6 +566,10 @@ For arguments FUNC and DEPS, see function `mapc' for more information."
      ((memq :vc dep)
       (let ((spec (cdr (memq :vc dep))))
         (eask-package-vc-install name spec)))
+     ;; Try out packages using `try'.
+     ((memq :try dep)
+      (let ((url-or-package (nth 2 dep)))
+        (eask-package-try name url-or-package)))
      ;; Fallback to archive install.
      (t (eask-package-install name)))))
 
@@ -694,6 +698,17 @@ Argument BODY are forms for execution."
   "Return non-nil if package (PKG) is installable."
   (assq (eask-intern pkg) package-archive-contents))
 
+(defun eask-package-try (pkg url-or-package)
+  "To try a package without actually install it."
+  (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
+  (require 'try)
+  (let ((target (or url-or-package pkg)))
+    (eask-with-progress
+      (format "  - %sTrying out %s... " eask--action-prefix
+              (ansi-green (eask-2str target)))
+      (eask-with-verbosity 'debug (try target))
+      "done ✓")))
+
 (defun eask-package-vc-install (pkg spec)
   "To vc install the package (PKG) by argument SPEC."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
@@ -757,23 +772,24 @@ Argument BODY are forms for execution."
         (unless (eask-package-installable-p pkg)
           (eask-error "Package not installable `%s'; make sure the package archive (source) is included" pkg))))
      (t
-      (eask-with-progress
-        (format "  - %s%snstalling %s (%s)... " eask--action-prefix
-                (if should-reinstall-p "Rei" "I")
-                name version)
-        (eask-with-verbosity 'debug
-          ;; Handle `--force` flag.
-          (when should-reinstall-p (package-delete (eask-package-desc pkg t) t))
-          ;; XXX: Without ignore-errors guard, it will trigger error
-          ;;
-          ;;   Can't find library xxxxxxx.el
-          ;;
-          ;; But we can remove this after Emacs 28, since function `find-library-name'
-          ;; has replaced the function `signal' instead of the `error'.
-          ;;
-          ;; Install it.
-          (eask-ignore-errors (package-install pkg)))
-        "done ✓")))))
+      (eask--pkg-process pkg  ; Second call to force refresh the data.
+        (eask-with-progress
+          (format "  - %s%snstalling %s (%s)... " eask--action-prefix
+                  (if should-reinstall-p "Rei" "I")
+                  name version)
+          (eask-with-verbosity 'debug
+            ;; Handle `--force` flag.
+            (when should-reinstall-p (package-delete (eask-package-desc pkg t) t))
+            ;; XXX: Without ignore-errors guard, it will trigger error
+            ;;
+            ;;   Can't find library xxxxxxx.el
+            ;;
+            ;; But we can remove this after Emacs 28, since function `find-library-name'
+            ;; has replaced the function `signal' instead of the `error'.
+            ;;
+            ;; Install it.
+            (eask-ignore-errors (package-install pkg)))
+          "done ✓"))))))
 
 (defun eask-package-delete (pkg)
   "Delete the package (PKG)."
@@ -783,7 +799,7 @@ Argument BODY are forms for execution."
      ((not installed-p)
       (eask-msg "  - %sSkipping %s (%s)... not installed ✗" eask--action-prefix name version))
      (t
-      (eask--pkg-process pkg
+      (eask--pkg-process pkg  ; Second call to force refresh the data.
         (eask-with-progress
           (format "  - %sUninstalling %s (%s)... " eask--action-prefix name version)
           (eask-with-verbosity 'debug
@@ -800,12 +816,13 @@ Argument BODY are forms for execution."
       (eask-msg "  - %sSkipping %s (%s)... not installed ✗" eask--action-prefix name version))
      (t
       (eask-pkg-init)
-      (eask-with-progress
-        (format "  - %sReinstalling %s (%s)... " eask--action-prefix name version)
-        (eask-with-verbosity 'debug
-          (package-delete (eask-package-desc pkg t) t)
-          (eask-ignore-errors (package-install pkg)))
-        "done ✓")))))
+      (eask--pkg-process pkg  ; Second call to force refresh the data.
+        (eask-with-progress
+          (format "  - %sReinstalling %s (%s)... " eask--action-prefix name version)
+          (eask-with-verbosity 'debug
+            (package-delete (eask-package-desc pkg t) t)
+            (eask-ignore-errors (package-install pkg)))
+          "done ✓"))))))
 
 (defun eask-package-desc (name &optional current)
   "Build package description by its NAME.
@@ -1540,6 +1557,9 @@ argument COMMAND."
 (defvar eask-depends-on-recipe-p nil
   "Set to t if package depends on recipe.")
 
+(defvar eask-depends-on-try-p nil
+  "Set to t if package depends on try.")
+
 (defvar eask--local-archive-name "local"
   "The local archive name.")
 
@@ -1547,6 +1567,10 @@ argument COMMAND."
   "Setup dependencies list."
   (setq eask-depends-on (reverse eask-depends-on)
         eask-depends-on-dev (reverse eask-depends-on-dev))
+  ;; On try
+  (when eask-depends-on-try-p
+    (eask-archive-install-packages '("gnu" "melpa") 'try))
+  ;; On recipe
   (when eask-depends-on-recipe-p
     (eask-with-progress
       (format "✓ Checking local archives %s... "
@@ -1593,22 +1617,21 @@ ELPA)."
             (eask-error "This requires Emacs %s and above!" minimum-version)
           (push recipe eask-depends-on-emacs))
         recipe)))
+   ;; Specified packages
+   ((or (memq :file args)  ; File packages
+        (memq :vc args)    ; VC packages
+        (memq :try args))  ; Try packages
+    (let* ((recipe (append (list (intern pkg)) args)))
+      (unless (eask--check-depends-on recipe)
+        (push recipe eask-depends-on))
+      ;; Set flag.
+      (when (memq :try args)
+        (setq eask-depends-on-try-p t))
+      recipe))
    ;; No argument specify
    ((<= (length args) 1)
     (let* ((minimum-version (car args))
            (recipe (list pkg minimum-version)))
-      (unless (eask--check-depends-on recipe)
-        (push recipe eask-depends-on))
-      recipe))
-   ;; File packages
-   ((memq :file args)
-    (let* ((recipe (append (list (intern pkg)) args)))
-      (unless (eask--check-depends-on recipe)
-        (push recipe eask-depends-on))
-      recipe))
-   ;; VC packages
-   ((memq :vc args)
-    (let* ((recipe (append (list (intern pkg)) args)))
       (unless (eask--check-depends-on recipe)
         (push recipe eask-depends-on))
       recipe))
