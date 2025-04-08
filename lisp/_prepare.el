@@ -698,16 +698,22 @@ Argument BODY are forms for execution."
   "Return non-nil if package (PKG) is installable."
   (assq (eask-intern pkg) package-archive-contents))
 
-(defun eask-package-try (pkg url-or-package)
-  "To try a package without actually install it."
+(defun eask-package-try (pkg &optional url-or-package)
+  "To try a package (PKG) without actually install it.
+
+The optional argument URL-OR-PACKAGE is used in the function `try'."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
-  (require 'try)
-  (let ((target (or url-or-package pkg)))
-    (eask-with-progress
-      (format "  - %sTrying out %s... " eask--action-prefix
-              (ansi-green (eask-2str target)))
-      (eask-with-verbosity 'debug (try target))
-      "done ✓")))
+  (eask-with-progress
+    (format "  - %sTrying out %s%s... " eask--action-prefix
+            (ansi-green (eask-2str pkg))
+            (if url-or-package
+                (concat " in " (ansi-yellow url-or-package))
+              ""))
+    (eask-with-verbosity 'debug
+      (eask-archive-install-packages '("gnu" "melpa") 'try)
+      (require 'try)
+      (try (or url-or-package pkg)))
+    "done ✓"))
 
 (defun eask-package-vc-install (pkg spec)
   "To vc install the package (PKG) by argument SPEC."
@@ -1557,9 +1563,6 @@ argument COMMAND."
 (defvar eask-depends-on-recipe-p nil
   "Set to t if package depends on recipe.")
 
-(defvar eask-depends-on-try-p nil
-  "Set to t if package depends on try.")
-
 (defvar eask--local-archive-name "local"
   "The local archive name.")
 
@@ -1567,9 +1570,6 @@ argument COMMAND."
   "Setup dependencies list."
   (setq eask-depends-on (reverse eask-depends-on)
         eask-depends-on-dev (reverse eask-depends-on-dev))
-  ;; On try
-  (when eask-depends-on-try-p
-    (eask-archive-install-packages '("gnu" "melpa") 'try))
   ;; On recipe
   (when eask-depends-on-recipe-p
     (eask-with-progress
@@ -1624,9 +1624,6 @@ ELPA)."
     (let* ((recipe (append (list (intern pkg)) args)))
       (unless (eask--check-depends-on recipe)
         (push recipe eask-depends-on))
-      ;; Set flag.
-      (when (memq :try args)
-        (setq eask-depends-on-try-p t))
       recipe))
    ;; No argument specify
    ((<= (length args) 1)
