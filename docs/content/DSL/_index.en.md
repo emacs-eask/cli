@@ -170,7 +170,7 @@ Specify dependencies in **try** format:
 ```elisp
 (depends-on "auto-rename-tag" :try "https://github.com/emacs-vs/auto-rename-tag")
 
-(depends-on "lsp-ui" :vc)  ; Try it, don't install it.
+(depends-on "lsp-ui" :try)  ; Try it, don't install it.
 ```
 
 Specify dependencies in **recipe** format:
