@@ -161,6 +161,14 @@ weight: 200
 (depends-on "lsp-ui" :vc "emacs-lsp/lsp-ui")
 ```
 
+以 **try** 格式指定依賴項：
+
+```elisp
+(depends-on "auto-rename-tag" :try "https://raw.githubusercontent.com/emacs-vs/auto-rename-tag/refs/heads/master/auto-rename-tag.el")
+
+(depends-on "lsp-ui" :try)  ; 只有試看看, 不安裝.
+```
+
 以 **recipe** 格式指定依賴項：
 
 ```elisp

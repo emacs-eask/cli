@@ -37,6 +37,10 @@
   ;;(depends-on "msgu" :vc "https://github.com/jcs-elpa/msgu")
   )
 
+;; Try out
+(depends-on "indent-control" :try)
+(depends-on "auto-rename-tag" :try "https://raw.githubusercontent.com/emacs-vs/auto-rename-tag/refs/heads/master/auto-rename-tag.el")
+
 ;; Recipe install
 (depends-on "watch-cursor"
             :repo "jcs-elpa/watch-cursor" :fetcher 'github)
