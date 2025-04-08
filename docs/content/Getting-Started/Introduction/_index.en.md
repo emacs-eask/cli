@@ -99,6 +99,7 @@ list.
 
 ## 📰 News
 
+- `0.11.x` - Add commands `install-file` and `install-vc`.
 - `0.10.x` - Add five new commands and improve the default user experience.
 - `0.9.x` - Enhance overall user experience.
 - `0.8.x` - Add `link` command.
@@ -108,7 +109,6 @@ list.
 - `0.4.x` - Add color logger.
 - `0.3.x` - Add verbosity level and timestamps.
 - `0.2.x` - Done basic error handling with exit code at the end of executions.
-- `0.1.39` - Use `spawn` instead `exec`; now messages will be printed immediately.
 
 ## 📝 Todo list
 
