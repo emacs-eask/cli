@@ -17,7 +17,7 @@ geekdocAnchor: false
 
 安裝 Eask 之後, 你就可以很輕鬆的開發任何 Elisp 包.
 
-開箱及用, Eask 支援 **50+ 指令** 來幫助整個你開發. 🔥
+開箱及用, Eask 支援 **80+ 指令** 來幫助整個你開發. 🔥
 
 {{< button size="large" relref="Getting-Started/Introduction/" >}}開始使用{{< /button >}}
 

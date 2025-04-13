@@ -17,7 +17,7 @@ geekdocAnchor: false
 
 After installing Eask, you can easily develop any Elisp package.
 
-Out of the box, Eask supports **50+ commands** to help you throughout development. 🔥
+Out of the box, Eask supports **80+ commands** to help you throughout development. 🔥
 
 {{< button size="large" relref="Getting-Started/Introduction/" >}}Getting Started{{< /button >}}
 
