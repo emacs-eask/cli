@@ -112,6 +112,13 @@ If nil, never time out."
                  (const  :tag "Never time out" nil))
   :group 'eask)
 
+;; This is used to avoid the error:
+;;
+;;   Ignoring unknown mode `eask-mode'.
+;;
+(unless (fboundp 'eask-mode)
+  (define-derived-mode eask-mode emacs-lisp-mode "Eask"))
+
 ;;
 ;;; Execution
 

@@ -1,3 +1,5 @@
+;; -*- mode: eask; lexical-binding: t -*-
+
 (package "options"
          "0.0.0"
          "Test all options flag")

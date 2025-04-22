@@ -1,3 +1,5 @@
+;; -*- mode: eask; lexical-binding: t -*-
+
 (package "color"
          "0.0.1"
          "Test to print color on the terminal")

@@ -1,3 +1,5 @@
+;; -*- mode: eask; lexical-binding: t -*-
+
 (package "home"
          "0.0.1"
          "Minimal test for global config")

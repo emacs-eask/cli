@@ -1,3 +1,5 @@
+;; -*- mode: eask; lexical-binding: t -*-
+
 (package "error"
          "0.0.1"
          "Test (trigger) error on GitHub Actions")

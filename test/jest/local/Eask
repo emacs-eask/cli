@@ -1,3 +1,5 @@
+;; -*- mode: eask; lexical-binding: t -*-
+
 (package "mini.pkg.1"
          "0.0.1"
          "Minimal test package")

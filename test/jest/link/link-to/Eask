@@ -1,3 +1,5 @@
+;; -*- mode: eask; lexical-binding: t -*-
+
 (package "link-to"
          "1.0.0"
          "simple package to link")
