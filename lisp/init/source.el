@@ -46,7 +46,9 @@
                           (keywords (string-join keywords "\" \""))
                           (reqs (package-desc-reqs pkg-desc))
                           (content (format
-                                    "(package \"%s\"
+                                    ";; -*- mode: eask; lexical-binding: t -*-
+
+(package \"%s\"
          \"%s\"
          %s)
 

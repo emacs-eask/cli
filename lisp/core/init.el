@@ -76,7 +76,9 @@ Press ^C at any time to quit.")
                          (split-string keywords "[ \t\n]+" t "[ ]+")))
              (keywords (mapconcat (lambda (s) (format "%S" s)) keywords " "))
              (content (format
-                       "(package \"%s\"
+                       ";; -*- mode: eask; lexical-binding: t -*-
+
+(package \"%s\"
          \"%s\"
          \"%s\")
 

@@ -1,3 +1,5 @@
+;; -*- mode: eask; lexical-binding: t -*-
+
 (package "outdated-upgrade"
          "0.0.1"
          "Test project for command outdated and upgrade")

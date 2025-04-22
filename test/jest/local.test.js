@@ -230,7 +230,7 @@ describe("local", () => {
   describe("Formatting", () => {
     // installs elisp-autofmt
     it("format elisp-autofmt", async () => {
-      if ((await emacsVersion()) >= "28.1") {
+      if ((await emacsVersion()) >= "29.1") {
         await ctx.runEask("format elisp-autofmt");
       }
     });

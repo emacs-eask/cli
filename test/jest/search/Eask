@@ -1,3 +1,5 @@
+;; -*- mode: eask; lexical-binding: t -*-
+
 (package "search"
          "0.0.1"
          "Test project for command `search'")

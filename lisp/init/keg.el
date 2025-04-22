@@ -73,7 +73,9 @@ If no found the Keg file, returns nil."
                         (keywords (split-string keywords "[, ]"))
                         (keywords (string-join keywords "\" \""))
                         (content (format
-                                  "(package \"%s\"
+                                  ";; -*- mode: eask; lexical-binding: t -*-
+
+(package \"%s\"
          \"%s\"
          \"%s\")
 

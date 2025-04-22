@@ -45,7 +45,7 @@
       (kill-buffer))))
 
 (eask-start
-  (eask-command-check "28.1")
+  (eask-command-check "29.1")
 
   ;; Preparation
   (eask-archive-install-packages '("gnu" "melpa")
