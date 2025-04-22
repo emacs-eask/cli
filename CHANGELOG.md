@@ -11,6 +11,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * fix(install): Package installed calculation (a479d5355dfc832286288b790338652e174d606d)
 * fix(install-file): Get correct install package name (#318)
 * feat: Add `:try` for `depends-on` DSL (#319)
+* fix: Warning missing `lexical-binding` cookie in Eask-file (#320)
 
 ## 0.11.x
 > Released Apr 03, 2025
