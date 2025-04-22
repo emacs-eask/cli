@@ -3,24 +3,24 @@
 exports[`analyze in ./dsl matches snapshot 1`] = `
 {
   "stderr": "
-~/Eask:7:18 Error: Multiple definition of \`package'
-~/Eask:10:55 Error: Multiple definition of \`website-url'
-~/Eask:12:16 Error: Multiple definition of \`keywords'
-~/Eask:15:15 Warning: Warning regarding duplicate author name, name
-~/Eask:18:17 Warning: Warning regarding duplicate license name, GPLv3
-~/Eask:21:29 Error: Multiple definition of \`package-file'
-~/Eask:23:35 Warning: Pkg-file seems to be missing \`check-pkg.el'
-~/Eask:24:35 Error: Multiple definition of \`package-descriptor'
-~/Eask:28:61 Error: Run-script with the same key name is not allowed: \`test\`
-~/Eask:31:13 Error: Multiple definition of source \`gnu'
-~/Eask:33:24 Error: Unknown package archive \`magic-archive'
-~/Eask:35:15 Error: Invalid archive name \`local'
-~/Eask:35:15 Error: Unknown package archive \`local'
-~/Eask:38:20 Error: Define dependencies with the same name \`emacs'
-~/Eask:41:19 Error: Define dependencies with the same name \`dash'
-~/Eask:42:27 Error: Define dependencies with the same name \`dash' with different version
-~/Eask:48:2 Error: Define dependencies with the same name \`f'
-~/Eask:48:2 Error: Define dependencies with the same name \`f' with different version
+~/Eask:9:18 Error: Multiple definition of \`package'
+~/Eask:12:55 Error: Multiple definition of \`website-url'
+~/Eask:14:16 Error: Multiple definition of \`keywords'
+~/Eask:17:15 Warning: Warning regarding duplicate author name, name
+~/Eask:20:17 Warning: Warning regarding duplicate license name, GPLv3
+~/Eask:23:29 Error: Multiple definition of \`package-file'
+~/Eask:25:35 Warning: Pkg-file seems to be missing \`check-pkg.el'
+~/Eask:26:35 Error: Multiple definition of \`package-descriptor'
+~/Eask:30:61 Error: Run-script with the same key name is not allowed: \`test\`
+~/Eask:33:13 Error: Multiple definition of source \`gnu'
+~/Eask:35:24 Error: Unknown package archive \`magic-archive'
+~/Eask:37:15 Error: Invalid archive name \`local'
+~/Eask:37:15 Error: Unknown package archive \`local'
+~/Eask:40:20 Error: Define dependencies with the same name \`emacs'
+~/Eask:43:19 Error: Define dependencies with the same name \`dash'
+~/Eask:44:27 Error: Define dependencies with the same name \`dash' with different version
+~/Eask:50:2 Error: Define dependencies with the same name \`f'
+~/Eask:50:2 Error: Define dependencies with the same name \`f' with different version
 ",
   "stdout": "",
 }
