@@ -27,6 +27,8 @@
 ;;
 ;;; Flags
 
+(eask-command-check "29.1")
+
 (advice-add #'eask-allow-error-p :override #'always)
 
 ;;
@@ -45,8 +47,6 @@
       (kill-buffer))))
 
 (eask-start
-  (eask-command-check "29.1")
-
   ;; Preparation
   (eask-archive-install-packages '("gnu" "melpa")
                                  'elisp-autofmt)

@@ -134,9 +134,7 @@ then,
 Report error if the current command requires minimum `version`.
 
 ```elisp
-(eask-start
-  (eask-command-check "27.1")  ; The command requires 27.1 and above!
-  ...
+(eask-command-check "27.1")  ; The command requires 27.1 and above!
 ```
 
 ## 🔍 Function: eask-command-p (`commands`)

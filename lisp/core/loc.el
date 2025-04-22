@@ -19,6 +19,14 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
+;;
+;;; Flags
+
+(eask-command-check "28.1")
+
+;;
+;;; Core
+
 (defvar eask-loc--lines 0)
 (defvar eask-loc--chars 0)
 
@@ -35,8 +43,6 @@
       (insert (format "| %s | %s | %s |\n" file lines chars)))))
 
 (eask-start
-  (eask-command-check "28.1")
-
   ;; Preparation
   (eask-archive-install-packages '("gnu" "melpa")
                                  'markdown-mode)

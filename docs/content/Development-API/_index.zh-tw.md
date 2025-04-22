@@ -133,9 +133,7 @@ eask init
 如果目前的指令需要最低的 `version` 就會報錯。
 
 ```elisp
-(eask-start
-  (eask-command-check "27.1")  ; 此指令需要 27.1 及以上版本！
-  ...
+(eask-command-check "27.1")  ; 此指令需要 27.1 及以上版本！
 ```
 
 ## 🔍 函式: eask-command-p (`commands`)

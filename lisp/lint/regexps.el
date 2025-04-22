@@ -27,6 +27,8 @@
 ;;
 ;;; Flags
 
+(eask-command-check "27.1")
+
 (advice-add #'eask-allow-error-p :override #'always)
 
 ;;
@@ -59,8 +61,6 @@
       (kill-this-buffer))))
 
 (eask-start
-  (eask-command-check "27.1")
-
   ;; Preparation
   (eask-archive-install-packages '("gnu")
                                  'relint)
