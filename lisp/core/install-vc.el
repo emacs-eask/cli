@@ -22,6 +22,14 @@
 
 (eask-load "core/install")
 
+;;
+;;; Flags
+
+(eask-command-check "29.1")
+
+;;
+;;; Core
+
 (defun eask-install-vc--guess-name (file)
   "Guess the package name of the install FILE."
   (file-name-sans-extension (file-name-nondirectory (directory-file-name file))))
@@ -63,8 +71,6 @@
                installed s skipped)))
 
 (eask-start
-  (eask-command-check "29.1")
-
   (eask-pkg-init)
   (if-let* ((specs (eask-args)))
       ;; If package [specs..] are specified, we try to install it
