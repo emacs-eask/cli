@@ -7,6 +7,8 @@ weight: 100
 The syntaxes are similar to the `Cask` file, but different.
 
 ```elisp
+;; -*- mode: eask; lexical-binding: t -*-
+
 (package "Emacs configuration's name"
          "0.1.0"
          "Your Emacs configuration's description")  ; optional

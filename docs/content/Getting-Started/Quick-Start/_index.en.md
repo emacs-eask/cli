@@ -79,6 +79,8 @@ website: https://example.com/project-url/
 keywords: tools example
 About to write to /path/to/project/Eask:
 
+;; -*- mode: eask; lexical-binding: t -*-
+
 (package "your-project"
          "1.0.0"
          "Your project description!")

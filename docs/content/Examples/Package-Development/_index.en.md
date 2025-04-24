@@ -7,6 +7,8 @@ weight: 200
 The syntaxes are similar to the `Cask` file, but different.
 
 ```elisp
+;; -*- mode: eask; lexical-binding: t -*-
+
 (package "your-package"
          "0.1.0"
          "Your package description")

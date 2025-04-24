@@ -6,6 +6,8 @@ weight: 200
 `Eask` 是魔法文件，`eask` 會將其讀取為 Emacs 中的初始化文件。語法類似於 `Cask` 文件，但有所不同。
 
 ```elisp
+;; -*- mode: eask; lexical-binding: t -*-
+
 (package "your-package"
          "0.1.0"
          "Your package description")
