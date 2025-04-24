@@ -70,25 +70,25 @@ Eask 將生成這樣的文件：
 
 **[推薦]** 如果您已有 elisp 項目，您可以將 `.el` 文件轉換為 Eask 文件：
 
-```
+```sh
 eask init --from source /path/to/source.el
 ```
 
 如果您已有 [Cask][] 項目，您可以將 Cask 文件轉換為 Eask 文件：
 
-```
+```sh
 eask init --from cask /path/to/Cask
 ```
 
 如果您已有 [Eldev][] 項目，您可以將 Eldev 文件轉換為 Eask 文件：
 
-```
+```sh
 eask init --from eldev /path/to/Eldev
 ```
 
 如果您已有 [Keg][] 項目，您可以將 Keg 文件轉換為 Eask 文件：
 
-```
+```sh
 eask init --from keg /path/to/Keg
 ```
 

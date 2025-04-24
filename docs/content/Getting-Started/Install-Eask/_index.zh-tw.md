@@ -130,7 +130,7 @@ scoop install eask-cli
 [Winget][]是微軟官方的 Windows 免費開源軟體套件管理器。
 若要安裝 Eask CLI，請執行下列操作：
 
-```
+```sh
 winget install eask.cli
 ```
 

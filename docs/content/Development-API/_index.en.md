@@ -335,7 +335,7 @@ Return a list of Eask files from DIR.
 
 Consider the following directory tree:
 
-```
+```text
 . root
 ├── Eask
 ├── Eask.28
@@ -354,7 +354,7 @@ Find the Eask-file from START-PATH.
 
 Consider the following directory tree:
 
-```
+```text
 .project
 ├─ src
 │ └── config.el
@@ -730,7 +730,7 @@ Log messages with timestamps.
 
 Output:
 
-```
+```text
 2022-04-14 13:44:46 This is a message with timestamps
 ```
 
@@ -744,7 +744,7 @@ Log messages with level. (default: `nil`)
 
 Output:
 
-```
+```text
 [DEBUG] This is a DEBUG message with log level
 ```
 
@@ -758,7 +758,7 @@ Weather to generate log files. (default: `nil`)
 
 Use command `cat` to see the log,
 
-```
+```text
 cat /.log/messages.log
 ```
 
@@ -822,7 +822,7 @@ to display.
 (eask-debug "This is DEBUG message")
 ```
 
-```
+```text
 2022-04-14 17:31:54 [DEBUG] This is DEBUG message
 ```
 
@@ -832,7 +832,7 @@ to display.
 (eask-log "This is LOG message")
 ```
 
-```
+```text
 2022-04-14 17:31:54 [LOG] This is LOG message
 ```
 
@@ -842,7 +842,7 @@ to display.
 (eask-info "This is INFO message")
 ```
 
-```
+```text
 2022-04-14 17:31:54 [INFO] This is INFO message
 ```
 
@@ -852,7 +852,7 @@ to display.
 (eask-warn "This is WARNING message")
 ```
 
-```
+```text
 2022-04-14 17:31:54 [WARNING] This is WARNING message
 ```
 
@@ -862,7 +862,7 @@ to display.
 (eask-error "This is ERROR message")
 ```
 
-```
+```text
 2022-04-14 17:31:54 [ERROR] This is ERROR message
 ```
 
@@ -1027,7 +1027,7 @@ Create execution with the responsive message output.
 
 Expect output:
 
-```
+```text
 Downloading files... done ✓
 ```
 

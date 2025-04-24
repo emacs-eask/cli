@@ -118,7 +118,7 @@ eask clean --help
 
 輸出，它顯示支持 7 個子命令：
 
-```
+```text
 Delete various files produced during building
 
 Usage: eask clean <type> [options..]

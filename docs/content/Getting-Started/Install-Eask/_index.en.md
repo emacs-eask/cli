@@ -137,7 +137,7 @@ scoop install eask-cli
 [Winget][] is Microsoft’s official free and open-source package manager for Windows.
 To install the Eask CLI:
 
-```
+```sh
 winget install eask.cli
 ```
 

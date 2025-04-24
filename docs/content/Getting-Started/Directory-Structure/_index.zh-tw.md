@@ -8,7 +8,7 @@ weight: 350
 從命令行運行 **`eask create package`** 生成器將創建
 具有以下結構的目錄：
 
-```
+```text
 .
 ├── .gitignore
 ├── Makefile

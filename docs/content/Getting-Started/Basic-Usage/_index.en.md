@@ -123,7 +123,7 @@ eask clean --help
 
 The output, and it shows there are 7 subcommands supported:
 
-```
+```text
 Delete various files produced during building
 
 Usage: eask clean <type> [options..]

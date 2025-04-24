@@ -116,7 +116,7 @@ However, any other alternative would work as well since Eask is also an Elisp fi
 
 The example error message,
 
-```
+```text
 http://melpa.org/packages/lsp-mode-20220429.647.tar: Not found
 ```
 
@@ -133,7 +133,7 @@ backup archives repository is [here](https://github.com/emacs-eask/archives).
 
 The example error message,
 
-```
+```text
 Package not installable `helm'; make sure package archives are included
 ```
 
@@ -153,7 +153,7 @@ provides its information. In the example above, `helm` is listed under the
 
 The example error message,
 
-```
+```text
 Loading package information... done v
 Installing 1 specified package...
 
@@ -172,7 +172,7 @@ required version.
 
 If you get this sample error message:
 
-```
+```text
 Loading package information... done ✓
   - Installing s (20210616.619)... Failed (status 2): git --no-pager remote get-url upstream .
 ...
@@ -188,7 +188,7 @@ for more information.
 
 If you get this sample error message:
 
-```
+```text
 Created your-package-0.1.0.tar containing:
 tar exited with status 2
 Error: Process completed with exit code 1.
@@ -197,7 +197,7 @@ Error: Process completed with exit code 1.
 You might get this error while using the BSD tar. The workaround is to use
 GNU tar instead.
 
-```
+```elisp
 (setq package-build-tar-executable "/path/to/gnu/tar")
 ```
 
@@ -206,7 +206,7 @@ the tar executable from Git; it uses GNU tar.
 
 Add the following code snippet to your Eask-file:
 
-```
+```elisp
 ;; Use GNU tar in Windows
 (when (memq system-type '(cygwin windows-nt ms-dos))
   (setq package-build-tar-executable "C:/Program Files/Git/usr/bin/tar.exe"))

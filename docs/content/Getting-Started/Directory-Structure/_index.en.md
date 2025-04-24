@@ -8,7 +8,7 @@ weight: 350
 Running the **`eask create package`** generator from the command-line will create
 a directory with the following structure:
 
-```
+```text
 .
 ├── .gitignore
 ├── Makefile

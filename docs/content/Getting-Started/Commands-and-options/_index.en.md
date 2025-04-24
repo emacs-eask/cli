@@ -71,25 +71,25 @@ Eask will generate the file like this:
 **[RECOMMENDED]** If you already have an elisp project, you can convert the
 `.el` file to Eask-file:
 
-```
+```sh
 eask init --from source /path/to/source.el
 ```
 
 If you already have a [Cask][] project, you can convert Cask-file to Eask-file:
 
-```
+```sh
 eask init --from cask /path/to/Cask
 ```
 
 If you already have a [Eldev][] project, you can convert Eldev-file to Eask-file:
 
-```
+```sh
 eask init --from eldev /path/to/Eldev
 ```
 
 If you already have a [Keg][] project, you can convert Keg-file to Eask-file:
 
-```
+```sh
 eask init --from keg /path/to/Keg
 ```
 

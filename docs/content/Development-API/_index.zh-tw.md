@@ -331,7 +331,7 @@ eask info --verbose 4 foo bar
 
 考慮以下目錄樹：
 
-```
+```text
 . root
 ├── Eask
 ├── Eask.28
@@ -350,7 +350,7 @@ eask info --verbose 4 foo bar
 
 考慮以下目錄樹：
 
-```
+```text
 .project
 ├─ src
 │ └── config.el
@@ -722,7 +722,7 @@ The default level is `log`.
 
 Output:
 
-```
+```text
 2022-04-14 13:44:46 這是一條帶有時間戳的消息
 ```
 
@@ -736,7 +736,7 @@ Output:
 
 輸出：
 
-```
+```text
 [DEBUG] 這是一條具有日誌級別的 DEBUG 消息
 ```
 
@@ -750,7 +750,7 @@ Output:
 
 使用命令 `cat` 查看日誌，
 
-```
+```text
 cat /.log/messages.log
 ```
 
@@ -812,7 +812,7 @@ cat /.log/messages.log
 (eask-debug "這是調試信息")
 ```
 
-```
+```text
 2022-04-14 17:31:54 [DEBUG] 這是調試信息
 ```
 
@@ -822,7 +822,7 @@ cat /.log/messages.log
 (eask-log "這是日誌消息")
 ```
 
-```
+```text
 2022-04-14 17:31:54 [LOG] 這是日誌消息
 ```
 
@@ -832,7 +832,7 @@ cat /.log/messages.log
 (eask-info "這是信息消息")
 ```
 
-```
+```text
 2022-04-14 17:31:54 [INFO] 這是信息消息
 ```
 
@@ -842,7 +842,7 @@ cat /.log/messages.log
 (eask-warn "這是警告消息")
 ```
 
-```
+```text
 2022-04-14 17:31:54 [WARNING] 這是警告消息
 ```
 
@@ -852,7 +852,7 @@ cat /.log/messages.log
 (eask-error "這是錯誤信息")
 ```
 
-```
+```text
 2022-04-14 17:31:54 [ERROR] 這是錯誤信息
 ```
 
@@ -1017,7 +1017,7 @@ cat /.log/messages.log
 
 期望輸出：
 
-```
+```text
 檔案下載中... 完成 ✓
 ```
 

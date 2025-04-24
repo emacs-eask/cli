@@ -103,7 +103,7 @@ Eask 會一次建立套件，並寄存本機 ELPA，讓您稍後安裝時使用�
 
 示例錯誤消息，
 
-```
+```text
 http://melpa.org/packages/lsp-mode-20220429.647.tar: Not found
 ```
 
@@ -117,7 +117,7 @@ ping 源太多次。 然後來源可能會阻止您的 IP 一段時間分鐘。
 
 示例錯誤消息，
 
-```
+```text
 Package not installable `helm'; make sure package archives are included
 ```
 
@@ -136,7 +136,7 @@ Package not installable `helm'; make sure package archives are included
 
 示例錯誤消息，
 
-```
+```text
 Loading package information... done v
 Installing 1 specified package...
 
@@ -153,7 +153,7 @@ Wrong type argument: package-desc, nil
 
 如果您收到此示例錯誤消息:
 
-```
+```text
 Loading package information... done ✓
   - Installing s (20210616.619)... Failed (status 2): git --no-pager remote get-url upstream .
 ...
@@ -168,7 +168,7 @@ Loading package information... done ✓
 
 如果您收到此示例錯誤消息:
 
-```
+```text
 Created your-package-0.1.0.tar containing:
 tar exited with status 2
 Error: Process completed with exit code 1.
@@ -176,7 +176,7 @@ Error: Process completed with exit code 1.
 
 使用 BSD tar 時您可能會收到此錯誤。解決方法是使用 GNU tar 代替。
 
-```
+```elisp
 (setq package-build-tar-executable "/path/to/gnu/tar")
 ```
 
@@ -185,7 +185,7 @@ Error: Process completed with exit code 1.
 
 將以下代碼片段添加到您的 Eask 文件中：
 
-```
+```elisp
 ;; 在Windows中使用 GNU tar
 (when (memq system-type '(cygwin windows-nt ms-dos))
   (setq package-build-tar-executable "C:/Program Files/Git/usr/bin/tar.exe"))
