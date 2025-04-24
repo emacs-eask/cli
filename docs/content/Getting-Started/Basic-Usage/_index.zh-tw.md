@@ -21,7 +21,7 @@ eask --help
 
 您在控制台中看到的輸出應類似於以下內容：
 
-```
+```text
 eask is the main command, used to manage your Emacs dependencies
 
 Eask is a command-line tool that helps you build, lint, and test Emacs Lisp packages.
