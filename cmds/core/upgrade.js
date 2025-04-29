@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['upgrade [names..]'];
-exports.desc = 'Upgrade packages';
+exports.desc = 'Upgrade packages from archives';
 exports.builder = yargs => yargs
   .positional(
     '[names..]', {

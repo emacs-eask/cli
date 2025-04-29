@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['search [queries..]'];
-exports.desc = 'Search packages';
+exports.desc = 'Search packages from archives';
 exports.builder = yargs => yargs
   .positional(
     '[queries..]', {

@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['status'];
-exports.desc = 'Display the state of the workspace';
+exports.desc = 'Show the workspace status';
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/status');

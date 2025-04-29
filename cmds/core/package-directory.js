@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['package-directory'];
-exports.desc = 'Print path to package directory';
+exports.desc = 'Print the path to package directory';
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/package-directory');

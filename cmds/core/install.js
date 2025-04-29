@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['install [names..]'];
-exports.desc = 'Install packages';
+exports.desc = 'Install packages from archives or install from the workspace';
 exports.builder = yargs => yargs
   .positional(
     '[names..]', {

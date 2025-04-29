@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['keywords'];
-exports.desc = 'List available keywords that can be used in the header section';
+exports.desc = 'Display the available keywords for use in the header section';
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/keywords');

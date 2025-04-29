@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['install-vc [specs..]'];
-exports.desc = 'Install packages directly from the version control';
+exports.desc = 'Fetch and install packages directly via version control';
 exports.builder = yargs => yargs
   .positional(
     '[specs..]', {

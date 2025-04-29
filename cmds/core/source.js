@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['source <type>'];
-exports.desc = UTIL.hide_cmd('Add/Remove source from DSL');
+exports.desc = UTIL.hide_cmd('Manage sources');
 exports.builder = function (yargs) {
   yargs.usage(`${exports.desc}
 
@@ -30,8 +30,8 @@ Usage: eask source <type> [options..]`)
   if (UTIL.cmd_count() == 1) {
     yargs.positional(
       '<type>', {
-      description: 'type of the control',
-    });
+        description: 'type of the control',
+      });
   }
 }
 

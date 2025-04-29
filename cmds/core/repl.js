@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['repl', 'ielm'];
-exports.desc = UTIL.hide_cmd('Start the Elisp REPL');
+exports.desc = UTIL.hide_cmd('Start an Elisp REPL');
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'core/repl');

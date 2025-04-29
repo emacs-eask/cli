@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['uninstall [names..]', 'delete [names..]'];
-exports.desc = 'Uninstall packages';
+exports.desc = 'Uninstall packages from archives';
 exports.builder = yargs => yargs
   .positional(
     '[names..]', {

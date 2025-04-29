@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['reinstall [names..]'];
-exports.desc = 'Reinstall packages';
+exports.desc = 'Reinstall packages from archives';
 exports.builder = yargs => yargs
   .positional(
     '[names..]', {
