@@ -956,7 +956,7 @@ eask [GLOBAL-OPTIONS] upgrade-eask
 
 ## 🔍 eask locate
 
-顯示 Eask 安裝位置。
+顯示 Eask 的安裝位置。
 
 ```sh
 eask [GLOBAL-OPTIONS] locate

@@ -970,7 +970,7 @@ eask [GLOBAL-OPTIONS] upgrade-eask
 
 ## 🔍 eask locate
 
-Show Eask installed location.
+Show the location where Eask is installed.
 
 ```sh
 eask [GLOBAL-OPTIONS] locate
