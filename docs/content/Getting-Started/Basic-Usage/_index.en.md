@@ -50,28 +50,28 @@ Commands:
   init [files..]             Initialize project to use Eask
   install-deps               Automatically install package dependencies                                                                                                  [aliases: install-dependencies, prepare]
   install-file [files..]     Install packages from files, .tar files, or directories
-  install-vc [specs..]       Install packages directly from the version control
-  install [names..]          Install packages
-  keywords                   List available keywords that can be used in the header section
+  install-vc [specs..]       Fetch and install packages directly via version control
+  install [names..]          Install packages from archives or install from the workspace
+  keywords                   Display the available keywords for use in the header section
   link <action>              Manage links
   lint <type>                Run linters
   list                       List packages
   load-path [patterns..]     Print the load-path from workspace
   load [files..]             Load elisp files
   outdated                   Show all outdated dependencies
-  package-directory          Print path to package directory
+  package-directory          Print the path to package directory
   package [destination]      Build a package artifact, and put it into the given destination                                                                                                      [aliases: pack]
   recipe                     Suggest a recipe format
   recompile [names..]        Byte-recompile `.el' files
-  refresh                    Download package archives
-  reinstall [names..]        Reinstall packages
+  refresh                    Download descriptions of all configured package archives
+  reinstall [names..]        Reinstall packages from archives
   run <type>                 Run custom tasks
-  search [queries..]         Search packages
-  status                     Display the state of the workspace
+  search [queries..]         Search packages from archives
+  status                     Show the workspace status
   test <type>                Run regression/unit tests
-  uninstall [names..]        Uninstall packages                                                                                                                                                 [aliases: delete]
-  upgrade [names..]          Upgrade packages
-  locate                     Print out Eask installed location
+  uninstall [names..]        Uninstall packages from archives                                                                                                                                   [aliases: delete]
+  upgrade [names..]          Upgrade packages from archives
+  locate                     Show the location where Eask is installed
   upgrade-eask               Upgrade Eask itself                                                                                                                                          [aliases: upgrade-self]
 
 Proxy Options:

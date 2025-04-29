@@ -106,7 +106,7 @@ eask [GLOBAL-OPTIONS] info
 
 ## 🔍 eask status
 
-顯示工作區的狀態。
+顯示現在 workspace 的狀態。
 
 ```sh
 eask [GLOBAL-OPTIONS] status
@@ -114,7 +114,7 @@ eask [GLOBAL-OPTIONS] status
 
 ## 🔍 eask install
 
-安裝軟件包。
+從包源或 workspace 安裝包。
 
 ```sh
 eask [GLOBAL-OPTIONS] install [PACKAGES..]
@@ -156,7 +156,7 @@ eask [GLOBAL-OPTIONS] install-file [FILES..]
 
 ## 🔍 eask install-vc
 
-直接從版本控制安裝套件。
+直接透過版本控制擷取及安裝套件。
 
 ```sh
 eask [GLOBAL-OPTIONS] install-vc [SPECS..]
@@ -180,6 +180,14 @@ eask uninstall dash f s
 
 ```sh
 eask uninstall
+```
+
+## 🔍 eask reinstall
+
+重新安裝包.
+
+```sh
+eask [GLOBAL-OPTIONS] reinstall [PACKAGES..]
 ```
 
 ## 🔍 eask package
@@ -276,7 +284,7 @@ eask [GLOBAL-OPTIONS] recipe [FILES..]
 
 ## 🔍 eask keywords
 
-列出可在標題部分中使用的可用關鍵字。
+顯示可在標頭部分使用的關鍵字。
 
 ```sh
 eask [GLOBAL-OPTIONS] keywords
@@ -376,7 +384,7 @@ eask [GLOBAL-OPTIONS] eval [FORM]
 
 ## 🔍 eask repl
 
-啟動 Elisp REPL。
+啟動一個 Elisp REPL。
 
 ```sh
 eask [GLOBAL-OPTIONS] repl [FILES..]

@@ -108,7 +108,7 @@ eask [GLOBAL-OPTIONS] info
 
 ## 🔍 eask status
 
-Display the state of the workspace.
+Show the workspace status.
 
 ```sh
 eask [GLOBAL-OPTIONS] status
@@ -116,7 +116,7 @@ eask [GLOBAL-OPTIONS] status
 
 ## 🔍 eask install
 
-To install packages.
+To install packages from archives or install from the workspace.
 
 ```sh
 eask [GLOBAL-OPTIONS] install [PACKAGES..]
@@ -158,7 +158,7 @@ eask [GLOBAL-OPTIONS] install-file [FILES..]
 
 ## 🔍 eask install-vc
 
-Install packages directly from the version control.
+Fetch and install packages directly via version control.
 
 ```sh
 eask [GLOBAL-OPTIONS] install-vc [SPECS..]
@@ -178,10 +178,18 @@ Uninstall packages by specifying arguments:
 eask uninstall dash f s
 ```
 
-Or else, it will uninstall the package from the current development:
+Or else, it will uninstall the package from the current workspace:
 
 ```sh
 eask uninstall
+```
+
+## 🔍 eask reinstall
+
+To reinstall packages from archives.
+
+```sh
+eask [GLOBAL-OPTIONS] reinstall [PACKAGES..]
 ```
 
 ## 🔍 eask package
@@ -232,7 +240,7 @@ compiling.
 
 ## 🔍 eask package-directory
 
-Print path to package directory, where all dependencies are installed.
+Print the path to package directory, where all dependencies are installed.
 
 ```sh
 eask [GLOBAL-OPTIONS] package-directory
@@ -280,7 +288,7 @@ eask [GLOBAL-OPTIONS] recipe [FILES..]
 
 ## 🔍 eask keywords
 
-List available keywords that can be used in the header section.
+Display the available keywords for use in the header section.
 
 ```sh
 eask [GLOBAL-OPTIONS] keywords
@@ -381,7 +389,7 @@ eask [GLOBAL-OPTIONS] eval [FORM]
 
 ## 🔍 eask repl
 
-Start the Elisp REPL.
+Start an Elisp REPL.
 
 ```sh
 eask [GLOBAL-OPTIONS] repl [FILES..]
@@ -446,7 +454,7 @@ eask [GLOBAL-OPTIONS] search [QUEIRES..]
 
 ## 🔍 eask upgrade
 
-Upgrade all packages.
+Upgrade all packages from archives.
 
 ```sh
 eask [GLOBAL-OPTIONS] upgrade
@@ -470,7 +478,7 @@ eask [GLOBAL-OPTIONS] outdated [--depth]
 
 ## 🔍 eask refresh
 
-Download package archives.
+Download descriptions of all configured package archives.
 
 ```sh
 eask [GLOBAL-OPTIONS] refresh

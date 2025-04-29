@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['locate'];
-exports.desc = 'Print out Eask installed location';
+exports.desc = 'Show the location where Eask is installed';
 
 exports.handler = async (argv) => {
   process.stdout.write(`✓ Eask located in '` + UTIL.plugin_dir() + `'`);
