@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['pkg-file'];
-exports.desc = 'Remove generated pkg-file';
+exports.desc = 'Remove the generated pkg-file';
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'clean/pkg-file');

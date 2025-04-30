@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['autoloads'];
-exports.desc = 'Remove generated autoloads file';
+exports.desc = 'Remove the generated autoloads file';
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'clean/autoloads', argv.dest);

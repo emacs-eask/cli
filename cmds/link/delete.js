@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['delete [names..]', 'remove [names..]'];
-exports.desc = 'Delete local linked packages';
+exports.desc = 'Delete locally linked packages';
 exports.builder = yargs => yargs
   .positional(
     '[names..]', {

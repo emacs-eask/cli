@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['travis-ci [file]'];
-exports.desc = 'Generate Travis CI workflow yaml file';
+exports.desc = 'Generate the Travis CI workflow yaml file';
 exports.builder = yargs => yargs
   .positional(
     '[file]', {

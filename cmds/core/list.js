@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['list'];
-exports.desc = 'List packages';
+exports.desc = 'List all installed packages in dependency tree form';
 exports.builder = yargs => yargs
   .options({
     'depth': {

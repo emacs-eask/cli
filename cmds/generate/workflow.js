@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['workflow <type>'];
-exports.desc = 'Generate yaml files for CI/CD';
+exports.desc = 'Generate a yaml files for CI/CD';
 exports.builder = function (yargs) {
   yargs.usage(`${exports.desc}
 

@@ -456,7 +456,7 @@ eask [GLOBAL-OPTIONS] upgrade
 
 ## 🔍 eask list
 
-列出包。
+使用樹狀依賴圖列出所有已安裝的包。
 
 ```sh
 eask [GLOBAL-OPTIONS] list [--depth]
@@ -484,7 +484,7 @@ eask [GLOBAL-OPTIONS] refresh
 
 ## 🔍 eask generate autoloads
 
-生成 autoload 文件。
+生成一個 autoloads 文件。
 
 將包自動加載到項目根目錄中的 `project-autoloads.el`。
 
@@ -497,7 +497,7 @@ eask [GLOBAL-OPTIONS] generate autoloads
 
 ## 🔍 eask generate pkg-file
 
-生成 pkg 文件。
+生成一個 pkg 文件。
 
 將包描述符文件寫入項目根目錄中的 `project-pkg.el`。
 

@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['dist [destination]', 'distribution [destination]'];
-exports.desc = 'Delete dist subdirectory';
+exports.desc = 'Delete the dist directory where the build output is stored';
 exports.builder = yargs => yargs
   .positional(
     'destination', {

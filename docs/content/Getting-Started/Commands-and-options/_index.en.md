@@ -462,7 +462,7 @@ eask [GLOBAL-OPTIONS] upgrade
 
 ## 🔍 eask list
 
-List packages.
+List all installed packages in dependency tree form.
 
 ```sh
 eask [GLOBAL-OPTIONS] list [--depth]
@@ -490,7 +490,7 @@ Generate files that are used for the development.
 
 ## 🔍 eask generate autoloads
 
-Generate autoload file.
+Generate the autoload file.
 
 Write a package autoloads to `project-autoloads.el` in the project root.
 
@@ -504,7 +504,7 @@ for details.
 
 ## 🔍 eask generate pkg-file
 
-Generate pkg file.
+Generate the pkg file.
 
 Write a package descriptor file to `project-pkg.el` in the project root.
 
@@ -520,7 +520,7 @@ for details.
 
 ## 🔍 eask generate recipe
 
-Generate recipe file.
+Generate the recipe file.
 
 ```sh
 eask [GLOBAL-OPTIONS] generate recipe [DESTINATION]
@@ -531,7 +531,7 @@ by default.
 
 ## 🔍 eask generate license
 
-Generate LICENSE file.
+Generate a LICENSE file.
 
 ```sh
 eask [GLOBAL-OPTIONS] generate license <name>
@@ -547,7 +547,7 @@ to generate ignore file.
 
 ## 🔍 eask generate ignore
 
-Generate ignore file.
+Generate an ignore file.
 
 ```sh
 eask [GLOBAL-OPTIONS] generate ignore <name>
@@ -592,7 +592,7 @@ eask [GLOBAL-OPTIONS] generate test ecukes
 
 ## 🔍 eask generate workflow circle-ci
 
-Generate [CircleCI][] workflow yaml file.
+Generate the [CircleCI][] workflow yaml file.
 
 The default filename is `config.yml`.
 
@@ -604,7 +604,7 @@ This will generate the yaml file under `.circleci/`!
 
 ## 🔍 eask generate workflow github
 
-Generate [GitHub Actions][] workflow yaml file.
+Generate the [GitHub Actions][] workflow yaml file.
 
 The default filename is `test.yml`.
 
@@ -616,7 +616,7 @@ This will generate the yaml file under `.github/workflow/`!
 
 ## 🔍 eask generate workflow gitlab
 
-Generate [GitLab Runner][] workflow yaml file.
+Generate the [GitLab Runner][] workflow yaml file.
 
 The default filename is `.gitlab-ci.yml`.
 
@@ -626,7 +626,7 @@ eask [GLOBAL-OPTIONS] generate workflow gitlab [--file]
 
 ## 🔍 eask generate workflow travis-ci
 
-Generate [Travis CI][] workflow yaml file.
+Generate the [Travis CI][] workflow yaml file.
 
 The default filename is `.travis.yml`.
 
@@ -651,7 +651,7 @@ eask [GLOBAL-OPTIONS] link add <NAME> <PATH>
 
 ## 🔍 eask link delete
 
-Deletes the link for the given packages.
+Delete locally linked packages.
 
 Alias: `remove`
 

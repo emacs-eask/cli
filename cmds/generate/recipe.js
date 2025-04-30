@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['recipe [destination]'];
-exports.desc = 'Generate recipe file';
+exports.desc = 'Generate the recipe file';
 exports.builder = yargs => yargs
   .positional(
     'destination', {

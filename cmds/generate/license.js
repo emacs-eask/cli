@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['license <name>'];
-exports.desc = 'Generate LICENSE file';
+exports.desc = 'Generate the LICENSE file';
 exports.builder = yargs => yargs
   .positional(
     '<name>', {

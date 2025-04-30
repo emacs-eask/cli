@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['circle-ci [file]'];
-exports.desc = 'Generate CircleCI workflow yaml file';
+exports.desc = 'Generate the CircleCI workflow yaml file';
 exports.builder = yargs => yargs
   .positional(
     '[file]', {

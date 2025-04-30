@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['workspace', '.eask'];
-exports.desc = 'Clean up .eask directory';
+exports.desc = 'Clean up the .eask directory';
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'clean/workspace');

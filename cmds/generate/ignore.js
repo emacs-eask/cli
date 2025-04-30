@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['ignore <name>'];
-exports.desc = 'Generate ignore file using .gitignore templates';
+exports.desc = 'Generate an ignore file using .gitignore templates';
 exports.builder = yargs => yargs
   .positional(
     '<name>', {

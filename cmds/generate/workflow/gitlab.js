@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['gitlab [file]', 'gitlab-runner [file]'];
-exports.desc = 'Generate GitLab Runner workflow yaml file';
+exports.desc = 'Generate the GitLab Runner workflow yaml file';
 exports.builder = yargs => yargs
   .positional(
     '[file]', {

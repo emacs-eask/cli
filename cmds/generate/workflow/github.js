@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['github [file]', 'github-actions [file]', 'gha [file]'];
-exports.desc = 'Generate GitHub Actions workflow yaml file';
+exports.desc = 'Generate the GitHub Actions workflow yaml file';
 exports.builder = yargs => yargs
   .positional(
     '[file]', {

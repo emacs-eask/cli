@@ -52,7 +52,7 @@ Commands:
   keywords                   Display the available keywords for use in the header section
   link <action>              Manage links
   lint <type>                Run linters
-  list                       List packages
+  list                       List all installed packages in dependency tree form
   load-path [patterns..]     Print the load-path from workspace
   load [files..]             Load elisp files
   outdated                   Show all outdated dependencies

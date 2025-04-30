@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['autoloads'];
-exports.desc = 'Generate autoloads file';
+exports.desc = 'Generate the autoloads file';
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'generate/autoloads');
