@@ -536,7 +536,7 @@ name` 是許可證的類型，請參閱 https://api.github.com/licenses 了解�
 
 ## 🔍 eask generate ignore
 
-生成忽略文件。
+生成 `ignore` 文件。
 
 ```sh
 eask [GLOBAL-OPTIONS] generate ignore <name>
@@ -637,7 +637,7 @@ eask [GLOBAL-OPTIONS] link add <NAME> <PATH>
 
 ## 🔍 eask link delete
 
-刪除給定包的鏈接。
+刪除本機連結的套件。
 
 別名: `remove`
 
@@ -659,7 +659,7 @@ eask [GLOBAL-OPTIONS] link list
 
 ## 🔍 eask clean workspace
 
-從當前工作區中刪除 `.eask` 。
+從當前 workspace 中刪除 `.eask` 。
 
 別名: `.eask`
 
@@ -683,7 +683,7 @@ eask [GLOBAL-OPTIONS] clean elc
 
 ## 🔍 eask clean dist
 
-刪除 dist 子目錄。
+刪除儲存建立輸出的 `dist` 目錄。
 
 別名: `distribution`
 

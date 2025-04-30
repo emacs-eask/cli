@@ -673,7 +673,7 @@ Delete various files produced during building.
 
 ## 🔍 eask clean workspace
 
-Delete `.eask` from the current workspace.
+Delete the `.eask` from the current workspace.
 
 Alias: `.eask`
 
@@ -697,7 +697,7 @@ eask [GLOBAL-OPTIONS] clean elc
 
 ## 🔍 eask clean dist
 
-Delete dist subdirectory.
+Delete the `dist` directory where the build output is stored.
 
 Alias: `distribution`
 
@@ -707,7 +707,7 @@ eask [GLOBAL-OPTIONS] clean dist
 
 ## 🔍 eask clean autoloads
 
-Remove generated autoloads file.
+Remove the generated autoloads file.
 
 ```sh
 eask [GLOBAL-OPTIONS] clean autoloads
@@ -715,7 +715,7 @@ eask [GLOBAL-OPTIONS] clean autoloads
 
 ## 🔍 eask clean pkg-file
 
-Remove generated pkg-file.
+Remove the generated pkg-file.
 
 ```sh
 eask [GLOBAL-OPTIONS] clean pkg-file
