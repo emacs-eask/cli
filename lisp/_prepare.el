@@ -83,7 +83,20 @@ Arguments FNC and ARGS are used for advice `:around'."
   "Return non-nil if terminal supports colors.")
 
 (defconst eask-homedir (getenv "EASK_HOMEDIR")
-  "Eask's home directory path.")
+  "Eask's home directory path.
+
+It points to the global home directory `/path/to/home/.eask/'.")
+
+(defconst eask-userdir (expand-file-name "../" eask-homedir)
+  "Eask's user directory path.
+
+It points to the global user directory `/path/to/home/'.")
+
+(defconst eask-package-sys-dir (expand-file-name (concat emacs-version "/elpa/")
+                                                 eask-homedir)
+  "Eask global elpa directory; it will be treated as the system-wide packages.
+
+It points to the global elpa directory `/path/to/home/.eask/XX.X/elpa/'")
 
 (defconst eask-invocation (getenv "EASK_INVOCATION")
   "Eask's invocation program path.")
@@ -679,6 +692,7 @@ Argument BODY are forms for execution."
   (declare (indent 1) (debug t))
   `(let ((package-archives package-archives)
          (archives (eask-listify ,archives))
+         (package-user-dir eask-package-sys-dir)  ; Point to the global directory.
          (added))
      (dolist (archive archives)
        (unless (assoc archive package-archives)
@@ -1246,12 +1260,15 @@ This uses function `locate-dominating-file' to look up directory tree."
 (defmacro eask--setup-home (dir &rest body)
   "Set up config directory in DIR, then execute BODY."
   (declare (indent 1) (debug t))
-  `(let* ((user-emacs-directory (expand-file-name (concat ".eask/" emacs-version "/") ,dir))
-          (package-user-dir     (expand-file-name "elpa" user-emacs-directory))
-          (early-init-file      (locate-user-emacs-file "early-init.el"))
-          (eask-dot-emacs-file  (locate-user-emacs-file ".emacs"))
-          (user-init-file       (locate-user-emacs-file "init.el"))
-          (custom-file          (locate-user-emacs-file "custom.el")))
+  `(let* ((user-emacs-directory   (expand-file-name (concat ".eask/" emacs-version "/") ,dir))
+          (package-user-dir       (expand-file-name "elpa/" user-emacs-directory))
+          ;; Add global scope elpa directory.
+          (package-directory-list (append package-directory-list
+                                          (list eask-package-sys-dir)))
+          (early-init-file        (locate-user-emacs-file "early-init.el"))
+          (eask-dot-emacs-file    (locate-user-emacs-file ".emacs"))
+          (user-init-file         (locate-user-emacs-file "init.el"))
+          (custom-file            (locate-user-emacs-file "custom.el")))
      ,@body))
 
 ;; NOTE: If you modified this function, make sure you modified `core/emacs.el'
@@ -1295,7 +1312,7 @@ This uses function `locate-dominating-file' to look up directory tree."
              (eask--load-config)
              (eask--with-hooks ,@body)))
           ((eask-global-p)
-           (eask--setup-home (concat eask-homedir "../")  ; `/home/user/', escape `.eask'
+           (eask--setup-home eask-userdir
              (let ((eask--first-init-p (not (file-directory-p user-emacs-directory))))
                ;; We accept Eask-file in `global' scope, but it shouldn't be used
                ;; for the sandbox.
@@ -1314,7 +1331,7 @@ This uses function `locate-dominating-file' to look up directory tree."
            (eask-file-try-load default-directory)
            ;; Then setup the user directory according to the Eask-file!
            (eask--setup-home (or eask-file-root
-                                 (concat eask-homedir "../"))
+                                 eask-userdir)
              (let ((eask--first-init-p (not (file-directory-p user-emacs-directory)))
                    (scope (if eask-file-root "" "global ")))
                (eask-with-verbosity 'debug

@@ -62,9 +62,9 @@
 
 (defun eask-status--print-infos (lst)
   "Print environment info LST."
-  (let* ((len-0 (eask-2str (eask-status--list-max-length lst 0)))
+  (let* ((len-0 (eask-2str (eask-status--list-max-length lst 0)))  ; unused
          (len-1 (eask-2str (+ (eask-status--list-max-length lst 1) 2)))
-         (fmt (concat "   %-21s   %-" len-1 "s   %s")))
+         (fmt (concat "   %-24s   %-" len-1 "s   %s")))
     (dolist (pair lst)
       (when pair
         (eask-status--print-info fmt pair)
@@ -96,6 +96,8 @@
       ,(eask-status--file-dir user-emacs-directory))
      ("ELPA directory" ,(expand-file-name package-user-dir)
       ,(eask-status--file-dir package-user-dir))
+     ("ELPA directory (system)" ,eask-package-sys-dir
+      ,(eask-status--file-dir eask-package-sys-dir))
      ("early-init.el" ,(expand-file-name early-init-file)
       ,(eask-status--file-dir early-init-file))
      (".emacs" ,(expand-file-name eask-dot-emacs-file)
@@ -106,10 +108,10 @@
                      "nil")
       ,(when custom-file (eask-status--file-dir custom-file)))))
 
-  (eask-status--print-title "Eask-file:")
+  (eask-status--print-title "Eask:")
   (eask-status--print-infos
    `(("Eask file" ,(or eask-file "missing"))
-     ("Eask-file Count" ,(length (eask--find-files default-directory)))))
+     ("Eask file Count" ,(length (eask--find-files default-directory)))))
 
   (eask-info "(Total of %s states listed)" eask-status--info-count))
 
