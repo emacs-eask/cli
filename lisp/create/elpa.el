@@ -30,7 +30,7 @@
       (goto-char (point-min))
       (search-forward "(script ")
       (forward-line 1)
-      (dolist (gitkeeps (directory-files-recursively eask-file-root ".gitkeep"))
+      (dolist (gitkeeps (eask-directory-files-recursively eask-file-root ".gitkeep"))
         (ignore-errors (delete-file gitkeeps)))
       ;; --- Start insertion
       (insert "(script \"build\" \"eask exec github-elpa build\")\n")

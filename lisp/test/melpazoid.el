@@ -17,7 +17,7 @@
 ;;
 ;;; Flags
 
-(advice-add #'eask-allow-error-p :override #'always)
+(advice-add #'eask-allow-error-p :override #'eask-always)
 
 ;;
 ;;; Core
