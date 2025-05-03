@@ -281,7 +281,7 @@ eask init
 💡 當您需要某些存檔中的特定套件時，這非常方便。
 {{< /hint >}}
 
-## 🔍 函式: eask-archive-install-packages (`archives` `names`)
+## 🔍 函式: eask-archive-install-packages (`archives` &rest `names`)
 
 使用 archives 設定安裝套件。
 
@@ -289,7 +289,7 @@ eask init
 
 ```elisp
 (eask-archive-install-packages '("gnu" "melpa")
-                               'el2org)  ; 接受列表
+                               'el2org)  ; 接受多個參數.
 ```
 
 {{< hint info >}}

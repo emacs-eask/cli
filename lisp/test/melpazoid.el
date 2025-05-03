@@ -31,7 +31,8 @@
 (eask-start
   ;; Preparation
   (eask-archive-install-packages '("gnu" "melpa")
-                                 '(package-lint pkg-info))
+                                 'package-lint
+                                 'pkg-info)
 
   ;; Start Testing
   (let* ((dirs (or (eask-args) `(,default-directory))))

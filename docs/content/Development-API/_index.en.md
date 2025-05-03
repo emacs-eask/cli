@@ -284,7 +284,7 @@ The argument `ARCHIVES` can either be a string or a list of strings.
 💡 This is handy when you need certain packages from certain archives.
 {{< /hint >}}
 
-## 🔍 Function: eask-archive-install-packages (`archives` `names`)
+## 🔍 Function: eask-archive-install-packages (`archives` &rest `names`)
 
 Install packages with archives setup.
 
@@ -292,7 +292,7 @@ The arugment `names` can be a symbol or list of symbols.
 
 ```elisp
 (eask-archive-install-packages '("gnu" "melpa")
-                               'el2org)  ; accept list
+                               'el2org)  ; Accept multiple arguments.
 ```
 
 {{< hint info >}}

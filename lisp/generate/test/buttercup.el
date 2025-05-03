@@ -42,7 +42,8 @@
 
 (eask-start
   (eask-archive-install-packages '("gnu" "melpa")
-                                 '(buttercup f))
+                                 'buttercup
+                                 'f)
   (require 'buttercup)
   (require 'f)
   (eask-generate-test-buttercup--init (eask-guess-package-name)))

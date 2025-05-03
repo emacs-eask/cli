@@ -708,11 +708,10 @@ Argument BODY are forms for execution."
          "done ✓"))
      ,@body))
 
-(defun eask-archive-install-packages (archives names)
+(defun eask-archive-install-packages (archives &rest names)
   "Install package NAMES with ARCHIVES setup."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
-  (when-let* ((names (eask-listify names))
-              ((cl-some (lambda (pkg) (not (package-installed-p pkg))) names)))
+  (when (cl-some (lambda (pkg) (not (package-installed-p pkg))) names)
     (eask-with-archives archives
       (eask--package-mapc #'eask-package-install names))))
 
