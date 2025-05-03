@@ -85,18 +85,18 @@ Arguments FNC and ARGS are used for advice `:around'."
 (defconst eask-homedir (getenv "EASK_HOMEDIR")
   "Eask's home directory path.
 
-It points to the global home directory `/path/to/home/.eask/'.")
+It points to the global home directory `~/.eask/'.")
 
 (defconst eask-userdir (expand-file-name "../" eask-homedir)
   "Eask's user directory path.
 
-It points to the global user directory `/path/to/home/'.")
+It points to the global user directory `~/'.")
 
 (defconst eask-package-sys-dir (expand-file-name (concat emacs-version "/elpa/")
                                                  eask-homedir)
   "Eask global elpa directory; it will be treated as the system-wide packages.
 
-It points to the global elpa directory `/path/to/home/.eask/XX.X/elpa/'")
+It points to the global elpa directory `~/.eask/XX.X/elpa/'.")
 
 (defconst eask-invocation (getenv "EASK_INVOCATION")
   "Eask's invocation program path.")
@@ -692,7 +692,7 @@ Argument BODY are forms for execution."
   (declare (indent 1) (debug t))
   `(let ((package-archives package-archives)
          (archives (eask-listify ,archives))
-         (package-user-dir eask-package-sys-dir)  ; Point to the global directory.
+         (package-user-dir eask-package-sys-dir)  ; Install as global packages.
          (added))
      (dolist (archive archives)
        (unless (assoc archive package-archives)

@@ -48,7 +48,23 @@ Return non-nil if the terminal supports colors.
 Eask's home directory path.
 
 ```elisp
-(message "%s" eask-homedir)
+(message "%s" eask-homedir)  ; ~/.eask/
+```
+
+## 🔍 Variable: eask-userdir
+
+Eask's user directory path.
+
+```elisp
+(message "%s" eask-userdir)  ; ~/
+```
+
+## 🔍 Variable: eask-package-sys-dir
+
+Eask global elpa directory; it will be treated as the system-wide packages.
+
+```elisp
+(message "%s" eask-package-sys-dir)  ; ~/.eask/30.1/elpa/
 ```
 
 ## 🔍 Variable: eask-invocation
