@@ -14,6 +14,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * fix: Warning missing `lexical-binding` cookie in Eask-file (#320)
 * fix(extern): Avoid patching compat functions (524c02dc66e14449f8511d5cfc591e4fae91b3b2)
 * feat(_prepare.el): Respect global/system-wide packages (e0732f26a179ccceed96528cc71d9903b2f5fe4e)
+* fix(extern): Clean up compat (2b41f5db4b5bbe145c9671f95850f79a00dcbd48)
 
 ## 0.11.x
 > Released Apr 03, 2025
