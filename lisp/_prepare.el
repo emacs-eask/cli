@@ -241,6 +241,13 @@ the `eask-start' execution.")
     (eval-buffer)))
 
 ;;
+;;; Compat
+
+(defun eask-always (&rest _arguments)
+  "The function `always' is supported after Emacs 28.1."
+  t)
+
+;;
 ;;; Util
 
 (defmacro eask-defvc< (version &rest body)
@@ -2230,7 +2237,6 @@ variable we use to test validation."
 ;;
 ;;; Externals
 
-(eask-load "extern/compat")
 (eask-load "extern/ansi")
 (eask-load "extern/package")
 (eask-load "extern/package-build")

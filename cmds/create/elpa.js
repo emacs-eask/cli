@@ -52,7 +52,9 @@ exports.handler = async (argv) => {
     console.warn('✗ Error while cloning template project');
     console.warn('');
     console.warn('  [1] Make sure you have git installed and has the right permission');
-    process.stderr.write(`  [2] Failed because of the target directory isn't empty`);
+    console.warn(`  [2] Failed because of the target directory isn't empty`);
+    console.warn('');
+    process.stderr.write(`Visit https://emacs-eask.github.io/ for quickstart guide and full documentation.`);
   });
 }
 

@@ -17,17 +17,17 @@
 ;;; Test functions
 
 (defconst compat-functions
-  '(ansi-color-filter-apply
-    thing-at-point--read-from-whole-string
-    ls-lisp-format-file-size
-    lsh
-    package--alist
-    package--activate-all
-    package-activate-all
-    package-generate-description-file
-    locate-dominating-file
-    url-file-exists-p
-    prin1-to-string)
+  '( ansi-color-filter-apply
+     thing-at-point--read-from-whole-string
+     ls-lisp-format-file-size
+     lsh
+     package--alist
+     package--activate-all
+     package-activate-all
+     package-generate-description-file
+     locate-dominating-file
+     url-file-exists-p
+     prin1-to-string)
   "List of function to check Emacs compatibility.")
 
 (message "Starting compatibility test for functions...")
@@ -45,10 +45,10 @@
 ;;; Test variables
 
 (defconst compat-variables
-  '(finder-known-keywords
-    package-quickstart-file
-    print-level
-    print-length)
+  '( finder-known-keywords
+     package-quickstart-file
+     print-level
+     print-length)
   "List of variables to check Emacs compatibility.")
 
 (message "Starting compatibility test for variables...")

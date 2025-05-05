@@ -19,6 +19,9 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
+;;
+;;; Core
+
 (defconst eask-create-elpa--template-name "template-elpa"
   "Holds template project name.")
 
@@ -30,7 +33,7 @@
       (goto-char (point-min))
       (search-forward "(script ")
       (forward-line 1)
-      (dolist (gitkeeps (eask-directory-files-recursively eask-file-root ".gitkeep"))
+      (dolist (gitkeeps (directory-files-recursively eask-file-root ".gitkeep"))
         (ignore-errors (delete-file gitkeeps)))
       ;; --- Start insertion
       (insert "(script \"build\" \"eask exec github-elpa build\")\n")
