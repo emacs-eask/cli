@@ -12,6 +12,7 @@
 ;;; Includes
 
 (require 'ansi-color)
+(require 'lisp-mnt)
 (require 'package)
 (require 'project)
 (require 'json)
