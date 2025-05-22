@@ -80,7 +80,7 @@ describe("install and uninstall", () => {
       });
 
       it("installs a package with only an Eask file", async () => {
-        await ctx.runEask("install-file ./foo-no-pkg");
+        await ctx.runEask("install-file ./foo-no");
       });
 
       it("errors when path is non-existing", async () => {
@@ -96,7 +96,7 @@ describe("install and uninstall", () => {
       });
 
       it("can install tar files created with eask package", async () => {
-        // foo-0.0.1.tar is created by running eask package in ./foo-no-pkg
+        // foo-0.0.1.tar is created by running eask package in ./foo-no
         await ctx.runEask("install-file ./foo-0.0.1.tar");
       });
 

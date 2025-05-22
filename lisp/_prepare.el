@@ -2070,14 +2070,17 @@ would send exit code of `1'."
           (cond ((numberp print-or-exit-code)
                  (eask--exit print-or-exit-code))
                 (t )))  ; Don't exit with anything else.
-      (eask-error "Help manual missing %s" help-file))))
+      (eask-error "✗ Help manual missing `%s`" help-file))))
 
 ;;
 ;;; Checker
 
 (defun eask--checker-existence ()
   "Return errors if required metadata is missing."
-  (unless eask-package (eask-error "Missing metadata package; make sure you have created an Eask-file with $ eask init!")))
+  (unless eask-package
+    (eask-error
+     (concat "✗ Missing metadata package; make sure you have created "
+             "an Eask-file with `$ eask init`!"))))
 
 (defun eask--check-strings (fmt f p &rest args)
   "Test strings (F and P); then print FMT and ARGS if not equal."
@@ -2100,7 +2103,7 @@ Arguments MSG1, MSG2, MSG3 and MSG4 are conditional messages."
   (when-let* (((and eask-package eask-package-desc))
               (def-point (if (eask-pkg-el) "-pkg.el file" "package-file")))
     (eask--check-strings
-     "Unmatched package name `%s`; it should be `%s`"
+     "💡 Unmatched package name `%s`; it should be `%s`"
      (eask-package-name) (package-desc-name eask-package-desc))
     (when-let* ((ver-eask (eask-package-version))
                 (ver-pkg (package-desc-version eask-package-desc))
@@ -2108,38 +2111,38 @@ Arguments MSG1, MSG2, MSG3 and MSG4 are conditional messages."
                 ;; inverses, since `version-to-list' is a many-to-one operation
                 ((not (equal (version-to-list ver-eask) ver-pkg))))
       (eask--check-strings
-       "Unmatched version `%s`; it should be `%s`"
+       "💡 Unmatched version `%s`; it should be `%s`"
        ver-eask (package-version-join ver-pkg)))
     (eask--check-strings
-     "Unmatched summary `%s`; it should be `%s`"
+     "💡 Unmatched summary `%s`; it should be `%s`"
      (eask-package-description) (package-desc-summary eask-package-desc))
     (let ((url (eask-package-desc-url)))
       (eask--check-optional
        eask-website-url url
-       "Unmatched website URL `%s`; it should be `%s`"
-       (format "Unmatched website URL `%s`; add `%s` to %s" eask-website-url
+       "💡 Unmatched website URL `%s`; it should be `%s`"
+       (format "💡 Unmatched website URL `%s`; add `%s` to %s" eask-website-url
                (if (string-prefix-p "-pkg.el" def-point)
                    (format ":url \"%s\"" eask-website-url)
                  (format ";; URL: %s" eask-website-url))
                def-point)
-       (format "Unmatched website URL `%s`; add `(website-url \"%s\")` to Eask-file" url url)
-       (format "URL header is optional, but it's often recommended")))
+       (format "💡 Unmatched website URL `%s`; add `(website-url \"%s\")` to Eask-file" url url)
+       (format "💡 URL header is optional, but it's often recommended")))
     (let ((keywords (eask-package-desc-keywords)))
       (cond
        ((or keywords eask-keywords)
         (dolist (keyword keywords)
           (unless (member keyword eask-keywords)
-            (eask-warn "Unmatched keyword `%s`; add `(keywords \"%s\")` to Eask-file or consider removing it" keyword keyword)))
+            (eask-warn "💡 Unmatched keyword `%s`; add `(keywords \"%s\")` to Eask-file or consider removing it" keyword keyword)))
         (dolist (keyword eask-keywords)
           (unless (member keyword keywords)
-            (eask-warn "Unmatched keyword `%s`; add `%s` to %s or consider removing it"
+            (eask-warn "💡 Unmatched keyword `%s`; add `%s` to %s or consider removing it"
                        keyword
                        (if (string-prefix-p "-pkg.el" def-point)
                            (format ":keywords '(\"%s\")" keyword)
                          (format ";; Keywords: %s" keyword))
                        def-point))))
        (t
-        (eask-warn "Keywords header is optional, but it's often recommended"))))
+        (eask-warn "💡 Keywords header is optional, but it's often recommended"))))
     (let* ((dependencies (append eask-depends-on-emacs eask-depends-on))
            (dependencies (mapcar #'car dependencies))
            (dependencies (mapcar (lambda (elm) (eask-2str elm)) dependencies))
@@ -2148,10 +2151,10 @@ Arguments MSG1, MSG2, MSG3 and MSG4 are conditional messages."
            (requirements (mapcar (lambda (elm) (eask-2str elm)) requirements)))
       (dolist (req requirements)
         (unless (member req dependencies)
-          (eask-warn "Unmatched dependency `%s`; add `(depends-on \"%s\")` to Eask-file or consider removing it" req req)))
+          (eask-warn "💡 Unmatched dependency `%s`; add `(depends-on \"%s\")` to Eask-file or consider removing it" req req)))
       (dolist (dep dependencies)
         (unless (member dep requirements)
-          (eask-warn "Unmatched dependency `%s`; add `(%s \"VERSION\")` to %s or consider removing it" dep dep def-point))))))
+          (eask-warn "💡 Unmatched dependency `%s`; add `(%s \"VERSION\")` to %s or consider removing it" dep dep def-point))))))
 
 (add-hook 'eask-file-loaded-hook #'eask--checker-existence)
 (add-hook 'eask-file-loaded-hook #'eask--checker-metadata)
