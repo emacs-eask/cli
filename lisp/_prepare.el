@@ -1490,16 +1490,16 @@ version number.  DESCRIPTION is the package description."
 (defun eask-f-author (name &optional email)
   "Set package author's NAME and EMAIL."
   (if (member name (mapcar #'car eask-authors))
-      (eask-warn "Warning regarding duplicate author name, %s" name)
+      (eask-warn "💡 Warning regarding duplicate author name, %s" name)
     (when (and email
                (not (string-match-p "@" email)))
-      (eask-warn "Email seems to be invalid, %s" email))
+      (eask-warn "💡 Email seems to be invalid, %s" email))
     (push (cons name email) eask-authors)))
 
 (defun eask-f-license (name)
   "Set package license NAME."
   (if (member name eask-licenses)
-      (eask-warn "Warning regarding duplicate license name, %s" name)
+      (eask-warn "💡 Warning regarding duplicate license name, %s" name)
     (push name eask-licenses)))
 
 (defun eask--try-construct-package-desc (file)
@@ -1526,11 +1526,11 @@ version number.  DESCRIPTION is the package description."
 (defun eask-f-package-file (file)
   "Set package FILE."
   (if eask-package-file
-      (eask-error "Multiple definition of `package-file'")
+      (eask-error "✗ Multiple definition of `package-file'")
     (setq eask-package-file (expand-file-name file))
     (if (file-exists-p eask-package-file)
         (eask--try-construct-package-desc eask-package-file)
-      (eask-warn "Package-file seems to be missing `%s'" file))
+      (eask-warn "💡 Package-file seems to be missing `%s'" file))
     (when-let*
         (((and (not eask-package-descriptor)  ; prevent multiple definition error
                (not eask-package-desc)))      ; check if constructed
@@ -1543,16 +1543,16 @@ version number.  DESCRIPTION is the package description."
   "Set package PKG-FILE."
   (cond
    (eask-package-descriptor
-    (eask-error "Multiple definition of `package-descriptor'"))
+    (eask-error "✗ Multiple definition of `package-descriptor'"))
    ((and eask-package-desc                ; check if construct successfully
          (equal (eask-pkg-el) pkg-file))  ; check filename the same
     )                                     ; ignore
    (t
     (setq eask-package-descriptor (expand-file-name pkg-file))
     (cond ((not (string-suffix-p "-pkg.el" eask-package-descriptor))
-           (eask-error "Pkg-file must end with `-pkg.el'"))
+           (eask-error "✗ Pkg-file must end with `-pkg.el'"))
           ((not (file-exists-p eask-package-descriptor))
-           (eask-warn "Pkg-file seems to be missing `%s'" pkg-file))
+           (eask-warn "💡 Pkg-file seems to be missing `%s'" pkg-file))
           (t
            (eask--try-construct-package-desc eask-package-descriptor))))))
 
@@ -1569,7 +1569,7 @@ contains extra shell commands, and it will eventually be concatenate with the
 argument COMMAND."
   (when (symbolp name) (setq name (eask-2str name)))  ; ensure to string, accept symbol
   (when (assoc name eask-scripts)
-    (eask-error "Run-script with the same key name is not allowed: `%s`" name))
+    (eask-error "✗ Run-script with the same key name is not allowed: `%s`" name))
   (push (cons name
               (mapconcat #'identity (append (list command) args) " "))
         eask-scripts))
@@ -1579,12 +1579,12 @@ argument COMMAND."
   (when (symbolp name) (setq name (eask-2str name)))  ; ensure to string, accept symbol
   ;; Handle local archive.
   (when (equal name eask--local-archive-name)
-    (eask-error "Invalid archive name `%s'" name))
+    (eask-error "✗ Invalid archive name `%s'" name))
   ;; Handle multiple same archive name!
   (when (assoc name package-archives)
-    (eask-error "Multiple definition of source `%s'" name))
+    (eask-error "✗ Multiple definition of source `%s'" name))
   (setq location (eask-source-url name location))
-  (unless location (eask-error "Unknown package archive `%s'" name))
+  (unless location (eask-error "✗ Unknown package archive `%s'" name))
   (add-to-list 'package-archives (cons name location) t))
 
 (defun eask-f-source-priority (name &optional priority)
@@ -1627,11 +1627,11 @@ argument COMMAND."
   (let ((pkg (car recipe))
         (minimum-version (cdr recipe)))
     (cond ((member recipe eask-depends-on)
-           (eask-error "Define dependencies with the same name `%s'" pkg))
+           (eask-error "✗ Define dependencies with the same name `%s'" pkg))
           ((cl-some (lambda (rcp)
                       (string= (car rcp) pkg))
                     eask-depends-on)
-           (eask-error "Define dependencies with the same name `%s' with different version" pkg)))))
+           (eask-error "✗ Define dependencies with the same name `%s' with different version" pkg)))))
 
 (defun eask-f-depends-on (pkg &rest args)
   "Specify a dependency (PKG) of this package.
@@ -1642,11 +1642,11 @@ ELPA)."
   (cond
    ((string= pkg "emacs")
     (if eask-depends-on-emacs
-        (eask-error "Define dependencies with the same name `%s'" pkg)
+        (eask-error "✗ Define dependencies with the same name `%s'" pkg)
       (let* ((minimum-version (car args))
              (recipe (list pkg minimum-version)))
         (if (version< emacs-version minimum-version)
-            (eask-error "This requires Emacs %s and above!" minimum-version)
+            (eask-error "✗ This requires Emacs %s and above!" minimum-version)
           (push recipe eask-depends-on-emacs))
         recipe)))
    ;; Specified packages
@@ -2165,9 +2165,9 @@ Arguments MSG1, MSG2, MSG3 and MSG4 are conditional messages."
 Argument NAME represent the name of that package's metadata.  VAR is the actual
 variable we use to test validation."
   (unless (stringp var)
-    (eask-error "%s must be a string" name))
+    (eask-error "✗ %s must be a string" name))
   (when (string-empty-p var)
-    (eask-warn "%s cannot be an empty string" name)))
+    (eask-warn "💡 %s cannot be an empty string" name)))
 
 ;;
 ;;; User customization
