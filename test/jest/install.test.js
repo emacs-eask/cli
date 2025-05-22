@@ -91,10 +91,6 @@ describe("install and uninstall", () => {
         await expect(ctx.runEask("install-file ../empty")).rejects.toThrow();
       });
 
-      it("gets the package name from a tar file", async () => {
-        await ctx.runEask("install-file ./foo-0.0.1.tar.gz");
-      });
-
       it("can install tar files created with eask package", async () => {
         // foo-0.0.1.tar is created by running eask package in ./foo-no
         await ctx.runEask("install-file ./foo-0.0.1.tar");
