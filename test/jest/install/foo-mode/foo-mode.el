@@ -1,4 +1,4 @@
-;;; foo.el --- foo -*- lexical-binding: t -*-
+;;; foo-mode.el --- foo mode -*- lexical-binding: t -*-
 
 ;; Author: none
 ;; Maintainer: none
@@ -29,10 +29,10 @@
 
 ;;; Code:
 
-(defun foo-message ()
+(defun foo-mode-message ()
   "docstring"
   (interactive "P")
   (message "Hello World!"))
 
-(provide 'foo)
-;;; foo.el ends here
+(provide 'foo-mode)
+;;; foo-mode.el ends here
