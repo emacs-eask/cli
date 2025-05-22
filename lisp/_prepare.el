@@ -391,8 +391,8 @@ and INHERIT-INPUT-METHOD see function `read-string' for more information."
         (setq pos (match-end 0)))
       (reverse matches))))
 
-(defun eask-ansi-get (s)
-  "Return a list of ansi string from S."
+(defun eask-ansi-codes (s)
+  "Return a list of ansi codes from S."
   (eask-re-seq "\e\[[0-9]+m" s))
 
 (defun eask-s-replace-ansi (old new s)
@@ -400,7 +400,7 @@ and INHERIT-INPUT-METHOD see function `read-string' for more information."
 
 For arguments OLD, NEW and S; see the function `eask-s-replace'
 for more information."
-  (if-let* ((data   (eask-ansi-get s))
+  (if-let* ((data   (eask-ansi-codes s))
             (start  (nth 1 data))
             (end    (nth 0 data))
             (splits (split-string s (regexp-quote old))))
