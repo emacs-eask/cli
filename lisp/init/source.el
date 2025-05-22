@@ -41,7 +41,7 @@
                           (version (package-version-join version))
                           (description (package-desc-summary pkg-desc))
                           (description (prin1-to-string description))
-                          (website (eask-package-desc-url))
+                          (website (or (eask-package-desc-url) ""))
                           (keywords (eask-package-desc-keywords))
                           (keywords (string-join keywords "\" \""))
                           (reqs (package-desc-reqs pkg-desc))
