@@ -1468,7 +1468,7 @@ This uses function `locate-dominating-file' to look up directory tree."
 Argument NAME is the name of the package.  VERSION is the string contains valid
 version number.  DESCRIPTION is the package description."
   (if eask-package
-      (eask-error "Multiple definition of `package'")
+      (eask-error "✗ Multiple definition of `package'")
     (setq eask-package `(:name ,name :version ,version :description ,description))
     (progn  ; Run checker
       (eask--checker-string "Name" name)
@@ -1478,13 +1478,13 @@ version number.  DESCRIPTION is the package description."
 (defun eask-f-website-url (url)
   "Set website URL."
   (if eask-website-url
-      (eask-error "Multiple definition of `website-url'")
+      (eask-error "✗ Multiple definition of `website-url'")
     (setq eask-website-url url)))
 
 (defun eask-f-keywords (&rest keywords)
   "Set package KEYWORDS."
   (if eask-keywords
-      (eask-error "Multiple definition of `keywords'")
+      (eask-error "✗ Multiple definition of `keywords'")
     (setq eask-keywords keywords)))
 
 (defun eask-f-author (name &optional email)
