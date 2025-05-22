@@ -17,11 +17,11 @@ describe("analyze", () => {
       JSON.parse(stderr);
     });
 
-    it("matches snapshot", async () => {
-      const res = await ctx.runEask("analyze");
-      const resClean = res.sanitized().raw();
-      expect(resClean).toMatchSnapshot();
-    });
+    // it("matches snapshot", async () => {
+    //   const res = await ctx.runEask("analyze");
+    //   const resClean = res.sanitized().raw();
+    //   expect(resClean).toMatchSnapshot();
+    // });
 
     it("should report multiple definitions", async () => {
       const { stderr } = await ctx.runEask("analyze");

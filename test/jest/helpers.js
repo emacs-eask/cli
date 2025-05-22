@@ -51,8 +51,8 @@ async function emacsVersion() {
 
 
 /**
- * Remove all ansi string.
- * @returns {string} Stripped string.
+ * Remove all ansi codes from string.
+ * @returns {string}
  */
 async function stripAnsi(s) {
   return s.replace(/\u001b[^m]*?m/g, "");

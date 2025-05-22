@@ -50,7 +50,7 @@
      (t
       ;; Note `package-dir-info' doesn't work outside of dired mode!
       (let ((pkg-desc (with-temp-buffer
-                        (dired (expand-file-name path))
+                        (dired path)
                         (ignore-errors (package-dir-info)))))
         (unless pkg-desc
           ;; `package-dir-info' will return nil if there is no `-pkg.el'
