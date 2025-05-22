@@ -49,6 +49,15 @@ async function emacsVersion() {
   return version;
 }
 
+
+/**
+ * Remove all ansi string.
+ * @returns {string} Stripped string.
+ */
+function stripAnsi(s) {
+  return s.replace(/\u001b[^m]*?m/g, "");
+}
+
 /** Provides transformations on output of node.exec(). */
 class CommandOutput {
   constructor(output, cwd) {
@@ -74,6 +83,17 @@ class CommandOutput {
     return {
       stderr: this.stderr,
       stdout: this.stdout,
+    };
+  }
+
+  /**
+   * Output with no color.
+   * @returns {{ sdout: string, stderr: string }}
+   */
+  rawNoColor() {
+    return {
+      stderr: stripAnsi(this.stderr),
+      stdout: stripAnsi(this.stdout),
     };
   }
 
@@ -110,15 +130,12 @@ class CommandOutput {
    */
   sanitized(...sanitizeFns) {
     let sani = (s) =>
-      sanitizeFns.reduce((s1, f) => f.call({}, s1), this.sanitizeString(s));
+        sanitizeFns.reduce((s1, f) => f.call({}, s1), this.sanitizeString(s));
 
-    return new CommandOutput(
-      {
-        stdout: sani(this.stdout),
-        stderr: sani(this.stderr),
-      },
-      this.cwd,
-    );
+    return new CommandOutput({
+      stdout: sani(this.stdout),
+      stderr: sani(this.stderr),
+    }, this.cwd,);
   }
 }
 
