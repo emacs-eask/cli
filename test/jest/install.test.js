@@ -14,8 +14,8 @@ describe("install and uninstall", () => {
     afterAll(() => ctx.cleanUp());
 
     it("installs project package", async () => {
-      await ctx.runEask("package"); // creates dist/<pkg>.tar
-      await ctx.runEask("install"); // installs dependencies and generated package
+      await ctx.runEask("package");  // creates dist/<pkg>.tar
+      await ctx.runEask("install");  // installs dependencies and generated package
       const { stderr } = await ctx.runEask("list");
       expect(stderr).toMatch(packageName);
     });
@@ -53,6 +53,8 @@ describe("install and uninstall", () => {
       expect(stderr).not.toMatch(packageName);
     });
 
+    /* File install */
+
     describe("eask install-file", () => {
       beforeAll(async () => {
         await ctx.runEask("clean workspace");
@@ -67,8 +69,6 @@ describe("install and uninstall", () => {
         const { stderr } = await ctx.runEask("install-file ./foo-mode");
         expect(stderr).toMatch("foo");
       });
-
-      /* File install */
 
       it("can repeat installs", async () => {
         await ctx.runEask("install-file ./foo-mode");
