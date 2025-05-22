@@ -92,7 +92,7 @@ describe("install and uninstall", () => {
       });
 
       it("gets the package name from a tar file", async () => {
-        await ctx.runEask("install-file ./foo.tar.gz");
+        await ctx.runEask("install-file ./foo-0.0.1.tar.gz");
       });
 
       it("can install tar files created with eask package", async () => {

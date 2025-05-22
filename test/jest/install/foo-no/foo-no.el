@@ -1,8 +1,14 @@
-;;; mini.pkg.1-2.el --- Extern file 2  -*- lexical-binding: t; -*-
+;;; foo-no.el --- foo -*- lexical-binding: t -*-
 
-;; This file is NOT part of GNU Emacs.
+;; Author: none
+;; Maintainer: none
+;; Version: 0.0.1
+;; Package-Requires: (emacs)
+;; Keywords: test
 
-;; This program is free software; you can redistribute it and/or modify
+;; This file is not part of GNU Emacs
+
+;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
 ;; the Free Software Foundation, either version 3 of the License, or
 ;; (at your option) any later version.
@@ -15,14 +21,17 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+
 ;;; Commentary:
-;;
-;; files/mini.pkg.1-2.el
-;;
+
+;; commentary
 
 ;;; Code:
 
-(defun mini.pkg.1-2 () "Test function 2." (interactive))
+(defun foo-no-message ()
+  "docstring"
+  (interactive "P")
+  (message "Hello World!"))
 
-(provide 'mini.pkg.1-2)
-;;; mini.pkg.1-2.el ends here
+(provide 'foo-no)
+;;; foo-no.el ends here
