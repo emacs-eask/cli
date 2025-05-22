@@ -2100,7 +2100,7 @@ Arguments MSG1, MSG2, MSG3 and MSG4 are conditional messages."
   (when-let* (((and eask-package eask-package-desc))
               (def-point (if (eask-pkg-el) "-pkg.el file" "package-file")))
     (eask--check-strings
-     "Unmatched package name '%s'; it should be '%s'"
+     "Unmatched package name `%s`; it should be `%s`"
      (eask-package-name) (package-desc-name eask-package-desc))
     (when-let* ((ver-eask (eask-package-version))
                 (ver-pkg (package-desc-version eask-package-desc))
@@ -2108,31 +2108,31 @@ Arguments MSG1, MSG2, MSG3 and MSG4 are conditional messages."
                 ;; inverses, since `version-to-list' is a many-to-one operation
                 ((not (equal (version-to-list ver-eask) ver-pkg))))
       (eask--check-strings
-       "Unmatched version '%s'; it should be '%s'"
+       "Unmatched version `%s`; it should be `%s`"
        ver-eask (package-version-join ver-pkg)))
     (eask--check-strings
-     "Unmatched summary '%s'; it should be '%s'"
+     "Unmatched summary `%s`; it should be `%s`"
      (eask-package-description) (package-desc-summary eask-package-desc))
     (let ((url (eask-package-desc-url)))
       (eask--check-optional
        eask-website-url url
-       "Unmatched website URL '%s'; it should be '%s'"
-       (format "Unmatched website URL '%s'; add %s to %s" eask-website-url
+       "Unmatched website URL `%s`; it should be `%s`"
+       (format "Unmatched website URL `%s`; add `%s` to %s" eask-website-url
                (if (string-prefix-p "-pkg.el" def-point)
                    (format ":url \"%s\"" eask-website-url)
                  (format ";; URL: %s" eask-website-url))
                def-point)
-       (format "Unmatched website URL '%s'; add (website-url \"%s\") to Eask-file" url url)
+       (format "Unmatched website URL `%s`; add `(website-url \"%s\")` to Eask-file" url url)
        (format "URL header is optional, but it's often recommended")))
     (let ((keywords (eask-package-desc-keywords)))
       (cond
        ((or keywords eask-keywords)
         (dolist (keyword keywords)
           (unless (member keyword eask-keywords)
-            (eask-warn "Unmatched keyword '%s'; add (keywords \"%s\") to Eask-file or consider removing it" keyword keyword)))
+            (eask-warn "Unmatched keyword `%s`; add `(keywords \"%s\")` to Eask-file or consider removing it" keyword keyword)))
         (dolist (keyword eask-keywords)
           (unless (member keyword keywords)
-            (eask-warn "Unmatched keyword '%s'; add %s to %s or consider removing it"
+            (eask-warn "Unmatched keyword `%s`; add `%s` to %s or consider removing it"
                        keyword
                        (if (string-prefix-p "-pkg.el" def-point)
                            (format ":keywords '(\"%s\")" keyword)
@@ -2148,10 +2148,10 @@ Arguments MSG1, MSG2, MSG3 and MSG4 are conditional messages."
            (requirements (mapcar (lambda (elm) (eask-2str elm)) requirements)))
       (dolist (req requirements)
         (unless (member req dependencies)
-          (eask-warn "Unmatched dependency '%s'; add (depends-on \"%s\") to Eask-file or consider removing it" req req)))
+          (eask-warn "Unmatched dependency `%s`; add `(depends-on \"%s\")` to Eask-file or consider removing it" req req)))
       (dolist (dep dependencies)
         (unless (member dep requirements)
-          (eask-warn "Unmatched dependency '%s'; add (%s \"VERSION\") to %s or consider removing it" dep dep def-point))))))
+          (eask-warn "Unmatched dependency `%s`; add `(%s \"VERSION\")` to %s or consider removing it" dep dep def-point))))))
 
 (add-hook 'eask-file-loaded-hook #'eask--checker-existence)
 (add-hook 'eask-file-loaded-hook #'eask--checker-metadata)
@@ -2230,7 +2230,7 @@ variable we use to test validation."
 (defmacro eask-defcommand (name &rest body)
   "Define an Eask command."
   (declare (doc-string 2) (indent 1))
-  (or name (error "Cannot define '%s' as a command" name))
+  (or name (error "Cannot define `%s` as a command" name))
   (push name eask-commands)
   (setq eask-commands (delete-dups eask-commands))
   `(defun ,name nil ,@body))
