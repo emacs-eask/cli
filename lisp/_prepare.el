@@ -381,6 +381,32 @@ and INHERIT-INPUT-METHOD see function `read-string' for more information."
   (declare (indent 0) (debug t))
   `(eask-with-buffer (erase-buffer) ,@body))
 
+(defun eask-re-seq (regexp string)
+  "Get a list of all REGEXP matches in a STRING."
+  (save-match-data
+    (let ((pos 0)
+          matches)
+      (while (string-match regexp string pos)
+        (push (match-string 0 string) matches)
+        (setq pos (match-end 0)))
+      (reverse matches))))
+
+(defun eask-ansi-get (s)
+  "Return a list of ansi string from S."
+  (eask-re-seq "\e\[[0-9]+m" s))
+
+(defun eask-s-replace-ansi (old new s)
+  "Like the function `eask-s-replace' but work with ansi.
+
+For arguments OLD, NEW and S; see the function `eask-s-replace'
+for more information."
+  (if-let* ((data   (eask-ansi-get s))
+            (start  (nth 1 data))
+            (end    (nth 0 data))
+            (splits (split-string s (regexp-quote old))))
+      (mapconcat #'identity splits (concat start new end))
+    (eask-s-replace old new s)))
+
 ;;
 ;;; Progress
 
@@ -1803,33 +1829,33 @@ detials."
   "Send error message; see function `eask--msg' for arguments MSG and ARGS."
   (apply #'eask--msg 'error "[ERROR]" msg args))
 
-(defun eask--msg-paint-kwds (string)
-  "Paint keywords from STRING."
-  (let* ((string (eask-s-replace "✓" (ansi-green "✓") string))
-         (string (eask-s-replace "✗" (ansi-red "✗") string))
-         (string (eask-s-replace "💡" (ansi-yellow "💡") string)))
-    string))
-
-(defun eask--msg-char-displayable (char replacement string)
-  "Ensure CHAR is displayable in STRING; if not, we fallback to REPLACEMENT
+(defun eask--msg-char-displayable (char replacement s)
+  "Ensure CHAR is displayable in S; if not, we fallback to REPLACEMENT
 character."
   (if (char-displayable-p (string-to-char char))
-      string
-    (eask-s-replace char replacement string)))
+      s
+    (eask-s-replace char replacement s)))
 
-(defun eask--msg-displayable-kwds (string)
-  "Make sure all keywords is displayable in STRING."
-  (let* ((string (eask--msg-char-displayable "✓" "v" string))
-         (string (eask--msg-char-displayable "✗" "X" string))
-         (string (eask--msg-char-displayable "💡" "<?>" string)))
-    string))
+(defun eask--msg-displayable-kwds (s)
+  "Make sure all keywords is displayable in S."
+  (let* ((s (eask--msg-char-displayable "✓" "v" s))
+         (s (eask--msg-char-displayable "✗" "X" s))
+         (s (eask--msg-char-displayable "💡" "<?>" s)))
+    s))
+
+(defun eask--msg-paint-kwds (s)
+  "Paint keywords from S."
+  (let* ((s (eask-s-replace-ansi "✓" (ansi-green "✓") s))
+         (s (eask-s-replace-ansi "✗" (ansi-red "✗") s))
+         (s (eask-s-replace-ansi "💡" (ansi-yellow "💡") s)))
+    s))
 
 (defun eask--format-paint-kwds (msg &rest args)
   "Paint keywords after format MSG and ARGS."
-  (let* ((string (apply #'format msg args))
-         (string (eask--msg-paint-kwds string))
-         (string (eask--msg-displayable-kwds string)))
-    string))
+  (let* ((s (apply #'format msg args))
+         (s (eask--msg-paint-kwds s))
+         (s (eask--msg-displayable-kwds s)))
+    s))
 
 (defun eask-princ (object &optional stderr)
   "Like function `princ'; with flag STDERR.

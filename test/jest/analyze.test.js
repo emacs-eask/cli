@@ -19,7 +19,7 @@ describe("analyze", () => {
 
     it("matches snapshot", async () => {
       const res = await ctx.runEask("analyze");
-      const resClean = res.sanitized().rawNoColor();
+      const resClean = res.sanitized().raw();
       expect(resClean).toMatchSnapshot();
     });
 

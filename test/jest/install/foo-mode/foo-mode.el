@@ -1,13 +1,15 @@
-;;; foo-mode.el --- foo mode -*- lexical-binding: t -*-
+;;; foo-mode.el --- foo mode  -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2025  the Eask authors.
 
 ;; Author: none
 ;; Maintainer: none
+;; URL: https://github.com/emacs-eask/cli/foo-mode
 ;; Version: 0.0.1
-;; Package-Requires: (emacs)
+;; Package-Requires: ((emacs "26.1"))
 ;; Keywords: test
 
-
-;; This file is not part of GNU Emacs
+;; This file is not part of GNU Emacs.
 
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -20,12 +22,12 @@
 ;; GNU General Public License for more details.
 
 ;; You should have received a copy of the GNU General Public License
-;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
+;; along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-
+;;
 ;; commentary
+;;
 
 ;;; Code:
 
