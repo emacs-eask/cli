@@ -1,13 +1,13 @@
 ;; -*- mode: eask; lexical-binding: t -*-
 
-(package "foo"
+(package "foo-no"
          "0.0.1"
          "")
 
 (website-url "")
 (keywords )
 
-(package-file "foo.el")
+(package-file "foo-no.el")
 
 (script "test" "echo \"Error: no test specified\" && exit 1")
 

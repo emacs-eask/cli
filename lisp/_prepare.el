@@ -381,6 +381,32 @@ and INHERIT-INPUT-METHOD see function `read-string' for more information."
   (declare (indent 0) (debug t))
   `(eask-with-buffer (erase-buffer) ,@body))
 
+(defun eask-re-seq (regexp string)
+  "Get a list of all REGEXP matches in a STRING."
+  (save-match-data
+    (let ((pos 0)
+          matches)
+      (while (string-match regexp string pos)
+        (push (match-string 0 string) matches)
+        (setq pos (match-end 0)))
+      (reverse matches))))
+
+(defun eask-ansi-codes (s)
+  "Return a list of ansi codes from S."
+  (eask-re-seq ansi-color-control-seq-regexp s))
+
+(defun eask-s-replace-ansi (old new s)
+  "Like the function `eask-s-replace' but work with ansi.
+
+For arguments OLD, NEW and S; see the function `eask-s-replace'
+for more information."
+  (if-let* ((data   (eask-ansi-codes s))
+            (start  (nth 1 data))
+            (end    (nth 0 data))
+            (splits (split-string s (regexp-quote old))))
+      (mapconcat #'identity splits (concat start new end))
+    (eask-s-replace old new s)))
+
 ;;
 ;;; Progress
 
@@ -1468,7 +1494,7 @@ This uses function `locate-dominating-file' to look up directory tree."
 Argument NAME is the name of the package.  VERSION is the string contains valid
 version number.  DESCRIPTION is the package description."
   (if eask-package
-      (eask-error "Multiple definition of `package'")
+      (eask-error "✗ Multiple definition of `package'")
     (setq eask-package `(:name ,name :version ,version :description ,description))
     (progn  ; Run checker
       (eask--checker-string "Name" name)
@@ -1478,28 +1504,28 @@ version number.  DESCRIPTION is the package description."
 (defun eask-f-website-url (url)
   "Set website URL."
   (if eask-website-url
-      (eask-error "Multiple definition of `website-url'")
+      (eask-error "✗ Multiple definition of `website-url'")
     (setq eask-website-url url)))
 
 (defun eask-f-keywords (&rest keywords)
   "Set package KEYWORDS."
   (if eask-keywords
-      (eask-error "Multiple definition of `keywords'")
+      (eask-error "✗ Multiple definition of `keywords'")
     (setq eask-keywords keywords)))
 
 (defun eask-f-author (name &optional email)
   "Set package author's NAME and EMAIL."
   (if (member name (mapcar #'car eask-authors))
-      (eask-warn "Warning regarding duplicate author name, %s" name)
+      (eask-warn "💡 Warning regarding duplicate author name, %s" name)
     (when (and email
                (not (string-match-p "@" email)))
-      (eask-warn "Email seems to be invalid, %s" email))
+      (eask-warn "💡 Email seems to be invalid, %s" email))
     (push (cons name email) eask-authors)))
 
 (defun eask-f-license (name)
   "Set package license NAME."
   (if (member name eask-licenses)
-      (eask-warn "Warning regarding duplicate license name, %s" name)
+      (eask-warn "💡 Warning regarding duplicate license name, %s" name)
     (push name eask-licenses)))
 
 (defun eask--try-construct-package-desc (file)
@@ -1526,11 +1552,11 @@ version number.  DESCRIPTION is the package description."
 (defun eask-f-package-file (file)
   "Set package FILE."
   (if eask-package-file
-      (eask-error "Multiple definition of `package-file'")
+      (eask-error "✗ Multiple definition of `package-file'")
     (setq eask-package-file (expand-file-name file))
     (if (file-exists-p eask-package-file)
         (eask--try-construct-package-desc eask-package-file)
-      (eask-warn "Package-file seems to be missing `%s'" file))
+      (eask-warn "💡 Package-file seems to be missing `%s'" file))
     (when-let*
         (((and (not eask-package-descriptor)  ; prevent multiple definition error
                (not eask-package-desc)))      ; check if constructed
@@ -1543,16 +1569,16 @@ version number.  DESCRIPTION is the package description."
   "Set package PKG-FILE."
   (cond
    (eask-package-descriptor
-    (eask-error "Multiple definition of `package-descriptor'"))
+    (eask-error "✗ Multiple definition of `package-descriptor'"))
    ((and eask-package-desc                ; check if construct successfully
          (equal (eask-pkg-el) pkg-file))  ; check filename the same
     )                                     ; ignore
    (t
     (setq eask-package-descriptor (expand-file-name pkg-file))
     (cond ((not (string-suffix-p "-pkg.el" eask-package-descriptor))
-           (eask-error "Pkg-file must end with `-pkg.el'"))
+           (eask-error "✗ Pkg-file must end with `-pkg.el'"))
           ((not (file-exists-p eask-package-descriptor))
-           (eask-warn "Pkg-file seems to be missing `%s'" pkg-file))
+           (eask-warn "💡 Pkg-file seems to be missing `%s'" pkg-file))
           (t
            (eask--try-construct-package-desc eask-package-descriptor))))))
 
@@ -1569,7 +1595,7 @@ contains extra shell commands, and it will eventually be concatenate with the
 argument COMMAND."
   (when (symbolp name) (setq name (eask-2str name)))  ; ensure to string, accept symbol
   (when (assoc name eask-scripts)
-    (eask-error "Run-script with the same key name is not allowed: `%s`" name))
+    (eask-error "✗ Run-script with the same key name is not allowed: `%s`" name))
   (push (cons name
               (mapconcat #'identity (append (list command) args) " "))
         eask-scripts))
@@ -1579,12 +1605,12 @@ argument COMMAND."
   (when (symbolp name) (setq name (eask-2str name)))  ; ensure to string, accept symbol
   ;; Handle local archive.
   (when (equal name eask--local-archive-name)
-    (eask-error "Invalid archive name `%s'" name))
+    (eask-error "✗ Invalid archive name `%s'" name))
   ;; Handle multiple same archive name!
   (when (assoc name package-archives)
-    (eask-error "Multiple definition of source `%s'" name))
+    (eask-error "✗ Multiple definition of source `%s'" name))
   (setq location (eask-source-url name location))
-  (unless location (eask-error "Unknown package archive `%s'" name))
+  (unless location (eask-error "✗ Unknown package archive `%s'" name))
   (add-to-list 'package-archives (cons name location) t))
 
 (defun eask-f-source-priority (name &optional priority)
@@ -1627,11 +1653,11 @@ argument COMMAND."
   (let ((pkg (car recipe))
         (minimum-version (cdr recipe)))
     (cond ((member recipe eask-depends-on)
-           (eask-error "Define dependencies with the same name `%s'" pkg))
+           (eask-error "✗ Define dependencies with the same name `%s'" pkg))
           ((cl-some (lambda (rcp)
                       (string= (car rcp) pkg))
                     eask-depends-on)
-           (eask-error "Define dependencies with the same name `%s' with different version" pkg)))))
+           (eask-error "✗ Define dependencies with the same name `%s' with different version" pkg)))))
 
 (defun eask-f-depends-on (pkg &rest args)
   "Specify a dependency (PKG) of this package.
@@ -1642,11 +1668,11 @@ ELPA)."
   (cond
    ((string= pkg "emacs")
     (if eask-depends-on-emacs
-        (eask-error "Define dependencies with the same name `%s'" pkg)
+        (eask-error "✗ Define dependencies with the same name `%s'" pkg)
       (let* ((minimum-version (car args))
              (recipe (list pkg minimum-version)))
         (if (version< emacs-version minimum-version)
-            (eask-error "This requires Emacs %s and above!" minimum-version)
+            (eask-error "✗ This requires Emacs %s and above!" minimum-version)
           (push recipe eask-depends-on-emacs))
         recipe)))
    ;; Specified packages
@@ -1803,33 +1829,33 @@ detials."
   "Send error message; see function `eask--msg' for arguments MSG and ARGS."
   (apply #'eask--msg 'error "[ERROR]" msg args))
 
-(defun eask--msg-paint-kwds (string)
-  "Paint keywords from STRING."
-  (let* ((string (eask-s-replace "✓" (ansi-green "✓") string))
-         (string (eask-s-replace "✗" (ansi-red "✗") string))
-         (string (eask-s-replace "💡" (ansi-yellow "💡") string)))
-    string))
-
-(defun eask--msg-char-displayable (char replacement string)
-  "Ensure CHAR is displayable in STRING; if not, we fallback to REPLACEMENT
+(defun eask--msg-char-displayable (char replacement s)
+  "Ensure CHAR is displayable in S; if not, we fallback to REPLACEMENT
 character."
   (if (char-displayable-p (string-to-char char))
-      string
-    (eask-s-replace char replacement string)))
+      s
+    (eask-s-replace char replacement s)))
 
-(defun eask--msg-displayable-kwds (string)
-  "Make sure all keywords is displayable in STRING."
-  (let* ((string (eask--msg-char-displayable "✓" "v" string))
-         (string (eask--msg-char-displayable "✗" "X" string))
-         (string (eask--msg-char-displayable "💡" "<?>" string)))
-    string))
+(defun eask--msg-displayable-kwds (s)
+  "Make sure all keywords is displayable in S."
+  (let* ((s (eask--msg-char-displayable "✓" "v" s))
+         (s (eask--msg-char-displayable "✗" "X" s))
+         (s (eask--msg-char-displayable "💡" "<?>" s)))
+    s))
+
+(defun eask--msg-paint-kwds (s)
+  "Paint keywords from S."
+  (let* ((s (eask-s-replace-ansi "✓" (ansi-green "✓") s))
+         (s (eask-s-replace-ansi "✗" (ansi-red "✗") s))
+         (s (eask-s-replace-ansi "💡" (ansi-yellow "💡") s)))
+    s))
 
 (defun eask--format-paint-kwds (msg &rest args)
   "Paint keywords after format MSG and ARGS."
-  (let* ((string (apply #'format msg args))
-         (string (eask--msg-paint-kwds string))
-         (string (eask--msg-displayable-kwds string)))
-    string))
+  (let* ((s (apply #'format msg args))
+         (s (eask--msg-paint-kwds s))
+         (s (eask--msg-displayable-kwds s)))
+    s))
 
 (defun eask-princ (object &optional stderr)
   "Like function `princ'; with flag STDERR.
@@ -2070,14 +2096,17 @@ would send exit code of `1'."
           (cond ((numberp print-or-exit-code)
                  (eask--exit print-or-exit-code))
                 (t )))  ; Don't exit with anything else.
-      (eask-error "Help manual missing %s" help-file))))
+      (eask-error "✗ Help manual missing `%s`" help-file))))
 
 ;;
 ;;; Checker
 
 (defun eask--checker-existence ()
   "Return errors if required metadata is missing."
-  (unless eask-package (eask-error "Missing metadata package; make sure you have created an Eask-file with $ eask init!")))
+  (unless eask-package
+    (eask-error
+     (concat "✗ Missing metadata package; make sure you have created "
+             "an Eask-file with `$ eask init`!"))))
 
 (defun eask--check-strings (fmt f p &rest args)
   "Test strings (F and P); then print FMT and ARGS if not equal."
@@ -2100,7 +2129,7 @@ Arguments MSG1, MSG2, MSG3 and MSG4 are conditional messages."
   (when-let* (((and eask-package eask-package-desc))
               (def-point (if (eask-pkg-el) "-pkg.el file" "package-file")))
     (eask--check-strings
-     "Unmatched package name `%s`; it should be `%s`"
+     "💡 Unmatched package name `%s`; it should be `%s`"
      (eask-package-name) (package-desc-name eask-package-desc))
     (when-let* ((ver-eask (eask-package-version))
                 (ver-pkg (package-desc-version eask-package-desc))
@@ -2108,38 +2137,38 @@ Arguments MSG1, MSG2, MSG3 and MSG4 are conditional messages."
                 ;; inverses, since `version-to-list' is a many-to-one operation
                 ((not (equal (version-to-list ver-eask) ver-pkg))))
       (eask--check-strings
-       "Unmatched version `%s`; it should be `%s`"
+       "💡 Unmatched version `%s`; it should be `%s`"
        ver-eask (package-version-join ver-pkg)))
     (eask--check-strings
-     "Unmatched summary `%s`; it should be `%s`"
+     "💡 Unmatched summary `%s`; it should be `%s`"
      (eask-package-description) (package-desc-summary eask-package-desc))
     (let ((url (eask-package-desc-url)))
       (eask--check-optional
        eask-website-url url
-       "Unmatched website URL `%s`; it should be `%s`"
-       (format "Unmatched website URL `%s`; add `%s` to %s" eask-website-url
+       "💡 Unmatched website URL `%s`; it should be `%s`"
+       (format "💡 Unmatched website URL `%s`; add `%s` to %s" eask-website-url
                (if (string-prefix-p "-pkg.el" def-point)
                    (format ":url \"%s\"" eask-website-url)
                  (format ";; URL: %s" eask-website-url))
                def-point)
-       (format "Unmatched website URL `%s`; add `(website-url \"%s\")` to Eask-file" url url)
-       (format "URL header is optional, but it's often recommended")))
+       (format "💡 Unmatched website URL `%s`; add `(website-url \"%s\")` to Eask-file" url url)
+       (format "💡 URL header is optional, but it's often recommended")))
     (let ((keywords (eask-package-desc-keywords)))
       (cond
        ((or keywords eask-keywords)
         (dolist (keyword keywords)
           (unless (member keyword eask-keywords)
-            (eask-warn "Unmatched keyword `%s`; add `(keywords \"%s\")` to Eask-file or consider removing it" keyword keyword)))
+            (eask-warn "💡 Unmatched keyword `%s`; add `(keywords \"%s\")` to Eask-file or consider removing it" keyword keyword)))
         (dolist (keyword eask-keywords)
           (unless (member keyword keywords)
-            (eask-warn "Unmatched keyword `%s`; add `%s` to %s or consider removing it"
+            (eask-warn "💡 Unmatched keyword `%s`; add `%s` to %s or consider removing it"
                        keyword
                        (if (string-prefix-p "-pkg.el" def-point)
                            (format ":keywords '(\"%s\")" keyword)
                          (format ";; Keywords: %s" keyword))
                        def-point))))
        (t
-        (eask-warn "Keywords header is optional, but it's often recommended"))))
+        (eask-warn "💡 Keywords header is optional, but it's often recommended"))))
     (let* ((dependencies (append eask-depends-on-emacs eask-depends-on))
            (dependencies (mapcar #'car dependencies))
            (dependencies (mapcar (lambda (elm) (eask-2str elm)) dependencies))
@@ -2148,10 +2177,10 @@ Arguments MSG1, MSG2, MSG3 and MSG4 are conditional messages."
            (requirements (mapcar (lambda (elm) (eask-2str elm)) requirements)))
       (dolist (req requirements)
         (unless (member req dependencies)
-          (eask-warn "Unmatched dependency `%s`; add `(depends-on \"%s\")` to Eask-file or consider removing it" req req)))
+          (eask-warn "💡 Unmatched dependency `%s`; add `(depends-on \"%s\")` to Eask-file or consider removing it" req req)))
       (dolist (dep dependencies)
         (unless (member dep requirements)
-          (eask-warn "Unmatched dependency `%s`; add `(%s \"VERSION\")` to %s or consider removing it" dep dep def-point))))))
+          (eask-warn "💡 Unmatched dependency `%s`; add `(%s \"VERSION\")` to %s or consider removing it" dep dep def-point))))))
 
 (add-hook 'eask-file-loaded-hook #'eask--checker-existence)
 (add-hook 'eask-file-loaded-hook #'eask--checker-metadata)
@@ -2162,9 +2191,9 @@ Arguments MSG1, MSG2, MSG3 and MSG4 are conditional messages."
 Argument NAME represent the name of that package's metadata.  VAR is the actual
 variable we use to test validation."
   (unless (stringp var)
-    (eask-error "%s must be a string" name))
+    (eask-error "✗ %s must be a string" name))
   (when (string-empty-p var)
-    (eask-warn "%s cannot be an empty string" name)))
+    (eask-warn "💡 %s cannot be an empty string" name)))
 
 ;;
 ;;; User customization

@@ -49,7 +49,7 @@
 ;; NOTE: This is copied from `eldev'! Great thanks!
 ;;
 ;; XXX: remove this after we drop 28.x
-(defun eask-install--package-file (file)
+(defun eask-install--file (file)
   "Old compatible version of function `package-install-file'.
 
 For argument FILE, please see function `package-install-file' for the details."
@@ -63,7 +63,7 @@ For argument FILE, please see function `package-install-file' for the details."
       (insert-file-contents-literally file)
       (goto-char (point-min))
       (if (not (search-forward "\r\n" nil t))
-          (package-install-file file) ;; no cllf
+          (package-install-file file)  ; no CRLF
 
         ;; CRLF found
         (let* ((nondir (file-name-nondirectory file))
@@ -104,7 +104,7 @@ For argument FILE, please see function `package-install-file' for the details."
           (progn
             (add-to-list 'load-path (expand-file-name (eask-package-packaged-name) package-user-dir))
             ;; XXX: Use regular `package-install-file' function after we drop 28.x
-            (eask-install--package-file target)
+            (eask-install--file target)
             (eask-msg "")
             (eask-info "(Installed in %s)"
                        (file-name-directory (locate-library name))))

@@ -1,11 +1,13 @@
-;;; foo.el --- foo -*- lexical-binding: t -*-
+;;; foo-no.el --- foo -*- lexical-binding: t -*-
+
+;; Copyright (C) 2025  the Eask authors.
 
 ;; Author: none
 ;; Maintainer: none
+;; URL: https://github.com/emacs-eask/cli/foo-no
 ;; Version: 0.0.1
-;; Package-Requires: (emacs)
+;; Package-Requires: ((emacs "26.1"))
 ;; Keywords: test
-
 
 ;; This file is not part of GNU Emacs
 
@@ -22,17 +24,17 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
 ;;; Commentary:
-
+;;
 ;; commentary
+;;
 
 ;;; Code:
 
-(defun foo-message ()
+(defun foo-no-message ()
   "docstring"
   (interactive "P")
   (message "Hello World!"))
 
-(provide 'foo)
-;;; foo.el ends here
+(provide 'foo-no)
+;;; foo-no.el ends here

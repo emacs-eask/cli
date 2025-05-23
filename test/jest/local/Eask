@@ -1,7 +1,7 @@
 ;; -*- mode: eask; lexical-binding: t -*-
 
 (package "mini.pkg.1"
-         "0.0.1"
+         "3.3.4"
          "Minimal test package")
 
 (website-url "https://github.com/emacs-eask/cli/tree/master/test/fixtures/mini.pkg.1")

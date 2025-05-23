@@ -22,10 +22,7 @@
 
 ;;; Code:
 
-(defun mini.pkg.1-2 ()
-  "Test function 2."
-  (interactive)
-  )
+(defun mini.pkg.1-2 () "Test function 2." (interactive))
 
 (provide 'mini.pkg.1-2)
 ;;; mini.pkg.1-2.el ends here
