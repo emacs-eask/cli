@@ -110,7 +110,7 @@ Argument LEVEL and MSG are data from the debug log signal."
                  (eask-analyze--pretty-json (json-encode
                                              `((warnings . ,eask-analyze--warnings)
                                                (errors   . ,eask-analyze--errors)))))
-           ;; XXX: When printint result, no color allow.
+           ;; XXX: When printing the result, no color allow.
            (eask--with-no-color
              (eask-msg content)))
           (eask-analyze--log  ; Plain text
@@ -119,7 +119,7 @@ Argument LEVEL and MSG are data from the debug log signal."
                    (dolist (msg (reverse eask-analyze--log))
                      (insert msg "\n"))
                    (buffer-string)))
-           ;; XXX: When printint result, no color allow.
+           ;; XXX: When printing the result, no color allow.
            (eask--with-no-color
              (mapc #'eask-msg (reverse eask-analyze--log))))
           (t
