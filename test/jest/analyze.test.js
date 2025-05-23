@@ -9,10 +9,7 @@ describe("analyze", () => {
       await ctx.runEask("analyze Eask");
     });
 
-    // TODO: Re-enable this test.
-    //
-    // `Bad control character in string literal in JSON`
-    it.skip("handles json option", async () => {
+    it("handles json option", async () => {
       const { stderr } = await ctx.runEask("analyze --json");
       await ctx.runEask("analyze Eask --json");
 
@@ -20,11 +17,7 @@ describe("analyze", () => {
       JSON.parse(stderr);
     });
 
-    // TODO: Re-enable this test.
-    //
-    // The match are the same but don't know why it still report errors.
-    // My best guess is due to the ansi codes (color) differences.
-    it.skip("matches snapshot", async () => {
+    it("matches snapshot", async () => {
       const res = await ctx.runEask("analyze");
       const resClean = res.sanitized().raw();
       expect(resClean).toMatchSnapshot();

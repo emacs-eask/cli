@@ -391,6 +391,14 @@ and INHERIT-INPUT-METHOD see function `read-string' for more information."
         (setq pos (match-end 0)))
       (reverse matches))))
 
+;;
+;;; Color
+
+(defmacro eask--with-no-color (&rest body)
+  "Execute forms BODY in when no color output."
+  (declare (indent 0) (debug t))
+  `(let ((ansi-inhibit-ansi t)) ,@body))
+
 (defun eask-ansi-codes (s)
   "Return a list of ansi codes from S."
   (eask-re-seq ansi-color-control-seq-regexp s))
