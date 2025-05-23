@@ -393,7 +393,7 @@ and INHERIT-INPUT-METHOD see function `read-string' for more information."
 
 (defun eask-ansi-codes (s)
   "Return a list of ansi codes from S."
-  (eask-re-seq "\e\[[0-9]+m" s))
+  (eask-re-seq ansi-color-control-seq-regexp s))
 
 (defun eask-s-replace-ansi (old new s)
   "Like the function `eask-s-replace' but work with ansi.
