@@ -40,7 +40,7 @@
       (let ((pkg-desc (with-temp-buffer
                         (insert-file-contents-literally path)
                         (tar-mode)
-                        (ignore-errors (package-tar-file-info)))))
+                        (eask-ignore-errors-silent (package-tar-file-info)))))
         (unless pkg-desc
           ;; `package-dir-info' will return nil if there is no `-pkg.el'
           ;; and no `.el' files at path
@@ -58,7 +58,7 @@
                         (dired-unmark-all-marks)
                         (eask--unsilent
                           (message "? %s" (dired-get-marked-files))
-                          (ignore-errors (package-dir-info))))))
+                          (eask-ignore-errors-silent (package-dir-info))))))
         (unless pkg-desc
           ;; `package-dir-info' will return nil if there is no `-pkg.el'
           ;; and no `.el' files at path
