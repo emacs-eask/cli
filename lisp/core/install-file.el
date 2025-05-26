@@ -56,6 +56,7 @@
                         ;;
                         ;; See https://debbugs.gnu.org/cgi/bugreport.cgi?bug=78521#17
                         (dired-mark-files-in-region (point-min) (point-max))
+                        (eask--unsilent (dired-get-marked-files))
                         (ignore-errors (package-dir-info)))))
         (unless pkg-desc
           ;; `package-dir-info' will return nil if there is no `-pkg.el'

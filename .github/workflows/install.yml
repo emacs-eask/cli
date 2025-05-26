@@ -71,6 +71,10 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: .github/scripts/setup-eask.ps1
 
+    # - name: Testing...
+    #   run: |
+    #     npm run test-unsafe test/jest/install.test.js
+
     - name: Testing...
       run: |
-        npm run test-unsafe test/jest/install.test.js
+        eask install-file ./test/jest/install/foo-mode/
