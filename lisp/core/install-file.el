@@ -53,6 +53,8 @@
                         (dired path)
                         ;; After Emacs 31, the function `package-dir-info'
                         ;; will respect the marked files.
+                        ;;
+                        ;; See https://debbugs.gnu.org/cgi/bugreport.cgi?bug=78521#17
                         (dired-mark-files-in-region (point-min) (point-max))
                         (ignore-errors (package-dir-info)))))
         (unless pkg-desc
