@@ -55,7 +55,7 @@
                         ;; will respect the marked files.
                         ;;
                         ;; See https://debbugs.gnu.org/cgi/bugreport.cgi?bug=78521#17
-                        ;;(dired-mark-files-in-region (point-min) (point-max))
+                        (dired-mark-files-in-region (point-min) (point-max))
                         (eask--unsilent
                           (message "? %s" (dired-get-marked-files))
                           (ignore-errors (package-dir-info))))))
