@@ -51,6 +51,9 @@
       ;; Note `package-dir-info' doesn't work outside of dired mode!
       (let ((pkg-desc (with-temp-buffer
                         (dired path)
+                        ;; After Emacs 31, the function `package-dir-info'
+                        ;; will respect the marked files.
+                        (dired-mark-files-in-region (point-min) (point-max))
                         (ignore-errors (package-dir-info)))))
         (unless pkg-desc
           ;; `package-dir-info' will return nil if there is no `-pkg.el'
