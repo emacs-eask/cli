@@ -55,3 +55,32 @@
  (depends-on "ert-runner"))
 
 (setq network-security-level 'low)  ; see https://github.com/jcs090218/setup-emacs-windows/issues/156#issuecomment-932956432
+
+
+(defun package-dir-info ()
+  "Find package information for a directory.
+The return result is a `package-desc'."
+  (cl-assert (derived-mode-p 'dired-mode))
+  (let* ((desc-file (package--description-file default-directory)))
+    (if (file-readable-p desc-file)
+        (with-temp-buffer
+          (insert-file-contents desc-file)
+          (package--read-pkg-desc 'dir))
+      (catch 'found
+        (let ((files (or (and (derived-mode-p 'dired-mode)
+                              (dired-get-marked-files))
+                         (directory-files-recursively default-directory "\\.el\\'"))))
+          ;; We sort the file names in lexicographical order, to ensure
+          ;; that we check shorter file names first (ie. those further
+          ;; up in the directory structure).
+          (dolist (file (sort files))
+            ;; The file may be a link to a nonexistent file; e.g., a
+            ;; lock file.
+            (when (file-exists-p file)
+              (with-temp-buffer
+                (insert-file-contents file)
+                ;; When we find the file with the data,
+                (when-let* ((info (ignore-errors (package-buffer-info))))
+                  (setf (package-desc-kind info) 'dir)
+                  (throw 'found info))))))
+        (error "No .el files with package headers in `%s'" default-directory)))))
