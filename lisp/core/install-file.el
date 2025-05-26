@@ -58,7 +58,7 @@
                         (dired-unmark-all-marks)
                         (eask--unsilent
                           (message "? %s" (dired-get-marked-files))
-                          (eask-ignore-errors-silent (package-dir-info))))))
+                          (ignore-errors (package-dir-info))))))
         (unless pkg-desc
           ;; `package-dir-info' will return nil if there is no `-pkg.el'
           ;; and no `.el' files at path
