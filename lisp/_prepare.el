@@ -1645,9 +1645,9 @@ argument COMMAND."
   ;; On recipe
   (when eask-depends-on-recipe-p
     (eask-with-progress
-      (concat (ansi-green "✓ Checking local archives ")
+      (concat (ansi-green "✓ Checking local archives `")
               (ansi-magenta eask--local-archive-name)
-              (ansi-green "... "))
+              (ansi-green "`... "))
       (eask-with-verbosity 'debug
         ;; Make sure can be customized by `source'
         (unless (assoc eask--local-archive-name package-archives)
