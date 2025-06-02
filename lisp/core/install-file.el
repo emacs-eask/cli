@@ -40,7 +40,7 @@
       (let ((pkg-desc (with-temp-buffer
                         (insert-file-contents-literally path)
                         (tar-mode)
-                        (ignore-errors (package-tar-file-info)))))
+                        (eask-ignore-errors-silent (package-tar-file-info)))))
         (unless pkg-desc
           ;; `package-dir-info' will return nil if there is no `-pkg.el'
           ;; and no `.el' files at path
@@ -51,7 +51,14 @@
       ;; Note `package-dir-info' doesn't work outside of dired mode!
       (let ((pkg-desc (with-temp-buffer
                         (dired path)
-                        (ignore-errors (package-dir-info)))))
+                        ;; After Emacs 31, the function `package-dir-info'
+                        ;; will respect the marked files.
+                        ;;
+                        ;; See https://debbugs.gnu.org/cgi/bugreport.cgi?bug=78521#17
+                        (dired-unmark-all-marks)
+                        (eask--unsilent
+                          (message "? %s" (dired-get-marked-files))
+                          (ignore-errors (package-dir-info))))))
         (unless pkg-desc
           ;; `package-dir-info' will return nil if there is no `-pkg.el'
           ;; and no `.el' files at path
