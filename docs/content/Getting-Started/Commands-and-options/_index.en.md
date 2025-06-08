@@ -37,6 +37,14 @@ eask [GLOBAL-OPTIONS] create elpa <name>
 💡 The template project is located in https://github.com/emacs-eask/template-elpa
 {{< /hint >}}
 
+## 🔍 eask create el-project
+
+Create a new project with [el-project](https://github.com/Kyure-A/el-project).
+
+```sh
+eask [GLOBAL-OPTIONS] create el-project
+```
+
 # 🚩 Core
 
 Often use commands that are uncategorized.

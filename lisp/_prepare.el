@@ -191,7 +191,7 @@ will return `lint/checkdoc' with a dash between two subcommands."
 These commands will first respect the current workspace.  If the current
 workspace has no valid Eask-file; it will load global workspace instead."
   (eask-command-p '("init" "init/source" "init/cask" "init/eldev" "init/keg"
-                    "create/package" "create/elpa"
+                    "create/package" "create/elpa" "create/el-project"
                     "bump" "cat" "keywords" "repl"
                     "generate/ignore" "generate/license"
                     "test/melpazoid")))

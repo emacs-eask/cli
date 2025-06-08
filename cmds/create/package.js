@@ -24,7 +24,7 @@ exports.desc = 'Create a new package';
 exports.builder = yargs => yargs
   .positional(
     '<name>', {
-      description: 'new project name',
+      description: 'new package name',
       type: 'string',
     });
 
