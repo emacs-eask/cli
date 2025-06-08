@@ -16,6 +16,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * feat(_prepare.el): Respect global/system-wide packages (e0732f26a179ccceed96528cc71d9903b2f5fe4e)
 * fix(lisp/extern): Clean up `compat` (2b41f5db4b5bbe145c9671f95850f79a00dcbd48)
 * fix(lisp): Paint keywords with nested ansi codes (#323)
+* feat(create): Add new command for `el-project` (#325)
 
 ## 0.11.x
 > Released Apr 03, 2025
