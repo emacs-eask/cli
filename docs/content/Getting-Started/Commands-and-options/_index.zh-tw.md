@@ -37,6 +37,14 @@ eask [GLOBAL-OPTIONS] create elpa <name>
 💡 模板項目位於 https://github.com/emacs-eask/template-elpa。
 {{< /hint >}}
 
+## 🔍 eask create el-project
+
+使用 [el-project](https://github.com/Kyure-A/el-project) 創建一個新專案。
+
+```sh
+eask [GLOBAL-OPTIONS] create el-project
+```
+
 # 🚩 核心
 
 經常使用未分類的命令。
