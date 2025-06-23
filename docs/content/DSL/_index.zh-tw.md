@@ -173,12 +173,12 @@ weight: 200
 
 ```elisp
 (depends-on "auto-rename-tag"
-            :repo "jcs-elpa/auto-rename-tag"
-            :fetcher 'github)
+            :fetcher 'github
+            :repo "jcs-elpa/auto-rename-tag")
 
 (depends-on "lsp-ui"
-            :repo "emacs-lsp/lsp-ui"
             :fetcher 'github
+            :repo "emacs-lsp/lsp-ui"
             :files '(:defaults "lsp-ui-doc.html" "resources"))
 ```
 
