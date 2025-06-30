@@ -17,6 +17,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * fix(lisp/extern): Clean up `compat` (2b41f5db4b5bbe145c9671f95850f79a00dcbd48)
 * fix(lisp): Paint keywords with nested ansi codes (#323)
 * feat(create): Add new command for `el-project` (#325)
+* feat(lint): Add command for `org-lint` (#328)
 
 ## 0.11.x
 > Released Apr 03, 2025
