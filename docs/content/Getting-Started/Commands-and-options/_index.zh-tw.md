@@ -754,7 +754,7 @@ eask [GLOBAL-OPTIONS] lint package [FILES..]
 
 ## 🔍 eask lint checkdoc
 
-運行 checkdoc (自帶).
+運行 checkdoc (自帶)。
 
 ```sh
 eask [GLOBAL-OPTIONS] lint checkdoc [FILES..]
@@ -762,7 +762,7 @@ eask [GLOBAL-OPTIONS] lint checkdoc [FILES..]
 
 ## 🔍 eask lint elint
 
-運行 elint (自帶).
+運行 elint (自帶)。
 
 ```sh
 eask [GLOBAL-OPTIONS] lint elint [FILES..]
@@ -794,25 +794,9 @@ eask [GLOBAL-OPTIONS] lint lint elsa [FILES..]
 eask [GLOBAL-OPTIONS] lint indent [FILES..]
 ```
 
-## 🔍 eask lint keywords
-
-運行 keywords checker (自帶).
-
-```sh
-eask [GLOBAL-OPTIONS] lint keywords
-```
-
-## 🔍 eask lint license
-
-運行 license check.
-
-```sh
-eask [GLOBAL-OPTIONS] lint license
-```
-
 ## 🔍 eask lint declare
 
-運行 check-declare (自帶).
+運行 check-declare (自帶)。
 
 ```sh
 eask [GLOBAL-OPTIONS] lint declare [FILES..]
@@ -826,6 +810,30 @@ Run [relint](https://github.com/mattiase/relint).
 
 ```sh
 eask [GLOBAL-OPTIONS] lint regexps [FILES..]
+```
+
+## 🔍 eask lint keywords
+
+運行 keywords checker (自帶).
+
+```sh
+eask [GLOBAL-OPTIONS] lint keywords
+```
+
+## 🔍 eask lint license
+
+運行 license 檢查器。
+
+```sh
+eask [GLOBAL-OPTIONS] lint license
+```
+
+## 🔍 eask lint org
+
+在 Org 檔案上運行 `org-lint`。
+
+```sh
+eask [GLOBAL-OPTIONS] lint org
 ```
 
 # 🚩 測試框架

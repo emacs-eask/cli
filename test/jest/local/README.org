@@ -1,0 +1,19 @@
+* Test Org File
+This is a test org file used for Emacs behavior checking.
+
+** TODO Broken heading without space
+***BROKEN Heading
+
+** Code Block
+#+BEGIN_SRC emacs-lisp
+(message "Hello, Emacs!")
+(1+ )  ; Intentional syntax error
+#+END_SRC
+
+** Bad Property
+:PROPERTIES:
+:WRONGPROP without value
+:END:
+
+** Notes
+Unclosed *bold and /italic text.

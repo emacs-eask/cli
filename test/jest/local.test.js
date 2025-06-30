@@ -198,6 +198,7 @@ describe("local", () => {
   describe("Linting", () => {
     // some lint commands may fail if packages are missing
     beforeAll(async () => await ctx.runEask("install-deps"));
+
     it.each([
       "lint checkdoc",
       "lint declare",
@@ -207,17 +208,24 @@ describe("local", () => {
       "lint keywords",
       "lint license",
       "lint package",
+      "lint org",
     ])("eask %s", async (cmd) => {
       await ctx.runEask(cmd);
     });
+
     it("lint regexps", async () => {
       if ((await emacsVersion()) >= "27.1") {
         await ctx.runEask("lint regexps");
       }
     });
+
     // XXX: Elsa is not stable, ignore it for now
     test.skip("lint elsa", async () => {
       await ctx.runEask("lint elsa");
+    });
+
+    it("lint org *.org", async () => {
+      await ctx.runEask("lint org *.org");
     });
   });
 

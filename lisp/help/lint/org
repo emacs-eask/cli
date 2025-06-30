@@ -1,0 +1,8 @@
+
+💡 You need to specify pattern(s) you want  to check
+
+    $ eask lint org [FILES..]
+
+For example,
+
+    $ eask lint org README.org docs/*.org

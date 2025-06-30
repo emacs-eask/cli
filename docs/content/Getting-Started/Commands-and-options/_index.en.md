@@ -808,22 +808,6 @@ Run indent-lint.
 eask [GLOBAL-OPTIONS] lint indent [FILES..]
 ```
 
-## 🔍 eask lint keywords
-
-Run keywords checker (built-in).
-
-```sh
-eask [GLOBAL-OPTIONS] lint keywords
-```
-
-## 🔍 eask lint license
-
-Run license check.
-
-```sh
-eask [GLOBAL-OPTIONS] lint license
-```
-
 ## 🔍 eask lint declare
 
 Run check-declare (built-in).
@@ -840,6 +824,30 @@ Alias: `lint relint`
 
 ```sh
 eask [GLOBAL-OPTIONS] lint regexps [FILES..]
+```
+
+## 🔍 eask lint keywords
+
+Run keywords checker (built-in).
+
+```sh
+eask [GLOBAL-OPTIONS] lint keywords
+```
+
+## 🔍 eask lint license
+
+Run license check.
+
+```sh
+eask [GLOBAL-OPTIONS] lint license
+```
+
+## 🔍 eask lint org
+
+Run `org-lint` on Org files.
+
+```sh
+eask [GLOBAL-OPTIONS] lint org
 ```
 
 # 🚩 Testing

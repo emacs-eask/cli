@@ -5,7 +5,7 @@
 
 ;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>
 ;; URL: https://github.com/emacs-eask/cli/tree/master/test/fixtures/mini.pkg.1
-;; Version: 5.5.6
+;; Version: 7.7.8
 ;; Package-Requires: ((emacs "24.3") (s "1.12.0") (fringe-helper "1.0.1"))
 ;; Keywords: test local
 
