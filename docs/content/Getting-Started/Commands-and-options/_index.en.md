@@ -847,7 +847,7 @@ eask [GLOBAL-OPTIONS] lint license
 Run `org-lint` on Org files.
 
 ```sh
-eask [GLOBAL-OPTIONS] lint org
+eask [GLOBAL-OPTIONS] lint org [FILES..]
 ```
 
 # 🚩 Testing

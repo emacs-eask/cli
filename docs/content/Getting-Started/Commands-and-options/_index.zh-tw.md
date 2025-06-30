@@ -833,7 +833,7 @@ eask [GLOBAL-OPTIONS] lint license
 在 Org 檔案上運行 `org-lint`。
 
 ```sh
-eask [GLOBAL-OPTIONS] lint org
+eask [GLOBAL-OPTIONS] lint org [FILES..]
 ```
 
 # 🚩 測試框架
