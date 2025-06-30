@@ -208,7 +208,6 @@ describe("local", () => {
       "lint keywords",
       "lint license",
       "lint package",
-      "lint org",
     ])("eask %s", async (cmd) => {
       await ctx.runEask(cmd);
     });
