@@ -438,7 +438,7 @@ for more information."
            (if (< elapsed eask-minimum-reported-time)
                (ignore-errors (eask-msg ,msg-end))
              (ignore-errors (eask-write ,msg-end))
-             (eask-msg (ansi-white (format " (%.3fs)" elapsed))))))
+             (eask-msg (format " (%.3fs)" elapsed)))))
      (ignore-errors (eask-write ,msg-start)) ,body
      (ignore-errors (eask-msg ,msg-end))))
 
@@ -2083,7 +2083,7 @@ Arguments FNC and ARGS are used for advice `:around'."
       (end-of-line)
       (setq max-column (max (current-column) max-column)))
     (eask-msg (concat "''" (spaces-string max-column) "''"))
-    (eask-msg (ansi-white (buffer-string)))
+    (eask-msg (buffer-string))
     (eask-msg (concat "''" (spaces-string max-column) "''"))))
 
 (defun eask-help (command &optional print-or-exit-code)
