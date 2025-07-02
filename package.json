@@ -1,6 +1,6 @@
 {
   "name": "@emacs-eask/cli",
-  "version": "0.11.7",
+  "version": "0.11.8",
   "description": "A set of command-line tools to build Emacs packages",
   "main": "eask",
   "scripts": {
