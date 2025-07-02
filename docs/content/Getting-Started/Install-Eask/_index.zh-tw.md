@@ -55,6 +55,12 @@ nix profile install nixpkgs#eask-cli
 若要安裝 Eask CLI，請執行下列操作：
 
 ```sh
+brew install eask-cli
+```
+
+或使用我們提供的 tap：
+
+```sh
 brew tap emacs-eask/cli https://github.com/emacs-eask/packaging
 brew install eask-cli
 ```
