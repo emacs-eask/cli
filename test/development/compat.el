@@ -27,7 +27,8 @@
      package-generate-description-file
      locate-dominating-file
      url-file-exists-p
-     prin1-to-string)
+     prin1-to-string
+     kill-current-buffer)
   "List of function to check Emacs compatibility.")
 
 (message "Starting compatibility test for functions...")
