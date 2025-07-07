@@ -19,6 +19,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * feat(create): Add new command for `el-project` (#325)
 * feat(lint): Add command for `org-lint` (#328)
 * fix: Avoid using white color for light theme (8acdc65f464414ac2ba591d600dbca55ac7a5952)
+* fix: Use `kill-current-buffer` instead (#331)
 
 ## 0.11.x
 > Released Apr 03, 2025
