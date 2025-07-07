@@ -58,7 +58,7 @@
                    (capitalize (eask-2str severity)) msg)))
       (unless errors
         (eask-msg "No issues found"))
-      (kill-this-buffer))))
+      (kill-current-buffer))))
 
 (eask-start
   ;; Preparation

@@ -54,7 +54,7 @@
     (eask-msg "`%s` with package-lint (%s)" (ansi-green file) eask-lint-package--version)
     (with-current-buffer (find-file filename)
       (package-lint-current-buffer)
-      (kill-this-buffer)))
+      (kill-current-buffer)))
   (eask-print-log-buffer "*Package-Lint*"))
 
 (eask-start

@@ -44,7 +44,7 @@
             (delete-region (point) end)
             (insert (format "\"%s\"" make-outdate-version)))))
       (save-buffer)
-      (kill-this-buffer))
+      (kill-current-buffer))
     (let ((dest (expand-file-name (concat name "-" make-outdate-version "/") package-user-dir)))
       (eask-info "Moving %s" dir)
       (eask-info "    to %s" dest)
