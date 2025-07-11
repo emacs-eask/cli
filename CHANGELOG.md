@@ -33,7 +33,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * feat(test): Make `ert-runner` accepts `files` arguments ([`d9041ea`](../../commit/d9041eaa3d15c82d196e9264faf74660eaa117ff))
 * fix(_prepare.el): Keywords cannot be parsed in Emacs 26.x ([`0cb755e`](../../commit/0cb755e0c18d37a59c76add905ea089c61b3a931))
 * feat(src/env.js): Ensure `Emacs` env ([`#289`](../../pull/289))
-* ci(build.yml): Try forked pkg to fix `arm64` build 2 (#292 and #294)
+* ci(build.yml): Try forked pkg to fix `arm64` build 2 ([`#292`](../../pull/292) and [`#294`](../../pull/294))
 * feat: Set error status when help is printed ([`#307`](../../pull/307))
 * feat: Add exit code specification ([`c49f53c`](../../commit/c49f53caa1f6ac94a9c8c884d70d0860f55728c1))
 * feat(install): Add commands `install-file` and `install-vc` ([`#317`](../../pull/317))
