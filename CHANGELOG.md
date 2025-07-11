@@ -135,20 +135,20 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * Resolve infinite recursion in `exec-path` setup ([`#118`](../../pull/118))
 * feat: Add capability to search through path ([`#119`](../../pull/119))
 * Support DSL `package-descriptor` ([`#124`](../../pull/124))
-* Resolve the potential symlink to the bash script (#24, #125, and #126)
-* Workaround for arguments that contain whitespaces (#128 and #129)
-* Silent unnecessary Node's stacktrace (#134 and #136)
-* Allow linter list through all errors (#134 and #137)
-* Omit `nil` value for conditions in `development` scope (#143 and #144)
+* Resolve the potential symlink to the bash script ([`#24`](../../pull/24), [`#125`](../../pull/125), and [`#126`](../../pull/126))
+* Workaround for arguments that contain whitespaces ([`#128`](../../pull/128) and [`#129`](../../pull/129))
+* Silent unnecessary Node's stacktrace ([`#134`](../../pull/134) and [`#136`](../../pull/136))
+* Allow linter list through all errors ([`#134`](../../pull/134) and [`#137`](../../pull/137))
+* Omit `nil` value for conditions in `development` scope ([`#143`](../../pull/143) and [`#144`](../../pull/144))
 * Move `pkg-file` and `autoloads` commands under `generate` subcommand ([`#142`](../../pull/142))
-* Add option to convert Cask to Eask (#141 and #145)
-* Add command to generate GHA workflow (#141 and #146)
+* Add option to convert Cask to Eask ([`#141`](../../pull/141) and [`#145`](../../pull/145))
+* Add command to generate GHA workflow ([`#141`](../../pull/141) and [`#146`](../../pull/146))
 * Add commands to support all kind of CI platforms ([`#150`](../../pull/150))
 
 ## 0.7.x
 > Released Sep 08, 2022
 
-* Avoid loading package info unless it's needed (#13, #14, and #19)
+* Avoid loading package info unless it's needed ([`#13`](../../pull/13), [`#14`](../../pull/14), and [`#19`](../../pull/19))
 * Read `-pkg.el` file prior to package-file while exists ([`#21`](../../pull/21))
 * Simplify (rewrite) command exec ([`#22`](../../pull/22))
 * Move `exec` command to node layer ([`#27`](../../pull/27))
