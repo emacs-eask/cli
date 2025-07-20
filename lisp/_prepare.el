@@ -5,8 +5,11 @@
 ;;
 ;;; Requirement
 
-(when (version< emacs-version "26.1")
-  (error "Eask requires Emacs 26.1 and above!"))
+(defconst eask-required-emacs-version "26.1"
+  "Minimum required Emacs version for this program to run.")
+
+(when (version< emacs-version eask-required-emacs-version)
+  (error "Eask requires Emacs %s and above!" eask-required-emacs-version))
 
 ;;
 ;;; Includes
