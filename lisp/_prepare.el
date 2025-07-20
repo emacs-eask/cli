@@ -6,7 +6,7 @@
 ;;; Requirement
 
 (defconst eask-required-emacs-version "26.1"
-  "Minimum required Emacs version for this program to run.")
+  "The minimum Emacs version required to run Eask.")
 
 (when (version< emacs-version eask-required-emacs-version)
   (error "Eask requires Emacs %s and above!" eask-required-emacs-version))
