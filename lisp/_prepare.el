@@ -441,7 +441,7 @@ for more information."
            (if (< elapsed eask-minimum-reported-time)
                (ignore-errors (eask-msg ,msg-end))
              (ignore-errors (eask-write ,msg-end))
-             (eask-msg (format " (%.3fs)" elapsed)))))
+             (eask-msg " (%.3fs)" elapsed))))
      (ignore-errors (eask-write ,msg-start)) ,body
      (ignore-errors (eask-msg ,msg-end))))
 
@@ -793,9 +793,10 @@ The optional argument URL-OR-PACKAGE is used in the function `try'."
   (eask--pkg-process pkg
     (cond
      ((and installed-p (not should-reinstall-p))
-      (eask-msg "  - %sSkipping %s (%s)... already installed ✗"
-                eask--action-prefix
-                name version))
+      (eask-with-progress
+        (format "  - %sSkipping %s (%s)... " eask--action-prefix name version)
+        (progn )  ; no operation needed
+        "already installed ✗"))
      (t
       (eask-with-progress
         (format "  - %s%snstalling %s (%s)... " eask--action-prefix
@@ -814,9 +815,10 @@ The optional argument URL-OR-PACKAGE is used in the function `try'."
   (eask--pkg-process pkg
     (cond
      ((and installed-p (not should-reinstall-p))
-      (eask-msg "  - %sSkipping %s (%s)... already installed ✗"
-                eask--action-prefix
-                name version))
+      (eask-with-progress
+        (format "  - %sSkipping %s (%s)... " eask--action-prefix name version)
+        (progn )  ; no operation needed
+        "already installed ✗"))
      (t
       (eask-with-progress
         (format "  - %s%snstalling %s (%s)... " eask--action-prefix
@@ -842,9 +844,10 @@ The optional argument URL-OR-PACKAGE is used in the function `try'."
   (eask--pkg-process pkg
     (cond
      ((and installed-p (not should-reinstall-p))
-      (eask-msg "  - %sSkipping %s (%s)... already installed ✗"
-                eask--action-prefix
-                name version))
+      (eask-with-progress
+        (format "  - %sSkipping %s (%s)... " eask--action-prefix name version)
+        (progn )  ; no operation needed
+        "already installed ✗"))
      ((progn
         (eask-pkg-init)
         (unless (eask-package-installable-p pkg)
@@ -875,7 +878,10 @@ The optional argument URL-OR-PACKAGE is used in the function `try'."
   (eask--pkg-process pkg
     (cond
      ((not installed-p)
-      (eask-msg "  - %sSkipping %s (%s)... not installed ✗" eask--action-prefix name version))
+      (eask-with-progress
+        (format "  - %sSkipping %s (%s)... " eask--action-prefix name version)
+        (progn )  ; no operation needed
+        "not installed ✗"))
      (t
       (eask--pkg-process pkg  ; Second call to force refresh the data.
         (eask-with-progress
@@ -891,7 +897,10 @@ The optional argument URL-OR-PACKAGE is used in the function `try'."
     (cond
      ;; You cannot reinstall the package that are not installed.
      ((not installed-p)
-      (eask-msg "  - %sSkipping %s (%s)... not installed ✗" eask--action-prefix name version))
+      (eask-with-progress
+        (format "  - %sSkipping %s (%s)... " eask--action-prefix name version)
+        (progn )  ; no operation needed
+        "not installed ✗"))
      (t
       (eask-pkg-init)
       (eask--pkg-process pkg  ; Second call to force refresh the data.
