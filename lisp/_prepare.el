@@ -411,22 +411,20 @@ and INHERIT-INPUT-METHOD see function `read-string' for more information."
 
 For arguments OLD, NEW and S; see the function `eask-s-replace'
 for more information."
-  (if-let* ((data   (eask-ansi-codes s))
-            (splits (split-string s (regexp-quote old))))
-      (let* ((result (nth 0 splits))
+  (if-let* ((splits (split-string s (regexp-quote old))))
+      (let* ((reset "\e[0m")
+             (result (nth 0 splits))
              (index  1)
-             (base   0)
-             (reset (car (last data))))
+             (last))
         (while (< index (length splits))
-          (let ((start (nth base data))
-                (end   (nth (1+ base) data)))  ; \e[0m
-            (setq result (concat result
-                                 end new start
+          (let* ((data (eask-ansi-codes result)))
+            (setq last (car (last data))
+                  result (concat result
+                                 (if (null last) "" reset) new last
                                  (nth index splits))))
-          (cl-incf base 2)
           (cl-incf index))
         ;; Just ensure the last character is reset.
-        (concat result reset))
+        (concat result (if (null last) "" reset)))
     (eask-s-replace old new s)))
 
 ;;
