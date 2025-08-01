@@ -44,6 +44,7 @@
           (eask-println (concat "  %-" offset "s (%s) %s")
                         (ansi-green (eask-2str (car dep)))
                         (ansi-yellow target-version)
+                        ;; Debug print the recipe format.
                         (if (eask-reach-verbosity-p 'debug)
                             (ansi-blue (eask-2str dep))
                           "")))))))
