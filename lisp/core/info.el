@@ -34,7 +34,9 @@
                                       (or (nth 0 target-version)  ; verison number
                                           "archive"))
                                      (t                "recipe"))))
-          (eask-println (concat "  %-" offset "s (%s)") (car dep) target-version)
+          (eask-println (concat "  %-" offset "s (%s)")
+                        (ansi-green (car dep))
+                        (ansi-yellow target-version))
           (eask-debug "    Recipe: %s" (car dep)))))))
 
 (eask-start
@@ -56,7 +58,7 @@
           (eask-println "keywords: %s" (string-join keywords ", ")))
         (eask-println "")
         (when eask-package-file
-          (eask-println "entry: %s" (eask-root-del eask-package-file)))
+          (eask-println "entry: %s" (ansi-cyan (eask-root-del eask-package-file))))
         (eask-println "kind: %s" (ansi-cyan (if (eask-package-multi-p) "tar" "single")))
         (eask-println "")
         (eask-println "dist")
