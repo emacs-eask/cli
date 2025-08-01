@@ -14,16 +14,23 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-(defvar eask-info--max-offset 0)
+(defvar eask-info--max-offset 0
+  "The maximum offset to print the info.")
 
 (defun eask-info--print-deps (title dependencies)
   "Print DEPENDENCIES with TITLE identifier."
   (when dependencies
     (eask-println "")
     (eask-println title)
-    (let* ((names (mapcar #'car dependencies))
+    (let* ((names (mapcar (lambda (dep)
+                            (ansi-green (eask-2str (car dep))))
+                          dependencies))
            (offset (eask-seq-str-max names)))
-      (setq eask-info--max-offset (max offset eask-info--max-offset)
+      (setq offset (if (eask-no-color-p) offset
+                     ;; XXX: I'm not sure why we need to plus 2 here.
+                     ;; My guess is regarding the ansi escape characters.
+                     (+ offset 2))
+            eask-info--max-offset (max offset eask-info--max-offset)
             offset (eask-2str eask-info--max-offset))
       (dolist (dep dependencies)
         (let* ((target-version (cdr dep))
@@ -34,10 +41,12 @@
                                       (or (nth 0 target-version)  ; verison number
                                           "archive"))
                                      (t                "recipe"))))
-          (eask-println (concat "  %-" offset "s (%s)")
-                        (ansi-green (car dep))
-                        (ansi-yellow target-version))
-          (eask-debug "    Recipe: %s" (car dep)))))))
+          (eask-println (concat "  %-" offset "s (%s) %s")
+                        (ansi-green (eask-2str (car dep)))
+                        (ansi-yellow target-version)
+                        (if (eask-reach-verbosity-p 'debug)
+                            (ansi-blue (eask-2str dep))
+                          "")))))))
 
 (eask-start
   (if eask-package
