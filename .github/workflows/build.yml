@@ -43,7 +43,7 @@ jobs:
         - win-x64
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
 
     - name: Install dependencies
       run: |
@@ -119,7 +119,7 @@ jobs:
       run: mv ${{ matrix.target }}.${{ env._EXT }} ~/
 
     - name: Checkout binaries repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         repository: ${{ env.REPO_BIN }}
         persist-credentials: false

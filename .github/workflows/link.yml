@@ -56,7 +56,7 @@ jobs:
       with:
         version: ${{ matrix.emacs-version }}
 
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
 
     - name: Prepare Eask (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
