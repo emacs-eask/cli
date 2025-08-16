@@ -64,7 +64,7 @@ Eask's user directory path.
 Eask global elpa directory; it will be treated as the system-wide packages.
 
 ```elisp
-(message "%s" eask-package-sys-dir)  ; ~/.eask/30.1/elpa/
+(message "%s" eask-package-sys-dir)  ; ~/.eask/30.2/elpa/
 ```
 
 ## 🔍 Variable: eask-invocation
