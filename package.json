@@ -41,7 +41,7 @@
   },
   "jest": {
     "rootDir": "./test/jest",
-    "testTimeout": 360000
+    "testTimeout": 600000000
   },
   "files": [
     "cmds",
