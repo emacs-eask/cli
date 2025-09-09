@@ -6,8 +6,6 @@
 
 const { emacsVersion, TestContext } = require("./helpers");
 
-jest.setTimeout(1000 * 60);
-
 describe("local", () => {
   const cwd = "./test/jest/local";
   const ctx = new TestContext(cwd);
