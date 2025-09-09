@@ -5,12 +5,13 @@ on:
     branches:
       - master
     paths:
-      - 'eask'
-      - '**.yml'
       - lisp/**
       - cmds/**
       - src/**
       - test/**
+      - '**.yml'
+      - '**.json'
+      - 'eask'
   pull_request:
     branches:
       - master
