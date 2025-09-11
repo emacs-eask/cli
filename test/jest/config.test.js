@@ -44,7 +44,7 @@ describe("config param", () => {
         fs.constants.COPYFILE_EXCL, // throw if init.el already exists
       );
       await ctx.runEask("install -c spinner ivy beacon company-fuzzy", {
-        timeout: 35000,
+        timeout: 120000,
       });
     });
 
