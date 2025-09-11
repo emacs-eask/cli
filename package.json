@@ -33,7 +33,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "which": "^4.0.0",
-    "yargs": "^17.0.0"
+    "yargs": "^18.0.0"
   },
   "devDependencies": {
     "@yao-pkg/pkg": "^6.0.0",
