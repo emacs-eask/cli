@@ -40,13 +40,13 @@ describe("global", () => {
     afterAll(async () => {
       if (process.env.ALLOW_UNSAFE) {
         // remove test changes
-        await ctx.runEask("uninstall -g spinner ivy beacon company-fuzzy");
+        await ctx.runEask("uninstall -g spinner ivy beacon company-fuzzy", , { timeout: 120000 });
         await fs.rm(path.join(process.env.HOME, "Eask"));
       }
     });
 
     testUnsafe("eask install -g", async () => {
-      await ctx.runEask("install -g spinner ivy beacon company-fuzzy");
+      await ctx.runEask("install -g spinner ivy beacon company-fuzzy", , { timeout: 120000 });
     });
 
     testUnsafe("eask uninstall -g", async () => {
