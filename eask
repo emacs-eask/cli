@@ -11,7 +11,7 @@ Usage: eask <command> [options..]`;
 
 const epilogue = `For more information, find the manual at https://emacs-eask.github.io/`;
 
-const version = `0.11.8`;
+const version = `0.11.9`;
 
 yargs
   .usage(usage)
