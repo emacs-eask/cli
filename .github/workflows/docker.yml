@@ -12,6 +12,8 @@ on:
       - '**.yml'
       - '**.json'
       - 'eask'
+    paths-ignore:
+      - '**/docs.yml'
   pull_request:
     branches:
       - master
