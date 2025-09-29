@@ -48,18 +48,19 @@ jobs:
       if: github.ref == 'refs/heads/master'
       with:
         repository: emacs-eask/emacs-eask.github.io
-        path: emacs-eask.github.io
+        path: ~/emacs-eask.github.io
         token: ${{ secrets.PAT }}
 
     - name: Build doc artifacts with Hugo
-      run: |
-        mkdir -p ../emacs-eask.github.io
-        hugo --destination ../emacs-eask.github.io --minify
       working-directory: docs
+      run: |
+        mkdir -p ~/emacs-eask.github.io
+        hugo --destination ~/emacs-eask.github.io --minify
 
     # TODO: Generate better commit message
     - name: Publish doc artifacts
       if: github.ref == 'refs/heads/master'
+      working-directory: ~/emacs-eask.github.io
       run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
@@ -70,4 +71,3 @@ jobs:
         SourceCommit: https://github.com/emacs-eask/cli/commit/${{ github.sha }}
         _UBLT_COMMIT_MSG_
         git push
-      working-directory: emacs-eask.github.io
