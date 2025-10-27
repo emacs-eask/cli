@@ -11,7 +11,7 @@ weight: 100
 
 Here is an example using the [GitHub](https://github.com/) Actions service.
 
-```yml
+```yaml
 jobs:
   test:
     runs-on: ${{ matrix.os }}
@@ -21,7 +21,7 @@ jobs:
         emacs-version: [26.3, 27.2, 28.2, 29.4, 30.2, snapshot]
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v5
 
     # Install Emacs
     - uses: jcs090218/setup-emacs@master
@@ -50,11 +50,11 @@ This example is testing your Emacs Lisp package in the below environment;
 
 with these following `actions`,
 
-* [setup-emacs](https://github.com/jcs090218/setup-emacs) to install Emacs
-* [setup-eask](https://github.com/emacs-eask/setup-eask) to install desired Eask version
+- [setup-emacs][] to install Emacs
+- [setup-eask][] to install desired Eask version
 
 {{< hint info >}}
-💡 You can generate workflow file via `eask generate workflow github`, see 
+💡 You can generate workflow file via `eask generate workflow github`, see
 [Commands and options](https://emacs-eask.github.io/Getting-Started/Commands-and-options/#-eask-generate-workflow-github)
 for more information!
 {{< /hint >}}
@@ -64,8 +64,8 @@ for more information!
 You can install Eask locally using scripts from `.github/scripts/setup-eask` (Unix)
 or `.github/scripts/setup-eask.ps1` (Windows).
 
-```yml
-    - uses: actions/checkout@v3
+```yaml
+    - uses: actions/checkout@v5
 
     - name: Prepare Eask (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
@@ -77,3 +77,9 @@ or `.github/scripts/setup-eask.ps1` (Windows).
       if: matrix.os == 'windows-latest'
       run: .github/scripts/setup-eask.ps1
 ```
+
+
+<!-- Links -->
+
+[setup-emacs]: https://github.com/jcs090218/setup-emacs
+[setup-eask]: https://github.com/emacs-eask/setup-eask
