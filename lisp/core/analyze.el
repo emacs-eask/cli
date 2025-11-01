@@ -114,15 +114,15 @@ Argument LEVEL and MSG are data from the debug log signal."
 
     ;; Print result
     (eask-msg "")
-    (cond ((and (eask-json-p)           ; JSON format
-                (or eask-analyze--warnings eask-analyze--errors))
-           (setq content
-                 (eask-analyze--pretty-json (json-encode
-                                             `((warnings . ,eask-analyze--warnings)
-                                               (errors   . ,eask-analyze--errors)))))
+    (cond ((eask-json-p)                ; JSON format
+           (when (or eask-analyze--warnings eask-analyze--errors)
+             (setq content
+                   (eask-analyze--pretty-json (json-encode
+                                               `((warnings . ,eask-analyze--warnings)
+                                                 (errors   . ,eask-analyze--errors))))))
            ;; XXX: When printing the result, no color allow.
            (eask--with-no-color
-            (eask-stdout content)))
+            (eask-stdout (or content "{}"))))
           (eask-analyze--log            ; Plain text
            (setq content
                  (with-temp-buffer
