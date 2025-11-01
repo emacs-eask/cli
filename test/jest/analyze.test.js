@@ -2,12 +2,13 @@ const { TestContext } = require("./helpers");
 
 /**
  * Clean output and attempt to parse as JSON.
+ * Does not accept empty strings as JSON.
  * Throws if failing.
  * @param {string} s
  * @returns {object} the parsed JSON.
  */
 function tryJSON(s) {
-  return JSON.parse(s.trim() || "{}");
+  return JSON.parse(s.trim());
 }
 
 describe("analyze", () => {
