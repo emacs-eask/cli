@@ -109,6 +109,7 @@ Argument LEVEL and MSG are data from the debug log signal."
     (dolist (file files)
       (eask--silent-error
        (eask--save-load-eask-file file
+                                  (push file checked-files)
                                   (push file checked-files))))
 
     ;; Print result

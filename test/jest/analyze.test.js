@@ -76,12 +76,10 @@ describe("analyze", () => {
 
     it("handles json", async () => {
       await expect(ctx.runEask("analyze --json")).rejects.toThrow();
-      await expect(ctx.runEask("analyze Eask --json")).rejects.toThrow(
-        expect.objectContaining({
-          code: 1,
-          stderr: expect.stringContaining("(Checked 1 file)"),
-        }),
-      );
+      await expect(ctx.runEask("analyze Eask --json")).rejects.toMatchObject({
+        code: 1,
+        stderr: expect.stringContaining("(Checked 1 file)"),
+      });
     });
   });
 
@@ -128,19 +126,19 @@ describe("analyze", () => {
       ).rejects.toThrow();
     });
 
-    // TODO prints 0 for some reason
-    it.failing("should print Checked when there are errors", async () => {
+    it("should print Checked when there are errors", async () => {
       await expect(ctx.runEask("analyze Eask-error")).rejects.toMatchObject({
-        stderr: "(Checked 1 file)",
+        stderr: expect.stringContaining("(Checked 1 file)"),
       });
     });
 
-    // TODO prints 1 for some reason
-    it.failing("should check all files when --allow-error is set", async () => {
+    it("should check all files when --allow-error is set", async () => {
       // this is not a great test because when there is any error it doesn't print this note
       await expect(
         ctx.runEask("analyze --allow-error Eask-normal Eask-error"),
-      ).rejects.toMatchObject({ stderr: "(Checked 2 files)" });
+      ).rejects.toMatchObject({
+        stderr: expect.stringContaining("(Checked 2 files)"),
+      });
     });
 
     // although the output does match, it still doesn't exit with an error
