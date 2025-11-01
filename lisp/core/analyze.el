@@ -37,8 +37,9 @@
 
 (defun eask-analyze--load-buffer ()
   "Return the current file loading session."
-  (car (cl-remove-if-not
-        (lambda (elm) (string-prefix-p " *load*-" (buffer-name elm))) (buffer-list))))
+  (car (cl-remove-if-not (lambda (elm)
+                           (string-prefix-p " *load*-" (buffer-name elm)))
+                         (buffer-list))))
 
 (defun eask-analyze--write-json-format (level msg)
   "Prepare log for JSON format.
@@ -98,7 +99,9 @@ Argument LEVEL and MSG are data from the debug log signal."
        level msg))))
 
 (defun eask-stdout (msg &rest args)
-  "Like `eask-msg' but prints to stdout."
+  "Like `eask-msg' but prints to stdout.
+
+For arguments MSG and ARGS, please see function `eask-msg' for the "
   (eask-princ (apply #'eask--format-paint-kwds msg args) nil)
   (eask-princ "\n" nil))
 
@@ -108,13 +111,13 @@ Argument LEVEL and MSG are data from the debug log signal."
     ;; Linting
     (dolist (file files)
       (eask--silent-error
-       (eask--save-load-eask-file file
-                                  (push file checked-files)
-                                  (push file checked-files))))
+        (eask--save-load-eask-file file
+            (push file checked-files))))
 
     ;; Print result
     (eask-msg "")
-    (cond ((eask-json-p)                ; JSON format
+    (cond ((eask-json-p)  ; JSON format
+           ;; Fill content with result.
            (when (or eask-analyze--warnings eask-analyze--errors)
              (setq content
                    (eask-analyze--pretty-json (json-encode
@@ -122,8 +125,8 @@ Argument LEVEL and MSG are data from the debug log signal."
                                                  (errors   . ,eask-analyze--errors))))))
            ;; XXX: When printing the result, no color allow.
            (eask--with-no-color
-            (eask-stdout (or content "{}"))))
-          (eask-analyze--log            ; Plain text
+             (eask-stdout (or content "{}"))))
+          (eask-analyze--log  ; Plain text
            (setq content
                  (with-temp-buffer
                    (dolist (msg (reverse eask-analyze--log))
@@ -131,7 +134,7 @@ Argument LEVEL and MSG are data from the debug log signal."
                    (buffer-string)))
            ;; XXX: When printing the result, no color allow.
            (eask--with-no-color
-            (mapc #'eask-stdout (reverse eask-analyze--log)))))
+             (mapc #'eask-stdout (reverse eask-analyze--log)))))
 
     (eask-info "(Checked %s file%s)"
                (length checked-files)
@@ -160,7 +163,7 @@ Argument LEVEL and MSG are data from the debug log signal."
    (files
     (eask-analyze--file files)
     (when eask-analyze--error-p
-      (eask--exit 1)))
+      (eask--exit 'failure)))
    ;; Pattern defined, but no file found!
    (patterns
     (eask-info "(No files match wildcard: %s)"
