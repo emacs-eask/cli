@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`analyze in ./dsl matches snapshot 1`] = `
+exports[`analyze in ./analyze/dsl matches snapshot 1`] = `
 {
   "stderr": "
 ~/Eask:9:18 Error: ✗ Multiple definition of \`package'

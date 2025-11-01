@@ -1,8 +1,8 @@
 const { TestContext } = require("./helpers");
 
 describe("analyze", () => {
-  describe("in ./dsl", () => {
-    const ctx = new TestContext("./test/jest/dsl");
+  describe("in ./analyze/dsl", () => {
+    const ctx = new TestContext("./test/jest/analyze/dsl");
 
     it("handles plain text", async () => {
       await ctx.runEask("analyze");
@@ -38,8 +38,8 @@ describe("analyze", () => {
     });
   });
 
-  describe("in ./metadata", () => {
-    const ctx = new TestContext("./test/jest/metadata");
+  describe("in ./analyze/metadata", () => {
+    const ctx = new TestContext("./test/jest/analyze/metadata");
 
     it("handles plain text", async () => {
       await ctx.runEask("analyze");
