@@ -1,5 +1,15 @@
 const { TestContext } = require("./helpers");
 
+/**
+ * Clean output and attempt to parse as JSON.
+ * Throws if failing.
+ * @param {string} s
+ * @returns {object} the parsed JSON.
+ */
+function tryJSON(s) {
+  return JSON.parse(s.trim() || "{}");
+}
+
 describe("analyze", () => {
   describe("in ./analyze/dsl", () => {
     const ctx = new TestContext("./test/jest/analyze/dsl");
@@ -10,11 +20,11 @@ describe("analyze", () => {
     });
 
     it("handles json option", async () => {
-      const { stderr } = await ctx.runEask("analyze --json");
+      const { stdout } = await ctx.runEask("analyze --json");
       await ctx.runEask("analyze Eask --json");
 
       // try to parse output, errors if not valid
-      JSON.parse(stderr);
+      tryJSON(stdout);
     });
 
     it("matches snapshot", async () => {
@@ -24,9 +34,9 @@ describe("analyze", () => {
     });
 
     it("should report multiple definitions", async () => {
-      const { stderr } = await ctx.runEask("analyze");
+      const { stdout } = await ctx.runEask("analyze");
       // expect this substring
-      expect(stderr).toMatch("Multiple definition of `package'");
+      expect(stdout).toMatch("Multiple definition of `package'");
     });
   });
 
@@ -71,6 +81,18 @@ describe("analyze", () => {
       await expect(ctx.runEask("analyze Eask-error")).rejects.toThrow();
     });
 
+    // JSON
+    it("handles json option when no errors", async () => {
+      const { stdout } = await ctx.runEask("analyze --json Eask-normal");
+      tryJSON(stdout);
+    });
+
+    it("handles json option when lexical binding warnings are present", async () => {
+      const { stdout } = await ctx.runEask("analyze --json Eask-lexical");
+      tryJSON(stdout);
+    });
+
+    // --strict and --allow-error
     it.failing("should error when using --strict on Eask-warn", async () => {
       await expect(ctx.runEask("analyze --strict Eask-warn")).rejects.toThrow();
     });
