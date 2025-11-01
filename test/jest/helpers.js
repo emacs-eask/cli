@@ -241,6 +241,10 @@ class TestContext {
         .catch(() => {}); // ignore "does not exist errors"
     }
   }
+
+  errorToCommandOutput(e) {
+    return new CommandOutput(e, this.cwd);
+  }
 }
 
 module.exports = {
