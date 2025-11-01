@@ -93,18 +93,23 @@ Argument LEVEL and MSG are data from the debug log signal."
              (t             #'eask-analyze--write-plain-text))
        level msg))))
 
+(defun eask-stdout (msg &rest args)
+  "Like `eask-msg' but prints to stdout."
+  (eask-princ (apply #'eask--format-paint-kwds msg args) nil)
+  (eask-princ "\n" nil))
+
 (defun eask-analyze--file (files)
   "Lint list of Eask FILES."
   (let (checked-files content)
     ;; Linting
     (dolist (file files)
       (eask--silent-error
-        (eask--save-load-eask-file file
-            (push file checked-files))))
+       (eask--save-load-eask-file file
+                                  (push file checked-files))))
 
     ;; Print result
     (eask-msg "")
-    (cond ((and (eask-json-p)  ; JSON format
+    (cond ((and (eask-json-p)           ; JSON format
                 (or eask-analyze--warnings eask-analyze--errors))
            (setq content
                  (eask-analyze--pretty-json (json-encode
@@ -112,8 +117,8 @@ Argument LEVEL and MSG are data from the debug log signal."
                                                (errors   . ,eask-analyze--errors)))))
            ;; XXX: When printing the result, no color allow.
            (eask--with-no-color
-             (eask-msg content)))
-          (eask-analyze--log  ; Plain text
+            (eask-stdout content)))
+          (eask-analyze--log            ; Plain text
            (setq content
                  (with-temp-buffer
                    (dolist (msg (reverse eask-analyze--log))
@@ -121,7 +126,7 @@ Argument LEVEL and MSG are data from the debug log signal."
                    (buffer-string)))
            ;; XXX: When printing the result, no color allow.
            (eask--with-no-color
-             (mapc #'eask-msg (reverse eask-analyze--log))))
+             (mapc #'eask-stdout (reverse eask-analyze--log))))
           (t
            (eask-info "(Checked %s file%s)"
                       (length checked-files)

@@ -3,7 +3,8 @@
 exports[`analyze in ./analyze/dsl matches snapshot 1`] = `
 {
   "stderr": "
-~/Eask:9:18 Error: ✗ Multiple definition of \`package'
+",
+  "stdout": "~/Eask:9:18 Error: ✗ Multiple definition of \`package'
 ~/Eask:12:55 Error: ✗ Multiple definition of \`website-url'
 ~/Eask:14:16 Error: ✗ Multiple definition of \`keywords'
 ~/Eask:17:15 Warning: 💡 Warning regarding duplicate author name, name
@@ -22,6 +23,5 @@ exports[`analyze in ./analyze/dsl matches snapshot 1`] = `
 ~/Eask:50:2 Error: ✗ Define dependencies with the same name \`f'
 ~/Eask:50:2 Error: ✗ Define dependencies with the same name \`f' with different version
 ",
-  "stdout": "",
 }
 `;
