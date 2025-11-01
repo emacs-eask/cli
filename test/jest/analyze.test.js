@@ -15,28 +15,41 @@ describe("analyze", () => {
     const ctx = new TestContext("./test/jest/analyze/dsl");
 
     it("handles plain text", async () => {
-      await ctx.runEask("analyze");
-      await ctx.runEask("analyze Eask");
+      await expect(ctx.runEask("analyze")).rejects.toThrow();
+      await expect(ctx.runEask("analyze Eask")).rejects.toThrow();
     });
 
     it("handles json option", async () => {
-      const { stdout } = await ctx.runEask("analyze --json");
-      await ctx.runEask("analyze Eask --json");
-
-      // try to parse output, errors if not valid
-      tryJSON(stdout);
+      // alternate command order
+      await expect(ctx.runEask("analyze Eask --json")).rejects.toThrow();
+      try {
+        await ctx.runEask("analyze --json");
+      } catch (e) {
+        tryJSON(e.stdout);
+        expect(e.stdout).toMatchSnapshot();
+      }
     });
 
     it("matches snapshot", async () => {
-      const res = await ctx.runEask("analyze");
-      const resClean = res.sanitized().raw();
-      expect(resClean).toMatchSnapshot();
+      try {
+        await ctx.runEask("analyze");
+        expect.failing();
+      } catch (e) {
+        expect(e.code).toBe(1);
+        const res = ctx.errorToCommandOutput(e);
+        const resClean = res.sanitized().raw();
+        expect(resClean).toMatchSnapshot();
+      }
     });
 
     it("should report multiple definitions", async () => {
-      const { stdout } = await ctx.runEask("analyze");
-      // expect this substring
-      expect(stdout).toMatch("Multiple definition of `package'");
+      try {
+        await ctx.runEask("analyze");
+        expect.failing();
+      } catch ({ stdout }) {
+        // expect this substring
+        expect(stdout).toMatch("Multiple definition of `package'");
+      }
     });
   });
 
@@ -52,13 +65,23 @@ describe("analyze", () => {
     const ctx = new TestContext("./test/jest/analyze/metadata");
 
     it("handles plain text", async () => {
-      await ctx.runEask("analyze");
-      await ctx.runEask("analyze Eask");
+      await expect(ctx.runEask("analyze")).rejects.toThrow();
+      await expect(ctx.runEask("analyze Eask")).rejects.toThrow(
+        expect.objectContaining({
+          code: 1,
+          stderr: expect.stringContaining("(Checked 1 file)"),
+        }),
+      );
     });
 
     it("handles json", async () => {
-      await ctx.runEask("analyze --json");
-      await ctx.runEask("analyze Eask --json");
+      await expect(ctx.runEask("analyze --json")).rejects.toThrow();
+      await expect(ctx.runEask("analyze Eask --json")).rejects.toThrow(
+        expect.objectContaining({
+          code: 1,
+          stderr: expect.stringContaining("(Checked 1 file)"),
+        }),
+      );
     });
   });
 
@@ -77,7 +100,7 @@ describe("analyze", () => {
       await ctx.runEask("analyze Eask-warn");
     });
 
-    it.failing("should error on Eask-errors", async () => {
+    it("should error on Eask-errors", async () => {
       await expect(ctx.runEask("analyze Eask-error")).rejects.toThrow();
     });
 
@@ -99,18 +122,20 @@ describe("analyze", () => {
 
     // sanity check: flag should not change behavior in this case
     // this is because the menaing of --allow-error is "continue to the end"
-    it.failing("should error when --allow-error is set", async () => {
+    it("should error when --allow-error is set", async () => {
       await expect(
         ctx.runEask("analyze Eask-error --allow-error"),
       ).rejects.toThrow();
     });
 
+    // TODO prints 0 for some reason
     it.failing("should print Checked when there are errors", async () => {
       await expect(ctx.runEask("analyze Eask-error")).rejects.toMatchObject({
         stderr: "(Checked 1 file)",
       });
     });
 
+    // TODO prints 1 for some reason
     it.failing("should check all files when --allow-error is set", async () => {
       // this is not a great test because when there is any error it doesn't print this note
       await expect(
@@ -119,14 +144,13 @@ describe("analyze", () => {
     });
 
     // although the output does match, it still doesn't exit with an error
-    it.failing(
-      "should have later warnings when --allow-error is set",
-      async () => {
-        await expect(
-          ctx.runEask("analyze --allow-error Eask-error Eask-warn"),
-          // this warning is specific to Eask-warn
-        ).rejects.toMatchObject({ stderr: "missing `none.el'" });
-      },
-    );
+    it("should have later warnings when --allow-error is set", async () => {
+      await expect(
+        ctx.runEask("analyze --allow-error Eask-error Eask-warn"),
+        // this warning is specific to Eask-warn
+      ).rejects.toMatchObject({
+        stdout: expect.stringContaining("missing `none.el'"),
+      });
+    });
   });
 });

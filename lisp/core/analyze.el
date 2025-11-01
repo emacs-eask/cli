@@ -28,6 +28,8 @@
 ;; JSON format
 (defvar eask-analyze--warnings nil)
 (defvar eask-analyze--errors nil)
+;; Error flag
+(defvar eask-analyze--error-p nil)
 
 (defun eask-analyze--pretty-json (json)
   "Return pretty JSON."
@@ -87,6 +89,8 @@ information."
 
 Argument LEVEL and MSG are data from the debug log signal."
   (unless (string= " *temp*" (buffer-name))  ; avoid error from `package-file' directive
+    (when (eq 'error level)
+      (setq eask-analyze--error-p t))
     (with-current-buffer (or (eask-analyze--load-buffer) (buffer-name))
       (funcall
        (cond ((eask-json-p) #'eask-analyze--write-json-format)
@@ -153,7 +157,9 @@ Argument LEVEL and MSG are data from the debug log signal."
   (cond
    ;; Files found, do the action!
    (files
-    (eask-analyze--file files))
+    (eask-analyze--file files)
+    (when eask-analyze--error-p
+      (eask--exit 1)))
    ;; Pattern defined, but no file found!
    (patterns
     (eask-info "(No files match wildcard: %s)"
