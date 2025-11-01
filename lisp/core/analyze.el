@@ -126,11 +126,11 @@ Argument LEVEL and MSG are data from the debug log signal."
                    (buffer-string)))
            ;; XXX: When printing the result, no color allow.
            (eask--with-no-color
-             (mapc #'eask-stdout (reverse eask-analyze--log))))
-          (t
-           (eask-info "(Checked %s file%s)"
-                      (length checked-files)
-                      (eask--sinr checked-files "" "s"))))
+            (mapc #'eask-stdout (reverse eask-analyze--log)))))
+
+    (eask-info "(Checked %s file%s)"
+               (length checked-files)
+               (eask--sinr checked-files "" "s"))
 
     ;; Output file
     (when (and content (eask-output))

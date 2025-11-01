@@ -3,6 +3,8 @@
 exports[`analyze in ./analyze/dsl matches snapshot 1`] = `
 {
   "stderr": "
+
+[36m(Checked 1 file)[0m
 ",
   "stdout": "~/Eask:9:18 Error: ✗ Multiple definition of \`package'
 ~/Eask:12:55 Error: ✗ Multiple definition of \`website-url'
