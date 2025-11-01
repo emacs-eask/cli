@@ -83,10 +83,28 @@ describe("analyze", () => {
       ).rejects.toThrow();
     });
 
+    it.failing("should print Checked when there are errors", async () => {
+      await expect(ctx.runEask("analyze Eask-error")).rejects.toMatchObject({
+        stderr: "(Checked 1 file)",
+      });
+    });
+
     it.failing("should check all files when --allow-error is set", async () => {
+      // this is not a great test because when there is any error it doesn't print this note
       await expect(
         ctx.runEask("analyze --allow-error Eask-normal Eask-error"),
       ).rejects.toMatchObject({ stderr: "(Checked 2 files)" });
     });
+
+    // although the output does match, it still doesn't exit with an error
+    it.failing(
+      "should have later warnings when --allow-error is set",
+      async () => {
+        await expect(
+          ctx.runEask("analyze --allow-error Eask-error Eask-warn"),
+          // this warning is specific to Eask-warn
+        ).rejects.toMatchObject({ stderr: "missing `none.el'" });
+      },
+    );
   });
 });
