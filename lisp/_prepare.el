@@ -1942,7 +1942,7 @@ Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
   `((success . 0)   ; Unused
     (failure . 1)   ; Catchall for general errors
     (misuse  . 2))
-  "Exit code specification.")
+  "The exit code specification.")
 
 (defun eask-exit-code (key)
   "Return the exit code by KEY symbol."
