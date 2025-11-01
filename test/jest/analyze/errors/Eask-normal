@@ -1,0 +1,3 @@
+;; -*- mode: eask; lexical-binding: t -*-
+(package "check-dsl" "0.0.1" "Test for DSL")
+(keywords "dsl")

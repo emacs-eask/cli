@@ -28,6 +28,8 @@
 ;; JSON format
 (defvar eask-analyze--warnings nil)
 (defvar eask-analyze--errors nil)
+;; Error flag
+(defvar eask-analyze--error-p nil)
 
 (defun eask-analyze--pretty-json (json)
   "Return pretty JSON."
@@ -35,8 +37,9 @@
 
 (defun eask-analyze--load-buffer ()
   "Return the current file loading session."
-  (car (cl-remove-if-not
-        (lambda (elm) (string-prefix-p " *load*-" (buffer-name elm))) (buffer-list))))
+  (car (cl-remove-if-not (lambda (elm)
+                           (string-prefix-p " *load*-" (buffer-name elm)))
+                         (buffer-list))))
 
 (defun eask-analyze--write-json-format (level msg)
   "Prepare log for JSON format.
@@ -87,11 +90,20 @@ information."
 
 Argument LEVEL and MSG are data from the debug log signal."
   (unless (string= " *temp*" (buffer-name))  ; avoid error from `package-file' directive
+    (when (eq 'error level)
+      (setq eask-analyze--error-p t))
     (with-current-buffer (or (eask-analyze--load-buffer) (buffer-name))
       (funcall
        (cond ((eask-json-p) #'eask-analyze--write-json-format)
              (t             #'eask-analyze--write-plain-text))
        level msg))))
+
+(defun eask-stdout (msg &rest args)
+  "Like `eask-msg' but prints to stdout.
+
+For arguments MSG and ARGS, please see function `eask-msg' for the "
+  (eask-princ (apply #'eask--format-paint-kwds msg args) nil)
+  (eask-princ "\n" nil))
 
 (defun eask-analyze--file (files)
   "Lint list of Eask FILES."
@@ -104,15 +116,16 @@ Argument LEVEL and MSG are data from the debug log signal."
 
     ;; Print result
     (eask-msg "")
-    (cond ((and (eask-json-p)  ; JSON format
-                (or eask-analyze--warnings eask-analyze--errors))
-           (setq content
-                 (eask-analyze--pretty-json (json-encode
-                                             `((warnings . ,eask-analyze--warnings)
-                                               (errors   . ,eask-analyze--errors)))))
+    (cond ((eask-json-p)  ; JSON format
+           ;; Fill content with result.
+           (when (or eask-analyze--warnings eask-analyze--errors)
+             (setq content
+                   (eask-analyze--pretty-json (json-encode
+                                               `((warnings . ,eask-analyze--warnings)
+                                                 (errors   . ,eask-analyze--errors))))))
            ;; XXX: When printing the result, no color allow.
            (eask--with-no-color
-             (eask-msg content)))
+             (eask-stdout (or content "{}"))))
           (eask-analyze--log  ; Plain text
            (setq content
                  (with-temp-buffer
@@ -121,11 +134,11 @@ Argument LEVEL and MSG are data from the debug log signal."
                    (buffer-string)))
            ;; XXX: When printing the result, no color allow.
            (eask--with-no-color
-             (mapc #'eask-msg (reverse eask-analyze--log))))
-          (t
-           (eask-info "(Checked %s file%s)"
-                      (length checked-files)
-                      (eask--sinr checked-files "" "s"))))
+             (mapc #'eask-stdout (reverse eask-analyze--log)))))
+
+    (eask-info "(Checked %s file%s)"
+               (length checked-files)
+               (eask--sinr checked-files "" "s"))
 
     ;; Output file
     (when (and content (eask-output))
@@ -148,7 +161,9 @@ Argument LEVEL and MSG are data from the debug log signal."
   (cond
    ;; Files found, do the action!
    (files
-    (eask-analyze--file files))
+    (eask-analyze--file files)
+    (when eask-analyze--error-p
+      (eask--exit 'failure)))
    ;; Pattern defined, but no file found!
    (patterns
     (eask-info "(No files match wildcard: %s)"
