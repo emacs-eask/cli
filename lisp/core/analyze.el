@@ -98,13 +98,6 @@ Argument LEVEL and MSG are data from the debug log signal."
              (t             #'eask-analyze--write-plain-text))
        level msg))))
 
-(defun eask-stdout (msg &rest args)
-  "Like `eask-msg' but prints to stdout.
-
-For arguments MSG and ARGS, please see function `eask-msg' for the "
-  (eask-princ (apply #'eask--format-paint-kwds msg args) nil)
-  (eask-princ "\n" nil))
-
 (defun eask-analyze--file (files)
   "Lint list of Eask FILES."
   (let (checked-files content)
@@ -112,6 +105,8 @@ For arguments MSG and ARGS, please see function `eask-msg' for the "
     (dolist (file files)
       (eask--silent-error
         (eask--save-load-eask-file file
+            (push file checked-files)
+            ;; also count files with errors in the total count
             (push file checked-files))))
 
     ;; Print result
@@ -119,13 +114,12 @@ For arguments MSG and ARGS, please see function `eask-msg' for the "
     (cond ((eask-json-p)  ; JSON format
            ;; Fill content with result.
            (when (or eask-analyze--warnings eask-analyze--errors)
-             (setq content
-                   (eask-analyze--pretty-json (json-encode
-                                               `((warnings . ,eask-analyze--warnings)
-                                                 (errors   . ,eask-analyze--errors))))))
+             (setq content (json-encode
+                            `((warnings . ,eask-analyze--warnings)
+                              (errors   . ,eask-analyze--errors)))))
            ;; XXX: When printing the result, no color allow.
            (eask--with-no-color
-             (eask-stdout (or content "{}"))))
+             (eask-msg (or content "{}"))))
           (eask-analyze--log  ; Plain text
            (setq content
                  (with-temp-buffer
@@ -134,7 +128,7 @@ For arguments MSG and ARGS, please see function `eask-msg' for the "
                    (buffer-string)))
            ;; XXX: When printing the result, no color allow.
            (eask--with-no-color
-             (mapc #'eask-stdout (reverse eask-analyze--log)))))
+             (mapc #'eask-msg (reverse eask-analyze--log)))))
 
     (eask-info "(Checked %s file%s)"
                (length checked-files)

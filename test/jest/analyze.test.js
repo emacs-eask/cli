@@ -2,13 +2,26 @@ const { TestContext } = require("./helpers");
 
 /**
  * Clean output and attempt to parse as JSON.
- * Does not accept empty strings as JSON.
  * Throws if failing.
  * @param {string} s
  * @returns {object} the parsed JSON.
  */
 function tryJSON(s) {
-  return JSON.parse(s.trim());
+  // The main use case of analyze --json is flycheck/flymake
+  // both of which accept mixed JSON/text output.
+  // So the test should filter non-JSON output in a similar way
+  // See flycheck--json-parser for reference
+  const lines = s.split("\n");
+  const json = lines.filter((x) => x.startsWith("{") || x.startsWith("["));
+  if (json.length > 1) {
+    console.warn("command produced multiple JSON objects as output");
+  }
+
+  if (json.length == 0) {
+    return {};
+  } else {
+    return JSON.parse(json[0]);
+  }
 }
 
 describe("analyze", () => {
@@ -26,8 +39,8 @@ describe("analyze", () => {
       try {
         await ctx.runEask("analyze --json");
       } catch (e) {
-        tryJSON(e.stdout);
-        expect(e.stdout).toMatchSnapshot();
+        tryJSON(e.stderr);
+        expect(e.stderr).toMatchSnapshot();
       }
     });
 
@@ -47,9 +60,9 @@ describe("analyze", () => {
       try {
         await ctx.runEask("analyze");
         expect.failing();
-      } catch ({ stdout }) {
+      } catch ({ stderr }) {
         // expect this substring
-        expect(stdout).toMatch("Multiple definition of `package'");
+        expect(stderr).toMatch("Multiple definition of `package'");
       }
     });
   });
@@ -105,13 +118,13 @@ describe("analyze", () => {
 
     // JSON
     it("handles json option when no errors", async () => {
-      const { stdout } = await ctx.runEask("analyze --json Eask-normal");
-      tryJSON(stdout);
+      const { stderr } = await ctx.runEask("analyze --json Eask-normal");
+      tryJSON(stderr);
     });
 
     it("handles json option when lexical binding warnings are present", async () => {
-      const { stdout } = await ctx.runEask("analyze --json Eask-lexical");
-      tryJSON(stdout);
+      const { stderr } = await ctx.runEask("analyze --json Eask-lexical");
+      tryJSON(stderr);
     });
 
     // --strict and --allow-error
@@ -148,7 +161,7 @@ describe("analyze", () => {
         ctx.runEask("analyze --allow-error Eask-error Eask-warn"),
         // this warning is specific to Eask-warn
       ).rejects.toMatchObject({
-        stdout: expect.stringContaining("missing `none.el'"),
+        stderr: expect.stringContaining("missing `none.el'"),
       });
     });
   });
