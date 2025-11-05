@@ -40,7 +40,9 @@ describe("analyze", () => {
         await ctx.runEask("analyze --json");
       } catch (e) {
         tryJSON(e.stderr);
-        expect(e.stderr).toMatchSnapshot();
+        const res = ctx.errorToCommandOutput(e);
+        const resClean = res.sanitized().raw();
+        expect(resClean).toMatchSnapshot();
       }
     });
 
