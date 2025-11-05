@@ -130,7 +130,7 @@ describe("analyze", () => {
     });
 
     // --strict and --allow-error
-    it.failing("should error when using --strict on Eask-warn", async () => {
+    it("should error when using --strict on Eask-warn", async () => {
       await expect(ctx.runEask("analyze --strict Eask-warn")).rejects.toThrow();
     });
 

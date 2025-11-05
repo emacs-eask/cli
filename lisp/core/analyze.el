@@ -28,6 +28,9 @@
 ;; JSON format
 (defvar eask-analyze--warnings nil)
 (defvar eask-analyze--errors nil)
+
+;; Warning flag
+(defvar eask-analyze--warning-p nil)
 ;; Error flag
 (defvar eask-analyze--error-p nil)
 
@@ -92,6 +95,8 @@ Argument LEVEL and MSG are data from the debug log signal."
   (unless (string= " *temp*" (buffer-name))  ; avoid error from `package-file' directive
     (when (eq 'error level)
       (setq eask-analyze--error-p t))
+    (when (eq 'warn level)
+      (setq eask-analyze--warning-p t))
     (with-current-buffer (or (eask-analyze--load-buffer) (buffer-name))
       (funcall
        (cond ((eask-json-p) #'eask-analyze--write-json-format)
@@ -156,7 +161,9 @@ Argument LEVEL and MSG are data from the debug log signal."
    ;; Files found, do the action!
    (files
     (eask-analyze--file files)
-    (when eask-analyze--error-p
+    (when (or eask-analyze--error-p
+              ;; strict flag turns warnings into errors
+              (and eask-analyze--warning-p (eask-strict-p)))
       (eask--exit 'failure)))
    ;; Pattern defined, but no file found!
    (patterns
