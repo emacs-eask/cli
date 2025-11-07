@@ -111,8 +111,8 @@ Argument LEVEL and MSG are data from the debug log signal."
       (eask--silent-error
         (eask--save-load-eask-file file
             (push file checked-files)
-            ;; also count files with errors in the total count
-            (push file checked-files))))
+          ;; also count files with errors in the total count
+          (push file checked-files))))
 
     ;; Print result
     (eask-msg "")
