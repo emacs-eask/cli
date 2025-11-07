@@ -93,10 +93,9 @@ information."
 
 Argument LEVEL and MSG are data from the debug log signal."
   (unless (string= " *temp*" (buffer-name))  ; avoid error from `package-file' directive
-    (when (eq 'error level)
-      (setq eask-analyze--error-p t))
-    (when (eq 'warn level)
-      (setq eask-analyze--warning-p t))
+    (cl-case level
+      (`error (setq eask-analyze--error-p t))
+      (`warn  (setq eask-analyze--warning-p t)))
     (with-current-buffer (or (eask-analyze--load-buffer) (buffer-name))
       (funcall
        (cond ((eask-json-p) #'eask-analyze--write-json-format)
