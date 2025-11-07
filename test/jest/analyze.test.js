@@ -11,16 +11,23 @@ function tryJSON(s) {
   // both of which accept mixed JSON/text output.
   // So the test should filter non-JSON output in a similar way
   // See flycheck--json-parser for reference
-  const lines = s.split("\n");
-  const json = lines.filter((x) => x.startsWith("{") || x.startsWith("["));
-  if (json.length > 1) {
-    console.warn("command produced multiple JSON objects as output");
-  }
 
+  // This is a rough approximation of the greedy JSON parsing
+  // that flycheck uses
+  // It will yield a false negative if:
+  // - a non-JSON output line begins with a space
+  // - there is more that one JSON object in the output
+  const lines = s.split("\n");
+  const json = lines.filter((x) => x.match("^[{}\\[\\] ]"));
   if (json.length == 0) {
     return {};
   } else {
-    return JSON.parse(json[0]);
+    const result = JSON.parse(json.join("\n"));
+    if (typeof result == "string") {
+      // this case is a single string prefixed with whitespace
+      return {};
+    }
+    return result;
   }
 }
 
