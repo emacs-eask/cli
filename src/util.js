@@ -212,6 +212,14 @@ async function e_call(argv, script, ...args) {
     return;
   }
 
+  if (argv.verbose !== undefined &&
+    // this must exclude NaN -- yargs default value for numeric type
+    !(argv.verbose >= 0 && argv.verbose <= 5)) {
+    console.warn("invalid value for --verbose option: must be a number between 0 and 5");
+    process.exit(1);
+    return;
+  }
+
   return new Promise(resolve => {
     let _path = el_script(script);
 
