@@ -18,6 +18,18 @@ describe("options", () => {
     });
   });
 
+  describe("verbose option", () => {
+    it("should error if no number is given", async () => {
+      await expect(ctx.runEask("info -v")).rejects.toMatchObject({ code: 1 });
+    });
+
+    it("should error if the number is omitted before the next option", async () => {
+      await expect(ctx.runEask("info -v --no-color")).rejects.toMatchObject({
+        code: 1,
+      });
+    });
+  });
+
   test.each([
     "-a",
     "--all",
