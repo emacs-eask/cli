@@ -146,7 +146,7 @@ function setup_env() {
 }
 
 /**
- * Handle global options
+ * Handle global options.
  *
  * @param { Object } argv - is a parsed object from yargs.
  */
@@ -209,14 +209,6 @@ function _environment_name (argv) {
 async function e_call(argv, script, ...args) {
   if (!which(EASK_EMACS)) {
     console.warn("Emacs is not installed (cannot find `" + EASK_EMACS + "' executable)");
-    return;
-  }
-
-  if (argv.verbose !== undefined &&
-    // this must exclude NaN -- yargs default value for numeric type
-    !(argv.verbose >= 0 && argv.verbose <= 5)) {
-    console.warn("invalid value for --verbose option: must be a number between 0 and 5");
-    process.exit(1);
     return;
   }
 
