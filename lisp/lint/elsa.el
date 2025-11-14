@@ -55,18 +55,24 @@
     (eask-msg "")
     (eask-msg "`%s` with elsa (%s)" (ansi-green file) eask-lint-elsa--version)
     (eask-with-verbosity 'debug
-                         (setq errors (oref (elsa-analyse-file filename elsa-global-state) errors)))
+      (setq errors (oref (elsa-analyse-file filename elsa-global-state) errors)))
     (if errors
         (--each (reverse errors)
           (let ((line (string-trim (concat file ":" (elsa-message-format it)))))
             (cond ((string-match-p "[: ][Ee]rror:" line)
-                   (setq eask-lint-elsa--errors-p 't)
+                   (setq eask-lint-elsa--errors-p t)
                    (eask-error line))
                   ((string-match-p "[: ][Ww]arning:" line)
-                   (setq eask-lint-elsa--warnings-p 't)
+                   (setq eask-lint-elsa--warnings-p t)
                    (eask-warn line))
                   (t (eask-log line)))))
       (eask-msg "No issues found"))))
+
+(defun eask-lint-elsa--has-error-p ()
+  "Return non-nil if we should report error for exit status."
+  (or eask-lint-elsa--errors-p
+      (and eask-lint-elsa--warnings-p
+           (eask-strict-p))))
 
 (eask-start
   ;; Preparation
@@ -88,9 +94,8 @@
       (eask-msg "")
       (eask-info "(Total of %s file%s linted)" (length files)
                  (eask--sinr files "" "s"))
-      (when (or eask-lint-elsa--errors-p
-             (and eask-lint-elsa--warnings-p
-                  (eask-strict-p)))
+      ;; Report error.
+      (when (eask-lint-elsa--has-error-p)
         (eask--exit 'failure)))
      ;; Pattern defined, but no file found!
      (patterns

@@ -54,17 +54,22 @@
                (error-pos (seq-elt err 2))
                (severity  (seq-elt err 7))
                (report-func (pcase severity
-                              (`error #'eask-error)
+                              (`error   #'eask-error)
                               (`warning #'eask-warn)
-                              (_ #'eask-info))))
+                              (_        #'eask-info))))
           (when (eq severity 'warning)
-            (setq eask-lint-regexps--warnings-p 't))
+            (setq eask-lint-regexps--warnings-p t))
           (funcall report-func "%s:%s %s: %s"
                    file (line-number-at-pos error-pos)
                    (capitalize (eask-2str severity)) msg)))
       (unless errors
         (eask-msg "No issues found"))
       (kill-current-buffer))))
+
+(defun eask-lint-regexps--has-error-p ()
+  "Return non-nil if we should report error for exit status."
+  (and eask-lint-regexps--warnings-p
+       (eask-strict-p)))
 
 (eask-start
   ;; Preparation
@@ -86,8 +91,8 @@
       (eask-msg "")
       (eask-info "(Total of %s file%s linted)" (length files)
                  (eask--sinr files "" "s"))
-      (when (and eask-lint-regexps--warnings-p
-                 (eask-strict-p))
+      ;; Report error.
+      (when (eask-lint-regexps--has-error-p)
         (eask--exit 'failure)))
      ;; Pattern defined, but no file found!
      (patterns

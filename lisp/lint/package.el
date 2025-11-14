@@ -43,6 +43,9 @@
 ;;
 ;;; Core
 
+(defconst eask-lint-package--buffer-name "*Package-Lint*"
+  "The buffer name for `package-lint's log file.")
+
 (defvar eask-lint-package--warnings-p nil
   "Non-nil if any warnings were reported in the run.")
 
@@ -58,11 +61,16 @@
     (with-current-buffer (find-file filename)
       (package-lint-current-buffer)
       (kill-current-buffer)))
-  (with-current-buffer "*Package-Lint*"
-      (goto-char (point-min))
-      (when (re-search-forward "warning:" nil t)
-        (setq eask-lint-package--warnings-p t)))
-  (eask-print-log-buffer "*Package-Lint*"))
+  (with-current-buffer eask-lint-package--buffer-name
+    (goto-char (point-min))
+    (when (re-search-forward "warning:" nil t)
+      (setq eask-lint-package--warnings-p t)))
+  (eask-print-log-buffer eask-lint-package--buffer-name))
+
+(defun eask-lint-package--has-error-p ()
+  "Return non-nil if we should report error for exit status."
+  (and eask-lint-package--warnings-p
+       (eask-strict-p)))
 
 (eask-start
   ;; Preparation
@@ -85,8 +93,8 @@
       (eask-msg "")
       (eask-info "(Total of %s file%s linted)" (length files)
                  (eask--sinr files "" "s"))
-      (when (and eask-lint-package--warnings-p
-                 (eask-strict-p))
+      ;; Report error.
+      (when (eask-lint-package--has-error-p)
         (eask--exit 'failure)))
      ;; Pattern defined, but no file found!
      (patterns

@@ -43,12 +43,18 @@
     (eask-lint-first-newline)
     (eask-msg "`%s` with elint" (ansi-green file))
     (eask-with-verbosity 'debug (elint-file filename))
-    (eask-print-log-buffer (elint-get-log-buffer))
-    (with-current-buffer (elint-get-log-buffer)
-      (goto-char (point-min))
-      (when (re-search-forward ":Warning:" nil t)
-        (setq eask-lint-elint--warnings-p t)))
-    (kill-buffer (elint-get-log-buffer))))
+    (let ((log-buffer (elint-get-log-buffer)))
+      (eask-print-log-buffer log-buffer)
+      (with-current-buffer log-buffer
+        (goto-char (point-min))
+        (when (re-search-forward ":Warning:" nil t)
+          (setq eask-lint-elint--warnings-p t)))
+      (kill-buffer log-buffer))))
+
+(defun eask-lint-elint--has-error-p ()
+  "Return non-nil if we should report error for exit status."
+  (and eask-lint-elint--warnings-p
+       (eask-strict-p)))
 
 (eask-start
   (require 'elint)
@@ -64,8 +70,8 @@
       (eask-info "(Total of %s file%s %s checked)" (length files)
                  (eask--sinr files "" "s")
                  (eask--sinr files "has" "have"))
-      (when (and eask-lint-elint--warnings-p
-                 (eask-strict-p))
+      ;; Report error.
+      (when (eask-lint-elint--has-error-p)
         (eask--exit 'failure)))
      ;; Pattern defined, but no file found!
      (patterns
