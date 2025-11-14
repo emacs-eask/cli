@@ -173,18 +173,26 @@ describe("lint", () => {
   });
 
   describe("keywords", () => {
-    // TODO seems like keywords in actual file are ignored
-    // only those in Eask file are checked
-    // but those interfere with --strict handling in other commands
+    // always errors so --strict doesn't matter
+    // checks only Eask and x-pkg.el, so --allow-error doesn't matter
 
-    it.failing("should work", async () => {
-      await ctx.runEask("lint keywords");
+    it("should error in an empty project", async () => {
+      const ctxEmpty = new TestContext("./test/jest/lint");
+      await expect(ctxEmpty.runEask("lint keywords")).rejects.toThrow();
     });
 
-    it.failing("should error given --strict", async () => {
-      await expect(ctx.runEask("lint keywords --strict")).rejects.toMatchObject(
-        { code: 1 },
-      );
+    it("should work in keywords-ok", async () => {
+      const ctxOk = new TestContext("./test/jest/lint/keywords-ok");
+      await expect(ctxOk.runEask("lint keywords")).resolves.toMatchObject({
+        stderr: expect.stringContaining("No issues found"),
+      });
+    });
+
+    it("should error in keywords-bad", async () => {
+      const ctxBad = new TestContext("./test/jest/lint/keywords-bad");
+      await expect(ctxBad.runEask("lint keywords")).rejects.toMatchObject({
+        stderr: expect.stringContaining("Missing a standard keyword"),
+      });
     });
   });
 
