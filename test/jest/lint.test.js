@@ -150,9 +150,7 @@ describe("lint", () => {
   });
 
   describe("indent", () => {
-    // TODO exits with 1
-    // TODO prints "Don't call me!"
-    it.failing("should work on indent-warn.el", async () => {
+    it("should work on indent-warn.el", async () => {
       await ctx.runEask("lint indent indent-warn.el");
     });
 
