@@ -40,8 +40,14 @@
     (eask-lint-first-newline)
     (eask-msg "`%s` with elint" (ansi-green file))
     (eask-with-verbosity 'debug (elint-file filename))
-    (eask-print-log-buffer (elint-get-log-buffer))
-    (kill-buffer (elint-get-log-buffer))))
+    (let ((log-buffer (elint-get-log-buffer)))
+      (eask-print-log-buffer log-buffer)
+      (kill-buffer log-buffer))))
+
+(defun eask-lint-elint--has-error-p ()
+  "Return non-nil if we should report error for exit status."
+  (and eask--has-warn-p
+       (eask-strict-p)))
 
 (eask-start
   (require 'elint)
@@ -56,7 +62,10 @@
       (eask-msg "")
       (eask-info "(Total of %s file%s %s checked)" (length files)
                  (eask--sinr files "" "s")
-                 (eask--sinr files "has" "have")))
+                 (eask--sinr files "has" "have"))
+      ;; Report error.
+      (when (eask-lint-elint--has-error-p)
+        (eask--exit 'failure)))
      ;; Pattern defined, but no file found!
      (patterns
       (eask-info "(No files match wildcard: %s)"

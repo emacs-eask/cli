@@ -53,10 +53,18 @@
     (if errors
         (--each (reverse errors)
           (let ((line (string-trim (concat file ":" (elsa-message-format it)))))
-            (cond ((string-match-p "[: ][Ee]rror:" line) (eask-error line))
-                  ((string-match-p "[: ][Ww]arning:" line) (eask-warn line))
+            (cond ((string-match-p "[: ][Ee]rror:" line)
+                   (eask-error line))
+                  ((string-match-p "[: ][Ww]arning:" line)
+                   (eask-warn line))
                   (t (eask-log line)))))
       (eask-msg "No issues found"))))
+
+(defun eask-lint-elsa--has-error-p ()
+  "Return non-nil if we should report error for exit status."
+  (or eask--has-error-p
+      (and eask--has-warn-p
+           (eask-strict-p))))
 
 (eask-start
   ;; Preparation
@@ -77,7 +85,10 @@
       (mapcar #'eask-lint-elsa--analyse-file files)
       (eask-msg "")
       (eask-info "(Total of %s file%s linted)" (length files)
-                 (eask--sinr files "" "s")))
+                 (eask--sinr files "" "s"))
+      ;; Report error.
+      (when (eask-lint-elsa--has-error-p)
+        (eask--exit 'failure)))
      ;; Pattern defined, but no file found!
      (patterns
       (eask-msg "")
