@@ -80,11 +80,21 @@ describe("lint", () => {
       await ctx.runEask("lint elint declare-ok.el");
     });
 
-    // TODO --strict has no effect on elint
-    it.failing("should error given --strict", async () => {
+    it("should error given --strict", async () => {
       await expect(
         ctx.runEask("lint elint --strict checkdoc-fail.el"),
       ).rejects.toMatchObject({ code: 1 });
+    });
+
+    it("should check both files given --strict --allow-error", async () => {
+      await expect(
+        ctx.runEask(
+          "lint elint --strict --allow-error checkdoc-fail.el declare-ok.el",
+        ),
+      ).rejects.toMatchObject({
+        code: 1,
+        stderr: expect.stringContaining("`declare-ok.el` with elint"),
+      });
     });
   });
 

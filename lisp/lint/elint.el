@@ -32,6 +32,9 @@
 ;;
 ;;; Core
 
+(defvar eask-lint-elint--warnings-p nil
+  "Non-nil if any warnings were reported in the run.")
+
 (defun eask-lint-elint--file (filename)
   "Run elint on FILENAME."
   (let* ((filename (expand-file-name filename))
@@ -41,6 +44,10 @@
     (eask-msg "`%s` with elint" (ansi-green file))
     (eask-with-verbosity 'debug (elint-file filename))
     (eask-print-log-buffer (elint-get-log-buffer))
+    (with-current-buffer (elint-get-log-buffer)
+      (goto-char (point-min))
+      (when (re-search-forward ":Warning:" nil t)
+        (setq eask-lint-elint--warnings-p t)))
     (kill-buffer (elint-get-log-buffer))))
 
 (eask-start
@@ -56,7 +63,10 @@
       (eask-msg "")
       (eask-info "(Total of %s file%s %s checked)" (length files)
                  (eask--sinr files "" "s")
-                 (eask--sinr files "has" "have")))
+                 (eask--sinr files "has" "have"))
+      (when (and eask-lint-elint--warnings-p
+                 (eask-strict-p))
+        (eask--exit 'failure)))
      ;; Pattern defined, but no file found!
      (patterns
       (eask-info "(No files match wildcard: %s)"
