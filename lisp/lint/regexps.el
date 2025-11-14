@@ -37,9 +37,6 @@
 (defconst eask-lint-regexps--relint-version nil
   "`relint' version.")
 
-(defvar eask-lint-regexps--warnings-p nil
-  "Non-nil if any warnings were reported in the run.")
-
 (defun eask-lint-regexps--relint-file (filename)
   "Package lint FILENAME."
   (let* ((filename (expand-file-name filename))
@@ -57,8 +54,6 @@
                               (`error   #'eask-error)
                               (`warning #'eask-warn)
                               (_        #'eask-info))))
-          (when (eq severity 'warning)
-            (setq eask-lint-regexps--warnings-p t))
           (funcall report-func "%s:%s %s: %s"
                    file (line-number-at-pos error-pos)
                    (capitalize (eask-2str severity)) msg)))
@@ -68,7 +63,7 @@
 
 (defun eask-lint-regexps--has-error-p ()
   "Return non-nil if we should report error for exit status."
-  (and eask-lint-regexps--warnings-p
+  (and eask--has-warn-p
        (eask-strict-p)))
 
 (eask-start

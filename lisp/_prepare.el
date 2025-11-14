@@ -1967,6 +1967,12 @@ Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
 (defvar eask-inhibit-error-message nil
   "Non-nil to stop error/warning message.")
 
+(defvar eask--has-error-p nil
+  "Non-nil if an error has occurred.")
+
+(defvar eask--has-warn-p nil
+  "Non-nil if a warning has occurred.")
+
 (defmacro eask-ignore-errors (&rest body)
   "Execute BODY without killing the process."
   (declare (indent 0) (debug t))
@@ -1994,6 +2000,7 @@ Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
   "On error.
 
 Arguments FNC and ARGS are used for advice `:around'."
+  (setq eask--has-error-p t)
   (let ((msg (eask--ansi 'error (apply #'format-message args))))
     (unless eask-inhibit-error-message
       (eask--unsilent (eask-msg "%s" msg)))
@@ -2005,6 +2012,7 @@ Arguments FNC and ARGS are used for advice `:around'."
   "On warn.
 
 Arguments FNC and ARGS are used for advice `:around'."
+  (setq eask--has-warn-p t)
   (let ((msg (eask--ansi 'warn (apply #'format-message args))))
     (unless eask-inhibit-error-message
       (eask--unsilent (eask-msg "%s" msg)))

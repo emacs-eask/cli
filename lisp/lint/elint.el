@@ -32,9 +32,6 @@
 ;;
 ;;; Core
 
-(defvar eask-lint-elint--warnings-p nil
-  "Non-nil if any warnings were reported in the run.")
-
 (defun eask-lint-elint--file (filename)
   "Run elint on FILENAME."
   (let* ((filename (expand-file-name filename))
@@ -45,15 +42,11 @@
     (eask-with-verbosity 'debug (elint-file filename))
     (let ((log-buffer (elint-get-log-buffer)))
       (eask-print-log-buffer log-buffer)
-      (with-current-buffer log-buffer
-        (goto-char (point-min))
-        (when (re-search-forward ":Warning:" nil t)
-          (setq eask-lint-elint--warnings-p t)))
       (kill-buffer log-buffer))))
 
 (defun eask-lint-elint--has-error-p ()
   "Return non-nil if we should report error for exit status."
-  (and eask-lint-elint--warnings-p
+  (and eask--has-warn-p
        (eask-strict-p)))
 
 (eask-start

@@ -41,12 +41,6 @@
 (defconst eask-lint-elsa--version nil
   "Elsa version.")
 
-(defvar eask-lint-elsa--warnings-p nil
-  "Non-nil if any warnings were reported in the run.")
-
-(defvar eask-lint-elsa--errors-p nil
-  "Non-nil if any errors were reported in the run.")
-
 (defun eask-lint-elsa--analyse-file (filename)
   "Process FILENAME."
   (let* ((filename (expand-file-name filename))
@@ -60,18 +54,16 @@
         (--each (reverse errors)
           (let ((line (string-trim (concat file ":" (elsa-message-format it)))))
             (cond ((string-match-p "[: ][Ee]rror:" line)
-                   (setq eask-lint-elsa--errors-p t)
                    (eask-error line))
                   ((string-match-p "[: ][Ww]arning:" line)
-                   (setq eask-lint-elsa--warnings-p t)
                    (eask-warn line))
                   (t (eask-log line)))))
       (eask-msg "No issues found"))))
 
 (defun eask-lint-elsa--has-error-p ()
   "Return non-nil if we should report error for exit status."
-  (or eask-lint-elsa--errors-p
-      (and eask-lint-elsa--warnings-p
+  (or eask--has-error-p
+      (and eask--has-warn-p
            (eask-strict-p))))
 
 (eask-start
