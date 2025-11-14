@@ -53,9 +53,10 @@
         (bs (buffer-string)))
     (eask-with-temp-buffer (insert bs))
     (eask--silent (indent-region (point-min) (point-max)))
-    (if (/= tick (buffer-modified-tick))
+    (if-let* (((/= tick (buffer-modified-tick)))
+              (infos (eask-lint-indent--undo-infos buffer-undo-list)))
         ;; Indentation changed: warn for each line.
-        (dolist (info (eask-lint-indent--undo-infos buffer-undo-list))
+        (dolist (info infos)
           (let* ((line    (nth 0 info))
                  (column  (nth 1 info))
                  (current (eask-with-buffer
