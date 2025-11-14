@@ -47,12 +47,13 @@
     (with-current-buffer (find-file filename)
       (setq errors (relint-buffer (current-buffer)))
       (dolist (err errors)
-        (let* ((msg       (nth 0 err))
-               (error-pos (nth 2 err))
-               (severity  (nth 5 err))
+        (let* ((msg       (seq-elt err 0))
+               (error-pos (seq-elt err 2))
+               (severity  (seq-elt err 7))
                (report-func (pcase severity
                               (`error #'eask-error)
-                              (`warning #'eask-warn))))
+                              (`warning #'eask-warn)
+                              (_ #'eask-info))))
           (funcall report-func "%s:%s %s: %s"
                    file (line-number-at-pos error-pos)
                    (capitalize (eask-2str severity)) msg)))

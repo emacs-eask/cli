@@ -223,7 +223,6 @@ describe("lint", () => {
       await ctx.runEask("lint regexps declare-ok.el");
     });
 
-    // TODO this prints a stack trace
     it("should error on regexp-warn.el", async () => {
       await expect(
         ctx.runEask("lint regexps regexp-warn.el"),
