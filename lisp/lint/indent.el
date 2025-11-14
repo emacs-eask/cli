@@ -68,6 +68,12 @@
   (let* ((patterns (eask-args))
          (files (if patterns (eask-expand-file-specs (eask-args))
                   (eask-package-el-files))))
+    ;; XXX: Load all dependencies and elisp files to ensure
+    ;; all macros' indentation is applied.
+    (progn
+      (eask-install-dependencies)
+      (eask-with-verbosity 'debug
+        (ignore-errors (mapc #'load (eask-package-el-files)))))
     (cond
      ;; Files found, do the action!
      (files
