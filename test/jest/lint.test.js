@@ -201,11 +201,20 @@ describe("lint", () => {
       await ctx.runEask("lint package declare-ok.el");
     });
 
-    // note that all files are checked anyway so --allow-error has no effect
-    it.failing("should error given --strict", async () => {
+    it("should error given --strict", async () => {
       await expect(
         ctx.runEask("lint package --strict declare-ok.el"),
       ).rejects.toMatchObject({ code: 1 });
+    });
+
+    // note that all files are checked anyway so --allow-error has no effect
+    it("should check all files given --allow-error", async () => {
+      await expect(
+        ctx.runEask("lint package --allow-error *.el"),
+      ).rejects.toMatchObject({
+        code: 1,
+        stderr: expect.stringContaining("`declare-ok.el` with package-lint"),
+      });
     });
   });
 

@@ -43,6 +43,9 @@
 ;;
 ;;; Core
 
+(defvar eask-lint-package--warnings-p nil
+  "Non-nil if any warnings were reported in the run.")
+
 (defconst eask-lint-package--version nil
   "`package-lint' version.")
 
@@ -55,6 +58,10 @@
     (with-current-buffer (find-file filename)
       (package-lint-current-buffer)
       (kill-current-buffer)))
+  (with-current-buffer "*Package-Lint*"
+      (goto-char (point-min))
+      (when (re-search-forward "warning:" nil t)
+        (setq eask-lint-package--warnings-p t)))
   (eask-print-log-buffer "*Package-Lint*"))
 
 (eask-start
@@ -77,7 +84,10 @@
       (mapcar #'eask-lint-package--file files)
       (eask-msg "")
       (eask-info "(Total of %s file%s linted)" (length files)
-                 (eask--sinr files "" "s")))
+                 (eask--sinr files "" "s"))
+      (when (and eask-lint-package--warnings-p
+                 (eask-strict-p))
+        (eask--exit 'failure)))
      ;; Pattern defined, but no file found!
      (patterns
       (eask-msg "")
