@@ -223,16 +223,25 @@ describe("lint", () => {
       await ctx.runEask("lint regexps declare-ok.el");
     });
 
-    it("should error on regexp-warn.el", async () => {
+    it("should have warnings on regexp-warn.el", async () => {
       await expect(
         ctx.runEask("lint regexps regexp-warn.el"),
-      ).rejects.toThrow();
+      ).resolves.toMatchObject({ stderr: expect.stringContaining("Warning:") });
     });
 
-    it.failing("should work with --allow-error", async () => {
+    it("should error on regexp-warn.el with --strict", async () => {
       await expect(
-        ctx.runEask("lint regexps --allow-error regexp-warn.el declare-ok.el"),
+        ctx.runEask("lint regexps --strict regexp-warn.el"),
+      ).rejects.toMatchObject({ code: 1 });
+    });
+
+    it("should work with --allow-error", async () => {
+      await expect(
+        ctx.runEask(
+          "lint regexps --allow-error --strict regexp-warn.el declare-ok.el",
+        ),
       ).rejects.toMatchObject({
+        code: 1,
         stderr: expect.stringContaining("2 files linted"),
       });
     });

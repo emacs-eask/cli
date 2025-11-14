@@ -37,6 +37,9 @@
 (defconst eask-lint-regexps--relint-version nil
   "`relint' version.")
 
+(defvar eask-lint-regexps--warnings-p nil
+  "Non-nil if any warnings were reported in the run.")
+
 (defun eask-lint-regexps--relint-file (filename)
   "Package lint FILENAME."
   (let* ((filename (expand-file-name filename))
@@ -54,6 +57,8 @@
                               (`error #'eask-error)
                               (`warning #'eask-warn)
                               (_ #'eask-info))))
+          (when (eq severity 'warning)
+            (setq eask-lint-regexps--warnings-p 't))
           (funcall report-func "%s:%s %s: %s"
                    file (line-number-at-pos error-pos)
                    (capitalize (eask-2str severity)) msg)))
@@ -80,7 +85,10 @@
       (mapcar #'eask-lint-regexps--relint-file files)
       (eask-msg "")
       (eask-info "(Total of %s file%s linted)" (length files)
-                 (eask--sinr files "" "s")))
+                 (eask--sinr files "" "s"))
+      (when (and eask-lint-regexps--warnings-p
+                 (eask-strict-p))
+        (eask--exit 'failure)))
      ;; Pattern defined, but no file found!
      (patterns
       (eask-msg "")
