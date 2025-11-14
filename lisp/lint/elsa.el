@@ -41,6 +41,12 @@
 (defconst eask-lint-elsa--version nil
   "Elsa version.")
 
+(defvar eask-lint-elsa--warnings-p nil
+  "Non-nil if any warnings were reported in the run.")
+
+(defvar eask-lint-elsa--errors-p nil
+  "Non-nil if any errors were reported in the run.")
+
 (defun eask-lint-elsa--analyse-file (filename)
   "Process FILENAME."
   (let* ((filename (expand-file-name filename))
@@ -49,12 +55,16 @@
     (eask-msg "")
     (eask-msg "`%s` with elsa (%s)" (ansi-green file) eask-lint-elsa--version)
     (eask-with-verbosity 'debug
-      (setq errors (oref (elsa-analyse-file filename elsa-global-state) errors)))
+                         (setq errors (oref (elsa-analyse-file filename elsa-global-state) errors)))
     (if errors
         (--each (reverse errors)
           (let ((line (string-trim (concat file ":" (elsa-message-format it)))))
-            (cond ((string-match-p "[: ][Ee]rror:" line) (eask-error line))
-                  ((string-match-p "[: ][Ww]arning:" line) (eask-warn line))
+            (cond ((string-match-p "[: ][Ee]rror:" line)
+                   (setq eask-lint-elsa--errors-p 't)
+                   (eask-error line))
+                  ((string-match-p "[: ][Ww]arning:" line)
+                   (setq eask-lint-elsa--warnings-p 't)
+                   (eask-warn line))
                   (t (eask-log line)))))
       (eask-msg "No issues found"))))
 
@@ -77,7 +87,11 @@
       (mapcar #'eask-lint-elsa--analyse-file files)
       (eask-msg "")
       (eask-info "(Total of %s file%s linted)" (length files)
-                 (eask--sinr files "" "s")))
+                 (eask--sinr files "" "s"))
+      (when (or eask-lint-elsa--errors-p
+             (and eask-lint-elsa--warnings-p
+                  (eask-strict-p)))
+        (eask--exit 'failure)))
      ;; Pattern defined, but no file found!
      (patterns
       (eask-msg "")

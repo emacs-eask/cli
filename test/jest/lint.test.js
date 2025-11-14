@@ -125,7 +125,8 @@ describe("lint", () => {
   });
 
   describe("elsa", () => {
-    // TODO prints a lot of garbage
+    // prints a lot of garbage
+    // likely an upstream problem, unclear how to fix
     it("should work on elisp-lint-ok.el", async () => {
       await ctx.runEask("lint elsa elisp-lint-ok.el");
     });
@@ -134,17 +135,23 @@ describe("lint", () => {
       await ctx.runEask("lint elsa elsa-warn.el");
     });
 
-    // TODO prints out "error" but no exit code
     it("should error on declare-ok.el", async () => {
       await expect(
         ctx.runEask("lint elsa declare-ok.el"),
       ).rejects.toMatchObject({ code: 1 });
     });
 
-    // TODO strict has no effect
-    it.failing("should error given --strict", async () => {
+    it("should error given --strict", async () => {
       await expect(
         ctx.runEask("lint elsa --strict elsa-warn.el"),
+      ).rejects.toMatchObject({ code: 1 });
+    });
+
+    it("should run all files given --allow-error", async () => {
+      await expect(
+        ctx.runEask(
+          "lint elsa --strict --allow-errors elsa-warn.el elisp-lint-ok.el",
+        ),
       ).rejects.toMatchObject({ code: 1 });
     });
   });
