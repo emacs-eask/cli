@@ -1432,7 +1432,29 @@ This uses function `locate-dominating-file' to look up directory tree."
                  (ignore-errors (make-directory package-user-dir t))
                  (eask--silent (eask-setup-paths))
                  (eask-with-verbosity 'debug (eask--load-config))
-                 (eask--with-hooks ,@body))))))))))
+                 (eask--with-hooks ,@body))))))
+         ;; Report exit stats if any.
+         (eask--handle-exit-status)))))
+
+(defun eask--error-status ()
+  "Return error status."
+  (let ((result))
+    ;; Error.
+    (when eask--has-error-p
+      (push 'error result))
+    ;; Warning.
+    (when eask--has-warn-p
+      (push (if (eask-strict-p)
+                'error
+              'warn)
+            result))
+    ;; No repeat.
+    (delete-dups result)))
+
+(defun eask--handle-exit-status ()
+  "Return non-nil if we should report error for exit status."
+  (when (memq 'error (eask--error-status))
+    (eask--exit 'failure)))
 
 ;;
 ;;; Eask file
@@ -1991,16 +2013,23 @@ Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
 (defun eask--trigger-error ()
   "Trigger error event."
   (when (and (not eask--ignore-error-p)
-             (not (eask-checker-p)))  ; Ignore when checking Eask-file.
-    (if (eask-allow-error-p)  ; Trigger error at the right time.
-        (add-hook 'eask-after-command-hook #'eask--exit)
-      (eask--exit))))
+             (not (eask-allow-error-p))
+             ;; Ignore when checking Eask-file.
+             (not (eask-checker-p)))
+    ;; Stop immediately.
+    (eask--exit 'failure)))
 
 (defun eask--error (fnc &rest args)
   "On error.
 
 Arguments FNC and ARGS are used for advice `:around'."
-  (setq eask--has-error-p t)  ; Just a record.
+  ;; Handle https://github.com/emacs-eask/cli/issues/11.
+  (cond ((< emacs-major-version 28)
+         (unless (string-prefix-p "Can't find library " (car args))
+           (setq eask--has-error-p t)))
+        (t
+         ;; Just a record.
+         (setq eask--has-error-p t)))
   (let ((msg (eask--ansi 'error (apply #'format-message args))))
     (unless eask-inhibit-error-message
       (eask--unsilent (eask-msg "%s" msg)))

@@ -4,7 +4,6 @@
 // Notice, below we clone a random package (repo) that uses Eask as the
 // dependencies management tool.
 
-const cmp = require('semver-compare');
 const { emacsVersion, TestContext } = require("./helpers");
 
 describe("local", () => {
@@ -15,10 +14,7 @@ describe("local", () => {
   //       this is because of recipe dependencies triggering
   //       "temporary archives" build.
   beforeAll(async () => {
-    await ctx.runEask(
-      "install-deps", { timeout: 40000 },
-      // See https://github.com/emacs-eask/cli/issues/11.
-      cmp(await emacsVersion(), "28.1") == -1);
+    await ctx.runEask("install-deps", { timeout: 40000 });
   });
 
   afterAll(() => ctx.cleanUp());
@@ -84,10 +80,7 @@ describe("local", () => {
 
   describe("Development", () => {
     beforeAll(async () => {
-      await ctx.runEask(
-        "install-deps", { timeout: 40000 },
-        // See https://github.com/emacs-eask/cli/issues/11.
-        cmp(await emacsVersion(), "28.1") == -1)
+      await ctx.runEask("install-deps", { timeout: 40000 });
     });
 
     // this requires install-deps
@@ -123,9 +116,7 @@ describe("local", () => {
 
   describe("Execution", () => {
     beforeAll(async () => {
-      await ctx.runEask("install-deps", { timeout: 40000 },
-                        // See https://github.com/emacs-eask/cli/issues/11.
-                        cmp(await emacsVersion(), "28.1") == -1)
+      await ctx.runEask("install-deps", { timeout: 40000 });
     });
 
     test("eval", async () => {
@@ -212,15 +203,14 @@ describe("local", () => {
   describe("Linting", () => {
     // some lint commands may fail if packages are missing
     beforeAll(async () => {
-      await ctx.runEask("install-deps", { timeout: 40000 },
-                        // See https://github.com/emacs-eask/cli/issues/11.
-                        cmp(await emacsVersion(), "28.1") == -1)
+      await ctx.runEask("install-deps", { timeout: 40000 });
     });
 
     it.each([
       "lint checkdoc",
       "lint declare",
       "lint elint",
+      "lint elisp-lint",
       "lint indent",
       "lint keywords",
       "lint license",
@@ -232,12 +222,6 @@ describe("local", () => {
     // XXX: Elsa is not stable, ignore it for now
     test.skip("lint elsa", async () => {
       await ctx.runEask("lint elsa");
-    });
-
-    it("lint elint", async () => {
-      await ctx.runEask("lint elisp-lint", { },
-                        // See https://github.com/emacs-eask/cli/issues/11.
-                        cmp(await emacsVersion(), "28.1") == -1);
     });
 
     it("lint regexps", async () => {

@@ -1,14 +1,10 @@
-const cmp = require('semver-compare');
 const { emacsVersion, TestContext } = require("./helpers");
 
 describe("outdated and upgrade", () => {
   const ctx = new TestContext("./test/jest/outdated-upgrade");
 
   beforeAll(async () => {
-    await ctx.runEask(
-      "install-deps", { timeout: 40000 },
-      // See https://github.com/emacs-eask/cli/issues/11.
-      cmp(await emacsVersion(), "28.1") == -1);
+    await ctx.runEask("install-deps", { timeout: 40000 });
     await ctx.runEask("load make-outdate.el");
   });
 
