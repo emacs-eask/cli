@@ -4,20 +4,21 @@
 // Notice, below we clone a random package (repo) that uses Eask as the
 // dependencies management tool.
 
+const cmp = require('semver-compare');
 const { emacsVersion, TestContext } = require("./helpers");
 
 describe("local", () => {
   const cwd = "./test/jest/local";
   const ctx = new TestContext(cwd);
 
-  // See https://github.com/emacs-eask/cli/issues/11.
-  const avoid11 = (emacsVersion() < "28.1");
-
   // NOTE: `install-deps` takes a long time in this package
   //       this is because of recipe dependencies triggering
   //       "temporary archives" build.
   beforeAll(async () => {
-    await ctx.runEask("install-deps", { timeout: 40000 }, avoid11)
+    await ctx.runEask(
+      "install-deps", { timeout: 40000 },
+      // See https://github.com/emacs-eask/cli/issues/11.
+      cmp(await emacsVersion(), "28.1") == -1);
   });
 
   afterAll(() => ctx.cleanUp());
@@ -83,7 +84,10 @@ describe("local", () => {
 
   describe("Development", () => {
     beforeAll(async () => {
-      await ctx.runEask("install-deps", { timeout: 40000 }, avoid11)
+      await ctx.runEask(
+        "install-deps", { timeout: 40000 },
+        // See https://github.com/emacs-eask/cli/issues/11.
+        ((await emacsVersion()) < "28.1"))
     });
 
     // this requires install-deps

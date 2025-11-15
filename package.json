@@ -37,7 +37,8 @@
   },
   "devDependencies": {
     "@yao-pkg/pkg": "^6.0.0",
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "semver-compare": "^1.0.0"
   },
   "jest": {
     "rootDir": "./test/jest",

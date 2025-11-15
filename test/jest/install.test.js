@@ -1,12 +1,10 @@
+const cmp = require('semver-compare');
 const { emacsVersion, TestContext } = require("./helpers");
 
 describe("install and uninstall", () => {
   describe("in ./install", () => {
     const ctx = new TestContext("./test/jest/install/");
     const packageName = "mini.pkg.1";
-
-    // See https://github.com/emacs-eask/cli/issues/11.
-    const avoid11 = (emacsVersion() < "28.1");
 
     beforeAll(async () => {
       await ctx.runEask("clean all");
@@ -15,8 +13,12 @@ describe("install and uninstall", () => {
     afterAll(() => ctx.cleanUp());
 
     it("installs project package", async () => {
-      await ctx.runEask("package", avoid11);  // creates dist/<pkg>.tar
-      await ctx.runEask("install");  // installs dependencies and generated package
+      // creates dist/<pkg>.tar
+      await ctx.runEask("package",
+                        // See https://github.com/emacs-eask/cli/issues/11.
+                        cmp(await emacsVersion(), "28.1") == -1);
+      // installs dependencies and generated package
+      await ctx.runEask("install");
       const { stderr } = await ctx.runEask("list");
       expect(stderr).toMatch(packageName);
     });
@@ -39,13 +41,18 @@ describe("install and uninstall", () => {
     });
 
     it("uninstalls project package", async () => {
-      await ctx.runEask("uninstall", avoid11);
+      await ctx.runEask("uninstall",
+                        // See https://github.com/emacs-eask/cli/issues/11.
+                        cmp(await emacsVersion(), "28.1") == -1);
       const { stderr } = await ctx.runEask("list");
       expect(stderr).not.toMatch(packageName);
     });
 
     it("installs dependencies", async () => {
-      const { stderr } = await ctx.runEask("install-deps", { timeout: 40000 }, avoid11);
+      const { stderr } = await ctx.runEask(
+        "install-deps", { timeout: 40000 },
+        // See https://github.com/emacs-eask/cli/issues/11.
+        cmp(await emacsVersion(), "28.1") == -1);
       expect(stderr).not.toMatch(packageName);
     });
 
