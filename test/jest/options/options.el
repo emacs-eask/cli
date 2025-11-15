@@ -1,6 +1,13 @@
-;;; options.el --- Test options  -*- lexical-binding: t; -*-
+;;; options.el --- Test all options flag  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2025  the Eask authors.
+
+;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>
+;; Maintainer: Shen, Jen-Chieh <jcs090218@gmail.com>
+;; URL: https://github.com/emacs-eask/options
+;; Version: 0.0.0
+;; Package-Requires: ((emacs "26.1"))
+;; Keywords:  test
 
 ;; This file is not part of GNU Emacs.
 
