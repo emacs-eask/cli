@@ -46,6 +46,31 @@ cd ./docs/
 hugo server
 ```
 
+您應該會看到類似以下畫面：
+
+```console
+Start building sites …
+hugo v0.148.1-98ba786f2f5dca0866f47ab79f394370bcb77d2f windows/amd64 BuildDate=2025-07-11T12:56:21Z VendorInfo=gohugoio
+
+
+                  │ EN  │ ZH - TW
+──────────────────┼─────┼─────────
+ Pages            │  36 │      34
+ Paginator pages  │   0 │       0
+ Non-page files   │   2 │       0
+ Static files     │ 144 │     144
+ Processed images │   0 │       0
+ Aliases          │   2 │       1
+ Cleaned          │   0 │       0
+
+Built in 3987 ms
+Environment: "development"
+Serving pages from disk
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
+Press Ctrl+C to stop
+```
+
 就是這樣！ 現在您可以在瀏覽器裡面打開 `localhost:1313`。 🎉
 
 {{< hint info >}}
