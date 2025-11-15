@@ -87,7 +87,7 @@ describe("local", () => {
       await ctx.runEask(
         "install-deps", { timeout: 40000 },
         // See https://github.com/emacs-eask/cli/issues/11.
-        ((await emacsVersion()) < "28.1"))
+        cmp(await emacsVersion(), "28.1") == -1)
     });
 
     // this requires install-deps

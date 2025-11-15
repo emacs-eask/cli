@@ -8,7 +8,7 @@ describe("exec", () => {
     await ctx.runEask(
       "install-deps", { timeout: 40000 },
       // See https://github.com/emacs-eask/cli/issues/11.
-      cmp(await emacsVersion(), "28.1") == -1))
+      cmp(await emacsVersion(), "28.1") == -1);
   });
 
   afterAll(() => ctx.cleanUp());
