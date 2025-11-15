@@ -45,7 +45,7 @@ describe("install and uninstall", () => {
     });
 
     it("installs dependencies", async () => {
-      const { stderr } = await ctx.runEask("install-deps");
+      const { stderr } = await ctx.runEask("install-deps", { timeout: 40000 }, avoid11);
       expect(stderr).not.toMatch(packageName);
     });
 

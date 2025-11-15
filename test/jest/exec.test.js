@@ -3,7 +3,12 @@ const { TestContext } = require("./helpers");
 describe("exec", () => {
   const ctx = new TestContext("./test/jest/exec");
 
-  beforeAll(async () => await ctx.runEask("install-deps"));
+  // See https://github.com/emacs-eask/cli/issues/11.
+  const avoid11 = (emacsVersion() < "28.1");
+
+  beforeAll(async () => {
+    await ctx.runEask("install-deps", { timeout: 40000 }, avoid11)
+  });
 
   afterAll(() => ctx.cleanUp());
 
