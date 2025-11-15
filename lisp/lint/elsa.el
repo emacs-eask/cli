@@ -53,8 +53,10 @@
     (if errors
         (--each (reverse errors)
           (let ((line (string-trim (concat file ":" (elsa-message-format it)))))
-            (cond ((string-match-p "[: ][Ee]rror:" line) (eask-error line))
-                  ((string-match-p "[: ][Ww]arning:" line) (eask-warn line))
+            (cond ((string-match-p "[: ][Ee]rror:" line)
+                   (eask-error line))
+                  ((string-match-p "[: ][Ww]arning:" line)
+                   (eask-warn line))
                   (t (eask-log line)))))
       (eask-msg "No issues found"))))
 

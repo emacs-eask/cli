@@ -49,8 +49,8 @@ test-29.4:
     - eask install
     - eask compile
 
-test-30.1:
-  image: silex/emacs:30.1-ci
+test-30.2:
+  image: silex/emacs:30.2-ci
   script:
     - eask clean all
     - eask package

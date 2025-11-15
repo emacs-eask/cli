@@ -5,12 +5,14 @@ on:
     branches:
       - master
     paths:
-      - 'eask'
-      - '**.yml'
       - lisp/**
       - cmds/**
       - src/**
       - test/**
+      - 'eask'
+      - '**.yml'
+    paths-ignore:
+      - '**/docs.yml'
   pull_request:
     branches:
       - master
@@ -31,7 +33,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         emacs-version:
-          - 30.1
+          - 30.2
 
     steps:
     - uses: jcs090218/setup-emacs@master

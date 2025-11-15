@@ -40,8 +40,9 @@
     (eask-lint-first-newline)
     (eask-msg "`%s` with elint" (ansi-green file))
     (eask-with-verbosity 'debug (elint-file filename))
-    (eask-print-log-buffer (elint-get-log-buffer))
-    (kill-buffer (elint-get-log-buffer))))
+    (let ((log-buffer (elint-get-log-buffer)))
+      (eask-print-log-buffer log-buffer)
+      (kill-buffer log-buffer))))
 
 (eask-start
   (require 'elint)

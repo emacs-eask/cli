@@ -146,7 +146,7 @@ function setup_env() {
 }
 
 /**
- * Handle global options
+ * Handle global options.
  *
  * @param { Object } argv - is a parsed object from yargs.
  */
@@ -167,7 +167,7 @@ function _global_options(argv) {
   flags.push(def_flag(argv['log-file'], (argv['log-file']) ? '--log-file' : '--no-log-file'));
   flags.push(def_flag(argv['elapsed-time'], (argv['elapsed-time']) ? '--elapsed-time' : '--no-elapsed-time'));
   flags.push(def_flag(argv['no-color'], '--no-color'));
-  /* Number type */
+  /* Numeric type */
   flags.push(def_flag(argv.verbose, '--verbose', argv.verbose));
   /* String type */
   flags.push(def_flag(argv.proxy, '--proxy', argv.proxy));
@@ -175,6 +175,23 @@ function _global_options(argv) {
   flags.push(def_flag(argv['https-proxy'], '--https-proxy', argv['https-proxy']));
   flags.push(def_flag(argv['no-proxy'], '--no-proxy', argv['no-proxy']));
   return flags;
+}
+
+/**
+ * Check any invalid arguments or options.
+ * @param { JSON } (argv - Argument vector.
+ * @return Return true if there is no input error.
+ */
+function _check_argv(argv) {
+  /* Numeric type */
+  if (argv.verbose !== undefined &&
+      // this must exclude NaN -- yargs default value for numeric type
+      !(argv.verbose >= 0 && argv.verbose <= 5)) {
+    console.warn("invalid value for --verbose option: must be a number between 0 and 5");
+    return false;
+  }
+
+  return true;
 }
 
 /**
@@ -209,6 +226,11 @@ function _environment_name (argv) {
 async function e_call(argv, script, ...args) {
   if (!which(EASK_EMACS)) {
     console.warn("Emacs is not installed (cannot find `" + EASK_EMACS + "' executable)");
+    return;
+  }
+
+  if (!_check_argv(argv)) {
+    process.exit(1);
     return;
   }
 

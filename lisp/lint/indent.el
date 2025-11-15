@@ -53,9 +53,10 @@
         (bs (buffer-string)))
     (eask-with-temp-buffer (insert bs))
     (eask--silent (indent-region (point-min) (point-max)))
-    (if (/= tick (buffer-modified-tick))
+    (if-let* (((/= tick (buffer-modified-tick)))
+              (infos (eask-lint-indent--undo-infos buffer-undo-list)))
         ;; Indentation changed: warn for each line.
-        (dolist (info (eask-lint-indent--undo-infos buffer-undo-list))
+        (dolist (info infos)
           (let* ((line    (nth 0 info))
                  (column  (nth 1 info))
                  (current (eask-with-buffer
@@ -68,9 +69,12 @@
   (let* ((patterns (eask-args))
          (files (if patterns (eask-expand-file-specs (eask-args))
                   (eask-package-el-files))))
-    (eask-install-dependencies)
-    (eask-with-verbosity 'debug
-      (ignore-errors (mapc #'load (eask-package-el-files))))
+    ;; XXX: Load all dependencies and elisp files to ensure
+    ;; all macros' indentation is applied.
+    (progn
+      (eask-install-dependencies)
+      (eask-with-verbosity 'debug
+        (ignore-errors (mapc #'load (eask-package-el-files)))))
     (cond
      ;; Files found, do the action!
      (files

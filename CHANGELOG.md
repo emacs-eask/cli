@@ -20,6 +20,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * feat(lint): Add command for `org-lint` ([#328](../../pull/328))
 * fix: Avoid using white color for light theme ([`8acdc65`](../../commit/8acdc65f464414ac2ba591d600dbca55ac7a5952))
 * fix: Use `kill-current-buffer` instead ([#331](../../pull/331))
+* fix: eask analyze should exit with 1 on errors ([#359](../../pull/359))
 
 ## 0.11.x
 > Released Apr 03, 2025

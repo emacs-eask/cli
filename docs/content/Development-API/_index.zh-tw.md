@@ -63,7 +63,7 @@ Eask 的使用者目錄路徑。
 Eask 全局 elpa 目錄；它將被視為系統全域的套件。
 
 ```elisp
-(message "%s" eask-package-sys-dir)  ; ~/.eask/30.1/elpa/
+(message "%s" eask-package-sys-dir)  ; ~/.eask/30.2/elpa/
 ```
 
 ## 🔍 變數: eask-invocation

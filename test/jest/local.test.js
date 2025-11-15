@@ -4,18 +4,22 @@
 // Notice, below we clone a random package (repo) that uses Eask as the
 // dependencies management tool.
 
+const cmp = require('semver-compare');
 const { emacsVersion, TestContext } = require("./helpers");
-
-jest.setTimeout(1000 * 60);
 
 describe("local", () => {
   const cwd = "./test/jest/local";
   const ctx = new TestContext(cwd);
 
-  // NOTE: install-deps takes a long time in this package
+  // NOTE: `install-deps` takes a long time in this package
   //       this is because of recipe dependencies triggering
   //       "temporary archives" build.
-  beforeAll(async () => await ctx.runEask("install-deps", { timeout: 40000 }));
+  beforeAll(async () => {
+    await ctx.runEask(
+      "install-deps", { timeout: 40000 },
+      // See https://github.com/emacs-eask/cli/issues/11.
+      cmp(await emacsVersion(), "28.1") == -1);
+  });
 
   afterAll(() => ctx.cleanUp());
 
@@ -51,7 +55,7 @@ describe("local", () => {
     // NOTE: eask loc is a long running command
     it("loc", async () => {
       // installs markdown mode -- depends on emacs 28.1
-      if ((await emacsVersion()) >= "28.1") {
+      if (cmp(await emacsVersion(), "28.1") == 1) {
         await ctx.runEask("loc");
         await ctx.runEask("loc Eask");
       }
@@ -79,7 +83,13 @@ describe("local", () => {
   });
 
   describe("Development", () => {
-    beforeAll(async () => await ctx.runEask("install-deps"));
+    beforeAll(async () => {
+      await ctx.runEask(
+        "install-deps", { timeout: 40000 },
+        // See https://github.com/emacs-eask/cli/issues/11.
+        cmp(await emacsVersion(), "28.1") == -1)
+    });
+
     // this requires install-deps
     it("compile", async () => {
       await ctx.runEask("compile");
@@ -112,7 +122,11 @@ describe("local", () => {
   });
 
   describe("Execution", () => {
-    beforeAll(async () => await ctx.runEask("install-deps"));
+    beforeAll(async () => {
+      await ctx.runEask("install-deps", { timeout: 40000 },
+                        // See https://github.com/emacs-eask/cli/issues/11.
+                        cmp(await emacsVersion(), "28.1") == -1)
+    });
 
     test("eval", async () => {
       await ctx.runEask('eval "(progn (require \'mini.pkg.1))"');
@@ -197,13 +211,16 @@ describe("local", () => {
 
   describe("Linting", () => {
     // some lint commands may fail if packages are missing
-    beforeAll(async () => await ctx.runEask("install-deps"));
+    beforeAll(async () => {
+      await ctx.runEask("install-deps", { timeout: 40000 },
+                        // See https://github.com/emacs-eask/cli/issues/11.
+                        cmp(await emacsVersion(), "28.1") == -1)
+    });
 
     it.each([
       "lint checkdoc",
       "lint declare",
       "lint elint",
-      "lint elisp-lint",
       "lint indent",
       "lint keywords",
       "lint license",
@@ -212,15 +229,21 @@ describe("local", () => {
       await ctx.runEask(cmd);
     });
 
-    it("lint regexps", async () => {
-      if ((await emacsVersion()) >= "27.1") {
-        await ctx.runEask("lint regexps");
-      }
-    });
-
     // XXX: Elsa is not stable, ignore it for now
     test.skip("lint elsa", async () => {
       await ctx.runEask("lint elsa");
+    });
+
+    it("lint elint", async () => {
+      await ctx.runEask("lint elisp-lint", { },
+                        // See https://github.com/emacs-eask/cli/issues/11.
+                        cmp(await emacsVersion(), "28.1") == -1);
+    });
+
+    it("lint regexps", async () => {
+      if (cmp(await emacsVersion(), "27.1") == 1) {
+        await ctx.runEask("lint regexps");
+      }
     });
 
     it("lint org *.org", async () => {
@@ -237,7 +260,7 @@ describe("local", () => {
   describe("Formatting", () => {
     // installs elisp-autofmt
     it("format elisp-autofmt", async () => {
-      if ((await emacsVersion()) >= "29.1") {
+      if (cmp(await emacsVersion(), "29.1") == 1) {
         await ctx.runEask("format elisp-autofmt");
       }
     });

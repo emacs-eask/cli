@@ -11,17 +11,17 @@ weight: 100
 
 以下是使用 [GitHub](https://github.com/) Actions 服務的示例。
 
-```yml
+```yaml
 jobs:
   test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        emacs-version: [26.3, 27.2, 28.2, 29.4, 30.1, snapshot]
+        emacs-version: [26.3, 27.2, 28.2, 29.4, 30.2, snapshot]
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v5
 
     # 安裝 Emacs
     - uses: jcs090218/setup-emacs@master
@@ -50,8 +50,8 @@ jobs:
 
 通過以下`操作`，
 
-* [setup-emacs](https://github.com/jcs090218/setup-emacs) 安裝 Emacs
-* [setup-eask](https://github.com/emacs-eask/setup-eask) 安裝所需的 Eask 版本
+- [setup-emacs][] 安裝 Emacs
+- [setup-eask][] 安裝所需的 Eask 版本
 
 {{< hint info >}}
 💡 您可以通過 `eask generate workflow github` 生成工作流文件，
@@ -64,8 +64,8 @@ jobs:
 您可以使用 `.github/scripts/setup-eask` (Unix) 或 `.github/scripts/setup-eask.ps1` (Windows)
 中的腳本在本地安裝 Eask。
 
-```yml
-    - uses: actions/checkout@v3
+```yaml
+    - uses: actions/checkout@v5
 
     - name: 準備 Eask (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
@@ -77,3 +77,9 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: .github/scripts/setup-eask.ps1
 ```
+
+
+<!-- Links -->
+
+[setup-emacs]: https://github.com/jcs090218/setup-emacs
+[setup-eask]: https://github.com/emacs-eask/setup-eask

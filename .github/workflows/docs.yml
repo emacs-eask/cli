@@ -20,6 +20,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  PATH_DOC: ${{ github.workspace }}/emacs-eask.github.io
+
 jobs:
   publish-doc:
     runs-on: ubuntu-latest
@@ -28,9 +31,9 @@ jobs:
       with:
         submodules: true
 
-    - uses: actions/setup-node@v4
+    - uses: actions/setup-node@v6
       with:
-        node-version: 20
+        node-version: 22
 
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v3
@@ -48,18 +51,24 @@ jobs:
       if: github.ref == 'refs/heads/master'
       with:
         repository: emacs-eask/emacs-eask.github.io
-        path: emacs-eask.github.io
+        path: ${{ env.PATH_DOC }}
         token: ${{ secrets.PAT }}
 
+    - name: Clean up before the build
+      working-directory: ${{ env.PATH_DOC }}
+      continue-on-error: true
+      run: git rm -r '*'
+
     - name: Build doc artifacts with Hugo
-      run: |
-        mkdir -p ../emacs-eask.github.io
-        hugo --destination ../emacs-eask.github.io --minify
       working-directory: docs
+      run: |
+        mkdir -p ${{ env.PATH_DOC }}
+        hugo --destination ${{ env.PATH_DOC }} --minify
 
     # TODO: Generate better commit message
     - name: Publish doc artifacts
       if: github.ref == 'refs/heads/master'
+      working-directory: ${{ env.PATH_DOC }}
       run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
@@ -70,4 +79,3 @@ jobs:
         SourceCommit: https://github.com/emacs-eask/cli/commit/${{ github.sha }}
         _UBLT_COMMIT_MSG_
         git push
-      working-directory: emacs-eask.github.io

@@ -5,13 +5,15 @@ on:
     branches:
       - master
     paths:
-      - 'eask'
-      - '**.yml'
       - lisp/**
       - cmds/**
       - src/**
       - test/**
+      - '**.yml'
       - '**.json'
+      - 'eask'
+      # ignore
+      - '!**/docs.yml'
   pull_request:
     branches:
       - master
@@ -25,7 +27,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  VERSION: 0.11.8
+  VERSION: 0.11.9
   REPO_BIN: 'emacs-eask/binaries'
 
 jobs:
@@ -108,7 +110,7 @@ jobs:
     #### Upload an artifact for testing purposes
 
     - name: Upload for tests
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: ${{ matrix.target }}
         path: dist
