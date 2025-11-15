@@ -5,6 +5,9 @@ describe("install and uninstall", () => {
     const ctx = new TestContext("./test/jest/install/");
     const packageName = "mini.pkg.1";
 
+    // See https://github.com/emacs-eask/cli/issues/11.
+    const avoid11 = (emacsVersion() < "28.1");
+
     beforeAll(async () => {
       await ctx.runEask("clean all");
     });
@@ -12,7 +15,7 @@ describe("install and uninstall", () => {
     afterAll(() => ctx.cleanUp());
 
     it("installs project package", async () => {
-      await ctx.runEask("package");  // creates dist/<pkg>.tar
+      await ctx.runEask("package", avoid11);  // creates dist/<pkg>.tar
       await ctx.runEask("install");  // installs dependencies and generated package
       const { stderr } = await ctx.runEask("list");
       expect(stderr).toMatch(packageName);
@@ -36,7 +39,7 @@ describe("install and uninstall", () => {
     });
 
     it("uninstalls project package", async () => {
-      await ctx.runEask("uninstall");
+      await ctx.runEask("uninstall", avoid11);
       const { stderr } = await ctx.runEask("list");
       expect(stderr).not.toMatch(packageName);
     });

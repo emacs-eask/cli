@@ -10,10 +10,15 @@ describe("local", () => {
   const cwd = "./test/jest/local";
   const ctx = new TestContext(cwd);
 
-  // NOTE: install-deps takes a long time in this package
+  // See https://github.com/emacs-eask/cli/issues/11.
+  const avoid11 = (emacsVersion() < "28.1");
+
+  // NOTE: `install-deps` takes a long time in this package
   //       this is because of recipe dependencies triggering
   //       "temporary archives" build.
-  beforeAll(async () => await ctx.runEask("install-deps", { timeout: 40000 }));
+  beforeAll(async () => {
+    await ctx.runEask("install-deps", { timeout: 40000 }, avoid11)
+  });
 
   afterAll(() => ctx.cleanUp());
 
@@ -77,7 +82,10 @@ describe("local", () => {
   });
 
   describe("Development", () => {
-    beforeAll(async () => await ctx.runEask("install-deps"));
+    beforeAll(async () => {
+      await ctx.runEask("install-deps", { timeout: 40000 }, avoid11)
+    });
+
     // this requires install-deps
     it("compile", async () => {
       await ctx.runEask("compile");
@@ -110,7 +118,9 @@ describe("local", () => {
   });
 
   describe("Execution", () => {
-    beforeAll(async () => await ctx.runEask("install-deps"));
+    beforeAll(async () => {
+      await ctx.runEask("install-deps", { timeout: 40000 }, avoid11)
+    });
 
     test("eval", async () => {
       await ctx.runEask('eval "(progn (require \'mini.pkg.1))"');
@@ -195,7 +205,9 @@ describe("local", () => {
 
   describe("Linting", () => {
     // some lint commands may fail if packages are missing
-    beforeAll(async () => await ctx.runEask("install-deps"));
+    beforeAll(async () => {
+      await ctx.runEask("install-deps", { timeout: 40000 }, avoid11)
+    });
 
     it.each([
       "lint checkdoc",
