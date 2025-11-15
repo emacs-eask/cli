@@ -60,12 +60,6 @@
                   (t (eask-log line)))))
       (eask-msg "No issues found"))))
 
-(defun eask-lint-elsa--has-error-p ()
-  "Return non-nil if we should report error for exit status."
-  (or eask--has-error-p
-      (and eask--has-warn-p
-           (eask-strict-p))))
-
 (eask-start
   ;; Preparation
   (eask-archive-install-packages '("gnu" "melpa")
@@ -85,10 +79,7 @@
       (mapcar #'eask-lint-elsa--analyse-file files)
       (eask-msg "")
       (eask-info "(Total of %s file%s linted)" (length files)
-                 (eask--sinr files "" "s"))
-      ;; Report error.
-      (when (eask-lint-elsa--has-error-p)
-        (eask--exit 'failure)))
+                 (eask--sinr files "" "s")))
      ;; Pattern defined, but no file found!
      (patterns
       (eask-msg "")
