@@ -1432,29 +1432,7 @@ This uses function `locate-dominating-file' to look up directory tree."
                  (ignore-errors (make-directory package-user-dir t))
                  (eask--silent (eask-setup-paths))
                  (eask-with-verbosity 'debug (eask--load-config))
-                 (eask--with-hooks ,@body))))))
-         ;; Report exit stats if any.
-         (eask--handle-exit-status)))))
-
-(defun eask--error-status ()
-  "Return error status."
-  (let ((result))
-    ;; Error.
-    (when eask--has-error-p
-      (push 'error result))
-    ;; Warning.
-    (when eask--has-warn-p
-      (push (if (eask-strict-p)
-                'error
-              'warn)
-            result))
-    ;; No repeat.
-    (delete-dups result)))
-
-(defun eask--handle-exit-status ()
-  "Return non-nil if we should report error for exit status."
-  (when (memq 'error (eask--error-status))
-    (eask--exit 'failure)))
+                 (eask--with-hooks ,@body))))))))))
 
 ;;
 ;;; Eask file
