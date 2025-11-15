@@ -55,7 +55,7 @@ describe("local", () => {
     // NOTE: eask loc is a long running command
     it("loc", async () => {
       // installs markdown mode -- depends on emacs 28.1
-      if ((await emacsVersion()) >= "28.1") {
+      if (cmp(await emacsVersion(), "28.1") == 1) {
         await ctx.runEask("loc");
         await ctx.runEask("loc Eask");
       }
@@ -241,7 +241,7 @@ describe("local", () => {
     });
 
     it("lint regexps", async () => {
-      if ((await emacsVersion()) >= "27.1") {
+      if (cmp(await emacsVersion(), "27.1") == 1) {
         await ctx.runEask("lint regexps");
       }
     });
@@ -260,7 +260,7 @@ describe("local", () => {
   describe("Formatting", () => {
     // installs elisp-autofmt
     it("format elisp-autofmt", async () => {
-      if ((await emacsVersion()) >= "29.1") {
+      if (cmp(await emacsVersion(), "29.1") == 1) {
         await ctx.runEask("format elisp-autofmt");
       }
     });

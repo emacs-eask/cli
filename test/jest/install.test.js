@@ -107,7 +107,7 @@ describe("install and uninstall", () => {
       /* VC install */
 
       test.skip("installs vc directly", async () => {
-        if ((await emacsVersion()) >= "29.1") {
+        if (cmp(await emacsVersion(), "29.1") == 1) {
           const { stderr } = await ctx.runEask(
             "install-vc https://github.com/jcs-elpa/msgu"
           );
