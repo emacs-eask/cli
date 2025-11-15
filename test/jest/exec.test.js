@@ -1,4 +1,3 @@
-const cmp = require('semver-compare');
 const { emacsVersion, TestContext } = require("./helpers");
 
 describe("exec", () => {
@@ -6,9 +5,7 @@ describe("exec", () => {
 
   beforeAll(async () => {
     await ctx.runEask(
-      "install-deps", { timeout: 40000 },
-      // See https://github.com/emacs-eask/cli/issues/11.
-      cmp(await emacsVersion(), "28.1") == -1);
+      "install-deps", { timeout: 40000 });
   });
 
   afterAll(() => ctx.cleanUp());

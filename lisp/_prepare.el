@@ -1432,7 +1432,14 @@ This uses function `locate-dominating-file' to look up directory tree."
                  (ignore-errors (make-directory package-user-dir t))
                  (eask--silent (eask-setup-paths))
                  (eask-with-verbosity 'debug (eask--load-config))
-                 (eask--with-hooks ,@body))))))))))
+                 (eask--with-hooks ,@body))))))
+         ;; Report exit stats if any.
+         (eask--resolve-exit-status)))))
+
+(defun eask--resolve-exit-status ()
+  "Resolve current exit status."
+  (when (memq 'error (eask--error-status))
+    (eask--exit 'failure)))
 
 ;;
 ;;; Eask file
@@ -1988,35 +1995,63 @@ Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
   (declare (indent 0) (debug t))
   `(eask-ignore-errors (eask--silent-error ,@body)))
 
-(defun eask--trigger-error ()
-  "Trigger error event."
+(defun eask--error-status ()
+  "Return error status."
+  (let ((result))
+    ;; Error.
+    (when eask--has-error-p
+      (push 'error result))
+    ;; Warning.
+    (when eask--has-warn-p
+      (push (if (eask-strict-p)
+                'error
+              'warn)
+            result))
+    ;; No repeat.
+    (delete-dups result)))
+
+(defun eask--trigger-error (args)
+  "Trigger error event.
+
+The argument ARGS is passed from the function `eask--error'."
+  (cond ((< emacs-major-version 28)
+         ;; Handle https://github.com/emacs-eask/cli/issues/11.
+         (unless (string-prefix-p "Can't find library " (car args))
+           (setq eask--has-error-p t)))
+        (t
+         (setq eask--has-error-p t)))  ; Just a record.
+
   (when (and (not eask--ignore-error-p)
-             (not (eask-checker-p)))  ; Ignore when checking Eask-file.
-    (if (eask-allow-error-p)  ; Trigger error at the right time.
-        (add-hook 'eask-after-command-hook #'eask--exit)
-      (eask--exit))))
+             (not (eask-allow-error-p))
+             ;; Ignore when checking Eask-file.
+             (not (eask-checker-p)))
+    ;; Stop immediately.
+    (eask--exit 'failure)))
 
 (defun eask--error (fnc &rest args)
   "On error.
 
 Arguments FNC and ARGS are used for advice `:around'."
-  (setq eask--has-error-p t)  ; Just a record.
   (let ((msg (eask--ansi 'error (apply #'format-message args))))
     (unless eask-inhibit-error-message
       (eask--unsilent (eask-msg "%s" msg)))
     (run-hook-with-args 'eask-on-error-hook 'error msg)
-    (eask--trigger-error))
+    (eask--trigger-error args))
   (when debug-on-error (apply fnc args)))
+
+(defun eask--trigger-warn ()
+  "Trigger warning event."
+  (setq eask--has-warn-p t))  ; Just a record.
 
 (defun eask--warn (fnc &rest args)
   "On warn.
 
 Arguments FNC and ARGS are used for advice `:around'."
-  (setq eask--has-warn-p t)  ; Just a record.
   (let ((msg (eask--ansi 'warn (apply #'format-message args))))
     (unless eask-inhibit-error-message
       (eask--unsilent (eask-msg "%s" msg)))
-    (run-hook-with-args 'eask-on-warning-hook 'warn msg))
+    (run-hook-with-args 'eask-on-warning-hook 'warn msg)
+    (eask--trigger-warn))
   (eask--silent (apply fnc args)))
 
 ;; Don't pollute outer exection.
