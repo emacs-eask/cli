@@ -2010,8 +2010,10 @@ Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
     ;; No repeat.
     (delete-dups result)))
 
-(defun eask--trigger-error ()
-  "Trigger error event."
+(defun eask--trigger-error (args)
+  "Trigger error event.
+
+The argument ARGS is passed from the function `eask--error'."
   (cond ((< emacs-major-version 28)
          ;; Handle https://github.com/emacs-eask/cli/issues/11.
          (unless (string-prefix-p "Can't find library " (car args))
@@ -2034,7 +2036,7 @@ Arguments FNC and ARGS are used for advice `:around'."
     (unless eask-inhibit-error-message
       (eask--unsilent (eask-msg "%s" msg)))
     (run-hook-with-args 'eask-on-error-hook 'error msg)
-    (eask--trigger-error))
+    (eask--trigger-error args))
   (when debug-on-error (apply fnc args)))
 
 (defun eask--trigger-warn ()
