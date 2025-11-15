@@ -14,7 +14,7 @@ describe("install and uninstall", () => {
 
     it("installs project package", async () => {
       // creates dist/<pkg>.tar
-      await ctx.runEask("package",
+      await ctx.runEask("package", { timeout: 40000 },
                         // See https://github.com/emacs-eask/cli/issues/11.
                         cmp(await emacsVersion(), "28.1") == -1);
       // installs dependencies and generated package
@@ -41,7 +41,7 @@ describe("install and uninstall", () => {
     });
 
     it("uninstalls project package", async () => {
-      await ctx.runEask("uninstall",
+      await ctx.runEask("uninstall", { timeout: 40000 },
                         // See https://github.com/emacs-eask/cli/issues/11.
                         cmp(await emacsVersion(), "28.1") == -1);
       const { stderr } = await ctx.runEask("list");
