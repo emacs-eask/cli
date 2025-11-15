@@ -3,6 +3,9 @@ const exec = util.promisify(require("node:child_process").exec);
 const fs = require("node:fs/promises");
 const path = require("node:path");
 
+// Load the environment.
+const env = require('../../src/env');
+
 /*
  * This file uses JsDoc syntax.
  * Documentation for type helpers like @param: https://jsdoc.app/tags-type

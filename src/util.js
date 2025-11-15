@@ -230,7 +230,7 @@ async function e_call(argv, script, ...args) {
   }
 
   if (!_check_argv(argv)) {
-    process.exit(1);
+    process.exit(EXIT_FAILURE);
     return;
   }
 

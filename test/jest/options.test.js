@@ -25,7 +25,7 @@ describe("options", () => {
 
     it("should error if the number is omitted before the next option", async () => {
       await expect(ctx.runEask("info -v --no-color")).rejects.toMatchObject({
-        code: 1,
+        code: EXIT_FAILURE,
       });
     });
   });

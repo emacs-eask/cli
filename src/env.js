@@ -33,5 +33,14 @@ process.env.EMACS = EASK_EMACS;  // Set back the value.
 global.TITLE_CMD_OPTION = 'Command Options:';
 global.TITLE_PROXY_OPTION = 'Proxy Options:';
 
+/* Exit Code
+ *
+ * This must match with the variable `eask--exit-code` in
+ * the file `lisp/_prepare.el`.
+ */
+global.EXIT_SUCCESS = 0;
+global.EXIT_FAILURE = 1;
+global.EXIT_MISUSE  = 2;
+
 /* CI */
 global.GITHUB_ACTIONS = (process.env.GITHUB_WORKSPACE !== undefined);
