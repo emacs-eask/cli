@@ -1,4 +1,4 @@
-;;; elsa-warn.el --- Test elsa linting      -*- lexical-binding: t; -*-
+;;; elsa-warn.el --- Test elsa-warn  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2025  the Eask authors.
 

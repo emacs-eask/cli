@@ -1,4 +1,4 @@
-;;; indent-warn.el --- Test indent linting      -*- lexical-binding: t; -*-
+;;; indent-warn.el --- Test indent-warn  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2025  the Eask authors.
 

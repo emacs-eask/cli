@@ -1,4 +1,4 @@
-;;; ert-test.el --- Test the command ert      -*- lexical-binding: t; -*-
+;;; declare-ok.el --- Test declare-ok      -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2025  the Eask authors.
 

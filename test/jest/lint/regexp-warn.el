@@ -1,4 +1,4 @@
-;;; regexp-warn.el --- Test regexp linting      -*- lexical-binding: t; -*-
+;;; regexp-warn.el --- Test regexp-warn  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2025  the Eask authors.
 
