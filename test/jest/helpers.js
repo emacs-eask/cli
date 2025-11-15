@@ -160,8 +160,8 @@ class TestContext {
    * @param {any} config
    * @returns {Promise.<CommandOutput>}
    */
-  runEask(command, config, safe = false) {
-    return this.run(this.easkCommand + " " + command, config, safe);
+  runEask(command, config) {
+    return this.run(this.easkCommand + " " + command, config);
   }
 
   /**
@@ -173,7 +173,7 @@ class TestContext {
    * @param {any} config
    * @returns {Promise.<CommandOutput>}
    */
-  run(command, config, safe = false) {
+  run(command, config) {
     return exec(command, {
       cwd: this.cwd,
       signal: this.controller.signal,
@@ -191,9 +191,6 @@ class TestContext {
         return new CommandOutput(obj, this.cwd);
       })
       .catch((err) => {
-        if (safe)
-          return this.errorToCommandOutput(err);
-
         if (!err.code)
           err.message += "\nexec: TIMEOUT";
 
