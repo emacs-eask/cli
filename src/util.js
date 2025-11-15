@@ -229,7 +229,7 @@ async function e_call(argv, script, ...args) {
     return;
   }
 
-  if (!_check_argv(avrg)) {
+  if (!_check_argv(argv)) {
     process.exit(1);
     return;
   }
