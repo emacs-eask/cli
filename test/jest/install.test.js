@@ -1,3 +1,4 @@
+const cmp = require('semver-compare');
 const { emacsVersion, TestContext } = require("./helpers");
 
 describe("install and uninstall", () => {
@@ -12,8 +13,12 @@ describe("install and uninstall", () => {
     afterAll(() => ctx.cleanUp());
 
     it("installs project package", async () => {
-      await ctx.runEask("package");  // creates dist/<pkg>.tar
-      await ctx.runEask("install");  // installs dependencies and generated package
+      // creates dist/<pkg>.tar
+      await ctx.runEask("package", { timeout: 40000 },
+                        // See https://github.com/emacs-eask/cli/issues/11.
+                        cmp(await emacsVersion(), "28.1") == -1);
+      // installs dependencies and generated package
+      await ctx.runEask("install");
       const { stderr } = await ctx.runEask("list");
       expect(stderr).toMatch(packageName);
     });
@@ -36,13 +41,18 @@ describe("install and uninstall", () => {
     });
 
     it("uninstalls project package", async () => {
-      await ctx.runEask("uninstall");
+      await ctx.runEask("uninstall", { timeout: 40000 },
+                        // See https://github.com/emacs-eask/cli/issues/11.
+                        cmp(await emacsVersion(), "28.1") == -1);
       const { stderr } = await ctx.runEask("list");
       expect(stderr).not.toMatch(packageName);
     });
 
     it("installs dependencies", async () => {
-      const { stderr } = await ctx.runEask("install-deps");
+      const { stderr } = await ctx.runEask(
+        "install-deps", { timeout: 40000 },
+        // See https://github.com/emacs-eask/cli/issues/11.
+        cmp(await emacsVersion(), "28.1") == -1);
       expect(stderr).not.toMatch(packageName);
     });
 
@@ -97,7 +107,7 @@ describe("install and uninstall", () => {
       /* VC install */
 
       test.skip("installs vc directly", async () => {
-        if ((await emacsVersion()) >= "29.1") {
+        if (cmp(await emacsVersion(), "29.1") == 1) {
           const { stderr } = await ctx.runEask(
             "install-vc https://github.com/jcs-elpa/msgu"
           );

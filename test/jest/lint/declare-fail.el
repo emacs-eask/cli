@@ -1,4 +1,4 @@
-;;; declare-fail.el --- Test lint declare      -*- lexical-binding: t; -*-
+;;; declare-fail.el --- Test declare-fail  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2025  the Eask authors.
 

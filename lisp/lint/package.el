@@ -57,11 +57,6 @@
       (kill-current-buffer)))
   (eask-print-log-buffer "*Package-Lint*"))
 
-(defun eask-lint-package--has-error-p ()
-  "Return non-nil if we should report error for exit status."
-  (and eask--has-warn-p
-       (eask-strict-p)))
-
 (eask-start
   ;; Preparation
   (eask-archive-install-packages '("gnu" "melpa")
@@ -82,10 +77,7 @@
       (mapcar #'eask-lint-package--file files)
       (eask-msg "")
       (eask-info "(Total of %s file%s linted)" (length files)
-                 (eask--sinr files "" "s"))
-      ;; Report error.
-      (when (eask-lint-package--has-error-p)
-        (eask--exit 'failure)))
+                 (eask--sinr files "" "s")))
      ;; Pattern defined, but no file found!
      (patterns
       (eask-msg "")

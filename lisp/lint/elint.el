@@ -44,11 +44,6 @@
       (eask-print-log-buffer log-buffer)
       (kill-buffer log-buffer))))
 
-(defun eask-lint-elint--has-error-p ()
-  "Return non-nil if we should report error for exit status."
-  (and eask--has-warn-p
-       (eask-strict-p)))
-
 (eask-start
   (require 'elint)
   (let* ((patterns (eask-args))
@@ -62,10 +57,7 @@
       (eask-msg "")
       (eask-info "(Total of %s file%s %s checked)" (length files)
                  (eask--sinr files "" "s")
-                 (eask--sinr files "has" "have"))
-      ;; Report error.
-      (when (eask-lint-elint--has-error-p)
-        (eask--exit 'failure)))
+                 (eask--sinr files "has" "have")))
      ;; Pattern defined, but no file found!
      (patterns
       (eask-info "(No files match wildcard: %s)"

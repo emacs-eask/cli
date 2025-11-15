@@ -1,4 +1,4 @@
-;;; elisp-lint-ok.el --- Test the linting      -*- lexical-binding: t; -*-
+;;; elisp-lint-ok.el --- Test elisp-lint-ok      -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2025  the Eask authors.
 
