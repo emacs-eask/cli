@@ -1,4 +1,4 @@
-const { TestContext } = require("./helpers");
+const { emacsVersion, TestContext } = require("./helpers");
 
 describe("outdated and upgrade", () => {
   const ctx = new TestContext("./test/jest/outdated-upgrade");
