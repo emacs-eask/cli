@@ -213,7 +213,6 @@ describe("local", () => {
       "lint checkdoc",
       "lint declare",
       "lint elint",
-      "lint elisp-lint",
       "lint indent",
       "lint keywords",
       "lint license",
@@ -222,15 +221,19 @@ describe("local", () => {
       await ctx.runEask(cmd);
     });
 
+    // XXX: Elsa is not stable, ignore it for now
+    test.skip("lint elsa", async () => {
+      await ctx.runEask("lint elsa");
+    });
+
+    it("lint elint", async () => {
+      await ctx.runEask("lint elisp-lint", avoid11);
+    });
+
     it("lint regexps", async () => {
       if ((await emacsVersion()) >= "27.1") {
         await ctx.runEask("lint regexps");
       }
-    });
-
-    // XXX: Elsa is not stable, ignore it for now
-    test.skip("lint elsa", async () => {
-      await ctx.runEask("lint elsa");
     });
 
     it("lint org *.org", async () => {
