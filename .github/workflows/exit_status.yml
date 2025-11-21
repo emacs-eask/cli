@@ -39,7 +39,7 @@ jobs:
       with:
         version: 30.2
 
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
 
     - name: Prepare Eask (Unix)
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
