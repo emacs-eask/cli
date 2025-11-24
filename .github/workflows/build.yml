@@ -162,7 +162,7 @@ jobs:
 
     - name: Push
       if: github.ref == 'refs/heads/master'
-      uses: jcs090218/github-push-action@master
+      uses: jcs-actions/github-push-action@master
       with:
         repository: ${{ env.REPO_BIN }}
         github_token: ${{ secrets.PAT }}
