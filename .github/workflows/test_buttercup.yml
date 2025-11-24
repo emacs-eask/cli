@@ -13,11 +13,13 @@ on:
       - '**.json'
       - 'eask'
       # ignore
+      - '!**/build.yml'
       - '!**/docs.yml'
   pull_request:
     branches:
       - master
     paths-ignore:
+      - '**/build.yml'
       - '**/docs.yml'
       - '**.md'
   workflow_dispatch:

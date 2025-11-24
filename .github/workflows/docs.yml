@@ -8,12 +8,16 @@ on:
     paths:
       - '**/docs.yml'
       - docs/**
+      # ignore
+      - '!**/build.yml'
   pull_request:
     branches:
       - master
     paths:
       - '**/docs.yml'
       - docs/**
+      # ignore
+      - '!**/build.yml'
   workflow_dispatch:
 
 concurrency:

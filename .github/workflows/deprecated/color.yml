@@ -11,12 +11,14 @@ on:
       - test/**
       - 'eask'
       - '**.yml'
-    paths-ignore:
-      - '**/docs.yml'
+      # ignore
+      - '!**/build.yml'
+      - '!**/docs.yml'
   pull_request:
     branches:
       - master
     paths-ignore:
+      - '**/build.yml'
       - '**/docs.yml'
       - '**.md'
   workflow_dispatch:
