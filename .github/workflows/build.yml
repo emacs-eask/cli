@@ -98,6 +98,15 @@ jobs:
         cd ..
         cp ${{ matrix.target }}.${{ env._EXT }} eask_${{ env.VERSION }}_${{ matrix.target }}.${{ env._EXT }}
 
+    - uses: ClementTsang/delete-tag-and-release@v0.4.0
+      if: github.ref == 'refs/heads/master'
+      continue-on-error: true
+      with:
+        delete_release: true
+        tag_name: ${{ env.VERSION }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT }}
+
     - name: Upload for prerelease
       if: github.ref == 'refs/heads/master'
       uses: softprops/action-gh-release@v2.0.8
