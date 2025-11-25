@@ -27,7 +27,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  VERSION: 0.11.9
+  VERSION: 0.11.10
   REPO_BIN: 'emacs-eask/binaries'
 
 jobs:
