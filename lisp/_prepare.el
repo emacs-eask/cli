@@ -2026,7 +2026,8 @@ The argument ARGS is passed from the function `eask--error'."
         (t
          (setq eask--has-error-p t)))  ; Just a record.
 
-  (when (and (not eask--ignore-error-p)
+  (when (and eask--has-error-p
+             (not eask--ignore-error-p)
              (not (eask-allow-error-p))
              ;; Ignore when checking Eask-file.
              (not (eask-checker-p)))
