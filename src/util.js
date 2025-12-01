@@ -252,7 +252,7 @@ async function e_call(argv, script, ...args) {
       console.log('');
     }
     if (5 <= argv.verbose) {  // `all` scope
-      console.warn('[EXEC] ' + EASK_EMACS +  ' ' + cmd.join(' '));
+      console.warn('[EXEC] ' + cmd.join(' '));
       console.warn('');
     }
 

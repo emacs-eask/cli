@@ -801,6 +801,15 @@ The optional argument URL-OR-PACKAGE is used in the function `try'."
       (try (or url-or-package pkg)))
     "done ✓"))
 
+(defun eask--package-delete-before-install (pkg force)
+  "Make sure PKG is not presented before installing the latest.
+
+The argument FORCE is passed through to the `package-delete' function."
+  ;; Recipe can be `nil', handle it.
+  (when-let* ((rcp (eask-package-desc pkg t)))
+    (package-delete rcp force)
+    t))
+
 (defun eask-package-vc-install (pkg spec)
   "To vc install the package (PKG) by argument SPEC."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
@@ -818,7 +827,8 @@ The optional argument URL-OR-PACKAGE is used in the function `try'."
                 name version)
         (eask-with-verbosity 'debug
           ;; Handle `--force` flag.
-          (when should-reinstall-p (package-delete (eask-package-desc pkg t) t))
+          (when should-reinstall-p
+            (eask--package-delete-before-install pkg t))
           ;; Install it.
           (apply #'package-vc-install spec))
         "done ✓")))))
@@ -840,16 +850,10 @@ The optional argument URL-OR-PACKAGE is used in the function `try'."
                 name version)
         (eask-with-verbosity 'debug
           ;; Handle `--force` flag.
-          (when should-reinstall-p (package-delete (eask-package-desc pkg t) t))
-          ;; XXX: Without ignore-errors guard, it will trigger error
-          ;;
-          ;;   Can't find library xxxxxxx.el
-          ;;
-          ;; But we can remove this after Emacs 28, since function `find-library-name'
-          ;; has replaced the function `signal' instead of the `error'.
-          ;;
+          (when should-reinstall-p
+            (eask--package-delete-before-install pkg t))
           ;; Install it.
-          (eask-ignore-errors (package-install-file (expand-file-name file))))
+          (package-install-file (expand-file-name file)))
         "done ✓")))))
 
 (defun eask-package-install (pkg)
@@ -874,16 +878,11 @@ The optional argument URL-OR-PACKAGE is used in the function `try'."
                   name version)
           (eask-with-verbosity 'debug
             ;; Handle `--force` flag.
-            (when should-reinstall-p (package-delete (eask-package-desc pkg t) t))
-            ;; XXX: Without ignore-errors guard, it will trigger error
-            ;;
-            ;;   Can't find library xxxxxxx.el
-            ;;
-            ;; But we can remove this after Emacs 28, since function `find-library-name'
-            ;; has replaced the function `signal' instead of the `error'.
-            ;;
+            (when should-reinstall-p
+              (eask--package-delete-before-install pkg t))
             ;; Install it.
-            (eask-ignore-errors (package-install pkg)))
+            (let ((current-prefix-arg (eask-force-p)))
+              (package-install pkg)))
           "done ✓"))))))
 
 (defun eask-package-delete (pkg)
@@ -898,11 +897,13 @@ The optional argument URL-OR-PACKAGE is used in the function `try'."
         "not installed ✗"))
      (t
       (eask--pkg-process pkg  ; Second call to force refresh the data.
-        (eask-with-progress
-          (format "  - %sUninstalling %s (%s)... " eask--action-prefix name version)
-          (eask-with-verbosity 'debug
-            (package-delete (eask-package-desc pkg t) (eask-force-p)))
-          "done ✓"))))))
+        (let ((success))
+          (eask-with-progress
+            (format "  - %sUninstalling %s (%s)... " eask--action-prefix name version)
+            (eask-with-verbosity 'debug
+              (when (eask--package-delete-before-install pkg (eask-force-p))
+                (setq success t)))
+            (if success "done ✓" "skipped ✗"))))))))
 
 (defun eask-package-reinstall (pkg)
   "Reinstall the package (PKG)."
@@ -921,8 +922,9 @@ The optional argument URL-OR-PACKAGE is used in the function `try'."
         (eask-with-progress
           (format "  - %sReinstalling %s (%s)... " eask--action-prefix name version)
           (eask-with-verbosity 'debug
-            (package-delete (eask-package-desc pkg t) t)
-            (eask-ignore-errors (package-install pkg)))
+            (eask--package-delete-before-install pkg t)
+            (let ((current-prefix-arg (eask-force-p)))
+              (package-install pkg)))
           "done ✓"))))))
 
 (defun eask-package-desc (name &optional current)
@@ -2015,13 +2017,17 @@ Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
 
 The argument ARGS is passed from the function `eask--error'."
   (cond ((< emacs-major-version 28)
+         ;; But we can remove this after Emacs 28, since function `find-library-name'
+         ;; has replaced the function `signal' instead of the `error'.
+         ;;
          ;; Handle https://github.com/emacs-eask/cli/issues/11.
          (unless (string-prefix-p "Can't find library " (car args))
            (setq eask--has-error-p t)))
         (t
          (setq eask--has-error-p t)))  ; Just a record.
 
-  (when (and (not eask--ignore-error-p)
+  (when (and eask--has-error-p
+             (not eask--ignore-error-p)
              (not (eask-allow-error-p))
              ;; Ignore when checking Eask-file.
              (not (eask-checker-p)))
