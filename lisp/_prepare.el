@@ -804,7 +804,7 @@ The optional argument URL-OR-PACKAGE is used in the function `try'."
 (defun eask--package-delete-before-install (pkg force)
   "Make sure PKG is not presented before installing the latest.
 
-The argument SHOULD-REINSTALL-P is the permit for this operation."
+The argument FORCE is passed through to the `package-delete' function."
   ;; Recipe can be `nil', handle it.
   (when-let* ((rcp (eask-package-desc pkg t)))
     (package-delete rcp force)
@@ -852,15 +852,8 @@ The argument SHOULD-REINSTALL-P is the permit for this operation."
           ;; Handle `--force` flag.
           (when should-reinstall-p
             (eask--package-delete-before-install pkg t))
-          ;; XXX: Without ignore-errors guard, it will trigger error
-          ;;
-          ;;   Can't find library xxxxxxx.el
-          ;;
-          ;; But we can remove this after Emacs 28, since function `find-library-name'
-          ;; has replaced the function `signal' instead of the `error'.
-          ;;
           ;; Install it.
-          (eask-ignore-errors (package-install-file (expand-file-name file))))
+          (package-install-file (expand-file-name file)))
         "done ✓")))))
 
 (defun eask-package-install (pkg)
@@ -887,15 +880,9 @@ The argument SHOULD-REINSTALL-P is the permit for this operation."
             ;; Handle `--force` flag.
             (when should-reinstall-p
               (eask--package-delete-before-install pkg t))
-            ;; XXX: Without ignore-errors guard, it will trigger error
-            ;;
-            ;;   Can't find library xxxxxxx.el
-            ;;
-            ;; But we can remove this after Emacs 28, since function `find-library-name'
-            ;; has replaced the function `signal' instead of the `error'.
-            ;;
             ;; Install it.
-            (eask-ignore-errors (package-install pkg)))
+            (let ((current-prefix-arg (eask-force-p)))
+              (package-install pkg)))
           "done ✓"))))))
 
 (defun eask-package-delete (pkg)
@@ -936,7 +923,8 @@ The argument SHOULD-REINSTALL-P is the permit for this operation."
           (format "  - %sReinstalling %s (%s)... " eask--action-prefix name version)
           (eask-with-verbosity 'debug
             (eask--package-delete-before-install pkg t)
-            (eask-ignore-errors (package-install pkg)))
+            (let ((current-prefix-arg (eask-force-p)))
+              (package-install pkg)))
           "done ✓"))))))
 
 (defun eask-package-desc (name &optional current)
@@ -2029,6 +2017,9 @@ Argument ARGS are direct arguments for functions `eask-error' or `eask-warn'."
 
 The argument ARGS is passed from the function `eask--error'."
   (cond ((< emacs-major-version 28)
+         ;; But we can remove this after Emacs 28, since function `find-library-name'
+         ;; has replaced the function `signal' instead of the `error'.
+         ;;
          ;; Handle https://github.com/emacs-eask/cli/issues/11.
          (unless (string-prefix-p "Can't find library " (car args))
            (setq eask--has-error-p t)))
