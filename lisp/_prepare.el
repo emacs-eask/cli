@@ -801,6 +801,15 @@ The optional argument URL-OR-PACKAGE is used in the function `try'."
       (try (or url-or-package pkg)))
     "done ✓"))
 
+(defun eask--package-delete-before-install (pkg force)
+  "Make sure PKG is not presented before installing the latest.
+
+The argument SHOULD-REINSTALL-P is the permit for this operation."
+  ;; Recipe can be `nil', handle it.
+  (when-let* ((rcp (eask-package-desc pkg t)))
+    (package-delete rcp force)
+    t))
+
 (defun eask-package-vc-install (pkg spec)
   "To vc install the package (PKG) by argument SPEC."
   (eask-defvc< 27 (eask-pkg-init))  ; XXX: remove this after we drop 26.x
@@ -818,7 +827,8 @@ The optional argument URL-OR-PACKAGE is used in the function `try'."
                 name version)
         (eask-with-verbosity 'debug
           ;; Handle `--force` flag.
-          (when should-reinstall-p (package-delete (eask-package-desc pkg t) t))
+          (when should-reinstall-p
+            (eask--package-delete-before-install pkg t))
           ;; Install it.
           (apply #'package-vc-install spec))
         "done ✓")))))
@@ -840,7 +850,8 @@ The optional argument URL-OR-PACKAGE is used in the function `try'."
                 name version)
         (eask-with-verbosity 'debug
           ;; Handle `--force` flag.
-          (when should-reinstall-p (package-delete (eask-package-desc pkg t) t))
+          (when should-reinstall-p
+            (eask--package-delete-before-install pkg t))
           ;; XXX: Without ignore-errors guard, it will trigger error
           ;;
           ;;   Can't find library xxxxxxx.el
@@ -874,7 +885,8 @@ The optional argument URL-OR-PACKAGE is used in the function `try'."
                   name version)
           (eask-with-verbosity 'debug
             ;; Handle `--force` flag.
-            (when should-reinstall-p (package-delete (eask-package-desc pkg t) t))
+            (when should-reinstall-p
+              (eask--package-delete-before-install pkg t))
             ;; XXX: Without ignore-errors guard, it will trigger error
             ;;
             ;;   Can't find library xxxxxxx.el
@@ -898,11 +910,13 @@ The optional argument URL-OR-PACKAGE is used in the function `try'."
         "not installed ✗"))
      (t
       (eask--pkg-process pkg  ; Second call to force refresh the data.
-        (eask-with-progress
-          (format "  - %sUninstalling %s (%s)... " eask--action-prefix name version)
-          (eask-with-verbosity 'debug
-            (package-delete (eask-package-desc pkg t) (eask-force-p)))
-          "done ✓"))))))
+        (let ((success))
+          (eask-with-progress
+            (format "  - %sUninstalling %s (%s)... " eask--action-prefix name version)
+            (eask-with-verbosity 'debug
+              (when (eask--package-delete-before-install pkg (eask-force-p))
+                (setq success t)))
+            (if success "done ✓" "skipped ✗"))))))))
 
 (defun eask-package-reinstall (pkg)
   "Reinstall the package (PKG)."
@@ -921,7 +935,7 @@ The optional argument URL-OR-PACKAGE is used in the function `try'."
         (eask-with-progress
           (format "  - %sReinstalling %s (%s)... " eask--action-prefix name version)
           (eask-with-verbosity 'debug
-            (package-delete (eask-package-desc pkg t) t)
+            (eask--package-delete-before-install pkg t)
             (eask-ignore-errors (package-install pkg)))
           "done ✓"))))))
 
