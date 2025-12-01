@@ -114,7 +114,7 @@ jobs:
 
     - name: Upload for prerelease
       if: github.ref == 'refs/heads/master'
-      uses: softprops/action-gh-release@v2.4.2
+      uses: softprops/action-gh-release@v2.5.0
       with:
         tag_name: ${{ env.VERSION }}
         token: ${{ secrets.PAT }}
