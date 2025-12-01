@@ -119,6 +119,7 @@ jobs:
         tag_name: ${{ env.VERSION }}
         token: ${{ secrets.PAT }}
         prerelease: true
+        draft: false
         files: eask_${{ env.VERSION }}_${{ matrix.target }}.${{ env._EXT }}
 
     #### Upload an artifact for testing purposes
