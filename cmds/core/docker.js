@@ -47,10 +47,16 @@ exports.handler = async (argv) => {
 
   let container_arg = project_dir + ':' + container_dir;
 
+  // Find out the image name.
+  let image = argv.version;
+
+  if (valid_version_string(argv.version))
+    image = 'silex/emacs:' + argv.version + '-eask';
+
   let default_cmd = ['docker', 'run', '--rm',
                      '-v', container_arg,
                      '-w', container_dir,
-                     'silex/emacs:' + argv.version + '-ci-eask',];
+                     image,];
   let rest = process.argv.slice(4);
 
   // If no argument; we enter the container directly!
@@ -75,4 +81,13 @@ exports.handler = async (argv) => {
  */
 function convert_path(path) {
   return UTIL.slash(path).replaceAll(':', '');
+}
+
+/**
+ * Return true when string is a valid version string.
+ * @param { String } str - The version string.
+ */
+function valid_version_string(str) {
+  const ver_regex = /^\d+(\.\d+)*(-[a-zA-Z0-9.]+)?(\+[a-zA-Z0-9.]+)?$/;
+  return ver_regex.test(str);
 }
