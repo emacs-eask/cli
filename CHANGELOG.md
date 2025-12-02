@@ -22,6 +22,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * fix: Use `kill-current-buffer` instead ([#331](../../pull/331))
 * fix: eask analyze should exit with 1 on errors ([#359](../../pull/359))
 * fix: Handle force install properly ([#373](../../pull/373))
+* feat(docker): Accept direct docker image name in version arg ([`b39a7d6`](../../commit/b39a7d62b53580cae5ef3e85e7d9048d5f40c960))
 
 ## 0.11.x
 > Released Apr 03, 2025
