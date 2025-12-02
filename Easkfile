@@ -1,7 +1,7 @@
 ;; -*- mode: eask; lexical-binding: t -*-
 
 (package "cli"
-         "0.11.10"
+         "0.12.0"
          "A set of command-line tools to build Emacs packages")
 
 (website-url "https://github.com/emacs-eask/cli")
