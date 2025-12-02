@@ -1,3 +1,4 @@
 [submodule "docs/themes/geekdoc"]
 	path = docs/themes/geekdoc
 	url = https://github.com/thegeeklab/hugo-geekdoc
+	branch = main
