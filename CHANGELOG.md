@@ -5,8 +5,13 @@ All notable changes to this project will be documented in this file.
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 
-## 0.12.x (Unreleased)
+## 0.13.x (Unreleased)
 > Released N/A
+
+* N/A
+
+## 0.12.x
+> Released Dec 02, 2025
 
 * fix(install): Package installed calculation ([`a479d53`](../../commit/a479d5355dfc832286288b790338652e174d606d))
 * fix(install-file): Get correct install package name ([#318](../../pull/318))
