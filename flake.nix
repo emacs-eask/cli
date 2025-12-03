@@ -32,6 +32,7 @@
                 shellHook = ''
                     echo "Welcome to the Emacs development shell with Eask!"
                     npm install --include=dev
+                    export PATH="$PATH:$PWD/bin"
                     eask --version
                     '';
               };
