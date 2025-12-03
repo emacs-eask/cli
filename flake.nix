@@ -33,12 +33,11 @@
                     echo "Welcome to the Emacs development shell with Eask!"
 
                     # Install if `node_modules` is missing
-                    if [ ! -d node_modules ]; then
+                    if ! command -v <the_command> >/dev/null 2>&1
                       npm install --include=dev
+                      export PATH="$PATH:$PWD/bin"
+                      eask --version
                     fi
-
-                    export PATH="$PATH:$PWD/bin"
-                    eask --version
                     '';
               };
             }
