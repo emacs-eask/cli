@@ -31,7 +31,12 @@
 
                 shellHook = ''
                     echo "Welcome to the Emacs development shell with Eask!"
-                    npm install --include=dev
+
+                    # Install if `node_modules` is missing
+                    if [ ! -d node_modules ]; then
+                      npm install --include=dev
+                    fi
+
                     export PATH="$PATH:$PWD/bin"
                     eask --version
                     '';
