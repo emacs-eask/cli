@@ -125,7 +125,7 @@ jobs:
     #### Upload an artifact for testing purposes
 
     - name: Upload for tests
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: ${{ matrix.target }}
         path: dist
