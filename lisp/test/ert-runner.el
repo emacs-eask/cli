@@ -4,7 +4,7 @@
 ;;
 ;; Command to run ert tests using ert-runner,
 ;;
-;;   $ eask ert-runner [files..]
+;;   $ eask test ert-runner [files..]
 ;;
 ;;
 ;;  Positionals:

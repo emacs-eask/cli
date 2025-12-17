@@ -4,7 +4,7 @@
 ;;
 ;; Command to run melpazoid tests,
 ;;
-;;   $ eask melpazoid
+;;   $ eask test melpazoid
 ;;
 
 ;;; Code:

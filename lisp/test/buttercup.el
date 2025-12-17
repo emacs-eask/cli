@@ -4,7 +4,7 @@
 ;;
 ;; Command to run buttercup tests,
 ;;
-;;   $ eask buttercup
+;;   $ eask test buttercup
 ;;
 
 ;;; Code:

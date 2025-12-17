@@ -4,7 +4,7 @@
 ;;
 ;; Command to run ecukes tests,
 ;;
-;;   $ eask ecukes
+;;   $ eask test ecukes
 ;;
 ;;
 ;;  Positionals:
