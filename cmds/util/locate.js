@@ -21,5 +21,5 @@ exports.command = ['locate'];
 exports.desc = 'Show the location where Eask is installed';
 
 exports.handler = async (argv) => {
-  process.stdout.write(`✓ Eask located in '` + UTIL.plugin_dir() + `'`);
+  console.log(UTIL.plugin_dir());
 };
