@@ -992,6 +992,14 @@ Show the location where Eask is installed.
 eask [GLOBAL-OPTIONS] locate
 ```
 
+## 🔍 eask root
+
+Display the effective installation directory of your Emacs packages.
+
+```sh
+eask [GLOBAL-OPTIONS] root
+```
+
 # 🚩 Checker
 
 Commands to check your Eask-file.
