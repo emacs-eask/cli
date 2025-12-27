@@ -99,6 +99,7 @@ list.
 
 ## 📰 News
 
+- `0.12.x` - Correctly handle the exit code.
 - `0.11.x` - Add commands `install-file` and `install-vc`.
 - `0.10.x` - Add five new commands and improve the default user experience.
 - `0.9.x` - Enhance overall user experience.
@@ -108,7 +109,6 @@ list.
 - `0.5.x` - Handle error for failed archive.
 - `0.4.x` - Add color logger.
 - `0.3.x` - Add verbosity level and timestamps.
-- `0.2.x` - Done basic error handling with exit code at the end of executions.
 
 ## 📝 Todo list
 
@@ -126,7 +126,7 @@ The design of Eask was greatly influenced by the following projects:
 
 - [Cask][] - Project management tool for Emacs
 - [makem.sh][] - Makefile-like script for building and testing Emacs Lisp packages
-- [epm](https://github.com/xuchunyang/epm) - Emacs Package Manager
+- [epm][] - Emacs Package Manager
 - [Eldev][] - Elisp Development Tool
 
 
@@ -136,6 +136,7 @@ The design of Eask was greatly influenced by the following projects:
 [Cask]: https://github.com/cask/cask
 [makem.sh]: https://github.com/alphapapa/makem.sh
 [Eldev]: https://github.com/doublep/eldev
+[epm]: https://github.com/xuchunyang/epm
 
 [yargs]: https://github.com/yargs/yargs
 [commander]: https://github.com/rejeep/commander.el

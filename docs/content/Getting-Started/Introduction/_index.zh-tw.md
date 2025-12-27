@@ -96,7 +96,7 @@ Eask 的設計深受以下項目的影響：
 
 - [Cask][] - Emacs 的項目管理工具
 - [makem.sh][] -用於構建和測試 Emacs Lisp 包的類似 Makefile 的腳本
-- [epm](https://github.com/xuchunyang/epm) - Emacs 包管理器
+- [epm][] - Emacs 包管理器
 - [Eldev][] - Elisp 開發工具
 
 
@@ -106,6 +106,7 @@ Eask 的設計深受以下項目的影響：
 [Cask]: https://github.com/cask/cask
 [makem.sh]: https://github.com/alphapapa/makem.sh
 [Eldev]: https://github.com/doublep/eldev
+[epm]: https://github.com/xuchunyang/epm
 
 [yargs]: https://github.com/yargs/yargs
 [commander]: https://github.com/rejeep/commander.el

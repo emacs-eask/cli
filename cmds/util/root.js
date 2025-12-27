@@ -18,7 +18,7 @@
 "use strict";
 
 exports.command = ['root'];
-exports.desc = 'Display the effective installation directory of your Emacs packages';
+exports.desc = UTIL.hide_cmd('Display the effective installation directory of your Emacs packages');
 
 exports.handler = async (argv) => {
   await UTIL.e_call(argv, 'util/root');
