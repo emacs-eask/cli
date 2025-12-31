@@ -1,6 +1,6 @@
 ;;; check-dsl.el --- Test for DSL  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2022-2025  the Eask authors.
+;; Copyright (C) 2022-2026  the Eask authors.
 ;; Created date 2022-04-19 15:16:50
 
 ;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>

@@ -1,6 +1,6 @@
 ;;; declare-ok.el --- Test declare-ok      -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2025  the Eask authors.
+;; Copyright (C) 2025-2026  the Eask authors.
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by

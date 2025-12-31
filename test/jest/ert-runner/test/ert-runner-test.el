@@ -1,6 +1,6 @@
 ;;; ert-runner-test.el --- Test the command ert-runner  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2022-2025  the Eask authors.
+;; Copyright (C) 2022-2026  the Eask authors.
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by

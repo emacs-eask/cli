@@ -1,6 +1,6 @@
 ;;; options.el --- Test all options flag  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2025  the Eask authors.
+;; Copyright (C) 2025-2026  the Eask authors.
 
 ;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>
 ;; Maintainer: Shen, Jen-Chieh <jcs090218@gmail.com>

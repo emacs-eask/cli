@@ -1,6 +1,6 @@
 ;;; foo-mode.el --- foo mode  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2025  the Eask authors.
+;; Copyright (C) 2025-2026  the Eask authors.
 
 ;; Author: none
 ;; Maintainer: none

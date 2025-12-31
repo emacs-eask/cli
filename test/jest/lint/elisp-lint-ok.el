@@ -1,6 +1,6 @@
 ;;; elisp-lint-ok.el --- Test elisp-lint-ok      -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2025  the Eask authors.
+;; Copyright (C) 2025-2026  the Eask authors.
 
 ;;; Version: 0.0.1
 ;;; URL: https://foo.com

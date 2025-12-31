@@ -1,6 +1,6 @@
 ;;; make-outdate.el --- Make some packages outdate  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2022-2025  the Eask authors.
+;; Copyright (C) 2022-2026  the Eask authors.
 
 ;; This file is not part of GNU Emacs.
 
