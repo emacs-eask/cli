@@ -100,7 +100,7 @@ jobs:
     - name: Tar dist (Unix)
       if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
       run: |
-        tar czf ${{ matrix.target }}.${{ env._EXT }} -C ./dist/ .
+        tar -czf ${{ matrix.target }}.${{ env._EXT }} -C ./dist/ .
         cp ${{ matrix.target }}.${{ env._EXT }} eask_${{ env.VERSION }}_${{ matrix.target }}.${{ env._EXT }}
 
     - name: Zipping dist (Windows)
