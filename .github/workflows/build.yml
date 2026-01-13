@@ -140,7 +140,7 @@ jobs:
       with:
         repository: ${{ env.REPO_BIN }}
         persist-credentials: false
-        fetch-depth: 0
+        fetch-depth: 1
 
     - name: Clean up previous binaries
       continue-on-error: true
