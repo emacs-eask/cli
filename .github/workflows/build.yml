@@ -116,8 +116,8 @@ jobs:
       if: github.ref == 'refs/heads/master'
       uses: ncipollo/release-action@v1.20.0
       with:
-        tag: ${{ env.VERSION }}
         token: ${{ secrets.PAT }}
+        tag: ${{ env.VERSION }}
         allowUpdates: true
         prerelease: true
         draft: false
