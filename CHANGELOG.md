@@ -8,6 +8,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 0.13.x (Unreleased)
 > Released N/A
 
+* fix(lisp): Fix line containing format placeholders ([#377](../../pull/377))
 * feat: Add `root` command ([`2a3872b`](../../commit/2a3872b0ac842268eb69cca403ab3ad8cda72a21))
 
 ## 0.12.x
