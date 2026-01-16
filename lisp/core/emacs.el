@@ -31,6 +31,7 @@
       user-init-file (locate-user-emacs-file "init.el")
       custom-file (locate-user-emacs-file "custom.el"))
 
+(eask-file-try-load default-directory)  ; Try respect the Eask file settings.
 (package-activate-all)
 (ignore-errors (make-directory package-user-dir t))
 (eask--silent (eask-setup-paths))
