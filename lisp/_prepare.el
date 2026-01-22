@@ -195,7 +195,7 @@ These commands will first respect the current workspace.  If the current
 workspace has no valid Eask-file; it will load global workspace instead."
   (eask-command-p '("init" "init/source" "init/cask" "init/eldev" "init/keg"
                     "create/package" "create/elpa" "create/el-project"
-                    "bump" "cat" "keywords" "repl"
+                    "bump" "cat" "keywords"
                     "generate/ignore" "generate/license"
                     "test/melpazoid"
                     "util/root")))
