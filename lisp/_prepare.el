@@ -208,7 +208,7 @@ This is added because we don't want to pollute `error' and `warn' functions."
                     "run/script" "run/command"
                     ;; NOTE: These test commands handle the exit code themselves;
                     ;; therefore, we don't need to handle it for them!
-                    "test/ert" "test/ert-runner")))
+                    "test/ert" "test/ert-runner" "test/buttercup")))
 
 (defun eask-checker-p ()
   "Return t if running Eask as the checker.
