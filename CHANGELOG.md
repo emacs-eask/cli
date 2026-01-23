@@ -11,6 +11,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * fix(lisp): Fix line containing format placeholders ([#377](../../pull/377))
 * feat: Add `root` command ([`2a3872b`](../../commit/2a3872b0ac842268eb69cca403ab3ad8cda72a21))
 * fix(lisp/emacs): Respect Eask file settings when possible ([`1b5aaa1`](../../commit/1b5aaa121b5d6a39e3a0664006fc10a4b22c2e84))
+* fix(lisp): Let buttercup tests handle exit code themselves ([#385](../../pull/385))
+* fix(lisp): Set up paths regardless of the working environment ([#386](../../pull/386))
 
 ## 0.12.x
 > Released Dec 02, 2025
