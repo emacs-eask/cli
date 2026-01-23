@@ -13,6 +13,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * fix(lisp/emacs): Respect Eask file settings when possible ([`1b5aaa1`](../../commit/1b5aaa121b5d6a39e3a0664006fc10a4b22c2e84))
 * fix(lisp): Let buttercup tests handle exit code themselves ([#385](../../pull/385))
 * fix(lisp): Set up paths regardless of the working environment ([#386](../../pull/386))
+* feat(cmds): Move `el2org` to docs subcommand ([#387](../../pull/387))
 
 ## 0.12.x
 > Released Dec 02, 2025
