@@ -147,6 +147,9 @@ describe("local", () => {
         "recipes",    // from generate recipes
         ".gitignore", // from generate ignore elisp
       );
+
+      // restore original .gitignore
+      await ctx.run("git restore .");
     });
 
     it.each([
