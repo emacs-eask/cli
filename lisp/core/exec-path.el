@@ -30,6 +30,6 @@
     (mapc #'eask-exec-path--print exec-path)
     (if (zerop (length exec-path))
         (eask-info "(No exec-path found)")
-      (eask-info "(Total of %s exec-path)" (length exec-path)))))
+      (eask-info "(Total of %s `exec-path` printed)" (length exec-path)))))
 
 ;;; core/exec-path.el ends here
