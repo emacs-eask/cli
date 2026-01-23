@@ -612,11 +612,14 @@ Arguments FNC and ARGS are used for advice `:around'."
 
 (defun eask--update-exec-path ()
   "Add all bin directory to the variable `exec-path'."
-  (dolist (entry (directory-files package-user-dir t directory-files-no-dot-files-regexp))
-    (when-let* ((bin (expand-file-name "bin" entry))
-                ((file-directory-p bin)))
-      (add-to-list 'exec-path bin t)))
-  (delete-dups exec-path))
+  (when-let* (((file-exists-p package-user-dir))
+              (entries (directory-files package-user-dir
+                                        t directory-files-no-dot-files-regexp)))
+    (dolist (entry entries)
+      (when-let* ((bin (expand-file-name "bin" entry))
+                  ((file-directory-p bin)))
+        (add-to-list 'exec-path bin t)))
+    (delete-dups exec-path)))
 
 (defun eask--update-load-path ()
   "Add all .el files to the variable `load-path'."
@@ -702,7 +705,8 @@ scope of the dependencies (it's either `production' or `development')."
   (eask-with-progress
     (ansi-green "Updating environment variables... ")
     (eask-with-verbosity 'debug
-      (eask--update-exec-path) (eask--update-load-path)
+      (eask--update-exec-path)
+      (eask--update-load-path)
       (setenv "PATH" (string-join exec-path path-separator))
       (setenv "EMACSLOADPATH" (string-join load-path path-separator)))
     (ansi-green "done ✓")))
@@ -1385,6 +1389,8 @@ This uses function `locate-dominating-file' to look up directory tree."
                  (eask-msg "✗ Loading config Eask file... missing!"))
                (eask-msg ""))
              (package-activate-all)
+             (ignore-errors (make-directory package-user-dir t))
+             (eask--silent (eask-setup-paths))
              (eask--load-config)
              (eask--with-hooks ,@body)))
           ((eask-global-p)
@@ -1400,6 +1406,7 @@ This uses function `locate-dominating-file' to look up directory tree."
                  (eask-msg ""))
                (package-activate-all)
                (ignore-errors (make-directory package-user-dir t))
+               (eask--silent (eask-setup-paths))
                (eask-with-verbosity 'debug (eask--load-config))
                (eask--with-hooks ,@body))))
           ((eask-special-p)  ; Commands without Eask-file needed!
@@ -1419,6 +1426,7 @@ This uses function `locate-dominating-file' to look up directory tree."
                  (eask-msg ""))
                (package-activate-all)
                (ignore-errors (make-directory package-user-dir t))
+               (eask--silent (eask-setup-paths))
                (eask-with-verbosity 'debug (eask--load-config))
                (eask--with-hooks ,@body))))
           (t

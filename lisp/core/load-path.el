@@ -34,6 +34,6 @@
     (mapc #'eask-load-path--print load-path)
     (if (zerop (length load-path))
         (eask-info "(No load-path found)")
-      (eask-info "(Total of %s load-path)" (length load-path)))))
+      (eask-info "(Total of %s `load-path` printed)" (length load-path)))))
 
 ;;; core/load-path.el ends here
