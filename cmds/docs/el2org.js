@@ -17,22 +17,26 @@
 
 "use strict";
 
-exports.command = ['docs <generator>', 'doc <generator>'];
-exports.desc = 'Build documentation';
-exports.builder = function (yargs) {
-  yargs.usage(`${exports.desc}
+exports.command = ['el2org [names..]', ];
+exports.desc = 'Build documentation with el2org';
+exports.builder = yargs => yargs
+  .positional(
+    '[names..]', {
+      description: 'specify source files to scan',
+      type: 'array',
+    })
+  .options({
+    'destination': {
+      description: 'optional output destination',
+      requiresArg: true,
+      alias: 'dest',
+      type: 'string',
+      group: TITLE_CMD_OPTION,
+    },
+  });
 
-Usage: eask docs <generator> [options..]`)
-    .commandDir('../docs/')
-    .demandCommand();
-
-  /* XXX: Configure only in the menu. */
-  if (UTIL.cmd_count() == 1) {
-    yargs.positional(
-      '<generator>', {
-        description: 'type of the generator',
-      });
-  }
-}
-
-exports.handler = async (argv) => { };
+exports.handler = async (argv) => {
+  await UTIL.e_call(argv, 'docs/el2org'
+                    , argv.names
+                    , UTIL.def_flag(argv.dest, '--dest', argv.dest));
+};

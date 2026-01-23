@@ -344,12 +344,12 @@ eask [GLOBAL-OPTIONS] loc [FILES..]
 
 用於建立文檔站點的命令。
 
-## 🔍 eask docs
+## 🔍 eask docs el2org
 
-建置文檔。
+使用 [el2org][] 建置文檔。
 
 ```sh
-eask [GLOBAL-OPTIONS] docs [NAMES..]
+eask [GLOBAL-OPTIONS] docs el2org [NAMES..]
 ```
 
 # 🚩 執行
@@ -1162,6 +1162,8 @@ eask --proxy "localhost:8888" [COMMAND]
 [GitHub Actions]: https://github.com/features/actions
 [GitLab Runner]: https://docs.gitlab.com/runner/
 [Travis CI]: https://www.travis-ci.com/
+
+[el2org]: https://github.com/tumashu/el2org
 
 [ert]: https://www.gnu.org/software/emacs/manual/html_node/ert/
 [ert-runner]: https://github.com/rejeep/ert-runner.el
