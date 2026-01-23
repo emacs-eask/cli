@@ -79,6 +79,12 @@ describe("local", () => {
     });
   });
 
+  describe("Documentation", () => {
+    it("docs el2org", async () => {
+      await ctx.runEask("docs el2org");
+    });
+  });
+
   describe("Development", () => {
     beforeAll(async () => {
       await ctx.runEask("install-deps", { timeout: 40000 });
