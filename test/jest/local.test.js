@@ -81,7 +81,9 @@ describe("local", () => {
 
   describe("Documentation", () => {
     it("docs el2org", async () => {
-      await ctx.runEask("docs el2org");
+      if (cmp(await emacsVersion(), "28.1") == 1) {
+        await ctx.runEask("docs el2org");
+      }
     });
   });
 

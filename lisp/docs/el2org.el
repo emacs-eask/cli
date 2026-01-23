@@ -24,6 +24,11 @@
         nil t))
 
 ;;
+;;; Flags
+
+(eask-command-check "28.1")
+
+;;
 ;;; Externals
 
 (require 'el2org nil t)
