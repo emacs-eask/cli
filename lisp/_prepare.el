@@ -612,11 +612,14 @@ Arguments FNC and ARGS are used for advice `:around'."
 
 (defun eask--update-exec-path ()
   "Add all bin directory to the variable `exec-path'."
-  (dolist (entry (directory-files package-user-dir t directory-files-no-dot-files-regexp))
-    (when-let* ((bin (expand-file-name "bin" entry))
-                ((file-directory-p bin)))
-      (add-to-list 'exec-path bin t)))
-  (delete-dups exec-path))
+  (when-let* (((file-exists-p package-user-dir))
+              (entries (directory-files package-user-dir
+                                        t directory-files-no-dot-files-regexp)))
+    (dolist (entry entries)
+      (when-let* ((bin (expand-file-name "bin" entry))
+                  ((file-directory-p bin)))
+        (add-to-list 'exec-path bin t)))
+    (delete-dups exec-path)))
 
 (defun eask--update-load-path ()
   "Add all .el files to the variable `load-path'."
@@ -1386,6 +1389,7 @@ This uses function `locate-dominating-file' to look up directory tree."
                  (eask-msg "✗ Loading config Eask file... missing!"))
                (eask-msg ""))
              (package-activate-all)
+             (ignore-errors (make-directory package-user-dir t))
              (eask--silent (eask-setup-paths))
              (eask--load-config)
              (eask--with-hooks ,@body)))
