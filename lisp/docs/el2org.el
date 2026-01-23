@@ -1,4 +1,4 @@
-;;; core/docs.el --- Build documentation  -*- lexical-binding: t; -*-
+;;; docs/el2org.el --- Build documentation with el2org  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -22,6 +22,11 @@
   (load (expand-file-name "_prepare.el"
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
+
+;;
+;;; Flags
+
+(eask-command-check "28.1")
 
 ;;
 ;;; Externals
@@ -72,4 +77,4 @@
       (eask-info "(No elisp source can be read)")
       (eask-help "core/docs")))))
 
-;;; core/docs.el ends here
+;;; docs/el2org.el ends here

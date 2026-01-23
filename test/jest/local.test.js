@@ -79,6 +79,14 @@ describe("local", () => {
     });
   });
 
+  describe("Documentation", () => {
+    it("docs el2org", async () => {
+      if (cmp(await emacsVersion(), "28.1") == 1) {
+        await ctx.runEask("docs el2org");
+      }
+    });
+  });
+
   describe("Development", () => {
     beforeAll(async () => {
       await ctx.runEask("install-deps", { timeout: 40000 });
@@ -139,6 +147,9 @@ describe("local", () => {
         "recipes",    // from generate recipes
         ".gitignore", // from generate ignore elisp
       );
+
+      // restore original .gitignore
+      await ctx.run("git restore .");
     });
 
     it.each([

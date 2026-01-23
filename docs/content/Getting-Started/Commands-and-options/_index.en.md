@@ -349,12 +349,12 @@ eask [GLOBAL-OPTIONS] loc [FILES..]
 
 Commands used to build documentation site.
 
-## 🔍 eask docs
+## 🔍 eask docs el2org
 
-Build documentation.
+Build documentation with [el2org][].
 
 ```sh
-eask [GLOBAL-OPTIONS] docs [NAMES..]
+eask [GLOBAL-OPTIONS] docs el2org [NAMES..]
 ```
 
 # 🚩 Execution
@@ -1177,6 +1177,8 @@ Do not use a proxy for any URL matching pattern.
 [GitHub Actions]: https://github.com/features/actions
 [GitLab Runner]: https://docs.gitlab.com/runner/
 [Travis CI]: https://www.travis-ci.com/
+
+[el2org]: https://github.com/tumashu/el2org
 
 [ert]: https://www.gnu.org/software/emacs/manual/html_node/ert/
 [ert-runner]: https://github.com/rejeep/ert-runner.el
