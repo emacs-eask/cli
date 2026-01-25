@@ -15,11 +15,6 @@
         nil t))
 
 ;;
-;;; Flags
-
-(advice-add #'eask-allow-error-p :override #'eask-always)
-
-;;
 ;;; Core
 
 (require 'finder)
@@ -38,10 +33,12 @@
         (file (eask-root-del eask-package-file)))
     (cond
      ((not eask-package-file)
-      (eask-report "Can't lint keywords without the package-file specified")
+      (eask-ignore-errors
+        (eask-report "Can't lint keywords without the package-file specified"))
       (eask-help "lint/keywords-file"))
      ((not keywords)
-      (eask-report "Keywords header seems to be missing in the `%s' file" file)
+      (eask-ignore-errors
+        (eask-report "Keywords header seems to be missing in the `%s' file" file))
       (eask-help "lint/keywords-header"))
      (t
       (eask-lint-first-newline)
@@ -50,7 +47,8 @@
           (progn
             (eask-msg "")
             (eask-info "(No issues found.)"))
-        (eask-report "Missing a standard keyword, consider adding one to the Keywords header!")
+        (eask-ignore-errors
+          (eask-report "Missing a standard keyword, consider adding one to the Keywords header!"))
         (eask-help "lint/keywords"))))))
 
 ;;; lint/keywords.el ends here

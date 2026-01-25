@@ -20,11 +20,6 @@
         nil t))
 
 ;;
-;;; Flags
-
-(advice-add #'eask-allow-error-p :override #'eask-always)
-
-;;
 ;;; Core
 
 (defun eask-lint-indent--undo-pos (entry)
@@ -61,8 +56,9 @@
                  (column  (nth 1 info))
                  (current (eask-with-buffer
                             (eask--goto-line line) (current-indentation))))
-            (eask-report "%s:%s: Expected indentation is %s but found %s"
-                         (buffer-name) line column current)))
+            (eask-ignore-errors
+              (eask-report "%s:%s: Expected indentation is %s but found %s"
+                           (buffer-name) line column current))))
       (eask-log "No mismatch indentation found"))))
 
 (eask-start

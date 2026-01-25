@@ -185,14 +185,18 @@ will return `lint/checkdoc' with a dash between two subcommands."
                 version)))
 
 (defun eask-command-p (commands)
-  "Return t if COMMANDS is the current command."
+  "Return t when the current command matches any entry in the COMMANDS list."
   (member (eask-command) (eask-listify commands)))
 
 (defun eask-special-p ()
   "Return t if the command that can be run without Eask-file existence.
 
 These commands will first respect the current workspace.  If the current
-workspace has no valid Eask-file; it will load global workspace instead."
+workspace has no valid Eask-file; it will load the Eask-file form the global
+workspace instead.
+
+If there is no valid Eask-file presented; the execution continues without
+printing the missing Eask-file message."
   (eask-command-p '("init" "init/source" "init/cask" "init/eldev" "init/keg"
                     "create/package" "create/elpa" "create/el-project"
                     "bump" "cat" "keywords" "repl"
@@ -254,6 +258,14 @@ the `eask-start' execution.")
 
 ;;
 ;;; Util
+
+(defmacro eask-add-hook (hooks &rest body)
+  "The eye candy for the function `add-hook'."
+  (declare (indent 1))
+  `(cond ((listp ,hooks)
+          (dolist (hook ,hooks)
+            (add-hook hook (lambda (&optional arg0 arg1 arg2 &rest args) ,@body))))
+         (t (add-hook ,hooks (lambda (&optional arg0 arg1 arg2 &rest args) ,@body)))))
 
 (defmacro eask-defvc< (version &rest body)
   "Define scope if Emacs version is below VERSION.
@@ -484,7 +496,7 @@ You can pass BUFFER-OR-NAME to replace current buffer."
                                                   (line-end-position))))
         ;; The variable `line' can contains format specifier, avoid it with `%s'!
         (cond ((string-match-p "[: ][Ee]rror: " line)
-               (eask-error "%s" line))
+               (eask-ignore-errors (eask-error "%s" line)))
               ((string-match-p "[: ][Ww]arning: " line)
                (eask-warn "%s" line))
               (t
@@ -2032,6 +2044,7 @@ The argument ARGS is passed from the function `eask--error'."
          ;; Handle https://github.com/emacs-eask/cli/issues/11.
          (unless (string-prefix-p "Can't find library " (car args))
            (setq eask--has-error-p t)))
+        ;; Flag the error normally.
         (t
          (setq eask--has-error-p t)))  ; Just a record.
 
@@ -2092,15 +2105,14 @@ Arguments FNC and ARGS are used for advice `:around'."
        (write-region (with-current-buffer ,buffer (buffer-string)) nil
                      (expand-file-name ,file log-dir)))))
 
-(add-hook 'kill-emacs-hook  ; Write log files
-          (lambda (&rest _)
-            (when eask-log-file
-              (let ((log-dir (expand-file-name eask-log-path eask-file-root)))
-                (make-directory log-dir t)
-                (eask--log-write-buffer "*Messages*" "messages.log")
-                (eask--log-write-buffer "*Warnings*" "warnings.log")
-                (eask--log-write-buffer "*Backtrace*" "backtrace.log")
-                (eask--log-write-buffer "*Compile-Log*" "compile-log.log")))))
+(eask-add-hook '( kill-emacs-hook)
+  (when eask-log-file  ; Write log files
+    (let ((log-dir (expand-file-name eask-log-path eask-file-root)))
+      (make-directory log-dir t)
+      (eask--log-write-buffer "*Messages*" "messages.log")
+      (eask--log-write-buffer "*Warnings*" "warnings.log")
+      (eask--log-write-buffer "*Backtrace*" "backtrace.log")
+      (eask--log-write-buffer "*Compile-Log*" "compile-log.log"))))
 
 ;;
 ;;; File

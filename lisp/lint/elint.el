@@ -25,11 +25,6 @@
 (declare-function elint-get-log-buffer "ext:elsa.el")
 
 ;;
-;;; Flags
-
-(advice-add #'eask-allow-error-p :override #'eask-always)
-
-;;
 ;;; Core
 
 (defun eask-lint-elint--file (filename)
@@ -39,7 +34,8 @@
          (noninteractive))
     (eask-lint-first-newline)
     (eask-msg "`%s` with elint" (ansi-green file))
-    (eask-with-verbosity 'debug (elint-file filename))
+    (eask-with-verbosity 'debug
+      (eask-ignore-errors (elint-file filename)))
     (let ((log-buffer (elint-get-log-buffer)))
       (eask-print-log-buffer log-buffer)
       (kill-buffer log-buffer))))

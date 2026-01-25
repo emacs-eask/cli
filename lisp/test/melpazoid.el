@@ -15,11 +15,6 @@
         nil t))
 
 ;;
-;;; Flags
-
-(advice-add #'eask-allow-error-p :override #'eask-always)
-
-;;
 ;;; Core
 
 (defcustom eask-test-melpazoid-el-url
@@ -42,7 +37,8 @@
       (dolist (dir dirs)
         (let ((default-directory (expand-file-name dir)))
           (eask-info "[+] %s" default-directory)
-          (eask-import eask-test-melpazoid-el-url))))
+          (eask-ignore-errors
+            (eask-import eask-test-melpazoid-el-url)))))
      ;; Default, print help!
      (t
       (eask-info "(No tests found.)")

@@ -20,11 +20,6 @@
         nil t))
 
 ;;
-;;; Flags
-
-(advice-add #'eask-allow-error-p :override #'eask-always)
-
-;;
 ;;; Core
 
 (defun eask-lint-org--print-error (file result)
@@ -34,7 +29,7 @@
          (line (elt data 0))
          (text (elt data 2))
          (msg (concat filename ":" line ": " text)))
-    (if (eask-strict-p) (error msg) (warn msg))))
+    (eask-ignore-errors (eask-report "%s" msg))))
 
 (defun eask-lint-org--file (file)
   "Run `org-lint' on FILE."
@@ -60,6 +55,7 @@
     (cond
      ;; Files found, do the action!
      (files
+      (eask-msg "")
       (mapcar #'eask-lint-org--file files)
       (eask-msg "")
       (eask-info "(Total of %s file%s linted)" (length files)

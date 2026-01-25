@@ -19,11 +19,15 @@
                           (locate-dominating-file dir "_prepare.el"))
         nil t))
 
-;; Handle options
-(add-hook 'eask-before-command-hook
-          (lambda ()
-            (when (eask-reach-verbosity-p 'debug)
-              (setq ert-runner-verbose t))))
+;;
+;;; Handle options
+
+(eask-add-hook '( eask-before-command-hook)
+  (when (eask-reach-verbosity-p 'debug)
+    (setq ert-runner-verbose t)))
+
+;;
+;;; Core
 
 (defun eask-test-ert-runner--run (fnc &rest args)
   "Run around function `ert-runner/run'.

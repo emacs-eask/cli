@@ -25,11 +25,6 @@
 (defvar check-declare-warning-buffer)
 
 ;;
-;;; Flags
-
-(advice-add #'eask-allow-error-p :override #'eask-always)
-
-;;
 ;;; Core
 
 (defun eask-lint-declare--file (filename)
@@ -40,10 +35,13 @@
     (eask-lint-first-newline)
     (eask-msg "`%s` with check-declare" (ansi-green file))
     (setq errors (eask--silent (check-declare-file filename)))
-    (if errors
-        (with-current-buffer check-declare-warning-buffer
-          (eask-report (string-remove-prefix "\n" (buffer-string))))
-      (eask-msg "No issues found"))))
+    (eask-ignore-errors  ; Continue checking.
+      (if errors
+          (with-current-buffer check-declare-warning-buffer
+            (eask-report
+             (string-remove-prefix "\n"
+                                   (buffer-string))))
+        (eask-msg "No issues found")))))
 
 (eask-start
   (require 'check-declare)

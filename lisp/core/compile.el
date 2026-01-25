@@ -20,19 +20,13 @@
         nil t))
 
 ;;
-;;; Flags
-
-(advice-add #'eask-allow-error-p :override #'eask-always)
-
-;;
 ;;; Handle options
 
-(add-hook 'eask-before-command-hook
-          (lambda ()
-            (when (eask-strict-p)
-              (setq byte-compile-error-on-warn t))
-            (when (eask-reach-verbosity-p 'debug)
-              (setq byte-compile-verbose t))))
+(eask-add-hook '( eask-before-command-hook)
+  (when (eask-strict-p)
+    (setq byte-compile-error-on-warn t))
+  (when (eask-reach-verbosity-p 'debug)
+    (setq byte-compile-verbose t)))
 
 ;;
 ;;; Core
@@ -98,21 +92,22 @@ The CMD is the command to start a new Emacs session."
 
 (defun eask-compile--byte-compile-file (filename)
   "Byte compile FILENAME."
-  ;; *Compile-Log* does not kill itself. Make sure it's clean before we do
-  ;; next byte-compile task.
-  (ignore-errors (kill-buffer byte-compile-log-buffer))
-  (let* ((filename (expand-file-name filename))
-         (result))
-    (eask-with-progress
-      (unless byte-compile-verbose (format "Compiling %s... " filename))
-      (eask-with-verbosity 'debug
-        (setq result (if (eask-clean-p)
-                         (eask-compile--byte-compile-file-external filename)
-                       (byte-compile-file filename))
-              result (eq result t)))
-      (unless byte-compile-verbose (if result "done ✓" "skipped ✗")))
-    (eask-compile--print-log)
-    result))
+  (eask-ignore-errors
+    ;; *Compile-Log* does not kill itself. Make sure it's clean before we do
+    ;; next byte-compile task.
+    (ignore-errors (kill-buffer byte-compile-log-buffer))
+    (let* ((filename (expand-file-name filename))
+           (result))
+      (eask-with-progress
+        (unless byte-compile-verbose (format "Compiling %s... " filename))
+        (eask-with-verbosity 'debug
+          (setq result (if (eask-clean-p)
+                           (eask-compile--byte-compile-file-external filename)
+                         (byte-compile-file filename))
+                result (eq result t)))
+        (unless byte-compile-verbose (if result "done ✓" "skipped ✗")))
+      (eask-compile--print-log)
+      result)))
 
 (defun eask-compile--files (files)
   "Compile sequence of FILES."

@@ -20,11 +20,6 @@
 (require 'whitespace nil t)
 
 ;;
-;;; Flags
-
-(advice-add #'eask-allow-error-p :override #'eask-always)
-
-;;
 ;;; Core
 
 (defun eask-lint-license--s-match-all (contents)

@@ -29,8 +29,6 @@
 
 (eask-command-check "27.1")
 
-(advice-add #'eask-allow-error-p :override #'eask-always)
-
 ;;
 ;;; Core
 
@@ -54,9 +52,10 @@
                               (`error   #'eask-error)
                               (`warning #'eask-warn)
                               (_        #'eask-info))))
-          (funcall report-func "%s:%s %s: %s"
-                   file (line-number-at-pos error-pos)
-                   (capitalize (eask-2str severity)) msg)))
+          (eask-ignore-errors
+            (funcall report-func "%s:%s %s: %s"
+                     file (line-number-at-pos error-pos)
+                     (capitalize (eask-2str severity)) msg))))
       (unless errors
         (eask-msg "No issues found"))
       (kill-current-buffer))))
