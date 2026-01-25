@@ -25,20 +25,14 @@
 (declare-function package-lint-current-buffer "ext:package-lint.el")
 
 ;;
-;;; Flags
-
-(advice-add #'eask-allow-error-p :override #'eask-always)
-
-;;
 ;;; Handle options
 
-(add-hook 'eask-before-command-hook
-          (lambda ()
-            (when (and (not (boundp 'package-lint-batch-fail-on-warnings))
-                       (not (eask-strict-p)))
-              ;; TODO: This doesn't work since this variable only controls
-              ;; `package-lint' exit code.
-              (setq package-lint-batch-fail-on-warnings nil))))
+(eask-add-hook '( eask-before-command-hook)
+  (when (and (not (boundp 'package-lint-batch-fail-on-warnings))
+             (not (eask-strict-p)))
+    ;; TODO: This doesn't work since this variable only controls
+    ;; `package-lint' exit code.
+    (setq package-lint-batch-fail-on-warnings nil)))
 
 ;;
 ;;; Core

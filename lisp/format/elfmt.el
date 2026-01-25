@@ -25,11 +25,6 @@
 (declare-function elfmt-buffer "ext:elisp-autofmt.el")
 
 ;;
-;;; Flags
-
-(advice-add #'eask-allow-error-p :override #'eask-always)
-
-;;
 ;;; Core
 
 (defconst eask-format-elfmt--version nil
@@ -40,7 +35,7 @@
   (let* ((filename (expand-file-name filename))
          (file (eask-root-del filename)))
     (with-current-buffer (find-file filename)
-      (elfmt-buffer)
+      (eask-ignore-errors (elfmt-buffer))
       (save-buffer)
       (kill-buffer))))
 

@@ -28,11 +28,6 @@
 (declare-function checkdoc-buffer-label "ext:checkdoc.el")
 
 ;;
-;;; Flags
-
-(advice-add #'eask-allow-error-p :override #'eask-always)
-
-;;
 ;;; Core
 
 (defvar eask-lint-checkdoc--errors nil "Error flag.")
@@ -59,7 +54,7 @@ be assigned to variable `checkdoc-create-error-function'."
          (eask-lint-checkdoc--errors))
     (eask-lint-first-newline)
     (eask-msg "`%s` with checkdoc (%s)" (ansi-green file) checkdoc-version)
-    (checkdoc-file filename)
+    (eask-ignore-errors (checkdoc-file filename))
     (unless eask-lint-checkdoc--errors (eask-msg "No issues found"))))
 
 (eask-start

@@ -29,8 +29,6 @@
 
 (eask-command-check "29.1")
 
-(advice-add #'eask-allow-error-p :override #'eask-always)
-
 ;;
 ;;; Core
 
@@ -42,7 +40,7 @@
   (let* ((filename (expand-file-name filename))
          (file (eask-root-del filename)))
     (with-current-buffer (find-file filename)
-      (elisp-autofmt-buffer)
+      (eask-ignore-errors (elisp-autofmt-buffer))
       (save-buffer)
       (kill-buffer))))
 

@@ -25,11 +25,6 @@
 (declare-function elisp-lint-file "ext:elsa.el")
 
 ;;
-;;; Flags
-
-(advice-add #'eask-allow-error-p :override #'eask-always)
-
-;;
 ;;; Core
 
 (defconst eask-lint-elisp-lint--version nil
@@ -42,13 +37,14 @@
          success)
     (eask-msg "")
     (eask-msg "`%s` with elisp-lint (%s)" (ansi-green file) eask-lint-elisp-lint--version)
-    (eask-with-verbosity 'debug
-      (setq success (elisp-lint-file filename)))
-    ;; Report result!
-    (cond (success
-           (eask-msg "No issues found"))
-          ((eask-strict-p)
-           (eask-error "Linting failed")))))
+    (eask-ignore-errors
+      (eask-with-verbosity 'debug
+        (setq success (elisp-lint-file filename)))
+      ;; Report result!
+      (cond (success
+             (eask-msg "No issues found"))
+            ((eask-strict-p)
+             (eask-error "Linting failed"))))))
 
 (eask-start
   ;; Preparation

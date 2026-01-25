@@ -31,11 +31,6 @@
 (declare-function --each "ext:dash.el")
 
 ;;
-;;; Flags
-
-(advice-add #'eask-allow-error-p :override #'eask-always)
-
-;;
 ;;; Core
 
 (defconst eask-lint-elsa--version nil
@@ -48,17 +43,18 @@
          errors)
     (eask-msg "")
     (eask-msg "`%s` with elsa (%s)" (ansi-green file) eask-lint-elsa--version)
-    (eask-with-verbosity 'debug
-      (setq errors (oref (elsa-analyse-file filename elsa-global-state) errors)))
-    (if errors
-        (--each (reverse errors)
-          (let ((line (string-trim (concat file ":" (elsa-message-format it)))))
-            (cond ((string-match-p "[: ][Ee]rror:" line)
-                   (eask-error "%s" line))
-                  ((string-match-p "[: ][Ww]arning:" line)
-                   (eask-warn "%s" line))
-                  (t (eask-log "%s" line)))))
-      (eask-msg "No issues found"))))
+    (eask-ignore-errors
+      (eask-with-verbosity 'debug
+        (setq errors (oref (elsa-analyse-file filename elsa-global-state) errors)))
+      (if errors
+          (--each (reverse errors)
+            (let ((line (string-trim (concat file ":" (elsa-message-format it)))))
+              (cond ((string-match-p "[: ][Ee]rror:" line)
+                     (eask-error "%s" line))
+                    ((string-match-p "[: ][Ww]arning:" line)
+                     (eask-warn "%s" line))
+                    (t (eask-log "%s" line)))))
+        (eask-msg "No issues found")))))
 
 (eask-start
   ;; Preparation
