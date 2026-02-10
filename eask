@@ -27,7 +27,7 @@ handler
   .commandDir(path.join(__dirname, './cmds/util/'))
   .command({
     command: '*',
-    handler() { yargs.showHelp(); }
+    handler() { handler.showHelp(); }
   })
   .version('version', 'output version information and exit', version)
   .help('help', 'show usage instructions')
