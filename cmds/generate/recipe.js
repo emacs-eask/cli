@@ -18,7 +18,7 @@
 "use strict";
 
 import { TITLE_CMD_OPTION } from "../../src/env.js";
-import { e_call } from "../../src/util.js";
+import { e_call, def_flag } from "../../src/util.js";
 
 export const command = ['recipe [destination]'];
 export const desc = 'Generate the recipe file';
