@@ -50,13 +50,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target:
-        - linux-arm64
-        - linux-x64
-        - macos-arm64
-        - macos-x64
-        - win-arm64
-        - win-x64
+        include:
+        - target: linux-arm64
+          ext: tar.gz
+        - target: linux-x64
+          ext: tar.gz
+        - target: macos-arm64
+          ext: tar.gz
+        - target: macos-x64
+          ext: tar.gz
+        - target: win-arm64
+          ext: zip
+        - target: win-x64
+          ext: zip
 
     steps:
     - uses: actions/checkout@v6
@@ -82,16 +88,6 @@ jobs:
         mv COPYING dist
         mv README.md dist
 
-    - name: Setup environment (Unix)
-      if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
-      run: |
-        echo "_EXT=tar.gz" >> $GITHUB_ENV
-
-    - name: Setup environment (Windows)
-      if: contains(fromJSON('["win-arm64", "win-x64"]'), matrix.target)
-      run: |
-        echo "_EXT=zip" >> $GITHUB_ENV
-
     - name: Change permissions (Unix)
       if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
       run: |
@@ -100,17 +96,17 @@ jobs:
     - name: Tar dist (Unix)
       if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
       run: |
-        tar -czf ${{ matrix.target }}.${{ env._EXT }} -C ./dist/ .
-        cp ${{ matrix.target }}.${{ env._EXT }} eask_${{ env.VERSION }}_${{ matrix.target }}.${{ env._EXT }}
+        tar -czf ${{ matrix.target }}.${{ matrix.ext }} -C ./dist/ .
+        cp ${{ matrix.target }}.${{ matrix.ext }} eask_${{ env.VERSION }}_${{ matrix.target }}.${{ matrix.ext }}
 
     - name: Zipping dist (Windows)
       if: contains(fromJSON('["win-arm64", "win-x64"]'), matrix.target)
       working-directory: dist
       run: |
-        zip -r ${{ matrix.target }}.${{ env._EXT }} .
-        mv ${{ matrix.target }}.${{ env._EXT }} ../
+        zip -r ${{ matrix.target }}.${{ matrix.ext }} .
+        mv ${{ matrix.target }}.${{ matrix.ext }} ../
         cd ..
-        cp ${{ matrix.target }}.${{ env._EXT }} eask_${{ env.VERSION }}_${{ matrix.target }}.${{ env._EXT }}
+        cp ${{ matrix.target }}.${{ matrix.ext }} eask_${{ env.VERSION }}_${{ matrix.target }}.${{ matrix.ext }}
 
     - name: Upload for prerelease
       if: github.ref == 'refs/heads/master'
@@ -121,7 +117,7 @@ jobs:
         allowUpdates: true
         prerelease: true
         draft: false
-        artifacts: eask_${{ env.VERSION }}_${{ matrix.target }}.${{ env._EXT }}
+        artifacts: eask_${{ env.VERSION }}_${{ matrix.target }}.${{ matrix.ext }}
 
     #### Upload an artifact for testing purposes
 
@@ -134,7 +130,7 @@ jobs:
     #### Prepare to push to `binaries` repository!
 
     - name: Move tar to HOME
-      run: mv ${{ matrix.target }}.${{ env._EXT }} ~/
+      run: mv ${{ matrix.target }}.${{ matrix.ext }} ~/
 
     - name: Checkout binaries repository
       uses: actions/checkout@v6
@@ -145,10 +141,10 @@ jobs:
 
     - name: Clean up previous binaries
       continue-on-error: true
-      run: rm -rf eask/${{ matrix.target }}.${{ env._EXT }}
+      run: rm -rf eask/${{ matrix.target }}.${{ matrix.ext }}
 
     - name: Move binaries to repository
-      run: mv ~/${{ matrix.target }}.${{ env._EXT }} ./
+      run: mv ~/${{ matrix.target }}.${{ matrix.ext }} ./
 
     - name: Set git config
       run: |
@@ -160,7 +156,7 @@ jobs:
       run: |
         git pull
         git add .
-        git commit -m "Update binaries ${{ matrix.target }}.${{ env._EXT }}"
+        git commit -m "Update binaries ${{ matrix.target }}.${{ matrix.ext }}"
 
     - name: Push
       if: github.ref == 'refs/heads/master'
