@@ -1,0 +1,131 @@
+#!/usr/bin/env node
+
+const env = require('./src/env');
+const yargs = require('yargs');
+
+const usage = `eask is the main command, used to manage your Emacs dependencies
+
+Eask is a command-line tool that helps you build, lint, and test Emacs Lisp packages.
+
+Usage: eask <command> [options..]`;
+
+const epilogue = `For more information, find the manual at https://emacs-eask.github.io/`;
+
+const version = `0.12.5`;
+
+yargs
+  .usage(usage)
+  .scriptName('')
+  .epilogue(epilogue)
+  .commandDir('cmds/core/')
+  .commandDir('cmds/util/')
+  .command({
+    command: '*',
+    handler() { yargs.showHelp(); }
+  })
+  .version('version', 'output version information and exit', version)
+  .help('help', 'show usage instructions')
+  .showHidden('show-hidden', 'Show hidden commands and options')
+  .options({
+    'global': {
+      description: `change default workspace to ~/.eask/`,
+      alias: 'g',
+      type: 'boolean',
+    },
+    'config': {
+      description: `change default workspace to ~/.emacs.d/`,
+      alias: 'c',
+      type: 'boolean',
+    },
+    'all': {
+      description: `enable all flag`,
+      alias: 'a',
+      type: 'boolean',
+    },
+    'quick': {
+      description: `start cleanly without loading the configuration files`,
+      alias: 'q',
+      type: 'boolean',
+    },
+    'force': {
+      description: `enable force flag`,
+      alias: 'f',
+      type: 'boolean',
+    },
+    'debug': {
+      description: `turn on debug mode`,
+      type: 'boolean',
+    },
+    'strict': {
+      description: `report error instead of warnings`,
+      type: 'boolean',
+    },
+    'allow-error': {
+      description: `attempt to continue execution on error`,
+      type: 'boolean',
+    },
+    'insecure': {
+      description: `allow insecure connection`,
+      type: 'boolean',
+    },
+    'timestamps': {
+      description: `log with timestamps`,
+      type: 'boolean',
+      hidden: true,
+    },
+    'log-level': {
+      description: `log with level`,
+      type: 'boolean',
+      hidden: true,
+    },
+    'log-file': {
+      description: `generate log files`,
+      alias: 'lf',
+      type: 'boolean',
+      hidden: true,
+    },
+    'elapsed-time': {
+      description: `show elapsed time between each operation`,
+      alias: 'et',
+      type: 'boolean',
+      hidden: true,
+    },
+    'no-color': {
+      description: 'enable/disable color output',
+      type: 'boolean',
+    },
+    'verbose': {
+      description: `set verbosity from 0 to 5`,
+      alias: 'v',
+      requiresArg: true,
+      type: 'number',
+    },
+  })
+  .options({
+    'proxy': {
+      description: `update proxy for HTTP and HTTPS to host`,
+      type: 'string',
+      group: TITLE_PROXY_OPTION,
+    },
+    'http-proxy': {
+      description: `update proxy for HTTP to host`,
+      type: 'string',
+      group: TITLE_PROXY_OPTION,
+    },
+    'https-proxy': {
+      description: `update proxy for HTTPS to host`,
+      type: 'string',
+      group: TITLE_PROXY_OPTION,
+    },
+    'no-proxy': {
+      description: `set no-proxy to host`,
+      type: 'string',
+      group: TITLE_PROXY_OPTION,
+    },
+  })
+  .parserConfiguration({ "boolean-negation": false })
+  .strict()
+  .demandCommand()
+  .showHelpOnFail(true)
+  .wrap(yargs.terminalWidth())
+  .argv;
