@@ -31,7 +31,7 @@
     "cli"
   ],
   "author": "Jen-Chieh Shen",
-  "license": "GPL-3.0",
+  "license": "GPL-3.0-or-later",
   "dependencies": {
     "which": "^6.0.0",
     "yargs": "^18.0.0"
