@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['elisp-lint [files..]'];
-exports.desc = 'Run elisp-lint';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['elisp-lint [files..]'];
+export const desc = 'Run elisp-lint';
+export const builder = yargs => yargs
   .positional(
     '[files..]', {
       description: 'files you want elisp-lint to run on',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'lint/elisp-lint', argv.files);
+export const handler = async (argv) => {
+  await e_call(argv, 'lint/elisp-lint', argv.files);
 };

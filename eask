@@ -1,7 +1,13 @@
 #!/usr/bin/env node
 
-const env = require('./src/env');
-const yargs = require('yargs');
+import path from 'path';
+import yargs from 'yargs/yargs';
+import { hideBin } from 'yargs/helpers';
+import { TITLE_PROXY_OPTION } from './src/env.js';
+
+const __dirname = import.meta.dirname;
+
+const handler = yargs(hideBin(process.argv));
 
 const usage = `eask is the main command, used to manage your Emacs dependencies
 
@@ -13,15 +19,15 @@ const epilogue = `For more information, find the manual at https://emacs-eask.gi
 
 const version = `0.12.5`;
 
-yargs
+handler
   .usage(usage)
   .scriptName('')
   .epilogue(epilogue)
-  .commandDir('cmds/core/')
-  .commandDir('cmds/util/')
+  .commandDir(path.join(__dirname, './cmds/core/'))
+  .commandDir(path.join(__dirname, './cmds/util/'))
   .command({
     command: '*',
-    handler() { yargs.showHelp(); }
+    handler() { handler.showHelp(); }
   })
   .version('version', 'output version information and exit', version)
   .help('help', 'show usage instructions')
@@ -127,5 +133,5 @@ yargs
   .strict()
   .demandCommand()
   .showHelpOnFail(true)
-  .wrap(yargs.terminalWidth())
+  .wrap(handler.terminalWidth())
   .argv;

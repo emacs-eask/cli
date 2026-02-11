@@ -17,9 +17,12 @@
 
 "use strict";
 
-exports.command = ['search [queries..]'];
-exports.desc = 'Search packages from archives';
-exports.builder = yargs => yargs
+import { TITLE_CMD_OPTION } from "../../src/env.js";
+import { e_call, def_flag } from "../../src/util.js";
+
+export const command = ['search [queries..]'];
+export const desc = 'Search packages from archives';
+export const builder = yargs => yargs
   .positional(
     '[queries..]', {
       description: 'queries to search packages',
@@ -34,7 +37,7 @@ exports.builder = yargs => yargs
     },
   });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/search', argv.queries
-                    , UTIL.def_flag(argv.depth, '--depth', argv.depth));
+export const handler = async (argv) => {
+  await e_call(argv, 'core/search', argv.queries
+    , def_flag(argv.depth, '--depth', argv.depth));
 };

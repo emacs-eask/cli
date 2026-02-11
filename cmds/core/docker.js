@@ -17,12 +17,13 @@
 
 "use strict";
 
-const path = require('path');
-const child_process = require("child_process");
+import path from 'path';
+import child_process from "child_process";
+import { which, cli_args, slash } from '../../src/util.js';
 
-exports.command = ['docker <version> [args..]'];
-exports.desc = 'Launch specified Emacs version in a Docker container';
-exports.builder = async (yargs) => {
+export const command = ['docker <version> [args..]'];
+export const desc = 'Launch specified Emacs version in a Docker container';
+export const builder = async (yargs) => {
   yargs.help(false);
   yargs.version(false);
   yargs.getOptions().narg = [];
@@ -33,8 +34,8 @@ exports.builder = async (yargs) => {
   });
 };
 
-exports.handler = async (argv) => {
-  if (!UTIL.which('docker')) {
+export const handler = async (argv) => {
+  if (!which('docker')) {
     console.warn("Docker is not installed (cannot find `docker' executable)");
     return;
   }
@@ -67,7 +68,7 @@ exports.handler = async (argv) => {
 
   let cmd = default_cmd.concat(rest);
 
-  let proc = child_process.spawn(UTIL.cli_args(cmd), { stdio: 'inherit', shell: true });
+  let proc = child_process.spawn(cli_args(cmd), { stdio: 'inherit', shell: true });
 
   proc.on('close', function (code) {
     if (code == 0) return;
@@ -80,7 +81,7 @@ exports.handler = async (argv) => {
  * @param { String } path - Path to convert.
  */
 function convert_path(path) {
-  return UTIL.slash(path).replaceAll(':', '');
+  return slash(path).replaceAll(':', '');
 }
 
 /**

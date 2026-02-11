@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['buttercup'];
-exports.desc = 'Create a new Buttercup setup for the project';
+import { e_call } from "../../../src/util.js";
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'generate/test/buttercup', argv.file);
+export const command = ['buttercup'];
+export const desc = 'Create a new Buttercup setup for the project';
+
+export const handler = async (argv) => {
+  await e_call(argv, 'generate/test/buttercup', argv.file);
 };

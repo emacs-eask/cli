@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['elsa [files..]'];
-exports.desc = 'Run elsa';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['elsa [files..]'];
+export const desc = 'Run elsa';
+export const builder = yargs => yargs
   .positional(
     '[files..]', {
       description: 'files you want elsa to run on',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'lint/elsa', argv.files);
+export const handler = async (argv) => {
+  await e_call(argv, 'lint/elsa', argv.files);
 };

@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['dist [destination]', 'distribution [destination]'];
-exports.desc = 'Delete the dist directory where the build output is stored';
-exports.builder = yargs => yargs
+import { e_call } from '../../src/util.js';
+
+export const command = ['dist [destination]', 'distribution [destination]'];
+export const desc = 'Delete the dist directory where the build output is stored';
+export const builder = yargs => yargs
   .positional(
     'destination', {
       description: 'destination path/folder to clean up',
@@ -27,6 +29,6 @@ exports.builder = yargs => yargs
       type: 'string',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'clean/dist', argv.dest);
+export const handler = async (argv) => {
+  await e_call(argv, 'clean/dist', argv.dest);
 };

@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['keywords'];
-exports.desc = `Run keywords checker (built-in)`;
+import { e_call } from "../../src/util.js";
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'lint/keywords');
+export const command = ['keywords'];
+export const desc = `Run keywords checker (built-in)`;
+
+export const handler = async (argv) => {
+  await e_call(argv, 'lint/keywords');
 };

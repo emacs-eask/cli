@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['refresh'];
-exports.desc = 'Download descriptions of all configured package archives';
+import { e_call } from "../../src/util.js";
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/refresh');
+export const command = ['refresh'];
+export const desc = 'Download descriptions of all configured package archives';
+
+export const handler = async (argv) => {
+  await e_call(argv, 'core/refresh');
 };

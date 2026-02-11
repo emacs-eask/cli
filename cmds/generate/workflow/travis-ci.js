@@ -17,16 +17,18 @@
 
 "use strict";
 
-exports.command = ['travis-ci [file]'];
-exports.desc = 'Generate the Travis CI workflow yaml file';
-exports.builder = yargs => yargs
+import { e_call } from "../../../src/util.js";
+
+export const command = ['travis-ci [file]'];
+export const desc = 'Generate the Travis CI workflow yaml file';
+export const builder = yargs => yargs
   .positional(
     '[file]', {
       description: 'name of the test file; the default is `.travis.yml`',
       type: 'string',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'generate/workflow/travis-ci', argv.file);
+export const handler = async (argv) => {
+  await e_call(argv, 'generate/workflow/travis-ci', argv.file);
 };
 

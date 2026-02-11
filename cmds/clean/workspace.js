@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['workspace', '.eask'];
-exports.desc = 'Clean up the .eask directory';
+import { e_call } from '../../src/util.js';
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'clean/workspace');
+export const command = ['workspace', '.eask'];
+export const desc = 'Clean up the .eask directory';
+
+export const handler = async (argv) => {
+  await e_call(argv, 'clean/workspace');
 };

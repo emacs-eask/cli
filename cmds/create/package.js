@@ -17,11 +17,12 @@
 
 "use strict";
 
-const child_process = require('child_process');
+import child_process from 'child_process';
+import { e_call } from "../../src/util.js";
 
-exports.command = ['package <name>', 'pkg <name>'];
-exports.desc = 'Create a new package';
-exports.builder = yargs => yargs
+export const command = ['package <name>', 'pkg <name>'];
+export const desc = 'Create a new package';
+export const builder = yargs => yargs
   .positional(
     '<name>', {
       description: 'new package name',
@@ -30,7 +31,7 @@ exports.builder = yargs => yargs
 
 const TEMPLATE_URL = 'https://github.com/emacs-eask/template-elisp';
 
-exports.handler = async (argv) => {
+export const handler = async (argv) => {
   const project_name = argv.name;
 
   let proc = child_process.spawn('git', ['clone', TEMPLATE_URL, project_name],
@@ -59,6 +60,6 @@ exports.handler = async (argv) => {
 /* Operations after _cloned */
 async function _cloned(argv) {
   console.warn('Initialize the Eask-file for your project...');
-  await UTIL.e_call(argv, 'core/init');
-  await UTIL.e_call(argv, 'create/package');
+  await e_call(argv, 'core/init');
+  await e_call(argv, 'create/package');
 }

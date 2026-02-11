@@ -17,16 +17,18 @@
 
 "use strict";
 
-exports.command = ['command [names..]', 'cmd [names..]'];
-exports.desc = 'Run elisp commands named [names..]';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['command [names..]', 'cmd [names..]'];
+export const desc = 'Run elisp commands named [names..]';
+export const builder = yargs => yargs
   .positional(
     '[names..]', {
       description: 'list of function commands to execute',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'run/command'
-                    , argv.names);
+export const handler = async (argv) => {
+  await e_call(argv, 'run/command'
+    , argv.names);
 };

@@ -17,17 +17,22 @@
 
 "use strict";
 
-exports.command = ['test <type>'];
-exports.desc = "Run regression/unit tests";
-exports.builder = function (yargs) {
-  yargs.usage(`${exports.desc}
+import path from 'path';
+import { cmd_count } from "../../src/util.js";
+
+const __dirname = import.meta.dirname;
+
+export const command = ['test <type>'];
+export const desc = "Run regression/unit tests";
+export const builder = function (yargs) {
+  yargs.usage(`${desc}
 
 Usage: eask test <type> [options..]`)
-    .commandDir('../test/')
+    .commandDir(path.join(__dirname, '../test/'))
     .demandCommand();
 
   /* XXX: Configure only in the menu. */
-  if (UTIL.cmd_count() == 1) {
+  if (cmd_count() == 1) {
     yargs.positional(
       '<type>', {
         description: 'type of the test framework',
@@ -35,4 +40,4 @@ Usage: eask test <type> [options..]`)
   }
 }
 
-exports.handler = async (argv) => { };
+export const handler = async (argv) => { };

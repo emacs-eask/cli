@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['loc [files..]'];
-exports.desc = UTIL.hide_cmd('Print LOC information');
-exports.builder = yargs => yargs
+import { e_call, hide_cmd } from "../../src/util.js";
+
+export const command = ['loc [files..]'];
+export const desc = hide_cmd('Print LOC information');
+export const builder = yargs => yargs
   .positional(
     '[files..]', {
       description: 'files to print LOC information',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/loc', argv.files);
+export const handler = async (argv) => {
+  await e_call(argv, 'core/loc', argv.files);
 };

@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['recipe'];
-exports.desc = 'Suggest a recipe format';
+import { e_call } from "../../src/util.js";
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/recipe');
+export const command = ['recipe'];
+export const desc = 'Suggest a recipe format';
+
+export const handler = async (argv) => {
+  await e_call(argv, 'core/recipe');
 };

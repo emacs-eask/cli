@@ -17,9 +17,12 @@
 
 "use strict";
 
-exports.command = ['load-path [patterns..]'];
-exports.desc = 'Print the load-path from workspace';
-exports.builder = yargs => yargs
+import { TITLE_CMD_OPTION } from "../../src/env.js";
+import { e_call } from "../../src/util.js";
+
+export const command = ['load-path [patterns..]'];
+export const desc = 'Print the load-path from workspace';
+export const builder = yargs => yargs
   .positional(
     '[patterns..]', {
       description: 'patterns you want to search (regex)',
@@ -28,6 +31,6 @@ exports.builder = yargs => yargs
       group: TITLE_CMD_OPTION,
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/load-path', argv.patterns);
+export const handler = async (argv) => {
+  await e_call(argv, 'core/load-path', argv.patterns);
 };

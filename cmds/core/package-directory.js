@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['package-directory'];
-exports.desc = 'Print the path to package directory';
+import { e_call } from "../../src/util.js";
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/package-directory');
+export const command = ['package-directory'];
+export const desc = 'Print the path to package directory';
+
+export const handler = async (argv) => {
+  await e_call(argv, 'core/package-directory');
 };

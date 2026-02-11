@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['load [files..]'];
-exports.desc = 'Load elisp files';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['load [files..]'];
+export const desc = 'Load elisp files';
+export const builder = yargs => yargs
   .positional(
     '[files..]', {
       description: 'files to load',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/load', argv.files);
+export const handler = async (argv) => {
+  await e_call(argv, 'core/load', argv.files);
 };
