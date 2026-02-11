@@ -17,10 +17,6 @@
 
 "use strict";
 
-const path = require('path');
-const fs = require('fs');
-const readline = require('readline');
-
 exports.command = ['init [files..]'];
 exports.desc = 'Initialize project to use Eask';
 exports.builder = yargs => yargs
