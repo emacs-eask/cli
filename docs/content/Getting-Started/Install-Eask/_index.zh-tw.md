@@ -89,6 +89,14 @@ sudo apt install eask-cli --allow-unauthenticated
 
 您也可以直接從 [packaging][packaging/debian] 代碼庫下載 Debian 軟體包。
 
+### 📦 Fedora (Linux)
+
+[Fedora][]
+
+```sh
+sudo dnf install eask
+```
+
 ### 📦 Snap (Linux)
 
 [Snap][] 是一款適用於 Linux 的免費開源套件管理器。
@@ -232,6 +240,7 @@ mv lisp dist
 
 [Debian]: https://www.debian.org/
 [elementary OS]: https://elementary.io/
+[Fedora]: https://fedoraproject.org/
 [KDE neon]: https://neon.kde.org/
 [Linux Lite]: https://www.linuxliteos.com/
 [Linux Mint]: https://linuxmint.com/
