@@ -4,8 +4,8 @@
   "description": "A set of command-line tools to build Emacs packages",
   "main": "eask",
   "scripts": {
-    "test-unsafe": "env ALLOW_UNSAFE=1 jest",
-    "test-debug": "env DEBUG=1 jest",
+    "test-unsafe": "cross-env ALLOW_UNSAFE=1 jest",
+    "test-debug": "cross-env DEBUG=1 jest",
     "test": "jest",
     "test-reset": "rm -rf ./test/jest/.eask ./test/jest/*/.eask; git restore ./test/jest/*/",
     "pkg-all": "pkg package.json",
@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "@yao-pkg/pkg": "^6.0.0",
+    "cross-env": "^10.1.0",
     "jest": "^29.7.0",
     "semver-compare": "^1.0.0"
   },
