@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['license'];
-exports.desc = `Run license check`;
+import { e_call } from "../../src/util.js";
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'lint/license');
+export const command = ['license'];
+export const desc = `Run license check`;
+
+export const handler = async (argv) => {
+  await e_call(argv, 'lint/license');
 };

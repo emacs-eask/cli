@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['archives', 'sources'];
-exports.desc = 'List out all package archives';
+import { e_call } from '../../src/util.js';
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/archives');
+export const command = ['archives', 'sources'];
+export const desc = 'List out all package archives';
+
+export const handler = async (argv) => {
+  await e_call(argv, 'core/archives');
 };

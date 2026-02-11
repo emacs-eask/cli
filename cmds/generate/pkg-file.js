@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['pkg-file', 'pkg', 'pkg-el'];
-exports.desc = 'Generate the pkg file';
+import { e_call } from "../../src/util.js";
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'generate/pkg-file');
+export const command = ['pkg-file', 'pkg', 'pkg-el'];
+export const desc = 'Generate the pkg file';
+
+export const handler = async (argv) => {
+  await e_call(argv, 'generate/pkg-file');
 };

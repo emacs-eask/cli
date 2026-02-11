@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['declare [files..]'];
-exports.desc = 'Run check-declare';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['declare [files..]'];
+export const desc = 'Run check-declare';
+export const builder = yargs => yargs
   .positional(
     '[files..]', {
       description: 'files you want check-declare to run on',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'lint/declare', argv.files);
+export const handler = async (argv) => {
+  await e_call(argv, 'lint/declare', argv.files);
 };

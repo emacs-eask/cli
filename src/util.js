@@ -17,23 +17,27 @@
 
 "use strict";
 
-const path = require('path');
-const child_process = require("child_process");
+import path from 'path';
+import child_process from 'child_process';
+import _which from 'which';
+import { IS_PKG, EASK_EMACS, EASK_HOMEDIR, GITHUB_ACTIONS, EXIT_FAILURE } from './env.js';
+
+const __dirname = import.meta.dirname;
 
 /**
  * Check to see if a program is installed and exists on the path.
  * @param { String } command - Program name.
  * @return Return path or null if not found.
  */
-function which(command) {
-  return require('which').sync(command, { nothrow: true });
+export function which(command) {
+  return _which.sync(command, { nothrow: true });
 }
 
 /**
  * Convert Windows backslash paths to slash paths: `foo\\bar` -> `foo/bar`
  * @see https://github.com/sindresorhus/slash
  */
-function slash(path) {
+export function slash(path) {
   const isExtendedLengthPath = path.startsWith('\\\\?\\');
   if (isExtendedLengthPath) {
     return path;
@@ -46,7 +50,7 @@ function slash(path) {
  * @param { String } str - String to escape string.
  * @return Escaped string.
  */
-function escape_str(str) {
+export function escape_str(str) {
   return str.replaceAll('\"', '\\"');
 }
 
@@ -65,7 +69,7 @@ function _rest_args() {
  * @see https://github.com/emacs-eask/cli/issues/128
  * @param { Array } argv - Argument vector.
  */
-function cli_args(argv) {
+export function cli_args(argv) {
   let result = '';
   let first = true;
   argv.forEach(function (element) {
@@ -92,7 +96,7 @@ function _remove_undefined(arr) {
 }
 
 /* Return plugin directory */
-function plugin_dir() {
+export function plugin_dir() {
   let root = (IS_PKG) ? process.execPath : __dirname;
   return path.join(root, '..');
 }
@@ -102,7 +106,7 @@ function plugin_dir() {
  * @param { boolean } arg - argument receive from yargs.
  * @param { string } name - the flag representation in alias.
  */
-function def_flag(arg, name, val = undefined) {
+export function def_flag(arg, name, val = undefined) {
   if (arg === undefined)
     return undefined;
   if (val === undefined)
@@ -124,7 +128,7 @@ function _invocation() {
 /**
  * Setup the environment variables so Emacs could receive them.
  */
-function setup_env() {
+export function setup_env() {
   /* Home Directory */
   process.env.EASK_INVOCATION = _invocation();
   process.env.EASK_HOMEDIR = EASK_HOMEDIR;
@@ -198,7 +202,7 @@ function _check_argv(argv) {
  * Form elisp script path.
  * @param { string } name - Name of the script without extension.
  */
-function el_script(name) {
+export function el_script(name) {
   let _script = 'lisp/' + name + '.el';
   let _path = path.join(plugin_dir(), _script);
   return _path;
@@ -223,7 +227,7 @@ function _environment_name (argv) {
  * @param { string } script - name of the script from `../lisp`
  * @param { string } args - the rest of the arguments
  */
-async function e_call(argv, script, ...args) {
+export async function e_call(argv, script, ...args) {
   if (!which(EASK_EMACS)) {
     console.warn("Emacs is not installed (cannot find `" + EASK_EMACS + "' executable)");
     return;
@@ -273,7 +277,7 @@ async function e_call(argv, script, ...args) {
  * Get the command count, not including options.
  * @return Return a size of the command array.
  */
-function cmd_count() {
+export function cmd_count() {
   let args = process.argv.slice(2);
   args = args.filter(elm => { return !elm.startsWith('-'); });
   return args.length;
@@ -285,27 +289,9 @@ function cmd_count() {
  * @param { integer } level - used to compare with command count.
  * @return Return a string to show command, else we return false.
  */
-function hide_cmd(description, level = 1) {
+export function hide_cmd(description, level = 1) {
   if ((process.argv.includes('--show-hidden'))
       || level <= cmd_count())  // When display in submenu!
     return description;
   return false;
 }
-
-
-/*
- * Module Exports
- */
-module.exports.which = which;
-module.exports.slash = slash;
-
-module.exports.escape_str = escape_str;
-module.exports.cli_args = cli_args;
-module.exports.plugin_dir = plugin_dir;
-module.exports.def_flag = def_flag;
-module.exports.setup_env = setup_env;
-module.exports.el_script = el_script;
-module.exports.e_call = e_call;
-
-module.exports.hide_cmd = hide_cmd;
-module.exports.cmd_count = cmd_count;

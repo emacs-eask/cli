@@ -1,4 +1,4 @@
-const { testUnsafe, TestContext } = require("./helpers");
+import { testUnsafe, TestContext } from "./helpers.js";
 
 describe("upgrade-eask", () => {
   const ctx = new TestContext();

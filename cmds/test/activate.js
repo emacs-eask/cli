@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['activate [files..]'];
-exports.desc = 'Activate package; use to test package activation';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['activate [files..]'];
+export const desc = 'Activate package; use to test package activation';
+export const builder = yargs => yargs
   .positional(
     '[files..]', {
       description: 'files to load after package activation',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'test/activate', argv.files);
+export const handler = async (argv) => {
+  await e_call(argv, 'test/activate', argv.files);
 };

@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['el-project'];
-exports.desc = 'Create a new project with `el-project`';
+import { e_call } from "../../src/util.js";
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'create/el-project');
+export const command = ['el-project'];
+export const desc = 'Create a new project with `el-project`';
+
+export const handler = async (argv) => {
+  await e_call(argv, 'create/el-project');
 };

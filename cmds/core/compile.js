@@ -17,9 +17,12 @@
 
 "use strict";
 
-exports.command = ['compile [names..]'];
-exports.desc = "Byte-compile `.el' files";
-exports.builder = yargs => yargs
+import { TITLE_CMD_OPTION } from "../../src/env.js";
+import { e_call, def_flag } from '../../src/util.js';
+
+export const command = ['compile [names..]'];
+export const desc = "Byte-compile `.el' files";
+export const builder = yargs => yargs
   .positional(
     '[names..]', {
       description: 'specify files to byte-compile',
@@ -33,8 +36,8 @@ exports.builder = yargs => yargs
     },
   });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/compile'
+export const handler = async (argv) => {
+  await e_call(argv, 'core/compile'
                     , argv.names
-                    , UTIL.def_flag(argv.clean, '--clean'));
+                    , def_flag(argv.clean, '--clean'));
 };

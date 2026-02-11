@@ -17,20 +17,22 @@
 
 "use strict";
 
-const fs = require('fs');
-const child_process = require("child_process");
+import fs from 'fs';
+import child_process from "child_process";
+import { EASK_HOMEDIR } from "../../src/env.js";
+import { e_call, cli_args } from '../../src/util.js';
 
-exports.command = ['eval [form]'];
-exports.desc = 'Evaluate lisp form with a proper PATH';
-exports.builder = yargs => yargs
+export const command = ['eval [form]'];
+export const desc = 'Evaluate lisp form with a proper PATH';
+export const builder = yargs => yargs
   .positional(
     '[form]', {
       description: 'lisp form',
       type: 'string',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/eval', argv.form);
+export const handler = async (argv) => {
+  await e_call(argv, 'core/eval', argv.form);
 
   if (!fs.existsSync(EASK_HOMEDIR)) {
     return;
@@ -53,7 +55,7 @@ exports.handler = async (argv) => {
 
   let cmd = ['emacs', '--batch', '--eval', argv.form];
 
-  let proc = child_process.spawn(UTIL.cli_args(cmd), { stdio: 'inherit', shell: true });
+  let proc = child_process.spawn(cli_args(cmd), { stdio: 'inherit', shell: true });
 
   proc.on('close', function (code) {
     if (code == 0) return;

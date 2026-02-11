@@ -17,26 +17,28 @@
 
 "use strict";
 
-const child_process = require("child_process");
+import child_process from "child_process";
+import { EASK_EMACS } from '../../src/env.js';
+import { el_script, setup_env, cli_args } from '../../src/util.js';
 
-exports.command = ['emacs [args..]'];
-exports.desc = 'Execute emacs with the appropriate environment';
-exports.builder = async (yargs) => {
+export const command = ['emacs [args..]'];
+export const desc = 'Execute emacs with the appropriate environment';
+export const builder = async (yargs) => {
   yargs.help(false);
   yargs.version(false);
   yargs.getOptions().narg = [];
   yargs.strict(false);
 };
 
-exports.handler = async (argv) => {
-  let s_path = UTIL.el_script('core/emacs');
+export const handler = async (argv) => {
+  let s_path = el_script('core/emacs');
 
   let default_cmd = [EASK_EMACS, '-Q', '-l', s_path];
   let rest = process.argv.slice(3);
   let cmd = default_cmd.concat(rest);
 
-  UTIL.setup_env();
-  let proc = child_process.spawn(UTIL.cli_args(cmd), { stdio: 'inherit', shell: true });
+  setup_env();
+  let proc = child_process.spawn(cli_args(cmd), { stdio: 'inherit', shell: true });
 
   proc.on('close', function (code) {
     if (code == 0) return;

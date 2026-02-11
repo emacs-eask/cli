@@ -17,20 +17,22 @@
 
 "use strict";
 
-const fs = require('fs');
-const child_process = require("child_process");
+import fs from "fs";
+import child_process from "child_process";
+import { IS_PKG, EASK_HOMEDIR } from "../../src/env.js";
+import { e_call } from "../../src/util.js";
 
-exports.command = ['script [names..]'];
-exports.desc = 'Run script named [names..]';
-exports.builder = yargs => yargs
+export const command = ['script [names..]'];
+export const desc = 'Run script named [names..]';
+export const builder = yargs => yargs
   .positional(
     '[names..]', {
       description: 'specify scripts to run',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'run/script', argv.names);
+export const handler = async (argv) => {
+  await e_call(argv, 'run/script', argv.names);
 
   if (!fs.existsSync(EASK_HOMEDIR)) {
     return;

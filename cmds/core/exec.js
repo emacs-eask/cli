@@ -17,22 +17,24 @@
 
 "use strict";
 
-const fs = require('fs');
-const child_process = require("child_process");
+import fs from 'fs';
+import child_process from "child_process";
+import { EASK_HOMEDIR } from "../../src/env.js";
+import { e_call, cli_args } from '../../src/util.js';
 
-exports.command = ['exec [args..]'];
-exports.desc = 'Execute command with correct environment PATH set up';
-exports.builder = async (yargs) => {
+export const command = ['exec [args..]'];
+export const desc = 'Execute command with correct environment PATH set up';
+export const builder = async (yargs) => {
   yargs.help(false);
   yargs.version(false);
   yargs.getOptions().narg = [];
   yargs.strict(false);
 };
 
-exports.handler = async (argv) => {
+export const handler = async (argv) => {
   let cmd = process.argv.slice(3);
 
-  await UTIL.e_call(argv, 'core/exec', '--', cmd);
+  await e_call(argv, 'core/exec', '--', cmd);
 
   if (cmd.length == 0) {
     return;
@@ -52,7 +54,7 @@ exports.handler = async (argv) => {
   process.env.PATH = fs.readFileSync(epf, 'utf8');
   process.env.EMACSLOADPATH = fs.readFileSync(lpf, 'utf8');
 
-  let proc = child_process.spawn(UTIL.cli_args(cmd), { stdio: 'inherit', shell: true });
+  let proc = child_process.spawn(cli_args(cmd), { stdio: 'inherit', shell: true });
 
   proc.on('close', function (code) {
     if (code == 0) return;

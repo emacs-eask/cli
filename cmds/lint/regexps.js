@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['regexps [files..]', 'relint [files..]'];
-exports.desc = 'Run relint';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['regexps [files..]', 'relint [files..]'];
+export const desc = 'Run relint';
+export const builder = yargs => yargs
   .positional(
     '[files..]', {
       description: 'files you want relint to run on',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'lint/regexps', argv.files);
+export const handler = async (argv) => {
+  await e_call(argv, 'lint/regexps', argv.files);
 };

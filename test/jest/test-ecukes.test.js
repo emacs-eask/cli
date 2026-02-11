@@ -1,4 +1,4 @@
-const { TestContext } = require("./helpers");
+import { TestContext } from "./helpers.js";
 
 describe("test_ecukes", () => {
   const ctx = new TestContext("./test/jest/ecukes");

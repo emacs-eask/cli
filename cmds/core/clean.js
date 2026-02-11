@@ -17,17 +17,22 @@
 
 "use strict";
 
-exports.command = ['clean <type>'];
-exports.desc = 'Delete various files produced during building';
-exports.builder = function (yargs) {
-  yargs.usage(`${exports.desc}
+import path from 'path';
+import { cmd_count } from '../../src/util.js';
+
+const __dirname = import.meta.dirname;
+
+export const command = ['clean <type>'];
+export const desc = 'Delete various files produced during building';
+export const builder = function (yargs) {
+  yargs.usage(`${desc}
 
 Usage: eask clean <type> [options..]`)
-    .commandDir('../clean/')
+    .commandDir(path.join(__dirname, '../clean/'))
     .demandCommand();
 
   /* XXX: Configure only in the menu. */
-  if (UTIL.cmd_count() == 1) {
+  if (cmd_count() == 1) {
     yargs.positional(
       '<type>', {
         description: 'type of the cleaning task',
@@ -35,4 +40,4 @@ Usage: eask clean <type> [options..]`)
   }
 }
 
-exports.handler = async (argv) => { };
+export const handler = async (argv) => { };

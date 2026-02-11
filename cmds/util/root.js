@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['root'];
-exports.desc = UTIL.hide_cmd('Display the effective installation directory of your Emacs packages');
+import { hide_cmd, e_call } from "../../src/util.js";
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'util/root');
+export const command = ['root'];
+export const desc = hide_cmd('Display the effective installation directory of your Emacs packages');
+
+export const handler = async (argv) => {
+  await e_call(argv, 'util/root');
 };
