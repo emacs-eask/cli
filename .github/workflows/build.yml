@@ -85,7 +85,7 @@ jobs:
     - name: Prepare content...
       run: |
         mv lisp dist
-        mv COPYING dist
+        mv LICENSE dist
         mv README.md dist
 
     - name: Change permissions (Unix)
