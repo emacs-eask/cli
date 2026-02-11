@@ -89,18 +89,18 @@ jobs:
         mv README.md dist
 
     - name: Change permissions (Unix)
-      if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
+      if: contains(fromJSON('["tar.gz"]'), matrix.ext)
       run: |
         chmod -R 777 ./dist
 
     - name: Tar dist (Unix)
-      if: contains(fromJSON('["linux-arm64", "linux-x64", "macos-arm64", "macos-x64"]'), matrix.target)
+      if: contains(fromJSON('["tar.gz"]'), matrix.ext)
       run: |
         tar -czf ${{ matrix.target }}.${{ matrix.ext }} -C ./dist/ .
         cp ${{ matrix.target }}.${{ matrix.ext }} eask_${{ env.VERSION }}_${{ matrix.target }}.${{ matrix.ext }}
 
     - name: Zipping dist (Windows)
-      if: contains(fromJSON('["win-arm64", "win-x64"]'), matrix.target)
+      if: contains(fromJSON('["zip"]'), matrix.ext)
       working-directory: dist
       run: |
         zip -r ${{ matrix.target }}.${{ matrix.ext }} .
