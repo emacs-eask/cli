@@ -16,6 +16,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * feat(cmds): Move `el2org` to docs subcommand ([#388](../../pull/388))
 * fix(lisp): Report error only inside the command's execution ([#389](../../pull/389))
 * fix: Correct entry file name to `eask.js` instead of `eask` ([#397](../../pull/397))
+* fix: Ensure that `eask.js` has Unix line-endings ([#398](../../pull/398))
 
 ## 0.12.x
 > Released Dec 02, 2025
