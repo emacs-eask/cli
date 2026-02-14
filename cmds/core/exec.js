@@ -30,7 +30,7 @@ exports.builder = async (yargs) => {
 };
 
 exports.handler = async (argv) => {
-  let cmd = process.argv.slice(3);
+  let cmd = UTIL.take_after(process.argv, 'exec');
 
   await UTIL.e_call(argv, 'core/exec', '--', cmd);
 

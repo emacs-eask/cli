@@ -51,6 +51,16 @@ function escape_str(str) {
 }
 
 /**
+ * Return arguments after matching string.
+ */
+function take_after(arr, str) {
+  let index = arr.indexOf(str);
+  if (index === -1)
+    return arr;
+  return arr.slice(index + 1);
+}
+
+/**
  * Return arguments after `--` in list.
  */
 function _rest_args() {
@@ -300,6 +310,7 @@ module.exports.which = which;
 module.exports.slash = slash;
 
 module.exports.escape_str = escape_str;
+module.exports.take_after = take_after;
 module.exports.cli_args = cli_args;
 module.exports.plugin_dir = plugin_dir;
 module.exports.def_flag = def_flag;
