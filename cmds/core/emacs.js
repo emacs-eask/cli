@@ -32,7 +32,7 @@ exports.handler = async (argv) => {
   let s_path = UTIL.el_script('core/emacs');
 
   let default_cmd = [EASK_EMACS, '-Q', '-l', s_path];
-  let rest = process.argv.slice(3);
+  let rest = UTIL.take_after(process.argv, EASK_EMACS);
   let cmd = default_cmd.concat(rest);
 
   UTIL.setup_env();
