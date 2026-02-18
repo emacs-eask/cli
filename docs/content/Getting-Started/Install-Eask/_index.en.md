@@ -93,6 +93,14 @@ sudo apt install eask-cli --allow-unauthenticated
 
 You can also download Debian packages from the [packaging][packaging/debian] repo.
 
+### 📦 Fedora (Linux)
+
+[Fedora][] 44 onwards includes a [package](https://packages.fedoraproject.org/pkgs/eask/eask/) for the Eask CLI.
+
+```sh
+sudo dnf install eask
+```
+
 ### 📦 Snap (Linux)
 
 [Snap][] is a free and open-source package manager for Linux.
@@ -237,6 +245,7 @@ to your environment `PATH` to execute eask from any location! 🎉 🎊
 
 [Debian]: https://www.debian.org/
 [elementary OS]: https://elementary.io/
+[Fedora]: https://fedoraproject.org/
 [KDE neon]: https://neon.kde.org/
 [Linux Lite]: https://www.linuxliteos.com/
 [Linux Mint]: https://linuxmint.com/
