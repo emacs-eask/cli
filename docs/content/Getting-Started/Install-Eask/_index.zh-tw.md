@@ -91,7 +91,7 @@ sudo apt install eask-cli --allow-unauthenticated
 
 ### 📦 Fedora (Linux)
 
-[Fedora][]
+[Fedora][] 44 及後續版本包含一個 [套件](https://packages.fedoraproject.org/pkgs/eask/eask/) 用於 Eask 命令列介面。
 
 ```sh
 sudo dnf install eask
