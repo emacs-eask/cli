@@ -22,5 +22,5 @@ weight: 400
 
 ## 📂 ELPA
 
-- [jcs-elpa](https://github.com/jcs-emacs/jcs-elpa)
-- [EINE Elpa](https://github.com/emacs-eine/elpa)
+- [JCS ELPA](https://github.com/jcs-emacs/jcs-elpa)
+- [EINE ELPA](https://github.com/emacs-eine/elpa)
