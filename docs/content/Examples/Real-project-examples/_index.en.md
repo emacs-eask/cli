@@ -9,7 +9,7 @@ These are some projects and configurations using Eask:
 
 ## 🧾 Configuration
 
-- [jcs-emacs](https://github.com/jcs-emacs/jcs-emacs)
+- [JCS-Emacs](https://github.com/jcs-emacs/jcs-emacs)
 
 ## 📦 Packages
 
