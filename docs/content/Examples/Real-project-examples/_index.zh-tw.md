@@ -9,7 +9,7 @@ weight: 400
 
 ## 🧾 配置
 
-- [jcs-emacs](https://github.com/jcs-emacs/jcs-emacs)
+- [JCS-Emacs](https://github.com/jcs-emacs/jcs-emacs)
 
 ## 📦 包
 
