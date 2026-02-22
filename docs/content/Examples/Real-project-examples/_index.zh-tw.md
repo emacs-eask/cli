@@ -9,18 +9,18 @@ weight: 400
 
 ## 🧾 配置
 
-* [jcs-emacs](https://github.com/jcs-emacs/jcs-emacs)
+- [jcs-emacs](https://github.com/jcs-emacs/jcs-emacs)
 
 ## 📦 包
 
-* [auto-highlight-symbol](https://github.com/elp-revive/auto-highlight-symbol)
-* [dashboard](https://github.com/emacs-dashboard/emacs-dashboard)
-* [flycheck-languagetool](https://github.com/emacs-languagetool/flycheck-languagetool)
-* [grammarly](https://github.com/emacs-grammarly/grammarly)
-* [popup-el](https://github.com/auto-complete/popup-el)
-* [line-reminder](https://github.com/emacs-vs/line-reminder)
-* [lsp-mode](https://github.com/emacs-lsp/lsp-mode)
+- [lsp-mode](https://github.com/emacs-lsp/lsp-mode)
+- [evil](https://github.com/emacs-evil/evil)
+- [flycheck](https://github.com/flycheck/flycheck)
+- [auto-complete](https://github.com/auto-complete/auto-complete)
+- [dashboard](https://github.com/emacs-dashboard/emacs-dashboard)
+- [docker.el](https://github.com/Silex/docker.el)
 
 ## 📂 ELPA
 
-* [jcs-elpa](https://github.com/jcs-emacs/jcs-elpa)
+- [jcs-elpa](https://github.com/jcs-emacs/jcs-elpa)
+- [EINE Elpa](https://github.com/emacs-eine/elpa)
