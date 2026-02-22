@@ -1475,6 +1475,7 @@ This uses function `locate-dominating-file' to look up directory tree."
   `((gnu          . "https://elpa.gnu.org/packages/")
     (nongnu       . "https://elpa.nongnu.org/nongnu/")
     (celpa        . "https://celpa.conao3.com/packages/")
+    (eine         . "https://emacs-eine.github.io/elpa/packages/")
     (jcs-elpa     . "https://jcs-emacs.github.io/jcs-elpa/packages/")
     (marmalade    . "https://marmalade-repo.org/packages/")
     (melpa        . "https://melpa.org/packages/")
