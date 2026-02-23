@@ -24,3 +24,9 @@ These are some projects and configurations using Eask:
 
 - [JCS ELPA](https://github.com/jcs-emacs/jcs-elpa)
 - [EINE ELPA](https://github.com/emacs-eine/elpa)
+
+## 🧩 Others
+
+- [simple-httpd-cli](https://github.com/emacs-eine/simple-httpd-cli)
+- [google-translate-cli](https://github.com/emacs-eine/google-translate-cli)
+- [cat](https://github.com/emacs-eine/cat)
