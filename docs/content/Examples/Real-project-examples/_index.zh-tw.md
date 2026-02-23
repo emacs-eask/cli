@@ -25,7 +25,7 @@ weight: 400
 - [JCS ELPA](https://github.com/jcs-emacs/jcs-elpa)
 - [EINE ELPA](https://github.com/emacs-eine/elpa)
 
-## 🧩 Others
+## 🧩 其他
 
 - [simple-httpd-cli](https://github.com/emacs-eine/simple-httpd-cli)
 - [google-translate-cli](https://github.com/emacs-eine/google-translate-cli)
