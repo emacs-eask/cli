@@ -122,7 +122,7 @@ jobs:
     #### Upload an artifact for testing purposes
 
     - name: Upload for tests
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         name: ${{ matrix.target }}
         path: dist
