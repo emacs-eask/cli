@@ -17,7 +17,7 @@ weight: 400
 - [evil](https://github.com/emacs-evil/evil)
 - [flycheck](https://github.com/flycheck/flycheck)
 - [auto-complete](https://github.com/auto-complete/auto-complete)
-- [dashboard](https://github.com/emacs-dashboard/emacs-dashboard)
+- [dashboard](https://github.com/emacs-dashboard/dashboard)
 - [docker.el](https://github.com/Silex/docker.el)
 
 ## 📂 ELPA
