@@ -32,7 +32,7 @@ export const builder = async (yargs) => {
 };
 
 export const handler = async (argv) => {
-  let cmd = process.argv.slice(3);
+  let cmd = UTIL.take_after(process.argv, 'exec');
 
   await e_call(argv, 'core/exec', '--', cmd);
 

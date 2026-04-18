@@ -3,7 +3,7 @@
   "version": "0.12.10",
   "description": "A set of command-line tools to build Emacs packages",
   "type": "module",
-  "exports": "./eask",
+  "exports": "./eask.js",
   "scripts": {
     "test-unsafe": "cross-env NODE_OPTIONS=--experimental-vm-modules ALLOW_UNSAFE=1 jest",
     "test-debug": "cross-env NODE_OPTIONS=--experimental-vm-modules DEBUG=1 jest",
