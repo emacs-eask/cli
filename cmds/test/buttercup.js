@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['buttercup [directories..]'];
-exports.desc = 'Run buttercup tests';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['buttercup [directories..]'];
+export const desc = 'Run buttercup tests';
+export const builder = yargs => yargs
   .positional(
     '[directories..]', {
       description: 'directories containing buttercup tests, must be children of the current directory',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'test/buttercup', argv.directories);
+export const handler = async (argv) => {
+  await e_call(argv, 'test/buttercup', argv.directories);
 };

@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['reinstall [names..]'];
-exports.desc = 'Reinstall packages from archives';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['reinstall [names..]'];
+export const desc = 'Reinstall packages from archives';
+export const builder = yargs => yargs
   .positional(
     '[names..]', {
       description: 'packages to reinstall',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/reinstall', argv.names);
+export const handler = async (argv) => {
+  await e_call(argv, 'core/reinstall', argv.names);
 };

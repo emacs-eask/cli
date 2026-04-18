@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['autoloads'];
-exports.desc = 'Generate the autoloads file';
+import { e_call } from "../../src/util.js";
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'generate/autoloads');
+export const command = ['autoloads'];
+export const desc = 'Generate the autoloads file';
+
+export const handler = async (argv) => {
+  await e_call(argv, 'generate/autoloads');
 };

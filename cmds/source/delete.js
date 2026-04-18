@@ -17,16 +17,18 @@
 
 "use strict";
 
-exports.command = ['delete <name>', 'remove <name>'];
-exports.desc = 'Remove an archive source';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['delete <name>', 'remove <name>'];
+export const desc = 'Remove an archive source';
+export const builder = yargs => yargs
   .positional(
     '<name>', {
       description: 'name of the archive',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'source/delete', argv.name);
+export const handler = async (argv) => {
+  await e_call(argv, 'source/delete', argv.name);
 };
 

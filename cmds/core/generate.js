@@ -17,17 +17,22 @@
 
 "use strict";
 
-exports.command = ['generate <type>'];
-exports.desc = 'Generate files that are used for the development';
-exports.builder = function (yargs) {
-  yargs.usage(`${exports.desc}
+import path from 'path';
+import { cmd_count } from '../../src/util.js';
+
+const __dirname = import.meta.dirname;
+
+export const command = ['generate <type>'];
+export const desc = 'Generate files that are used for the development';
+export const builder = function (yargs) {
+  yargs.usage(`${desc}
 
 Usage: eask generate <type> [options..]`)
-    .commandDir('../generate/')
+    .commandDir(path.join(__dirname, '../generate/'))
     .demandCommand();
 
   /* XXX: Configure only in the menu. */
-  if (UTIL.cmd_count() == 1) {
+  if (cmd_count() == 1) {
     yargs.positional(
       '<type>', {
         description: 'type of the file',
@@ -35,4 +40,4 @@ Usage: eask generate <type> [options..]`)
   }
 }
 
-exports.handler = async (argv) => { };
+export const handler = async (argv) => { };

@@ -17,16 +17,18 @@
 
 "use strict";
 
-exports.command = ['gitlab [file]', 'gitlab-runner [file]'];
-exports.desc = 'Generate the GitLab Runner workflow yaml file';
-exports.builder = yargs => yargs
+import { e_call } from "../../../src/util.js";
+
+export const command = ['gitlab [file]', 'gitlab-runner [file]'];
+export const desc = 'Generate the GitLab Runner workflow yaml file';
+export const builder = yargs => yargs
   .positional(
     '[file]', {
       description: 'name of the test file; the default is `.gitlab-ci.yml`',
       type: 'string',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'generate/workflow/gitlab', argv.file);
+export const handler = async (argv) => {
+  await e_call(argv, 'generate/workflow/gitlab', argv.file);
 };
 

@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['repl', 'ielm'];
-exports.desc = UTIL.hide_cmd('Start an Elisp REPL');
+import { e_call, hide_cmd } from "../../src/util.js";
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/repl');
+export const command = ['repl', 'ielm'];
+export const desc = hide_cmd('Start an Elisp REPL');
+
+export const handler = async (argv) => {
+  await e_call(argv, 'core/repl');
 };

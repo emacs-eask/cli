@@ -1,4 +1,5 @@
-const { TestContext } = require("./helpers");
+import { EXIT_FAILURE } from "../../src/env.js";
+import { TestContext } from "./helpers.js";
 
 describe("options", () => {
   const ctx = new TestContext("./test/jest/options");

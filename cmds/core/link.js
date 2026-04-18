@@ -17,17 +17,22 @@
 
 "use strict";
 
-exports.command = ['link <action>'];
-exports.desc = 'Manage links';
-exports.builder = function (yargs) {
-  yargs.usage(`${exports.desc}
+import path from 'path';
+import { cmd_count } from '../../src/util.js';
+
+const __dirname = import.meta.dirname;
+
+export const command = ['link <action>'];
+export const desc = 'Manage links';
+export const builder = function (yargs) {
+  yargs.usage(`${desc}
 
 Usage: eask link <action> [options..]`)
-    .commandDir('../link/')
+    .commandDir(path.join(__dirname, '../link/'))
     .demandCommand();
 
   /* XXX: Configure only in the menu. */
-  if (UTIL.cmd_count() == 1) {
+  if (cmd_count() == 1) {
     yargs.positional(
       '<action>', {
         description: 'type of link action',
@@ -35,4 +40,4 @@ Usage: eask link <action> [options..]`)
   }
 }
 
-exports.handler = async (argv) => { };
+export const handler = async (argv) => { };

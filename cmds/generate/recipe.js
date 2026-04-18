@@ -17,9 +17,12 @@
 
 "use strict";
 
-exports.command = ['recipe [destination]'];
-exports.desc = 'Generate the recipe file';
-exports.builder = yargs => yargs
+import { TITLE_CMD_OPTION } from "../../src/env.js";
+import { e_call, def_flag } from "../../src/util.js";
+
+export const command = ['recipe [destination]'];
+export const desc = 'Generate the recipe file';
+export const builder = yargs => yargs
   .positional(
     'destination', {
       description: 'destination path/folder',
@@ -35,8 +38,8 @@ exports.builder = yargs => yargs
     },
   });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'generate/recipe'
-                    , argv.dest
-                    , UTIL.def_flag(argv.yes, '--yes'));
+export const handler = async (argv) => {
+  await e_call(argv, 'generate/recipe'
+    , argv.dest
+    , def_flag(argv.yes, '--yes'));
 };

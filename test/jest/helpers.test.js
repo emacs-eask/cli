@@ -1,5 +1,5 @@
-const { CommandOutput } = require("./helpers");
-const path = require("node:path");
+import path from 'node:path';
+import { CommandOutput } from "./helpers.js";
 
 describe("CommandOutput", () => {
   describe("sanitizeString", () => {

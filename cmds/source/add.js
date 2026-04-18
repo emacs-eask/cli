@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['add <name> [url]'];
-exports.desc = 'Add an archive source';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['add <name> [url]'];
+export const desc = 'Add an archive source';
+export const builder = yargs => yargs
   .positional(
     '<name>', {
       description: 'name of the archive',
@@ -31,6 +33,6 @@ exports.builder = yargs => yargs
       type: 'string',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'source/add', argv.name, argv.url);
+export const handler = async (argv) => {
+  await e_call(argv, 'source/add', argv.name, argv.url);
 };

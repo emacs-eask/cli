@@ -17,9 +17,12 @@
 
 "use strict";
 
-exports.command = ['install-deps', 'install-dependencies', 'prepare'];
-exports.desc = 'Automatically install package dependencies';
-exports.builder = yargs => yargs
+import { TITLE_CMD_OPTION } from "../../src/env.js";
+import { e_call, def_flag } from "../../src/util.js";
+
+export const command = ['install-deps', 'install-dependencies', 'prepare'];
+export const desc = 'Automatically install package dependencies';
+export const builder = yargs => yargs
   .options({
     'development': {
       description: 'also install development dependencies',
@@ -29,7 +32,7 @@ exports.builder = yargs => yargs
     },
   });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/install-deps'
-                    , UTIL.def_flag(argv.development, '--dev'));
+export const handler = async (argv) => {
+  await e_call(argv, 'core/install-deps'
+                    , def_flag(argv.development, '--dev'));
 };

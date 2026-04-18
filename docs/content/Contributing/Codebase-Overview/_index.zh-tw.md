@@ -21,20 +21,19 @@ yargs 命令文件是用 JavaScript 編寫的，位於 **cmds** 文件夾下。 
 讓我們看一下文件 `cmds/core/archives.js` ：
 
 ```js
-exports.command = ['archives', 'sources'];  // 來源的別名
-exports.desc = 'List out all package archives';
+export const command = ['archives', 'sources'];  // 來源的別名
+export const desc = 'List out all package archives';
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/archives');
+export const handler = async (argv) => {
+  await e_call(argv, 'core/archives');
 };
 ```
 
 這是一個標準的 yargs 命令文件，裡麵包含了我們所有的信息需要將它傳遞給 Emacs session。
 
-- **exports.command** 是參數模式，但它也接受別名（數組）
-- **exports.desc** 是命令說明
-- **exports.handler** 是處理命令執行的異步函數
-- **UTIL** 是指向 `src/util.js` 模塊的全局變量。
+- **export const command** 是參數模式，但它也接受別名（數組）
+- **export const desc** 是命令說明
+- **export const handler** 是處理命令執行的異步函數
 - **`'core/archives'`** 是 **lisp** 文件夾下的 elisp 文件（沒有 .el 擴展名）。
 
 `eask` 是一個包含我們所有全局選項的 JavaScript 文件。
@@ -57,7 +56,7 @@ yargs
 ...
 ```
 
-對於 **local** 選項，請使用 `exports.builder` 並在其下指定命令文件。
+對於 **local** 選項，請使用 `export const builder` 並在其下指定命令文件。
 
 看
 [yargs/docs/advanced.md](https://github.com/yargs/yargs/blob/main/docs/advanced.md),

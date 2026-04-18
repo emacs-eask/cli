@@ -17,16 +17,18 @@
 
 "use strict";
 
-exports.command = ['bump [levels..]'];
-exports.desc = UTIL.hide_cmd('Bump version for your project');
-exports.builder = yargs => yargs
+import { e_call, hide_cmd } from '../../src/util.js';
+
+export const command = ['bump [levels..]'];
+export const desc = hide_cmd('Bump version for your project');
+export const builder = yargs => yargs
   .positional(
     '[levels..]', {
       description: "version level to bump; accept `major', `minor' or `patch'",
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/bump'
-                    , argv.levels);
+export const handler = async (argv) => {
+  await e_call(argv, 'core/bump'
+    , argv.levels);
 };

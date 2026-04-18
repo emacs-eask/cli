@@ -17,17 +17,22 @@
 
 "use strict";
 
-exports.command = ['source <type>'];
-exports.desc = UTIL.hide_cmd('Manage sources');
-exports.builder = function (yargs) {
-  yargs.usage(`${exports.desc}
+import path from 'path';
+import { cmd_count, hide_cmd } from "../../src/util.js";
+
+const __dirname = import.meta.dirname;
+
+export const command = ['source <type>'];
+export const desc = hide_cmd('Manage sources');
+export const builder = function (yargs) {
+  yargs.usage(`${desc}
 
 Usage: eask source <type> [options..]`)
-    .commandDir('../source/')
+    .commandDir(path.join(__dirname, '../source/'))
     .demandCommand();
 
   /* XXX: Configure only in the menu. */
-  if (UTIL.cmd_count() == 1) {
+  if (cmd_count() == 1) {
     yargs.positional(
       '<type>', {
         description: 'type of the control',
@@ -35,4 +40,4 @@ Usage: eask source <type> [options..]`)
   }
 }
 
-exports.handler = async (argv) => {};
+export const handler = async (argv) => {};

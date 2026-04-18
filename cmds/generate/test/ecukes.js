@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['ecukes'];
-exports.desc = 'Create a new Ecukes setup for the project';
+import { e_call } from "../../../src/util.js";
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'generate/test/ecukes', argv.file);
+export const command = ['ecukes'];
+export const desc = 'Create a new Ecukes setup for the project';
+
+export const handler = async (argv) => {
+  await e_call(argv, 'generate/test/ecukes', argv.file);
 };

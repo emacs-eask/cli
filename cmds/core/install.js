@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['install [names..]'];
-exports.desc = 'Install packages from archives or install from the workspace';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['install [names..]'];
+export const desc = 'Install packages from archives or install from the workspace';
+export const builder = yargs => yargs
   .positional(
     '[names..]', {
       description: 'packages to install',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/install', argv.names);
+export const handler = async (argv) => {
+  await e_call(argv, 'core/install', argv.names);
 };

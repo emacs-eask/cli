@@ -17,17 +17,22 @@
 
 "use strict";
 
-exports.command = ['create <type>'];
-exports.desc = 'Create a new elisp project';
-exports.builder = function (yargs) {
-  yargs.usage(`${exports.desc}
+import path from 'path';
+import { cmd_count } from '../../src/util.js';
+
+const __dirname = import.meta.dirname;
+
+export const command = ['create <type>'];
+export const desc = 'Create a new elisp project';
+export const builder = function (yargs) {
+  yargs.usage(`${desc}
 
 Usage: eask create <type> [options..]`)
-    .commandDir('../create/')
+    .commandDir(path.join(__dirname, '../create/'))
     .demandCommand();
 
   /* XXX: Configure only in the menu. */
-  if (UTIL.cmd_count() == 1) {
+  if (cmd_count() == 1) {
     yargs.positional(
       '<type>', {
         description: 'type of the creation',
@@ -35,4 +40,4 @@ Usage: eask create <type> [options..]`)
   }
 }
 
-exports.handler = async (argv) => { };
+export const handler = async (argv) => { };

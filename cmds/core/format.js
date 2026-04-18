@@ -17,17 +17,22 @@
 
 "use strict";
 
-exports.command = ['format <type>', 'fmt <type>'];
-exports.desc = 'Run formatters';
-exports.builder = function (yargs) {
-  yargs.usage(`${exports.desc}
+import path from 'path';
+import { cmd_count } from '../../src/util.js';
+
+const __dirname = import.meta.dirname;
+
+export const command = ['format <type>', 'fmt <type>'];
+export const desc = 'Run formatters';
+export const builder = function (yargs) {
+  yargs.usage(`${desc}
 
 Usage: eask format <type> [options..]`)
-    .commandDir('../format/')
+    .commandDir(path.join(__dirname, '../format/'))
     .demandCommand();
 
   /* XXX: Configure only in the menu. */
-  if (UTIL.cmd_count() == 1) {
+  if (cmd_count() == 1) {
     yargs.positional(
       '<type>', {
         description: 'type of the formatter',
@@ -35,4 +40,4 @@ Usage: eask format <type> [options..]`)
   }
 }
 
-exports.handler = async (argv) => { };
+export const handler = async (argv) => { };

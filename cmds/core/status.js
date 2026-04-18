@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['status'];
-exports.desc = 'Show the workspace status';
+import { e_call } from "../../src/util.js";
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/status');
+export const command = ['status'];
+export const desc = 'Show the workspace status';
+
+export const handler = async (argv) => {
+  await e_call(argv, 'core/status');
 };

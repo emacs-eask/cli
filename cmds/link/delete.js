@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['delete [names..]', 'remove [names..]'];
-exports.desc = 'Delete locally linked packages';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['delete [names..]', 'remove [names..]'];
+export const desc = 'Delete locally linked packages';
+export const builder = yargs => yargs
   .positional(
     '[names..]', {
       description: 'name of the link, accept array',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'link/delete', argv.names);
+export const handler = async (argv) => {
+  await e_call(argv, 'link/delete', argv.names);
 };

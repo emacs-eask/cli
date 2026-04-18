@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['elfmt [files..]'];
-exports.desc = 'Reformat Elisp source with elfmt';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['elfmt [files..]'];
+export const desc = 'Reformat Elisp source with elfmt';
+export const builder = yargs => yargs
   .positional(
     '[files..]', {
       description: 'specify files to do elfmt',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'format/elfmt', argv.files);
+export const handler = async (argv) => {
+  await e_call(argv, 'format/elfmt', argv.files);
 };

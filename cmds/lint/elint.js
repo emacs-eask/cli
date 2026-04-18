@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['elint [files..]'];
-exports.desc = 'Run elint';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['elint [files..]'];
+export const desc = 'Run elint';
+export const builder = yargs => yargs
   .positional(
     '[files..]', {
       description: 'files you want elint to run on',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'lint/elint', argv.files);
+export const handler = async (argv) => {
+  await e_call(argv, 'lint/elint', argv.files);
 };

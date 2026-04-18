@@ -1,10 +1,9 @@
-const util = require("node:util");
-const exec = util.promisify(require("node:child_process").exec);
-const fs = require("node:fs/promises");
-const path = require("node:path");
+import util from 'node:util';
+import { exec as execCallback } from 'node:child_process';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 
-// Load the environment.
-const env = require('../../src/env');
+export const exec = util.promisify(execCallback);
 
 /*
  * This file uses JsDoc syntax.
@@ -19,7 +18,7 @@ const env = require('../../src/env');
  * @param {function({ fail: function }): void | function(): PromiseLike.<unknown>} fn
  * @param {number} [timeout]
  */
-function testUnsafe(name, fn, timeout) {
+export function testUnsafe(name, fn, timeout) {
   if (process.env.ALLOW_UNSAFE) {
     return test(name, fn, timeout);
   } else {
@@ -32,7 +31,7 @@ function testUnsafe(name, fn, timeout) {
  * This is used in TestContext to limit `exec`.
  * @returns {number}
  */
-function getTimeout() {
+export function getTimeout() {
   // parseInt returns NaN if it fails
   // TIMEOUT <= 0 will be ignored too
   return Number.parseInt(process.env.TIMEOUT) || 25000;
@@ -43,7 +42,7 @@ function getTimeout() {
  * You can compare lexicographically, e.g. if ((await emacsVersion()) > "27") { ... }
  * @returns {Promise.<string>} emacs version string.
  */
-async function emacsVersion() {
+export async function emacsVersion() {
   const text = await exec("emacs --version");
   const version = text.stdout.match("Emacs ([^ ]+)")?.[1];
   if (!version) {
@@ -62,7 +61,7 @@ async function stripAnsi(s) {
 }
 
 /** Provides transformations on output of node.exec(). */
-class CommandOutput {
+export class CommandOutput {
   constructor(output, cwd) {
     this.stderr = output.stderr;
     this.stdout = output.stdout;
@@ -142,7 +141,7 @@ class CommandOutput {
   }
 }
 
-class TestContext {
+export class TestContext {
   /**
    * @param {string} cwd Current Working Directory, used for all commands.
    */
@@ -251,11 +250,3 @@ class TestContext {
     return new CommandOutput(e, this.cwd);
   }
 }
-
-module.exports = {
-  testUnsafe,
-  emacsVersion,
-  TestContext,
-  getTimeout,
-  CommandOutput,
-};

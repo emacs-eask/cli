@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['checkdoc [files..]'];
-exports.desc = 'Run checkdoc';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['checkdoc [files..]'];
+export const desc = 'Run checkdoc';
+export const builder = yargs => yargs
   .positional(
     '[files..]', {
       description: 'files you want checkdoc to run on',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'lint/checkdoc', argv.files);
+export const handler = async (argv) => {
+  await e_call(argv, 'lint/checkdoc', argv.files);
 };

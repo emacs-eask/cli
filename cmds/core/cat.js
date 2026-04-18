@@ -17,9 +17,12 @@
 
 "use strict";
 
-exports.command = ['cat <patterns..>', 'type <patterns..>'];
-exports.desc = UTIL.hide_cmd('View filename(s)');
-exports.builder = yargs => yargs
+import { TITLE_CMD_OPTION } from "../../src/env.js";
+import { e_call, hide_cmd, def_flag } from '../../src/util.js';
+
+export const command = ['cat <patterns..>', 'type <patterns..>'];
+export const desc = hide_cmd('View filename(s)');
+export const builder = yargs => yargs
   .positional(
     '<patterns..>', {
       description: 'patterns you want to search (wildcard)',
@@ -35,8 +38,8 @@ exports.builder = yargs => yargs
     },
   });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/cat'
-                    , argv.patterns
-                    , UTIL.def_flag(argv.number, '--number'));
+export const handler = async (argv) => {
+  await e_call(argv, 'core/cat'
+    , argv.patterns
+    , def_flag(argv.number, '--number'));
 };

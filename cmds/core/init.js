@@ -17,9 +17,12 @@
 
 "use strict";
 
-exports.command = ['init [files..]'];
-exports.desc = 'Initialize project to use Eask';
-exports.builder = yargs => yargs
+import { TITLE_CMD_OPTION } from "../../src/env.js";
+import { e_call, def_flag } from "../../src/util.js";
+
+export const command = ['init [files..]'];
+export const desc = 'Initialize project to use Eask';
+export const builder = yargs => yargs
   .positional(
     '[files..]', {
       description: 'files to use with `--from` flag',
@@ -34,15 +37,15 @@ exports.builder = yargs => yargs
     },
   });
 
-exports.handler = async (argv) => {
+export const handler = async (argv) => {
   if (argv.from) {
     switch (argv.from) {
     case 'cask':
     case 'eldev':
     case 'keg':
     case 'source':
-      await UTIL.e_call(argv, 'init/' + argv.from
-                        , UTIL.def_flag(argv.from, '--from', argv.from)
+      await e_call(argv, 'init/' + argv.from
+                        , def_flag(argv.from, '--from', argv.from)
                         , argv.files);
       break;
     default:
@@ -50,6 +53,6 @@ exports.handler = async (argv) => {
       break;
     }
   } else {
-    await UTIL.e_call(argv, 'core/init');
+    await e_call(argv, 'core/init');
   }
 };

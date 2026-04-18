@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['upgrade [names..]'];
-exports.desc = 'Upgrade packages from archives';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['upgrade [names..]'];
+export const desc = 'Upgrade packages from archives';
+export const builder = yargs => yargs
   .positional(
     '[names..]', {
       description: 'packages to upgrade',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/upgrade', argv.names);
+export const handler = async (argv) => {
+  await e_call(argv, 'core/upgrade', argv.names);
 };

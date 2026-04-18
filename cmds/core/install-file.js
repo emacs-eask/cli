@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['install-file [files..]'];
-exports.desc = 'Install packages from files, .tar files, or directories';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['install-file [files..]'];
+export const desc = 'Install packages from files, .tar files, or directories';
+export const builder = yargs => yargs
   .positional(
     '[files..]', {
       description: 'files to install as packages',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/install-file', argv.files);
+export const handler = async (argv) => {
+  await e_call(argv, 'core/install-file', argv.files);
 };

@@ -17,9 +17,12 @@
 
 "use strict";
 
-exports.command = ['analyze [files..]'];
-exports.desc = 'Run Eask checker';
-exports.builder = yargs => yargs
+import { TITLE_CMD_OPTION } from "../../src/env.js";
+import { e_call, def_flag } from '../../src/util.js';
+
+export const command = ['analyze [files..]'];
+export const desc = 'Run Eask checker';
+export const builder = yargs => yargs
   .positional(
     '[files..]', {
       description: 'specify Eask-files for checker to lint',
@@ -39,9 +42,9 @@ exports.builder = yargs => yargs
     },
   });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/analyze'
-                    , argv.files
-                    , UTIL.def_flag(argv.json, '--json')
-                    , UTIL.def_flag(argv.output, '--output', argv.output));
+export const handler = async (argv) => {
+  await e_call(argv, 'core/analyze'
+    , argv.files
+    , def_flag(argv.json, '--json')
+    , def_flag(argv.output, '--output', argv.output));
 };

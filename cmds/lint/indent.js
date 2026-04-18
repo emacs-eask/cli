@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['indent [files..]'];
-exports.desc = 'Run indent-lint';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['indent [files..]'];
+export const desc = 'Run indent-lint';
+export const builder = yargs => yargs
   .positional(
     '[files..]', {
       description: 'files you want indent-lint to run on',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'lint/indent', argv.files);
+export const handler = async (argv) => {
+  await e_call(argv, 'lint/indent', argv.files);
 };

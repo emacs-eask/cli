@@ -17,17 +17,22 @@
 
 "use strict";
 
-exports.command = ['workflow <type>'];
-exports.desc = 'Generate yaml files for CI/CD';
-exports.builder = function (yargs) {
-  yargs.usage(`${exports.desc}
+import path from 'path';
+import { cmd_count } from "../../src/util.js";
+
+const __dirname = import.meta.dirname;
+
+export const command = ['workflow <type>'];
+export const desc = 'Generate yaml files for CI/CD';
+export const builder = function (yargs) {
+  yargs.usage(`${desc}
 
 Usage: eask generate workflow <type> [options..]`)
-    .commandDir('./workflow/')
+    .commandDir(path.join(__dirname, './workflow/'))
     .demandCommand();
 
   /* XXX: Configure only in the menu. */
-  if (UTIL.cmd_count() == 2) {
+  if (cmd_count() == 2) {
     yargs.positional(
       '<type>', {
         description: 'type of the workflow',
@@ -35,4 +40,4 @@ Usage: eask generate workflow <type> [options..]`)
   }
 }
 
-exports.handler = async (argv) => { };
+export const handler = async (argv) => { };

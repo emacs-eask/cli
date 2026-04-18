@@ -17,16 +17,18 @@
 
 "use strict";
 
-exports.command = ['circle-ci [file]'];
-exports.desc = 'Generate the CircleCI workflow yaml file';
-exports.builder = yargs => yargs
+import { e_call } from "../../../src/util.js";
+
+export const command = ['circle-ci [file]'];
+export const desc = 'Generate the CircleCI workflow yaml file';
+export const builder = yargs => yargs
   .positional(
     '[file]', {
       description: 'name of the test file; the default is `config.yml`',
       type: 'string',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'generate/workflow/circle-ci', argv.file);
+export const handler = async (argv) => {
+  await e_call(argv, 'generate/workflow/circle-ci', argv.file);
 };
 

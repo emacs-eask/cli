@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['org [files..]'];
-exports.desc = `Run org-lint on Org files`;
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['org [files..]'];
+export const desc = `Run org-lint on Org files`;
+export const builder = yargs => yargs
   .positional(
     '[files..]', {
       description: 'files you want org-lint to run on',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'lint/org', argv.files);
+export const handler = async (argv) => {
+  await e_call(argv, 'lint/org', argv.files);
 };

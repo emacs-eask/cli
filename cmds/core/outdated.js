@@ -17,9 +17,12 @@
 
 "use strict";
 
-exports.command = ['outdated'];
-exports.desc = 'Show all outdated dependencies';
-exports.builder = yargs => yargs
+import { TITLE_CMD_OPTION } from "../../src/env.js";
+import { e_call } from "../../src/util.js";
+
+export const command = ['outdated'];
+export const desc = 'Show all outdated dependencies';
+export const builder = yargs => yargs
   .options({
     'depth': {
       description: 'dependency depth level to print',
@@ -29,6 +32,6 @@ exports.builder = yargs => yargs
     },
   });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/outdated');
+export const handler = async (argv) => {
+  await e_call(argv, 'core/outdated');
 };

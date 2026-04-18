@@ -1,4 +1,4 @@
-const { emacsVersion, TestContext } = require("./helpers");
+import { TestContext } from "./helpers.js";
 
 describe("exec", () => {
   const ctx = new TestContext("./test/jest/exec");

@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['info'];
-exports.desc = 'Display information about the current package';
+import { e_call } from "../../src/util.js";
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/info');
+export const command = ['info'];
+export const desc = 'Display information about the current package';
+
+export const handler = async (argv) => {
+  await e_call(argv, 'core/info');
 };

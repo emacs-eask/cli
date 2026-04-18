@@ -17,9 +17,12 @@
 
 "use strict";
 
-exports.command = ['ignore <name>'];
-exports.desc = 'Generate an ignore file using .gitignore templates';
-exports.builder = yargs => yargs
+import { TITLE_CMD_OPTION } from "../../src/env.js";
+import { e_call, def_flag } from "../../src/util.js";
+
+export const command = ['ignore <name>'];
+export const desc = 'Generate an ignore file using .gitignore templates';
+export const builder = yargs => yargs
   .positional(
     '<name>', {
       description: 'name of the ignore template',
@@ -34,8 +37,8 @@ exports.builder = yargs => yargs
     },
   });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'generate/ignore'
-                    , argv.name
-                    , UTIL.def_flag(argv.output, '--output', argv.output));
+export const handler = async (argv) => {
+  await e_call(argv, 'generate/ignore'
+    , argv.name
+    , def_flag(argv.output, '--output', argv.output));
 };

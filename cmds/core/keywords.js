@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['keywords'];
-exports.desc = 'Display the available keywords for use in the header section';
+import { e_call } from "../../src/util.js";
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/keywords');
+export const command = ['keywords'];
+export const desc = 'Display the available keywords for use in the header section';
+
+export const handler = async (argv) => {
+  await e_call(argv, 'core/keywords');
 };

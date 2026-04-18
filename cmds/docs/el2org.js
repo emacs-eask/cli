@@ -17,9 +17,12 @@
 
 "use strict";
 
-exports.command = ['el2org [names..]', ];
-exports.desc = 'Build documentation with el2org';
-exports.builder = yargs => yargs
+import { TITLE_CMD_OPTION } from "../../src/env.js";
+import { e_call, def_flag } from "../../src/util.js";
+
+export const command = ['el2org [names..]', ];
+export const desc = 'Build documentation with el2org';
+export const builder = yargs => yargs
   .positional(
     '[names..]', {
       description: 'specify source files to scan',
@@ -35,8 +38,8 @@ exports.builder = yargs => yargs
     },
   });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'docs/el2org'
-                    , argv.names
-                    , UTIL.def_flag(argv.dest, '--dest', argv.dest));
+export const handler = async (argv) => {
+  await e_call(argv, 'docs/el2org'
+    , argv.names
+    , def_flag(argv.dest, '--dest', argv.dest));
 };
