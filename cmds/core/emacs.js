@@ -19,7 +19,7 @@
 
 import child_process from "child_process";
 import { EASK_EMACS } from '../../src/env.js';
-import { el_script, setup_env, cli_args } from '../../src/util.js';
+import { el_script, setup_env, cli_args, take_after } from '../../src/util.js';
 
 export const command = ['emacs [args..]'];
 export const desc = 'Execute emacs with the appropriate environment';
@@ -34,7 +34,7 @@ export const handler = async (argv) => {
   let s_path = el_script('core/emacs');
 
   let default_cmd = [EASK_EMACS, '-Q', '-l', s_path];
-  let rest = UTIL.take_after(process.argv, EASK_EMACS);
+  let rest = take_after(process.argv, EASK_EMACS);
   let cmd = default_cmd.concat(rest);
 
   setup_env();
