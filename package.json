@@ -18,7 +18,7 @@
     "pkg-win-x64": "pkg package.json -t node*-win-x64 --output dist/eask --public"
   },
   "bin": {
-    "eask": "./eask"
+    "eask": "./eask.js"
   },
   "repository": {
     "type": "git",
