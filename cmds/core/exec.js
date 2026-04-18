@@ -20,7 +20,7 @@
 import fs from 'fs';
 import child_process from "child_process";
 import { EASK_HOMEDIR } from "../../src/env.js";
-import { e_call, cli_args } from '../../src/util.js';
+import { e_call, cli_args, take_after } from '../../src/util.js';
 
 export const command = ['exec [args..]'];
 export const desc = 'Execute command with correct environment PATH set up';
@@ -32,7 +32,7 @@ export const builder = async (yargs) => {
 };
 
 export const handler = async (argv) => {
-  let cmd = UTIL.take_after(process.argv, 'exec');
+  let cmd = take_after(process.argv, 'exec');
 
   await e_call(argv, 'core/exec', '--', cmd);
 

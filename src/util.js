@@ -57,7 +57,7 @@ export function escape_str(str) {
 /**
  * Return arguments after matching string.
  */
-function take_after(arr, str) {
+export function take_after(arr, str) {
   let index = arr.indexOf(str);
   if (index === -1)
     return arr;
