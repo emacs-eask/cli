@@ -1,3 +1,6 @@
+# OS generated
+.DS_Store
+
 ### Node ###
 # Logs
 logs
@@ -153,12 +156,12 @@ emacs_backtrace.txt
 .eask/
 dist/
 
+# tools
+.elsa/
+
 # packaging
 *-autoloads.el
 *-pkg.el
 *.zip
 *.tar
 *.tar.gz
-
-# OS generated
-.DS_Store
