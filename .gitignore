@@ -153,6 +153,9 @@ emacs_backtrace.txt
 .eask/
 dist/
 
+# elisp tools
+.elsa/
+
 # packaging
 *-autoloads.el
 *-pkg.el
