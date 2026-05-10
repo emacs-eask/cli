@@ -17,10 +17,12 @@
 
 "use strict";
 
-exports.command = ['list'];
-exports.desc = 'List all source information';
+import { e_call } from "../../src/util.js";
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'source/list');
+export const command = ['list'];
+export const desc = 'List all source information';
+
+export const handler = async (argv) => {
+  await e_call(argv, 'source/list');
 };
 

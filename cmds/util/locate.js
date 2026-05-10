@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['locate'];
-exports.desc = 'Show the location where Eask is installed';
+import { plugin_dir } from "../../src/util.js";
 
-exports.handler = async (argv) => {
-  console.log(UTIL.plugin_dir());
+export const command = ['locate'];
+export const desc = 'Show the location where Eask is installed';
+
+export const handler = async (argv) => {
+  console.log(plugin_dir());
 };

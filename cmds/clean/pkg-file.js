@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['pkg-file'];
-exports.desc = 'Remove the generated pkg-file';
+import { e_call } from '../../src/util.js';
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'clean/pkg-file');
+export const command = ['pkg-file'];
+export const desc = 'Remove the generated pkg-file';
+
+export const handler = async (argv) => {
+  await e_call(argv, 'clean/pkg-file');
 };

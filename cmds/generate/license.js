@@ -17,9 +17,12 @@
 
 "use strict";
 
-exports.command = ['license <name>'];
-exports.desc = 'Generate the LICENSE file';
-exports.builder = yargs => yargs
+import { TITLE_CMD_OPTION } from "../../src/env.js";
+import { e_call, def_flag } from "../../src/util.js";
+
+export const command = ['license <name>'];
+export const desc = 'Generate the LICENSE file';
+export const builder = yargs => yargs
   .positional(
     '<name>', {
       description: 'name of the license',
@@ -34,8 +37,8 @@ exports.builder = yargs => yargs
     },
   });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'generate/license'
-                    , argv.name
-                    , UTIL.def_flag(argv.output, '--output', argv.output));
+export const handler = async (argv) => {
+  await e_call(argv, 'generate/license'
+    , argv.name
+    , def_flag(argv.output, '--output', argv.output));
 };

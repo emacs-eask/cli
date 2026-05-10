@@ -17,9 +17,12 @@
 
 "use strict";
 
-exports.command = ['list'];
-exports.desc = 'List all installed packages in dependency tree form';
-exports.builder = yargs => yargs
+import { TITLE_CMD_OPTION } from "../../src/env.js";
+import { e_call, def_flag } from "../../src/util.js";
+
+export const command = ['list'];
+export const desc = 'List all installed packages in dependency tree form';
+export const builder = yargs => yargs
   .options({
     'depth': {
       description: 'dependency depth level to print',
@@ -29,7 +32,7 @@ exports.builder = yargs => yargs
     },
   });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/list'
-                    , UTIL.def_flag(argv.depth, '--depth', argv.depth));
+export const handler = async (argv) => {
+  await e_call(argv, 'core/list'
+    , def_flag(argv.depth, '--depth', argv.depth));
 };

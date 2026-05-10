@@ -1,4 +1,4 @@
-const { TestContext } = require("./helpers");
+import { TestContext } from "./helpers.js";
 
 describe("emacs", () => {
   const ctx = new TestContext("./test/jest/empty");

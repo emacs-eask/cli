@@ -1,4 +1,4 @@
-const { TestContext } = require("./helpers");
+import { TestContext } from "./helpers.js";
 
 describe("link", () => {
   describe("in ./link", () => {

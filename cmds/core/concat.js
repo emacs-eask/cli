@@ -17,9 +17,12 @@
 
 "use strict";
 
-exports.command = ['concat [names..]', 'concatenate [names..]'];
-exports.desc = UTIL.hide_cmd('Concatenate elisp files');
-exports.builder = yargs => yargs
+import { TITLE_CMD_OPTION } from "../../src/env.js";
+import { e_call, hide_cmd, def_flag } from '../../src/util.js';
+
+export const command = ['concat [names..]', 'concatenate [names..]'];
+export const desc = hide_cmd('Concatenate elisp files');
+export const builder = yargs => yargs
   .positional(
     '[names..]', {
       description: 'specify files to concatenate',
@@ -41,9 +44,9 @@ exports.builder = yargs => yargs
     },
   });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/concat'
-                    , argv.names
-                    , UTIL.def_flag(argv.dest, '--dest', argv.dest)
-                    , UTIL.def_flag(argv.output, '--output', argv.output));
+export const handler = async (argv) => {
+  await e_call(argv, 'core/concat'
+    , argv.names
+    , def_flag(argv.dest, '--dest', argv.dest)
+    , def_flag(argv.output, '--output', argv.output));
 };

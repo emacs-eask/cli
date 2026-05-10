@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['all', 'everything'];
-exports.desc = 'Do all cleaning tasks';
+import { e_call } from '../../src/util.js';
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'clean/all');
+export const command = ['all', 'everything'];
+export const desc = 'Do all cleaning tasks';
+
+export const handler = async (argv) => {
+  await e_call(argv, 'clean/all');
 };

@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['package [destination]', 'pack [destination]'];
-exports.desc = 'Build a package artifact, and put it into the given destination';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['package [destination]', 'pack [destination]'];
+export const desc = 'Build a package artifact, and put it into the given destination';
+export const builder = yargs => yargs
   .positional(
     'destination', {
       description: 'destination path/folder',
@@ -27,6 +29,6 @@ exports.builder = yargs => yargs
       type: 'string',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/package', argv.dest);
+export const handler = async (argv) => {
+  await e_call(argv, 'core/package', argv.dest);
 };

@@ -1,4 +1,4 @@
-const { TestContext } = require("./helpers");
+import { TestContext } from "./helpers.js";
 
 /**
  * Clean output and attempt to parse as JSON.

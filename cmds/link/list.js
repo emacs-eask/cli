@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['list'];
-exports.desc = 'List all project links';
+import { e_call } from "../../src/util.js";
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'link/list');
+export const command = ['list'];
+export const desc = 'List all project links';
+
+export const handler = async (argv) => {
+  await e_call(argv, 'link/list');
 };

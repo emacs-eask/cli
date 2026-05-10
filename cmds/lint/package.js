@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['package [files..]'];
-exports.desc = 'Run package-lint';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['package [files..]'];
+export const desc = 'Run package-lint';
+export const builder = yargs => yargs
   .positional(
     '[files..]', {
       description: 'specify files to do package lint',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'lint/package', argv.files);
+export const handler = async (argv) => {
+  await e_call(argv, 'lint/package', argv.files);
 };

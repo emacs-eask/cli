@@ -17,17 +17,22 @@
 
 "use strict";
 
-exports.command = ['docs <generator>', 'doc <generator>'];
-exports.desc = 'Build documentation';
-exports.builder = function (yargs) {
-  yargs.usage(`${exports.desc}
+import path from 'path';
+import { cmd_count } from '../../src/util.js';
+
+const __dirname = import.meta.dirname;
+
+export const command = ['docs <generator>', 'doc <generator>'];
+export const desc = 'Build documentation';
+export const builder = function (yargs) {
+  yargs.usage(`${desc}
 
 Usage: eask docs <generator> [options..]`)
-    .commandDir('../docs/')
+    .commandDir(path.join(__dirname, '../docs/'))
     .demandCommand();
 
   /* XXX: Configure only in the menu. */
-  if (UTIL.cmd_count() == 1) {
+  if (cmd_count() == 1) {
     yargs.positional(
       '<generator>', {
         description: 'type of the generator',
@@ -35,4 +40,4 @@ Usage: eask docs <generator> [options..]`)
   }
 }
 
-exports.handler = async (argv) => { };
+export const handler = async (argv) => { };

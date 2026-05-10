@@ -4,8 +4,8 @@
 // Notice, below we clone a random package (repo) that uses Eask as the
 // dependencies management tool.
 
-const cmp = require('semver-compare');
-const { emacsVersion, TestContext } = require("./helpers");
+import cmp from 'semver-compare';
+import { emacsVersion, TestContext } from "./helpers.js";
 
 describe("local", () => {
   const cwd = "./test/jest/local";

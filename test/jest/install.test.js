@@ -1,5 +1,5 @@
-const cmp = require('semver-compare');
-const { emacsVersion, TestContext } = require("./helpers");
+import cmp from 'semver-compare';
+import { emacsVersion, TestContext } from "./helpers.js";
 
 describe("install and uninstall", () => {
   describe("in ./install", () => {

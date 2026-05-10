@@ -1,7 +1,7 @@
-const { testUnsafe, TestContext } = require("./helpers");
-const fs = require("node:fs/promises");
-const path = require("node:path");
-const process = require("node:process");
+import fs from "node:fs/promises";
+import path from "node:path";
+import process from "node:process";
+import { testUnsafe, TestContext } from "./helpers.js";
 
 describe("config param", () => {
   const ctx = new TestContext();

@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['ert-runner [names..]'];
-exports.desc = 'Create a new test project for the ert-runner';
-exports.builder = yargs => yargs
+import { e_call } from "../../../src/util.js";
+
+export const command = ['ert-runner [names..]'];
+export const desc = 'Create a new test project for the ert-runner';
+export const builder = yargs => yargs
   .positional(
     '[names..]', {
       description: 'specify test names',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'generate/test/ert-runner', argv.names);
+export const handler = async (argv) => {
+  await e_call(argv, 'generate/test/ert-runner', argv.names);
 };

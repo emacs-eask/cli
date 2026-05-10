@@ -17,9 +17,11 @@
 
 "use strict";
 
-exports.command = ['log-file'];
-exports.desc = 'Remove all generated log files';
+import { e_call } from '../../src/util.js';
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'clean/log-file');
+export const command = ['log-file'];
+export const desc = 'Remove all generated log files';
+
+export const handler = async (argv) => {
+  await e_call(argv, 'clean/log-file');
 };

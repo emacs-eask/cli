@@ -17,17 +17,22 @@
 
 "use strict";
 
-exports.command = ['lint <type>'];
-exports.desc = 'Run linters';
-exports.builder = function (yargs) {
-  yargs.usage(`${exports.desc}
+import path from 'path';
+import { cmd_count } from '../../src/util.js';
+
+const __dirname = import.meta.dirname;
+
+export const command = ['lint <type>'];
+export const desc = 'Run linters';
+export const builder = function (yargs) {
+  yargs.usage(`${desc}
 
 Usage: eask lint <type> [options..]`)
-    .commandDir('../lint/')
+    .commandDir(path.join(__dirname, '../lint/'))
     .demandCommand();
 
   /* XXX: Configure only in the menu. */
-  if (UTIL.cmd_count() == 1) {
+  if (cmd_count() == 1) {
     yargs.positional(
       '<type>', {
         description: 'type of the linter',
@@ -35,4 +40,4 @@ Usage: eask lint <type> [options..]`)
   }
 }
 
-exports.handler = async (argv) => { };
+export const handler = async (argv) => { };

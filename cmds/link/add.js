@@ -17,9 +17,12 @@
 
 "use strict";
 
-exports.command = ['add <name> <path>'];
-exports.desc = 'Link a local package';
-exports.builder = yargs => yargs
+import { TITLE_CMD_OPTION } from "../../src/env.js";
+import { e_call } from "../../src/util.js";
+
+export const command = ['add <name> <path>'];
+export const desc = 'Link a local package';
+export const builder = yargs => yargs
   .positional(
     '<name>', {
       description: 'name of the link',
@@ -39,6 +42,6 @@ exports.builder = yargs => yargs
     },
   });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'link/add', argv.name, argv.path);
+export const handler = async (argv) => {
+  await e_call(argv, 'link/add', argv.name, argv.path);
 };

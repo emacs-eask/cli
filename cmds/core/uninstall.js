@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['uninstall [names..]', 'delete [names..]'];
-exports.desc = 'Uninstall packages from archives';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['uninstall [names..]', 'delete [names..]'];
+export const desc = 'Uninstall packages from archives';
+export const builder = yargs => yargs
   .positional(
     '[names..]', {
       description: 'packages to uninstall',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/uninstall', argv.names);
+export const handler = async (argv) => {
+  await e_call(argv, 'core/uninstall', argv.names);
 };

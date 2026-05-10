@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['melpazoid [directories..]'];
-exports.desc = 'Run melpazoid tests';
-exports.builder = yargs => yargs
+import { e_call } from "../../src/util.js";
+
+export const command = ['melpazoid [directories..]'];
+export const desc = 'Run melpazoid tests';
+export const builder = yargs => yargs
   .positional(
     '[directories..]', {
       description: 'specify directories to do melpazoid tests',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'test/melpazoid', argv.directories);
+export const handler = async (argv) => {
+  await e_call(argv, 'test/melpazoid', argv.directories);
 };

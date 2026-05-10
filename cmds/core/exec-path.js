@@ -17,15 +17,17 @@
 
 "use strict";
 
-exports.command = ['path [patterns..]', 'exec-path [patterns..]'];
-exports.desc = 'Print the PATH (exec-path) from workspace';
-exports.builder = yargs => yargs
+import { e_call } from '../../src/util.js';
+
+export const command = ['path [patterns..]', 'exec-path [patterns..]'];
+export const desc = 'Print the PATH (exec-path) from workspace';
+export const builder = yargs => yargs
   .positional(
     '[patterns..]', {
       description: 'patterns you want to search (regex)',
       type: 'array',
     });
 
-exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'core/exec-path', argv.patterns);
+export const handler = async (argv) => {
+  await e_call(argv, 'core/exec-path', argv.patterns);
 };
