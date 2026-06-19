@@ -65,7 +65,7 @@ jobs:
           ext: zip
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
 
     - name: Install dependencies
       run: |
@@ -133,7 +133,7 @@ jobs:
       run: mv ${{ matrix.target }}.${{ matrix.ext }} ~/
 
     - name: Checkout binaries repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
       with:
         repository: ${{ env.REPO_BIN }}
         persist-credentials: false
