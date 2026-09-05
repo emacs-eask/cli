@@ -19,6 +19,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * fix: Ensure that `eask.js` has Unix line-endings ([#398](../../pull/398))
 * fix: Correctly parse operands from the command arguments ([#401](../../pull/401))
 * feat: Add new source `eine` ([`da75d6b`](../../commit/da75d6bf06fbf804f33262724dc17c3672a68e46))
+* fix(lisp): Don't assume a list representation in `eask-current-time` ([#432](../../pull/432))
 
 ## 0.12.x
 > Released Dec 02, 2025
