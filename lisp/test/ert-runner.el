@@ -47,6 +47,12 @@ Handle the argument ARGS when command arguments are specified."
   (eask-archive-install-packages '("gnu" "melpa")
                                  'ert-runner)
 
+  ;; XXX: `ert-runner' parses `command-line-args-left' with `commander' while
+  ;; it is loading; this aborts on the Eask's internal flags (e.g.
+  ;; `--eask--verbose').  Reset it so `ert-runner/run' is called without
+  ;; arguments; the arguments are provided by the advice above.
+  (setq command-line-args-left nil)
+
   ;; Start Testing
   (require 'ert-runner))
 
