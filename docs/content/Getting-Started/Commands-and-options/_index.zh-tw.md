@@ -867,8 +867,20 @@ eask [GLOBAL-OPTIONS] test ert [FILES..]
 使用 [ert-runner][] 運行 [ert][] 測試。
 
 ```sh
-eask [GLOBAL-OPTIONS] test ert-runner
+eask [GLOBAL-OPTIONS] test ert-runner [FILES..] [-p PATTERN] [-t TAGS] [--reporter NAME]
 ```
+
+{{< hint info >}}
+💡 你可以傳入 **-p, --pattern**，僅運行符合該模式的測試！
+
+```sh
+eask test ert-runner -p some-specific-test
+```
+
+💡 你可以傳入 **-t, --tags**，僅運行帶有這些標籤的測試！
+
+💡 你可以傳入 **--reporter** 來更換報告器；例如 `--reporter ert`。
+{{< /hint >}}
 
 ## 🔍 eask test buttercup
 

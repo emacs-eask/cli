@@ -21,6 +21,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * feat: Add new source `eine` ([`da75d6b`](../../commit/da75d6bf06fbf804f33262724dc17c3672a68e46))
 * fix(lisp): Don't assume a list representation in `eask-current-time` ([#432](../../pull/432))
 * fix(test/ert-runner): Don't let `ert-runner` choke on the Eask flags ([#438](../../pull/438))
+* feat(test/ert-runner): Add `-p`, `-t`, and `--reporter` options ([#438](../../pull/438))
 
 ## 0.12.x
 > Released Dec 02, 2025

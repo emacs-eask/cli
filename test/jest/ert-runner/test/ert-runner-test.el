@@ -27,5 +27,8 @@
 (ert-deftest ert-runner-test-1 ()
   (should (= 1 1)))
 
+(ert-deftest ert-runner-test-2 ()
+  (should (= 2 2)))
+
 (provide 'ert-runner-test)
 ;;; ert-runner-test.el ends here
