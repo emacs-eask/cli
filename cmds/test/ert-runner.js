@@ -24,8 +24,33 @@ exports.builder = yargs => yargs
     '[files..]', {
       description: 'specify files to do ert tests',
       type: 'array',
-    });
+    })
+  .options({
+    'pattern': {
+      description: 'Run tests matching the pattern',
+      alias: 'p',
+      requiresArg: true,
+      type: 'string',
+      group: TITLE_CMD_OPTION,
+    },
+    'tags': {
+      description: 'Run tests matching the tags',
+      alias: 't',
+      requiresArg: true,
+      type: 'string',
+      group: TITLE_CMD_OPTION,
+    },
+    'reporter': {
+      description: 'Set the reporter to use (e.g. "dot", "ert")',
+      requiresArg: true,
+      type: 'string',
+      group: TITLE_CMD_OPTION,
+    },
+  });
 
 exports.handler = async (argv) => {
-  await UTIL.e_call(argv, 'test/ert-runner', argv.files);
+  await UTIL.e_call(argv, 'test/ert-runner', argv.files
+                    , UTIL.def_flag(argv.pattern, '--pattern', argv.pattern)
+                    , UTIL.def_flag(argv.tags, '--tags', argv.tags)
+                    , UTIL.def_flag(argv.reporter, '--reporter', argv.reporter));
 };

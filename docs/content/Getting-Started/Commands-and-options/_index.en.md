@@ -881,8 +881,20 @@ eask [GLOBAL-OPTIONS] test ert [FILES..]
 Run [ert][] test using [ert-runner][].
 
 ```sh
-eask [GLOBAL-OPTIONS] test ert-runner
+eask [GLOBAL-OPTIONS] test ert-runner [FILES..] [-p PATTERN] [-t TAGS] [--reporter NAME]
 ```
+
+{{< hint info >}}
+💡 You can pass in **-p, --pattern** so only the tests matching the pattern are executed!
+
+```sh
+eask test ert-runner -p some-specific-test
+```
+
+💡 You can pass in **-t, --tags** so only the tests carrying the given tags are executed!
+
+💡 You can pass in **--reporter** to change the reporter to use; e.g. `--reporter ert`.
+{{< /hint >}}
 
 ## 🔍 eask test buttercup
 

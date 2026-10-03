@@ -1096,6 +1096,15 @@ full detials."
 (defun eask-from ()
   "Non-nil when flag has value (`--from')."
   (eask--flag-value "--from"))
+(defun eask-pattern ()
+  "Non-nil when flag has value (`-p', `--pattern')."
+  (eask--flag-value "--pattern"))
+(defun eask-tags ()
+  "Non-nil when flag has value (`-t', `--tags')."
+  (eask--flag-value "--tags"))
+(defun eask-reporter ()
+  "Non-nil when flag has value (`--reporter')."
+  (eask--flag-value "--reporter"))
 
 ;;; Number (with arguments)
 (defun eask-depth ()
@@ -1168,7 +1177,8 @@ other scripts internally.  See function `eask-call'.")
    '("--output"
      "--proxy" "--http-proxy" "--https-proxy" "--no-proxy"
      "--verbose" "--silent"
-     "--depth" "--dest" "--from"))
+     "--depth" "--dest" "--from"
+     "--pattern" "--tags" "--reporter"))
   "List of arguments (number/string) type options.")
 
 (defconst eask--command-list
